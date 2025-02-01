@@ -2,11 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-sans;
+}
+
 @layer base {
   :root {
+    --background: 285 11 93;
+    --foreground: 270 15 95;
+    --danger: 339 90 30;
+    --white: 0 0 98;
+    --primary: 201 85 50;
+    --secondary: 202 35 20;
+    --black: 264 8 12;
+    --muted: 0 0 73;
   }
 
-  body {
-    @apply font-sans;
+  .dark {
+    --danger: 343 89 41;
+    --background: 260 14 8;
+    --foreground: 264 14 7;
+    --primary: 201 93 54;
+    --muted: 264 8 12;
   }
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--dark-blue));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0px;
 }

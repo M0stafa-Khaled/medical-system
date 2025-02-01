@@ -7,6 +7,8 @@ import NotFound from "../pages/NotFound";
 import UnAuthorized from "../pages/UnAuthorized";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+import DashboardLayout from "../layout/DashboardLayout";
+import { Clinics } from "../pages/dashboard/Clinics";
 
 const routes = createRoutesFromElements(
   <>
@@ -14,6 +16,11 @@ const routes = createRoutesFromElements(
     <Route path="/" element={<>الصفحة الرئيسية</>} />
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
+
+    <Route path="/dashboard" element={<DashboardLayout />}>
+      <Route index element={<Clinics />} />
+      <Route path="admin" element={<Clinics />} />
+    </Route>
 
     {/* Errors */}
     <Route path="*" element={<NotFound />} />

@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CookieService from "../../../utils/cookieServices";
+import { TRole } from "../../../types";
 
 interface IAuthState {
   isAuthenticated: boolean;
-  role: string | null; // * 'admin' OR 'employee'
+  role: TRole;
   token: string | null;
 }
 
@@ -17,7 +18,13 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<{ token: string; role: string }>) => {
+    login: (
+      state,
+      action: PayloadAction<{
+        token: string;
+        role: TRole;
+      }>
+    ) => {
       state.isAuthenticated = true;
       state.token = action.payload.token;
       state.role = action.payload.role;

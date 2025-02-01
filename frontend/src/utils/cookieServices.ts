@@ -1,4 +1,5 @@
 import Cookies from "universal-cookie";
+import { TRole } from "../types";
 
 class CookieService {
   private cookies: Cookies;
@@ -17,13 +18,13 @@ class CookieService {
     return this.cookies.get("token");
   }
 
-  setRole(role: string, expiresInDays: number = 7) {
+  setRole(role: TRole, expiresInDays: number = 7) {
     const expires = new Date();
     expires.setDate(expires.getDate() + expiresInDays);
     this.cookies.set("role", role, { expires });
   }
 
-  getRole(): string | undefined {
+  getRole(): TRole | undefined {
     return this.cookies.get("role");
   }
 
