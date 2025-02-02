@@ -37,10 +37,10 @@ const ClinicList = () => {
           </TableCaption>
           <Thead>
             <Tr>
-              <Th className="!py-4 text-black dark:text-white/70 !text-base !font-sans">
+              <Th className="!py-4 text-black dark:text-white/70 !text-sm !font-sans">
                 اسم العيادة
               </Th>
-              <Th className="!py-4 text-black dark:text-white/70 !text-base !text-center !font-sans">
+              <Th className="!py-4 text-black dark:text-white/70 !text-sm !text-center !font-sans">
                 الإجراءات
               </Th>
             </Tr>
@@ -48,19 +48,26 @@ const ClinicList = () => {
           <Tbody>
             {Array.from({ length: 5 }).map((_, idx) => (
               <Tr key={idx}>
-                <Td>عظام</Td>
+                <Td className="text-sm">عظام</Td>
                 <Td className="!text-center flex justify-center gap-4">
-                  <Button className="!bg-primary !text-white gap-2">
+                  <Button
+                    size={"sm"}
+                    className="!bg-primary !text-white gap-2 !text-sm"
+                  >
                     عرض
                     <PiReadCvLogoFill size={18} />
                   </Button>
-                  <Button className="!bg-secondary !text-white gap-2">
+                  <Button
+                    size={"sm"}
+                    className="!bg-secondary !text-white gap-2 !text-sm"
+                  >
                     تعديل
                     <FaPencil size={18} />
                   </Button>
                   <Button
+                    size={"sm"}
                     onClick={onOpenDeleteModal}
-                    className="!bg-danger !text-white gap-2"
+                    className="!bg-danger !text-white gap-2 !text-sm"
                   >
                     حذف
                     <MdDelete size={18} />
@@ -99,11 +106,11 @@ const ClinicList = () => {
       >
         <Button
           onClick={onCloseDeleteModal}
-          className="!bg-primary !text-white"
+          className="!bg-primary !text-white !text-sm"
         >
           إلغاء
         </Button>
-        <Button className="!bg-danger !text-white" mr={3}>
+        <Button className="!bg-danger !text-white !text-sm" mr={3}>
           حذف
         </Button>
       </Modal>

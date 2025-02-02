@@ -7,11 +7,12 @@ const Home = () => {
     <div className="mt-6">
       <div className="mb-8">
         <Button
+          size={"sm"}
           variant={"outline"}
-          className="gap-2 !text-primary hover:!bg-primary hover:!text-white !border-primary py-6 !rounded-lg"
+          className="gap-2 !text-primary hover:!bg-primary hover:!text-white !border-primary py-6 !rounded-lg !text-xs lg:!text-sm"
         >
           إضافة عيادة جديدة
-          <FiPlus size={24} />
+          <FiPlus size={20} />
         </Button>
       </div>
       <ClinicList />
