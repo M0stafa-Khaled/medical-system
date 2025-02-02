@@ -24,7 +24,7 @@ const DashboardLayout = () => {
           <Navbar
             links={[
               { name: "العيادات", path: "/dashboard" },
-              { name: "المزيد", path: "/sd/asadsd" },
+              { name: "المزيد", path: "/dashboard/admin" },
             ]}
           />
           <div className="py-6">

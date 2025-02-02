@@ -15,7 +15,7 @@ const PathIndicator = ({ routeNames }: IProps) => {
       {!pathnames.length && (
         <BreadcrumbItem>
           <BreadcrumbLink
-            className="text-black dark:!text-white"
+            className="text-black dark:!text-white !text-sm"
             as={Link}
             to="/"
           >
@@ -32,12 +32,17 @@ const PathIndicator = ({ routeNames }: IProps) => {
         return (
           <BreadcrumbItem key={name} className="text-black dark:!text-white">
             {isLast ? (
-              <BreadcrumbLink as={Link} to={routeTo} fontWeight="semibold">
+              <BreadcrumbLink
+                as={Link}
+                to={routeTo}
+                fontWeight="semibold"
+                className="!text-sm"
+              >
                 {arabicName}
               </BreadcrumbLink>
             ) : (
               <BreadcrumbLink
-                className="!text-black/80 dark:!text-white/70"
+                className="!text-black/80 dark:!text-white/70 !text-sm"
                 as={Link}
                 to={routeTo}
               >

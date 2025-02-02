@@ -130,10 +130,10 @@ const Navbar = ({ links }: IProps) => {
                     >
                       <NavLink
                         to={link.path}
-                        className={`block w-full text-center py-3 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted ${
+                        className={`block w-full p-3 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted ${
                           activeLink === link.path.split("/")[2]
                             ? "bg-[#B9B9B9] dark:bg-[#322C3A]"
-                            : "bg-white dark:bg-[#646464]"
+                            : "bg-white dark:bg-[#646464]/10"
                         }`}
                       >
                         {link.name}
@@ -144,7 +144,7 @@ const Navbar = ({ links }: IProps) => {
                 <Button
                   onClick={onOpen}
                   variant={"outline"}
-                  className="py-6 flex items-center justify-center gap-2 border !border-danger w-full text-xl !text-danger rounded-lg hover:!text-white hover:!bg-danger"
+                  className="py-6 flex items-center justify-center gap-2 border !border-danger w-full !text-danger rounded-lg hover:!text-white hover:!bg-danger !text-sm lg:!text-base"
                 >
                   تسجيل الخروج
                   <FiLogOut size={24} />
@@ -162,10 +162,10 @@ const Navbar = ({ links }: IProps) => {
         title="تسجيل الخروج"
         description="هل انت متأكد من تسجيل الخروج؟"
       >
-        <Button onClick={onClose} className="!bg-primary !text-white">
+        <Button onClick={onClose} className="!bg-primary !text-white !text-sm">
           إلغاء
         </Button>
-        <Button className="!bg-danger !text-white" mr={3}>
+        <Button className="!bg-danger !text-white !text-sm" mr={3}>
           تسجيل الخروج
         </Button>
       </Modal>
