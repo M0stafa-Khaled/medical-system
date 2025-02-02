@@ -8,8 +8,8 @@ body {
 
 @layer base {
   :root {
-    --background: 285 11 93;
-    --foreground: 270 15 95;
+    --foreground: 300 2 90;
+    --background: 270 15 95;
     --danger: 339 90 30;
     --white: 0 0 98;
     --primary: 201 85 50;

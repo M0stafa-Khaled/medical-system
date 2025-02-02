@@ -14,7 +14,6 @@ import {
 import { useTheme } from "next-themes";
 import { FaPencil } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
-import { PiReadCvLogoFill } from "react-icons/pi";
 import Modal from "../../shared/Modal";
 
 const ClinicList = () => {
@@ -27,7 +26,7 @@ const ClinicList = () => {
 
   return (
     <>
-      <TableContainer className="text-black dark:text-white rounded-lg bg-foreground dark:bg-foreground border border-muted/30">
+      <TableContainer className="text-black dark:text-white rounded-lg dark:bg-foreground border border-muted/30">
         <Table
           variant="simple"
           colorScheme={resolvedTheme === "dark" ? "whiteAlpha" : "blackAlpha"}
@@ -37,7 +36,7 @@ const ClinicList = () => {
           </TableCaption>
           <Thead>
             <Tr>
-              <Th className="!py-4 text-black dark:text-white/70 !text-sm !font-sans">
+              <Th className="!py-4 text-black dark:text-white/70 !text-sm !font-sans !text-center">
                 اسم العيادة
               </Th>
               <Th className="!py-4 text-black dark:text-white/70 !text-sm !text-center !font-sans">
@@ -47,19 +46,15 @@ const ClinicList = () => {
           </Thead>
           <Tbody>
             {Array.from({ length: 5 }).map((_, idx) => (
-              <Tr key={idx}>
-                <Td className="text-sm">عظام</Td>
+              <Tr
+                key={idx}
+                className="hover:bg-gray-300 transition-all duration-300"
+              >
+                <Td className="text-sm !text-center">عظام</Td>
                 <Td className="!text-center flex justify-center gap-4">
                   <Button
                     size={"sm"}
                     className="!bg-primary !text-white gap-2 !text-sm"
-                  >
-                    عرض
-                    <PiReadCvLogoFill size={18} />
-                  </Button>
-                  <Button
-                    size={"sm"}
-                    className="!bg-secondary !text-white gap-2 !text-sm"
                   >
                     تعديل
                     <FaPencil size={18} />
@@ -78,7 +73,7 @@ const ClinicList = () => {
           </Tbody>
           <Tfoot>
             <Tr>
-              <Th className="text-black dark:text-white/70 !font-sans">
+              <Th className="text-black dark:text-white/70 !font-sans !text-center">
                 اسم العيادة
               </Th>
               <Th className="text-black dark:text-white/70 !text-center !font-sans">
