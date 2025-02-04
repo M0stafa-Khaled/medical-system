@@ -3,18 +3,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import CookieService from "../../utils/cookieServices";
 import { ReactNode } from "react";
-
-const ProtectedRoute = ({
-  children,
-  requiredRole,
-}: {
+interface IProps {
   children: ReactNode;
   requiredRole: string;
-}) => {
+}
+const ProtectedRoute = ({ children, requiredRole }: IProps) => {
   const { isAuthenticated, role } = useSelector(
     (state: RootState) => state.auth
   );
-  const token = CookieService.getToken(); // * Get token from cookies
+  const token = CookieService.getToken();
 
   if (!token || !isAuthenticated) {
     return <Navigate to="/login" replace />;

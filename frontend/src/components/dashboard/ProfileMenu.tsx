@@ -1,0 +1,46 @@
+import { RootState } from "@/app/store";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { FaUser } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+const ProfileMenu = () => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  if (isAuthenticated)
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button className="h-10 w-10">
+            <FaUser size={24} />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          style={{ direction: "rtl" }}
+          className="w-56 border-muted bg-primary text-white dark:text-black"
+        >
+          <DropdownMenuLabel>حسابي</DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-white/30 dark:bg-black/30" />
+          <DropdownMenuItem>
+            <Link to="" className="block w-full h-full py-2">
+              الملف الشخصي
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link to="" className="block w-full h-full py-2">
+              الإعدادات
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+};
+
+export default ProfileMenu;

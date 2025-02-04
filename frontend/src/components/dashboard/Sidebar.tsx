@@ -2,11 +2,20 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "next-themes";
 import { IoIosMoon, IoIosSunny } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
-import { Button, useDisclosure } from "@chakra-ui/react";
-import Modal from "../shared/Modal";
 import { useDispatch } from "react-redux";
 import { logout } from "../../app/features/auth/authSlice";
-
+import ProfileMenu from "./ProfileMenu";
+import { Button } from "../ui/button";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../ui/alert-dialog";
+import { useState } from "react";
 interface IProps {
   links: {
     name: string;
@@ -15,21 +24,21 @@ interface IProps {
 }
 
 const Sidebar = ({ links }: IProps) => {
+  const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false);
+
   const navigate = useNavigate();
-  const { isOpen, onClose, onOpen } = useDisclosure();
   const dispatch = useDispatch();
   const { theme, setTheme } = useTheme();
   const activeLink = useLocation().pathname.split("/")[2];
 
   const logoutFromDashboard = () => {
     dispatch(logout());
-    onClose();
     navigate("/login");
   };
 
   return (
     <aside className="hidden lg:block h-full overflow-hidden bg-foreground border-l border-muted">
-      <div className="h-full min-w-[300px] overflow-y-auto custom-scrollbar pb-6 px-4 flex flex-col justify-between">
+      <div className="h-full min-w-[270px] max-w-[350px] overflow-y-auto custom-scrollbar pb-3 px-4 flex flex-col justify-between">
         <div>
           {/* Logo */}
           <div className="flex justify-center items-center">
@@ -39,18 +48,22 @@ const Sidebar = ({ links }: IProps) => {
               className="max-w-40 flex justify-center items-center"
             />
           </div>
-          {/* Toggle Mode */}
-          <div className="flex justify-center">
-            <button
+          {/* Profile Menu & Toggle Mode */}
+          <div className="flex justify-center items-center gap-4">
+            <ProfileMenu />
+            <Button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="bg-[#1D1B20]/40 px-3 py-2 rounded-md hover:bg-[#1D1B20]/50 dark:hover:bg-[#1D1B20]/90 transition-all duration-300"
+              className="h-10 w-10 px-0 py-0"
             >
               {theme === "dark" ? (
-                <IoIosSunny size={24} className="text-amber-400" />
+                <IoIosSunny size={24} className="text-amber-400 h-10 w-10" />
               ) : (
-                <IoIosMoon size={24} className="text-black" />
+                <IoIosMoon
+                  size={24}
+                  className="text-white dark:text-black h-10 w-10"
+                />
               )}
-            </button>
+            </Button>
           </div>
           {/* Links */}
           <nav>
@@ -62,8 +75,8 @@ const Sidebar = ({ links }: IProps) => {
                       to={link.path}
                       className={`block mt-4 w-full text-center py-3 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted ${
                         activeLink === link.path.split("/")[2]
-                          ? "bg-[#B9B9B9] dark:bg-[#322C3A]"
-                          : "bg-white dark:bg-[#646464]/10"
+                          ? "bg-dark/20 dark:bg-dark"
+                          : "hover:bg-dark/10 dark:hover:bg-dark/50"
                       }`}
                     >
                       {link.name}
@@ -75,36 +88,48 @@ const Sidebar = ({ links }: IProps) => {
           </nav>
           {/* Logout */}
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center gap-2">
           <Button
-            onClick={onOpen}
-            variant={"outline"}
-            className="py-6 flex items-center justify-center gap-2 border !border-danger w-full !text-danger rounded-lg hover:!text-white hover:!bg-danger !text-xs lg:!text-base"
+            onClick={() => setIsOpenLogoutModal(true)}
+            variant={"destructive"}
+            className="h-auto py-3 items-center justify-center gap-2 w-full !text-base !font-normal"
           >
             تسجيل الخروج
-            <FiLogOut size={24} />
+            <FiLogOut size={20} />
           </Button>
         </div>
       </div>
 
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        onOpen={onOpen}
-        title="تسجيل الخروج"
-        description="هل انت متأكد من تسجيل الخروج؟"
+      <AlertDialog
+        open={isOpenLogoutModal}
+        onOpenChange={() => setIsOpenLogoutModal((prev) => !prev)}
       >
-        <Button onClick={onClose} className="!bg-primary !text-white !text-sm">
-          إلغاء
-        </Button>
-        <Button
-          onClick={logoutFromDashboard}
-          className="!bg-danger !text-white !text-sm"
-          mr={3}
-        >
-          تسجيل الخروج
-        </Button>
-      </Modal>
+        <AlertDialogContent className="border-muted">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-black dark:text-white text-start">
+              تسجيل الخروج
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-start !my-3">
+              هل انت متاكد من{" "}
+              <span className="font-medium text-black dark:text-white">
+                تسجيل الخروج
+              </span>
+              ؟
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="text-start !justify-start gap-2">
+            <AlertDialogCancel className="bg-primary hover:bg-primary/90 hover:text-white text-white dark:text-black">
+              إلغاء
+            </AlertDialogCancel>
+            <Button
+              onClick={logoutFromDashboard}
+              variant={"destructive"}
+            >
+              تسجيل الخروج
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </aside>
   );
 };

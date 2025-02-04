@@ -4,14 +4,14 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
 import ThemeProvider from "./Providers/ThemeProvider.tsx";
-import { ChakraProvider } from "@chakra-ui/react";
+import { QueryProvider } from "./lib/react-query/QueryProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <Provider store={store}>
-    <ThemeProvider>
-      <ChakraProvider>
+  <QueryProvider>
+    <Provider store={store}>
+      <ThemeProvider>
         <App />
-      </ChakraProvider>
-    </ThemeProvider>
-  </Provider>
+      </ThemeProvider>
+    </Provider>
+  </QueryProvider>
 );

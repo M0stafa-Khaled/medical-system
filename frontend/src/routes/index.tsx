@@ -1,23 +1,33 @@
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import { DashboardLayout, RootLayout } from "@/layout";
+import { Login, Register } from "@/pages/auth";
+import { Clinics } from "@/pages/dashboard/Clinics";
+import NotFound from "@/pages/NotFound";
+import UnAuthorized from "@/pages/UnAuthorized";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import NotFound from "../pages/NotFound";
-import UnAuthorized from "../pages/UnAuthorized";
-import Login from "../pages/auth/Login";
-import Register from "../pages/auth/Register";
-import DashboardLayout from "../layout/DashboardLayout";
-import { Clinics } from "../pages/dashboard/Clinics";
 
 const routes = createRoutesFromElements(
   <>
     {/* Public */}
-    <Route path="/" element={<>الصفحة الرئيسية</>} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/register" element={<Register />} />
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<>الصفحة الرئيسية</>} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Route>
 
-    <Route path="/dashboard" element={<DashboardLayout />}>
+    {/* Dashboard */}
+    <Route
+      path="/dashboard"
+      element={
+        <ProtectedRoute requiredRole="admin">
+          <DashboardLayout />
+        </ProtectedRoute>
+      }
+    >
       <Route index element={<Clinics />} />
       <Route path="admin" element={<Clinics />} />
     </Route>

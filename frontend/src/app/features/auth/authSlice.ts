@@ -9,9 +9,9 @@ interface IAuthState {
 }
 
 const initialState: IAuthState = {
-  isAuthenticated: false,
-  role: null,
-  token: null,
+  isAuthenticated: !!CookieService.getToken(),
+  role: CookieService.getRole() || null,
+  token: CookieService.getToken() || null,
 };
 
 const authSlice = createSlice({

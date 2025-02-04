@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-sans;
-}
-
 @layer base {
   :root {
     --foreground: 300 2 90;
@@ -64,6 +60,7 @@ body {
 @layer base {
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    scroll-behavior: smooth;
   }
 }
 

@@ -1,7 +1,7 @@
+import Navbar from "@/components/Navbar";
+import PathIndicator from "@/components/dashboard/PathIndicator";
+import Sidebar from "@/components/dashboard/Sidebar";
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import Sidebar from "../components/dashboard/Sidebar";
-import Navbar from "../components/dashboard/Navbar";
-import PathIndicator from "../components/dashboard/PathIndicator";
 
 const DashboardLayout = () => {
   const routeNames = {
@@ -22,6 +22,7 @@ const DashboardLayout = () => {
       <main className="flex flex-1 h-full overflow-hidden bg-background">
         <div className="container h-full mt-[62px] lg:mt-0 overflow-y-auto custom-scrollbar">
           <Navbar
+            dashboard
             links={[
               { name: "العيادات", path: "/dashboard" },
               { name: "المزيد", path: "/dashboard/admin" },
