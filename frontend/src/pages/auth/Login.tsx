@@ -40,15 +40,14 @@ const Login = () => {
       const { status, message, data } = await loginAdmin({
         email,
         password,
-        role: "admin",
       });
 
       // ! Login Field
       if (!status) return toast.error(message);
+
       // * Login Success
-      console.log(data);
       toast.success(message);
-      dispatch(login({ token: data.token, role: "admin" }));
+      dispatch(login({ token: data.token, role: data.role }));
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
