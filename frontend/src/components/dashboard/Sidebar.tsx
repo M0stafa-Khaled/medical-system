@@ -1,6 +1,4 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "next-themes";
-import { IoIosMoon, IoIosSunny } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../app/features/auth/authSlice";
@@ -16,6 +14,7 @@ import {
   AlertDialogTitle,
 } from "../ui/alert-dialog";
 import { useState } from "react";
+import ToggleMode from "../ToggleMode";
 interface IProps {
   links: {
     name: string;
@@ -28,7 +27,6 @@ const Sidebar = ({ links }: IProps) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { theme, setTheme } = useTheme();
   const activeLink = useLocation().pathname.split("/")[2];
 
   const logoutFromDashboard = () => {
@@ -51,19 +49,7 @@ const Sidebar = ({ links }: IProps) => {
           {/* Profile Menu & Toggle Mode */}
           <div className="flex justify-center items-center gap-4">
             <ProfileMenu />
-            <Button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="h-10 w-10 px-0 py-0"
-            >
-              {theme === "dark" ? (
-                <IoIosSunny size={24} className="text-amber-400 h-10 w-10" />
-              ) : (
-                <IoIosMoon
-                  size={24}
-                  className="text-white dark:text-black h-10 w-10"
-                />
-              )}
-            </Button>
+            <ToggleMode />
           </div>
           {/* Links */}
           <nav>
@@ -121,10 +107,7 @@ const Sidebar = ({ links }: IProps) => {
             <AlertDialogCancel className="bg-primary hover:bg-primary/90 hover:text-white text-white dark:text-black">
               إلغاء
             </AlertDialogCancel>
-            <Button
-              onClick={logoutFromDashboard}
-              variant={"destructive"}
-            >
+            <Button onClick={logoutFromDashboard} variant={"destructive"}>
               تسجيل الخروج
             </Button>
           </AlertDialogFooter>

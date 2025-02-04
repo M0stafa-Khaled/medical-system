@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "next-themes";
-import { IoIosMoon, IoIosSunny } from "react-icons/io";
 import ProfileMenu from "./dashboard/ProfileMenu";
 import NavList from "./NavList";
 
 import AuthButtons from "./dashboard/AuthButtons";
-import { Button } from "./ui/button";
+import ToggleMode from "./ToggleMode";
 
 interface IProps {
   links: {
@@ -19,8 +17,6 @@ interface IProps {
 }
 
 const Navbar = ({ links, dashboard = false }: IProps) => {
-  const { theme, setTheme } = useTheme();
-
   const [openNav, setOpenNav] = useState(false);
   useEffect(() => {
     window.addEventListener(
@@ -107,19 +103,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
           <div className="flex justify-center items-center gap-4">
             <div className="flex justify-center items-center gap-3">
               <ProfileMenu />
-              <Button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="h-10 w-10 px-0 py-0"
-              >
-                {theme === "dark" ? (
-                  <IoIosSunny size={24} className="text-amber-400 h-10 w-10" />
-                ) : (
-                  <IoIosMoon
-                    size={24}
-                    className="text-white dark:text-black h-10 w-10"
-                  />
-                )}
-              </Button>
+              <ToggleMode />
             </div>
             <Link
               to={links[0].path}

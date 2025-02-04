@@ -13,11 +13,11 @@ import {
 const routes = createRoutesFromElements(
   <>
     {/* Public */}
-    <Route path="/" element={<RootLayout />}>
-      <Route index element={<>الصفحة الرئيسية</>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+    <Route element={<RootLayout />}>
+      <Route path="/" element={<>الصفحة الرئيسية</>} />
     </Route>
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} />
 
     {/* Dashboard */}
     <Route

@@ -43,12 +43,12 @@ const AuthButtons = () => {
         </Button>
       ) : (
         <>
-          <Button className="bg-primary h-auto px-0 py-0 flex items-center justify-center gap-2 !border-danger w-full lg:w-52 !text-base !font-normal">
+          <Button className="bg-primary h-auto px-0 py-0 flex items-center justify-center gap-2 !border-danger w-full lg:w-52 !text-base">
             <Link to={"/login"} className="py-3 px-4">
               تسجيل الدخول
             </Link>
           </Button>
-          <Button className="bg-slate-600 hover:bg-slate-600/90 dark:bg-gray-700 hover:dark:bg-gray-700/70 text-white mt-3 lg:mt-0 h-auto px-0 py-0 flex items-center justify-center gap-2 !border-danger w-full lg:w-52 !text-base !font-normal">
+          <Button className="bg-cyan-600 hover:bg-cyan-600/90 text-white mt-3 lg:mt-0 h-auto px-0 py-0 flex items-center justify-center gap-2 !border-danger w-full lg:w-52 !text-base">
             <Link to="/register" className="py-3 px-4">
               تسجيل
             </Link>
