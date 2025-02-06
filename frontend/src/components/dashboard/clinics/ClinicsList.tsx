@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { logout } from "@/app/features/auth/authSlice";
 import { useEffect } from "react";
+import SkeletonClinicsList from "./SkeletonClinicsList";
 
 const ClinicsList = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const ClinicsList = () => {
   }, [failureReasonObj, dispatch, navigate]);
 
   if (isLoading) {
-    return <div className="text-white">جاري التحميل...</div>;
+    return <SkeletonClinicsList length={8} />;
   }
 
   return (
