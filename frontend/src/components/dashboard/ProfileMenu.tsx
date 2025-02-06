@@ -41,6 +41,7 @@ const ProfileMenu = () => {
         </DropdownMenuContent>
       </DropdownMenu>
     );
+  return <></>;
 };
 
 export default ProfileMenu;

@@ -20,7 +20,7 @@ const DashboardLayout = () => {
       />
       {/* Main Content */}
       <main className="flex flex-1 h-full overflow-hidden bg-background">
-        <div className="container h-full mt-[62px] lg:mt-0 overflow-y-auto custom-scrollbar">
+        <div className="w-full h-full pt-[62px] lg:pt-0 overflow-y-auto custom-scrollbar">
           <Navbar
             dashboard
             links={[
@@ -28,7 +28,7 @@ const DashboardLayout = () => {
               { name: "المزيد", path: "/dashboard/admin" },
             ]}
           />
-          <div className="py-6">
+          <div className="container py-6">
             <PathIndicator routeNames={routeNames} />
 
             <Outlet />

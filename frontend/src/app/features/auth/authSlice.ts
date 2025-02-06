@@ -37,7 +37,6 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.token = null;
       state.role = null;
-      // Remove the token and role from cookies
       CookieService.clearAllCookies();
     },
   },

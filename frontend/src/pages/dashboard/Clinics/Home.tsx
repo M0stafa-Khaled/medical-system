@@ -1,4 +1,4 @@
-import ClinicList from "@/components/dashboard/clinics/ClinicsList";
+import ClinicsList from "@/components/dashboard/clinics/ClinicsList";
 import AddClinicModalButton from "@/components/dashboard/clinics/AddClinicModalButton";
 
 const Home = () => {
@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <div className="mt-6">
         <AddClinicModalButton />
-        <ClinicList />
+        <ClinicsList />
       </div>
     </>
   );

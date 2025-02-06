@@ -15,19 +15,34 @@ import {
   AlertDialogTitle,
 } from "../ui/alert-dialog";
 import { toast } from "react-toastify";
+import { useLogout } from "@/lib/react-query/auth";
+import { AxiosError } from "axios";
 
 const AuthButtons = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false);
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, token } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const { mutateAsync: logoutUser } = useLogout();
+  const logoutFromDashboard = async () => {
+    try {
+      const { status, message } = await logoutUser(token as string);
+      // ! Logout Field
+      if (!status) return toast.error(message);
 
-  const logoutFromDashboard = () => {
-    setIsOpenLogoutModal(false);
-    dispatch(logout());
-    navigate("/login");
-    toast.success("تم تسجيل الخروج");
+      // * Logout Success
+      dispatch(logout());
+      navigate("/login");
+      toast.success("تم تسجيل الخروج");
+    } catch (error) {
+      const errorObj = error as AxiosError<{ message: string }>;
+      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+    } finally {
+      setIsOpenLogoutModal(false);
+    }
   };
 
   return (
@@ -56,6 +71,7 @@ const AuthButtons = () => {
         </>
       )}
 
+      {/* Confirm Logout Modal */}
       <AlertDialog
         open={isOpenLogoutModal}
         onOpenChange={() => setIsOpenLogoutModal((prev) => !prev)}

@@ -12,45 +12,47 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LOGIN_FORM_INPUTS } from "@/constants";
-import { useLoginAdmin } from "@/lib/react-query/auth";
+import { useLogin } from "@/lib/react-query/auth";
 import loginSchema from "@/validations/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { mutateAsync: loginAdmin, isPending } = useLoginAdmin();
+  const { mutateAsync: loginUser, isPending } = useLogin();
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "admin@gmail.com",
+      password: "admin@345",
     },
   });
 
   const onSubmit = async ({ email, password }: z.infer<typeof loginSchema>) => {
     try {
-      const { status, message, data } = await loginAdmin({
+      const { status, message, data } = await loginUser({
         email,
         password,
       });
 
       // ! Login Field
-      if (!status) return toast.error(message);
+      if (!status) {
+        toast.error(message);
+        return;
+      }
 
       // * Login Success
-      toast.success(message);
+      window.location.reload();
       dispatch(login({ token: data.token, role: data.role }));
-      navigate("/dashboard");
+      return toast.success(message);
     } catch (error) {
-      console.log(error);
       const errorObj = error as AxiosError<{ message: string }>;
       toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
     }

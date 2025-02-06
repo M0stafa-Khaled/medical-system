@@ -8,11 +8,38 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { useDeleteClinic } from "@/lib/react-query/clinics";
+import { AxiosError } from "axios";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
-const DeleteClinicButton = () => {
+interface IProps {
+  name: string;
+  id: number;
+}
+
+const DeleteClinicButton = ({ name, id }: IProps) => {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
+  const { mutateAsync: deleteClinic, isPending } = useDeleteClinic();
+
+  const handleDelete = async () => {
+    try {
+      const { status, message } = await deleteClinic(id);
+
+      // ! Delete Field
+      if (!status) return toast.error(message);
+
+      // * Delete Success
+      return toast.success(message);
+    } catch (error) {
+      const errorObj = error as AxiosError<{ message: string }>;
+      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+    } finally {
+      setIsOpenDeleteModal(false);
+    }
+  };
 
   return (
     <div>
@@ -39,7 +66,7 @@ const DeleteClinicButton = () => {
             <AlertDialogDescription className="text-start">
               هل انت متاكد من حذف عيادة{" "}
               <span className="font-medium text-black dark:text-white">
-                {"عظام"}
+                {name}
               </span>
               ؟
             </AlertDialogDescription>
@@ -49,10 +76,12 @@ const DeleteClinicButton = () => {
               إلغاء
             </AlertDialogCancel>
             <Button
-              onClick={() => setIsOpenDeleteModal(false)}
+              onClick={handleDelete}
               variant={"destructive"}
+              disabled={isPending}
             >
               حذف
+              {isPending && <Loader2 className="animate-spin" />}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
