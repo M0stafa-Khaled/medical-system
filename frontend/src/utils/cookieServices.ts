@@ -18,9 +18,6 @@ class CookieService {
     this.cookies.set("token", token, {
       expires,
       path: "/",
-      // Optional: Add secure and httpOnly flags if using HTTPS
-      // secure: true,
-      // httpOnly: true
     });
   }
 
