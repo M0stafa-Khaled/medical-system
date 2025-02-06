@@ -65,17 +65,15 @@ const AddClinicModalButton = () => {
 
   return (
     <>
-      <div className="mb-8">
-        <Button
-          onClick={() => setIsOpenAddModal(true)}
-          size={"sm"}
-          variant={"outline"}
-          className="gap-2 !text-primary hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-6 !rounded-lg font-semibold"
-        >
-          إضافة عيادة جديدة
-          <FiPlus size={20} />
-        </Button>
-      </div>
+      <Button
+        onClick={() => setIsOpenAddModal(true)}
+        size={"sm"}
+        variant={"outline"}
+        className="bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-6 !rounded-lg font-semibold"
+      >
+        إضافة عيادة جديدة
+        <FiPlus size={20} />
+      </Button>
       {/* Edit Modal */}
       <AlertDialog
         open={isOpenAddModal}
