@@ -1,12 +1,10 @@
-import ClinicsList from "@/components/dashboard/clinics/ClinicsList";
-import AddClinicModalButton from "@/components/dashboard/clinics/AddClinicModalButton";
+import ClinicsTable from "@/components/dashboard/clinics/ClinicsTable";
 
 const Home = () => {
   return (
     <>
       <div className="mt-6">
-        <AddClinicModalButton />
-        <ClinicsList />
+        <ClinicsTable />
       </div>
     </>
   );
