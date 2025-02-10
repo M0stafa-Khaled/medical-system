@@ -1,40 +1,60 @@
+import { logout } from "@/app/features/auth/authSlice";
 import Navbar from "@/components/Navbar";
 import PathIndicator from "@/components/dashboard/PathIndicator";
 import Sidebar from "@/components/dashboard/Sidebar";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { useCheckAuth } from "@/lib/react-query/auth";
+import cookieServices from "@/utils/cookieServices";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const DashboardLayout = () => {
-  const routeNames = {
-    dashboard: "العيادات",
-    admin: "المزيد",
-  };
-  return (
-    <div className="flex h-screen font-sans">
-      <ScrollRestoration />
-      {/* Sidebar */}
-      <Sidebar
-        links={[
-          { name: "العيادات", path: "/dashboard" },
-          { name: "المزيد", path: "/dashboard/admin" },
-        ]}
-      />
-      {/* Main Content */}
-      <main className="flex flex-1 h-full overflow-hidden bg-background">
-        <div className="w-full h-full pt-[62px] lg:pt-0 overflow-y-auto custom-scrollbar">
-          <Navbar
-            dashboard
-            links={[
-              { name: "العيادات", path: "/dashboard" },
-              { name: "المزيد", path: "/dashboard/admin" },
-            ]}
-          />
-          <div className="container py-6">
-            <PathIndicator routeNames={routeNames} />
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = cookieServices.getToken();
+  const { mutateAsync: checkAuthUser } = useCheckAuth();
 
+  const routeNames = {
+    dashboard: "لوحة التحكم",
+    clinics: "العيادات",
+    doctors: "الأطباء",
+    add: "إضافة طبيب",
+    update: "تعديل طبيب",
+  };
+
+  const NAV_LINKS = [
+    { name: routeNames.dashboard, path: "/dashboard" },
+    { name: routeNames.clinics, path: "/dashboard/clinics" },
+    { name: routeNames.doctors, path: "/dashboard/doctors" },
+  ];
+
+  useEffect(() => {
+    (async () => {
+      const { auth } = await checkAuthUser(token as string);
+      if (!auth) {
+        dispatch(logout());
+        navigate("/login");
+        toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+      }
+    })();
+  }, [checkAuthUser, token, navigate, dispatch]);
+
+  return (
+    <div className="flex font-sans">
+      <ScrollRestoration />
+      <div className="fixed inset-y-0 right-0 overflow-y-auto">
+        <Sidebar links={NAV_LINKS} />
+      </div>
+      <div className="container flex-1 flex flex-col overflow-hidden lg:mr-[275px]">
+        <Navbar links={NAV_LINKS} dashboard />
+        <main className="flex-1 mt-20 lg:mt-6 bg-background">
+          <PathIndicator routeNames={routeNames} />
+          <div className="my-5">
             <Outlet />
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

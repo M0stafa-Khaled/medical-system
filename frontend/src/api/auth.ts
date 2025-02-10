@@ -13,10 +13,25 @@ export const login: (user: {
 };
 
 export const logout: (token: string) => Promise<IAuthResponse> = async (
-  token: string
+  token
 ) => {
   const { data } = await axiosInstanceAPI.post(
     "/logout",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return data;
+};
+
+export const checkAuth: (token: string) => Promise<{ auth: boolean }> = async (
+  token
+) => {
+  const { data } = await axiosInstanceAPI.post(
+    "/check-auth",
     {},
     {
       headers: {

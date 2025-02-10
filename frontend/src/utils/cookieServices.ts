@@ -48,12 +48,6 @@ class CookieService {
     this.cookies.remove("token", { path: "/" });
     this.cookies.remove("role", { path: "/" });
   }
-
-  // Optional: Add a method to check token validity
-  isTokenValid(): boolean {
-    const token = this.getToken();
-    return !!token;
-  }
 }
 
 export default new CookieService();
