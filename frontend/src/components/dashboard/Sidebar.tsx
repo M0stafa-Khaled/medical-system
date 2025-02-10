@@ -1,7 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
-import { useDispatch } from "react-redux";
-import { logout } from "../../app/features/auth/authSlice";
 import ProfileMenu from "./ProfileMenu";
 import { Button } from "../ui/button";
 import {
@@ -15,6 +13,9 @@ import {
 } from "../ui/alert-dialog";
 import { useState } from "react";
 import ToggleMode from "../ToggleMode";
+import { useDispatch } from "react-redux";
+import { logout } from "@/app/features/auth/authSlice";
+
 interface IProps {
   links: {
     name: string;
@@ -23,10 +24,9 @@ interface IProps {
 }
 
 const Sidebar = ({ links }: IProps) => {
-  const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false);
   const activeLink = useLocation().pathname.split("/")[2];
 
   const logoutFromDashboard = () => {

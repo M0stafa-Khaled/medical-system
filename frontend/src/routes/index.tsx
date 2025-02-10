@@ -1,7 +1,6 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { DashboardLayout, RootLayout } from "@/layout";
 import { Login, Register } from "@/pages/auth";
-import { Clinics } from "@/pages/dashboard/Clinics";
 import NotFound from "@/pages/NotFound";
 import UnAuthorized from "@/pages/UnAuthorized";
 import {
@@ -9,6 +8,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import { AddDoctor, Clinics, Doctors, UpdateDoctor } from "@/pages/dashboard";
 
 const routes = createRoutesFromElements(
   <>
@@ -23,13 +23,19 @@ const routes = createRoutesFromElements(
     <Route
       path="/dashboard"
       element={
-        <ProtectedRoute requiredRole="admin">
+        <ProtectedRoute requiredRole={["admin"]}>
           <DashboardLayout />
         </ProtectedRoute>
       }
     >
-      <Route index element={<Clinics />} />
-      <Route path="admin" element={<Clinics />} />
+      <Route
+        index
+        element={<h1 className="text-primary">الصفحة الرئيسية</h1>}
+      />
+      <Route path="clinics" element={<Clinics />} />
+      <Route path="doctors" element={<Doctors />} />
+      <Route path="doctors/add" element={<AddDoctor />} />
+      <Route path="doctors/update/:id" element={<UpdateDoctor />} />
     </Route>
 
     {/* Errors */}

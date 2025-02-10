@@ -8,13 +8,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import {
-  AlertDialog,
   AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
@@ -28,8 +23,11 @@ import { useCreateClinic } from "@/lib/react-query/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
+import ClinicModal from "@/components/shared/ClinicModal";
+import cookieServices from "@/utils/cookieServices";
 
 const AddClinicModalButton = () => {
+  const token = cookieServices.getToken() || "";
   const [isOpenAddModal, setIsOpenAddModal] = useState(false);
   const { mutateAsync: createClinic, isPending } = useCreateClinic();
 
@@ -47,7 +45,11 @@ const AddClinicModalButton = () => {
         status: statusServer,
         message,
         data,
-      } = await createClinic({ name, status });
+      } = await createClinic({
+        name,
+        status,
+        token,
+      });
 
       // ! Update Field
       if (!statusServer) return toast.error(message);
@@ -63,6 +65,11 @@ const AddClinicModalButton = () => {
     }
   };
 
+  const handleCloseModal = () => {
+    setIsOpenAddModal(false);
+    form.reset();
+  };
+
   return (
     <>
       <Button
@@ -74,87 +81,69 @@ const AddClinicModalButton = () => {
         إضافة عيادة جديدة
         <FiPlus size={20} />
       </Button>
-      {/* Edit Modal */}
-      <AlertDialog
-        open={isOpenAddModal}
-        onOpenChange={() =>
-          setIsOpenAddModal((prev) => {
-            form.reset();
-            return !prev;
-          })
-        }
+
+      <ClinicModal
+        isOpen={isOpenAddModal}
+        onOpenChange={handleCloseModal}
+        title="إضافة عيادة جديدة"
+        description="يمكنك اضافة عيادة جديدة من هنا"
+        showFooter={false}
       >
-        <AlertDialogContent className="border-muted !z-[1000] rounded-lg">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-black dark:text-white text-center">
-              إضافة عيادة جديدة
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-center">
-              يمكنك اضافة عيادة جديدة من هنا
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <div>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="w-fit leading-relaxed text-black dark:text-white">
+                    اسم العيادة:
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="اسم العيادة"
+                      {...field}
+                      className="py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-black/50 dark:placeholder:text-white/50"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center gap-4">
+                  <FormLabel className="text-black dark:text-white">
+                    متاحة:
+                  </FormLabel>
+                  <FormControl>
+                    <Switch
+                      dir="ltr"
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="data-[state=unchecked]:bg-black/50 dark:data-[state=unchecked]:bg-white/50"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <AlertDialogFooter className="text-start !justify-start gap-2">
+              <AlertDialogCancel
+                onClick={handleCloseModal}
+                className="text-black dark:text-white"
               >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="w-fit leading-relaxed text-black dark:text-white">
-                        اسم العيادة:
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="اسم العيادة"
-                          {...field}
-                          value={form.getValues("name")}
-                          onChange={(e) =>
-                            form.setValue("name", e.target.value)
-                          }
-                          className="py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-black/50 dark:placeholder:text-white/50"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="status"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center gap-4">
-                      <FormLabel className="text-black dark:text-white">
-                        متاحة:
-                      </FormLabel>
-                      <FormControl>
-                        <Switch
-                          dir="ltr"
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                          className="data-[state=unchecked]:bg-black/50 dark:data-[state=unchecked]:bg-white/50"
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <AlertDialogFooter className="text-start !justify-start gap-2">
-                  <AlertDialogCancel className="text-black dark:text-white">
-                    إلغاء
-                  </AlertDialogCancel>
-                  <Button type="submit" disabled={isPending}>
-                    إضافة
-                    {isPending && <Loader2 className="animate-spin" />}
-                  </Button>
-                </AlertDialogFooter>
-              </form>
-            </Form>
-          </div>
-        </AlertDialogContent>
-      </AlertDialog>
+                إلغاء
+              </AlertDialogCancel>
+              <Button type="submit" disabled={isPending}>
+                إضافة
+                {isPending && <Loader2 className="animate-spin ml-2" />}
+              </Button>
+            </AlertDialogFooter>
+          </form>
+        </Form>
+      </ClinicModal>
     </>
   );
 };

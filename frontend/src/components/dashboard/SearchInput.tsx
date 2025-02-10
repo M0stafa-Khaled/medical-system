@@ -1,9 +1,8 @@
 import { Input } from "@/components/ui/input";
-import { Dispatch, SetStateAction } from "react";
 
 interface IProps {
   searchKeyword: string;
-  setSearchKeyword: Dispatch<SetStateAction<string>>;
+  setSearchKeyword: (value: string) => void;
   placeholder: string;
 }
 const SearchInput = ({
@@ -11,6 +10,7 @@ const SearchInput = ({
   setSearchKeyword,
   placeholder,
 }: IProps) => {
+  
   return (
     <Input
       placeholder={placeholder}

@@ -11,7 +11,7 @@ const ThemeProvider = ({ children }: IProps) => {
     <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}

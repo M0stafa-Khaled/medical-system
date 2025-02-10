@@ -1,7 +1,4 @@
-import { logout } from "@/app/features/auth/authSlice";
-import { RootState } from "@/app/store";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { FiLogOut } from "react-icons/fi";
@@ -17,22 +14,24 @@ import {
 import { toast } from "react-toastify";
 import { useLogout } from "@/lib/react-query/auth";
 import { AxiosError } from "axios";
+import cookieServices from "@/utils/cookieServices";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/app/store";
+import { logout } from "@/app/features/auth/authSlice";
 
 const AuthButtons = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false);
-  const { isAuthenticated, token } = useSelector(
-    (state: RootState) => state.auth
-  );
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  const token = cookieServices.getToken();
   const { mutateAsync: logoutUser } = useLogout();
+
   const logoutFromDashboard = async () => {
     try {
-      const { status, message } = await logoutUser(token as string);
+      await logoutUser(token as string);
       // ! Logout Field
-      if (!status) return toast.error(message);
-
       // * Logout Success
       dispatch(logout());
       navigate("/login");

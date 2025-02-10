@@ -1,13 +1,13 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import {
-  IClinicsResponse,
   ICreateClinic,
   ICreateClinicResponse,
+  IResponseClinics,
 } from "@/interfaces";
-import cookieServices from "@/utils/cookieServices";
 
-const token = cookieServices.getToken();
-export const getAllClinics: () => Promise<IClinicsResponse> = async () => {
+export const getAllClinics: (
+  token: string
+) => Promise<IResponseClinics> = async (token) => {
   const { data } = await axiosInstanceAPI.get("/clinics", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -22,6 +22,7 @@ export const createClinic: ({
 }: ICreateClinic) => Promise<ICreateClinicResponse> = async ({
   name,
   status,
+  token,
 }) => {
   const { data } = await axiosInstanceAPI.post(
     "/clinics",
@@ -35,9 +36,13 @@ export const createClinic: ({
   return data;
 };
 
-export const deleteClinic: (
-  id: number
-) => Promise<ICreateClinicResponse> = async (id) => {
+export const deleteClinic: ({
+  id,
+  token,
+}: {
+  id: number;
+  token: string | null;
+}) => Promise<ICreateClinicResponse> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.delete(`/clinics/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -50,11 +55,13 @@ export const updateClinic: ({
   id,
   name,
   status,
-}: {
-  id: number;
-  name: string;
-  status: boolean;
-}) => Promise<ICreateClinicResponse> = async ({ id, name, status }) => {
+  token,
+}: ICreateClinic) => Promise<ICreateClinicResponse> = async ({
+  id,
+  name,
+  status,
+  token,
+}) => {
   const { data } = await axiosInstanceAPI.put(
     `/clinics/${id}?name=${name}&status=${status ? "1" : "0"}`,
     {},

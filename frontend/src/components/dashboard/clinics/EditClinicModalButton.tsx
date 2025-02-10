@@ -29,6 +29,7 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import cookieServices from "@/utils/cookieServices";
 
 interface IProps {
   id: number;
@@ -36,6 +37,8 @@ interface IProps {
   status: boolean;
 }
 const EditClinicModalButton = ({ id, name, status }: IProps) => {
+  const token = cookieServices.getToken() || "";
+
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
   const { mutateAsync: updateClinic, isPending } = useUpdateClinic();
 
@@ -52,19 +55,18 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
         status: statusServer,
         message,
         data,
-      } = await updateClinic({ id, name, status });
+      } = await updateClinic({ id, name, status, token });
 
       // ! Create Field
       if (!statusServer) return toast.error(message);
-
       // * Create Success
-      return toast.success(`${message} '${data.name}'`);
+      return toast.success(`${message} (${data.name})`);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
       toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
     } finally {
       setIsOpenEditModal(false);
-      form.reset();
+      form.reset({ name, status });
     }
   };
 
@@ -122,7 +124,7 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
                         <Input
                           placeholder="اسم العيادة"
                           {...field}
-                          value={form.getValues("name")}
+                          value={field.value}
                           onChange={(e) =>
                             form.setValue("name", e.target.value)
                           }

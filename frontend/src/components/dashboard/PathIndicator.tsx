@@ -24,25 +24,32 @@ const PathIndicator = ({ routeNames }: IProps) => {
             const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
             const isLast = index === pathnames.length - 1;
             const arabicName = routeNames?.[name] || name;
-            return (
-              <Fragment key={name}>
-                <BreadcrumbItem className="text-black dark:!text-white !text-sm">
-                  {isLast ? (
-                    <BreadcrumbPage className="!text-black dark:!text-white">
-                      {arabicName}
-                    </BreadcrumbPage>
-                  ) : (
-                    <Link
-                      className="!text-black/80 dark:!text-white/70"
-                      to={routeTo}
-                    >
-                      {arabicName}
-                    </Link>
+
+              return (
+                <Fragment key={name}>
+                  <BreadcrumbItem className="text-black dark:!text-white !text-sm">
+                    {isLast  ? (
+                      <BreadcrumbPage className="!text-black dark:!text-white">
+                        {arabicName}
+                      </BreadcrumbPage>
+                    ) : (
+                      <Link
+                        className="!text-black/80 dark:!text-white/70"
+                        to={
+                          routeTo === "/dashboard/doctors/update"
+                            ? "/dashboard/doctors"
+                            : routeTo
+                        }
+                      >
+                        {arabicName}
+                      </Link>
+                    )}
+                  </BreadcrumbItem>
+                  {!isLast && (
+                    <BreadcrumbSeparator className="rotate-180" />
                   )}
-                </BreadcrumbItem>
-                {!isLast && <BreadcrumbSeparator className="rotate-180" />}
-              </Fragment>
-            );
+                </Fragment>
+              );
           })}
         </BreadcrumbList>
       </Breadcrumb>

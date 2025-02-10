@@ -43,13 +43,9 @@ const Login = () => {
       });
 
       // ! Login Field
-      if (!status) {
-        toast.error(message);
-        return;
-      }
+      if (!status) return toast.error(message);
 
       // * Login Success
-      window.location.reload();
       dispatch(login({ token: data.token, role: data.role }));
       return toast.success(message);
     } catch (error) {
