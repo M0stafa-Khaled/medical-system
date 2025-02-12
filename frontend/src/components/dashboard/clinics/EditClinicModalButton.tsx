@@ -76,11 +76,9 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
         onClick={() => {
           setIsOpenEditModal(true);
         }}
-        size={"sm"}
-        className="bg-primary text-white dark:text-black gap-2 text-sm"
+        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
       >
-        تعديل
-        <FaPencil size={18} />
+        <FaPencil size={24} />
       </Button>
 
       {/* Edit Modal */}

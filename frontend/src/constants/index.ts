@@ -27,6 +27,12 @@ export const ADD_DOCTOR_FORM_INPUTS: IFormInput[] = [
     type: "text",
   },
   {
+    name: "register_id",
+    label: "رقم القيد",
+    placeholder: "ادخل رقم ",
+    type: "text",
+  },
+  {
     name: "first_phone",
     label: "رقم الهاتف الأول",
     placeholder: "ادخل رقم الهاتف",
@@ -62,6 +68,16 @@ export const ADD_DOCTOR_FORM_INPUTS: IFormInput[] = [
     type: "switch",
   },
   {
+    name: "clinics",
+    label: "العيادة",
+    type: "clinics",
+  },
+  {
+    name: "gender",
+    label: "النوع",
+    type: "gender",
+  },
+  {
     name: "image",
     label: "صورة الطبيب",
     type: "file",
@@ -72,5 +88,16 @@ export const ADD_DOCTOR_FORM_INPUTS: IFormInput[] = [
     label: "توقيع الطبيب",
     type: "file",
     accept: "image/*",
+  },
+];
+
+export const GENDER: { value: string; label: string }[] = [
+  {
+    value: "male",
+    label: "ذكر",
+  },
+  {
+    value: "female",
+    label: "انثى",
   },
 ];

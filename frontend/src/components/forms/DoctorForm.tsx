@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { z, ZodSchema } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,22 +12,25 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
-import { ADD_DOCTOR_FORM_INPUTS } from "@/constants";
+import { ADD_DOCTOR_FORM_INPUTS, GENDER } from "@/constants";
 import { IDoctor, IFormInput } from "@/interfaces";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
-import doctorSchema from "@/validations/doctorSchema";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useAddDoctor, useUpdateDoctor } from "@/lib/react-query/doctors";
 import { useNavigate } from "react-router-dom";
+import { useGetAllClinics } from "@/lib/react-query/clinics";
+import Select, { StylesConfig } from "react-select";
+import { useTheme } from "next-themes";
 
 interface IProps {
   doctor?: IDoctor;
   action: "add" | "update";
+  doctorSchema: ZodSchema;
 }
 
-const DoctorForm = ({ doctor, action }: IProps) => {
+const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   const {
     id,
     name,
@@ -36,15 +39,24 @@ const DoctorForm = ({ doctor, action }: IProps) => {
     first_phone,
     second_phone,
     status,
+    register_id,
     user,
+    clinics,
   } = doctor || {};
 
   const token = cookieServices.getToken() || "";
+  const { theme } = useTheme();
   const navigate = useNavigate();
 
   const { mutateAsync: addDoctor, isPending: isLoadingAdd } = useAddDoctor();
+  const { data: clinicsData } = useGetAllClinics(token as string, `${id}`);
   const { mutateAsync: updateDoctor, isPending: isLoadingUpdate } =
     useUpdateDoctor();
+
+  const clinicsOptions = clinicsData?.data.map((clinic) => ({
+    value: clinic.id.toString(),
+    label: clinic.name,
+  }));
 
   const form = useForm<z.infer<typeof doctorSchema>>({
     resolver: zodResolver(doctorSchema),
@@ -54,6 +66,7 @@ const DoctorForm = ({ doctor, action }: IProps) => {
       first_phone: first_phone || "",
       second_phone: second_phone || "",
       email: user?.email || "",
+      register_id: register_id || "",
       password: "",
       commission:
         commission?.toString().slice(0, commission?.toString().length - 1) ||
@@ -61,6 +74,12 @@ const DoctorForm = ({ doctor, action }: IProps) => {
       status: status || true,
       image: undefined,
       signature: undefined,
+      gender: "",
+      clinics:
+        clinics?.map((clinic) => ({
+          value: clinic.id.toString(),
+          label: clinic.name,
+        })) || [],
     },
   });
 
@@ -70,7 +89,7 @@ const DoctorForm = ({ doctor, action }: IProps) => {
     <FormField
       key={input.name}
       control={form.control}
-      name={input.name as keyof z.infer<typeof doctorSchema>}
+      name={input.name as keyof z.infer<typeof doctorSchema> as string}
       render={
         input.type === "switch"
           ? ({ field }) => (
@@ -83,10 +102,59 @@ const DoctorForm = ({ doctor, action }: IProps) => {
                       dir="ltr"
                       checked={field.value as boolean | undefined}
                       onCheckedChange={field.onChange}
-                      className="data-[state=unchecked]:bg-black/50 dark:data-[state=unchecked]:bg-white/50"
+                      className="data-[state=unchecked]:bg-black/50 data-[state=checked]:bg-green-700 dark:data-[state=unchecked]:bg-white/50 dark:data-[state=checked]:bg-green-500"
                     />
                   </FormControl>
                 </div>
+              </FormItem>
+            )
+          : input.name === "clinics"
+          ? ({ field }) => (
+              <FormItem>
+                <FormLabel>{input.label}</FormLabel>
+                <FormControl>
+                  <Select
+                    {...field}
+                    isMulti
+                    options={clinicsOptions}
+                    onChange={(selectedOptions) => {
+                      field.onChange(selectedOptions);
+                    }}
+                    styles={selectStyles}
+                    // theme={(selectTheme) => ({
+                    //   ...selectTheme,
+                    //   colors: {
+                    //     ...selectTheme.colors,
+                    //     primary25: theme === "dark" ? "#110f14" : "#e6e5e6",
+                    //   },
+                    // })}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )
+          : input.name === "gender"
+          ? ({ field }) => (
+              <FormItem>
+                <FormLabel>{input.label}</FormLabel>
+                <FormControl>
+                  <Select
+                    {...field}
+                    options={GENDER}
+                    onChange={(selectedOptions) => {
+                      field.onChange(selectedOptions);
+                    }}
+                    styles={selectStyles}
+                    // theme={(selectTheme) => ({
+                    //   ...selectTheme,
+                    //   colors: {
+                    //     ...selectTheme.colors,
+                    //     primary25: theme === "dark" ? "#110f14" : "#e6e5e6",
+                    //   },
+                    // })}
+                  />
+                </FormControl>
+                <FormMessage />
               </FormItem>
             )
           : input.type === "file"
@@ -131,6 +199,7 @@ const DoctorForm = ({ doctor, action }: IProps) => {
   );
 
   const onSubmit = async (formData: z.infer<typeof doctorSchema>) => {
+    console.log(formData);
     try {
       if (action === "add") {
         const { status, message } = await addDoctor({
@@ -150,6 +219,7 @@ const DoctorForm = ({ doctor, action }: IProps) => {
         toast.success("تم تحديث بيانات الطبيب بنجاح");
       }
       navigate("/dashboard/doctors");
+      form.reset();
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
@@ -163,11 +233,30 @@ const DoctorForm = ({ doctor, action }: IProps) => {
           );
         });
       }
-    } finally {
-      form.reset();
     }
   };
 
+  const selectStyles: StylesConfig = {
+    input: (baseStyles) => ({
+      ...baseStyles,
+      color: "#1e1c21",
+      padding: "8px 0px",
+    }),
+    menu: (baseState) => ({
+      ...baseState,
+      color: theme === "dark" ? "#fafafa" : "",
+      // background: theme === "dark" ? "#1e1c21" : "",
+    }),
+    option: (baseStyle) => ({
+      ...baseStyle,
+      // ":hover": {
+      //   backgroundColor: theme === "dark" ? "#110f14" : "",
+      // },
+      color: theme === "dark" ? "#110f14" : "",
+      paddingTop: "12px",
+      paddingBottom: "12px",
+    }),
+  };
   return (
     <Form {...form}>
       <form

@@ -56,8 +56,7 @@ export interface ICreateClinicResponse {
 
 // Doctor Interfaces
 export interface IDoctor {
-  commission: number;
-  company_id: number | null;
+  commission: string;
   created_at: string;
   first_phone: string;
   id: number;
@@ -68,7 +67,8 @@ export interface IDoctor {
   signature: string | null;
   status: boolean;
   updated_at: string;
-  user_id?: number;
+  register_id: string;
+  clinics: IClinic[];
   user?: {
     email: string;
     id: number;
@@ -94,11 +94,15 @@ export interface IAddDoctor {
   name: string;
   personal_id: string;
   first_phone: string;
-  second_phone?: string | undefined;
+  second_phone?: string | null;
   commission: string;
   status: boolean;
+  register_id: string;
   email: string;
   password: string;
   image?: File | undefined;
   signature?: File | undefined;
+  clinics: {
+    value: string;
+  }[];
 }

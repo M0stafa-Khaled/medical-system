@@ -8,10 +8,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
 import { ICreateClinic } from "@/interfaces";
 
-export const useGetAllClinics = (token: string) => {
+export const useGetAllClinics = (token: string, id?: string) => {
   return useQuery({
     queryFn: () => getAllClinics(token),
-    queryKey: [Query_Keys.GET_ALL_CLINICS],
+    queryKey: [Query_Keys.GET_ALL_CLINICS, id, Query_Keys.GET_ONE_DOCTOR],
   });
 };
 

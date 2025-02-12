@@ -40,10 +40,9 @@ const DeleteClinicButton = ({ name, id }: IProps) => {
         size={"sm"}
         onClick={() => setIsOpenDeleteModal(true)}
         variant={"destructive"}
-        className="text-white gap-2 text-sm"
+        className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
       >
-        حذف
-        <MdDelete size={18} />
+        <MdDelete size={24} />
       </Button>
 
       <ClinicModal
@@ -54,6 +53,7 @@ const DeleteClinicButton = ({ name, id }: IProps) => {
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}
+        variant="destructive"
       />
     </>
   );

@@ -8,7 +8,13 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import { AddDoctor, Clinics, Doctors, UpdateDoctor } from "@/pages/dashboard";
+import {
+  AddDoctor,
+  Clinics,
+  DoctorDetails,
+  Doctors,
+  UpdateDoctor,
+} from "@/pages/dashboard";
 
 const routes = createRoutesFromElements(
   <>
@@ -34,8 +40,9 @@ const routes = createRoutesFromElements(
       />
       <Route path="clinics" element={<Clinics />} />
       <Route path="doctors" element={<Doctors />} />
+      <Route path="doctors/:doctorId" element={<DoctorDetails />} />
       <Route path="doctors/add" element={<AddDoctor />} />
-      <Route path="doctors/update/:id" element={<UpdateDoctor />} />
+      <Route path="doctors/update/:doctorId" element={<UpdateDoctor />} />
     </Route>
 
     {/* Errors */}

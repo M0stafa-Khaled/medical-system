@@ -25,10 +25,15 @@ const PathIndicator = ({ routeNames }: IProps) => {
             const isLast = index === pathnames.length - 1;
             const arabicName = routeNames?.[name] || name;
 
-              return (
-                <Fragment key={name}>
+            const isNextItemNumber =
+              index < pathnames.length - 1 &&
+              !isNaN(Number(pathnames[index + 1]));
+
+            return (
+              <Fragment key={name}>
+                {isNaN(Number(name)) && (
                   <BreadcrumbItem className="text-black dark:!text-white !text-sm">
-                    {isLast  ? (
+                    {isLast ? (
                       <BreadcrumbPage className="!text-black dark:!text-white">
                         {arabicName}
                       </BreadcrumbPage>
@@ -45,11 +50,12 @@ const PathIndicator = ({ routeNames }: IProps) => {
                       </Link>
                     )}
                   </BreadcrumbItem>
-                  {!isLast && (
-                    <BreadcrumbSeparator className="rotate-180" />
-                  )}
-                </Fragment>
-              );
+                )}
+                {!isLast && isNaN(Number(name)) && !isNextItemNumber && (
+                  <BreadcrumbSeparator className="rotate-180" />
+                )}
+              </Fragment>
+            );
           })}
         </BreadcrumbList>
       </Breadcrumb>

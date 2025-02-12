@@ -27,7 +27,7 @@ export const useGetDoctorById = ({
     queryFn: () => getDoctorById({ id, token }),
     queryKey: [Query_Keys.GET_ONE_DOCTOR, id],
     refetchOnMount: true,
-    enabled: !!id
+    enabled: !!id,
   });
 };
 

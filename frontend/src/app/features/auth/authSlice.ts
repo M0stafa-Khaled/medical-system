@@ -28,7 +28,6 @@ const authSlice = createSlice({
       CookieService.setRole(action.payload.role, 1);
     },
     logout: (state) => {
-      console.log("logout");
       state.isAuthenticated = false;
       CookieService.clearAllCookies();
     },

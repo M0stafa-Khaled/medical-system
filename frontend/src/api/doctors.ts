@@ -19,6 +19,7 @@ export const getDoctorById: ({
   id: string;
   token: string;
 }) => Promise<IResponseDoctor> = async ({ id, token }) => {
+  if (isNaN(Number(id))) return;
   const { data } = await axiosInstanceAPI.get(`doctors/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,6 +43,10 @@ export const addDoctor: ({
   formData.append("status", dataForm.status ? "1" : "0");
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
+  formData.append("register_id", dataForm.register_id);
+  dataForm.clinics.map((clinic, idx) =>
+    formData.append(`clinics[${idx}]`, clinic.value)
+  );
   if (dataForm.second_phone)
     formData.append("second_phone", dataForm?.second_phone);
   if (dataForm.image) formData.append("image", dataForm.image);
@@ -61,7 +66,6 @@ export const updateDoctor: ({
   dataForm: IAddDoctor;
   token: string;
 }) => Promise<IResponseDoctor> = async ({ dataForm, token }) => {
-  console.log(dataForm.id);
   const formData = new FormData();
   formData.append("name", dataForm.name);
   formData.append("personal_id", dataForm.personal_id);
@@ -71,6 +75,10 @@ export const updateDoctor: ({
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
   formData.append("_method", "put");
+  formData.append("register_id", dataForm.register_id);
+  dataForm.clinics.map((clinic, idx) =>
+    formData.append(`clinics[${idx}]`, clinic.value)
+  );
   if (dataForm.second_phone)
     formData.append("second_phone", dataForm?.second_phone);
   if (dataForm.image) formData.append("image", dataForm.image);

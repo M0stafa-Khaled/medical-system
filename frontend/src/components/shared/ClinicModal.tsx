@@ -21,6 +21,7 @@ interface IProps {
   confirmText?: string;
   isLoading?: boolean;
   showFooter?: boolean;
+  variant?: "default" | "destructive" | "ghost" | "outline" | "secondary";
 }
 
 const ClinicModal = ({
@@ -34,6 +35,7 @@ const ClinicModal = ({
   confirmText = "تأكيد",
   isLoading = false,
   showFooter = true,
+  variant = "default",
 }: IProps) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
@@ -58,7 +60,11 @@ const ClinicModal = ({
               إلغاء
             </AlertDialogCancel>
             {onConfirm && (
-              <Button onClick={onConfirm} disabled={isLoading}>
+              <Button
+                onClick={onConfirm}
+                disabled={isLoading}
+                variant={variant}
+              >
                 {confirmText}
                 {isLoading && <Loader2 className="animate-spin ml-2" />}
               </Button>

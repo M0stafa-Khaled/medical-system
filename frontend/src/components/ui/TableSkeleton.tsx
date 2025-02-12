@@ -50,7 +50,7 @@ const SkeletonActionsCell = ({ buttons }: { buttons: number }) => (
   <TableCell className="py-3">
     <div className="mx-auto w-fit flex justify-center items-center gap-4">
       {Array.from({ length: buttons }).map((_, idx) => (
-        <Skeleton key={idx} className="h-6 w-10 md:w-14 rounded-sm" />
+        <Skeleton key={idx} className="w-9 h-9 rounded-sm" />
       ))}
     </div>
   </TableCell>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import DeleteDoctorButton from "./DeleteClinicModalButton";
 import { FaPencil } from "react-icons/fa6";
+import { FiEye } from "react-icons/fi";
 
 interface IProps {
   doctors: IDoctor[];
@@ -48,16 +49,20 @@ const DoctorsList = ({ doctors }: IProps) => {
             </TableCell>
 
             <TableCell className="text-center">
-              <div className="flex justify-center items-center gap-4">
-                <Button
-                  size={"sm"}
-                  className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm"
-                >
+              <div className="flex justify-center items-center gap-3">
+                <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
+                  <Link
+                    to={`/dashboard/doctors/${id}`}
+                    className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
+                  >
+                    <FiEye size={24} />
+                  </Link>
+                </Button>
+                <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                   <Link
                     to={`/dashboard/doctors/update/${id}`}
-                    className="flex justify-center items-center gap-2 w-full h-full py-1.5 px-3"
+                    className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                   >
-                    تعديل
                     <FaPencil size={18} />
                   </Link>
                 </Button>

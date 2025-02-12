@@ -6,12 +6,25 @@ import ClinicsTableActions from "./ClinicsTableActions";
 import ClinicsList from "./ClinicsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const ClinicsTable = () => {
   const token = cookieServices.getToken();
 
-  const { data: clinics, isLoading } = useGetAllClinics(token as string);
+  const {
+    data: clinics,
+    isLoading,
+    isError,
+  } = useGetAllClinics(token as string);
   const { filteredItems, searchTerm, setSearchTerm } = useSearch(clinics?.data);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("حدث خطأ اثناء تحميل البيانات");
+      return;
+    }
+  }, [isError]);
 
   return (
     <DataTable

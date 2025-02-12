@@ -6,12 +6,25 @@ import DoctorsTableActions from "./DoctorsTableActions";
 import DoctorsList from "./DoctorsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const DoctorsTable = () => {
   const token = cookieServices.getToken();
 
-  const { data: doctors, isLoading } = useGetAllDoctors(token as string);
+  const {
+    data: doctors,
+    isLoading,
+    isError,
+  } = useGetAllDoctors(token as string);
   const { searchTerm, setSearchTerm, filteredItems } = useSearch(doctors?.data);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("حدث خطأ اثناء تحميل البيانات");
+      return;
+    }
+  }, [isError]);
 
   return (
     <DataTable
