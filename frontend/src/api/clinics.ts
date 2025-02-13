@@ -41,7 +41,7 @@ export const deleteClinic: ({
   token,
 }: {
   id: number;
-  token: string | null;
+  token: string;
 }) => Promise<ICreateClinicResponse> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.delete(`/clinics/${id}`, {
     headers: {

@@ -66,7 +66,7 @@ export const useUpdateDoctor = () => {
 export const useDeleteDoctor = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, token }: { id: number; token: string | null }) =>
+    mutationFn: ({ id, token }: { id: number; token: string }) =>
       deleteDoctor({ id, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({

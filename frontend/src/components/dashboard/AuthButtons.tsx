@@ -81,7 +81,7 @@ const AuthButtons = () => {
               تسجيل الخروج
             </AlertDialogTitle>
             <AlertDialogDescription className="text-start !my-3">
-              هل انت متاكد من{" "}
+              هل انت متاكد من
               <span className="font-medium text-black dark:text-white">
                 تسجيل الخروج
               </span>

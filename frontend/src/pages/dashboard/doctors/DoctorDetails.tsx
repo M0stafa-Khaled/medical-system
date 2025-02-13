@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
-import DeleteDoctorButton from "@/components/dashboard/doctors/DeleteClinicModalButton";
+import DeleteDoctorButton from "@/components/dashboard/doctors/DeleteDoctorModalButton";
 import { FaPencil } from "react-icons/fa6";
 
 const DoctorDetails = () => {
@@ -112,8 +112,8 @@ const DoctorDetails = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">الحالة:</h5>
-              <p className="font-medium">{status ? "متاح" : "غير متاح"}</p>
+              <h5 className="text-sm text-muted-foreground">حالة الحساب:</h5>
+              <p className="font-medium">{status ? "مفعل" : "غير مفعل"}</p>
             </div>
             <div className="flex items-center gap-2">
               <h5 className="text-sm text-muted-foreground">العمولة:</h5>

@@ -1,23 +1,25 @@
-import { useGetAllDoctors } from "@/lib/react-query/doctors";
 import { useSearch } from "@/hooks/useSearch";
 import DataTable from "@/components/ui/DataTable";
-import DoctorsTableHeader from "./DoctorsTableHeader";
-import DoctorsTableActions from "./DoctorsTableActions";
-import DoctorsList from "./DoctorsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import PatientsTableActions from "../patients/PatientsTableActions";
+import EmployeesList from "./EmployeesList";
+import EmployeesTableHeader from "./EmployeesTableHeader";
+import { useGetAllEmployees } from "@/lib/react-query/employees";
 
-const DoctorsTable = () => {
+const EmployeesTable = () => {
   const token = cookieServices.getToken();
 
   const {
-    data: doctors,
+    data: employees,
     isLoading,
     isError,
-  } = useGetAllDoctors(token as string);
-  const { searchTerm, setSearchTerm, filteredItems } = useSearch(doctors?.data);
+  } = useGetAllEmployees(token as string);
+  const { searchTerm, setSearchTerm, filteredItems } = useSearch(
+    employees?.data
+  );
 
   useEffect(() => {
     if (isError) {
@@ -29,15 +31,15 @@ const DoctorsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      caption="الاطباء"
+      caption="الموظفين"
       actions={
-        <DoctorsTableActions
+        <PatientsTableActions
           searchKeyword={searchTerm}
           setSearchKeyword={setSearchTerm}
         />
       }
-      header={<DoctorsTableHeader />}
-      list={<DoctorsList doctors={filteredItems} />}
+      header={<EmployeesTableHeader />}
+      list={<EmployeesList employees={filteredItems} />}
       skeleton={
         <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
       }
@@ -45,4 +47,4 @@ const DoctorsTable = () => {
   );
 };
 
-export default DoctorsTable;
+export default EmployeesTable;

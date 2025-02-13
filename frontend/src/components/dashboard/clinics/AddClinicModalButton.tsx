@@ -23,7 +23,7 @@ import { useCreateClinic } from "@/lib/react-query/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
-import ClinicModal from "@/components/shared/ClinicModal";
+import DeleteModal from "@/components/shared/DeleteModal";
 import cookieServices from "@/utils/cookieServices";
 
 const AddClinicModalButton = () => {
@@ -82,7 +82,7 @@ const AddClinicModalButton = () => {
         <FiPlus size={20} />
       </Button>
 
-      <ClinicModal
+      <DeleteModal
         isOpen={isOpenAddModal}
         onOpenChange={handleCloseModal}
         title="إضافة عيادة جديدة"
@@ -123,7 +123,7 @@ const AddClinicModalButton = () => {
                       dir="ltr"
                       checked={field.value}
                       onCheckedChange={field.onChange}
-                      className="data-[state=unchecked]:bg-black/50 dark:data-[state=unchecked]:bg-white/50"
+                      className="data-[state=unchecked]:bg-black/50 data-[state=checked]:bg-green-700 dark:data-[state=unchecked]:bg-white/50 dark:data-[state=checked]:bg-green-500"
                     />
                   </FormControl>
                 </FormItem>
@@ -143,7 +143,7 @@ const AddClinicModalButton = () => {
             </AlertDialogFooter>
           </form>
         </Form>
-      </ClinicModal>
+      </DeleteModal>
     </>
   );
 };

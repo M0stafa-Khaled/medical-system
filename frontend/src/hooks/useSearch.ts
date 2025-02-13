@@ -11,10 +11,12 @@ export const useSearch = <T extends Searchable>(items: T[] = []) => {
   const memoizedItems = useMemo(() => items, [items]);
 
   useEffect(() => {
+    if (!items.length) return;
+
     if (!searchTerm) return setFilteredItems(items);
 
     const results = memoizedItems.filter((item) =>
-      item.name.toLowerCase().startsWith(searchTerm.trim().toLowerCase())
+      item.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
     );
 
     setFilteredItems(results);

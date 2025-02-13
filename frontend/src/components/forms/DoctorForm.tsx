@@ -23,7 +23,8 @@ import { useNavigate } from "react-router-dom";
 import { useGetAllClinics } from "@/lib/react-query/clinics";
 import Select, { StylesConfig } from "react-select";
 import { useTheme } from "next-themes";
-
+import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
 interface IProps {
   doctor?: IDoctor;
   action: "add" | "update";
@@ -40,7 +41,9 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
     second_phone,
     status,
     register_id,
+    gender,
     user,
+
     clinics,
   } = doctor || {};
 
@@ -67,14 +70,17 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       second_phone: second_phone || "",
       email: user?.email || "",
       register_id: register_id || "",
+      gender: {
+        value: gender?.toString() || "",
+        label: gender === "female" ? "أنثى" : "ذكر",
+      },
       password: "",
       commission:
         commission?.toString().slice(0, commission?.toString().length - 1) ||
         "0",
-      status: status || true,
+      status: Boolean(status),
       image: undefined,
       signature: undefined,
-      gender: "",
       clinics:
         clinics?.map((clinic) => ({
           value: clinic.id.toString(),
@@ -82,6 +88,15 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         })) || [],
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      clinics: clinics?.map((clinic) => ({
+        value: clinic.id.toString(),
+        label: clinic.name,
+      })),
+    });
+  }, [doctor, form, clinics]);
 
   const { handleFileChange } = useUploadImgHandler(form);
 
@@ -94,9 +109,9 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         input.type === "switch"
           ? ({ field }) => (
               <FormItem>
-                <FormLabel>حالة الطبيب</FormLabel>
+                <FormLabel>حالة الحساب</FormLabel>
                 <div className="flex flex-row items-center justify-between rounded-lg border border-input p-3">
-                  <FormLabel>{field.value ? " متاح " : " غير متاح "}</FormLabel>
+                  <FormLabel>{field.value ? " مفعل " : " غير مفعل "}</FormLabel>
                   <FormControl>
                     <Switch
                       dir="ltr"
@@ -179,7 +194,16 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
             )
           : ({ field }) => (
               <FormItem>
-                <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
+                <FormLabel htmlFor={input.name}>
+                  {input.label}
+                  {(input.name === "password" || input.name === "email") &&
+                    action === "update" && (
+                      <span className="text-xs text-muted-foreground">
+                        {" "}
+                        (اختياري)
+                      </span>
+                    )}
+                </FormLabel>
                 <FormControl>
                   <Input
                     id={input.name}
@@ -218,7 +242,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         if (!status) return toast.error(message);
         toast.success("تم تحديث بيانات الطبيب بنجاح");
       }
-      navigate("/dashboard/doctors");
+      navigate(-1);
       form.reset();
     } catch (error) {
       const errorObj = error as AxiosError<{
@@ -280,6 +304,9 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
             : isLoadingUpdate
             ? "جاري تحديث البيانات"
             : "تحديث البيانات"}
+          {(isLoadingAdd || isLoadingUpdate) && (
+            <Loader2 className="animate-spin ml-2" />
+          )}
         </Button>
       </form>
     </Form>

@@ -44,6 +44,7 @@ export const addDoctor: ({
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
   formData.append("register_id", dataForm.register_id);
+  formData.append("gender", dataForm.gender.value);
   dataForm.clinics.map((clinic, idx) =>
     formData.append(`clinics[${idx}]`, clinic.value)
   );
@@ -66,6 +67,7 @@ export const updateDoctor: ({
   dataForm: IAddDoctor;
   token: string;
 }) => Promise<IResponseDoctor> = async ({ dataForm, token }) => {
+  console.log(dataForm.gender);
   const formData = new FormData();
   formData.append("name", dataForm.name);
   formData.append("personal_id", dataForm.personal_id);
@@ -76,6 +78,7 @@ export const updateDoctor: ({
   formData.append("password", dataForm.password);
   formData.append("_method", "put");
   formData.append("register_id", dataForm.register_id);
+  formData.append("gender", dataForm.gender.value.toLowerCase());
   dataForm.clinics.map((clinic, idx) =>
     formData.append(`clinics[${idx}]`, clinic.value)
   );
@@ -100,7 +103,7 @@ export const deleteDoctor: ({
   token,
 }: {
   id: number;
-  token: string | null;
+  token: string;
 }) => Promise<IResponseDoctor> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.delete(`/doctors/${id}`, {
     headers: {

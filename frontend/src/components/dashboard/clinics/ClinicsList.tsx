@@ -29,9 +29,11 @@ const ClinicsList = ({ clinics }: IProps) => {
               {name}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white">
-              <Badge className="bg-green-500 hover:bg-green-500">
-                {status ? "متاحة" : "غير متاحة"}
-              </Badge>
+              {status ? (
+                <Badge className="bg-green-500 hover:bg-green-500">متاحة</Badge>
+              ) : (
+                <Badge variant={"destructive"}>غير متاحة</Badge>
+              )}
             </TableCell>
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-4">

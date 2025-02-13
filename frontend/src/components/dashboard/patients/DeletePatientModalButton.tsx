@@ -1,6 +1,6 @@
-import ClinicModal from "@/components/shared/ClinicModal";
+import DeleteModal from "@/components/shared/DeleteModal";
 import { Button } from "@/components/ui/button";
-import { useDeleteDoctor } from "@/lib/react-query/doctors";
+import { useDeletePatient } from "@/lib/react-query/patients";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -13,20 +13,20 @@ interface IProps {
   id: number;
 }
 
-const DeleteDoctorButton = ({ name, id }: IProps) => {
+const DeletePatientButton = ({ name, id }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteDoctor, isPending } = useDeleteDoctor();
+  const { mutateAsync: deletePatient, isPending } = useDeletePatient();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deleteDoctor({ id, token });
+      const { status, message } = await deletePatient({ id, token });
 
       // ! Delete Field
       if (!status) return toast.error(message);
       // * Delete Success
-      navigate("/dashboard/doctors");
+      navigate("/dashboard/employees");
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
@@ -47,11 +47,11 @@ const DeleteDoctorButton = ({ name, id }: IProps) => {
         <MdDelete size={24} />
       </Button>
 
-      <ClinicModal
+      <DeleteModal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف طبيب"
-        description={`هل انت متاكد من حذف طبيب ${name}؟`}
+        title="حذف مريض"
+        description={`هل انت متاكد من حذف مريض ${name}؟`}
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}
@@ -61,4 +61,4 @@ const DeleteDoctorButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteDoctorButton;
+export default DeletePatientButton;

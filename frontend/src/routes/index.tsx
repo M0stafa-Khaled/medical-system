@@ -13,7 +13,15 @@ import {
   Clinics,
   DoctorDetails,
   Doctors,
+  Employees,
   UpdateDoctor,
+  AddEmployee,
+  UpdateEmployee,
+  Patients,
+  AddPatient,
+  UpdatePatient,
+  EmployeeDetails,
+  PatientDetails,
 } from "@/pages/dashboard";
 
 const routes = createRoutesFromElements(
@@ -38,11 +46,26 @@ const routes = createRoutesFromElements(
         index
         element={<h1 className="text-primary">الصفحة الرئيسية</h1>}
       />
+
+      {/* Clinics */}
       <Route path="clinics" element={<Clinics />} />
+      {/* Doctors */}
       <Route path="doctors" element={<Doctors />} />
       <Route path="doctors/:doctorId" element={<DoctorDetails />} />
       <Route path="doctors/add" element={<AddDoctor />} />
       <Route path="doctors/update/:doctorId" element={<UpdateDoctor />} />
+
+      {/* Employees */}
+      <Route path="employees" element={<Employees />} />
+      <Route path="employees:/:employeeId" element={<EmployeeDetails />} />
+      <Route path="employees/add" element={<AddEmployee />} />
+      <Route path="employees/update/:employeeId" element={<UpdateEmployee />} />
+
+      {/* Patients */}
+      <Route path="patients" element={<Patients />} />
+      <Route path="patients/:patientId" element={<PatientDetails />} />
+      <Route path="patients/add" element={<AddPatient />} />
+      <Route path="patients/update" element={<UpdatePatient />} />
     </Route>
 
     {/* Errors */}

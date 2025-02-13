@@ -146,8 +146,8 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
                           dir="ltr"
                           checked={field.value}
                           onCheckedChange={field.onChange}
-                          className="data-[state=unchecked]:bg-black/50 dark:data-[state=unchecked]:bg-white/50"
-                        />
+                          className="data-[state=unchecked]:bg-black/50 data-[state=checked]:bg-green-700 dark:data-[state=unchecked]:bg-white/50 dark:data-[state=checked]:bg-green-500"
+                          />
                       </FormControl>
                     </FormItem>
                   )}

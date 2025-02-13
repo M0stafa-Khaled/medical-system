@@ -19,14 +19,18 @@ const DashboardLayout = () => {
     dashboard: "لوحة التحكم",
     clinics: "العيادات",
     doctors: "الأطباء",
-    add: "إضافة طبيب",
-    update: "تعديل طبيب",
+    add: "إضافة",
+    update: "تعديل",
+    employees: "الموظفين",
+    patients: "المرضى",
   };
 
   const NAV_LINKS = [
     { name: routeNames.dashboard, path: "/dashboard" },
     { name: routeNames.clinics, path: "/dashboard/clinics" },
     { name: routeNames.doctors, path: "/dashboard/doctors" },
+    { name: routeNames.employees, path: "/dashboard/employees" },
+    { name: routeNames.patients, path: "/dashboard/patients" },
   ];
 
   useEffect(() => {

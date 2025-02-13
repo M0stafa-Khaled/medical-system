@@ -56,10 +56,10 @@ export interface ICreateClinicResponse {
 
 // Doctor Interfaces
 export interface IDoctor {
+  id: number;
   commission: string;
   created_at: string;
   first_phone: string;
-  id: number;
   image: string | null;
   name: string;
   personal_id: string;
@@ -67,6 +67,7 @@ export interface IDoctor {
   signature: string | null;
   status: boolean;
   updated_at: string;
+  gender: string;
   register_id: string;
   clinics: IClinic[];
   user?: {
@@ -90,7 +91,7 @@ export interface IResponseDoctor {
 }
 
 export interface IAddDoctor {
-  id?: number;
+  id?: string;
   name: string;
   personal_id: string;
   first_phone: string;
@@ -99,10 +100,95 @@ export interface IAddDoctor {
   status: boolean;
   register_id: string;
   email: string;
+  gender: {
+    value: "male" | "female";
+  };
   password: string;
-  image?: File | undefined;
-  signature?: File | undefined;
+  image?: File | null;
+  signature?: File | null;
   clinics: {
     value: string;
   }[];
+}
+
+// Employees Interfaces
+
+export interface IEmployee {
+  id: number;
+  name: string;
+  first_phone: string;
+  second_phone: string;
+  personal_id: string;
+  image: string | null;
+  personal_image: string | null;
+  status: true;
+  created_at: string;
+  grander: string;
+  jop: string;
+  salary: string;
+  user: {
+    id: number;
+    email: string;
+    role: TRole;
+  };
+}
+
+export interface IResponseEmployees {
+  status: boolean;
+  message: string;
+  data: IEmployee[];
+}
+
+export interface IResponseEmployee {
+  status: boolean;
+  message: string;
+  data: IEmployee;
+}
+
+export interface IAddEmployee {
+  id?: string;
+  name: string;
+  personal_id: string;
+  email: string;
+  password: string;
+  role: string;
+  grander: string;
+  jop: string;
+  status: boolean;
+  salary: string;
+  first_phone: string;
+  second_phone?: string | null;
+  image?: File | undefined;
+}
+
+// Patient interfaces
+
+export interface IPatient {
+  id: number;
+  name: string;
+  another_name: string;
+  first_phone: string;
+  second_phone: string;
+  personal_id: string;
+  personal_image: string | null;
+  status: true;
+  grander: string;
+  description: string;
+  user: {
+    id: number;
+    email: string;
+    role: TRole;
+  };
+}
+
+export interface IResponsePatients {
+  status: boolean;
+  message: string;
+  data: IPatient[];
+}
+
+export interface IResponsePatient {
+  status: boolean;
+  message: string;
+  data: IPatient;
 }

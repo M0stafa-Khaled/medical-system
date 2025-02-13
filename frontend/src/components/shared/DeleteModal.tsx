@@ -24,7 +24,7 @@ interface IProps {
   variant?: "default" | "destructive" | "ghost" | "outline" | "secondary";
 }
 
-const ClinicModal = ({
+const DeleteModal = ({
   isOpen,
   onOpenChange,
   title,
@@ -76,4 +76,4 @@ const ClinicModal = ({
   );
 };
 
-export default ClinicModal;
+export default DeleteModal;
