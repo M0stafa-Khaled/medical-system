@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { IEmployee } from "@/interfaces";
-import DeletePatientButton from "../patients/DeletePatientModalButton";
+import DeleteEmployeeButton from "./DeleteEmployeeModalButton";
 
 interface IProps {
   employees: IEmployee[];
@@ -70,7 +70,7 @@ const EmployeesList = ({ employees }: IProps) => {
                   </Link>
                 </Button>
 
-                <DeletePatientButton name={name} id={id} />
+                <DeleteEmployeeButton name={name} id={id} />
               </div>
             </TableCell>
           </TableRow>

@@ -18,7 +18,7 @@ const ProfileMenu = () => {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="h-10 w-10">
+          <Button className="h-9 w-9">
             <FaUser size={24} />
           </Button>
         </DropdownMenuTrigger>

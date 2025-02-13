@@ -7,7 +7,7 @@ const ToggleMode = () => {
   return (
     <Button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="h-10 w-10 px-0 py-0"
+      className="h-9 w-9 px-0 py-0"
     >
       {theme === "dark" ? (
         <IoIosSunny size={24} className="text-amber-400 h-10 w-10" />

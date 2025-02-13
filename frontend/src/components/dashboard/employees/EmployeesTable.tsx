@@ -4,10 +4,10 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import PatientsTableActions from "../patients/PatientsTableActions";
 import EmployeesList from "./EmployeesList";
 import EmployeesTableHeader from "./EmployeesTableHeader";
 import { useGetAllEmployees } from "@/lib/react-query/employees";
+import EmployeesTableActions from "./EmployeesTableActions";
 
 const EmployeesTable = () => {
   const token = cookieServices.getToken();
@@ -32,7 +32,7 @@ const EmployeesTable = () => {
     <DataTable
       isLoading={isLoading}
       actions={
-        <PatientsTableActions
+        <EmployeesTableActions
           searchKeyword={searchTerm}
           setSearchKeyword={setSearchTerm}
         />

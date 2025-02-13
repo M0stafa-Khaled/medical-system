@@ -17,7 +17,7 @@ const EmployeesTableActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
         className=" h-auto py-0 px-0 bg-primary md:bg-transparent md:text-primary text-primary-foreground hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black !rounded-lg font-semibold"
       >
         <Link
-          to="/dashboard/doctors/add"
+          to="/dashboard/employees/add"
           className="flex justify-center items-center gap-2 w-full h-full py-4 px-4"
         >
           إضافة موظف جديد

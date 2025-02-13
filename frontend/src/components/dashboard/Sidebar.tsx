@@ -43,7 +43,7 @@ const Sidebar = ({ links }: IProps) => {
             <img
               src={"/logo.svg"}
               alt="logo"
-              className="max-w-40 flex justify-center items-center"
+              className="max-w-24 flex justify-center items-center"
             />
           </div>
           {/* Profile Menu & Toggle Mode */}
@@ -53,13 +53,13 @@ const Sidebar = ({ links }: IProps) => {
           </div>
           {/* Links */}
           <nav>
-            <ul className="w-full">
+            <ul className="w-full mt-4">
               {links.map((link, idx) => {
                 return (
                   <li key={idx} className="w-full">
                     <NavLink
                       to={link.path}
-                      className={`block mt-4 w-full text-center py-3 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted ${
+                      className={`block mt-2 w-full text-center py-3 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted ${
                         activeLink === link.path.split("/")[2]
                           ? "bg-dark/20 dark:bg-dark"
                           : "hover:bg-dark/10 dark:hover:bg-dark/50"
