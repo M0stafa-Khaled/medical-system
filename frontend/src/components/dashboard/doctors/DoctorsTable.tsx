@@ -29,7 +29,6 @@ const DoctorsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      caption="الاطباء"
       actions={
         <DoctorsTableActions
           searchKeyword={searchTerm}

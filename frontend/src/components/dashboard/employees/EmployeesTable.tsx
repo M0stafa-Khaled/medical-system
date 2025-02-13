@@ -31,7 +31,6 @@ const EmployeesTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      caption="الموظفين"
       actions={
         <PatientsTableActions
           searchKeyword={searchTerm}
