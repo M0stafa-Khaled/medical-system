@@ -16,7 +16,7 @@ const DashboardLayout = () => {
   const { mutateAsync: checkAuthUser } = useCheckAuth();
 
   const routeNames = {
-    dashboard: "لوحة التحكم",
+    dashboard: "الرئيسية",
     clinics: "العيادات",
     doctors: "الأطباء",
     add: "إضافة",

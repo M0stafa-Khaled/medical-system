@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { FiLogOut } from "react-icons/fi";
+// import { FiLogOut } from "react-icons/fi";
 import ProfileMenu from "./ProfileMenu";
 import { Button } from "../ui/button";
 import {
@@ -15,6 +15,7 @@ import { useState } from "react";
 import ToggleMode from "../ToggleMode";
 import { useDispatch } from "react-redux";
 import { logout } from "@/app/features/auth/authSlice";
+import LogoutIconButton from "../LogoutIconButton";
 
 interface IProps {
   links: {
@@ -48,6 +49,7 @@ const Sidebar = ({ links }: IProps) => {
           </div>
           {/* Profile Menu & Toggle Mode */}
           <div className="flex justify-center items-center gap-4">
+            <LogoutIconButton />
             <ProfileMenu />
             <ToggleMode />
           </div>
@@ -75,14 +77,14 @@ const Sidebar = ({ links }: IProps) => {
           {/* Logout */}
         </div>
         <div className="flex flex-col justify-center items-center gap-2">
-          <Button
+          {/* <Button
             onClick={() => setIsOpenLogoutModal(true)}
             variant={"destructive"}
             className="h-auto py-3 items-center justify-center gap-2 w-full !text-base !font-normal"
           >
             تسجيل الخروج
             <FiLogOut size={20} />
-          </Button>
+          </Button> */}
         </div>
       </div>
 

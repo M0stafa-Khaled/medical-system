@@ -7,6 +7,7 @@ import NavList from "./NavList";
 
 import AuthButtons from "./dashboard/AuthButtons";
 import ToggleMode from "./ToggleMode";
+import LogoutIconButton from "./LogoutIconButton";
 
 interface IProps {
   links: {
@@ -102,6 +103,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
           {/* Toggle Mode */}
           <div className="flex justify-center items-center gap-4">
             <div className="flex justify-center items-center gap-3">
+              <LogoutIconButton />
               <ProfileMenu />
               <ToggleMode />
             </div>
