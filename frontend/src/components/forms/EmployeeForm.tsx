@@ -89,7 +89,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           ? ({ field }) => (
               <FormItem>
                 <FormLabel>{input.label}</FormLabel>
-                <div className="flex flex-row items-center justify-between rounded-lg border border-input p-3">
+                <div className="border-muted flex flex-row items-center justify-between rounded-lg border p-3">
                   <FormLabel>{field.value ? " مفعل " : " غير مفعل "}</FormLabel>
                   <FormControl>
                     <Switch
@@ -147,7 +147,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
                       type="file"
                       accept={input.accept}
                       onChange={(e) => handleFileChange(e, onChange)}
-                      className="h-auto py-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                      className="border-muted h-auto py-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
                       {...field}
                       value={undefined}
                     />
@@ -176,7 +176,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
                     {...field}
                     onChange={(e) => field.onChange(e.target.value)}
                     value={field.value as string | undefined}
-                    className="py-3 placeholder:h-14 h-auto text-black dark:text-white placeholder:text-black/50 dark:placeholder:text-white/50"
+                    className="border-muted py-3 placeholder:h-14 h-auto text-black dark:text-white placeholder:text-black/50 dark:placeholder:text-white/50"
                   />
                 </FormControl>
                 <FormMessage />

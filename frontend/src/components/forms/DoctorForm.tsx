@@ -108,7 +108,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
           ? ({ field }) => (
               <FormItem>
                 <FormLabel className="w-full">{input.label}</FormLabel>
-                <div className="flex flex-row items-center justify-between rounded-lg border border-muted p-3">
+                <div className="flex flex-row items-center justify-between rounded-lg border border-muted p-3.5">
                   <FormLabel>{field.value ? " مفعل " : " غير مفعل "}</FormLabel>
                   <FormControl>
                     <Switch
@@ -134,13 +134,6 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
                       field.onChange(selectedOptions);
                     }}
                     styles={selectStyles}
-                    // theme={(selectTheme) => ({
-                    //   ...selectTheme,
-                    //   colors: {
-                    //     ...selectTheme.colors,
-                    //     primary25: theme === "dark" ? "#110f14" : "#e6e5e6",
-                    //   },
-                    // })}
                   />
                 </FormControl>
                 <FormMessage />
@@ -158,13 +151,6 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
                       field.onChange(selectedOptions);
                     }}
                     styles={selectStyles}
-                    // theme={(selectTheme) => ({
-                    //   ...selectTheme,
-                    //   colors: {
-                    //     ...selectTheme.colors,
-                    //     primary25: theme === "dark" ? "#110f14" : "#e6e5e6",
-                    //   },
-                    // })}
                   />
                 </FormControl>
                 <FormMessage />
@@ -267,13 +253,13 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
     menu: (baseState) => ({
       ...baseState,
       color: theme === "dark" ? "#fafafa" : "",
-      // background: theme === "dark" ? "#1e1c21" : "",
+    }),
+    multiValueRemove: (baseStyles) => ({
+      ...baseStyles,
+      color: theme === "dark" ? "#110f14" : "",
     }),
     option: (baseStyle) => ({
       ...baseStyle,
-      // ":hover": {
-      //   backgroundColor: theme === "dark" ? "#110f14" : "",
-      // },
       color: theme === "dark" ? "#110f14" : "",
       paddingTop: "12px",
       paddingBottom: "12px",

@@ -1,4 +1,5 @@
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { memo } from "react";
 
 const PatientsTableHeader = () => {
   return (
@@ -13,4 +14,4 @@ const PatientsTableHeader = () => {
   );
 };
 
-export default PatientsTableHeader;
+export default memo(PatientsTableHeader);

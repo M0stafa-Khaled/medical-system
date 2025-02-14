@@ -1,4 +1,5 @@
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { memo } from "react";
 
 const EmployeesTableHeader = () => {
   return (
@@ -14,4 +15,4 @@ const EmployeesTableHeader = () => {
   );
 };
 
-export default EmployeesTableHeader;
+export default memo(EmployeesTableHeader);
