@@ -134,6 +134,12 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     type: "password",
   },
   {
+    name: "job",
+    label: "الوظيفة",
+    placeholder: "ادخل الوظيفة",
+    type: "text",
+  },
+  {
     name: "status",
     label: "حالة الحساب",
     type: "switch",

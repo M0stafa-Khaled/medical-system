@@ -39,7 +39,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     status,
     salary,
     gender,
-    jop,
+    job,
     user,
   } = employee || {};
 
@@ -61,10 +61,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       second_phone: second_phone || "",
       salary: salary || "",
       email: user?.email || "",
-      jop: jop || "",
+      job: job || "",
       gender: {
-        value: gender || "male",
-        label: gender === "female" ? "أنثى" : "ذكر",
+        value: gender?.toLowerCase() || "male",
+        label: gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
       },
       password: "",
       status: Boolean(status) || true,
@@ -76,7 +76,6 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       },
     },
   });
-  console.log(form.formState.errors);
   const { handleFileChange } = useUploadImgHandler(form);
 
   const renderFormField = (input: IFormInput) => (
@@ -105,9 +104,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           : input.name === "gender"
           ? ({ field }) => (
               <FormItem>
-                <FormLabel>{input.label}</FormLabel>
+                <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
                 <FormControl>
                   <Select
+                    id={input.name}
                     {...field}
                     options={GENDER}
                     onChange={(selectedOptions) => {
@@ -122,9 +122,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           : input.name === "role"
           ? ({ field }) => (
               <FormItem>
-                <FormLabel>{input.label}</FormLabel>
+                <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
                 <FormControl>
                   <Select
+                    id={input.name}
                     {...field}
                     options={ROLES}
                     onChange={(selectedOptions) => {

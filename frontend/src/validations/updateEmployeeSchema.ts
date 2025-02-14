@@ -23,9 +23,10 @@ const updateEmployeeSchema = z.object({
     }),
   salary: z
     .string({ message: " الراتب مطلوب" })
-    .regex(/^\d+$/, "يجب إدخال رقم صالح")
+    .regex(/^\d*\.?\d+$/, "يجب إدخال رقم صالح")
     .trim(),
   status: z.boolean().default(true),
+  job: z.string({ message: "الوظيفة مطلوبة" }),
   email: z
     .string()
     .trim()
@@ -39,6 +40,13 @@ const updateEmployeeSchema = z.object({
       label: z.string({ message: "النوع مطلوب" }),
     },
     { message: "النوع مطلوب" }
+  ),
+  role: z.object(
+    {
+      value: z.string({ message: "الدور مطلوب" }),
+      label: z.string({ message: "الدور مطلوب" }),
+    },
+    { message: "الدور مطلوب" }
   ),
   password: z
     .string()

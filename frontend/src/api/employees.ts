@@ -67,7 +67,7 @@ export const addEmployee: ({
   formData.append("password", dataForm.password);
   formData.append("role", dataForm.role.value);
   formData.append("gender", dataForm.gender.value);
-  formData.append("jop", dataForm.jop);
+  formData.append("job", dataForm.job);
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
@@ -99,9 +99,9 @@ export const updateEmployee: ({
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
   formData.append("role", dataForm.role.value);
-  console.log("heelo");
   formData.append("gender", dataForm.gender.value);
-  formData.append("jop", dataForm.jop);
+  console.log(dataForm.gender)
+  formData.append("job", dataForm.job);
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");

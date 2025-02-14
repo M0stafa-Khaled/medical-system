@@ -16,6 +16,12 @@ export interface IAuthResponse {
   };
 }
 
+export interface ICheckAuth {
+  auth: boolean;
+  email_verified: boolean;
+  status: boolean;
+}
+
 // Form Input Interfaces
 export interface IFormInput {
   name: string;
@@ -146,7 +152,7 @@ export interface IEmployee {
   status: true;
   created_at: string;
   gender: string;
-  jop: string;
+  job: string;
   salary: string;
   user: {
     id: number;
@@ -167,7 +173,7 @@ export interface IAddEmployee {
   gender: {
     value: "male" | "female";
   };
-  jop: string;
+  job: string;
   status: boolean;
   salary: string;
   first_phone: string;

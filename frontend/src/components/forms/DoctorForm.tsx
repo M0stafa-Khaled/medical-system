@@ -159,7 +159,15 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
           : input.type === "file"
           ? ({ field: { onChange, value, ...field } }) => (
               <FormItem>
-                <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
+                <FormLabel htmlFor={input.name}>
+                  {input.label}
+                  {(input.name === "image" || input.name === "signature") && (
+                    <span className="text-xs text-muted-foreground">
+                      {" "}
+                      (اختياري)
+                    </span>
+                  )}
+                </FormLabel>
                 <FormControl>
                   <div className="flex flex-col gap-4">
                     <Input

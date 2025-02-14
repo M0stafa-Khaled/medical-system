@@ -21,7 +21,7 @@ const addEmployeeSchema = z.object({
     }),
   salary: z
     .string({ message: " الراتب مطلوب" })
-    .regex(/^\d+$/, "يجب إدخال رقم صالح")
+    .regex(/^\d*\.?\d+$/, "يجب إدخال رقم صالح")
     .trim(),
 
   status: z.boolean().default(true),
@@ -32,6 +32,7 @@ const addEmployeeSchema = z.object({
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
     .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
+  job: z.string({ message: "الوظفية مطلوبة" }),
   gender: z.object(
     {
       value: z.string({ message: "النوع مطلوب" }),
