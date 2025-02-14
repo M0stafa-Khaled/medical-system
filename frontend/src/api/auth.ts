@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IAuthResponse } from "@/interfaces";
+import { IAuthResponse, ICheckAuth } from "@/interfaces";
 
 export const login: (user: {
   email: string;
@@ -27,12 +27,52 @@ export const logout: (token: string) => Promise<IAuthResponse> = async (
   return data;
 };
 
-export const checkAuth: (token: string) => Promise<{ auth: boolean }> = async (
+export const checkAuth: (token: string) => Promise<ICheckAuth> = async (
   token
 ) => {
   const { data } = await axiosInstanceAPI.post(
     "/check-auth",
     {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return data;
+};
+
+export const resendOtp: (token: string) => Promise<{
+  status: boolean;
+  message: string;
+}> = async (token) => {
+  const { data } = await axiosInstanceAPI.post(
+    "/email/verification-notification",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return data;
+};
+
+export const verifyEmail: ({
+  token,
+  otp,
+}: {
+  token: string;
+  otp: string;
+}) => Promise<{
+  status: boolean;
+  message: string;
+}> = async ({ token, otp }) => {
+  const { data } = await axiosInstanceAPI.post(
+    "email/verify",
+    {
+      code: otp,
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,

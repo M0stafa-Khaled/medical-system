@@ -1,4 +1,4 @@
-import { checkAuth, login, logout } from "@/api/auth";
+import { checkAuth, login, logout, resendOtp, verifyEmail } from "@/api/auth";
 import { useMutation } from "@tanstack/react-query";
 
 export const useLogin = () => {
@@ -16,5 +16,18 @@ export const useLogout = () => {
 export const useCheckAuth = () => {
   return useMutation({
     mutationFn: (token: string) => checkAuth(token),
+  });
+};
+
+export const useResendOtp = () => {
+  return useMutation({
+    mutationFn: (token: string) => resendOtp(token),
+  });
+};
+
+export const useVerifyEmail = () => {
+  return useMutation({
+    mutationFn: ({ token, otp }: { token: string; otp: string }) =>
+      verifyEmail({token, otp}),
   });
 };

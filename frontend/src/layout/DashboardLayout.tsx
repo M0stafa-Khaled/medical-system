@@ -35,13 +35,26 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     (async () => {
-      const { auth } = await checkAuthUser(token as string);
+      const { auth, email_verified, status } = await checkAuthUser(
+        token as string
+      );
       if (!auth) {
         dispatch(logout());
         navigate("/login");
-        toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+        return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+      }
+
+      if (!status) {
+        navigate("/not-active");
+        return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
+      }
+
+      if (!email_verified) {
+        navigate("/verify-email");
+        return toast.warn("يرجى تاكيد البريد الالكتروني");
       }
     })();
+    return;
   }, [checkAuthUser, token, navigate, dispatch]);
 
   return (

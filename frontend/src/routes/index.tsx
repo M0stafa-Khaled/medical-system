@@ -1,6 +1,6 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { DashboardLayout, RootLayout } from "@/layout";
-import { Login, Register } from "@/pages/auth";
+import { Login, Register, VerifyEmail } from "@/pages/auth";
 import NotFound from "@/pages/NotFound";
 import UnAuthorized from "@/pages/UnAuthorized";
 import {
@@ -32,6 +32,7 @@ const routes = createRoutesFromElements(
     </Route>
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
+    <Route path="/verify-email" element={<VerifyEmail />} />
 
     {/* Dashboard */}
     <Route

@@ -1,0 +1,193 @@
+import { logout } from "@/app/features/auth/authSlice";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import {
+  useCheckAuth,
+  useResendOtp,
+  useVerifyEmail,
+} from "@/lib/react-query/auth";
+import cookieServices from "@/utils/cookieServices";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import * as z from "zod";
+
+const formSchema = z.object({
+  otp: z
+    .string()
+    .min(6, "يجب إدخال رمز التحقق")
+    .max(6, "يجب إدخال رمز التحقق "),
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
+const VerifyEmail = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = cookieServices.getToken();
+  const { mutateAsync: checkAuthUser } = useCheckAuth();
+  const { mutateAsync: resendOtp, isPending: isLoadingResendOtp } =
+    useResendOtp();
+  const { mutateAsync: verifyEmail, isPending: isLoadingVerifyEmail } =
+    useVerifyEmail();
+
+  useEffect(() => {
+    (async () => {
+      const { auth, email_verified } = await checkAuthUser(token as string);
+      if (!auth) {
+        dispatch(logout());
+        navigate("/login");
+        return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+      }
+
+      if (email_verified) return navigate("/dashboard");
+    })();
+    return;
+  }, [checkAuthUser, token, navigate, dispatch]);
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      otp: "",
+    },
+  });
+
+  const onSubmit = async (values: FormValues) => {
+    try {
+      const { status, message } = await verifyEmail({
+        token: token as string,
+        otp: values.otp,
+      });
+      if (!status) return toast.error(message);
+      toast.success("تم تأكيد البريد الإلكتروني بنجاح");
+      navigate("/");
+    } catch (_error) {
+      toast.error("حدث خطأ أثناء تأكيد البريد الإلكتروني");
+    }
+  };
+
+  const handleResendOtp = async () => {
+    try {
+      const { message, status } = await resendOtp(token as string);
+      if (!status) return toast.error(message);
+
+      toast.success("تم ارسال رمز التحقق مرة اخرى");
+    } catch (_error) {
+      toast.error("حدث خطأ أثناء ارسال الرمز");
+    }
+  };
+
+  return (
+    <div className="container flex items-center justify-center min-h-screen">
+      <Card className="border-muted bg-foreground shadow-none">
+        <div className="flex justify-center items-center max-w-xs mx-auto">
+          <img src="/verify-email.svg" alt="verify email" className="w-56" />
+        </div>
+        <CardHeader className="text-center">
+          <CardTitle className="leading-relaxed">
+            تأكيد البريد الإلكتروني
+          </CardTitle>
+          <CardDescription className="leading-relaxed">
+            الرجاء إدخال رمز التحقق المرسل إلى بريدك الإلكتروني
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+              <FormField
+                control={form.control}
+                name="otp"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="flex justify-center " dir="ltr">
+                        <InputOTP
+                          maxLength={6}
+                          value={field.value}
+                          onChange={field.onChange}
+                          autoFocus
+                        >
+                          <InputOTPGroup>
+                            <InputOTPSlot
+                              index={0}
+                              className="border-muted w-12 h-12"
+                            />
+                            <InputOTPSlot
+                              index={1}
+                              className="border-muted w-12 h-12"
+                            />
+                            <InputOTPSlot
+                              index={2}
+                              className="border-muted w-12 h-12"
+                            />
+                            <InputOTPSlot
+                              index={3}
+                              className="border-muted w-12 h-12"
+                            />
+                            <InputOTPSlot
+                              index={4}
+                              className="border-muted w-12 h-12"
+                            />
+                            <InputOTPSlot
+                              index={5}
+                              className="border-muted w-12 h-12"
+                            />
+                          </InputOTPGroup>
+                        </InputOTP>
+                      </div>
+                    </FormControl>
+                    <FormMessage className="text-center" />
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                type="submit"
+                className="w-full h-auto py-3"
+                disabled={isLoadingVerifyEmail}
+              >
+                تأكيد
+              </Button>
+
+              <p className="text-center text-muted-foreground text-sm">
+                لم يصلك رمز التحقق؟{" "}
+                <Button
+                  variant="link"
+                  className="p-0"
+                  onClick={handleResendOtp}
+                  type="button"
+                  disabled={isLoadingResendOtp}
+                >
+                  اضغط لإعادة الإرسال
+                </Button>
+              </p>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default VerifyEmail;
