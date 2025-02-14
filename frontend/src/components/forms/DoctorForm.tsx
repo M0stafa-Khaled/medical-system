@@ -215,7 +215,6 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   );
 
   const onSubmit = async (formData: z.infer<typeof doctorSchema>) => {
-    console.log(formData);
     try {
       if (action === "add") {
         const { status, message } = await addDoctor({
