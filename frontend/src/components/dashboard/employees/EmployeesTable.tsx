@@ -46,9 +46,11 @@ const EmployeesTable = () => {
       skeleton={
         <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
       }
-      pagination={employees?.data && {
-        links: employees.data.links
-      }}
+      pagination={
+        employees?.data && {
+          links: employees.data.links,
+        }
+      }
     />
   );
 };

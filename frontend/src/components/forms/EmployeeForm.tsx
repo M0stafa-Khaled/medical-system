@@ -78,6 +78,15 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   });
   const { handleFileChange } = useUploadImgHandler(form);
 
+  const isOptionalField = (fieldName: string) => {
+    const optionalFields = ["second_phone", "image", "personal_image"];
+    const updateOptionalFields = ["password", "email"];
+
+    return (
+      optionalFields.includes(fieldName) ||
+      (action === "update" && updateOptionalFields.includes(fieldName))
+    );
+  };
   const renderFormField = (input: IFormInput) => (
     <FormField
       key={input.name}
@@ -142,8 +151,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
               <FormItem>
                 <FormLabel htmlFor={input.name}>
                   {input.label}
-                  {(input.name === "image" ||
-                    input.name === "personal_image") && (
+                  {isOptionalField(input.name) && (
                     <span className="text-xs text-muted-foreground">
                       {" "}
                       (اختياري)
@@ -170,13 +178,12 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
               <FormItem>
                 <FormLabel htmlFor={input.name}>
                   {input.label}
-                  {(input.name === "password" || input.name === "email") &&
-                    action === "update" && (
-                      <span className="text-xs text-muted-foreground">
-                        {" "}
-                        (اختياري)
-                      </span>
-                    )}
+                  {isOptionalField(input.name) && (
+                    <span className="text-xs text-muted-foreground">
+                      {" "}
+                      (اختياري)
+                    </span>
+                  )}
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -197,7 +204,6 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   );
 
   const onSubmit = async (formData: z.infer<typeof employeeSchema>) => {
-    console.log(formData);
     try {
       if (action === "add") {
         const { status, message } = await addEmployee({

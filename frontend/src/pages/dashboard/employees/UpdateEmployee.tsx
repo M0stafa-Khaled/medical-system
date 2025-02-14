@@ -13,7 +13,6 @@ const UpdateEmployee = () => {
   const token = cookieServices.getToken();
 
   const { employeeId } = useParams();
-  console.log(employeeId);
   const {
     data: employee,
     isLoading,
@@ -32,7 +31,7 @@ const UpdateEmployee = () => {
 
     if (!employee?.status && employee?.message) {
       toast.error(employee.message);
-      navigate("/dashboard/doctors");
+      navigate("/dashboard/employees");
       return;
     }
   }, [isError, navigate, employeeId, employee]);

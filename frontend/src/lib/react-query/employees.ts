@@ -45,7 +45,6 @@ export const useAddEmployee = () => {
 };
 
 export const useUpdateEmployee = () => {
-  console.log("ahhhhh");
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ data, token }: { data: IAddEmployee; token: string }) =>

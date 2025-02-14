@@ -100,7 +100,6 @@ export const updateEmployee: ({
   formData.append("password", dataForm.password);
   formData.append("role", dataForm.role.value);
   formData.append("gender", dataForm.gender.value);
-  console.log(dataForm.gender)
   formData.append("job", dataForm.job);
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
