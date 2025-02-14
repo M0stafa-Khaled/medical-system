@@ -124,7 +124,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
               animate="visible"
               exit="hidden"
               variants={navVariants}
-              className="w-full overflow-hidden py-2"
+              className="w-full overflow-hidden"
             >
               <div className="w-full mx-auto">
                 <NavList links={links} />

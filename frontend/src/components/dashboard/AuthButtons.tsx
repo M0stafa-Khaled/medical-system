@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { FiLogOut } from "react-icons/fi";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -46,16 +45,7 @@ const AuthButtons = () => {
 
   return (
     <>
-      {isAuthenticated ? (
-        <Button
-          onClick={() => setIsOpenLogoutModal(true)}
-          variant={"destructive"}
-          className="h-auto py-3 flex items-center justify-center gap-2 w-full lg:w-52 !text-base !font-normal"
-        >
-          تسجيل الخروج
-          <FiLogOut size={20} />
-        </Button>
-      ) : (
+      {!isAuthenticated && (
         <>
           <Button className="bg-primary h-auto px-0 py-0 flex items-center justify-center gap-2 !border-danger w-full lg:w-52 !text-base">
             <Link to={"/login"} className="py-3 px-4">
