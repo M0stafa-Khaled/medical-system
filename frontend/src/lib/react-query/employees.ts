@@ -1,10 +1,13 @@
 import {
+  addEmployee,
   deleteEmployee,
   getAllEmployees,
   getEmployeeById,
+  updateEmployee,
 } from "@/api/employees";
 import Query_Keys from "./queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { IAddEmployee } from "@/interfaces";
 
 export const useGetAllEmployees = (token: string) => {
   return useQuery({
@@ -25,6 +28,32 @@ export const useGetEmployeeById = ({
     queryKey: [Query_Keys.GET_ONE_EMPLOYEE, id],
     refetchOnMount: true,
     enabled: !!id,
+  });
+};
+
+export const useAddEmployee = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ data, token }: { data: IAddEmployee; token: string }) =>
+      addEmployee({ dataForm: data, token }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_EMPLOYEES],
+      });
+    },
+  });
+};
+
+export const useUpdateEmployee = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ data, token }: { data: IAddEmployee; token: string }) =>
+      updateEmployee({ dataForm: data, token }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_EMPLOYEES],
+      });
+    },
   });
 };
 

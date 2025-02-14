@@ -61,10 +61,10 @@ export interface IDoctor {
   created_at: string;
   first_phone: string;
   image: string | null;
+  signature: string | null;
   name: string;
   personal_id: string;
   second_phone: string | null;
-  signature: string | null;
   status: boolean;
   updated_at: string;
   gender: string;
@@ -104,15 +104,14 @@ export interface IAddDoctor {
     value: "male" | "female";
   };
   password: string;
-  image?: File | null;
-  signature?: File | null;
+  image?: File | undefined;
+  signature?: File | undefined;
   clinics: {
     value: string;
   }[];
 }
 
 // Employees Interfaces
-
 export interface IEmployee {
   id: number;
   name: string;
@@ -123,14 +122,35 @@ export interface IEmployee {
   personal_image: string | null;
   status: true;
   created_at: string;
-  grander: string;
+  gender: string;
   jop: string;
   salary: string;
   user: {
     id: number;
     email: string;
-    role: TRole;
+    role: "admin" | "employee";
   };
+}
+
+export interface IAddEmployee {
+  id?: string;
+  name: string;
+  personal_id: string;
+  email: string;
+  password: string;
+  role: {
+    value: "admin" | "employee";
+  };
+  gender: {
+    value: "male" | "female";
+  };
+  jop: string;
+  status: boolean;
+  salary: string;
+  first_phone: string;
+  second_phone?: string | null;
+  image?: File | undefined;
+  personal_image?: File | undefined;
 }
 
 export interface IResponseEmployees {
@@ -145,24 +165,7 @@ export interface IResponseEmployee {
   data: IEmployee;
 }
 
-export interface IAddEmployee {
-  id?: string;
-  name: string;
-  personal_id: string;
-  email: string;
-  password: string;
-  role: string;
-  grander: string;
-  jop: string;
-  status: boolean;
-  salary: string;
-  first_phone: string;
-  second_phone?: string | null;
-  image?: File | undefined;
-}
-
 // Patient interfaces
-
 export interface IPatient {
   id: number;
   name: string;
@@ -177,7 +180,7 @@ export interface IPatient {
   user: {
     id: number;
     email: string;
-    role: TRole;
+    role: "patient";
   };
 }
 
