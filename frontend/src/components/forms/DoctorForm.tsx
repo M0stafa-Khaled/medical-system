@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
-import { ADD_DOCTOR_FORM_INPUTS, GENDER } from "@/constants";
+import { DOCTOR_FORM_INPUTS, GENDER } from "@/constants";
 import { IDoctor, IFormInput } from "@/interfaces";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
@@ -71,14 +71,12 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       email: user?.email || "",
       register_id: register_id || "",
       gender: {
-        value: gender?.toString() || "",
+        value: gender || "male",
         label: gender === "female" ? "أنثى" : "ذكر",
       },
       password: "",
-      commission:
-        commission?.toString().slice(0, commission?.toString().length - 1) ||
-        "0",
-      status: Boolean(status),
+      commission: commission?.slice(0, commission?.length - 1) || "0",
+      status: Boolean(status) || true,
       image: undefined,
       signature: undefined,
       clinics:
@@ -109,8 +107,8 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         input.type === "switch"
           ? ({ field }) => (
               <FormItem>
-                <FormLabel>حالة الحساب</FormLabel>
-                <div className="flex flex-row items-center justify-between rounded-lg border border-input p-3">
+                <FormLabel className="w-full">{input.label}</FormLabel>
+                <div className="flex flex-row items-center justify-between rounded-lg border border-muted p-3">
                   <FormLabel>{field.value ? " مفعل " : " غير مفعل "}</FormLabel>
                   <FormControl>
                     <Switch
@@ -183,7 +181,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
                       type="file"
                       accept={input.accept}
                       onChange={(e) => handleFileChange(e, onChange)}
-                      className="h-auto py-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                      className="h-auto py-3 border-muted file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
                       {...field}
                       value={undefined}
                     />
@@ -212,7 +210,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
                     {...field}
                     onChange={(e) => field.onChange(e.target.value)}
                     value={field.value as string | undefined}
-                    className="py-3 placeholder:h-14 h-auto text-black dark:text-white placeholder:text-black/50 dark:placeholder:text-white/50"
+                    className="py-3 border-muted placeholder:h-14 h-auto text-black dark:text-white placeholder:text-black/50 dark:placeholder:text-white/50"
                   />
                 </FormControl>
                 <FormMessage />
@@ -289,9 +287,8 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         className="space-y-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
-          {ADD_DOCTOR_FORM_INPUTS.map(renderFormField)}
+          {DOCTOR_FORM_INPUTS.map(renderFormField)}
         </div>
-
         <Button
           type="submit"
           disabled={isLoadingAdd || isLoadingUpdate}

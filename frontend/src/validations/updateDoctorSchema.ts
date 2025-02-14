@@ -15,7 +15,12 @@ const updateDoctorSchema = z.object({
     .string({ message: "رقم الهاتف مطلوب" })
     .trim()
     .regex(/^\d+$/, "يجب ادخال رقم هاتف صالح"),
-  second_phone: z.string().trim().optional().or(z.literal("")),
+  second_phone: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^\d+$/.test(val), {
+      message: "يجب ادخال رقم هاتف صالح",
+    }),
   register_id: z
     .string({ message: "رقم الهوية مطلوب" })
     .trim()

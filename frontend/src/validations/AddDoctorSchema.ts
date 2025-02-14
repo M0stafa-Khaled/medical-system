@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { MAX_FILE_SIZE, ACCEPTED_IMAGE_TYPES } from "@/utils/file";
 
-const AddDoctorSchema = z.object({
+const addDoctorSchema = z.object({
   name: z
     .string({ message: "الاسم مطلوب" })
     .min(3, "الاسم يجب أن يكون 3 أحرف على الأقل")
@@ -13,7 +13,12 @@ const AddDoctorSchema = z.object({
   first_phone: z
     .string({ message: "رقم الهاتف مطلوب" })
     .regex(/^\d+$/, "يجب ادخال رقم هاتف صالح"),
-  second_phone: z.string().optional().or(z.literal("")),
+  second_phone: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^\d+$/.test(val), {
+      message: "يجب ادخال رقم هاتف صالح",
+    }),
   register_id: z
     .string({ message: "رقم الهوية مطلوب" })
     .min(1, "رقم الهوية مطلوب"),
@@ -68,4 +73,4 @@ const AddDoctorSchema = z.object({
     .min(1, "يجب اختيار عيادة واحدة على الأقل"),
 });
 
-export default AddDoctorSchema;
+export default addDoctorSchema;

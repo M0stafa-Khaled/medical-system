@@ -57,7 +57,7 @@ const routes = createRoutesFromElements(
 
       {/* Employees */}
       <Route path="employees" element={<Employees />} />
-      <Route path="employees:/:employeeId" element={<EmployeeDetails />} />
+      <Route path="employees/:employeeId" element={<EmployeeDetails />} />
       <Route path="employees/add" element={<AddEmployee />} />
       <Route path="employees/update/:employeeId" element={<UpdateEmployee />} />
 
