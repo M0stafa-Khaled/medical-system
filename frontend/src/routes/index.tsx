@@ -29,6 +29,7 @@ const routes = createRoutesFromElements(
     {/* Public */}
     <Route element={<RootLayout />}>
       <Route path="/" element={<>الصفحة الرئيسية</>} />
+      <Route path="/profile" element={<>الصفحة السخصية</>} />
     </Route>
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
@@ -67,7 +68,7 @@ const routes = createRoutesFromElements(
       <Route path="patients" element={<Patients />} />
       <Route path="patients/:patientId" element={<PatientDetails />} />
       <Route path="patients/add" element={<AddPatient />} />
-      <Route path="patients/update" element={<UpdatePatient />} />
+      <Route path="patients/update/:patientId" element={<UpdatePatient />} />
     </Route>
 
     {/* Errors */}

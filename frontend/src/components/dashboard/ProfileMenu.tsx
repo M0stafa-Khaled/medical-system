@@ -29,7 +29,7 @@ const ProfileMenu = () => {
           <DropdownMenuLabel>حسابي</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-white/30 dark:bg-black/30" />
           <DropdownMenuItem>
-            <Link to="" className="block w-full h-full py-2">
+            <Link to="/profile" className="block w-full h-full py-2">
               الملف الشخصي
             </Link>
           </DropdownMenuItem>

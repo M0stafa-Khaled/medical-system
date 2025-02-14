@@ -26,7 +26,7 @@ const DeletePatientButton = ({ name, id }: IProps) => {
       // ! Delete Field
       if (!status) return toast.error(message);
       // * Delete Success
-      navigate("/dashboard/employees");
+      navigate("/dashboard/patients");
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
@@ -51,7 +51,7 @@ const DeletePatientButton = ({ name, id }: IProps) => {
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف مريض"
-        description={`هل انت متاكد من حذف مريض ${name}؟`}
+        description={`هل انت متاكد من حذف المريض ${name}؟`}
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}

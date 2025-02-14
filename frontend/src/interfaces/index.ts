@@ -208,13 +208,30 @@ export interface IPatient {
   personal_id: string;
   personal_image: string | null;
   status: true;
-  grander: string;
+  gender: string;
   description: string;
   user: {
     id: number;
     email: string;
     role: "patient";
   };
+}
+
+export interface IAddPatient {
+  id?: string;
+  name: string;
+  another_name: string;
+  first_phone: string;
+  second_phone?: string | null;
+  personal_id: string;
+  email: string;
+  password: string;
+  gender: {
+    value: "male" | "female";
+  };
+  status: boolean;
+  personal_image?: File | undefined;
+  description: string;
 }
 
 export interface IResponsePatients {
