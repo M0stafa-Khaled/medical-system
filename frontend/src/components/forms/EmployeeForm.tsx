@@ -76,7 +76,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       },
     },
   });
-
+  console.log(form.formState.errors);
   const { handleFileChange } = useUploadImgHandler(form);
 
   const renderFormField = (input: IFormInput) => (
@@ -139,7 +139,16 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           : input.type === "file"
           ? ({ field: { onChange, value, ...field } }) => (
               <FormItem>
-                <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
+                <FormLabel htmlFor={input.name}>
+                  {input.label}
+                  {(input.name === "image" ||
+                    input.name === "personal_image") && (
+                    <span className="text-xs text-muted-foreground">
+                      {" "}
+                      (اختياري)
+                    </span>
+                  )}
+                </FormLabel>
                 <FormControl>
                   <div className="flex flex-col gap-4">
                     <Input

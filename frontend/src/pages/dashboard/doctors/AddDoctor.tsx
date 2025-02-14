@@ -1,6 +1,6 @@
 import DoctorForm from "@/components/forms/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
-import AddDoctorSchema from "@/validations/AddDoctorSchema";
+import AddDoctorSchema from "@/validations/addDoctorSchema";
 
 const AddDoctor = () => {
   return (

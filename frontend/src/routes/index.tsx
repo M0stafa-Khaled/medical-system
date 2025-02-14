@@ -41,6 +41,7 @@ const routes = createRoutesFromElements(
           <DashboardLayout />
         </ProtectedRoute>
       }
+      // errorElement={<Error />}
     >
       <Route
         index

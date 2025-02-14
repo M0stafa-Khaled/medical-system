@@ -175,7 +175,7 @@ export const GENDER: { value: string; label: string }[] = [
 export const ROLES: { value: string; label: string }[] = [
   {
     value: "admin",
-    label: "ادمن",
+    label: "مسؤول",
   },
   {
     value: "employee",

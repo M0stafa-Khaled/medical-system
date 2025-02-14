@@ -1,10 +1,14 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IAddDoctor, IResponseDoctor, IResponseDoctors } from "@/interfaces";
 
-export const getAllDoctors: (
-  token: string
-) => Promise<IResponseDoctors> = async (token) => {
-  const { data } = await axiosInstanceAPI.get("/doctors", {
+export const getAllDoctors = async ({
+  token,
+  page = 1,
+}: {
+  token: string;
+  page?: number;
+}): Promise<IResponseDoctors> => {
+  const { data } = await axiosInstanceAPI.get(`/doctors?page=${page}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -67,7 +71,6 @@ export const updateDoctor: ({
   dataForm: IAddDoctor;
   token: string;
 }) => Promise<IResponseDoctor> = async ({ dataForm, token }) => {
-  console.log(dataForm.gender);
   const formData = new FormData();
   formData.append("name", dataForm.name);
   formData.append("personal_id", dataForm.personal_id);

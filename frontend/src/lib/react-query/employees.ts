@@ -9,10 +9,10 @@ import Query_Keys from "./queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { IAddEmployee } from "@/interfaces";
 
-export const useGetAllEmployees = (token: string) => {
+export const useGetAllEmployees = (token: string, page: number = 1) => {
   return useQuery({
-    queryFn: () => getAllEmployees(token as string),
-    queryKey: [Query_Keys.GET_ALL_EMPLOYEES],
+    queryKey: [Query_Keys.GET_ALL_EMPLOYEES, page],
+    queryFn: () => getAllEmployees({ token, page }),
   });
 };
 
@@ -45,6 +45,7 @@ export const useAddEmployee = () => {
 };
 
 export const useUpdateEmployee = () => {
+  console.log("ahhhhh");
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ data, token }: { data: IAddEmployee; token: string }) =>

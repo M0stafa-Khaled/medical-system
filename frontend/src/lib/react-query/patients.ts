@@ -2,10 +2,10 @@ import { deletePatient, getAllPatients, getPatientById } from "@/api/patients";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
 
-export const useGetAllPatients = (token: string) => {
+export const useGetAllPatients = (token: string, page: number = 1) => {
   return useQuery({
-    queryKey: [Query_Keys.GET_ALL_PATIENTS],
-    queryFn: () => getAllPatients(token),
+    queryKey: [Query_Keys.GET_ALL_PATIENTS, page],
+    queryFn: () => getAllPatients({ token, page }),
   });
 };
 

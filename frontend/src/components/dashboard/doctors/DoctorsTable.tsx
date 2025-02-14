@@ -8,16 +8,22 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const DoctorsTable = () => {
   const token = cookieServices.getToken();
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page")) || 1;
 
   const {
     data: doctors,
     isLoading,
     isError,
-  } = useGetAllDoctors(token as string);
-  const { searchTerm, setSearchTerm, filteredItems } = useSearch(doctors?.data);
+  } = useGetAllDoctors(token as string, page);
+
+  const { searchTerm, setSearchTerm, filteredItems } = useSearch(
+    doctors?.data.items
+  );
 
   useEffect(() => {
     if (isError) {
@@ -40,6 +46,9 @@ const DoctorsTable = () => {
       skeleton={
         <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
       }
+      pagination={doctors?.data && {
+        links: doctors.data.links
+      }}
     />
   );
 };

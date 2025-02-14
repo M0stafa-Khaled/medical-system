@@ -1,5 +1,65 @@
+import EmployeeForm from "@/components/forms/EmployeeForm";
+import { Card, CardContent } from "@/components/ui/card";
+import { useGetEmployeeById } from "@/lib/react-query/employees";
+import cookieServices from "@/utils/cookieServices";
+import updateEmployeeSchema from "@/validations/updateEmployeeSchema";
+import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const UpdateEmployee = () => {
-  return <div>UpdateEmployee</div>;
+  const navigate = useNavigate();
+  const token = cookieServices.getToken();
+
+  const { employeeId } = useParams();
+  console.log(employeeId);
+  const {
+    data: employee,
+    isLoading,
+    isError,
+  } = useGetEmployeeById({
+    id: employeeId as string,
+    token: token as string,
+  });
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("فشل في تحميل بيانات الموظف");
+      navigate("/dashboard/employees");
+      return;
+    }
+
+    if (!employee?.status && employee?.message) {
+      toast.error(employee.message);
+      navigate("/dashboard/doctors");
+      return;
+    }
+  }, [isError, navigate, employeeId, employee]);
+
+  if (isLoading)
+    return (
+      <div className="mt-20 text-black dark:text-white flex justify-center">
+        <Loader2 className="animate-spin" size={48} />
+      </div>
+    );
+
+  return (
+    <Card className="mt-10 dark:bg-foreground border-muted">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <h1 className="font-semibold leading-none tracking-tight">
+          تحديث بيانات الموظف
+        </h1>
+      </div>
+      <CardContent>
+        <EmployeeForm
+          action={"update"}
+          employee={employee?.data}
+          employeeSchema={updateEmployeeSchema}
+        />
+      </CardContent>
+    </Card>
+  );
 };
 
 export default UpdateEmployee;

@@ -1,6 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import AddDoctorSchema from "@/validations/AddDoctorSchema";
+import AddDoctorSchema from "@/validations/addDoctorSchema";
 import {
   MAX_FILE_SIZE,
   ACCEPTED_IMAGE_TYPES,

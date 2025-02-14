@@ -78,10 +78,33 @@ export interface IDoctor {
   };
 }
 
+export interface IPaginationLink {
+  url: string | null;
+  label: string;
+  active: boolean;
+}
+
+export interface IPaginationMeta {
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  links: IPaginationLink[];
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+}
+
 export interface IResponseDoctors {
   status: boolean;
-  message: string;
-  data: IDoctor[];
+  message: string | null;
+  data: {
+    items: IDoctor[];
+    links: IPaginationLink[];
+    meta: IPaginationMeta;
+  };
 }
 
 export interface IResponseDoctor {
@@ -155,8 +178,12 @@ export interface IAddEmployee {
 
 export interface IResponseEmployees {
   status: boolean;
-  message: string;
-  data: IEmployee[];
+  message: string | null;
+  data: {
+    items: IEmployee[];
+    links: IPaginationLink[];
+    meta: IPaginationMeta;
+  };
 }
 
 export interface IResponseEmployee {
@@ -186,8 +213,12 @@ export interface IPatient {
 
 export interface IResponsePatients {
   status: boolean;
-  message: string;
-  data: IPatient[];
+  message: string | null;
+  data: {
+    items: IPatient[];
+    links: IPaginationLink[];
+    meta: IPaginationMeta;
+  };
 }
 
 export interface IResponsePatient {

@@ -13,7 +13,6 @@ const UpdateDoctor = () => {
   const token = cookieServices.getToken();
 
   const { doctorId } = useParams();
-  console.log(doctorId);
   const {
     data: doctor,
     isLoading,
@@ -29,7 +28,12 @@ const UpdateDoctor = () => {
       navigate("/dashboard/doctors");
       return;
     }
-  }, [isError, navigate, doctorId]);
+    if (!doctor?.status && doctor?.message) {
+      toast.error(doctor.message);
+      navigate("/dashboard/doctors");
+      return;
+    }
+  }, [isError, navigate, doctorId, doctor]);
 
   if (isLoading)
     return (
@@ -38,11 +42,6 @@ const UpdateDoctor = () => {
       </div>
     );
 
-  if (!doctor?.status && doctor?.message) {
-    toast.error(doctor.message);
-    navigate("/dashboard/doctors");
-    return null;
-  }
   return (
     <Card className="mt-10 dark:bg-foreground border-muted">
       <div className="flex flex-col space-y-1.5 p-6">

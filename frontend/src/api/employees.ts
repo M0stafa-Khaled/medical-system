@@ -5,10 +5,14 @@ import {
   IResponseEmployees,
 } from "@/interfaces";
 
-export const getAllEmployees: (
-  token: string
-) => Promise<IResponseEmployees> = async (token: string) => {
-  const { data } = await axiosInstanceAPI.get("/employees", {
+export const getAllEmployees = async ({
+  token,
+  page = 1,
+}: {
+  token: string;
+  page?: number;
+}): Promise<IResponseEmployees> => {
+  const { data } = await axiosInstanceAPI.get(`/employees?page=${page}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -22,7 +26,7 @@ export const getEmployeeById: ({
 }: {
   id: string;
   token: string;
-}) => Promise<IResponseEmployees> = async ({ id, token }) => {
+}) => Promise<IResponseEmployee> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.get(`/employees/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -95,16 +99,20 @@ export const updateEmployee: ({
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
   formData.append("role", dataForm.role.value);
+  console.log("heelo");
   formData.append("gender", dataForm.gender.value);
   formData.append("jop", dataForm.jop);
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
-  if (dataForm.second_phone)
+  if (dataForm.second_phone) {
     formData.append("second_phone", dataForm?.second_phone);
+  }
   if (dataForm.image) formData.append("image", dataForm.image);
-  if (dataForm.personal_image)
+  if (dataForm.personal_image) {
     formData.append("personal_image", dataForm.personal_image);
+  }
+  formData.append("_method", "put");
   const { data } = await axiosInstanceAPI.post(
     `/employees/${dataForm.id}`,
     formData,

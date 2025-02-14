@@ -4,21 +4,25 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import PatientsList from "./PatientsList";
+import PatientsTableHeader from "./PatientsTableHeader";
 import { useGetAllPatients } from "@/lib/react-query/patients";
 import PatientsTableActions from "./PatientsTableActions";
-import PatientsTableHeader from "./PatientsTableHeader";
-import PatientsList from "./PatientsList";
+import { useSearchParams } from "react-router-dom";
 
 const PatientsTable = () => {
   const token = cookieServices.getToken();
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page")) || 1;
 
   const {
     data: patients,
     isLoading,
     isError,
-  } = useGetAllPatients(token as string);
+  } = useGetAllPatients(token as string, page);
+
   const { searchTerm, setSearchTerm, filteredItems } = useSearch(
-    patients?.data
+    patients?.data.items
   );
 
   useEffect(() => {
@@ -39,7 +43,12 @@ const PatientsTable = () => {
       }
       header={<PatientsTableHeader />}
       list={<PatientsList patients={filteredItems} />}
-      skeleton={<TableSkeleton columns={4} rows={6} actionButtons={3} />}
+      skeleton={
+        <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
+      }
+      pagination={patients?.data && {
+        links: patients.data.links
+      }}
     />
   );
 };

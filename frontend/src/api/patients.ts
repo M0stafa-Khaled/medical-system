@@ -1,10 +1,14 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IResponsePatients, IResponsePatient } from "@/interfaces";
 
-export const getAllPatients: (
-  token: string
-) => Promise<IResponsePatients> = async (token) => {
-  const { data } = await axiosInstanceAPI.get("/patients", {
+export const getAllPatients = async ({
+  token,
+  page = 1,
+}: {
+  token: string;
+  page?: number;
+}): Promise<IResponsePatients> => {
+  const { data } = await axiosInstanceAPI.get(`/patients?page=${page}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
