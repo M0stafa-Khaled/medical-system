@@ -210,6 +210,7 @@ export interface IPatient {
   status: true;
   gender: string;
   description: string;
+  created_at: string;
   user: {
     id: number;
     email: string;

@@ -1,10 +1,16 @@
 import ClinicsTable from "@/components/dashboard/clinics/ClinicsTable";
+import { motion } from "framer-motion";
 
 const Clinics = () => {
   return (
-    <section className="mt-6">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="mt-6"
+    >
       <ClinicsTable />
-    </section>
+    </motion.section>
   );
 };
 

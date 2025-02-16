@@ -172,7 +172,7 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
   {
     name: "name",
     label: "اسم المريض",
-    placeholder: "ادخل اسم الموظف",
+    placeholder: "ادخل اسم المريض",
     type: "text",
   },
   {

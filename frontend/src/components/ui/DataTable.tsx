@@ -34,6 +34,7 @@ const DataTable = ({
           <Table className="border dark:border-muted !rounded-lg overflow-hidden">
             {header}
             <TableBody>{list}</TableBody>
+            {header}
           </Table>
           {shouldShowPagination && (
             <DataTablePagination links={pagination.links} />

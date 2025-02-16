@@ -46,14 +46,13 @@ export const addPatient: ({
   formData.append("gender", dataForm.gender.value);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
-  formData.append("another_name", dataForm.another_name);
   formData.append("description", dataForm.description);
-  if (dataForm.second_phone) {
+  if (dataForm.another_name)
+    formData.append("another_name", dataForm.another_name);
+  if (dataForm.second_phone)
     formData.append("second_phone", dataForm?.second_phone);
-  }
-  if (dataForm.personal_image) {
+  if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
-  }
   const { data } = await axiosInstanceAPI.post(`/patients`, formData, {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -39,6 +39,8 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
     second_phone,
     status,
     gender,
+    description,
+    another_name,
     user,
   } = patient || {};
 
@@ -54,10 +56,12 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
     resolver: zodResolver(patientSchema),
     defaultValues: {
       name: name || "",
+      another_name: another_name || "",
       personal_id: personal_id || "",
       first_phone: first_phone || "",
       second_phone: second_phone || "",
       email: user?.email || "",
+      description: description || "",
       gender: {
         value: gender?.toLowerCase() || "male",
         label: gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",

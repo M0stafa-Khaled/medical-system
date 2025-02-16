@@ -11,6 +11,9 @@ import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
 import DeleteDoctorButton from "@/components/dashboard/doctors/DeleteDoctorModalButton";
 import { FaPencil } from "react-icons/fa6";
+import ImageModal from "@/components/shared/ImageModal";
+import ProfileHeader from "@/components/dashboard/ProfileHeader";
+import InfoField from "@/components/dashboard/InfoField";
 
 const DoctorDetails = () => {
   const navigate = useNavigate();
@@ -60,6 +63,7 @@ const DoctorDetails = () => {
     register_id,
     second_phone,
     signature,
+    gender,
     status,
     user,
   } = doctor?.data || {};
@@ -68,34 +72,24 @@ const DoctorDetails = () => {
     <section>
       <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
         <CardHeader>
-          <div className="flex flex-col sm:flex-row items-center sm:items-end gap-x-6 gap-y-3 pb-2">
-            <div className="w-36 h-36">
-              <img
-                src={image || "/avatar.svg"}
-                alt={name}
-                className="w-full h-full rounded-full"
-              />
-            </div>
-            <div className="space-y-1">
-              <div>
-                <h3 className="flex items-center gap-2">{doctor?.data.name}</h3>
-                <p className="capitalize text-muted-foreground text-center sm:text-start">
-                  {user?.role}
-                </p>
-                <div className="flex items-center justify-center sm:justify-start gap-3 my-2">
-                  <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                    <Link
-                      to={`/dashboard/doctors/update/${id}`}
-                      className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                    >
-                      <FaPencil size={18} />
-                    </Link>
-                  </Button>
-                  <DeleteDoctorButton id={id as number} name={name as string} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProfileHeader
+            image={image as string}
+            name={name as string}
+            role={user?.role.toLowerCase() as string}
+            actionButtons={
+              <>
+                <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                  <Link
+                    to={`/dashboard/doctors/update/${id}`}
+                    className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                  >
+                    <FaPencil size={18} />
+                  </Link>
+                </Button>
+                <DeleteDoctorButton id={id as number} name={name as string} />
+              </>
+            }
+          />
         </CardHeader>
         <div className="px-4">
           <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
@@ -111,62 +105,40 @@ const DoctorDetails = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <InfoField
+              label="حالة الحساب"
+              value={status ? "مفعل" : "غير مفعل"}
+            />
+            <InfoField label="العمولة" value={commission} />
+            <InfoField label="رقم القيد" value={register_id} />
+            <InfoField label="رقم الهوية" value={personal_id} />
+            <InfoField label="رقم الهاتف الاول" value={first_phone} />
+            <InfoField
+              label="رقم الهاتف الثاني"
+              value={second_phone ? second_phone : "لا يوجد"}
+            />
+            <InfoField label="البريد الإلكتروني" value={user?.email} sm />
+            <InfoField
+              label="الجنس"
+              value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
+              sm
+            />
+            <InfoField
+              label="تاريخ الإنشاء"
+              value={formatDateTime(created_at as string)}
+              sm
+            />
             <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">حالة الحساب:</h5>
-              <p className="font-medium">{status ? "مفعل" : "غير مفعل"}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">العمولة:</h5>
-              <p className="font-medium">{commission}</p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">رقم القيد:</h5>
-              <p className="font-medium break-all">{register_id}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">رقم الهوية:</h5>
-              <p className="font-medium break-all">{personal_id}</p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">
-                رقم الهاتف الاول:
-              </h5>
-              <p className="font-medium break-all">{first_phone}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">
-                رقم الهاتف الثاني:
-              </h5>
-              <p className="font-medium break-words whitespace-pre-wrap">
-                {second_phone ? second_phone : "لا يوجد"}
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">
-                البريد الإلكتروني:
-              </h5>
-              <p className="font-medium text-sm text-wrap break-all">
-                {user?.email}
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground">تاريخ الإنشاء:</h5>
-              <p className="font-medium text-sm">
-                {formatDateTime(created_at as string)}
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <h5 className="text-sm text-muted-foreground"> التوقيع:</h5>
+              <h5 className="text-sm text-muted-foreground">التوقيع:</h5>
               {signature ? (
-                <img
+                <ImageModal
                   src={signature}
-                  alt={`signature of ${name}`}
-                  className="w-36 rounded-md"
+                  alt="Signature"
+                  showThumbnail={false}
+                  trigger={<Button size="sm">عرض الصورة</Button>}
                 />
               ) : (
-                <p className="font-medium">لا يوجد</p>
+                <p className="text-sm text-muted-foreground">لا يوجد</p>
               )}
             </div>
           </div>
