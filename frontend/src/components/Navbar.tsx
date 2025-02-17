@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./dashboard/ProfileMenu";
-import NavList from "./NavList";
 
 import AuthButtons from "./dashboard/AuthButtons";
 import ToggleMode from "./ToggleMode";
 import LogoutIconButton from "./LogoutIconButton";
+import NavList from "./dashboard/NavList";
+import {
+  menuIconVariants,
+  navVariants,
+  sidebarVariants,
+  logoVariants,
+  navItemsVariants,
+} from "@/animations/navbarAnimatons";
 
 interface IProps {
   links: {
@@ -25,53 +32,30 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
-  const navVariants = {
-    hidden: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut",
-      },
-    },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const menuIconVariants = {
-    hidden: {
-      scale: 0,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
 
   return (
-    <header
+    <motion.header
+      initial="hidden"
+      animate="visible"
+      variants={sidebarVariants}
       className={`container ${
-        dashboard ? "lg:hidden" : ""
+        dashboard && "lg:hidden"
       } pt-1 fixed w-full right-0 top-0 left-0 z-50`}
     >
-      <nav
-        className={`flex  container bg-foreground flex-wrap items-center justify-between px-3 py-1 border border-muted rounded-2xl`}
+      <motion.nav
+        initial="hidden"
+        animate="visible"
+        variants={navItemsVariants}
+        className={`flex px-0 container bg-foreground flex-wrap items-center justify-between py-1 border border-muted rounded-2xl`}
       >
-        <div className="flex items-center justify-between w-full">
-          <div className={`hidden lg:flex gap-3 items-center w-full`}>
+        <div className="flex items-center justify-between w-full px-3">
+          <motion.div
+            variants={navItemsVariants}
+            className={`hidden lg:flex gap-3 items-center w-full`}
+          >
             <AuthButtons />
             <NavList links={links} />
-          </div>
+          </motion.div>
           <button
             className="flex justify-center items-center lg:hidden"
             onClick={() => setOpenNav(!openNav)}
@@ -101,19 +85,37 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
             </AnimatePresence>
           </button>
           {/* Toggle Mode */}
-          <div className="flex justify-center items-center gap-4">
-            <div className="flex justify-center items-center gap-3">
-              <LogoutIconButton />
-              <ProfileMenu />
-              <ToggleMode />
-            </div>
-            <Link
-              to={links[0].path}
-              className="text-white cursor-pointer font-medium text-2xl w-14"
+          <motion.div
+            variants={navItemsVariants}
+            className="flex justify-center items-center gap-4"
+          >
+            <motion.div
+              variants={navItemsVariants}
+              className="flex justify-center items-center gap-3"
             >
-              <img src={"/logo.svg"} alt="logo" className="w-full h-full" />
-            </Link>
-          </div>
+              <motion.div variants={navItemsVariants}>
+                <LogoutIconButton />
+              </motion.div>
+              <motion.div variants={navItemsVariants}>
+                <ProfileMenu />
+              </motion.div>
+              <motion.div variants={navItemsVariants}>
+                <ToggleMode />
+              </motion.div>
+            </motion.div>
+            <motion.div variants={logoVariants} className="w-14">
+              <Link to={links[0].path}>
+                <motion.img
+                  src={"/logo.svg"}
+                  alt="logo"
+                  variants={logoVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="w-full h-full cursor-pointer"
+                />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
         {/* Mobile menu */}
         <AnimatePresence>
@@ -126,15 +128,18 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
               variants={navVariants}
               className="w-full overflow-hidden"
             >
-              <div className="w-full mx-auto">
+              <motion.div
+                variants={navItemsVariants}
+                className="w-full mx-auto max-h-[80vh] overflow-y-scroll px-3 py-2"
+              >
                 <NavList links={links} />
-              </div>
+              </motion.div>
               <AuthButtons />
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
-    </header>
+      </motion.nav>
+    </motion.header>
   );
 };
 

@@ -1,6 +1,6 @@
 interface IProps {
   label: string;
-  value: string | number | undefined;
+  value: string | number;
   sm?: boolean;
 }
 const InfoField = ({ label, value, sm }: IProps) => {

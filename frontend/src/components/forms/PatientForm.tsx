@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { GENDER, PATIENT_FORM_INPUTS } from "@/constants";
-import { IFormInput, IPatient } from "@/interfaces";
+import { IFormInput } from "@/interfaces";
+import { IPatient } from "@/interfaces/patient";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
@@ -23,6 +24,7 @@ import Select, { StylesConfig } from "react-select";
 import { useTheme } from "next-themes";
 import { Loader2 } from "lucide-react";
 import { useAddPatient, useUpdatePatient } from "@/lib/react-query/patients";
+import { useEffect } from "react";
 
 interface IProps {
   patient?: IPatient;
@@ -31,19 +33,6 @@ interface IProps {
 }
 
 const PatientForm = ({ patient, action, patientSchema }: IProps) => {
-  const {
-    id,
-    name,
-    personal_id,
-    first_phone,
-    second_phone,
-    status,
-    gender,
-    description,
-    another_name,
-    user,
-  } = patient || {};
-
   const token = cookieServices.getToken() || "";
   const { theme } = useTheme();
   const navigate = useNavigate();
@@ -55,22 +44,41 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   const form = useForm<z.infer<typeof patientSchema>>({
     resolver: zodResolver(patientSchema),
     defaultValues: {
-      name: name || "",
-      another_name: another_name || "",
-      personal_id: personal_id || "",
-      first_phone: first_phone || "",
-      second_phone: second_phone || "",
-      email: user?.email || "",
-      description: description || "",
+      name: patient?.name || "",
+      another_name: patient?.another_name || "",
+      personal_id: patient?.personal_id || "",
+      first_phone: patient?.first_phone || "",
+      second_phone: patient?.second_phone || "",
+      email: patient?.user?.email || "",
+      description: patient?.description || "",
       gender: {
-        value: gender?.toLowerCase() || "male",
-        label: gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+        value: patient?.gender?.toLowerCase() || "male",
+        label: patient?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
       },
       password: "",
-      status: Boolean(status) || true,
+      status: Boolean(patient?.status) || true,
       personal_image: undefined,
     },
   });
+
+  useEffect(() => {
+    if (!patient) return;
+    form.reset({
+      name: patient?.name,
+      another_name: patient?.another_name || "",
+      personal_id: patient?.personal_id,
+      first_phone: patient?.first_phone,
+      second_phone: patient?.second_phone || "",
+      email: patient?.user?.email,
+      description: patient?.description,
+      gender: {
+        value: patient?.gender?.toLowerCase(),
+        label: patient?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+      },
+      status: Boolean(patient?.status),
+    });
+  }, [form, patient]);
+
   const { handleFileChange } = useUploadImgHandler(form);
 
   const isOptionalField = (fieldName: string) => {
@@ -194,7 +202,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
 
       if (action === "update") {
         const { status, message } = await updatePatient({
-          data: { ...formData, id: id },
+          data: { ...formData, id: patient?.id },
           token,
         });
         if (!status) return toast.error(message);

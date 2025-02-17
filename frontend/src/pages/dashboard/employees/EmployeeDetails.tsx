@@ -24,8 +24,8 @@ const EmployeeDetails = () => {
     isLoading,
     isError,
   } = useGetEmployeeById({
-    id: employeeId as string,
-    token: token as string,
+    id: employeeId!,
+    token: token!,
   });
 
   useEffect(() => {
@@ -70,8 +70,8 @@ const EmployeeDetails = () => {
       <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
         <CardHeader>
           <ProfileHeader
-            image={image as string}
-            name={name as string}
+            image={image!}
+            name={name!}
             role={user?.role.toLowerCase() as string}
             actionButtons={
               <>
@@ -83,7 +83,7 @@ const EmployeeDetails = () => {
                     <FaPencil size={18} />
                   </Link>
                 </Button>
-                <DeleteEmployeeButton id={id as number} name={name as string} />
+                <DeleteEmployeeButton id={id!} name={name!} />
               </>
             }
           />
@@ -99,15 +99,19 @@ const EmployeeDetails = () => {
               label="حالة الحساب"
               value={status ? "مفعل" : "غير مفعل"}
             />
-            <InfoField label="الراتب" value={salary} />
-            <InfoField label="الوظيفة" value={job} />
-            <InfoField label="رقم الهوية" value={personal_id} />
-            <InfoField label="رقم الهاتف الاول" value={first_phone} />
+            <InfoField label="الراتب" value={salary!} />
+            <InfoField label="الوظيفة" value={job!} />
+            <InfoField label="رقم الهوية" value={personal_id!} />
+            <InfoField label="رقم الهاتف الاول" value={first_phone!} />
             <InfoField
               label="رقم الهاتف الثاني"
               value={second_phone ? second_phone : "لا يوجد"}
             />
-            <InfoField label="البريد الإلكتروني" value={user?.email} sm />
+            <InfoField
+              label="البريد الإلكتروني"
+              value={user?.email as string}
+              sm
+            />
             <InfoField
               label="الجنس"
               value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
@@ -115,7 +119,7 @@ const EmployeeDetails = () => {
             />
             <InfoField
               label="تاريخ الإنشاء"
-              value={formatDateTime(created_at as string)}
+              value={formatDateTime(created_at!)}
               sm
             />
             <div className="flex items-center gap-2 select-none">

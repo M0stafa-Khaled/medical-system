@@ -40,7 +40,7 @@ export const DOCTOR_FORM_INPUTS: IFormInput[] = [
   },
   {
     name: "second_phone",
-    label: "رقم الهاتف الثاني (اختياري)",
+    label: "رقم الهاتف الثاني",
     placeholder: "ادخل رقم الهاتف الثاني",
     type: "text",
   },
@@ -177,8 +177,8 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
   },
   {
     name: "another_name",
-    label: "اسم أخر",
-    placeholder: "ادخل اسم أخر",
+    label: "اسم احد الاقارب",
+    placeholder: "ادخل اسم احد الاقارب",
     type: "text",
   },
   {

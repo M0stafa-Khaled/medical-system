@@ -3,7 +3,7 @@ import {
   IAddEmployee,
   IResponseEmployee,
   IResponseEmployees,
-} from "@/interfaces";
+} from "@/interfaces/employee";
 
 export const getAllEmployees = async ({
   token,

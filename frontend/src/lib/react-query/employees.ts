@@ -7,7 +7,7 @@ import {
 } from "@/api/employees";
 import Query_Keys from "./queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IAddEmployee } from "@/interfaces";
+import { IAddEmployee } from "@/interfaces/employee";
 
 export const useGetAllEmployees = (token: string, page: number = 1) => {
   return useQuery({

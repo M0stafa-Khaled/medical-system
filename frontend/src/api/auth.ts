@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IAuthResponse, ICheckAuth } from "@/interfaces";
+import { IAuthResponse, ICheckAuth } from "@/interfaces/auth";
 
 export const login: (user: {
   email: string;

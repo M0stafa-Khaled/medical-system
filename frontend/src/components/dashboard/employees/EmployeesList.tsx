@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
-import { IEmployee } from "@/interfaces";
+import { IEmployee } from "@/interfaces/employee";
 import DeleteEmployeeButton from "./DeleteEmployeeModalButton";
 import { motion } from "framer-motion";
 import { tabelRowVariants } from "@/animations/dashboardAnimations";
@@ -43,10 +43,10 @@ const EmployeesList = ({ employees }: IProps) => {
               className="w-12 h-12 rounded-full object-cover"
             />
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
             {name}
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
             {first_phone}
           </TableCell>
 

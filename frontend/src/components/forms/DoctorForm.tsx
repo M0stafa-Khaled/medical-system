@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { DOCTOR_FORM_INPUTS, GENDER } from "@/constants";
-import { IDoctor, IFormInput } from "@/interfaces";
+import { IDoctor } from "@/interfaces/doctor";
+import { IFormInput } from "@/interfaces";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
@@ -32,27 +33,12 @@ interface IProps {
 }
 
 const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
-  const {
-    id,
-    name,
-    personal_id,
-    commission,
-    first_phone,
-    second_phone,
-    status,
-    register_id,
-    gender,
-    user,
-
-    clinics,
-  } = doctor || {};
-
   const token = cookieServices.getToken() || "";
   const { theme } = useTheme();
   const navigate = useNavigate();
 
   const { mutateAsync: addDoctor, isPending: isLoadingAdd } = useAddDoctor();
-  const { data: clinicsData } = useGetAllClinics(token as string, `${id}`);
+  const { data: clinicsData } = useGetAllClinics(token as string);
   const { mutateAsync: updateDoctor, isPending: isLoadingUpdate } =
     useUpdateDoctor();
 
@@ -64,23 +50,24 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   const form = useForm<z.infer<typeof doctorSchema>>({
     resolver: zodResolver(doctorSchema),
     defaultValues: {
-      name: name || "",
-      personal_id: personal_id || "",
-      first_phone: first_phone || "",
-      second_phone: second_phone || "",
-      email: user?.email || "",
-      register_id: register_id || "",
+      name: doctor?.name || "",
+      personal_id: doctor?.personal_id || "",
+      first_phone: doctor?.first_phone || "",
+      second_phone: doctor?.second_phone || "",
+      email: doctor?.user?.email || "",
+      register_id: doctor?.register_id || "",
       gender: {
-        value: gender || "male",
-        label: gender === "female" ? "أنثى" : "ذكر",
+        value: doctor?.gender || "male",
+        label: doctor?.gender === "female" ? "أنثى" : "ذكر",
       },
       password: "",
-      commission: commission?.slice(0, commission?.length - 1) || "0",
+      commission:
+        doctor?.commission?.slice(0, doctor?.commission?.length - 1) || "0",
       status: Boolean(status) || true,
       image: undefined,
       signature: undefined,
       clinics:
-        clinics?.map((clinic) => ({
+        doctor?.clinics?.map((clinic) => ({
           value: clinic.id.toString(),
           label: clinic.name,
         })) || [],
@@ -88,16 +75,38 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   });
 
   useEffect(() => {
+    if (!doctor) return;
     form.reset({
-      clinics: clinics?.map((clinic) => ({
-        value: clinic.id.toString(),
-        label: clinic.name,
+      name: doctor?.name,
+      personal_id: doctor?.personal_id,
+      first_phone: doctor?.first_phone,
+      second_phone: doctor?.second_phone || "",
+      email: doctor?.user?.email,
+      register_id: doctor?.register_id,
+      gender: {
+        value: doctor?.gender?.toLowerCase(),
+        label: doctor?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+      },
+      commission: doctor?.commission?.slice(0, doctor?.commission?.length - 1),
+      status: Boolean(doctor?.status),
+      clinics: doctor?.clinics?.map((clinic) => ({
+        value: clinic?.id.toString(),
+        label: clinic?.name,
       })),
     });
-  }, [doctor, form, clinics]);
+  }, [form, doctor]);
 
   const { handleFileChange } = useUploadImgHandler(form);
 
+  const isOptionalField = (fieldName: string) => {
+    const optionalFields = ["second_phone", "image", "signature"];
+    const updateOptionalFields = ["password", "email"];
+
+    return (
+      optionalFields.includes(fieldName) ||
+      (action === "update" && updateOptionalFields.includes(fieldName))
+    );
+  };
   const renderFormField = (input: IFormInput) => (
     <FormField
       key={input.name}
@@ -161,7 +170,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
               <FormItem>
                 <FormLabel htmlFor={input.name}>
                   {input.label}
-                  {(input.name === "image" || input.name === "signature") && (
+                  {isOptionalField(input.name) && (
                     <span className="text-xs text-muted-foreground">
                       {" "}
                       (اختياري)
@@ -188,13 +197,12 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
               <FormItem>
                 <FormLabel htmlFor={input.name}>
                   {input.label}
-                  {(input.name === "password" || input.name === "email") &&
-                    action === "update" && (
-                      <span className="text-xs text-muted-foreground">
-                        {" "}
-                        (اختياري)
-                      </span>
-                    )}
+                  {isOptionalField(input.name) && (
+                    <span className="text-xs text-muted-foreground">
+                      {" "}
+                      (اختياري)
+                    </span>
+                  )}
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -227,7 +235,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
 
       if (action === "update") {
         const { status, message } = await updateDoctor({
-          data: { ...formData, id: id },
+          data: { ...formData, id: doctor?.id },
           token,
         });
         if (!status) return toast.error(message);

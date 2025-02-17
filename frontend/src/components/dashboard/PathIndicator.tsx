@@ -14,21 +14,20 @@ interface IProps {
 
 const PathIndicator = ({ routeNames }: IProps) => {
   const location = useLocation();
-  const pathnames = location.pathname.split("/").filter((x) => x);
+  const pathnames = location.pathname.split("/");
 
   return (
     <>
       <Breadcrumb>
         <BreadcrumbList>
           {pathnames.map((name, index) => {
-            const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
+            const routeTo = `${pathnames.slice(0, index + 1).join("/")}`;
             const isLast = index === pathnames.length - 1;
             const arabicName = routeNames?.[name] || name;
 
             const isNextItemNumber =
               index < pathnames.length - 1 &&
               !isNaN(Number(pathnames[index + 1]));
-
             return (
               <Fragment key={name}>
                 {isNaN(Number(name)) && (
@@ -41,8 +40,8 @@ const PathIndicator = ({ routeNames }: IProps) => {
                       <Link
                         className="!text-black/80 dark:!text-white/70"
                         to={
-                          routeTo === "/dashboard/doctors/update"
-                            ? "/dashboard/doctors"
+                          routeTo.split("/").pop() === "update"
+                            ? "/dashboard"
                             : routeTo
                         }
                       >

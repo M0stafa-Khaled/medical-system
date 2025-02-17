@@ -26,11 +26,20 @@ const DashboardLayout = () => {
   };
 
   const NAV_LINKS = [
-    { name: routeNames.dashboard, path: "/dashboard" },
-    { name: routeNames.clinics, path: "/dashboard/clinics" },
-    { name: routeNames.doctors, path: "/dashboard/doctors" },
-    { name: routeNames.employees, path: "/dashboard/employees" },
-    { name: routeNames.patients, path: "/dashboard/patients" },
+    {
+      name: routeNames.dashboard,
+      path: "/dashboard",
+    },
+    {
+      name: "التكويدات",
+      path: "",
+      children: [
+        { name: routeNames.clinics, path: "/dashboard/clinics" },
+        { name: routeNames.doctors, path: "/dashboard/doctors" },
+        { name: routeNames.employees, path: "/dashboard/employees" },
+        { name: routeNames.patients, path: "/dashboard/patients" },
+      ],
+    },
   ];
 
   useEffect(() => {

@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { EMPLOYEE_FORM_INPUTS, GENDER, ROLES } from "@/constants";
-import { IEmployee, IFormInput } from "@/interfaces";
+import { IEmployee } from "@/interfaces/employee";
+import { IFormInput } from "@/interfaces";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
@@ -23,6 +24,7 @@ import Select, { StylesConfig } from "react-select";
 import { useTheme } from "next-themes";
 import { Loader2 } from "lucide-react";
 import { useAddEmployee, useUpdateEmployee } from "@/lib/react-query/employees";
+import { useEffect } from "react";
 interface IProps {
   employee?: IEmployee;
   action: "add" | "update";
@@ -30,19 +32,6 @@ interface IProps {
 }
 
 const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
-  const {
-    id,
-    name,
-    personal_id,
-    first_phone,
-    second_phone,
-    status,
-    salary,
-    gender,
-    job,
-    user,
-  } = employee || {};
-
   const token = cookieServices.getToken() || "";
   const { theme } = useTheme();
   const navigate = useNavigate();
@@ -55,27 +44,50 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   const form = useForm<z.infer<typeof employeeSchema>>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
-      name: name || "",
-      personal_id: personal_id || "",
-      first_phone: first_phone || "",
-      second_phone: second_phone || "",
-      salary: salary || "",
-      email: user?.email || "",
-      job: job || "",
+      name: employee?.name || "",
+      personal_id: employee?.personal_id || "",
+      first_phone: employee?.first_phone || "",
+      second_phone: employee?.second_phone || "",
+      salary: employee?.salary || "",
+      email: employee?.user?.email || "",
+      job: employee?.job || "",
       gender: {
-        value: gender?.toLowerCase() || "male",
-        label: gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+        value: employee?.gender?.toLowerCase() || "male",
+        label: employee?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
       },
       password: "",
-      status: Boolean(status) || true,
+      status: Boolean(employee?.status) || true,
       image: undefined,
       personal_image: undefined,
       role: {
-        value: user?.role || "employee",
-        label: user?.role === "admin" ? "مسؤول" : "موظف",
+        value: employee?.user?.role || "employee",
+        label: employee?.user?.role === "admin" ? "مسؤول" : "موظف",
       },
     },
   });
+
+  useEffect(() => {
+    if (!employee) return;
+    form.reset({
+      name: employee?.name,
+      personal_id: employee?.personal_id,
+      first_phone: employee?.first_phone || "",
+      second_phone: employee?.second_phone,
+      salary: employee?.salary,
+      email: employee?.user?.email,
+      job: employee?.job,
+      gender: {
+        value: employee?.gender?.toLowerCase(),
+        label: employee?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+      },
+      password: "",
+      status: Boolean(employee?.status),
+      role: {
+        value: employee?.user?.role,
+        label: employee?.user?.role === "admin" ? "مسؤول" : "موظف",
+      },
+    });
+  }, [form, employee]);
   const { handleFileChange } = useUploadImgHandler(form);
 
   const isOptionalField = (fieldName: string) => {
@@ -216,7 +228,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
 
       if (action === "update") {
         const { status, message } = await updateEmployee({
-          data: { ...formData, id: id },
+          data: { ...formData, id: employee?.id },
           token,
         });
         if (!status) return toast.error(message);

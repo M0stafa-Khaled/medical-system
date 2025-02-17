@@ -7,7 +7,7 @@ import {
 } from "@/api/patients";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
-import { IAddPatient } from "@/interfaces";
+import { IAddPatient } from "@/interfaces/patient";
 
 export const useGetAllPatients = (token: string, page: number = 1) => {
   return useQuery({

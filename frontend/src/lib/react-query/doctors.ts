@@ -1,4 +1,4 @@
-import { IAddDoctor } from "@/interfaces";
+import { IAddDoctor } from "@/interfaces/doctor";
 import {
   addDoctor,
   deleteDoctor,

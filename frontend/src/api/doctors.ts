@@ -1,5 +1,9 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IAddDoctor, IResponseDoctor, IResponseDoctors } from "@/interfaces";
+import {
+  IAddDoctor,
+  IResponseDoctor,
+  IResponseDoctors,
+} from "@/interfaces/doctor";
 
 export const getAllDoctors = async ({
   token,
@@ -23,7 +27,6 @@ export const getDoctorById: ({
   id: string;
   token: string;
 }) => Promise<IResponseDoctor> = async ({ id, token }) => {
-  if (isNaN(Number(id))) return;
   const { data } = await axiosInstanceAPI.get(`doctors/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

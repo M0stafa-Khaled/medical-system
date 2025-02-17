@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IResponsePatients, IResponsePatient, IAddPatient } from "@/interfaces";
+import { IResponsePatients, IResponsePatient, IAddPatient } from "@/interfaces/patient";
 
 export const getAllPatients = async ({
   token,

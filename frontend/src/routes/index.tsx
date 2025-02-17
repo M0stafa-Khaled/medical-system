@@ -23,13 +23,14 @@ import {
   EmployeeDetails,
   PatientDetails,
 } from "@/pages/dashboard";
+import { Profile } from "@/pages/profile";
 
 const routes = createRoutesFromElements(
   <>
     {/* Public */}
     <Route element={<RootLayout />}>
       <Route path="/" element={<>الصفحة الرئيسية</>} />
-      <Route path="/profile" element={<>الصفحة السخصية</>} />
+      <Route path="/profile" element={<Profile />} />
     </Route>
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />

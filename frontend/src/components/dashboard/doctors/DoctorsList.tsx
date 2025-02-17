@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { IDoctor } from "@/interfaces";
+import { IDoctor } from "@/interfaces/doctor";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import DeleteDoctorButton from "./DeleteDoctorModalButton";
@@ -43,10 +43,10 @@ const DoctorsList = ({ doctors }: IProps) => {
               className="w-12 h-12 rounded-full object-cover"
             />
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
             {name}
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
             {clinics.map(({ name }) => name).join(", ")}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">

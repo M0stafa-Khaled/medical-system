@@ -1,5 +1,4 @@
 import { RootState } from "@/app/store";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,10 +16,8 @@ const ProfileMenu = () => {
   if (isAuthenticated)
     return (
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button className="h-9 w-9">
-            <FaUser size={24} />
-          </Button>
+        <DropdownMenuTrigger className="h-9 w-9 bg-primary flex justify-center items-center rounded-md shadow transition-all duration-100 hover:bg-primary/90">
+          <FaUser size={16} />
         </DropdownMenuTrigger>
         <DropdownMenuContent
           style={{ direction: "rtl" }}
@@ -41,7 +38,7 @@ const ProfileMenu = () => {
         </DropdownMenuContent>
       </DropdownMenu>
     );
-  return <></>;
+  return null;
 };
 
 export default ProfileMenu;

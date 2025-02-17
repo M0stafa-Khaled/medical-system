@@ -115,7 +115,7 @@ const PatientDetails = () => {
               value={formatDateTime(created_at as string)}
               sm
             />
-            <div className="flex items-center gap-2 mt-3 select-none">
+            <div className="flex items-center gap-2 select-none">
               <h5 className="text-sm text-muted-foreground">صورة الهوية :</h5>
               {personal_image ? (
                 <ImageModal

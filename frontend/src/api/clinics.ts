@@ -3,7 +3,7 @@ import {
   ICreateClinic,
   ICreateClinicResponse,
   IResponseClinics,
-} from "@/interfaces";
+} from "@/interfaces/clinic";
 
 export const getAllClinics: (
   token: string

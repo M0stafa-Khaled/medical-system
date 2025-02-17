@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import DeletePatientButton from "./DeletePatientModalButton";
-import { IPatient } from "@/interfaces";
+import { IPatient } from "@/interfaces/patient";
 import { motion } from "framer-motion";
 import { tabelRowVariants } from "@/animations/dashboardAnimations";
 
@@ -36,10 +36,10 @@ const PatientsList = ({ patients }: IProps) => {
           variants={tabelRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
             {name}
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
             {first_phone}
           </TableCell>
 
@@ -50,7 +50,6 @@ const PatientsList = ({ patients }: IProps) => {
               <Badge variant={"destructive"}>غير مفعل</Badge>
             )}
           </TableCell>
-
           <TableCell className="text-center">
             <div className="flex justify-center items-center gap-3">
               <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">

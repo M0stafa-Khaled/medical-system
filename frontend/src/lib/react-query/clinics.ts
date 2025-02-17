@@ -6,12 +6,12 @@ import {
 } from "@/api/clinics";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
-import { ICreateClinic } from "@/interfaces";
+import { ICreateClinic } from "@/interfaces/clinic";
 
-export const useGetAllClinics = (token: string, id?: string) => {
+export const useGetAllClinics = (token: string) => {
   return useQuery({
     queryFn: () => getAllClinics(token),
-    queryKey: [Query_Keys.GET_ALL_CLINICS, id, Query_Keys.GET_ONE_DOCTOR],
+    queryKey: [Query_Keys.GET_ALL_CLINICS],
   });
 };
 
@@ -31,7 +31,7 @@ export const useCreateClinic = () => {
 export const useDeleteClinic = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, token }: { id: number; token: string | null }) =>
+    mutationFn: ({ id, token }: { id: number; token: string }) =>
       deleteClinic({ id, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({
