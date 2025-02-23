@@ -55,8 +55,7 @@ export const addDoctor: ({
   dataForm.clinics.map((clinic, idx) =>
     formData.append(`clinics[${idx}]`, clinic.value)
   );
-  if (dataForm.second_phone)
-    formData.append("second_phone", dataForm?.second_phone);
+  formData.append("second_phone", dataForm?.second_phone || "");
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.signature) formData.append("signature", dataForm.signature);
   const { data } = await axiosInstanceAPI.post("/doctors", formData, {
@@ -85,11 +84,15 @@ export const updateDoctor: ({
   formData.append("_method", "put");
   formData.append("register_id", dataForm.register_id);
   formData.append("gender", dataForm.gender.value.toLowerCase());
+  formData.append(
+    "second_phone",
+    dataForm?.second_phone ? dataForm?.second_phone : ""
+  );
+
   dataForm.clinics.map((clinic, idx) =>
     formData.append(`clinics[${idx}]`, clinic.value)
   );
-  if (dataForm.second_phone)
-    formData.append("second_phone", dataForm?.second_phone);
+
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.signature) formData.append("signature", dataForm.signature);
   const { data } = await axiosInstanceAPI.post(

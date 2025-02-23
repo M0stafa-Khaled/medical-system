@@ -47,6 +47,7 @@ class CookieService {
   clearAllCookies() {
     this.cookies.remove("token", { path: "/" });
     this.cookies.remove("role", { path: "/" });
+    this.cookies.remove("permissions", { path: "/" });
   }
 }
 

@@ -1,4 +1,4 @@
-import DeleteModal from "@/components/shared/DeleteModal";
+import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { useDeleteEmployee } from "@/lib/react-query/employees";
 import cookieServices from "@/utils/cookieServices";
@@ -47,7 +47,7 @@ const DeleteEmployeeButton = ({ name, id }: IProps) => {
         <MdDelete size={24} />
       </Button>
 
-      <DeleteModal
+      <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف موظف"

@@ -24,7 +24,7 @@ interface IProps {
   variant?: "default" | "destructive" | "ghost" | "outline" | "secondary";
 }
 
-const DeleteModal = ({
+const Modal = ({
   isOpen,
   onOpenChange,
   title,
@@ -76,4 +76,4 @@ const DeleteModal = ({
   );
 };
 
-export default DeleteModal;
+export default Modal;

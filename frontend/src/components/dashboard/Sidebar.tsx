@@ -7,7 +7,7 @@ import {
   logoVariants,
   navItemsVariants,
   sidebarVariants,
-} from "@/animations/navbarAnimatons";
+} from "@/animations/navbarAnimations";
 
 interface IProps {
   links: ILink[];

@@ -1,5 +1,20 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IAuthResponse, ICheckAuth } from "@/interfaces/auth";
+import {
+  IAuthResponse,
+  ICheckAuth,
+  IResponsePermissions,
+} from "@/interfaces/auth";
+
+export const getAllPermissions: (
+  token: string
+) => Promise<IResponsePermissions> = async (token) => {
+  const { data } = await axiosInstanceAPI.get("/permissions", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
 
 export const login: (user: {
   email: string;

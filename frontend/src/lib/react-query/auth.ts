@@ -1,5 +1,12 @@
-import { checkAuth, login, logout, resendOtp, verifyEmail } from "@/api/auth";
-import { useMutation } from "@tanstack/react-query";
+import {
+  checkAuth,
+  getAllPermissions,
+  login,
+  logout,
+  resendOtp,
+  verifyEmail,
+} from "@/api/auth";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useLogin = () => {
   return useMutation({
@@ -28,6 +35,13 @@ export const useResendOtp = () => {
 export const useVerifyEmail = () => {
   return useMutation({
     mutationFn: ({ token, otp }: { token: string; otp: string }) =>
-      verifyEmail({token, otp}),
+      verifyEmail({ token, otp }),
+  });
+};
+
+export const useGetAllPermissions = (token: string) => {
+  return useQuery({
+    queryKey: ["permissions"],
+    queryFn: () => getAllPermissions(token),
   });
 };

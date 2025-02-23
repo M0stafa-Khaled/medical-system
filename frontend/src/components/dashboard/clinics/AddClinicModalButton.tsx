@@ -23,7 +23,7 @@ import { useCreateClinic } from "@/lib/react-query/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
-import DeleteModal from "@/components/shared/DeleteModal";
+import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 
 const AddClinicModalButton = () => {
@@ -82,7 +82,7 @@ const AddClinicModalButton = () => {
         <FiPlus size={20} />
       </Button>
 
-      <DeleteModal
+      <Modal
         isOpen={isOpenAddModal}
         onOpenChange={handleCloseModal}
         title="إضافة عيادة جديدة"
@@ -132,18 +132,22 @@ const AddClinicModalButton = () => {
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white"
+                className="text-black dark:text-white py-3 h-auto"
               >
                 إلغاء
               </AlertDialogCancel>
-              <Button type="submit" disabled={isPending}>
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="py-3 h-auto"
+              >
                 إضافة
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>
           </form>
         </Form>
-      </DeleteModal>
+      </Modal>
     </>
   );
 };

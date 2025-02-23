@@ -14,6 +14,7 @@ import { FaPencil } from "react-icons/fa6";
 import ImageModal from "@/components/shared/ImageModal";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
 import InfoField from "@/components/dashboard/InfoField";
+import Actions from "@/components/dashboard/doctors/actions/Actions";
 
 const DoctorDetails = () => {
   const navigate = useNavigate();
@@ -109,15 +110,19 @@ const DoctorDetails = () => {
               label="حالة الحساب"
               value={status ? "مفعل" : "غير مفعل"}
             />
-            <InfoField label="العمولة" value={commission} />
-            <InfoField label="رقم القيد" value={register_id} />
-            <InfoField label="رقم الهوية" value={personal_id} />
-            <InfoField label="رقم الهاتف الاول" value={first_phone} />
+            <InfoField label="العمولة" value={commission!} />
+            <InfoField label="رقم القيد" value={register_id!} />
+            <InfoField label="رقم الهوية" value={personal_id!} />
+            <InfoField label="رقم الهاتف الاول" value={first_phone!} />
             <InfoField
               label="رقم الهاتف الثاني"
               value={second_phone ? second_phone : "لا يوجد"}
             />
-            <InfoField label="البريد الإلكتروني" value={user?.email} sm />
+            <InfoField
+              label="البريد الإلكتروني"
+              value={user?.email as string}
+              sm
+            />
             <InfoField
               label="الجنس"
               value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
@@ -144,6 +149,7 @@ const DoctorDetails = () => {
           </div>
         </CardContent>
       </Card>
+      <Actions doctorId={doctorId!} />
     </section>
   );
 };

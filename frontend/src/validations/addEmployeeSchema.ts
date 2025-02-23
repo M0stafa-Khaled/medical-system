@@ -47,6 +47,14 @@ const addEmployeeSchema = z.object({
     },
     { message: "الدور مطلوب" }
   ),
+  permissions: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(1, "يجب اختيار صلاحية واحدة على الأقل"),
   image: z.union([
     z.undefined(),
     z

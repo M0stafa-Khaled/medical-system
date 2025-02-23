@@ -1,4 +1,5 @@
 import { login } from "@/app/features/auth/authSlice";
+import { setPermissions } from "@/app/features/permissions/permissionsSlice";
 import ReverseProtectedRoute from "@/components/auth/ReverseProtectedRoute";
 import ToggleMode from "@/components/ToggleMode";
 import { Button } from "@/components/ui/button";
@@ -30,11 +31,10 @@ const Login = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "admin@gmail.com",
-      password: "admin@345",
+      email: "eslame.elgohary2@gmail.com",
+      password: "eslame@345",
     },
   });
-
   const onSubmit = async ({ email, password }: z.infer<typeof loginSchema>) => {
     try {
       const { status, message, data } = await loginUser({
@@ -46,7 +46,13 @@ const Login = () => {
       if (!status) return toast.error(message);
 
       // * Login Success
-      dispatch(login({ token: data.token, role: data.role }));
+      dispatch(
+        login({
+          token: data.token,
+          role: data.role,
+        })
+      );
+      dispatch(setPermissions(data.permissions));
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;

@@ -1,4 +1,4 @@
-import DeleteModal from "@/components/shared/DeleteModal";
+import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { useDeleteClinic } from "@/lib/react-query/clinics";
 import cookieServices from "@/utils/cookieServices";
@@ -45,7 +45,7 @@ const DeleteClinicButton = ({ name, id }: IProps) => {
         <MdDelete size={24} />
       </Button>
 
-      <DeleteModal
+      <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف العيادة"

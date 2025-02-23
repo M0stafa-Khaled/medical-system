@@ -91,6 +91,21 @@ export const DOCTOR_FORM_INPUTS: IFormInput[] = [
   },
 ];
 
+export const DOCTOR_ACTION_INPUTS: IFormInput[] = [
+  {
+    name: "name",
+    label: "اسم الإجراء",
+    type: "text",
+    placeholder: "ادخل اسم الإجراء",
+  },
+  {
+    name: "price",
+    label: "السعر",
+    type: "number",
+    placeholder: "ادخل سعر الإجراء ",
+  },
+];
+
 export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
   {
     name: "name",
@@ -146,16 +161,6 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     type: "switch",
   },
   {
-    name: "gender",
-    label: "النوع",
-    type: "select",
-  },
-  {
-    name: "role",
-    label: "الدور",
-    type: "select",
-  },
-  {
     name: "image",
     label: "صورة شخصية",
     type: "file",
@@ -167,7 +172,18 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     type: "file",
     accept: "image/*",
   },
+  {
+    name: "gender",
+    label: "النوع",
+    type: "select",
+  },
+  {
+    name: "role",
+    label: "الدور",
+    type: "select",
+  },
 ];
+
 export const PATIENT_FORM_INPUTS: IFormInput[] = [
   {
     name: "name",
@@ -213,8 +229,8 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
   },
   {
     name: "description",
-    label: "الوصف",
-    placeholder: "ادخل الوصف",
+    label: "ملاحظات",
+    placeholder: "ادخل ملاحظات",
     type: "text",
   },
   {
@@ -245,6 +261,7 @@ export const GENDER: { value: string; label: string }[] = [
     label: "انثى",
   },
 ];
+
 export const ROLES: { value: string; label: string }[] = [
   {
     value: "admin",

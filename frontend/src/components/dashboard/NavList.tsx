@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { GoDot } from "react-icons/go";
 import { motion, AnimatePresence } from "framer-motion";
-import { linkVariants } from "@/animations/navbarAnimatons";
+import { linkVariants } from "@/animations/navbarAnimations";
 
 export interface ILink {
   name: string;

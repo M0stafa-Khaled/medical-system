@@ -1,4 +1,5 @@
 import { IPaginationLink, IPaginationMeta } from ".";
+import { IPermission } from "./auth";
 
 export interface IEmployee {
   id: number;
@@ -18,6 +19,7 @@ export interface IEmployee {
     email: string;
     role: "admin" | "employee";
   };
+  permissions: IPermission[];
 }
 
 export interface IAddEmployee {
@@ -39,6 +41,9 @@ export interface IAddEmployee {
   second_phone?: string | null;
   image?: File | undefined;
   personal_image?: File | undefined;
+  permissions: {
+    value: string;
+  }[];
 }
 
 export interface IResponseEmployees {

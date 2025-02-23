@@ -96,15 +96,19 @@ const PatientDetails = () => {
               label="حالة الحساب"
               value={status ? "مفعل" : "غير مفعل"}
             />
-            <InfoField label="اسم آخر" value={another_name} />
-            <InfoField label="الوصف" value={description} />
-            <InfoField label="رقم الهوية" value={personal_id} />
-            <InfoField label="رقم الهاتف الاول" value={first_phone} />
+            <InfoField label="اسم آخر" value={another_name!} />
+            <InfoField label="الوصف" value={description!} />
+            <InfoField label="رقم الهوية" value={personal_id!} />
+            <InfoField label="رقم الهاتف الاول" value={first_phone!} />
             <InfoField
               label="رقم الهاتف الثاني"
               value={second_phone ? second_phone : "لا يوجد"}
             />
-            <InfoField label="البريد الإلكتروني" value={user?.email} sm />
+            <InfoField
+              label="البريد الإلكتروني"
+              value={user?.email as string}
+              sm
+            />
             <InfoField
               label="الجنس"
               value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}

@@ -1,11 +1,11 @@
-import { Permission } from "@/types";
-import { ROLE_PERMISSIONS } from "@/constants/permission";
-import cookieServices from "@/utils/cookieServices";
+import { RootState } from "@/app/store";
+import { useSelector } from "react-redux";
 
-export const useHasPermission = (requiredPermission: Permission): boolean => {
-  const role = cookieServices.getRole();
-  if (!role) return false;
-
-  const userPermissions = ROLE_PERMISSIONS[role];
-  return userPermissions.includes(requiredPermission);
+const useHasPermission = (requiredPermission: string): boolean => {
+  const { permissions } = useSelector((state: RootState) => state.permissions);
+  return permissions.some(
+    (permission) => permission.name === requiredPermission
+  );
 };
+
+export default useHasPermission;

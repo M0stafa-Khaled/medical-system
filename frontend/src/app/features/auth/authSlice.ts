@@ -22,11 +22,11 @@ const authSlice = createSlice({
       }>
     ) => {
       state.isAuthenticated = true;
-
       // Set the token and role in cookies
       CookieService.setToken(action.payload.token, 1);
       CookieService.setRole(action.payload.role, 1);
     },
+
     logout: (state) => {
       state.isAuthenticated = false;
       CookieService.clearAllCookies();

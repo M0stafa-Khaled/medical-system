@@ -18,6 +18,7 @@ import cookieServices from "@/utils/cookieServices";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import { logout } from "@/app/features/auth/authSlice";
+import { clearPermissions } from "@/app/features/permissions/permissionsSlice";
 
 const LogoutIconButton = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const LogoutIconButton = () => {
       // ! Logout Field
       // * Logout Success
       dispatch(logout());
+      dispatch(clearPermissions());
       navigate("/login");
       toast.success("تم تسجيل الخروج");
     } catch (error) {

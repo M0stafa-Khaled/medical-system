@@ -25,6 +25,7 @@ import { useTheme } from "next-themes";
 import { Loader2 } from "lucide-react";
 import { useAddEmployee, useUpdateEmployee } from "@/lib/react-query/employees";
 import { useEffect } from "react";
+import { useGetAllPermissions } from "@/lib/react-query/auth";
 interface IProps {
   employee?: IEmployee;
   action: "add" | "update";
@@ -32,14 +33,22 @@ interface IProps {
 }
 
 const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
-  const token = cookieServices.getToken() || "";
   const { theme } = useTheme();
   const navigate = useNavigate();
+
+  const token = cookieServices.getToken() || "";
+
+  const { data: permissions } = useGetAllPermissions(token!);
 
   const { mutateAsync: addEmployee, isPending: isLoadingAdd } =
     useAddEmployee();
   const { mutateAsync: updateEmployee, isPending: isLoadingUpdate } =
     useUpdateEmployee();
+
+  const permissionsOptions = permissions?.data.map((permission) => ({
+    value: permission.id.toString(),
+    label: permission.name,
+  }));
 
   const form = useForm<z.infer<typeof employeeSchema>>({
     resolver: zodResolver(employeeSchema),
@@ -47,7 +56,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       name: employee?.name || "",
       personal_id: employee?.personal_id || "",
       first_phone: employee?.first_phone || "",
-      second_phone: employee?.second_phone || "",
+      second_phone: "",
       salary: employee?.salary || "",
       email: employee?.user?.email || "",
       job: employee?.job || "",
@@ -63,19 +72,24 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         value: employee?.user?.role || "employee",
         label: employee?.user?.role === "admin" ? "مسؤول" : "موظف",
       },
+      permissions:
+        employee?.permissions?.map((p) => ({
+          value: p.id,
+          label: p.name,
+        })) || [],
     },
   });
 
   useEffect(() => {
     if (!employee) return;
     form.reset({
-      name: employee?.name,
-      personal_id: employee?.personal_id,
+      name: employee?.name || "",
+      personal_id: employee?.personal_id || "",
       first_phone: employee?.first_phone || "",
-      second_phone: employee?.second_phone,
-      salary: employee?.salary,
-      email: employee?.user?.email,
-      job: employee?.job,
+      second_phone: employee?.second_phone || "",
+      salary: employee?.salary ? `${employee?.salary}` : "",
+      email: employee?.user?.email || "",
+      job: employee?.job || "",
       gender: {
         value: employee?.gender?.toLowerCase(),
         label: employee?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
@@ -83,16 +97,21 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       password: "",
       status: Boolean(employee?.status),
       role: {
-        value: employee?.user?.role,
+        value: employee?.user?.role || "employee",
         label: employee?.user?.role === "admin" ? "مسؤول" : "موظف",
       },
+      permissions:
+        employee?.permissions?.map((p) => ({
+          value: p.id,
+          label: p.name,
+        })) || [],
     });
   }, [form, employee]);
   const { handleFileChange } = useUploadImgHandler(form);
 
   const isOptionalField = (fieldName: string) => {
     const optionalFields = ["second_phone", "image", "personal_image"];
-    const updateOptionalFields = ["password", "email"];
+    const updateOptionalFields = ["password", "email", "permissions"];
 
     return (
       optionalFields.includes(fieldName) ||
@@ -216,6 +235,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   );
 
   const onSubmit = async (formData: z.infer<typeof employeeSchema>) => {
+    console.log(formData);
     try {
       if (action === "add") {
         const { status, message } = await addEmployee({
@@ -276,6 +296,35 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6"
       >
+        <FormField
+          control={form.control}
+          name={"permissions"}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                الصلاحيات
+                {isOptionalField("permissions") && (
+                  <span className="text-xs text-muted-foreground">
+                    {" "}
+                    (اختياري)
+                  </span>
+                )}
+              </FormLabel>
+              <FormControl>
+                <Select
+                  {...field}
+                  isMulti
+                  options={permissionsOptions}
+                  onChange={(selectedOptions) => {
+                    field.onChange(selectedOptions);
+                  }}
+                  styles={selectStyles}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
           {EMPLOYEE_FORM_INPUTS.map(renderFormField)}
         </div>

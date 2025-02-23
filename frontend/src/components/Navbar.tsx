@@ -14,7 +14,7 @@ import {
   sidebarVariants,
   logoVariants,
   navItemsVariants,
-} from "@/animations/navbarAnimatons";
+} from "@/animations/navbarAnimations";
 
 interface IProps {
   links: {
@@ -104,7 +104,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
               </motion.div>
             </motion.div>
             <motion.div variants={logoVariants} className="w-14">
-              <Link to={links[0].path}>
+              <Link to={"/"}>
                 <motion.img
                   src={"/logo.svg"}
                   alt="logo"

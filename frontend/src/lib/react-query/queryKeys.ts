@@ -7,6 +7,7 @@ enum Query_Keys {
   GET_ALL_PATIENTS = "patients",
   GET_ONE_PATIENT = "patient",
   GET_USER_PROFILE = "user",
+  DOCTOR_ACTIONS = "doctorActions",
 }
 
 export default Query_Keys;

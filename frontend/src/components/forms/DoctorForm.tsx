@@ -53,7 +53,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       name: doctor?.name || "",
       personal_id: doctor?.personal_id || "",
       first_phone: doctor?.first_phone || "",
-      second_phone: doctor?.second_phone || "",
+      second_phone: doctor?.second_phone ? doctor.second_phone : "",
       email: doctor?.user?.email || "",
       register_id: doctor?.register_id || "",
       gender: {

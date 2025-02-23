@@ -1,7 +1,10 @@
 import { logout } from "@/app/features/auth/authSlice";
+import { setPermissions } from "@/app/features/permissions/permissionsSlice";
 import Navbar from "@/components/Navbar";
 import PathIndicator from "@/components/dashboard/PathIndicator";
 import Sidebar from "@/components/dashboard/Sidebar";
+import { PERMISSIONS } from "@/enums/permissions";
+import useHasPermission from "@/hooks/useHasPermission";
 import { useCheckAuth } from "@/lib/react-query/auth";
 import cookieServices from "@/utils/cookieServices";
 import { useEffect } from "react";
@@ -10,6 +13,11 @@ import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const DashboardLayout = () => {
+  const canViewClinics = useHasPermission(PERMISSIONS.CLINICS);
+  const canViewDoctors = useHasPermission(PERMISSIONS.DOCTORS);
+  const canViewEmployees = useHasPermission(PERMISSIONS.EMPLOYEES);
+  const canViewPatients = useHasPermission(PERMISSIONS.PATIENTS);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken();
@@ -30,21 +38,33 @@ const DashboardLayout = () => {
       name: routeNames.dashboard,
       path: "/dashboard",
     },
-    {
-      name: "التكويدات",
-      path: "",
-      children: [
-        { name: routeNames.clinics, path: "/dashboard/clinics" },
-        { name: routeNames.doctors, path: "/dashboard/doctors" },
-        { name: routeNames.employees, path: "/dashboard/employees" },
-        { name: routeNames.patients, path: "/dashboard/patients" },
-      ],
-    },
+    ...(canViewClinics || canViewDoctors || canViewEmployees || canViewPatients
+      ? [
+          {
+            name: "التكويدات",
+            path: "",
+            children: [
+              ...(canViewClinics
+                ? [{ name: routeNames.clinics, path: "/dashboard/clinics" }]
+                : []),
+              ...(canViewDoctors
+                ? [{ name: routeNames.doctors, path: "/dashboard/doctors" }]
+                : []),
+              ...(canViewEmployees
+                ? [{ name: routeNames.employees, path: "/dashboard/employees" }]
+                : []),
+              ...(canViewPatients
+                ? [{ name: routeNames.patients, path: "/dashboard/patients" }]
+                : []),
+            ],
+          },
+        ]
+      : []),
   ];
 
   useEffect(() => {
     (async () => {
-      const { auth, email_verified, status } = await checkAuthUser(
+      const { auth, email_verified, status, permissions } = await checkAuthUser(
         token as string
       );
       if (!auth) {
@@ -52,6 +72,9 @@ const DashboardLayout = () => {
         navigate("/login");
         return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
       }
+
+      // Set Permissions in state
+      dispatch(setPermissions(permissions));
 
       if (!status) {
         navigate("/not-active");

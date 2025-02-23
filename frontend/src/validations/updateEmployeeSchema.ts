@@ -16,15 +16,14 @@ const updateEmployeeSchema = z.object({
     .trim()
     .regex(/^\d+$/, "يجب ادخال رقم هاتف صالح"),
   second_phone: z
-    .string()
+    .string({ message: "ادخل رقم هاتف صالح" })
     .optional()
     .refine((val) => !val || /^\d+$/.test(val), {
       message: "يجب ادخال رقم هاتف صالح",
     }),
   salary: z
     .string({ message: " الراتب مطلوب" })
-    .regex(/^\d*\.?\d+$/, "يجب إدخال رقم صالح")
-    .trim(),
+    .regex(/^\d*\.?\d+$/, "يجب إدخال رقم صالح"),
   status: z.boolean().default(true),
   job: z.string({ message: "الوظيفة مطلوبة" }),
   email: z
@@ -54,7 +53,14 @@ const updateEmployeeSchema = z.object({
     .refine((val) => !val || val.length >= 8, {
       message: "كلمة المرور يجب أن تكون 8 حروف على الأقل",
     }),
-
+  permissions: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(1, "يجب اختيار صلاحية واحدة على الأقل"),
   image: z.union([
     z.undefined(),
     z

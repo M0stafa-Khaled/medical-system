@@ -71,11 +71,15 @@ export const addEmployee: ({
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
-  if (dataForm.second_phone)
-    formData.append("second_phone", dataForm?.second_phone);
+  formData.append("second_phone", dataForm?.second_phone || "");
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
+
+  if (dataForm.permissions)
+    dataForm.permissions.map((permission, idx) =>
+      formData.append(`permissions[${idx}]`, permission.value)
+    );
   const { data } = await axiosInstanceAPI.post("/employees", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -104,13 +108,16 @@ export const updateEmployee: ({
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
-  if (dataForm.second_phone) {
-    formData.append("second_phone", dataForm?.second_phone);
-  }
+  formData.append("second_phone", dataForm?.second_phone || "");
+
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.personal_image) {
     formData.append("personal_image", dataForm.personal_image);
   }
+  if (dataForm.permissions)
+    dataForm.permissions.map((permission, idx) =>
+      formData.append(`permissions[${idx}]`, permission.value)
+    );
   formData.append("_method", "put");
   const { data } = await axiosInstanceAPI.post(
     `/employees/${dataForm.id}`,
