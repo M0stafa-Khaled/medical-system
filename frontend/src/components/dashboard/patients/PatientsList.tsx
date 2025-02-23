@@ -7,7 +7,7 @@ import { FiEye } from "react-icons/fi";
 import DeletePatientButton from "./DeletePatientModalButton";
 import { IPatient } from "@/interfaces/patient";
 import { motion } from "framer-motion";
-import { tabelRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 
@@ -39,7 +39,7 @@ const PatientsList = ({ patients }: IProps) => {
           initial="hidden"
           animate="visible"
           custom={idx}
-          variants={tabelRowVariants}
+          variants={tableRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">

@@ -6,7 +6,7 @@ interface IPermissionsState {
 }
 
 const initialState: IPermissionsState = {
-  permissions: [],
+  permissions: JSON.parse(sessionStorage.getItem("permissions")!) || [],
 };
 
 const permissionsSlice = createSlice({
@@ -15,10 +15,12 @@ const permissionsSlice = createSlice({
   reducers: {
     setPermissions(state, action: PayloadAction<IPermission[]>) {
       state.permissions = action.payload;
+      sessionStorage.setItem("permissions", JSON.stringify(action.payload));
     },
 
     clearPermissions(state) {
       state.permissions = [];
+      sessionStorage.removeItem("permissions");
     },
   },
 });

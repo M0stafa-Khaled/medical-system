@@ -1,8 +1,12 @@
 import DoctorForm from "@/components/forms/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
+import { PERMISSIONS } from "@/enums/permissions";
+import useHasPermission from "@/hooks/useHasPermission";
 import AddDoctorSchema from "@/validations/addDoctorSchema";
 
 const AddDoctor = () => {
+  const canEditDoctor = useHasPermission(PERMISSIONS.EDIT_DOCTOR);
+
   return (
     <Card className="dark:bg-foreground border-gray-300 dark:border-muted shadow-none">
       <div className="flex flex-col space-y-1.5 p-6">

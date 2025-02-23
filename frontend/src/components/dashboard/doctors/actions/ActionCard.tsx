@@ -2,12 +2,17 @@ import { IDoctorAction } from "@/interfaces/doctorActions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DeleteActionModalButton from "./DeleteActionModelButton";
 import EditActionModalButton from "./EditActionModalButton";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 interface IProps {
   action: IDoctorAction;
   doctorId: string;
 }
 const ActionCard = ({ action, doctorId }: IProps) => {
+  const canDeleteAction = useHasPermission(PERMISSIONS.DELETE_ACTION_DOCTOR);
+  const canEditAction = useHasPermission(PERMISSIONS.EDIT_ACTION_DOCTOR);
+
   return (
     <Card className="border-muted bg-background dark:bg-dark flex justify-between items-center">
       <div>
@@ -24,8 +29,12 @@ const ActionCard = ({ action, doctorId }: IProps) => {
         </CardContent>
       </div>
       <div className="flex flex-col px-4 gap-2">
-        <DeleteActionModalButton id={action.id} name={action.name} />
-        <EditActionModalButton doctorId={doctorId} action={action} />
+        {canDeleteAction && (
+          <DeleteActionModalButton id={action.id} name={action.name} />
+        )}
+        {canEditAction && (
+          <EditActionModalButton doctorId={doctorId} action={action} />
+        )}
       </div>
     </Card>
   );

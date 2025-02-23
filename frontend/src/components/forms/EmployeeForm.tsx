@@ -1,31 +1,26 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
-import { EMPLOYEE_FORM_INPUTS, GENDER, ROLES } from "@/constants";
+import { Form } from "@/components/ui/form";
+import { EMPLOYEE_FORM_INPUTS } from "@/constants";
 import { IEmployee } from "@/interfaces/employee";
-import { IFormInput } from "@/interfaces";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import Select, { StylesConfig } from "react-select";
-import { useTheme } from "next-themes";
-import { Loader2 } from "lucide-react";
 import { useAddEmployee, useUpdateEmployee } from "@/lib/react-query/employees";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllPermissions } from "@/lib/react-query/auth";
+import EmployeeFormField from "@/components/dashboard/employees/form/EmployeeFormField";
+import { PermissionsField } from "@/components/dashboard/employees/form/PermissionsField";
+import SubmitButton from "./SubmitButton";
+import { motion } from "framer-motion";
+import {
+  FormItemVariants,
+  formVariants,
+} from "@/animations/dashboardAnimations";
+
 interface IProps {
   employee?: IEmployee;
   action: "add" | "update";
@@ -33,13 +28,13 @@ interface IProps {
 }
 
 const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
-  const { theme } = useTheme();
   const navigate = useNavigate();
-
+  const [showPermissions, setShowPermissions] = useState(
+    employee?.user?.role === "employee" || !employee
+  );
   const token = cookieServices.getToken() || "";
 
   const { data: permissions } = useGetAllPermissions(token!);
-
   const { mutateAsync: addEmployee, isPending: isLoadingAdd } =
     useAddEmployee();
   const { mutateAsync: updateEmployee, isPending: isLoadingUpdate } =
@@ -53,35 +48,37 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   const form = useForm<z.infer<typeof employeeSchema>>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
-      name: employee?.name || "",
-      personal_id: employee?.personal_id || "",
-      first_phone: employee?.first_phone || "",
+      name: "",
+      personal_id: "",
+      first_phone: "",
       second_phone: "",
-      salary: employee?.salary || "",
-      email: employee?.user?.email || "",
-      job: employee?.job || "",
+      salary: "",
+      email: "",
+      job: "",
       gender: {
-        value: employee?.gender?.toLowerCase() || "male",
-        label: employee?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+        value: "male",
+        label: "ذكر",
       },
       password: "",
-      status: Boolean(employee?.status) || true,
+      status: true,
       image: undefined,
       personal_image: undefined,
       role: {
-        value: employee?.user?.role || "employee",
-        label: employee?.user?.role === "admin" ? "مسؤول" : "موظف",
+        value: "employee",
+        label: "موظف",
       },
-      permissions:
-        employee?.permissions?.map((p) => ({
-          value: p.id,
-          label: p.name,
-        })) || [],
+      permissions: [],
     },
   });
 
   useEffect(() => {
     if (!employee) return;
+    const subscription = form.watch((value, { name }) => {
+      if (name === "role") {
+        setShowPermissions(value.role?.value === "employee");
+      }
+    });
+
     form.reset({
       name: employee?.name || "",
       personal_id: employee?.personal_id || "",
@@ -92,7 +89,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       job: employee?.job || "",
       gender: {
         value: employee?.gender?.toLowerCase(),
-        label: employee?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+        label: employee?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
       },
       password: "",
       status: Boolean(employee?.status),
@@ -106,7 +103,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           label: p.name,
         })) || [],
     });
+
+    return () => subscription.unsubscribe();
   }, [form, employee]);
+
   const { handleFileChange } = useUploadImgHandler(form);
 
   const isOptionalField = (fieldName: string) => {
@@ -118,124 +118,8 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       (action === "update" && updateOptionalFields.includes(fieldName))
     );
   };
-  const renderFormField = (input: IFormInput) => (
-    <FormField
-      key={input.name}
-      control={form.control}
-      name={input.name as keyof z.infer<typeof employeeSchema> as string}
-      render={
-        input.type === "switch"
-          ? ({ field }) => (
-              <FormItem>
-                <FormLabel>{input.label}</FormLabel>
-                <div className="border-muted flex flex-row items-center justify-between rounded-lg border p-3">
-                  <FormLabel>{field.value ? " مفعل " : " غير مفعل "}</FormLabel>
-                  <FormControl>
-                    <Switch
-                      dir="ltr"
-                      checked={field.value as boolean | undefined}
-                      onCheckedChange={field.onChange}
-                      className="data-[state=unchecked]:bg-black/50 data-[state=checked]:bg-green-700 dark:data-[state=unchecked]:bg-white/50 dark:data-[state=checked]:bg-green-500"
-                    />
-                  </FormControl>
-                </div>
-              </FormItem>
-            )
-          : input.name === "gender"
-          ? ({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
-                <FormControl>
-                  <Select
-                    id={input.name}
-                    {...field}
-                    options={GENDER}
-                    onChange={(selectedOptions) => {
-                      field.onChange(selectedOptions);
-                    }}
-                    styles={selectStyles}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )
-          : input.name === "role"
-          ? ({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
-                <FormControl>
-                  <Select
-                    id={input.name}
-                    {...field}
-                    options={ROLES}
-                    onChange={(selectedOptions) => {
-                      field.onChange(selectedOptions);
-                    }}
-                    styles={selectStyles}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )
-          : input.type === "file"
-          ? ({ field: { onChange, value, ...field } }) => (
-              <FormItem>
-                <FormLabel htmlFor={input.name}>
-                  {input.label}
-                  {isOptionalField(input.name) && (
-                    <span className="text-xs text-muted-foreground">
-                      {" "}
-                      (اختياري)
-                    </span>
-                  )}
-                </FormLabel>
-                <FormControl>
-                  <div className="flex flex-col gap-4">
-                    <Input
-                      id={input.name}
-                      type="file"
-                      accept={input.accept}
-                      onChange={(e) => handleFileChange(e, onChange)}
-                      className="border-muted h-auto py-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
-                      {...field}
-                      value={undefined}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )
-          : ({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor={input.name}>
-                  {input.label}
-                  {isOptionalField(input.name) && (
-                    <span className="text-xs text-muted-foreground">
-                      {" "}
-                      (اختياري)
-                    </span>
-                  )}
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    id={input.name}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    {...field}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    value={field.value as string | undefined}
-                    className="border-muted py-3 placeholder:h-14 h-auto text-black dark:text-white placeholder:text-black/50 dark:placeholder:text-white/50"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )
-      }
-    />
-  );
 
   const onSubmit = async (formData: z.infer<typeof employeeSchema>) => {
-    console.log(formData);
     try {
       if (action === "add") {
         const { status, message } = await addEmployee({
@@ -272,80 +156,55 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     }
   };
 
-  const selectStyles: StylesConfig = {
-    input: (baseStyles) => ({
-      ...baseStyles,
-      color: "#1e1c21",
-      padding: "8px 0px",
-    }),
-    menu: (baseState) => ({
-      ...baseState,
-      color: theme === "dark" ? "#fafafa" : "",
-    }),
-    option: (baseStyle) => ({
-      ...baseStyle,
-      color: theme === "dark" ? "#110f14" : "",
-      paddingTop: "12px",
-      paddingBottom: "12px",
-    }),
-  };
   return (
     <Form {...form}>
-      <form
+      <motion.form
         key={employee?.id || "add"}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6"
+        initial="hidden"
+        animate="visible"
+        variants={formVariants}
       >
-        <FormField
-          control={form.control}
-          name={"permissions"}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                الصلاحيات
-                {isOptionalField("permissions") && (
-                  <span className="text-xs text-muted-foreground">
-                    {" "}
-                    (اختياري)
-                  </span>
-                )}
-              </FormLabel>
-              <FormControl>
-                <Select
-                  {...field}
-                  isMulti
-                  options={permissionsOptions}
-                  onChange={(selectedOptions) => {
-                    field.onChange(selectedOptions);
-                  }}
-                  styles={selectStyles}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
-          {EMPLOYEE_FORM_INPUTS.map(renderFormField)}
-        </div>
-
-        <Button
-          type="submit"
-          disabled={isLoadingAdd || isLoadingUpdate}
-          className="py-6 w-full md:w-fit"
+        {showPermissions && (
+          <motion.div variants={formVariants}>
+            <PermissionsField
+              control={form.control}
+              isOptionalField={isOptionalField}
+              permissionsOptions={permissionsOptions || []}
+            />
+          </motion.div>
+        )}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
+          variants={formVariants}
         >
-          {action === "add"
-            ? isLoadingAdd
-              ? "جاري الإضافة"
-              : "إضافة موظف"
-            : isLoadingUpdate
-            ? "جاري تحديث البيانات"
-            : "تحديث البيانات"}
-          {(isLoadingAdd || isLoadingUpdate) && (
-            <Loader2 className="animate-spin ml-2" />
-          )}
-        </Button>
-      </form>
+          {EMPLOYEE_FORM_INPUTS.map((input, index) => (
+            <motion.div
+              key={input.name}
+              custom={index}
+              variants={FormItemVariants}
+            >
+              <EmployeeFormField
+                input={input}
+                form={form}
+                handleFileChange={handleFileChange}
+                isOptionalField={isOptionalField}
+                employeeSchema={employeeSchema}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+        <motion.div variants={formVariants}>
+          <SubmitButton
+            action={action}
+            isLoadingAdd={isLoadingAdd}
+            isLoadingUpdate={isLoadingUpdate}
+            addText="إضافة موظف"
+            updateText="تحديث بيانات الموظف"
+          />
+        </motion.div>
+      </motion.form>
     </Form>
   );
 };

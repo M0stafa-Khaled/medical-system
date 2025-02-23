@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import EditClinicModalButton from "./EditClinicModalButton";
 import DeleteClinicButton from "./DeleteClinicModalButton";
 import { IClinic } from "@/interfaces/clinic";
-import { tabelRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations/dashboardAnimations";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
@@ -37,7 +37,7 @@ const ClinicsList = ({ clinics }: IProps) => {
           initial="hidden"
           animate="visible"
           custom={idx}
-          variants={tabelRowVariants}
+          variants={tableRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
           <TableCell className="text-sm text-center text-black dark:text-white py-5 font-medium">

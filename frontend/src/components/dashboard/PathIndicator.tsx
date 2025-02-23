@@ -29,7 +29,7 @@ const PathIndicator = ({ routeNames }: IProps) => {
               index < pathnames.length - 1 &&
               !isNaN(Number(pathnames[index + 1]));
             return (
-              <Fragment key={name}>
+              <Fragment key={`${name}-${index}`}>
                 {isNaN(Number(name)) && (
                   <BreadcrumbItem className="text-black dark:!text-white !text-sm">
                     {isLast ? (

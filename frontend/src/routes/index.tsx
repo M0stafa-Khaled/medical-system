@@ -24,6 +24,7 @@ import {
   PatientDetails,
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const routes = createRoutesFromElements(
   <>
@@ -40,7 +41,7 @@ const routes = createRoutesFromElements(
     <Route
       path="/dashboard"
       element={
-        <ProtectedRoute requiredRole={["admin"]}>
+        <ProtectedRoute requiredRole={["admin", "employee"]}>
           <DashboardLayout />
         </ProtectedRoute>
       }
@@ -52,24 +53,120 @@ const routes = createRoutesFromElements(
       />
 
       {/* Clinics */}
-      <Route path="clinics" element={<Clinics />} />
+      <Route
+        path="clinics"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.CLINICS}>
+            <Clinics />
+          </ProtectedRoute>
+        }
+      />
+
       {/* Doctors */}
-      <Route path="doctors" element={<Doctors />} />
-      <Route path="doctors/:doctorId" element={<DoctorDetails />} />
-      <Route path="doctors/add" element={<AddDoctor />} />
-      <Route path="doctors/update/:doctorId" element={<UpdateDoctor />} />
+      <Route
+        path="doctors"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.DOCTORS}>
+            <Doctors />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="doctors/:doctorId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_DOCTOR}>
+            <DoctorDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="doctors/add"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
+            <AddDoctor />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="doctors/update/:doctorId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_DOCTOR}>
+            <UpdateDoctor />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Employees */}
-      <Route path="employees" element={<Employees />} />
-      <Route path="employees/:employeeId" element={<EmployeeDetails />} />
-      <Route path="employees/add" element={<AddEmployee />} />
-      <Route path="employees/update/:employeeId" element={<UpdateEmployee />} />
+      <Route
+        path="employees"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EMPLOYEES}>
+            <Employees />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="employees/:employeeId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_EMPLOYEE}>
+            <EmployeeDetails />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="employees/add"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.ADD_EMPLOYEE}>
+            <AddEmployee />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="employees/update/:employeeId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_EMPLOYEE}>
+            <UpdateEmployee />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Patients */}
-      <Route path="patients" element={<Patients />} />
-      <Route path="patients/:patientId" element={<PatientDetails />} />
-      <Route path="patients/add" element={<AddPatient />} />
-      <Route path="patients/update/:patientId" element={<UpdatePatient />} />
+      <Route
+        path="patients"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS}>
+            <Patients />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="patients/:patientId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_PATIENT}>
+            <PatientDetails />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="patients/add"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
+            <AddPatient />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="patients/update/:patientId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_PATIENT}>
+            <UpdatePatient />
+          </ProtectedRoute>
+        }
+      />
     </Route>
 
     {/* Errors */}

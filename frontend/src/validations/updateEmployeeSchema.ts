@@ -60,7 +60,7 @@ const updateEmployeeSchema = z.object({
         label: z.string(),
       })
     )
-    .min(1, "يجب اختيار صلاحية واحدة على الأقل"),
+    .optional(),
   image: z.union([
     z.undefined(),
     z
