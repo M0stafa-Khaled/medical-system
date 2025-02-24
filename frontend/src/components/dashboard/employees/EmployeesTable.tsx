@@ -1,29 +1,27 @@
-import { useSearch } from "@/hooks/useSearch";
 import DataTable from "@/components/ui/DataTable";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import EmployeesList from "./EmployeesList";
 import EmployeesTableHeader from "./EmployeesTableHeader";
 import { useGetAllEmployees } from "@/lib/react-query/employees";
 import EmployeesTableActions from "./EmployeesTableActions";
 import { useSearchParams } from "react-router-dom";
+import useDebounce from "@/hooks/useDebounce";
 
 const EmployeesTable = () => {
-  const token = cookieServices.getToken();
+  const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
+  const [searchTerm, setSearchTerm] = useState("");
+  const search = useDebounce(searchTerm, 500);
 
   const {
     data: employees,
     isLoading,
     isError,
-  } = useGetAllEmployees(token as string, page);
-
-  const { searchTerm, setSearchTerm, filteredItems } = useSearch(
-    employees?.data.items
-  );
+  } = useGetAllEmployees({ token, page, search });
 
   useEffect(() => {
     if (isError) {
@@ -42,7 +40,7 @@ const EmployeesTable = () => {
         />
       }
       header={<EmployeesTableHeader />}
-      list={<EmployeesList employees={filteredItems} />}
+      list={<EmployeesList employees={employees?.data.items || []} />}
       skeleton={
         <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
       }

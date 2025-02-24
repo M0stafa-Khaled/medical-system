@@ -5,10 +5,17 @@ import {
   IResponseClinics,
 } from "@/interfaces/clinic";
 
-export const getAllClinics: (
-  token: string
-) => Promise<IResponseClinics> = async (token) => {
+export const getAllClinics: ({
+  token,
+  search,
+}: {
+  token: string;
+  search?: string;
+}) => Promise<IResponseClinics> = async ({ token, search }) => {
   const { data } = await axiosInstanceAPI.get("/clinics", {
+    params: {
+      q: search,
+    },
     headers: {
       Authorization: `Bearer ${token}`,
     },

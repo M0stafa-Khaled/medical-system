@@ -8,11 +8,17 @@ import {
 export const getAllDoctors = async ({
   token,
   page = 1,
+  search = " ",
 }: {
   token: string;
   page?: number;
+  search: string;
 }): Promise<IResponseDoctors> => {
-  const { data } = await axiosInstanceAPI.get(`/doctors?page=${page}`, {
+  const { data } = await axiosInstanceAPI.get(`/doctors`, {
+    params: {
+      page,
+      q: search,
+    },
     headers: {
       Authorization: `Bearer ${token}`,
     },

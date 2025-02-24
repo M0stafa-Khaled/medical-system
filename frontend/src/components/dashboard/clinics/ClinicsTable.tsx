@@ -1,23 +1,23 @@
 import { useGetAllClinics } from "@/lib/react-query/clinics";
-import { useSearch } from "@/hooks/useSearch";
 import DataTable from "@/components/ui/DataTable";
 import ClinicsTableHeader from "./ClinicsTableHeader";
 import ClinicsTableActions from "./ClinicsTableActions";
 import ClinicsList from "./ClinicsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import useDebounce from "@/hooks/useDebounce";
 
 const ClinicsTable = () => {
-  const token = cookieServices.getToken();
-
+  const token = cookieServices.getToken()!;
+  const [searchTerm, setSearchTerm] = useState("");
+  const search = useDebounce(searchTerm, 500);
   const {
     data: clinics,
     isLoading,
     isError,
-  } = useGetAllClinics(token as string);
-  const { filteredItems, searchTerm, setSearchTerm } = useSearch(clinics?.data);
+  } = useGetAllClinics({ token, search });
 
   useEffect(() => {
     if (isError) {
@@ -36,7 +36,7 @@ const ClinicsTable = () => {
         />
       }
       header={<ClinicsTableHeader />}
-      list={<ClinicsList clinics={filteredItems} />}
+      list={<ClinicsList clinics={clinics?.data || []} />}
       skeleton={<TableSkeleton columns={3} rows={8} />}
     />
   );

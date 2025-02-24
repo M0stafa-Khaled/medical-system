@@ -31,7 +31,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   const navigate = useNavigate();
 
   const { mutateAsync: addDoctor, isPending: isLoadingAdd } = useAddDoctor();
-  const { data: clinicsData } = useGetAllClinics(token as string);
+  const { data: clinicsData } = useGetAllClinics({ token });
   const { mutateAsync: updateDoctor, isPending: isLoadingUpdate } =
     useUpdateDoctor();
 

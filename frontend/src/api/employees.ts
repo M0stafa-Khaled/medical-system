@@ -8,11 +8,17 @@ import {
 export const getAllEmployees = async ({
   token,
   page = 1,
+  search = "",
 }: {
   token: string;
   page?: number;
+  search?: string;
 }): Promise<IResponseEmployees> => {
-  const { data } = await axiosInstanceAPI.get(`/employees?page=${page}`, {
+  const { data } = await axiosInstanceAPI.get(`/employees`, {
+    params: {
+      page,
+      q: search,
+    },
     headers: {
       Authorization: `Bearer ${token}`,
     },

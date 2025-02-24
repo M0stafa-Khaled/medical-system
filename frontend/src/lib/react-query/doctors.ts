@@ -9,10 +9,19 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
 
-export const useGetAllDoctors = (token: string, page: number = 1) => {
+export const useGetAllDoctors = ({
+  token,
+  page,
+  search,
+}: {
+  token: string;
+  page: number;
+  search: string;
+}) => {
   return useQuery({
-    queryKey: [Query_Keys.GET_ALL_DOCTORS, page],
-    queryFn: () => getAllDoctors({ token, page }),
+    queryKey: [Query_Keys.GET_ALL_DOCTORS, page, search],
+    queryFn: () => getAllDoctors({ token, page, search }),
+    staleTime: 1000,
   });
 };
 
