@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { GoDot } from "react-icons/go";
 import { motion, AnimatePresence } from "framer-motion";
-import { linkVariants } from "@/animations/navbarAnimations";
+import { linkVariants, navItemsVariants } from "@/animations/navbarAnimations";
 
 export interface ILink {
   name: string;
@@ -46,13 +46,12 @@ const NavList = ({ links, sidebar }: IProps) => {
           <div className="flex items-center">
             {hasChildren ? (
               <motion.div
+                variants={navItemsVariants}
                 className={`select-none w-full px-4 cursor-pointer py-2 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleLinkExpansion(link.name);
                 }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
               >
                 <span className="flex-grow">{link.name}</span>
                 <motion.button
@@ -67,19 +66,21 @@ const NavList = ({ links, sidebar }: IProps) => {
                 </motion.button>
               </motion.div>
             ) : (
-              <NavLink
-                to={link.path || "#"}
-                className={`w-full mt-2 ${
-                  sidebar ? "" : "lg:w-fit lg:mt-0"
-                }  py-2 px-4 mt-2 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 ${
-                  activeLink === (link.path ? link.path.split("/")[2] : "")
-                    ? "bg-dark/20 dark:bg-dark"
-                    : "hover:bg-dark/10 dark:hover:bg-dark/50"
-                }`}
-              >
-                {isChildLink && <GoDot size={16} />}
-                <span className="flex-grow">{link.name}</span>
-              </NavLink>
+              <motion.div variants={navItemsVariants} className="w-full">
+                <NavLink
+                  to={link.path || "#"}
+                  className={`w-full ${
+                    sidebar ? "mt-2" : "mt-2 lg:mt-0"
+                  } py-2 px-4 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 ${
+                    activeLink === (link.path ? link.path.split("/")[2] : "")
+                      ? "bg-dark/20 dark:bg-dark"
+                      : "hover:bg-dark/10 dark:hover:bg-dark/50"
+                  }`}
+                >
+                  {isChildLink && <GoDot size={16} />}
+                  <span className="flex-grow">{link.name}</span>
+                </NavLink>
+              </motion.div>
             )}
           </div>
           <AnimatePresence>

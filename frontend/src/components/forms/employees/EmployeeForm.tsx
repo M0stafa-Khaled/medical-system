@@ -11,15 +11,17 @@ import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAddEmployee, useUpdateEmployee } from "@/lib/react-query/employees";
 import { useEffect, useState } from "react";
-import { useGetAllPermissions } from "@/lib/react-query/auth";
-import EmployeeFormField from "@/components/dashboard/employees/form/EmployeeFormField";
-import { PermissionsField } from "@/components/dashboard/employees/form/PermissionsField";
-import SubmitButton from "./SubmitButton";
+import { useCheckAuth, useGetAllPermissions } from "@/lib/react-query/auth";
+import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";
 import {
   FormItemVariants,
   formVariants,
 } from "@/animations/dashboardAnimations";
+import RenderFormFields from "../RenderFormFields";
+import { useDispatch } from "react-redux";
+import { setPermissions } from "@/app/features/permissions/permissionsSlice";
+import { logout } from "@/app/features/auth/authSlice";
 
 interface IProps {
   employee?: IEmployee;
@@ -28,7 +30,9 @@ interface IProps {
 }
 
 const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { mutateAsync: checkAuthUser } = useCheckAuth();
   const [showPermissions, setShowPermissions] = useState(
     employee?.user?.role === "employee" || !employee
   );
@@ -71,14 +75,37 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     },
   });
 
+  const checkAuth = async () => {
+    const { auth, email_verified, status, permissions } = await checkAuthUser(
+      token as string
+    );
+    if (!auth) {
+      dispatch(logout());
+      navigate("/login");
+      return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+    }
+
+    // Set Permissions in state
+    dispatch(setPermissions(permissions));
+
+    if (!status) {
+      navigate("/not-active");
+      return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
+    }
+
+    if (!email_verified) {
+      navigate("/verify-email");
+      return toast.warn("يرجى تاكيد البريد الالكتروني");
+    }
+  };
+
   useEffect(() => {
-    if (!employee) return;
     const subscription = form.watch((value, { name }) => {
       if (name === "role") {
         setShowPermissions(value.role?.value === "employee");
       }
     });
-
+    if (!employee) return () => subscription.unsubscribe();
     form.reset({
       name: employee?.name || "",
       personal_id: employee?.personal_id || "",
@@ -99,7 +126,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       },
       permissions:
         employee?.permissions?.map((p) => ({
-          value: p.id,
+          value: p.id.toString(),
           label: p.name,
         })) || [],
     });
@@ -136,6 +163,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           token,
         });
         if (!status) return toast.error(message);
+        checkAuth();
         toast.success("تم تحديث بيانات الموظف بنجاح");
       }
       navigate(-1);
@@ -168,10 +196,17 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       >
         {showPermissions && (
           <motion.div variants={formVariants}>
-            <PermissionsField
-              control={form.control}
+            <RenderFormFields
+              schema={employeeSchema}
+              form={form}
+              input={{
+                name: "permissions",
+                label: "الصلاحيات",
+                type: "multiselect",
+              }}
+              options={permissionsOptions}
+              handleFileChange={handleFileChange}
               isOptionalField={isOptionalField}
-              permissionsOptions={permissionsOptions || []}
             />
           </motion.div>
         )}
@@ -185,12 +220,12 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
               custom={index}
               variants={FormItemVariants}
             >
-              <EmployeeFormField
+              <RenderFormFields
                 input={input}
                 form={form}
                 handleFileChange={handleFileChange}
                 isOptionalField={isOptionalField}
-                employeeSchema={employeeSchema}
+                schema={employeeSchema}
               />
             </motion.div>
           ))}

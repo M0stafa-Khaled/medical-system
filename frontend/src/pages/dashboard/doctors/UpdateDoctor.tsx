@@ -1,4 +1,4 @@
-import DoctorForm from "@/components/forms/DoctorForm";
+import DoctorForm from "@/components/forms/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetDoctorById } from "@/lib/react-query/doctors";
 import cookieServices from "@/utils/cookieServices";

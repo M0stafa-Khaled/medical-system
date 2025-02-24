@@ -60,7 +60,6 @@ const VerifyEmail = () => {
         navigate("/login");
         return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
       }
-
       if (email_verified) return navigate("/dashboard");
     })();
     return;
@@ -81,6 +80,7 @@ const VerifyEmail = () => {
       });
       if (!status) return toast.error(message);
       toast.success("تم تأكيد البريد الإلكتروني بنجاح");
+      window.location.reload();
       navigate("/");
     } catch (_error) {
       toast.error("حدث خطأ أثناء تأكيد البريد الإلكتروني");

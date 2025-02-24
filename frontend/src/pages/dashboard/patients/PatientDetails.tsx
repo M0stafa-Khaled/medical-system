@@ -13,8 +13,13 @@ import { useGetPatientById } from "@/lib/react-query/patients";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
 import DeletePatientButton from "@/components/dashboard/patients/DeletePatientModalButton";
 import InfoField from "@/components/dashboard/InfoField";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const PatientDetails = () => {
+  const canEditPatient = useHasPermission(PERMISSIONS.EDIT_PATIENT);
+  const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
+
   const navigate = useNavigate();
   const token = cookieServices.getToken();
   const { patientId } = useParams();
@@ -61,6 +66,7 @@ const PatientDetails = () => {
     gender,
     personal_image,
     another_name,
+    info_status,
     description,
   } = patient?.data || {};
 
@@ -73,15 +79,22 @@ const PatientDetails = () => {
             role={user?.role.toLowerCase() as string}
             actionButtons={
               <>
-                <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                  <Link
-                    to={`/dashboard/patients/update/${id}`}
-                    className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                  >
-                    <FaPencil size={18} />
-                  </Link>
-                </Button>
-                <DeletePatientButton id={id as number} name={name as string} />
+                {canEditPatient && (
+                  <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                    <Link
+                      to={`/dashboard/patients/update/${id}`}
+                      className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                    >
+                      <FaPencil size={18} />
+                    </Link>
+                  </Button>
+                )}
+                {canDeletePatient && (
+                  <DeletePatientButton
+                    id={id as number}
+                    name={name as string}
+                  />
+                )}
               </>
             }
           />
@@ -96,8 +109,9 @@ const PatientDetails = () => {
               label="حالة الحساب"
               value={status ? "مفعل" : "غير مفعل"}
             />
-            <InfoField label="اسم آخر" value={another_name!} />
-            <InfoField label="الوصف" value={description!} />
+            <InfoField label="ملاحظات حالة الحساب" value={info_status!} />
+            <InfoField label="اسم احد الاقارب" value={another_name!} />
+            <InfoField label="ملاحظات" value={description!} />
             <InfoField label="رقم الهوية" value={personal_id!} />
             <InfoField label="رقم الهاتف الاول" value={first_phone!} />
             <InfoField

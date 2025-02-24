@@ -46,16 +46,13 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
         initial="hidden"
         animate="visible"
         variants={navItemsVariants}
-        className={`flex px-0 container bg-foreground flex-wrap items-center justify-between py-1 border border-muted rounded-2xl`}
+        className={`flex bg-foreground flex-wrap items-center justify-between py-1 border border-muted rounded-xl`}
       >
         <div className="flex items-center justify-between w-full px-3">
-          <motion.div
-            variants={navItemsVariants}
-            className={`hidden lg:flex gap-3 items-center w-full`}
-          >
+          <div className={`hidden lg:flex gap-3 items-center w-full`}>
             <AuthButtons />
             <NavList links={links} />
-          </motion.div>
+          </div>
           <button
             className="flex justify-center items-center lg:hidden"
             onClick={() => setOpenNav(!openNav)}

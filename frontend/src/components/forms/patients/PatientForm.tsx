@@ -11,8 +11,8 @@ import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAddPatient, useUpdatePatient } from "@/lib/react-query/patients";
 import { useEffect } from "react";
-import PatientFormField from "../dashboard/patients/form/PatientFormField";
-import SubmitButton from "./SubmitButton";
+import RenderFormFields from "../RenderFormFields";
+import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";
 import {
   FormItemVariants,
@@ -43,6 +43,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       second_phone: patient?.second_phone || "",
       email: patient?.user?.email || "",
       description: patient?.description || "",
+      info_status: patient?.info_status || "",
       gender: {
         value: patient?.gender?.toLowerCase() || "male",
         label: patient?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
@@ -62,7 +63,8 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       first_phone: patient?.first_phone,
       second_phone: patient?.second_phone || "",
       email: patient?.user?.email,
-      description: patient?.description,
+      description: patient?.description || "",
+      info_status: patient?.info_status || "",
       gender: {
         value: patient?.gender?.toLowerCase(),
         label: patient?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
@@ -74,7 +76,13 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   const { handleFileChange } = useUploadImgHandler(form);
 
   const isOptionalField = (fieldName: string) => {
-    const optionalFields = ["another_name", "second_phone", "personal_image"];
+    const optionalFields = [
+      "another_name",
+      "second_phone",
+      "personal_image",
+      "description",
+      "info_status",
+    ];
     const updateOptionalFields = ["password", "email"];
 
     return (
@@ -82,6 +90,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       (action === "update" && updateOptionalFields.includes(fieldName))
     );
   };
+  console.log(form.formState.errors);
 
   const onSubmit = async (formData: z.infer<typeof patientSchema>) => {
     try {
@@ -140,12 +149,12 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
               variants={FormItemVariants}
               custom={index}
             >
-              <PatientFormField
+              <RenderFormFields
                 form={form}
                 handleFileChange={handleFileChange}
                 input={input}
                 isOptionalField={isOptionalField}
-                patientSchema={patientSchema}
+                schema={patientSchema}
               />
             </motion.div>
           ))}

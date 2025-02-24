@@ -62,11 +62,7 @@ export const DOCTOR_FORM_INPUTS: IFormInput[] = [
     placeholder: "ادخل كلمة المرور",
     type: "password",
   },
-  {
-    name: "status",
-    label: "حالة الحساب",
-    type: "switch",
-  },
+
   {
     name: "clinics",
     label: "العيادة",
@@ -89,6 +85,11 @@ export const DOCTOR_FORM_INPUTS: IFormInput[] = [
     type: "file",
     accept: "image/*",
   },
+  {
+    name: "status",
+    label: "حالة الحساب",
+    type: "switch",
+  },
 ];
 
 export const DOCTOR_ACTION_INPUTS: IFormInput[] = [
@@ -107,6 +108,11 @@ export const DOCTOR_ACTION_INPUTS: IFormInput[] = [
 ];
 
 export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
+  {
+    name: "role",
+    label: "الدور",
+    type: "select",
+  },
   {
     name: "name",
     label: "اسم الموظف",
@@ -156,19 +162,8 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     type: "text",
   },
   {
-    name: "status",
-    label: "حالة الحساب",
-    type: "switch",
-  },
-  {
     name: "image",
     label: "صورة شخصية",
-    type: "file",
-    accept: "image/*",
-  },
-  {
-    name: "personal_image",
-    label: "صورة الهوية",
     type: "file",
     accept: "image/*",
   },
@@ -178,9 +173,15 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     type: "select",
   },
   {
-    name: "role",
-    label: "الدور",
-    type: "select",
+    name: "personal_image",
+    label: "صورة الهوية",
+    type: "file",
+    accept: "image/*",
+  },
+  {
+    name: "status",
+    label: "حالة الحساب",
+    type: "switch",
   },
 ];
 
@@ -234,11 +235,6 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
     type: "text",
   },
   {
-    name: "status",
-    label: "حالة الحساب",
-    type: "switch",
-  },
-  {
     name: "gender",
     label: "النوع",
     type: "select",
@@ -248,6 +244,17 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
     label: "صورة الهوية",
     type: "file",
     accept: "image/*",
+  },
+  {
+    name: "status",
+    label: "حالة الحساب",
+    type: "switch",
+  },
+  {
+    name: "info_status",
+    label: "ملاحظات حالة الحساب",
+    type: "text",
+    placeholder: "ادخل ملاحظات",
   },
 ];
 

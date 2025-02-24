@@ -13,8 +13,12 @@ import ProfileHeader from "@/components/dashboard/ProfileHeader";
 import InfoField from "@/components/dashboard/InfoField";
 import { FaPencil } from "react-icons/fa6";
 import DeleteEmployeeButton from "@/components/dashboard/employees/DeleteEmployeeModalButton";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const EmployeeDetails = () => {
+  const canEditEmployee = useHasPermission(PERMISSIONS.EDIT_EMPLOYEE);
+  const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
   const navigate = useNavigate();
   const token = cookieServices.getToken();
   const { employeeId } = useParams();
@@ -75,15 +79,19 @@ const EmployeeDetails = () => {
             role={user?.role.toLowerCase() as string}
             actionButtons={
               <>
-                <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                  <Link
-                    to={`/dashboard/employees/update/${id}`}
-                    className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                  >
-                    <FaPencil size={18} />
-                  </Link>
-                </Button>
-                <DeleteEmployeeButton id={id!} name={name!} />
+                {canEditEmployee && (
+                  <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                    <Link
+                      to={`/dashboard/employees/update/${id}`}
+                      className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                    >
+                      <FaPencil size={18} />
+                    </Link>
+                  </Button>
+                )}
+                {canDeleteEmployee && (
+                  <DeleteEmployeeButton id={id!} name={name!} />
+                )}
               </>
             }
           />

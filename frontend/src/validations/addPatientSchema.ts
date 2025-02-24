@@ -6,7 +6,7 @@ const addPatientSchema = z.object({
     .string({ message: "الاسم مطلوب" })
     .min(3, "الاسم يجب أن يكون 3 أحرف على الأقل")
     .trim(),
-  anothet_name: z.string({ message: "الاسم مطلوب" }).trim().optional(),
+  another_name: z.string({ message: "الاسم مطلوب" }).trim().optional(),
   personal_id: z
     .string({ message: "رقم الهوية مطلوب" })
     .min(1, "رقم الهوية مطلوب")
@@ -28,7 +28,8 @@ const addPatientSchema = z.object({
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
     .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
-  description: z.string({ message: "الوصف مطلوب" }).optional(),
+  description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
+  info_status: z.string({ message: "الملاحظات مطلوبة" }).optional(),
   gender: z.object(
     {
       value: z.string({ message: "النوع مطلوب" }),

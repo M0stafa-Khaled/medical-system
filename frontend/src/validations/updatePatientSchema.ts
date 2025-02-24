@@ -23,7 +23,8 @@ const updatePatientSchema = z.object({
       message: "يجب ادخال رقم هاتف صالح",
     }),
   status: z.boolean().default(true),
-  description: z.string({ message: "الوصف مطلوب" }).optional(),
+  description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
+  info_status: z.string({ message: "الملاحظات مطلوبة" }).optional(),
   email: z
     .string()
     .trim()

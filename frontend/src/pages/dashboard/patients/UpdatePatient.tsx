@@ -1,8 +1,8 @@
-import PatientForm from "@/components/forms/PatientForm";
+import PatientForm from "@/components/forms/patients/PatientForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetPatientById } from "@/lib/react-query/patients";
 import cookieServices from "@/utils/cookieServices";
-import updateEmployeeSchema from "@/validations/updateEmployeeSchema";
+import updatePatientSchema from "@/validations/updatePatientSchema";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -54,7 +54,7 @@ const UpdatePatient = () => {
         <PatientForm
           action={"update"}
           patient={patient?.data}
-          patientSchema={updateEmployeeSchema}
+          patientSchema={updatePatientSchema}
         />
       </CardContent>
     </Card>

@@ -11,6 +11,7 @@ export interface IPatient {
   status: true;
   gender: string;
   description: string;
+  info_status: string;
   created_at: string;
   user: {
     id: number;
@@ -32,8 +33,9 @@ export interface IAddPatient {
     value: "male" | "female";
   };
   status: boolean;
+  info_status?: string | null;
   personal_image?: File | undefined;
-  description: string;
+  description?: string | null;
 }
 
 export interface IResponsePatients {

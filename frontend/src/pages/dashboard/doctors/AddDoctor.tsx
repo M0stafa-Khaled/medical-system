@@ -1,4 +1,4 @@
-import DoctorForm from "@/components/forms/DoctorForm";
+import DoctorForm from "@/components/forms/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";

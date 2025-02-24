@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://onwsa.shop",
+        target: "https://egprog.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),
       },

@@ -12,13 +12,13 @@ import { useAddDoctor, useUpdateDoctor } from "@/lib/react-query/doctors";
 import { useNavigate } from "react-router-dom";
 import { useGetAllClinics } from "@/lib/react-query/clinics";
 import { useEffect } from "react";
-import DoctorFormField from "../dashboard/doctors/form/DoctorFormField";
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";
 import {
   FormItemVariants,
   formVariants,
 } from "@/animations/dashboardAnimations";
+import RenderFormFields from "../RenderFormFields";
 
 interface IProps {
   doctor?: IDoctor;
@@ -137,6 +137,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       }
     }
   };
+  console.log(form.formState.errors);
 
   return (
     <Form {...form}>
@@ -158,13 +159,13 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
               variants={FormItemVariants}
               custom={index}
             >
-              <DoctorFormField
+              <RenderFormFields
                 input={input}
                 form={form}
                 handleFileChange={handleFileChange}
                 isOptionalField={isOptionalField}
-                doctorSchema={doctorSchema}
-                clinicsOptions={clinicsOptions || []}
+                schema={doctorSchema}
+                options={clinicsOptions}
               />
             </motion.div>
           ))}
