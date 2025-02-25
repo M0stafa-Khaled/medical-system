@@ -1,4 +1,4 @@
-import { IPaginationLink, IPaginationMeta } from ".";
+import {  IPaginationMeta } from ".";
 import { IClinic } from "./clinic";
 
 export interface IDoctor {
@@ -29,7 +29,6 @@ export interface IResponseDoctors {
   message: string | null;
   data: {
     items: IDoctor[];
-    links: IPaginationLink[];
     meta: IPaginationMeta;
   };
 }

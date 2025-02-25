@@ -1,7 +1,7 @@
 import { Table, TableBody } from "@/components/ui/table";
 import { ReactNode } from "react";
 import DataTablePagination from "./DataTablePagination";
-import { IPaginationLink } from "@/interfaces";
+import { IPaginationMeta } from "@/interfaces";
 
 interface DataTableProps {
   isLoading: boolean;
@@ -10,7 +10,7 @@ interface DataTableProps {
   list: ReactNode;
   skeleton: ReactNode;
   pagination?: {
-    links: IPaginationLink[];
+    meta: IPaginationMeta;
   };
 }
 
@@ -22,7 +22,10 @@ const DataTable = ({
   skeleton,
   pagination,
 }: DataTableProps) => {
-  const shouldShowPagination = pagination && pagination.links.length > 3;
+  const shouldShowPagination = pagination && pagination.meta.last_page > 1;
+  const currentPage = pagination
+    ? Math.ceil(pagination.meta.from / pagination.meta.per_page)
+    : 1;
 
   return (
     <>
@@ -37,7 +40,10 @@ const DataTable = ({
             {header}
           </Table>
           {shouldShowPagination && (
-            <DataTablePagination links={pagination.links} />
+            <DataTablePagination
+              currentPage={currentPage}
+              totalPages={pagination.meta.last_page}
+            />
           )}
         </>
       )}

@@ -1,4 +1,4 @@
-import { IPaginationLink, IPaginationMeta } from ".";
+import { IPaginationMeta } from ".";
 
 export interface IPatient {
   id: number;
@@ -43,7 +43,6 @@ export interface IResponsePatients {
   message: string | null;
   data: {
     items: IPatient[];
-    links: IPaginationLink[];
     meta: IPaginationMeta;
   };
 }

@@ -26,7 +26,6 @@ export default {
         danger: "hsl(var(--danger))",
         muted: "hsl(var(--muted))",
         white: "hsl(var(--white))",
-
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

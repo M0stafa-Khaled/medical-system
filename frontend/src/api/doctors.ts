@@ -16,8 +16,7 @@ export const getAllDoctors = async ({
 }): Promise<IResponseDoctors> => {
   const { data } = await axiosInstanceAPI.get(`/doctors`, {
     params: {
-      page,
-      q: search,
+      ...(search ? { q: search } : { page, q: search }),
     },
     headers: {
       Authorization: `Bearer ${token}`,

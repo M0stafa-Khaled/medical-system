@@ -46,7 +46,7 @@ const EmployeesTable = () => {
       }
       pagination={
         employees?.data && {
-          links: employees.data.links,
+          meta: employees.data.meta,
         }
       }
     />

@@ -22,7 +22,6 @@ import RenderFormFields from "../RenderFormFields";
 import { useDispatch } from "react-redux";
 import { setPermissions } from "@/app/features/permissions/permissionsSlice";
 import { logout } from "@/app/features/auth/authSlice";
-
 interface IProps {
   employee?: IEmployee;
   action: "add" | "update";
@@ -171,6 +170,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
+        message: string;
       }>;
       if (errorObj?.response?.data.errors) {
         Object.keys(errorObj.response.data.errors).forEach((key) => {
@@ -179,6 +179,11 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
               autoClose: 5000,
             })
           );
+        });
+      }
+      if (errorObj?.response?.data.message) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
         });
       }
     }

@@ -7,11 +7,11 @@ interface PaginationButtonProps
   disabled?: boolean;
 }
 
-export function CustomPaginationPrevious({
+export const CustomPaginationPrevious = ({
   className,
   disabled,
   ...props
-}: PaginationButtonProps) {
+}: PaginationButtonProps) => {
   return (
     <button
       className={cn(
@@ -26,13 +26,13 @@ export function CustomPaginationPrevious({
       <span>السابق</span>
     </button>
   );
-}
+};
 
-export function CustomPaginationNext({
+export const CustomPaginationNext = ({
   className,
   disabled,
   ...props
-}: PaginationButtonProps) {
+}: PaginationButtonProps) => {
   return (
     <button
       className={cn(
@@ -47,4 +47,4 @@ export function CustomPaginationNext({
       <ChevronRight className="h-4 w-4" />
     </button>
   );
-}
+};

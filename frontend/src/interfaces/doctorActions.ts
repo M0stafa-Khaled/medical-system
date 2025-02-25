@@ -1,4 +1,4 @@
-import { IPaginationLink, IPaginationMeta } from "./";
+import { IPaginationMeta } from "./";
 
 export interface IDoctorAction {
   id: number;
@@ -29,7 +29,6 @@ export interface IResponseActions {
   message: null;
   data: {
     items: IDoctorAction[];
-    links: IPaginationLink[];
     meta: IPaginationMeta;
   };
 }

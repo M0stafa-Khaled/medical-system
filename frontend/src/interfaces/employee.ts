@@ -1,4 +1,4 @@
-import { IPaginationLink, IPaginationMeta } from ".";
+import { IPaginationMeta } from ".";
 import { IPermission } from "./auth";
 
 export interface IEmployee {
@@ -51,7 +51,6 @@ export interface IResponseEmployees {
   message: string | null;
   data: {
     items: IEmployee[];
-    links: IPaginationLink[];
     meta: IPaginationMeta;
   };
 }

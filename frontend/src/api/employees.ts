@@ -16,8 +16,7 @@ export const getAllEmployees = async ({
 }): Promise<IResponseEmployees> => {
   const { data } = await axiosInstanceAPI.get(`/employees`, {
     params: {
-      page,
-      q: search,
+      ...(search ? { q: search } : { page, q: search }),
     },
     headers: {
       Authorization: `Bearer ${token}`,

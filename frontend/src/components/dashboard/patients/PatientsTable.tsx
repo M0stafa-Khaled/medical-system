@@ -45,7 +45,7 @@ const PatientsTable = () => {
       }
       pagination={
         patients?.data && {
-          links: patients.data.links,
+          meta: patients.data.meta,
         }
       }
     />
