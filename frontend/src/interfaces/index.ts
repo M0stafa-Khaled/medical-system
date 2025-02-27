@@ -15,3 +15,10 @@ export interface IPaginationMeta {
   to: number;
   total: number;
 }
+
+// Get interface
+export interface IGetTokenPageSearch {
+  token: string;
+  page?: number;
+  search?: string;
+}

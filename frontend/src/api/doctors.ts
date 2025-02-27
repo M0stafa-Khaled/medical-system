@@ -1,4 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
+import { IGetTokenPageSearch } from "@/interfaces";
 import {
   IAddDoctor,
   IResponseDoctor,
@@ -9,11 +10,7 @@ export const getAllDoctors = async ({
   token,
   page = 1,
   search = " ",
-}: {
-  token: string;
-  page?: number;
-  search: string;
-}): Promise<IResponseDoctors> => {
+}: IGetTokenPageSearch): Promise<IResponseDoctors> => {
   const { data } = await axiosInstanceAPI.get(`/doctors`, {
     params: {
       ...(search ? { q: search } : { page, q: search }),

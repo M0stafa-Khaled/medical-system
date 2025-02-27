@@ -1,4 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
+import { IGetTokenPageSearch } from "@/interfaces";
 import {
   ICreateClinic,
   ICreateClinicResponse,
@@ -8,10 +9,10 @@ import {
 export const getAllClinics: ({
   token,
   search,
-}: {
-  token: string;
-  search?: string;
-}) => Promise<IResponseClinics> = async ({ token, search }) => {
+}: IGetTokenPageSearch) => Promise<IResponseClinics> = async ({
+  token,
+  search,
+}) => {
   const { data } = await axiosInstanceAPI.get("/clinics", {
     params: {
       q: search,
