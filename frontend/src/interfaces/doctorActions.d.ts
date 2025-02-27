@@ -1,4 +1,4 @@
-import { IPaginationMeta } from "./";
+import { IPaginationMeta } from ".";
 
 export interface IDoctorAction {
   id: number;
