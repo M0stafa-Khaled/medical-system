@@ -31,9 +31,16 @@ const DashboardLayout = () => {
     update: "تعديل",
     employees: "الموظفين",
     patients: "المرضى",
+    medications: "الأدوية",
   };
 
-  const NAV_LINKS = [
+  interface INavLink {
+    name: string;
+    path: string;
+    children?: INavLink[];
+  }
+
+  const NAV_LINKS: INavLink[] = [
     {
       name: routeNames.dashboard,
       path: "/dashboard",
@@ -60,6 +67,7 @@ const DashboardLayout = () => {
           },
         ]
       : []),
+    { name: "الأدوية", path: "/dashboard/medications" },
   ];
 
   useEffect(() => {

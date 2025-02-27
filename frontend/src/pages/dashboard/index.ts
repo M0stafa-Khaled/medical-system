@@ -11,3 +11,4 @@ export { default as Patients } from "./patients/Patients";
 export { default as PatientDetails } from "./patients/PatientDetails";
 export { default as AddPatient } from "./patients/AddPatient";
 export { default as UpdatePatient } from "./patients/UpdatePatient";
+export { default as Medications } from "./medications/Medications";

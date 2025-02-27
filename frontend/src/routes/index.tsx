@@ -22,6 +22,7 @@ import {
   UpdatePatient,
   EmployeeDetails,
   PatientDetails,
+  Medications,
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -149,7 +150,6 @@ const routes = createRoutesFromElements(
           </ProtectedRoute>
         }
       />
-
       <Route
         path="patients/add"
         element={
@@ -158,7 +158,6 @@ const routes = createRoutesFromElements(
           </ProtectedRoute>
         }
       />
-
       <Route
         path="patients/update/:patientId"
         element={
@@ -167,6 +166,9 @@ const routes = createRoutesFromElements(
           </ProtectedRoute>
         }
       />
+
+      {/* pharmaceutical */}
+      <Route path="medications" element={<Medications />} />
     </Route>
 
     {/* Errors */}
