@@ -70,7 +70,7 @@ const NavList = ({ links, sidebar }: IProps) => {
                 <NavLink
                   to={link.path || "#"}
                   className={`w-full ${
-                    sidebar ? "mt-2" : "mt-2 lg:mt-0"
+                    isChildLink ? "mt-2" : ""
                   } py-2 px-4 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 ${
                     activeLink === (link.path ? link.path.split("/")[2] : "")
                       ? "bg-dark/20 dark:bg-dark"
