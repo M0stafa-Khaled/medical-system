@@ -9,12 +9,25 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    sourcemap: false,
+  },
   server: {
     proxy: {
       "/api": {
         target: "https://egprog.com",
         changeOrigin: true,
+        secure: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq, req) => {
+            if (
+              !req.headers.referer ||
+              !req.headers.referer.includes("http://localhost:5173")
+            )
+              proxyReq.destroy();
+          });
+        },
       },
     },
   },
