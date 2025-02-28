@@ -14,6 +14,12 @@ export interface IEmployee {
   gender: string;
   job: string;
   salary: string;
+  treasury?: {
+    id: number;
+    name: string;
+    status: boolean;
+    expenses_total: number;
+  };
   user: {
     id: number;
     email: string;
@@ -31,6 +37,9 @@ export interface IAddEmployee {
   role: {
     value: "admin" | "employee";
   };
+  treasury_id?: {
+    value: string;
+  };
   gender: {
     value: "male" | "female";
   };
@@ -46,7 +55,7 @@ export interface IAddEmployee {
   }[];
 }
 
-export interface IResponseEmployees {
+export interface IEmployeesRes {
   status: boolean;
   message: string | null;
   data: {
@@ -55,7 +64,7 @@ export interface IResponseEmployees {
   };
 }
 
-export interface IResponseEmployee {
+export interface IEmployeeRes {
   status: boolean;
   message: string;
   data: IEmployee;

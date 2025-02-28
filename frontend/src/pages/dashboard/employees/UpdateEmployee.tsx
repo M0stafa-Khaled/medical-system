@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const UpdateEmployee = () => {
   const navigate = useNavigate();
-  const token = cookieServices.getToken();
+  const token = cookieServices.getToken()!;
 
   const { employeeId } = useParams();
   const {
@@ -19,7 +19,7 @@ const UpdateEmployee = () => {
     isError,
   } = useGetEmployeeById({
     id: employeeId as string,
-    token: token as string,
+    token,
   });
 
   useEffect(() => {

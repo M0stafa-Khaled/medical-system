@@ -1,6 +1,6 @@
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { IMedication } from "@/interfaces/medications";
+import { IMedication } from "@/interfaces/medication";
 import { motion } from "framer-motion";
 
 interface IProps {
@@ -12,7 +12,7 @@ const MedicationsList = ({ medications }: IProps) => {
     return (
       <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
         <TableCell
-          colSpan={7}
+          colSpan={2}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
           لا يوجد أدوية

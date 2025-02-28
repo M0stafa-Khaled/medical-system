@@ -11,4 +11,5 @@ export const useGetALlMedications = ({
   useQuery({
     queryKey: [Query_Keys.GET_ALL_MEDICATIONS, page, search],
     queryFn: () => getAllMedications({ token, page, search }),
+    staleTime: 30 * 1000,
   });

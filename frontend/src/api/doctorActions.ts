@@ -1,4 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
+import { IDeleteRes } from "@/interfaces";
 import {
   IActionProps,
   IResponseAction,
@@ -10,7 +11,7 @@ interface IGetAction {
   token: string;
 }
 
-export const getDoctorActionsById: ({
+export const getDoctorActions: ({
   doctorId,
   token,
 }: IGetAction) => Promise<IResponseActions> = async ({ doctorId, token }) => {
@@ -64,10 +65,7 @@ export const deleteDoctorAction: ({
 }: {
   id: string;
   token: string;
-}) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ id, token }) => {
+}) => Promise<IDeleteRes> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.delete(`/actions/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

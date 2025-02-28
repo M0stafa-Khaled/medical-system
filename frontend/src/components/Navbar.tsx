@@ -84,7 +84,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
           {/* Toggle Mode */}
           <motion.div
             variants={navItemsVariants}
-            className="flex justify-center items-center gap-4"
+            className="flex justify-center items-center gap-4 p-1"
           >
             <motion.div
               variants={navItemsVariants}
@@ -123,11 +123,11 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
               animate="visible"
               exit="hidden"
               variants={navVariants}
-              className="w-full overflow-hidden"
+              className="w-full overflow-hidden py-3"
             >
               <motion.div
                 variants={navItemsVariants}
-                className="w-full mx-auto max-h-[80vh] overflow-y-scroll px-3 py-2"
+                className="w-full mx-auto max-h-[80vh] overflow-y-scroll custom-scrollbar px-3 py-2"
               >
                 <NavList links={links} />
               </motion.div>

@@ -26,7 +26,7 @@ const Sidebar = ({ links }: IProps) => {
           {/* Logo */}
           <motion.div
             variants={logoVariants}
-            className="flex justify-center items-center"
+            className="flex justify-center items-center p-3"
           >
             <motion.img
               src={"/logo.svg"}

@@ -15,13 +15,14 @@ import { useCheckAuth, useGetAllPermissions } from "@/lib/react-query/auth";
 import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";
 import {
-  FormItemVariants,
-  formVariants,
+  itemVariants,
+  containerVariants,
 } from "@/animations/dashboardAnimations";
 import RenderFormFields from "../RenderFormFields";
 import { useDispatch } from "react-redux";
 import { setPermissions } from "@/app/features/permissions/permissionsSlice";
 import { logout } from "@/app/features/auth/authSlice";
+import { useGetAllTreasuries } from "@/lib/react-query/treasuries";
 interface IProps {
   employee?: IEmployee;
   action: "add" | "update";
@@ -35,13 +36,19 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   const [showPermissions, setShowPermissions] = useState(
     employee?.user?.role === "employee" || !employee
   );
-  const token = cookieServices.getToken() || "";
+  const token = cookieServices.getToken()!;
 
   const { data: permissions } = useGetAllPermissions(token!);
   const { mutateAsync: addEmployee, isPending: isLoadingAdd } =
     useAddEmployee();
   const { mutateAsync: updateEmployee, isPending: isLoadingUpdate } =
     useUpdateEmployee();
+  const { data: treasuries } = useGetAllTreasuries({ token });
+
+  const treasuriesOptions = treasuries?.data.map((treasury) => ({
+    value: treasury?.id.toString(),
+    label: treasury?.name,
+  }));
 
   const permissionsOptions = permissions?.data.map((permission) => ({
     value: permission.id.toString(),
@@ -61,6 +68,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       gender: {
         value: "male",
         label: "ذكر",
+      },
+      treasury_id: {
+        label: "",
+        value: "",
       },
       password: "",
       status: true,
@@ -119,6 +130,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       },
       password: "",
       status: Boolean(employee?.status),
+      treasury_id: {
+        value: employee?.treasury?.id.toString() || "",
+        label: employee?.treasury?.name || "",
+      },
       role: {
         value: employee?.user?.role || "employee",
         label: employee?.user?.role === "admin" ? "مسؤول" : "موظف",
@@ -131,12 +146,17 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     });
 
     return () => subscription.unsubscribe();
-  }, [form, employee]);
+  }, [form, employee, treasuries]);
 
   const { handleFileChange } = useUploadImgHandler(form);
 
   const isOptionalField = (fieldName: string) => {
-    const optionalFields = ["second_phone", "image", "personal_image"];
+    const optionalFields = [
+      "second_phone",
+      "image",
+      "personal_image",
+      "treasury_id",
+    ];
     const updateOptionalFields = ["password", "email", "permissions"];
 
     return (
@@ -165,6 +185,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         checkAuth();
         toast.success("تم تحديث بيانات الموظف بنجاح");
       }
+
       navigate(-1);
       form.reset();
     } catch (error) {
@@ -197,10 +218,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         className="space-y-6"
         initial="hidden"
         animate="visible"
-        variants={formVariants}
+        variants={containerVariants}
       >
         {showPermissions && (
-          <motion.div variants={formVariants}>
+          <motion.div variants={containerVariants}>
             <RenderFormFields
               schema={employeeSchema}
               form={form}
@@ -217,25 +238,22 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         )}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
-          variants={formVariants}
+          variants={containerVariants}
         >
           {EMPLOYEE_FORM_INPUTS.map((input, index) => (
-            <motion.div
-              key={input.name}
-              custom={index}
-              variants={FormItemVariants}
-            >
+            <motion.div key={input.name} custom={index} variants={itemVariants}>
               <RenderFormFields
                 input={input}
                 form={form}
                 handleFileChange={handleFileChange}
                 isOptionalField={isOptionalField}
                 schema={employeeSchema}
+                treasuries={treasuriesOptions}
               />
             </motion.div>
           ))}
         </motion.div>
-        <motion.div variants={formVariants}>
+        <motion.div variants={containerVariants}>
           <SubmitButton
             action={action}
             isLoadingAdd={isLoadingAdd}

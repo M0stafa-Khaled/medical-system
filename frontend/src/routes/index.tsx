@@ -23,6 +23,9 @@ import {
   EmployeeDetails,
   PatientDetails,
   Medications,
+  Treasuries,
+  Expenses,
+  ExpensesCategories,
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -169,6 +172,33 @@ const routes = createRoutesFromElements(
 
       {/* pharmaceutical */}
       <Route path="medications" element={<Medications />} />
+
+      {/* Expenses */}
+      <Route
+        path="expenses"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
+            <Expenses />
+          </ProtectedRoute>
+        }
+      />
+      {/* Expenses Categories */}
+      <Route
+        path="expenses-categories"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_SECTIONS}>
+            <ExpensesCategories />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="treasuries"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
+            <Treasuries />
+          </ProtectedRoute>
+        }
+      />
     </Route>
 
     {/* Errors */}

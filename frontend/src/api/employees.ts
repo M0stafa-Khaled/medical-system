@@ -1,16 +1,16 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IGetTokenPageSearch } from "@/interfaces";
+import { IDeleteRes, IGetTokenPageSearch } from "@/interfaces";
 import {
   IAddEmployee,
-  IResponseEmployee,
-  IResponseEmployees,
+  IEmployeeRes,
+  IEmployeesRes,
 } from "@/interfaces/employee";
 
 export const getAllEmployees = async ({
   token,
   page = 1,
   search = "",
-}: IGetTokenPageSearch): Promise<IResponseEmployees> => {
+}: IGetTokenPageSearch): Promise<IEmployeesRes> => {
   const { data } = await axiosInstanceAPI.get(`/employees`, {
     params: {
       ...(search ? { q: search } : { page, q: search }),
@@ -28,7 +28,7 @@ export const getEmployeeById: ({
 }: {
   id: string;
   token: string;
-}) => Promise<IResponseEmployee> = async ({ id, token }) => {
+}) => Promise<IEmployeeRes> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.get(`/employees/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export const deleteEmployee: ({
 }: {
   id: number;
   token: string;
-}) => Promise<IResponseEmployee> = async ({ id, token }) => {
+}) => Promise<IDeleteRes> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.delete(`/employees/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -58,10 +58,10 @@ export const addEmployee: ({
 }: {
   dataForm: IAddEmployee;
   token: string;
-}) => Promise<IResponseEmployee> = async ({
+}) => Promise<IEmployeeRes> = async ({
   dataForm,
   token,
-}): Promise<IResponseEmployee> => {
+}): Promise<IEmployeeRes> => {
   const formData = new FormData();
   formData.append("name", dataForm.name);
   formData.append("personal_id", dataForm.personal_id);
@@ -73,7 +73,11 @@ export const addEmployee: ({
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
-  formData.append("second_phone", dataForm?.second_phone || "");
+  if (dataForm.second_phone)
+    formData.append("second_phone", dataForm?.second_phone);
+
+  if (dataForm.treasury_id)
+    formData.append("treasury_id", dataForm?.treasury_id.value);
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
@@ -95,10 +99,10 @@ export const updateEmployee: ({
 }: {
   dataForm: IAddEmployee;
   token: string;
-}) => Promise<IResponseEmployee> = async ({
+}) => Promise<IEmployeeRes> = async ({
   dataForm,
   token,
-}): Promise<IResponseEmployee> => {
+}): Promise<IEmployeeRes> => {
   const formData = new FormData();
   formData.append("name", dataForm.name);
   formData.append("personal_id", dataForm.personal_id);
@@ -110,7 +114,12 @@ export const updateEmployee: ({
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
-  formData.append("second_phone", dataForm?.second_phone || "");
+
+  if (dataForm.personal_image)
+    formData.append("personal_image", dataForm.personal_image);
+
+  if (dataForm.treasury_id)
+    formData.append("treasury_id", dataForm?.treasury_id.value);
 
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.personal_image) {

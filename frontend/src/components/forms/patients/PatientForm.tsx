@@ -15,8 +15,8 @@ import RenderFormFields from "../RenderFormFields";
 import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";
 import {
-  FormItemVariants,
-  formVariants,
+  itemVariants,
+  containerVariants,
 } from "@/animations/dashboardAnimations";
 
 interface IProps {
@@ -90,7 +90,6 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       (action === "update" && updateOptionalFields.includes(fieldName))
     );
   };
-  console.log(form.formState.errors);
 
   const onSubmit = async (formData: z.infer<typeof patientSchema>) => {
     try {
@@ -137,18 +136,14 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
         className="space-y-6"
         initial="hidden"
         animate="visible"
-        variants={formVariants}
+        variants={containerVariants}
       >
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
-          variants={formVariants}
+          variants={containerVariants}
         >
           {PATIENT_FORM_INPUTS.map((input, index) => (
-            <motion.div
-              key={input.name}
-              variants={FormItemVariants}
-              custom={index}
-            >
+            <motion.div key={input.name} variants={itemVariants} custom={index}>
               <RenderFormFields
                 form={form}
                 handleFileChange={handleFileChange}
@@ -159,7 +154,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
             </motion.div>
           ))}
         </motion.div>
-        <motion.div variants={formVariants}>
+        <motion.div variants={containerVariants}>
           <SubmitButton
             action={action}
             isLoadingAdd={isLoadingAdd}

@@ -18,7 +18,7 @@ export const tableRowVariants = {
   }),
 };
 
-export const formVariants = {
+export const containerVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -30,7 +30,19 @@ export const formVariants = {
   },
 };
 
-export const FormItemVariants = {
+// export const itemVariants = {
+//   hidden: { opacity: 0, y: 20 },
+//   visible: { opacity: 1, y: 0 },
+// };
+
+export const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
 };

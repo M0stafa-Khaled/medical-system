@@ -9,6 +9,11 @@ enum Query_Keys {
   GET_USER_PROFILE = "user",
   DOCTOR_ACTIONS = "doctorActions",
   GET_ALL_MEDICATIONS = "medications",
+  GET_ALL_TREASURIES = "treasuries",
+  GET_ALL_EXPENSES = "expenses",
+  GET_ONE_EXPENSE = "expense",
+  GET_ALL_EXPENSES_CATEGORIES = "expenses categories",
+  GET_ALL_EXPENSES_ONE_CATEGORY = "expenses category",
 }
 
 export default Query_Keys;

@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IGetTokenPageSearch } from "@/interfaces";
+import { IDeleteRes, IGetTokenPageSearch } from "@/interfaces";
 import {
   IAddDoctor,
   IResponseDoctor,
@@ -115,7 +115,7 @@ export const deleteDoctor: ({
 }: {
   id: number;
   token: string;
-}) => Promise<IResponseDoctor> = async ({ id, token }) => {
+}) => Promise<IDeleteRes> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.delete(`/doctors/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

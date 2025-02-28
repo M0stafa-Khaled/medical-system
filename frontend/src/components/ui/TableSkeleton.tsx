@@ -14,6 +14,7 @@ interface IProps {
   rows?: number;
   hasImage?: boolean;
   actionButtons?: number;
+  showButtons?: boolean;
 }
 
 const SkeletonCaption = () => (
@@ -36,7 +37,7 @@ const SkeletonHeader = ({ columns }: { columns: number }) => (
 
 const SkeletonCell = () => (
   <TableCell>
-    <Skeleton className="mx-auto h-4 w-24 rounded-lg" />
+    <Skeleton className="mx-auto h-3 w-24 rounded-lg" />
   </TableCell>
 );
 
@@ -61,17 +62,24 @@ const TableSkeleton = ({
   rows = 10,
   hasImage = false,
   actionButtons = 2,
+  showButtons = true,
 }: IProps) => {
   const renderRow = (idx: number) => (
     <TableRow
       key={idx}
-      className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
+      className={`dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300 ${
+        !hasImage ? "h-14" : ""
+      }`}
     >
       {hasImage && <SkeletonImageCell />}
-      {Array.from({ length: columns - (hasImage ? 2 : 1) }).map((_, idx) => (
+      {Array.from({
+        length:
+          columns -
+          (hasImage && showButtons ? 2 : hasImage || showButtons ? 1 : 0),
+      }).map((_, idx) => (
         <SkeletonCell key={idx} />
       ))}
-      <SkeletonActionsCell buttons={actionButtons} />
+      {showButtons && <SkeletonActionsCell buttons={actionButtons} />}
     </TableRow>
   );
 

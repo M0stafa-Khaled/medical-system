@@ -26,6 +26,13 @@ const updateEmployeeSchema = z.object({
     .regex(/^\d*\.?\d+$/, "يجب إدخال رقم صالح"),
   status: z.boolean().default(true),
   job: z.string({ message: "الوظيفة مطلوبة" }),
+  treasury_id: z
+    .object({
+      value: z.string(),
+      label: z.string(),
+    })
+    .nullable()
+    .optional(),
   email: z
     .string()
     .trim()

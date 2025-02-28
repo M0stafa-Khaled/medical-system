@@ -41,7 +41,7 @@ const MedicationsTable = () => {
       }
       header={<MedicationsTableHeader />}
       list={<MedicationsList medications={medications?.data.items || []} />}
-      skeleton={<TableSkeleton columns={2} rows={6} hasImage />}
+      skeleton={<TableSkeleton columns={2} rows={6} showButtons={false} />}
       pagination={
         medications?.data && {
           meta: medications.data.meta,

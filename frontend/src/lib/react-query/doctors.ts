@@ -21,7 +21,7 @@ export const useGetAllDoctors = ({
   return useQuery({
     queryKey: [Query_Keys.GET_ALL_DOCTORS, page, search],
     queryFn: () => getAllDoctors({ token, page, search }),
-    staleTime: 1000,
+    staleTime: 30 * 1000,
   });
 };
 
@@ -31,14 +31,12 @@ export const useGetDoctorById = ({
 }: {
   id: string;
   token: string;
-}) => {
-  return useQuery({
+}) =>
+  useQuery({
     queryFn: () => getDoctorById({ id, token }),
     queryKey: [Query_Keys.GET_ONE_DOCTOR, id],
-    refetchOnMount: true,
     enabled: !!id,
   });
-};
 
 export const useAddDoctor = () => {
   const queryClient = useQueryClient();
@@ -50,7 +48,7 @@ export const useAddDoctor = () => {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ALL_DOCTORS, Query_Keys.GET_ONE_DOCTOR],
+        queryKey: [Query_Keys.GET_ALL_DOCTORS],
       });
     },
   });
@@ -66,7 +64,7 @@ export const useUpdateDoctor = () => {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ALL_DOCTORS, Query_Keys.GET_ONE_DOCTOR],
+        queryKey: [Query_Keys.GET_ALL_DOCTORS],
       });
     },
   });

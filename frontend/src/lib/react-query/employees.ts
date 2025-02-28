@@ -17,13 +17,12 @@ export const useGetAllEmployees = ({
   token: string;
   page: number;
   search: string;
-}) => {
-  return useQuery({
+}) =>
+  useQuery({
     queryKey: [Query_Keys.GET_ALL_EMPLOYEES, page, search],
     queryFn: () => getAllEmployees({ token, page, search }),
-    staleTime: 1000,
+    staleTime: 30 * 1000,
   });
-};
 
 export const useGetEmployeeById = ({
   id,
@@ -31,14 +30,12 @@ export const useGetEmployeeById = ({
 }: {
   id: string;
   token: string;
-}) => {
-  return useQuery({
+}) =>
+  useQuery({
     queryFn: () => getEmployeeById({ id, token }),
     queryKey: [Query_Keys.GET_ONE_EMPLOYEE, id],
-    refetchOnMount: true,
     enabled: !!id,
   });
-};
 
 export const useAddEmployee = () => {
   const queryClient = useQueryClient();

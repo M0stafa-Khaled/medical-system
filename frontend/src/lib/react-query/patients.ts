@@ -17,13 +17,12 @@ export const useGetAllPatients = ({
   token: string;
   page: number;
   search: string;
-}) => {
-  return useQuery({
+}) =>
+  useQuery({
     queryKey: [Query_Keys.GET_ALL_PATIENTS, page, search],
     queryFn: () => getAllPatients({ token, page, search }),
-    staleTime: 1000,
+    staleTime: 30 * 1000,
   });
-};
 
 export const useGetPatientById = ({
   id,
@@ -31,12 +30,12 @@ export const useGetPatientById = ({
 }: {
   id: string;
   token: string;
-}) => {
-  return useQuery({
+}) =>
+  useQuery({
     queryKey: [Query_Keys.GET_ONE_PATIENT, id],
     queryFn: () => getPatientById({ id, token }),
+    enabled: !!id,
   });
-};
 
 export const useAddPatient = () => {
   const queryClient = useQueryClient();

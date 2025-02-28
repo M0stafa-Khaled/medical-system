@@ -18,6 +18,11 @@ const DashboardLayout = () => {
   const canViewEmployees = useHasPermission(PERMISSIONS.EMPLOYEES);
   const canViewPatients = useHasPermission(PERMISSIONS.PATIENTS);
 
+  const canViewExpenses = useHasPermission(PERMISSIONS.EXPENSES);
+  const canViewExpensesCategories = useHasPermission(
+    PERMISSIONS.EXPENSE_SECTIONS
+  );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken();
@@ -32,6 +37,9 @@ const DashboardLayout = () => {
     employees: "الموظفين",
     patients: "المرضى",
     medications: "الأدوية",
+    treasuries: "الخزينة",
+    expenses: "المصروفات",
+    "expenses-categories": "تصنيفات المصروفات",
   };
 
   interface INavLink {
@@ -45,6 +53,7 @@ const DashboardLayout = () => {
       name: routeNames.dashboard,
       path: "/dashboard",
     },
+    // Codes
     ...(canViewClinics || canViewDoctors || canViewEmployees || canViewPatients
       ? [
           {
@@ -63,10 +72,48 @@ const DashboardLayout = () => {
               ...(canViewPatients
                 ? [{ name: routeNames.patients, path: "/dashboard/patients" }]
                 : []),
+              ...(canViewExpenses
+                ? [
+                    {
+                      name: routeNames.treasuries,
+                      path: "/dashboard/treasuries",
+                    },
+                  ]
+                : []),
             ],
           },
         ]
       : []),
+
+    // Operations
+    ...(canViewExpenses
+      ? [
+          {
+            name: "العمليات",
+            path: "",
+            children: [
+              ...(canViewExpenses
+                ? [
+                    {
+                      name: routeNames.expenses,
+                      path: "/dashboard/expenses",
+                    },
+                  ]
+                : []),
+              ...(canViewExpensesCategories
+                ? [
+                    {
+                      name: routeNames["expenses-categories"],
+                      path: "/dashboard/expenses-categories",
+                    },
+                  ]
+                : []),
+            ],
+          },
+        ]
+      : []),
+
+    // Medications
     { name: "الأدوية", path: "/dashboard/medications" },
   ];
 

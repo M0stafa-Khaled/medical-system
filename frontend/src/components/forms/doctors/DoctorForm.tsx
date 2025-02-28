@@ -15,8 +15,8 @@ import { useEffect } from "react";
 import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";
 import {
-  FormItemVariants,
-  formVariants,
+  itemVariants,
+  containerVariants,
 } from "@/animations/dashboardAnimations";
 import RenderFormFields from "../RenderFormFields";
 
@@ -137,7 +137,6 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       }
     }
   };
-  console.log(form.formState.errors);
 
   return (
     <Form {...form}>
@@ -147,18 +146,14 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         className="space-y-6"
         initial="hidden"
         animate="visible"
-        variants={formVariants}
+        variants={containerVariants}
       >
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
-          variants={formVariants}
+          variants={containerVariants}
         >
           {DOCTOR_FORM_INPUTS.map((input, index) => (
-            <motion.div
-              key={input.name}
-              variants={FormItemVariants}
-              custom={index}
-            >
+            <motion.div key={input.name} variants={itemVariants} custom={index}>
               <RenderFormFields
                 input={input}
                 form={form}
@@ -170,7 +165,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
             </motion.div>
           ))}
         </motion.div>
-        <motion.div variants={formVariants}>
+        <motion.div variants={containerVariants}>
           <SubmitButton
             action={action}
             isLoadingAdd={isLoadingAdd}

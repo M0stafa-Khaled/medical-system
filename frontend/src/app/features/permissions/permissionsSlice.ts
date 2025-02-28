@@ -1,12 +1,12 @@
 import { IPermission } from "@/interfaces/auth";
+import { decryptData, encryptData } from "@/utils/encryptData";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IPermissionsState {
   permissions: IPermission[];
 }
-
 const initialState: IPermissionsState = {
-  permissions: JSON.parse(sessionStorage.getItem("permissions")!) || [],
+  permissions: decryptData(localStorage.getItem("permissions")) || [],
 };
 
 const permissionsSlice = createSlice({
@@ -15,12 +15,13 @@ const permissionsSlice = createSlice({
   reducers: {
     setPermissions(state, action: PayloadAction<IPermission[]>) {
       state.permissions = action.payload;
-      sessionStorage.setItem("permissions", JSON.stringify(action.payload));
+      const encryptPermissions = encryptData(action.payload);
+      localStorage.setItem("permissions", encryptPermissions);
     },
 
     clearPermissions(state) {
       state.permissions = [];
-      sessionStorage.removeItem("permissions");
+      localStorage.removeItem("permissions");
     },
   },
 });

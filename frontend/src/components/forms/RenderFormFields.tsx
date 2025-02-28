@@ -7,21 +7,25 @@ import GenderFormItem from "./formItems/GenderFormItem";
 import FileFormItem from "./formItems/FileFormItem";
 import InputFormItem from "./formItems/InputFormItem";
 import SelectFormItem from "./formItems/SelectFormItem";
-import { ROLES } from "@/constants";
+import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
+
+interface IOption {
+  value: string;
+  label: string;
+}
 
 interface IProps {
   input: IFormInput;
-  form: any;
-  handleFileChange: (
+  form: UseFormReturn<any>;
+  handleFileChange?: (
     e: ChangeEvent<HTMLInputElement>,
     fieldChange: (value: File) => void
   ) => void;
-  isOptionalField: (fieldName: string) => boolean;
+  isOptionalField?: (fieldName: string) => boolean;
   schema: z.ZodSchema;
-  options?: {
-    value: string;
-    label: string;
-  }[];
+  options?: IOption[];
+  categories?: IOption[];
+  treasuries?: IOption[];
 }
 
 const RenderFormFields = ({
@@ -29,50 +33,69 @@ const RenderFormFields = ({
   form,
   handleFileChange,
   isOptionalField,
+  treasuries,
+  categories,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   schema,
   options,
 }: IProps) => {
+  const renderField = ({ field }: { field: ControllerRenderProps }) => {
+    const commonProps = {
+      field,
+      input,
+      isOptionalField,
+    };
+
+    switch (true) {
+      case input.name === "status":
+        return <SwitchFormItem {...commonProps} />;
+
+      case input.name === "gender":
+        return <GenderFormItem {...commonProps} />;
+
+      case input.type === "file":
+        return (
+          <FileFormItem
+            {...commonProps}
+            isOptionalField={isOptionalField!}
+            handleFileChange={handleFileChange!}
+          />
+        );
+
+      case input.name === "role":
+        return (
+          <SelectFormItem
+            {...commonProps}
+            isOptionalField={isOptionalField!}
+            options={options!}
+          />
+        );
+      case input.name === "category_id":
+        return (
+          <SelectFormItem
+            {...commonProps}
+            isOptionalField={isOptionalField!}
+            options={categories!}
+          />
+        );
+
+      case input.name === "treasury_id":
+        return <SelectFormItem {...commonProps} options={treasuries!} />;
+
+      case input.name === "clinics" || input.name === "permissions":
+        return <SelectFormItem {...commonProps} options={options!} isMulti />;
+
+      default:
+        return <InputFormItem {...commonProps} />;
+    }
+  };
+
   return (
     <FormField
       key={input.name}
       control={form.control}
       name={input.name as keyof z.infer<typeof schema> as string}
-      render={
-        input.name === "status"
-          ? ({ field }) => <SwitchFormItem field={field} input={input} />
-          : input.name === "gender"
-          ? ({ field }) => <GenderFormItem field={field} input={input} />
-          : input.type === "file"
-          ? ({ field }) => (
-              <FileFormItem
-                input={input}
-                field={field}
-                isOptionalField={isOptionalField}
-                handleFileChange={handleFileChange}
-              />
-            )
-          : input.name === "role"
-          ? ({ field }) => (
-              <SelectFormItem input={input} field={field} options={ROLES} />
-            )
-          : input.name === "clinics" || input.name === "permissions"
-          ? ({ field }) => (
-              <SelectFormItem
-                field={field}
-                input={input}
-                options={options || []}
-                isMulti
-              />
-            )
-          : ({ field }) => (
-              <InputFormItem
-                input={input}
-                field={field}
-                isOptionalField={isOptionalField}
-              />
-            )
-      }
+      render={renderField}
     />
   );
 };

@@ -2,7 +2,11 @@ import { useGetDoctorActions } from "@/lib/react-query/doctorActions";
 import cookieServices from "@/utils/cookieServices";
 import ActionCard from "./ActionCard";
 import ActionSkeleton from "@/components/ui/ActionSkeleton";
-
+import {
+  containerVariants,
+  itemVariants,
+} from "@/animations/dashboardAnimations";
+import { motion } from "framer-motion";
 interface IProps {
   doctorId: string;
 }
@@ -13,19 +17,24 @@ const ActionsList = ({ doctorId }: IProps) => {
 
   if (isLoading) return <ActionSkeleton />;
   return (
-    <div>
+    <>
       {!actions?.data?.items.length ? (
-        <p className="text-sm text-center text-black dark:text-white py-5 font-medium">
+        <p className="text-center text-muted-foreground py-3">
           لا يوجد إجراءات
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
-          {actions?.data?.items.map((action) => (
-            <ActionCard key={action.id} action={action} doctorId={doctorId} />
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4"
+        >
+          {actions?.data?.items.map((action, idx) => (
+            <motion.div variants={itemVariants} custom={idx}>
+              <ActionCard key={action.id} action={action} doctorId={doctorId} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
-    </div>
+    </>
   );
 };
 

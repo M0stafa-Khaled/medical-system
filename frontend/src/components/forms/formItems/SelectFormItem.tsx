@@ -9,9 +9,16 @@ interface IProps {
   input: IFormInput;
   options: { value: string; label: string }[];
   isMulti?: boolean;
+  isOptionalField?: (fieldName: string) => boolean;
 }
 
-const SelectFormItem = ({ input, field, options, isMulti = false }: IProps) => {
+const SelectFormItem = ({
+  input,
+  field,
+  options,
+  isOptionalField,
+  isMulti = false,
+}: IProps) => {
   const { theme } = useTheme();
   const selectStyles: StylesConfig = {
     input: (baseStyles) => ({
@@ -33,13 +40,19 @@ const SelectFormItem = ({ input, field, options, isMulti = false }: IProps) => {
 
   return (
     <FormItem>
-      <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
+      <FormLabel htmlFor={input.name}>
+        {input.label}
+        {isOptionalField && isOptionalField(input.name) && (
+          <span className="text-xs text-muted-foreground"> (اختياري)</span>
+        )}
+      </FormLabel>
       <FormControl>
         <Select
           id={input.name}
           {...field}
           isMulti={isMulti}
           options={options}
+          isClearable={true}
           onChange={(selectedOptions) => {
             field.onChange(selectedOptions);
           }}

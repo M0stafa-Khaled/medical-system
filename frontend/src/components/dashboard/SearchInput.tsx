@@ -10,7 +10,6 @@ const SearchInput = ({
   setSearchKeyword,
   placeholder,
 }: IProps) => {
-  
   return (
     <Input
       placeholder={placeholder}

@@ -1,33 +1,31 @@
 import { useState } from "react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import clinicSchema from "@/validations/clinicSchema";
-import { Switch } from "@/components/ui/switch";
 import { useCreateClinic } from "@/lib/react-query/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
+import { motion } from "framer-motion";
+import {
+  containerVariants,
+  itemVariants,
+} from "@/animations/dashboardAnimations";
+import { CLINIC_FORM_INPUTS } from "@/constants";
+import RenderFormFields from "@/components/forms/RenderFormFields";
 
 const AddClinicModalButton = () => {
-  const token = cookieServices.getToken() || "";
+  const token = cookieServices.getToken()!;
   const [isOpenAddModal, setIsOpenAddModal] = useState(false);
   const { mutateAsync: createClinic, isPending } = useCreateClinic();
 
@@ -57,8 +55,24 @@ const AddClinicModalButton = () => {
       // * Update Success
       return toast.success(`${message} '${data.name}'`);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      const errorObj = error as AxiosError<{
+        errors: { [key: string]: string[] };
+        message: string;
+      }>;
+      if (errorObj?.response?.data.errors) {
+        Object.keys(errorObj.response.data.errors).forEach((key) => {
+          errorObj?.response?.data.errors[key].forEach((error) =>
+            toast.error(error, {
+              autoClose: 5000,
+            })
+          );
+        });
+      }
+      if (errorObj?.response?.data.message) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
+      }
     } finally {
       setIsOpenAddModal(false);
       form.reset();
@@ -76,7 +90,7 @@ const AddClinicModalButton = () => {
         onClick={() => setIsOpenAddModal(true)}
         size={"sm"}
         variant={"outline"}
-        className="bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-6 !rounded-lg font-semibold"
+        className="bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-[1.4rem] !rounded-lg font-semibold"
       >
         إضافة عيادة جديدة
         <FiPlus size={20} />
@@ -90,45 +104,23 @@ const AddClinicModalButton = () => {
         showFooter={false}
       >
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="w-fit leading-relaxed text-black dark:text-white">
-                    اسم العيادة:
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="اسم العيادة"
-                      {...field}
-                      className="py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-black/50 dark:placeholder:text-white/50"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center gap-4">
-                  <FormLabel className="text-black dark:text-white">
-                    متاحة:
-                  </FormLabel>
-                  <FormControl>
-                    <Switch
-                      dir="ltr"
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="data-[state=unchecked]:bg-black/50 data-[state=checked]:bg-green-700 dark:data-[state=unchecked]:bg-white/50 dark:data-[state=checked]:bg-green-500"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+          <motion.form
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-6 text-white"
+          >
+            {CLINIC_FORM_INPUTS.map((input, idx) => (
+              <motion.div variants={itemVariants} key={input.name} custom={idx}>
+                <RenderFormFields
+                  input={input}
+                  form={form}
+                  schema={clinicSchema}
+                />
+              </motion.div>
+            ))}
+
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
@@ -145,7 +137,7 @@ const AddClinicModalButton = () => {
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>
-          </form>
+          </motion.form>
         </Form>
       </Modal>
     </>

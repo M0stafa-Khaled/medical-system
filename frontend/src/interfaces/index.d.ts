@@ -1,3 +1,7 @@
+export interface IDeleteRes {
+  status: boolean;
+  message: string;
+}
 // Form Input Interfaces
 export interface IFormInput {
   name: string;

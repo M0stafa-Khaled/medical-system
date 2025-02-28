@@ -1,7 +1,7 @@
 import {
   createDoctorAction,
   deleteDoctorAction,
-  getDoctorActionsById,
+  getDoctorActions,
   updateDoctorAction,
 } from "@/api/doctorActions";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -17,7 +17,8 @@ export const useGetDoctorActions = ({
 }) => {
   return useQuery({
     queryKey: [Query_Keys.DOCTOR_ACTIONS],
-    queryFn: () => getDoctorActionsById({ doctorId, token }),
+    queryFn: () => getDoctorActions({ doctorId, token }),
+    enabled: !!doctorId,
   });
 };
 

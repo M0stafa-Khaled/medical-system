@@ -49,6 +49,12 @@ const addEmployeeSchema = z.object({
     },
     { message: "الدور مطلوب" }
   ),
+  treasury_id: z
+    .object({
+      value: z.string(),
+      label: z.string(),
+    })
+    .optional(),
   permissions: z
     .array(
       z.object({

@@ -13,6 +13,20 @@ export const LOGIN_FORM_INPUTS: IFormInput[] = [
   },
 ];
 
+export const CLINIC_FORM_INPUTS: IFormInput[] = [
+  {
+    label: "اسم العيادة",
+    name: "name",
+    type: "text",
+    placeholder: "اسم العيادة",
+  },
+  {
+    label: "حالة العيادة",
+    name: "status",
+    type: "switch",
+  },
+];
+
 export const DOCTOR_FORM_INPUTS: IFormInput[] = [
   {
     name: "name",
@@ -119,6 +133,7 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     placeholder: "ادخل اسم الموظف",
     type: "text",
   },
+
   {
     name: "personal_id",
     label: "رقم الهوية",
@@ -160,6 +175,11 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     label: "الوظيفة",
     placeholder: "ادخل الوظيفة",
     type: "text",
+  },
+  {
+    name: "treasury_id",
+    label: "الخزينة",
+    type: "select",
   },
   {
     name: "image",
@@ -277,5 +297,36 @@ export const ROLES: { value: string; label: string }[] = [
   {
     value: "employee",
     label: "موظف",
+  },
+];
+
+export const EXPENSE_FORM_INPUTS: IFormInput[] = [
+  {
+    name: "name",
+    label: "اسم المصروف",
+    type: "text",
+    placeholder: "اسم المصروف",
+  },
+  {
+    name: "status",
+    label: "حالة المصروف",
+    type: "switch",
+  },
+  {
+    name: "price",
+    label: "القمية",
+    type: "number",
+    placeholder: "القمية",
+  },
+  {
+    name: "category_id",
+    label: "تصنيف المصروف",
+    type: "select",
+  },
+  {
+    name: "description",
+    label: "ملاحظات",
+    type: "text",
+    placeholder: "ملاحظات",
   },
 ];

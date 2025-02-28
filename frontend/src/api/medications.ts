@@ -1,6 +1,6 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IGetTokenPageSearch } from "@/interfaces";
-import { IMedicationsResponse } from "@/interfaces/medications";
+import { IMedicationsResponse } from "@/interfaces/medication";
 
 export const getAllMedications: ({
   token,

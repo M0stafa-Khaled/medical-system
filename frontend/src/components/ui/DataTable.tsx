@@ -26,7 +26,6 @@ const DataTable = ({
   const currentPage = pagination
     ? Math.ceil(pagination.meta.from / pagination.meta.per_page)
     : 1;
-
   return (
     <>
       {actions}
