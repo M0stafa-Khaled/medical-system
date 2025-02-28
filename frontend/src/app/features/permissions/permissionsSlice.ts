@@ -6,7 +6,9 @@ interface IPermissionsState {
   permissions: IPermission[];
 }
 const initialState: IPermissionsState = {
-  permissions: decryptData(localStorage.getItem("permissions")) || [],
+  permissions: localStorage.getItem("permissions")
+    ? decryptData(localStorage.getItem("permissions"))
+    : [],
 };
 
 const permissionsSlice = createSlice({
