@@ -71,7 +71,7 @@ const Login = () => {
                 <ToggleMode />
               </div>
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center max-w-28 mx-auto">
               <img src="/logo.svg" alt="logo" className="max-w-full" />
             </div>
             <h1 className="my-3 text-black dark:text-white font-bold text-center text-xl">
