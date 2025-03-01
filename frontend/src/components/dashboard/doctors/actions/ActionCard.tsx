@@ -1,7 +1,7 @@
 import { IDoctorAction } from "@/interfaces/doctorActions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DeleteActionModalButton from "./DeleteActionModelButton";
-import EditActionModalButton from "./EditActionModalButton";
+import DeleteActionButton from "./DeleteActionModelButton";
+import EditActionButton from "./EditActionModalButton";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
@@ -30,10 +30,10 @@ const ActionCard = ({ action, doctorId }: IProps) => {
       </div>
       <div className="flex flex-col px-4 gap-2">
         {canDeleteAction && (
-          <DeleteActionModalButton id={action.id} name={action.name} />
+          <DeleteActionButton id={action.id} name={action.name} />
         )}
         {canEditAction && (
-          <EditActionModalButton doctorId={doctorId} action={action} />
+          <EditActionButton doctorId={doctorId} action={action} />
         )}
       </div>
     </Card>

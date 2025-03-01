@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ActionsList from "./ActionsList";
-import AddActionModalButton from "./AddActionModalButton";
+import AddActionButton from "./AddActionModalButton";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
@@ -27,7 +27,7 @@ const Actions = ({ doctorId }: { doctorId: string }) => {
         <CardContent className="py-3">
           {canAddAction && (
             <motion.div variants={itemVariants} custom={"addAction"}>
-              <AddActionModalButton doctorId={doctorId} />
+              <AddActionButton doctorId={doctorId} />
             </motion.div>
           )}
           <motion.div variants={containerVariants}>

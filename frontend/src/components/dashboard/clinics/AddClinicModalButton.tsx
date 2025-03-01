@@ -49,10 +49,10 @@ const AddClinicModalButton = () => {
         token,
       });
 
-      // ! Update Field
+      // ! Create failed
       if (!statusServer) return toast.error(message);
 
-      // * Update Success
+      // * Create Success
       return toast.success(`${message} '${data.name}'`);
     } catch (error) {
       const errorObj = error as AxiosError<{
@@ -109,7 +109,7 @@ const AddClinicModalButton = () => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 text-white"
+            className="space-y-5 text-black dark:text-white"
           >
             {CLINIC_FORM_INPUTS.map((input, idx) => (
               <motion.div variants={itemVariants} key={input.name} custom={idx}>
@@ -124,14 +124,14 @@ const AddClinicModalButton = () => {
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-3 h-auto"
+                className="text-black dark:text-white py-2.5 h-auto"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-3 h-auto"
+                className="py-2.5 h-auto"
               >
                 إضافة
                 {isPending && <Loader2 className="animate-spin ml-2" />}

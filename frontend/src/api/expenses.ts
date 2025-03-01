@@ -57,18 +57,22 @@ export const createExpense: ({
   return data;
 };
 
-export const CancelExpense: ({
+export const cancelExpense: ({
   id,
   token,
-  dataForm,
+  description,
 }: {
   id: string;
   token: string;
-  dataForm: ICreateExpense;
-}) => Promise<IExpense> = async ({ token, dataForm, id }) => {
+  description: string;
+}) => Promise<{ status: boolean; message: string }> = async ({
+  token,
+  description,
+  id,
+}) => {
   const { data } = await axiosInstanceAPI.post(
-    `/expenses/${id}`,
-    { ...dataForm, _method: "put" },
+    `/expenses/${id}/cancel`,
+    description,
     {
       headers: {
         Authorization: `Bearer ${token}`,

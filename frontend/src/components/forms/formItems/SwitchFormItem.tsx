@@ -13,7 +13,15 @@ const SwitchFormItem = ({ input, field }: IProps) => {
     <FormItem>
       <FormLabel className="w-full">{input.label}</FormLabel>
       <div className="flex flex-row items-center justify-between rounded-lg border border-muted p-3">
-        <FormLabel>{field.value ? " مفعل " : " غير مفعل "}</FormLabel>
+        <FormLabel className="cursor-pointer">
+          {input.label === "حالة المصروف"
+            ? field.value
+              ? "معتمد"
+              : "ملغي"
+            : field.value
+            ? " مفعل "
+            : " غير مفعل "}
+        </FormLabel>
         <FormControl>
           <Switch
             dir="ltr"

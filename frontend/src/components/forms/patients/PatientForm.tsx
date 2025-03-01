@@ -139,7 +139,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 dark:text-white"
           variants={containerVariants}
         >
           {PATIENT_FORM_INPUTS.map((input, index) => (

@@ -40,9 +40,14 @@ const EmployeesTable = () => {
         />
       }
       header={<EmployeesTableHeader />}
-      list={<EmployeesList employees={employees?.data.items || []} />}
+      list={
+        <EmployeesList
+          meta={employees?.data && employees.data.meta}
+          employees={employees?.data.items || []}
+        />
+      }
       skeleton={
-        <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
+        <TableSkeleton columns={5} rows={6} hasImage actionButtons={3} />
       }
       pagination={
         employees?.data && {

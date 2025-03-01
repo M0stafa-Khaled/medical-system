@@ -28,16 +28,18 @@ const SkeletonHeader = ({ columns }: { columns: number }) => (
     <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
       {Array.from({ length: columns }, (_, idx) => (
         <TableHead key={idx}>
-          <Skeleton className="mx-auto h-4 w-32 rounded-lg" />
+          <Skeleton
+            className={`mx-auto h-4 ${idx === 0 ? "w-20" : "w-28"} rounded-lg`}
+          />
         </TableHead>
       ))}
     </TableRow>
   </TableHeader>
 );
 
-const SkeletonCell = () => (
+const SkeletonCell = ({ width = "w-24" }: { width?: string }) => (
   <TableCell>
-    <Skeleton className="mx-auto h-3 w-24 rounded-lg" />
+    <Skeleton className={`mx-auto h-3 ${width} rounded-lg`} />
   </TableCell>
 );
 
@@ -49,7 +51,7 @@ const SkeletonImageCell = () => (
 
 const SkeletonActionsCell = ({ buttons }: { buttons: number }) => (
   <TableCell className="py-3">
-    <div className="mx-auto w-fit flex justify-center items-center gap-4">
+    <div className="mx-auto w-fit flex justify-center items-center gap-2">
       {Array.from({ length: buttons }).map((_, idx) => (
         <Skeleton key={idx} className="w-9 h-9 rounded-sm" />
       ))}
@@ -71,6 +73,7 @@ const TableSkeleton = ({
         !hasImage ? "h-14" : ""
       }`}
     >
+      <SkeletonCell width="w-16" />
       {hasImage && <SkeletonImageCell />}
       {Array.from({
         length:
@@ -86,7 +89,7 @@ const TableSkeleton = ({
   return (
     <Table className="border dark:border-muted !rounded-lg overflow-hidden">
       <SkeletonCaption />
-      <SkeletonHeader columns={columns} />
+      <SkeletonHeader columns={columns + 1} />
       <TableBody>
         {Array.from({ length: rows }).map((_, idx) => renderRow(idx))}
       </TableBody>

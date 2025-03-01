@@ -5,7 +5,7 @@ import {
   deleteExpense,
   getAllExpenses,
   getExpenseById,
-  CancelExpense,
+  cancelExpense,
 } from "@/api/expenses";
 import { IGetTokenPageSearch } from "@/interfaces";
 import { ICreateExpense } from "@/interfaces/expense";
@@ -49,19 +49,18 @@ export const useCreateExpense = () => {
     },
   });
 };
-
-export const useUpdateExpense = () => {
+export const useCancelExpense = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({
       token,
       id,
-      dataForm,
+      description,
     }: {
       token: string;
       id: string;
-      dataForm: ICreateExpense;
-    }) => CancelExpense({ token, dataForm, id }),
+      description: string;
+    }) => cancelExpense({ token, id, description }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EXPENSES],

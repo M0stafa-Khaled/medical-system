@@ -39,7 +39,12 @@ const DoctorsTable = () => {
         />
       }
       header={<DoctorsTableHeader />}
-      list={<DoctorsList doctors={doctors?.data.items || []} />}
+      list={
+        <DoctorsList
+          meta={doctors?.data && doctors.data.meta}
+          doctors={doctors?.data.items || []}
+        />
+      }
       skeleton={
         <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
       }

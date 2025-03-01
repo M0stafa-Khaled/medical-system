@@ -1,16 +1,16 @@
 import DataTable from "@/components/ui/DataTable";
-import MedicationsTableActions from "./MedicationsTableActions";
+import DrugsTableActions from "./DrugsTableActions";
 import { useEffect, useState } from "react";
 import cookieServices from "@/utils/cookieServices";
-import MedicationsTableHeader from "./MedicationsTableHeader";
-import MedicationsList from "./MedicationsList";
+import DrugsTableHeader from "./DrugsTableHeader";
+import DrugsList from "./DrugsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import { useGetALlMedications } from "@/lib/react-query/medications";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 
-const MedicationsTable = () => {
+const DrugsTable = () => {
   const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const [searchParams] = useSearchParams();
@@ -18,7 +18,7 @@ const MedicationsTable = () => {
   const search = useDebounce(searchTerm, 500);
 
   const {
-    data: medications,
+    data: drugs,
     isLoading,
     isError,
   } = useGetALlMedications({ page, token, search });
@@ -34,21 +34,26 @@ const MedicationsTable = () => {
     <DataTable
       isLoading={isLoading}
       actions={
-        <MedicationsTableActions
+        <DrugsTableActions
           searchKeyword={searchTerm}
           setSearchKeyword={setSearchTerm}
         />
       }
-      header={<MedicationsTableHeader />}
-      list={<MedicationsList medications={medications?.data.items || []} />}
+      header={<DrugsTableHeader />}
+      list={
+        <DrugsList
+          medications={drugs?.data.items || []}
+          meta={drugs?.data && drugs.data.meta}
+        />
+      }
       skeleton={<TableSkeleton columns={2} rows={6} showButtons={false} />}
       pagination={
-        medications?.data && {
-          meta: medications.data.meta,
+        drugs?.data && {
+          meta: drugs.data.meta,
         }
       }
     />
   );
 };
 
-export default MedicationsTable;
+export default DrugsTable;

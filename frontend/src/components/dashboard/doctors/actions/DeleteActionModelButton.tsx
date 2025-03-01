@@ -12,7 +12,7 @@ interface IProps {
   id: number;
 }
 
-const DeleteActionModalButton = ({ name, id }: IProps) => {
+const DeleteActionButton = ({ name, id }: IProps) => {
   const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
   const { mutateAsync: deleteAction, isPending } = useDeleteDoctorAction();
@@ -21,7 +21,7 @@ const DeleteActionModalButton = ({ name, id }: IProps) => {
     try {
       const { message, status } = await deleteAction({ id: `${id}`, token });
 
-      // ! Delete Field
+      // ! Delete failed
       if (!status) return toast.error(message);
 
       // * Delete Success
@@ -59,4 +59,4 @@ const DeleteActionModalButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteActionModalButton;
+export default DeleteActionButton;

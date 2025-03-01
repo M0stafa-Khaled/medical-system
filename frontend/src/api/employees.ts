@@ -82,7 +82,7 @@ export const addEmployee: ({
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
 
-  if (dataForm.permissions)
+  if (dataForm.permissions && dataForm.role.value === "employee")
     dataForm.permissions.map((permission, idx) =>
       formData.append(`permissions[${idx}]`, permission.value)
     );

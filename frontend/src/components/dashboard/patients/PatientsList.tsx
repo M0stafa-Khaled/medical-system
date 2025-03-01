@@ -10,12 +10,15 @@ import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
+import { IPaginationMeta } from "@/interfaces";
+import countSerial from "@/utils/countSerial";
 
 interface IProps {
   patients: IPatient[];
+  meta?: IPaginationMeta;
 }
 
-const PatientsList = ({ patients }: IProps) => {
+const PatientsList = ({ patients, meta }: IProps) => {
   const canEditPatient = useHasPermission(PERMISSIONS.EDIT_PATIENT);
   const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
   const canViewPatient = useHasPermission(PERMISSIONS.VIEW_PATIENT);
@@ -24,7 +27,7 @@ const PatientsList = ({ patients }: IProps) => {
     return (
       <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
         <TableCell
-          colSpan={4}
+          colSpan={5}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
           لا يوجد مرضى
@@ -33,15 +36,18 @@ const PatientsList = ({ patients }: IProps) => {
     );
   return (
     <>
-      {patients.map(({ id, name, status, first_phone }, idx) => (
+      {patients.map(({ id, name, status, first_phone }, index) => (
         <motion.tr
           key={id}
           initial="hidden"
           animate="visible"
-          custom={idx}
+          custom={index}
           variants={tableRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+            {countSerial({ meta: meta!, index })}
+          </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
             {name}
           </TableCell>
@@ -58,7 +64,7 @@ const PatientsList = ({ patients }: IProps) => {
           </TableCell>
           {(canDeletePatient || canEditPatient || canViewPatient) && (
             <TableCell className="text-center">
-              <div className="flex justify-center items-center gap-3">
+              <div className="flex justify-center items-center gap-2">
                 {canViewPatient && (
                   <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
                     <Link

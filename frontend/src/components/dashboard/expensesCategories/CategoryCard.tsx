@@ -1,13 +1,20 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { IExpenseCategory } from "@/interfaces/expenseCategory";
-import DeleteCategoryModalButton from "./DeleteCategoryModelButton";
+import DeleteCategoryButton from "./DeleteCategoryModelButton";
 import EditCategoryButton from "./EditCategoryModalButton";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 interface IProps {
   category: IExpenseCategory;
 }
 
 const CategoryCard = ({ category }: IProps) => {
+  const canEditCategory = useHasPermission(PERMISSIONS.EDIT_EXPENSE_CATEGORY);
+  const canDeleteCategory = useHasPermission(
+    PERMISSIONS.DELETE_EXPENSE_CATEGORY
+  );
+
   return (
     <Card
       className={
@@ -19,8 +26,8 @@ const CategoryCard = ({ category }: IProps) => {
           {category?.name}
         </h3>
         <div className="flex items-center justify-center gap-2">
-          <DeleteCategoryModalButton category={category} />
-          <EditCategoryButton category={category} />
+          {canDeleteCategory && <DeleteCategoryButton category={category} />}
+          {canEditCategory && <EditCategoryButton category={category} />}
         </div>
       </CardContent>
     </Card>

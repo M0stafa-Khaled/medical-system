@@ -16,6 +16,7 @@ const ExpensesTable = () => {
   const page = Number(searchParams.get("page")) || 1;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
+
   const {
     data: expenses,
     isLoading,
@@ -39,7 +40,12 @@ const ExpensesTable = () => {
         />
       }
       header={<ExpensesTableHeader />}
-      list={<ExpensesList expenses={expenses?.data.items || []} />}
+      list={
+        <ExpensesList
+          meta={expenses?.data && expenses.data.meta}
+          expenses={expenses?.data.items || []}
+        />
+      }
       skeleton={
         <TableSkeleton columns={7} rows={6} hasImage actionButtons={3} />
       }

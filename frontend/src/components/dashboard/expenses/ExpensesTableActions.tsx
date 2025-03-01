@@ -17,7 +17,7 @@ const ExpensesTableActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
       <SearchInput
         searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}
-        placeholder="ابحث عن مصروف"
+        placeholder="ابحث عن برقم الإيصال او التصنيف"
       />
     </div>
   );

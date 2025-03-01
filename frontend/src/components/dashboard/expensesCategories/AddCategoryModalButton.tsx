@@ -42,7 +42,7 @@ const AddCategoryButton = () => {
         name,
       });
 
-      // ! Create Field
+      // ! Create failed
       if (!status) return toast.error(message);
 
       // * Create Success
@@ -93,7 +93,7 @@ const AddCategoryButton = () => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 text-white"
+            className="space-y-6 text-black dark:text-white"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -114,14 +114,14 @@ const AddCategoryButton = () => {
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-3 h-auto"
+                className="text-black dark:text-white py-2.5h-auto"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-3 h-auto"
+                className="py-2.5 h-auto"
               >
                 إضافة
                 {isPending && <Loader2 className="animate-spin ml-2" />}

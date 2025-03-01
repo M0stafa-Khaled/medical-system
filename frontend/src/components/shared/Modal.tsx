@@ -9,12 +9,13 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { ReactNode } from "react";
 
 interface IProps {
   isOpen: boolean;
   onOpenChange: () => void;
   title: string;
-  description: string;
+  description: string | ReactNode;
   children?: React.ReactNode;
   onCancel?: () => void;
   onConfirm?: () => void;
@@ -55,7 +56,7 @@ const Modal = ({
           <AlertDialogFooter className="text-start !justify-start gap-2">
             <AlertDialogCancel
               onClick={onCancel}
-              className="text-black dark:text-white"
+              className="text-black dark:text-white py-2.5 h-auto"
             >
               إلغاء
             </AlertDialogCancel>
@@ -64,6 +65,7 @@ const Modal = ({
                 onClick={onConfirm}
                 disabled={isLoading}
                 variant={variant}
+                className="py-2.5 h-auto"
               >
                 {confirmText}
                 {isLoading && <Loader2 className="animate-spin ml-2" />}

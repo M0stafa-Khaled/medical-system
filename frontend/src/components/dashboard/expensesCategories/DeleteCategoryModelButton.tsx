@@ -12,7 +12,7 @@ interface IProps {
   category: IExpenseCategory;
 }
 
-const DeleteCategoryModalButton = ({ category }: IProps) => {
+const DeleteCategoryButton = ({ category }: IProps) => {
   const token = cookieServices.getToken()!;
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
   const { mutateAsync: deleteCategory, isPending } = useDeleteExpenseCategory();
@@ -24,7 +24,7 @@ const DeleteCategoryModalButton = ({ category }: IProps) => {
         token,
       });
 
-      // ! Delete Field
+      // ! Delete failed
       if (!status) return toast.error(message);
 
       // * Delete Success
@@ -62,4 +62,4 @@ const DeleteCategoryModalButton = ({ category }: IProps) => {
   );
 };
 
-export default DeleteCategoryModalButton;
+export default DeleteCategoryButton;

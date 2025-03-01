@@ -23,7 +23,7 @@ const DeletePatientButton = ({ name, id }: IProps) => {
     try {
       const { status, message } = await deletePatient({ id, token });
 
-      // ! Delete Field
+      // ! Delete failed
       if (!status) return toast.error(message);
       // * Delete Success
       navigate("/dashboard/patients");

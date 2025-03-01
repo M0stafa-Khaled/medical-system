@@ -10,12 +10,15 @@ import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
+import { IPaginationMeta } from "@/interfaces";
+import countSerial from "@/utils/countSerial";
 
 interface IProps {
   employees: IEmployee[];
+  meta?: IPaginationMeta;
 }
 
-const EmployeesList = ({ employees }: IProps) => {
+const EmployeesList = ({ employees, meta }: IProps) => {
   const canEditEmployee = useHasPermission(PERMISSIONS.EDIT_EMPLOYEE);
   const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
   const canViewEmployee = useHasPermission(PERMISSIONS.VIEW_EMPLOYEE);
@@ -24,7 +27,7 @@ const EmployeesList = ({ employees }: IProps) => {
     return (
       <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
         <TableCell
-          colSpan={7}
+          colSpan={6}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
           لا يوجد موظفين
@@ -33,15 +36,18 @@ const EmployeesList = ({ employees }: IProps) => {
     );
   return (
     <>
-      {employees.map(({ id, name, status, image, first_phone }, idx) => (
+      {employees.map(({ id, name, status, image, first_phone }, index) => (
         <motion.tr
           key={id}
           initial="hidden"
           animate="visible"
-          custom={idx}
+          custom={index}
           variants={tableRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+            {countSerial({ meta: meta!, index })}
+          </TableCell>
           <TableCell className="flex justify-center items-center text-sm text-center text-black dark:text-white py-3 font-medium">
             <img
               src={image || "/avatar.svg"}
@@ -65,9 +71,9 @@ const EmployeesList = ({ employees }: IProps) => {
           </TableCell>
           {(canDeleteEmployee || canEditEmployee || canViewEmployee) && (
             <TableCell className="text-center">
-              <div className="flex justify-center items-center gap-3">
+              <div className="flex justify-center items-center gap-2">
                 {canViewEmployee && (
-                  <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
+                  <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm">
                     <Link
                       to={`/dashboard/employees/${id}`}
                       className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"

@@ -22,7 +22,7 @@ import {
   UpdatePatient,
   EmployeeDetails,
   PatientDetails,
-  Medications,
+  Drugs,
   Treasuries,
   Expenses,
   ExpensesCategories,
@@ -171,7 +171,7 @@ const routes = createRoutesFromElements(
       />
 
       {/* pharmaceutical */}
-      <Route path="medications" element={<Medications />} />
+      <Route path="drugs" element={<Drugs />} />
 
       {/* Expenses */}
       <Route
@@ -186,7 +186,7 @@ const routes = createRoutesFromElements(
       <Route
         path="expenses-categories"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_SECTIONS}>
+          <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_CATEGORIES}>
             <ExpensesCategories />
           </ProtectedRoute>
         }

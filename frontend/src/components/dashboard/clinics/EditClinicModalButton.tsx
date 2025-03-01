@@ -53,9 +53,9 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
         data,
       } = await updateClinic({ id, name, status, token });
 
-      // ! Create Field
+      // ! Update failed
       if (!statusServer) return toast.error(message);
-      // * Create Success
+      // * Update Success
       return toast.success(`${message} (${data.name})`);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
@@ -139,13 +139,13 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
               )}
             />
             <AlertDialogFooter className="text-start !justify-start gap-2">
-              <AlertDialogCancel className="text-black dark:text-white py-3 h-auto">
+              <AlertDialogCancel className="text-black dark:text-white py-2.5 h-auto">
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-3 h-auto"
+                className="py-2.5 h-auto"
               >
                 حفظ
                 {isPending && <Loader2 className="animate-spin" />}

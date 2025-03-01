@@ -123,17 +123,21 @@ export const DOCTOR_ACTION_INPUTS: IFormInput[] = [
 
 export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
   {
-    name: "role",
-    label: "الدور",
-    type: "select",
-  },
-  {
     name: "name",
     label: "اسم الموظف",
     placeholder: "ادخل اسم الموظف",
     type: "text",
   },
-
+  {
+    name: "role",
+    label: "الدور",
+    type: "select",
+  },
+  {
+    name: "permissions",
+    label: "الصلاحيات",
+    type: "multiselect",
+  },
   {
     name: "personal_id",
     label: "رقم الهوية",
@@ -308,25 +312,19 @@ export const EXPENSE_FORM_INPUTS: IFormInput[] = [
     placeholder: "اسم المصروف",
   },
   {
+    name: "price",
+    label: "القيمة",
+    type: "number",
+    placeholder: "القمية",
+  },
+  {
     name: "status",
     label: "حالة المصروف",
     type: "switch",
   },
   {
-    name: "price",
-    label: "القمية",
-    type: "number",
-    placeholder: "القمية",
-  },
-  {
     name: "category_id",
     label: "تصنيف المصروف",
     type: "select",
-  },
-  {
-    name: "description",
-    label: "ملاحظات",
-    type: "text",
-    placeholder: "ملاحظات",
   },
 ];

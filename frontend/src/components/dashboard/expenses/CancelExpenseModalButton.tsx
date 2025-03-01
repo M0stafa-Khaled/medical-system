@@ -8,60 +8,51 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
-import { EXPENSE_FORM_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
 import RenderFormFields from "@/components/forms/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import addExpenseSchema from "@/validations/addExpenseSchema";
-import { useCreateExpense } from "@/lib/react-query/expenses";
-import { useGetAllExpensesCategories } from "@/lib/react-query/expensesCategories";
+import { useCancelExpense } from "@/lib/react-query/expenses";
+import { MdDoNotDisturbAlt } from "react-icons/md";
 
-const AddExpenseButton = () => {
+const CancelExpenseButton = ({ id }: { id: number }) => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
-  const { data: expensesCategories } = useGetAllExpensesCategories({ token });
-  const { mutateAsync: createExpense, isPending } = useCreateExpense();
+  const { mutateAsync: cancelExpense, isPending } = useCancelExpense();
+  const cancelExpenseSchema = z.object({
+    description: z
+      .string({ message: "السبب مطلوب" })
+      .nonempty({ message: "السبب مطلوب" }),
+  });
 
-  const expensesCategoriesOptions = expensesCategories?.data.map(
-    (category) => ({
-      value: category.id.toString(),
-      label: category.name,
-    })
-  );
-  const form = useForm<z.infer<typeof addExpenseSchema>>({
-    resolver: zodResolver(addExpenseSchema),
+  const form = useForm<z.infer<typeof cancelExpenseSchema>>({
+    resolver: zodResolver(cancelExpenseSchema),
     defaultValues: {
-      name: "",
-      status: true,
-      price: 0,
+      description: "",
     },
   });
 
-  const onSubmit = async (dataForm: z.infer<typeof addExpenseSchema>) => {
+  const onSubmit = async ({
+    description,
+  }: z.infer<typeof cancelExpenseSchema>) => {
     try {
-      const { status, message } = await createExpense({
+      const { status, message } = await cancelExpense({
         token,
-        dataForm: {
-          status: dataForm.status ? "1" : "0",
-          category_id: dataForm.category_id.value,
-          name: dataForm.name,
-          price: dataForm.price,
-        },
+        id: `${id}`,
+        description,
       });
 
-      // ! Create failed
+      // ! Cancel failed
       if (!status) return toast.error(message);
 
-      // * Create Success
+      // * Cancel Success
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{
@@ -96,53 +87,43 @@ const AddExpenseButton = () => {
   return (
     <>
       <Button
-        onClick={() => setIsOpen(true)}
         size={"sm"}
-        variant={"outline"}
-        className="bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-[1.4rem] !rounded-lg font-semibold"
+        onClick={() => setIsOpen(true)}
+        className="bg-gray-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600 text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
       >
-        إضافة مصروف
-        <FiPlus size={20} />
+        <MdDoNotDisturbAlt size={24} />
       </Button>
 
       <Modal
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="إضافة مصروف جديد"
-        description="يمكنك اضافة مصروف جديد من هنا"
+        title="إلغاء مصروف"
+        description={
+          <p className="text-red-700 font-medium">
+            يرجى العلم أن الإلغاء لا يمكن التراجع عنه!
+          </p>
+        }
         showFooter={false}
       >
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6"
+            className="space-y-6 text-black dark:text-white"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-3 text-black dark:text-white"
-              variants={containerVariants}
-            >
-              {EXPENSE_FORM_INPUTS.map((input, idx) => (
-                <motion.div
-                  key={input.name}
-                  custom={idx}
-                  variants={itemVariants}
-                  className={`${
-                    input.name === "name" || input.name === "category_id"
-                      ? "col-span-full"
-                      : ""
-                  }`}
-                >
-                  <RenderFormFields
-                    input={input}
-                    form={form as any}
-                    schema={addExpenseSchema}
-                    options={{ categories: expensesCategoriesOptions }}
-                  />
-                </motion.div>
-              ))}
+            <motion.div variants={itemVariants}>
+              <RenderFormFields
+                input={{
+                  name: "description",
+                  label: "سبب الإلغاء",
+                  type: "text",
+                  placeholder: "اذكر سبب الإلغاء",
+                }}
+                form={form as any}
+                schema={cancelExpenseSchema}
+              />
             </motion.div>
 
             <AlertDialogFooter className="text-start !justify-start gap-2">
@@ -156,8 +137,9 @@ const AddExpenseButton = () => {
                 type="submit"
                 disabled={isPending}
                 className="py-2.5 h-auto"
+                variant={"destructive"}
               >
-                إضافة
+                تأكيد
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>
@@ -168,4 +150,4 @@ const AddExpenseButton = () => {
   );
 };
 
-export default AddExpenseButton;
+export default CancelExpenseButton;

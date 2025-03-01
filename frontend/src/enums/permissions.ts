@@ -35,18 +35,18 @@ export enum PERMISSIONS {
   VIEW_EMPLOYEE = "عرض-موظف",
 
   // Expenses
-  EDIT_EXPENSE = "تعديل-مصروف",
   ADD_EXPENSE = "اضافة-مصروف",
   DELETE_EXPENSE = "حذف-مصروف",
+  CANCEL_EXPENSE = "الغاء-مصروف",
   VIEW_EXPENSE = "عرض-مصروف",
   EXPENSES = "المصاريف",
 
-  // Expense sections
-  ADD_EXPENSE_SECTION = "اضافة-قسم-للمصروف",
-  EDIT_EXPENSE_SECTION = "تعديل-قسم-المصروف",
-  DELETE_EXPENSE_SECTION = "حذف-قسم-المصروف",
-  EXPENSE_SECTIONS = "اقسام المصاريف",
-  VIEW_EXPENSE_SECTION = "عرض-قسم-المصروف",
+  // Expense categories
+  ADD_EXPENSE_CATEGORY = "اضافة-قسم-للمصروف",
+  EDIT_EXPENSE_CATEGORY = "تعديل-قسم-للمصروف",
+  DELETE_EXPENSE_CATEGORY = "حذف-قسم-للمصروف",
+  EXPENSE_CATEGORIES = "اقسام المصاريف",
+  VIEW_EXPENSE_CATEGORY = "عرض-قسم-للمصروف",
 
   // Treasuries
   EDIT_TREASURY = "تعديل-خزنة",

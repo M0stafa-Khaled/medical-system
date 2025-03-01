@@ -8,11 +8,11 @@ interface IProps {
 }
 
 const CategoriesActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
-  const canAddExpense = useHasPermission(PERMISSIONS.ADD_EXPENSE);
+  const canAddCategory = useHasPermission(PERMISSIONS.ADD_EXPENSE_CATEGORY);
 
   return (
     <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
-      {canAddExpense && <AddCategoryButton />}
+      {canAddCategory && <AddCategoryButton />}
       <SearchInput
         searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}

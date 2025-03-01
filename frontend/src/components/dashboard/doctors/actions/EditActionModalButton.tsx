@@ -31,7 +31,7 @@ interface IProps {
   doctorId: string;
   action: IDoctorAction;
 }
-const EditActionModalButton = ({ doctorId, action }: IProps) => {
+const EditActionButton = ({ doctorId, action }: IProps) => {
   const token = cookieServices.getToken() || "";
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: updateDoctorAction, isPending } =
@@ -54,7 +54,7 @@ const EditActionModalButton = ({ doctorId, action }: IProps) => {
         formData: { name, price: `${price}`, doctor_id: doctorId },
         id: `${action.id}`,
       });
-      // ! Update Field
+      // ! Update failed
       if (!status) return toast.error(message);
       // * Create Success
       return toast.success(message);
@@ -130,14 +130,14 @@ const EditActionModalButton = ({ doctorId, action }: IProps) => {
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-3 h-auto"
+                className="text-black dark:text-white py-2.5 h-auto"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-3 h-auto"
+                className="py-2.5 h-auto"
               >
                 تعديل
                 {isPending && <Loader2 className="animate-spin ml-2" />}
@@ -150,4 +150,4 @@ const EditActionModalButton = ({ doctorId, action }: IProps) => {
   );
 };
 
-export default EditActionModalButton;
+export default EditActionButton;

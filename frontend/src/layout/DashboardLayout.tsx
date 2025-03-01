@@ -20,7 +20,7 @@ const DashboardLayout = () => {
 
   const canViewExpenses = useHasPermission(PERMISSIONS.EXPENSES);
   const canViewExpensesCategories = useHasPermission(
-    PERMISSIONS.EXPENSE_SECTIONS
+    PERMISSIONS.EXPENSE_CATEGORIES
   );
 
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const DashboardLayout = () => {
     update: "تعديل",
     employees: "الموظفين",
     patients: "المرضى",
-    medications: "الأدوية",
+    drugs: "الأدوية",
     treasuries: "الخزينة",
     expenses: "المصروفات",
     "expenses-categories": "تصنيفات المصروفات",
@@ -80,26 +80,6 @@ const DashboardLayout = () => {
                     },
                   ]
                 : []),
-            ],
-          },
-        ]
-      : []),
-
-    // Operations
-    ...(canViewExpenses
-      ? [
-          {
-            name: "العمليات",
-            path: "",
-            children: [
-              ...(canViewExpenses
-                ? [
-                    {
-                      name: routeNames.expenses,
-                      path: "/dashboard/expenses",
-                    },
-                  ]
-                : []),
               ...(canViewExpensesCategories
                 ? [
                     {
@@ -113,8 +93,28 @@ const DashboardLayout = () => {
         ]
       : []),
 
+    // Operations
+    ...(canViewExpenses
+      ? [
+          {
+            name: "الحسابات",
+            path: "",
+            children: [
+              ...(canViewExpenses
+                ? [
+                    {
+                      name: routeNames.expenses,
+                      path: "/dashboard/expenses",
+                    },
+                  ]
+                : []),
+            ],
+          },
+        ]
+      : []),
+
     // Medications
-    { name: "الأدوية", path: "/dashboard/medications" },
+    { name: "الأدوية", path: "/dashboard/drugs" },
   ];
 
   useEffect(() => {

@@ -23,7 +23,7 @@ const DeleteDoctorButton = ({ name, id }: IProps) => {
     try {
       const { status, message } = await deleteDoctor({ id, token });
 
-      // ! Delete Field
+      // ! Delete failed
       if (!status) return toast.error(message);
       // * Delete Success
       navigate("/dashboard/doctors");

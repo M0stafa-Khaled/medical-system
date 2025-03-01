@@ -8,6 +8,7 @@ import FileFormItem from "./formItems/FileFormItem";
 import InputFormItem from "./formItems/InputFormItem";
 import SelectFormItem from "./formItems/SelectFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
+import { ROLES } from "@/constants";
 
 interface IOption {
   value: string;
@@ -23,9 +24,12 @@ interface IProps {
   ) => void;
   isOptionalField?: (fieldName: string) => boolean;
   schema: z.ZodSchema;
-  options?: IOption[];
-  categories?: IOption[];
-  treasuries?: IOption[];
+  options?: {
+    categories?: IOption[];
+    treasuries?: IOption[];
+    permissions?: IOption[];
+    clinics?: IOption[];
+  };
 }
 
 const RenderFormFields = ({
@@ -33,8 +37,6 @@ const RenderFormFields = ({
   form,
   handleFileChange,
   isOptionalField,
-  treasuries,
-  categories,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   schema,
   options,
@@ -61,13 +63,12 @@ const RenderFormFields = ({
             handleFileChange={handleFileChange!}
           />
         );
-
       case input.name === "role":
         return (
           <SelectFormItem
             {...commonProps}
             isOptionalField={isOptionalField!}
-            options={options!}
+            options={ROLES}
           />
         );
       case input.name === "category_id":
@@ -75,16 +76,33 @@ const RenderFormFields = ({
           <SelectFormItem
             {...commonProps}
             isOptionalField={isOptionalField!}
-            options={categories!}
+            options={options?.categories || []}
           />
         );
 
       case input.name === "treasury_id":
-        return <SelectFormItem {...commonProps} options={treasuries!} />;
-
-      case input.name === "clinics" || input.name === "permissions":
-        return <SelectFormItem {...commonProps} options={options!} isMulti />;
-
+        return (
+          <SelectFormItem
+            {...commonProps}
+            options={options?.treasuries || []}
+          />
+        );
+      case input.name === "permissions":
+        return (
+          <SelectFormItem
+            {...commonProps}
+            options={options?.permissions || []}
+            isMulti
+          />
+        );
+      case input.name === "clinics":
+        return (
+          <SelectFormItem
+            {...commonProps}
+            options={options?.clinics || []}
+            isMulti
+          />
+        );
       default:
         return <InputFormItem {...commonProps} />;
     }

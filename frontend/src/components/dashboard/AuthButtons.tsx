@@ -32,7 +32,7 @@ const AuthButtons = () => {
   const logoutFromDashboard = async () => {
     try {
       await logoutUser(token as string);
-      // ! Logout Field
+      // ! Logout failed
       // * Logout Success
       dispatch(logout());
       navigate("/login");

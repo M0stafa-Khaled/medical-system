@@ -7,7 +7,6 @@ import { IClinic } from "@/interfaces/clinic";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-
 interface IProps {
   clinics: IClinic[];
 }
@@ -20,7 +19,7 @@ const ClinicsList = ({ clinics }: IProps) => {
     return (
       <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
         <TableCell
-          colSpan={3}
+          colSpan={4}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
           لا يوجد عيادات
@@ -31,15 +30,18 @@ const ClinicsList = ({ clinics }: IProps) => {
 
   return (
     <>
-      {clinics.map(({ id, name, status }, idx) => (
+      {clinics.map(({ id, name, status }, index) => (
         <motion.tr
           key={id}
           initial="hidden"
           animate="visible"
-          custom={idx}
+          custom={index}
           variants={tableRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+            {index + 1}
+          </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-5 font-medium">
             {name}
           </TableCell>
@@ -52,7 +54,7 @@ const ClinicsList = ({ clinics }: IProps) => {
           </TableCell>
           {(canEditClinic || canDeleteClinic) && (
             <TableCell className="text-center">
-              <div className="flex justify-center items-center gap-4">
+              <div className="flex justify-center items-center gap-2">
                 <EditClinicModalButton name={name} id={id} status={status} />
                 {canDeleteClinic && <DeleteClinicButton name={name} id={id} />}
               </div>

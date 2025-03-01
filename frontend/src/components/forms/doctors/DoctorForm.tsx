@@ -149,7 +149,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 dark:text-white"
           variants={containerVariants}
         >
           {DOCTOR_FORM_INPUTS.map((input, index) => (
@@ -160,7 +160,9 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
                 handleFileChange={handleFileChange}
                 isOptionalField={isOptionalField}
                 schema={doctorSchema}
-                options={clinicsOptions}
+                options={{
+                  clinics: clinicsOptions,
+                }}
               />
             </motion.div>
           ))}

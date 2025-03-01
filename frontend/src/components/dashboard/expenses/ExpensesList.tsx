@@ -2,7 +2,6 @@ import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
@@ -10,15 +9,23 @@ import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { IExpense } from "@/interfaces/expense";
 import formatDateTime from "@/utils/formatDate";
+import { IPaginationMeta } from "@/interfaces";
+import countSerial from "@/utils/countSerial";
+import DeleteExpenseButton from "./DeleteExpenseModalButton";
+import CancelExpenseButton from "./CancelExpenseModalButton";
+import { FaPrint } from "react-icons/fa6";
 
 interface IProps {
   expenses: IExpense[];
+  meta?: IPaginationMeta;
 }
 
-const ExpensesList = ({ expenses }: IProps) => {
-  const canEditPatient = useHasPermission(PERMISSIONS.EDIT_PATIENT);
-  const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
-  const canViewPatient = useHasPermission(PERMISSIONS.VIEW_PATIENT);
+const ExpensesList = ({ expenses, meta }: IProps) => {
+  const canDeleteExpense = useHasPermission(
+    PERMISSIONS.DELETE_EXPENSE_CATEGORY
+  );
+  const canCancelExpense = useHasPermission(PERMISSIONS.CANCEL_EXPENSE);
+  const canViewExpense = useHasPermission(PERMISSIONS.VIEW_EXPENSE_CATEGORY);
 
   if (!expenses.length)
     return (
@@ -36,16 +43,19 @@ const ExpensesList = ({ expenses }: IProps) => {
       {expenses.map(
         (
           { id, name, status, category, created_at, employee, treasury },
-          idx
+          index
         ) => (
           <motion.tr
             key={id}
             initial="hidden"
             animate="visible"
-            custom={idx}
+            custom={index}
             variants={tableRowVariants}
             className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
           >
+            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+              {countSerial({ meta: meta!, index })}
+            </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
               {name}
             </TableCell>
@@ -80,10 +90,10 @@ const ExpensesList = ({ expenses }: IProps) => {
                 hour12: true,
               })}
             </TableCell>
-            {(canDeletePatient || canEditPatient || canViewPatient) && (
+            {(canDeleteExpense || canCancelExpense || canViewExpense) && (
               <TableCell className="text-center">
-                <div className="flex justify-center items-center gap-3">
-                  {canViewPatient && (
+                <div className="flex justify-center items-center gap-2">
+                  {canViewExpense && (
                     <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
                       <Link
                         to={`/dashboard/expenses/${id}`}
@@ -93,15 +103,16 @@ const ExpensesList = ({ expenses }: IProps) => {
                       </Link>
                     </Button>
                   )}
-                  {canEditPatient && (
-                    <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                      <Link
-                        to={`/dashboard/expenses/update/${id}`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                      >
-                        <FaPencil size={18} />
-                      </Link>
+                  {canViewExpense && (
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm h-9 w-9">
+                      <FaPrint size={24} />
                     </Button>
+                  )}
+                  {canCancelExpense && status && (
+                    <CancelExpenseButton id={id} />
+                  )}
+                  {canDeleteExpense && !status && (
+                    <DeleteExpenseButton id={id} name={name} />
                   )}
                 </div>
               </TableCell>

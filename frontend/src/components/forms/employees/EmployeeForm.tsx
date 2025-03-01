@@ -69,10 +69,6 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         value: "male",
         label: "ذكر",
       },
-      treasury_id: {
-        label: "",
-        value: "",
-      },
       password: "",
       status: true,
       image: undefined,
@@ -115,6 +111,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         setShowPermissions(value.role?.value === "employee");
       }
     });
+
     if (!employee) return () => subscription.unsubscribe();
     form.reset({
       name: employee?.name || "",
@@ -215,43 +212,39 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       <motion.form
         key={employee?.id || "add"}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6"
+        className="space-y-6 dark:text-white"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        {showPermissions && (
-          <motion.div variants={containerVariants}>
-            <RenderFormFields
-              schema={employeeSchema}
-              form={form}
-              input={{
-                name: "permissions",
-                label: "الصلاحيات",
-                type: "multiselect",
-              }}
-              options={permissionsOptions}
-              handleFileChange={handleFileChange}
-              isOptionalField={isOptionalField}
-            />
-          </motion.div>
-        )}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
           variants={containerVariants}
         >
-          {EMPLOYEE_FORM_INPUTS.map((input, index) => (
-            <motion.div key={input.name} custom={index} variants={itemVariants}>
-              <RenderFormFields
-                input={input}
-                form={form}
-                handleFileChange={handleFileChange}
-                isOptionalField={isOptionalField}
-                schema={employeeSchema}
-                treasuries={treasuriesOptions}
-              />
-            </motion.div>
-          ))}
+          {EMPLOYEE_FORM_INPUTS.map((input, index) =>
+            input.name === "permissions" && !showPermissions ? null : (
+              <motion.div
+                key={input.name}
+                custom={index}
+                variants={itemVariants}
+                className={`${
+                  input.name === "permissions" ? "col-span-full" : ""
+                }`}
+              >
+                <RenderFormFields
+                  input={input}
+                  form={form}
+                  handleFileChange={handleFileChange}
+                  isOptionalField={isOptionalField}
+                  schema={employeeSchema}
+                  options={{
+                    treasuries: treasuriesOptions,
+                    permissions: permissionsOptions,
+                  }}
+                />
+              </motion.div>
+            )
+          )}
         </motion.div>
         <motion.div variants={containerVariants}>
           <SubmitButton

@@ -26,7 +26,7 @@ import { DOCTOR_ACTION_INPUTS } from "@/constants";
 import doctorActionSchema from "@/validations/doctorActionSchema";
 import { useCreateDoctorAction } from "@/lib/react-query/doctorActions";
 
-const AddActionModalButton = ({ doctorId }: { doctorId: string }) => {
+const AddActionButton = ({ doctorId }: { doctorId: string }) => {
   const token = cookieServices.getToken() || "";
   const [isOpenAddModal, setIsOpenAddModal] = useState(false);
   const { mutateAsync: createDoctorAction, isPending } =
@@ -48,7 +48,7 @@ const AddActionModalButton = ({ doctorId }: { doctorId: string }) => {
         token,
         formData: { name, price: `${price}`, doctor_id: doctorId },
       });
-      // ! Update Field
+      // ! Create failed
       if (!status) return toast.error(message);
       // * Create Success
       return toast.success(message);
@@ -118,14 +118,14 @@ const AddActionModalButton = ({ doctorId }: { doctorId: string }) => {
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-3 h-auto"
+                className="text-black dark:text-white py-2.5 h-auto"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-3 h-auto"
+                className="py-2.5 h-auto"
               >
                 إضافة
                 {isPending && <Loader2 className="animate-spin ml-2" />}
@@ -138,4 +138,4 @@ const AddActionModalButton = ({ doctorId }: { doctorId: string }) => {
   );
 };
 
-export default AddActionModalButton;
+export default AddActionButton;

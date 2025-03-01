@@ -4,10 +4,7 @@ interface IProps {
   searchKeyword: string;
   setSearchKeyword: (value: string) => void;
 }
-const MedicationsTableActions = ({
-  searchKeyword,
-  setSearchKeyword,
-}: IProps) => {
+const DrugsTableActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
   return (
     <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
       <SearchInput
@@ -19,4 +16,4 @@ const MedicationsTableActions = ({
   );
 };
 
-export default MedicationsTableActions;
+export default DrugsTableActions;

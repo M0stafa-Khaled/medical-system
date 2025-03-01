@@ -1,7 +1,7 @@
-import MedicationsTable from "@/components/dashboard/medications/MedicationsTable";
+import DrugsTable from "@/components/dashboard/drugs/DrugsTable";
 import { motion } from "framer-motion";
 
-const Medications = () => {
+const Drugs = () => {
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -9,9 +9,9 @@ const Medications = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="mt-6"
     >
-      <MedicationsTable />
+      <DrugsTable />
     </motion.section>
   );
 };
 
-export default Medications;
+export default Drugs;

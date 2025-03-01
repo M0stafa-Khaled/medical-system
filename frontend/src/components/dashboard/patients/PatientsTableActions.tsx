@@ -32,7 +32,7 @@ const PatientsTableActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
       <SearchInput
         searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}
-        placeholder="ابحث عن مريض"
+        placeholder="ابحث بالاسم او رقم الهاتف"
       />
     </div>
   );

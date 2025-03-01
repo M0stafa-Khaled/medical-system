@@ -7,7 +7,6 @@ export interface ICreateExpense {
   status: string;
   price: number;
   category_id: string;
-  description: string;
 }
 
 export interface IExpense {
