@@ -51,7 +51,9 @@ const DeleteEmployeeButton = ({ name, id }: IProps) => {
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف موظف"
-        description={`هل انت متاكد من حذف الموظف ${name}؟`}
+        description={{
+          text: `هل انت متاكد من حذف الموظف ${name}؟`,
+        }}
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}

@@ -39,7 +39,7 @@ const ClinicsList = ({ clinics }: IProps) => {
           variants={tableRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20 text-wrap">
             {index + 1}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-5 font-medium">

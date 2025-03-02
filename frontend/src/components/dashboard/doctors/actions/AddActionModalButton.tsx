@@ -81,7 +81,9 @@ const AddActionButton = ({ doctorId }: { doctorId: string }) => {
         isOpen={isOpenAddModal}
         onOpenChange={handleCloseModal}
         title="إضافة إجراء"
-        description="يمكنك اضافة إجراء جديد من هنا"
+        description={{
+          text: "يمكنك اضافة إجراء جديد من هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>

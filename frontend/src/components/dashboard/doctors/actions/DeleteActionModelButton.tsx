@@ -49,7 +49,10 @@ const DeleteActionButton = ({ name, id }: IProps) => {
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف إجراء"
-        description={`هل انت متاكد من حذف إجراء ${name}؟`}
+        description={{
+          text: `هل انت متاكد من حذف إجراء ${name}؟`,
+          color: "text-red-700",
+        }}
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}

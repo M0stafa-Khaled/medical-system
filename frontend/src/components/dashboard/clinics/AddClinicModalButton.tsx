@@ -100,7 +100,9 @@ const AddClinicModalButton = () => {
         isOpen={isOpenAddModal}
         onOpenChange={handleCloseModal}
         title="إضافة عيادة جديدة"
-        description="يمكنك اضافة عيادة جديدة من هنا"
+        description={{
+          text: "يمكنك اضافة عيادة جديدة من هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>

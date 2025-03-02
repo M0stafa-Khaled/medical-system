@@ -52,7 +52,10 @@ const DeleteExpenseButton = ({ id, name }: IProps) => {
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف مصروف"
-        description={`هل انت متاكد من حذف مصروف ${name}؟`}
+        description={{
+          text: `هل انت متاكد من حذف مصروف ${name}؟`,
+          color: "text-red-700",
+        }}
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}

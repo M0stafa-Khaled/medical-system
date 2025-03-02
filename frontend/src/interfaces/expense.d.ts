@@ -1,5 +1,6 @@
 import { IPaginationMeta } from ".";
 import { IEmployee } from "./employee";
+import { IExpenseCategory } from "./expenseCategory";
 import { ITreasury } from "./treasury";
 
 export interface ICreateExpense {
@@ -12,8 +13,11 @@ export interface ICreateExpense {
 export interface IExpense {
   id: number;
   name: string;
+  cancelled_info: string | null;
   description: string | null;
+  price: string;
   status: true;
+  code: string;
   created_at: string;
   category: IExpenseCategory;
   treasury: ITreasury;

@@ -7,7 +7,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import formatDateTime from "@/utils/formatDate";
-import { Loader2 } from "lucide-react";
+import {
+  BadgeCheck,
+  BadgeX,
+  Briefcase,
+  Calendar,
+  CircleDollarSign,
+  FileImage,
+  Loader2,
+  Mail,
+  Phone,
+  UserCircle2,
+  VenusAndMars,
+} from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
 import InfoField from "@/components/dashboard/InfoField";
@@ -20,7 +32,7 @@ const EmployeeDetails = () => {
   const canEditEmployee = useHasPermission(PERMISSIONS.EDIT_EMPLOYEE);
   const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
   const navigate = useNavigate();
-  const token = cookieServices.getToken();
+  const token = cookieServices.getToken()!;
   const { employeeId } = useParams();
 
   const {
@@ -29,7 +41,7 @@ const EmployeeDetails = () => {
     isError,
   } = useGetEmployeeById({
     id: employeeId!,
-    token: token!,
+    token,
   });
 
   useEffect(() => {
@@ -106,32 +118,62 @@ const EmployeeDetails = () => {
             <InfoField
               label="حالة الحساب"
               value={status ? "مفعل" : "غير مفعل"}
+              icon={
+                status ? (
+                  <BadgeCheck className="text-green-500" />
+                ) : (
+                  <BadgeX className="text-red-500" />
+                )
+              }
             />
-            <InfoField label="الراتب" value={salary!} />
-            <InfoField label="الوظيفة" value={job!} />
-            <InfoField label="رقم الهوية" value={personal_id!} />
-            <InfoField label="رقم الهاتف الاول" value={first_phone!} />
+            <InfoField
+              label="الراتب"
+              value={salary!}
+              icon={<CircleDollarSign className="text-blue-500" />}
+            />
+            <InfoField
+              label="الوظيفة"
+              value={job!}
+              icon={<Briefcase className="text-purple-500" />}
+            />
+            <InfoField
+              label="رقم الهوية"
+              value={personal_id!}
+              icon={<UserCircle2 className="text-primary" />}
+            />
+            <InfoField
+              label="رقم الهاتف الاول"
+              value={first_phone!}
+              icon={<Phone className="text-green-600" />}
+            />
             <InfoField
               label="رقم الهاتف الثاني"
               value={second_phone ? second_phone : "لا يوجد"}
+              icon={<Phone className="text-green-600" />}
             />
             <InfoField
               label="البريد الإلكتروني"
               value={user?.email as string}
+              icon={<Mail className="text-orange-500" />}
               sm
             />
             <InfoField
               label="الجنس"
               value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
+              icon={<VenusAndMars className="text-primary" />}
               sm
             />
             <InfoField
               label="تاريخ الإنشاء"
               value={formatDateTime(created_at!)}
+              icon={<Calendar className="text-teal-500" />}
               sm
             />
             <div className="flex items-center gap-2 select-none">
-              <h5 className="text-sm text-muted-foreground">صورة الهوية :</h5>
+              <h5 className="text-sm text-muted-foreground flex items-center gap-2">
+                <FileImage className="text-cyan-500" />
+                صورة الهوية :
+              </h5>
               {personal_image ? (
                 <ImageModal
                   src={personal_image}

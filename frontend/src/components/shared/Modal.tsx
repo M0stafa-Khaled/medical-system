@@ -9,13 +9,15 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { ReactNode } from "react";
 
 interface IProps {
   isOpen: boolean;
   onOpenChange: () => void;
   title: string;
-  description: string | ReactNode;
+  description: {
+    text: string;
+    color?: string;
+  };
   children?: React.ReactNode;
   onCancel?: () => void;
   onConfirm?: () => void;
@@ -45,8 +47,12 @@ const Modal = ({
           <AlertDialogTitle className="text-black dark:text-white text-center">
             {title}
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-center">
-            {description}
+          <AlertDialogDescription
+            className={`text-center ${
+              description.color ? description.color : ""
+            }`}
+          >
+            {description.text}
           </AlertDialogDescription>
         </AlertDialogHeader>
 

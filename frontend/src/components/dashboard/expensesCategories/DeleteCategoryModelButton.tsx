@@ -52,7 +52,10 @@ const DeleteCategoryButton = ({ category }: IProps) => {
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف تصنيف"
-        description={`هل انت متاكد من حذف تصنيف ${category?.name}؟`}
+        description={{
+          text: `هل أنت متأكد من حذف تصنيف ${category?.name}؟`,
+          color: "text-red-700",
+        }}
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}

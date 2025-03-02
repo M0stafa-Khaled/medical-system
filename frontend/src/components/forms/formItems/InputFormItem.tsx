@@ -28,6 +28,7 @@ const InputFormItem = ({ input, field, isOptionalField }: IProps) => {
           id={input.name}
           type={input.type}
           placeholder={input.placeholder}
+          autoComplete={"on"}
           {...field}
           onChange={(e) => field.onChange(e.target.value)}
           value={field.value as string | undefined}

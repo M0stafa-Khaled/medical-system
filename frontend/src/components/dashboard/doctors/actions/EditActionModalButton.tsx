@@ -93,7 +93,9 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="تعديل إجراء"
-        description="يمكنك تعديل الإجراء المحدد هنا"
+        description={{
+          text: "يمكنك تعديل الإجراء المحدد هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>

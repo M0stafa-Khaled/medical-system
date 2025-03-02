@@ -109,7 +109,9 @@ const AddExpenseButton = () => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="إضافة مصروف جديد"
-        description="يمكنك اضافة مصروف جديد من هنا"
+        description={{
+          text: "يمكنك اضافة مصروف جديد من هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>

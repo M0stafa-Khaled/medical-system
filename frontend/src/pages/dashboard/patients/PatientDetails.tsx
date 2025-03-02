@@ -7,7 +7,17 @@ import { Button } from "@/components/ui/button";
 import { FaPencil } from "react-icons/fa6";
 import { Separator } from "@/components/ui/separator";
 import formatDateTime from "@/utils/formatDate";
-import { Loader2 } from "lucide-react";
+import {
+  BadgeInfo,
+  FileImage,
+  Info,
+  Loader2,
+  Mail,
+  Phone,
+  UserCircle2,
+  Users,
+  VenusAndMars,
+} from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
 import { useGetPatientById } from "@/lib/react-query/patients";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
@@ -15,6 +25,8 @@ import DeletePatientButton from "@/components/dashboard/patients/DeletePatientMo
 import InfoField from "@/components/dashboard/InfoField";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { Calendar, BadgeCheck, BadgeX } from "lucide-react";
+// Remove VenusAndMars since it's not available in lucide-react
 
 const PatientDetails = () => {
   const canEditPatient = useHasPermission(PERMISSIONS.EDIT_PATIENT);
@@ -106,19 +118,48 @@ const PatientDetails = () => {
           <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <InfoField
+              icon={
+                status ? (
+                  <BadgeCheck className="text-green-500" />
+                ) : (
+                  <BadgeX className="text-red-500" />
+                )
+              }
               label="حالة الحساب"
               value={status ? "مفعل" : "غير مفعل"}
             />
-            <InfoField label="ملاحظات حالة الحساب" value={info_status!} />
-            <InfoField label="اسم احد الاقارب" value={another_name!} />
-            <InfoField label="ملاحظات" value={description!} />
-            <InfoField label="رقم الهوية" value={personal_id!} />
-            <InfoField label="رقم الهاتف الاول" value={first_phone!} />
             <InfoField
+              icon={<Info className="text-blue-700" />}
+              label="ملاحظات حالة الحساب"
+              value={info_status!}
+            />
+            <InfoField
+              icon={<Users className="text-blue-700" />}
+              label="اسم احد الاقارب"
+              value={another_name!}
+            />
+            <InfoField
+              icon={<BadgeInfo className="text-primary" />}
+              label="ملاحظات"
+              value={description!}
+            />
+            <InfoField
+              icon={<UserCircle2 className="text-primary" />}
+              label="رقم الهوية"
+              value={personal_id!}
+            />
+            <InfoField
+              icon={<Phone className="text-purple-600" />}
+              label="رقم الهاتف الاول"
+              value={first_phone!}
+            />
+            <InfoField
+              icon={<Phone className="text-green-600" />}
               label="رقم الهاتف الثاني"
               value={second_phone ? second_phone : "لا يوجد"}
             />
             <InfoField
+              icon={<Mail className="text-orange-500" />}
               label="البريد الإلكتروني"
               value={user?.email as string}
               sm
@@ -127,13 +168,16 @@ const PatientDetails = () => {
               label="الجنس"
               value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
               sm
+              icon={<VenusAndMars className="text-primary" />}
             />
             <InfoField
+              icon={<Calendar className="text-teal-500" />}
               label="تاريخ الإنشاء"
-              value={formatDateTime(created_at as string)}
+              value={formatDateTime(created_at!)}
               sm
             />
             <div className="flex items-center gap-2 select-none">
+              <FileImage className="text-cyan-500" />
               <h5 className="text-sm text-muted-foreground">صورة الهوية :</h5>
               {personal_image ? (
                 <ImageModal

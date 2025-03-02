@@ -12,6 +12,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";
+import truncateText from "@/utils/truncateText";
 
 interface IProps {
   patients: IPatient[];
@@ -45,11 +46,11 @@ const PatientsList = ({ patients, meta }: IProps) => {
           variants={tableRowVariants}
           className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20 text-wrap">
             {countSerial({ meta: meta!, index })}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
-            {name}
+            {truncateText(name, 20)}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
             {first_phone}

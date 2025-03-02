@@ -27,7 +27,7 @@ const CancelExpenseButton = ({ id }: { id: number }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: cancelExpense, isPending } = useCancelExpense();
   const cancelExpenseSchema = z.object({
-    description: z
+    cancelled_info: z
       .string({ message: "السبب مطلوب" })
       .nonempty({ message: "السبب مطلوب" }),
   });
@@ -35,18 +35,18 @@ const CancelExpenseButton = ({ id }: { id: number }) => {
   const form = useForm<z.infer<typeof cancelExpenseSchema>>({
     resolver: zodResolver(cancelExpenseSchema),
     defaultValues: {
-      description: "",
+      cancelled_info: "",
     },
   });
 
   const onSubmit = async ({
-    description,
+    cancelled_info,
   }: z.infer<typeof cancelExpenseSchema>) => {
     try {
       const { status, message } = await cancelExpense({
         token,
         id: `${id}`,
-        description,
+        cancelled_info,
       });
 
       // ! Cancel failed
@@ -98,11 +98,10 @@ const CancelExpenseButton = ({ id }: { id: number }) => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="إلغاء مصروف"
-        description={
-          <p className="text-red-700 font-medium">
-            يرجى العلم أن الإلغاء لا يمكن التراجع عنه!
-          </p>
-        }
+        description={{
+          text: "يرجى العلم أن الإلغاء لا يمكن التراجع عنه!",
+          color: "text-red-700",
+        }}
         showFooter={false}
       >
         <Form {...form}>
@@ -116,7 +115,7 @@ const CancelExpenseButton = ({ id }: { id: number }) => {
             <motion.div variants={itemVariants}>
               <RenderFormFields
                 input={{
-                  name: "description",
+                  name: "cancelled_info",
                   label: "سبب الإلغاء",
                   type: "text",
                   placeholder: "اذكر سبب الإلغاء",

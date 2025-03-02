@@ -313,9 +313,9 @@ export const EXPENSE_FORM_INPUTS: IFormInput[] = [
   },
   {
     name: "price",
-    label: "القيمة",
+    label: "المبلغ",
     type: "number",
-    placeholder: "القمية",
+    placeholder: "المبلغ",
   },
   {
     name: "status",

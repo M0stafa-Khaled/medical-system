@@ -26,6 +26,7 @@ import {
   Treasuries,
   Expenses,
   ExpensesCategories,
+  ExpenseDetails,
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -177,11 +178,20 @@ const routes = createRoutesFromElements(
       <Route
         path="expenses"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
+          <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES}>
             <Expenses />
           </ProtectedRoute>
         }
       />
+      <Route
+        path="expenses/:expenseId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EXPENSE}>
+            <ExpenseDetails />
+          </ProtectedRoute>
+        }
+      />
+
       {/* Expenses Categories */}
       <Route
         path="expenses-categories"

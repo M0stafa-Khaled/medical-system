@@ -51,7 +51,10 @@ const DeleteDoctorButton = ({ name, id }: IProps) => {
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
         title="حذف طبيب"
-        description={`هل انت متاكد من حذف الطبيب ${name}؟`}
+        description={{
+          text: `هل انت متاكد من حذف الطبيب ${name}؟`,
+          color: "text-red-700",
+        }}
         onConfirm={handleDelete}
         confirmText="حذف"
         isLoading={isPending}

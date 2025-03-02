@@ -98,7 +98,9 @@ const EditCategoryButton = ({ category }: IProps) => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="تعديل تصنيف"
-        description="يمكنك تعديل التصنيف المحدد هنا"
+        description={{
+          text: "يمكنك تعديل التصنيف المحدد هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>

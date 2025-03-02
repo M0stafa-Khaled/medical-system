@@ -55,12 +55,12 @@ export const useCancelExpense = () => {
     mutationFn: ({
       token,
       id,
-      description,
+      cancelled_info,
     }: {
       token: string;
       id: string;
-      description: string;
-    }) => cancelExpense({ token, id, description }),
+      cancelled_info: string;
+    }) => cancelExpense({ token, id, cancelled_info }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EXPENSES],

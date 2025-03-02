@@ -30,7 +30,10 @@ export const getExpenseById: ({
 }: {
   token: string;
   id: string;
-}) => Promise<{ data: IExpense; status: boolean }> = async ({ token, id }) => {
+}) => Promise<{ data: IExpense; message: string; status: boolean }> = async ({
+  token,
+  id,
+}) => {
   const { data } = await axiosInstanceAPI.get(`/expenses/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -60,19 +63,19 @@ export const createExpense: ({
 export const cancelExpense: ({
   id,
   token,
-  description,
+  cancelled_info,
 }: {
   id: string;
   token: string;
-  description: string;
+  cancelled_info: string;
 }) => Promise<{ status: boolean; message: string }> = async ({
   token,
-  description,
+  cancelled_info,
   id,
 }) => {
   const { data } = await axiosInstanceAPI.post(
     `/expenses/${id}/cancel`,
-    description,
+    { cancelled_info },
     {
       headers: {
         Authorization: `Bearer ${token}`,

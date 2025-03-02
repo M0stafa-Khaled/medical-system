@@ -87,7 +87,7 @@ const AddCategoryButton = () => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="إضافة تصنيف جديد"
-        description="يمكنك اضافة تصنيف جديد من هنا"
+        description={{ text: "يمكنك اضافة تصنيف جديد من هنا" }}
         showFooter={false}
       >
         <Form {...form}>

@@ -14,6 +14,7 @@ import countSerial from "@/utils/countSerial";
 import DeleteExpenseButton from "./DeleteExpenseModalButton";
 import CancelExpenseButton from "./CancelExpenseModalButton";
 import { FaPrint } from "react-icons/fa6";
+import truncateText from "@/utils/truncateText";
 
 interface IProps {
   expenses: IExpense[];
@@ -31,7 +32,7 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
     return (
       <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
         <TableCell
-          colSpan={7}
+          colSpan={9}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
           لا يوجد مصروفات
@@ -42,7 +43,17 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
     <>
       {expenses.map(
         (
-          { id, name, status, category, created_at, employee, treasury },
+          {
+            id,
+            name,
+            status,
+            category,
+            created_at,
+            employee,
+            treasury,
+            code,
+            price,
+          },
           index
         ) => (
           <motion.tr
@@ -53,14 +64,17 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
             variants={tableRowVariants}
             className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
           >
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20 text-wrap">
               {countSerial({ meta: meta!, index })}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
-              {name}
+            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+              {code}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
               {category?.name}
+            </TableCell>
+            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+              {price}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
               {treasury?.name}
@@ -70,7 +84,7 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
                 to={`/dashboard/employees/${employee.id}`}
                 className="dark:hover:text-blue-500 transition-all duration-200"
               >
-                {employee?.name}
+                {truncateText(employee?.name, 15)}
               </Link>
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">

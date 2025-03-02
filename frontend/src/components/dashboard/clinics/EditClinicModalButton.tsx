@@ -93,7 +93,9 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="تعديل عيادة"
-        description="يمكنك تعديل العيادة المحددة هنا"
+        description={{
+          text: "يمكنك تعديل العيادة المحددة هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>

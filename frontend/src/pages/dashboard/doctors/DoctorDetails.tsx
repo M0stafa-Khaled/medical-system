@@ -4,7 +4,20 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import {
+  BadgeCheck,
+  BadgeX,
+  Calendar,
+  FileImage,
+  Loader2,
+  Mail,
+  Phone,
+  UserCircle2,
+  VenusAndMars,
+  BadgeInfo,
+  Building2,
+  Percent,
+} from "lucide-react";
 import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import formatDateTime from "@/utils/formatDate";
@@ -104,6 +117,7 @@ const DoctorDetails = () => {
         <CardContent className="py-4">
           <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
           <div className="flex items-center gap-2 mb-6">
+            <Building2 className="text-blue-700" />
             <h3 className="text-sm text-muted-foreground">العيادات:</h3>
             <div className="flex items-center flex-wrap gap-2">
               {clinics?.map((clinic) => (
@@ -113,33 +127,61 @@ const DoctorDetails = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <InfoField
+              icon={
+                status ? (
+                  <BadgeCheck className="text-green-500" />
+                ) : (
+                  <BadgeX className="text-red-500" />
+                )
+              }
               label="حالة الحساب"
               value={status ? "مفعل" : "غير مفعل"}
             />
-            <InfoField label="العمولة" value={commission!} />
-            <InfoField label="رقم القيد" value={register_id!} />
-            <InfoField label="رقم الهوية" value={personal_id!} />
-            <InfoField label="رقم الهاتف الاول" value={first_phone!} />
             <InfoField
+              icon={<Percent className="text-orange-500" />}
+              label="العمولة"
+              value={commission!}
+            />
+            <InfoField
+              icon={<BadgeInfo className="text-blue-700" />}
+              label="رقم القيد"
+              value={register_id!}
+            />
+            <InfoField
+              icon={<UserCircle2 className="text-primary" />}
+              label="رقم الهوية"
+              value={personal_id!}
+            />
+            <InfoField
+              icon={<Phone className="text-purple-600" />}
+              label="رقم الهاتف الاول"
+              value={first_phone!}
+            />
+            <InfoField
+              icon={<Phone className="text-green-600" />}
               label="رقم الهاتف الثاني"
               value={second_phone ? second_phone : "لا يوجد"}
             />
             <InfoField
+              icon={<Mail className="text-orange-500" />}
               label="البريد الإلكتروني"
               value={user?.email as string}
               sm
             />
             <InfoField
+              icon={<VenusAndMars className="text-primary" />}
               label="الجنس"
               value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
               sm
             />
             <InfoField
+              icon={<Calendar className="text-teal-500" />}
               label="تاريخ الإنشاء"
               value={formatDateTime(created_at as string)}
               sm
             />
             <div className="flex items-center gap-2">
+              <FileImage className="text-cyan-500" />
               <h5 className="text-sm text-muted-foreground">التوقيع:</h5>
               {signature ? (
                 <ImageModal

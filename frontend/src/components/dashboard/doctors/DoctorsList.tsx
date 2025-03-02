@@ -12,6 +12,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";
+import truncateText from "@/utils/truncateText";
 
 interface IProps {
   doctors: IDoctor[];
@@ -57,7 +58,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
               />
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
-              {name}
+              {truncateText(name, 15)}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
               {clinics.map(({ name }) => name).join(", ")}

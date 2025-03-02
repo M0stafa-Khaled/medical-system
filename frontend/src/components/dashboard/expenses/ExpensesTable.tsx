@@ -46,9 +46,7 @@ const ExpensesTable = () => {
           expenses={expenses?.data.items || []}
         />
       }
-      skeleton={
-        <TableSkeleton columns={7} rows={6} hasImage actionButtons={3} />
-      }
+      skeleton={<TableSkeleton columns={8} rows={6} actionButtons={3} />}
       pagination={
         expenses?.data && {
           meta: expenses.data.meta,
