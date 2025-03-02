@@ -30,7 +30,11 @@ const Actions = ({ doctorId }: { doctorId: string }) => {
               <AddActionButton doctorId={doctorId} />
             </motion.div>
           )}
-          <motion.div variants={containerVariants}>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <ActionsList doctorId={doctorId} />
           </motion.div>
         </CardContent>

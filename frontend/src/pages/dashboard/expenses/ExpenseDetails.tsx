@@ -4,7 +4,6 @@ import { useGetExpenseById } from "@/lib/react-query/expenses";
 import cookieServices from "@/utils/cookieServices";
 import formatDateTime from "@/utils/formatDate";
 import {
-  Loader2,
   DollarSign,
   Tag,
   User2,
@@ -17,6 +16,12 @@ import {
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+import {
+  containerVariants,
+  itemVariants,
+} from "@/animations/dashboardAnimations";
+import DataLoader from "@/components/DataLoader";
 
 const ExpenseDetails = () => {
   const navigate = useNavigate();
@@ -45,15 +50,7 @@ const ExpenseDetails = () => {
     }
   }, [expense, isError, navigate]);
 
-  if (isLoading)
-    return (
-      <div className="mt-20 text-black dark:text-white flex flex-col items-center justify-center gap-4">
-        <Loader2 className="animate-spin" size={48} />
-        <p className="text-lg font-medium animate-pulse">
-          جاري تحميل البيانات...
-        </p>
-      </div>
-    );
+  if (isLoading) return <DataLoader />;
 
   const {
     name,
@@ -68,91 +65,122 @@ const ExpenseDetails = () => {
   } = expense?.data || {};
 
   return (
-    <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm hover:shadow-md transition-shadow duration-300">
-      <CardHeader>
-        <CardTitle className="mb-4 flex items-center gap-2">
-          <Receipt className="h-6 w-6 text-primary" />
-          <span>تفاصيل المصروف:</span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <InfoField
-            label="اسم المصروف"
-            value={name!}
-            icon={<Tag className="h-5 w-5 text-primary" />}
-          />
+    <motion.section
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm hover:shadow-md transition-shadow duration-300">
+        <CardHeader>
+          <motion.div variants={itemVariants}>
+            <CardTitle className="flex items-center gap-2">
+              <Receipt className="h-6 w-6 text-primary" />
+              <span>تفاصيل المصروف:</span>
+            </CardTitle>
+          </motion.div>
+        </CardHeader>
 
-          <InfoField
-            label="المبلغ"
-            value={price!}
-            icon={<DollarSign className="h-5 w-5 text-green-500" />}
-          />
-
-          <InfoField
-            label="التصنيف"
-            value={category?.name ?? "لا يوجد"}
-            icon={<Tag className="h-5 w-5 text-blue-500" />}
-          />
-
-          <InfoField
-            label="الحالة"
-            value={status ? "معتمد" : "ملغي"}
-            icon={
-              status ? (
-                <BadgeCheck className="text-green-500" />
-              ) : (
-                <BadgeX className="text-red-500" />
-              )
-            }
-          />
-          {!status && cancelled_info && (
-            <InfoField
-              label="سبب الإلغاء"
-              value={cancelled_info}
-              icon={<BadgeX className="text-red-500" />}
-            />
-          )}
-
-          <Link
-            to={`/dashboard/employees/${employee?.id}`}
-            className="block hover:text-primary transition-colors duration-200"
+        <CardContent>
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            variants={containerVariants}
           >
-            <InfoField
-              label="الموظف"
-              value={employee?.name || ""}
-              icon={<User2 className="h-5 w-5 text-indigo-500" />}
-            />
-          </Link>
+            <motion.div variants={itemVariants}>
+              <InfoField
+                label="اسم المصروف"
+                value={name!}
+                icon={<Tag className="h-5 w-5 text-primary" />}
+              />
+            </motion.div>
 
-          <InfoField
-            label="تاريخ الصرف"
-            value={formatDateTime(created_at!, {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
-              hour12: true,
-            })}
-            icon={<Calendar className="h-5 w-5 text-orange-500" />}
-            sm
-          />
+            <motion.div variants={itemVariants}>
+              <InfoField
+                label="المبلغ"
+                value={price!}
+                icon={<DollarSign className="h-5 w-5 text-green-500" />}
+              />
+            </motion.div>
 
-          <InfoField
-            label="رقم الإيصال"
-            value={code!}
-            icon={<Receipt className="h-5 w-5 text-purple-500" />}
-          />
+            <motion.div variants={itemVariants}>
+              <InfoField
+                label="التصنيف"
+                value={category?.name ?? "لا يوجد"}
+                icon={<Tag className="h-5 w-5 text-blue-500" />}
+              />
+            </motion.div>
 
-          <InfoField
-            label="الخزينة"
-            value={treasury?.name ?? "لا يوجد"}
-            icon={<Wallet className="h-5 w-5 text-yellow-500" />}
-          />
-        </div>
-      </CardContent>
-    </Card>
+            <motion.div variants={itemVariants}>
+              <InfoField
+                label="الحالة"
+                value={status ? "معتمد" : "ملغي"}
+                icon={
+                  status ? (
+                    <BadgeCheck className="text-green-500" />
+                  ) : (
+                    <BadgeX className="text-red-500" />
+                  )
+                }
+              />
+            </motion.div>
+
+            {!status && cancelled_info && (
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  label="سبب الإلغاء"
+                  value={cancelled_info}
+                  icon={<BadgeX className="text-red-500" />}
+                />
+              </motion.div>
+            )}
+
+            <motion.div variants={itemVariants}>
+              <Link
+                to={`/dashboard/employees/${employee?.id}`}
+                className="block hover:text-primary transition-colors duration-200"
+              >
+                <InfoField
+                  label="الموظف"
+                  value={employee?.name || ""}
+                  icon={<User2 className="h-5 w-5 text-indigo-500" />}
+                />
+              </Link>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <InfoField
+                label="تاريخ الصرف"
+                value={formatDateTime(created_at!, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })}
+                icon={<Calendar className="h-5 w-5 text-orange-500" />}
+                sm
+              />
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <InfoField
+                label="رقم الإيصال"
+                value={code!}
+                icon={<Receipt className="h-5 w-5 text-purple-500" />}
+              />
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <InfoField
+                label="الخزينة"
+                value={treasury?.name ?? "لا يوجد"}
+                icon={<Wallet className="h-5 w-5 text-yellow-500" />}
+              />
+            </motion.div>
+          </motion.div>
+        </CardContent>
+      </Card>
+    </motion.section>
   );
 };
 
