@@ -6,9 +6,11 @@ const addExpenseSchema = z.object({
     .nonempty({ message: "الاسم مطلوب" })
     .trim(),
   status: z.boolean().default(true),
-  price: z.coerce.number({
-    message: "ادخل قمية صالحة",
-  }),
+  price: z.coerce
+    .number({
+      message: "ادخل مبلغ صالح",
+    })
+    .min(1, { message: "ادخل مبلغ صالح" }),
   category_id: z.object(
     {
       value: z.string({ message: "التصنيف مطلوب" }),

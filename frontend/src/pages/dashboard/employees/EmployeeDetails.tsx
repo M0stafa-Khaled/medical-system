@@ -11,6 +11,7 @@ import {
   BadgeCheck,
   BadgeX,
   Briefcase,
+  Building2,
   Calendar,
   CircleDollarSign,
   FileImage,
@@ -18,6 +19,7 @@ import {
   Phone,
   UserCircle2,
   VenusAndMars,
+  Wallet,
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
@@ -32,6 +34,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import DataLoader from "@/components/DataLoader";
+import { Badge } from "@/components/ui/badge";
 
 const EmployeeDetails = () => {
   const canEditEmployee = useHasPermission(PERMISSIONS.EDIT_EMPLOYEE);
@@ -79,6 +82,8 @@ const EmployeeDetails = () => {
     user,
     gender,
     personal_image,
+    permissions,
+    treasury,
   } = employee?.data || {};
 
   return (
@@ -163,6 +168,14 @@ const EmployeeDetails = () => {
 
             <motion.div variants={itemVariants}>
               <InfoField
+                label="الخزينة"
+                value={treasury?.name ?? "لا يوجد"}
+                icon={<Wallet className="h-5 w-5 text-yellow-500" />}
+              />
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <InfoField
                 label="رقم الهوية"
                 value={personal_id!}
                 icon={<UserCircle2 className="text-primary" />}
@@ -231,6 +244,22 @@ const EmployeeDetails = () => {
                 <p>لا يوجد صورة</p>
               )}
             </motion.div>
+            {user?.role === "employee" && (
+              <motion.div
+                className="flex items-center gap-2 col-span-full"
+                variants={itemVariants}
+              >
+                <Building2 className="text-blue-700" />
+                <h3 className="text-sm text-muted-foreground">الصلاحيات:</h3>
+                <div className="flex items-center flex-wrap gap-2">
+                  {permissions?.map((permission) => (
+                    <motion.div key={permission.id} variants={itemVariants}>
+                      <Badge>{permission.name}</Badge>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </CardContent>
       </Card>
