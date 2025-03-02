@@ -4,9 +4,11 @@ const doctorActionSchema = z.object({
   name: z.string().nonempty({
     message: "اسم الإجراء مطلوب",
   }),
-  price: z.coerce.number({
-    message: "ادخل سعر إجراء صالح",
-  }),
+  price: z.coerce
+    .number({
+      message: "ادخل سعر إجراء صالح",
+    })
+    .min(0, { message: "ادخل سعر إجراء صالح" }),
 });
 
 export default doctorActionSchema;

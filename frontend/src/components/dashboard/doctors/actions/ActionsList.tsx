@@ -28,8 +28,8 @@ const ActionsList = ({ doctorId }: IProps) => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4"
         >
           {actions?.data?.items.map((action, idx) => (
-            <motion.div variants={itemVariants} custom={idx}>
-              <ActionCard key={action.id} action={action} doctorId={doctorId} />
+            <motion.div variants={itemVariants} custom={idx} key={action.id}>
+              <ActionCard action={action} doctorId={doctorId} />
             </motion.div>
           ))}
         </motion.div>

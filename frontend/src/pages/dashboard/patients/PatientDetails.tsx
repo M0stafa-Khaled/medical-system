@@ -176,7 +176,7 @@ const PatientDetails = () => {
 
             <motion.div variants={itemVariants}>
               <InfoField
-                icon={<Phone className="text-purple-600" />}
+                icon={<Phone className="text-green-600" />}
                 label="رقم الهاتف الاول"
                 value={first_phone!}
               />
@@ -184,7 +184,7 @@ const PatientDetails = () => {
 
             <motion.div variants={itemVariants}>
               <InfoField
-                icon={<Phone className="text-green-600" />}
+                icon={<Phone className="text-purple-600" />}
                 label="رقم الهاتف الثاني"
                 value={second_phone ? second_phone : "لا يوجد"}
               />

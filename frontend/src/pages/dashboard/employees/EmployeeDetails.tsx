@@ -11,12 +11,12 @@ import {
   BadgeCheck,
   BadgeX,
   Briefcase,
-  Building2,
   Calendar,
   CircleDollarSign,
   FileImage,
   Mail,
   Phone,
+  ShieldUser,
   UserCircle2,
   VenusAndMars,
   Wallet,
@@ -194,7 +194,7 @@ const EmployeeDetails = () => {
               <InfoField
                 label="رقم الهاتف الثاني"
                 value={second_phone ? second_phone : "لا يوجد"}
-                icon={<Phone className="text-green-600" />}
+                icon={<Phone className="text-purple-600" />}
               />
             </motion.div>
 
@@ -246,10 +246,10 @@ const EmployeeDetails = () => {
             </motion.div>
             {user?.role === "employee" && (
               <motion.div
-                className="flex items-center gap-2 col-span-full"
+                className="flex gap-2 col-span-full"
                 variants={itemVariants}
               >
-                <Building2 className="text-blue-700" />
+                <ShieldUser className="text-blue-700 flex-shrink-0" />
                 <h3 className="text-sm text-muted-foreground">الصلاحيات:</h3>
                 <div className="flex items-center flex-wrap gap-2">
                   {permissions?.map((permission) => (

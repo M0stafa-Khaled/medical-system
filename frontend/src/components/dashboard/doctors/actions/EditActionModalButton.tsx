@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -26,6 +18,12 @@ import doctorActionSchema from "@/validations/doctorActionSchema";
 import { useUpdateDoctorAction } from "@/lib/react-query/doctorActions";
 import { FaPencil } from "react-icons/fa6";
 import { IDoctorAction } from "@/interfaces/doctorActions";
+import { motion } from "framer-motion";
+import {
+  containerVariants,
+  itemVariants,
+} from "@/animations/dashboardAnimations";
+import RenderFormFields from "@/components/forms/RenderFormFields";
 
 interface IProps {
   doctorId: string;
@@ -99,36 +97,22 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
         showFooter={false}
       >
         <Form {...form}>
-          <form
+          <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 md:space-y-8"
+            className="space-y-5 text-black dark:text-white"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
           >
-            <div className="space-y-4">
-              {DOCTOR_ACTION_INPUTS.map((input) => (
-                <FormField
-                  key={input.name}
-                  control={form.control}
-                  name={input.name as keyof z.infer<typeof doctorActionSchema>}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="w-fit leading-relaxed text-black dark:text-white">
-                        {input.label}
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type={input.type}
-                          min={0}
-                          placeholder={input.placeholder}
-                          {...field}
-                          className="py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-black/50 dark:placeholder:text-white/50"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+            {DOCTOR_ACTION_INPUTS.map((input, idx) => (
+              <motion.div variants={itemVariants} key={input.name} custom={idx}>
+                <RenderFormFields
+                  input={input}
+                  form={form}
+                  schema={doctorActionSchema}
                 />
-              ))}
-            </div>
+              </motion.div>
+            ))}
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
@@ -145,7 +129,7 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>
-          </form>
+          </motion.form>
         </Form>
       </Modal>
     </>

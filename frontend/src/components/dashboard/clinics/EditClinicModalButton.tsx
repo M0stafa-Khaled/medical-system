@@ -1,20 +1,12 @@
 import { FaPencil } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
 
-import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -23,9 +15,15 @@ import { useUpdateClinic } from "@/lib/react-query/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
 import cookieServices from "@/utils/cookieServices";
 import Modal from "@/components/shared/Modal";
+import { CLINIC_FORM_INPUTS } from "@/constants";
+import RenderFormFields from "@/components/forms/RenderFormFields";
+import {
+  containerVariants,
+  itemVariants,
+} from "@/animations/dashboardAnimations";
+import { motion } from "framer-motion";
 
 interface IProps {
   id: number;
@@ -99,47 +97,22 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
         showFooter={false}
       >
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="w-fit leading-relaxed text-black dark:text-white">
-                    اسم العيادة:
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="اسم العيادة"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) => form.setValue("name", e.target.value)}
-                      className="py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-black/50 dark:placeholder:text-white/50"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center gap-4">
-                  <FormLabel className="text-black dark:text-white">
-                    متاحة:
-                  </FormLabel>
-                  <FormControl>
-                    <Switch
-                      dir="ltr"
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="data-[state=unchecked]:bg-black/50 data-[state=checked]:bg-green-700 dark:data-[state=unchecked]:bg-white/50 dark:data-[state=checked]:bg-green-500"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+          <motion.form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-5 text-black dark:text-white"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            {CLINIC_FORM_INPUTS.map((input, idx) => (
+              <motion.div variants={itemVariants} key={input.name} custom={idx}>
+                <RenderFormFields
+                  input={input}
+                  form={form}
+                  schema={clinicSchema}
+                />
+              </motion.div>
+            ))}
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel className="text-black dark:text-white py-2.5 h-auto">
                 إلغاء
@@ -153,7 +126,7 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </AlertDialogFooter>
-          </form>
+          </motion.form>
         </Form>
       </Modal>
     </div>
