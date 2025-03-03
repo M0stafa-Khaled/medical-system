@@ -13,8 +13,8 @@ import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";
 import DeleteExpenseButton from "./DeleteExpenseModalButton";
 import CancelExpenseButton from "./CancelExpenseModalButton";
-import { FaPrint } from "react-icons/fa6";
 import truncateText from "@/utils/truncateText";
+import PrintExpenseReceipt from "./PrintExpenseReceipt";
 
 interface IProps {
   expenses: IExpense[];
@@ -117,11 +117,7 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
                       </Link>
                     </Button>
                   )}
-                  {canViewExpense && (
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm h-9 w-9">
-                      <FaPrint size={24} />
-                    </Button>
-                  )}
+                  {canViewExpense && <PrintExpenseReceipt />}
                   {canCancelExpense && status && (
                     <CancelExpenseButton id={id} />
                   )}
