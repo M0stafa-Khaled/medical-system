@@ -5,8 +5,10 @@ import cookieServices from "@/utils/cookieServices";
 import updatePatientSchema from "@/validations/updatePatientSchema";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const UpdatePatient = () => {
   const navigate = useNavigate();
@@ -44,20 +46,31 @@ const UpdatePatient = () => {
     );
 
   return (
-    <Card className="mt-10 dark:bg-foreground border-muted">
-      <div className="flex flex-col space-y-1.5 p-6">
-        <h1 className="font-semibold leading-none tracking-tight">
-          تحديث بيانات المريض
-        </h1>
-      </div>
-      <CardContent>
-        <PatientForm
-          action={"update"}
-          patient={patient?.data}
-          patientSchema={updatePatientSchema}
-        />
-      </CardContent>
-    </Card>
+    <>
+      <Helmet>
+        <title>EgProg | {patient?.data.name}</title>
+      </Helmet>
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <Card className="mt-10 dark:bg-foreground border-muted">
+          <div className="flex flex-col space-y-1.5 p-6">
+            <h1 className="font-semibold leading-none tracking-tight">
+              تحديث بيانات المريض
+            </h1>
+          </div>
+          <CardContent>
+            <PatientForm
+              action={"update"}
+              patient={patient?.data}
+              patientSchema={updatePatientSchema}
+            />
+          </CardContent>
+        </Card>
+      </motion.section>
+    </>
   );
 };
 

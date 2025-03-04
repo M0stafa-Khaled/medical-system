@@ -35,6 +35,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import DataLoader from "@/components/DataLoader";
+import { Helmet } from "react-helmet-async";
 const DoctorDetails = () => {
   const canEditDoctor = useHasPermission(PERMISSIONS.EDIT_DOCTOR);
   const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
@@ -84,172 +85,177 @@ const DoctorDetails = () => {
     user,
   } = doctor?.data || {};
   return (
-    <motion.section
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
-        <CardHeader>
-          <motion.div variants={itemVariants}>
-            <ProfileHeader
-              image={image!}
-              name={name!}
-              role={user?.role.toLowerCase() as string}
-              actionButtons={
-                <>
-                  {canEditDoctor && (
-                    <motion.div variants={itemVariants}>
-                      <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                        <Link
-                          to={`/dashboard/doctors/update/${id}`}
-                          className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                        >
-                          <FaPencil size={18} />
-                        </Link>
-                      </Button>
-                    </motion.div>
-                  )}
-                  {canDeleteDoctor && (
-                    <motion.div variants={itemVariants}>
-                      <DeleteDoctorButton id={id!} name={name!} />
-                    </motion.div>
-                  )}
-                </>
-              }
-            />
-          </motion.div>
-        </CardHeader>
-        <motion.div className="px-4" variants={itemVariants}>
-          <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
-        </motion.div>
-        <CardContent className="py-4">
-          <motion.div variants={itemVariants}>
-            <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
-          </motion.div>
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
-            <motion.div
-              className="flex items-center gap-2 col-span-full"
-              variants={itemVariants}
-            >
-              <Building2 className="text-blue-700" />
-              <h3 className="text-sm text-muted-foreground">العيادات:</h3>
-              <div className="flex items-center flex-wrap gap-2">
-                {clinics?.map((clinic) => (
-                  <motion.div key={clinic.id} variants={itemVariants}>
-                    <Badge>{clinic.name}</Badge>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
+    <>
+      <Helmet>
+        <title>EgProg | د / {name}</title>
+      </Helmet>
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
+          <CardHeader>
             <motion.div variants={itemVariants}>
-              <InfoField
-                icon={
-                  status ? (
-                    <BadgeCheck className="text-green-500" />
-                  ) : (
-                    <BadgeX className="text-red-500" />
-                  )
+              <ProfileHeader
+                image={image!}
+                name={name!}
+                role={user?.role.toLowerCase() as string}
+                actionButtons={
+                  <>
+                    {canEditDoctor && (
+                      <motion.div variants={itemVariants}>
+                        <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                          <Link
+                            to={`/dashboard/doctors/update/${id}`}
+                            className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                          >
+                            <FaPencil size={18} />
+                          </Link>
+                        </Button>
+                      </motion.div>
+                    )}
+                    {canDeleteDoctor && (
+                      <motion.div variants={itemVariants}>
+                        <DeleteDoctorButton id={id!} name={name!} />
+                      </motion.div>
+                    )}
+                  </>
                 }
-                label="حالة الحساب"
-                value={status ? "مفعل" : "غير مفعل"}
               />
             </motion.div>
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Percent className="text-orange-500" />}
-                label="العمولة"
-                value={commission!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<BadgeInfo className="text-blue-700" />}
-                label="رقم القيد"
-                value={register_id!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<UserCircle2 className="text-primary" />}
-                label="رقم الهوية"
-                value={personal_id!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Phone className="text-green-600" />}
-                label="رقم الهاتف الاول"
-                value={first_phone!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Phone className="text-purple-600" />}
-                label="رقم الهاتف الثاني"
-                value={second_phone ? second_phone : "لا يوجد"}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Mail className="text-orange-500" />}
-                label="البريد الإلكتروني"
-                value={user?.email as string}
-                sm
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<VenusAndMars className="text-primary" />}
-                label="الجنس"
-                value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
-                sm
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Calendar className="text-teal-500" />}
-                label="تاريخ الإنشاء"
-                value={formatDateTime(created_at as string)}
-                sm
-              />
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center gap-2"
-            >
-              <FileImage className="text-cyan-500" />
-              <h5 className="text-sm text-muted-foreground">التوقيع:</h5>
-              {signature ? (
-                <ImageModal
-                  src={signature}
-                  alt="Signature"
-                  showThumbnail={false}
-                  trigger={<Button size="sm">عرض الصورة</Button>}
-                />
-              ) : (
-                <p className="text-sm text-muted-foreground">لا يوجد</p>
-              )}
-            </motion.div>
+          </CardHeader>
+          <motion.div className="px-4" variants={itemVariants}>
+            <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
           </motion.div>
-        </CardContent>
-      </Card>
-      <motion.div variants={itemVariants}>
-        <Actions doctorId={doctorId!} />
-      </motion.div>
-    </motion.section>
+          <CardContent className="py-4">
+            <motion.div variants={itemVariants}>
+              <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
+            </motion.div>
+            <motion.div
+              variants={containerVariants}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              <motion.div
+                className="flex items-center gap-2 col-span-full"
+                variants={itemVariants}
+              >
+                <Building2 className="text-blue-700" />
+                <h3 className="text-sm text-muted-foreground">العيادات:</h3>
+                <div className="flex items-center flex-wrap gap-2">
+                  {clinics?.map((clinic) => (
+                    <motion.div key={clinic.id} variants={itemVariants}>
+                      <Badge>{clinic.name}</Badge>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={
+                    status ? (
+                      <BadgeCheck className="text-green-500" />
+                    ) : (
+                      <BadgeX className="text-red-500" />
+                    )
+                  }
+                  label="حالة الحساب"
+                  value={status ? "مفعل" : "غير مفعل"}
+                />
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Percent className="text-orange-500" />}
+                  label="العمولة"
+                  value={commission!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<BadgeInfo className="text-blue-700" />}
+                  label="رقم القيد"
+                  value={register_id!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<UserCircle2 className="text-primary" />}
+                  label="رقم الهوية"
+                  value={personal_id!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Phone className="text-green-600" />}
+                  label="رقم الهاتف الاول"
+                  value={first_phone!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Phone className="text-purple-600" />}
+                  label="رقم الهاتف الثاني"
+                  value={second_phone ? second_phone : "لا يوجد"}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Mail className="text-orange-500" />}
+                  label="البريد الإلكتروني"
+                  value={user?.email as string}
+                  sm
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<VenusAndMars className="text-primary" />}
+                  label="الجنس"
+                  value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
+                  sm
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Calendar className="text-teal-500" />}
+                  label="تاريخ الإنشاء"
+                  value={formatDateTime(created_at as string)}
+                  sm
+                />
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex items-center gap-2"
+              >
+                <FileImage className="text-cyan-500" />
+                <h5 className="text-sm text-muted-foreground">التوقيع:</h5>
+                {signature ? (
+                  <ImageModal
+                    src={signature}
+                    alt="Signature"
+                    showThumbnail={false}
+                    trigger={<Button size="sm">عرض الصورة</Button>}
+                  />
+                ) : (
+                  <p className="text-sm text-muted-foreground">لا يوجد</p>
+                )}
+              </motion.div>
+            </motion.div>
+          </CardContent>
+        </Card>
+        <motion.div variants={itemVariants}>
+          <Actions doctorId={doctorId!} />
+        </motion.div>
+      </motion.section>
+    </>
   );
 };
 

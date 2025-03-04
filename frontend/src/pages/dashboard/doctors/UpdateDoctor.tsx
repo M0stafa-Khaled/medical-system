@@ -5,9 +5,10 @@ import cookieServices from "@/utils/cookieServices";
 import updateDoctorSchema from "@/validations/updateDoctorSchema";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { motion } from "framer-motion";
 const UpdateDoctor = () => {
   const navigate = useNavigate();
   const token = cookieServices.getToken();
@@ -18,8 +19,8 @@ const UpdateDoctor = () => {
     isLoading,
     isError,
   } = useGetDoctorById({
-    id: doctorId as string,
-    token: token as string,
+    id: doctorId!,
+    token: token!,
   });
 
   useEffect(() => {
@@ -43,20 +44,32 @@ const UpdateDoctor = () => {
     );
 
   return (
-    <Card className="mt-10 dark:bg-foreground border-muted">
-      <div className="flex flex-col space-y-1.5 p-6">
-        <h1 className="font-semibold leading-none tracking-tight">
-          تحديث بيانات طبيب
-        </h1>
-      </div>
-      <CardContent>
-        <DoctorForm
-          action={"update"}
-          doctor={doctor?.data}
-          doctorSchema={updateDoctorSchema}
-        />
-      </CardContent>
-    </Card>
+    <>
+      <Helmet>
+        <title>EgProg | د / {doctor?.data.name}</title>
+      </Helmet>
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="mt-6"
+      >
+        <Card className="mt-10 dark:bg-foreground border-muted">
+          <div className="flex flex-col space-y-1.5 p-6">
+            <h1 className="font-semibold leading-none tracking-tight">
+              تحديث بيانات طبيب
+            </h1>
+          </div>
+          <CardContent>
+            <DoctorForm
+              action={"update"}
+              doctor={doctor?.data}
+              doctorSchema={updateDoctorSchema}
+            />
+          </CardContent>
+        </Card>
+      </motion.section>
+    </>
   );
 };
 

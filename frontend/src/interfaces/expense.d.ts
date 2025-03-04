@@ -14,7 +14,6 @@ export interface IExpense {
   id: number;
   name: string;
   cancelled_info: string | null;
-  description: string | null;
   price: string;
   status: true;
   code: string;

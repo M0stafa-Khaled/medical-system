@@ -28,14 +28,16 @@ const ActionCard = ({ action, doctorId }: IProps) => {
           </p>
         </CardContent>
       </div>
-      <div className="flex flex-col px-4 gap-2">
-        {canDeleteAction && (
-          <DeleteActionButton id={action.id} name={action.name} />
-        )}
-        {canEditAction && (
-          <EditActionButton doctorId={doctorId} action={action} />
-        )}
-      </div>
+      {(canDeleteAction || canEditAction) && (
+        <div className="flex flex-col px-4 gap-2">
+          {canDeleteAction && (
+            <DeleteActionButton id={action.id} name={action.name} />
+          )}
+          {canEditAction && (
+            <EditActionButton doctorId={doctorId} action={action} />
+          )}
+        </div>
+      )}
     </Card>
   );
 };

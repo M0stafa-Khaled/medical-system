@@ -1,16 +1,21 @@
 import ClinicsTable from "@/components/dashboard/clinics/ClinicsTable";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const Clinics = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mt-6"
-    >
-      <ClinicsTable />
-    </motion.section>
+    <>
+      <Helmet>
+        <title>EgProg | العيادات</title>
+      </Helmet>
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <ClinicsTable />
+      </motion.section>
+    </>
   );
 };
 

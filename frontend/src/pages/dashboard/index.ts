@@ -12,7 +12,7 @@ export { default as PatientDetails } from "./patients/PatientDetails";
 export { default as AddPatient } from "./patients/AddPatient";
 export { default as UpdatePatient } from "./patients/UpdatePatient";
 export { default as Drugs } from "./drugs";
-export { default as Treasuries } from "./treasuries/Treasuries";
 export { default as Expenses } from "./expenses";
 export { default as ExpensesCategories } from "./expensesCategories";
 export { default as ExpenseDetails } from "./expenses/ExpenseDetails";
+export { default as Treasuries } from "./treasuries";

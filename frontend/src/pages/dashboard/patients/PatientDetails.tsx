@@ -31,6 +31,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import DataLoader from "@/components/DataLoader";
+import { Helmet } from "react-helmet-async";
 
 const PatientDetails = () => {
   const canEditPatient = useHasPermission(PERMISSIONS.EDIT_PATIENT);
@@ -82,162 +83,167 @@ const PatientDetails = () => {
   } = patient?.data || {};
 
   return (
-    <motion.section
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
-        <CardHeader>
-          <motion.div variants={itemVariants}>
-            <ProfileHeader
-              name={name!}
-              role={user?.role.toLowerCase() as string}
-              actionButtons={
-                <>
-                  {canEditPatient && (
-                    <motion.div variants={itemVariants}>
-                      <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                        <Link
-                          to={`/dashboard/patients/update/${id}`}
-                          className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                        >
-                          <FaPencil size={18} />
-                        </Link>
-                      </Button>
-                    </motion.div>
-                  )}
-                  {canDeletePatient && (
-                    <motion.div variants={itemVariants}>
-                      <DeletePatientButton id={id!} name={name!} />
-                    </motion.div>
-                  )}
-                </>
-              }
-            />
-          </motion.div>
-        </CardHeader>
-        <motion.div variants={itemVariants} className="px-4">
-          <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
-        </motion.div>
-        <CardContent className="py-4">
-          <motion.div variants={itemVariants}>
-            <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
-          </motion.div>
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            variants={containerVariants}
-          >
+    <>
+      <Helmet>
+        <title>EgProg | إضافة مريض</title>
+      </Helmet>
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
+          <CardHeader>
             <motion.div variants={itemVariants}>
-              <InfoField
-                icon={
-                  status ? (
-                    <BadgeCheck className="text-green-500" />
-                  ) : (
-                    <BadgeX className="text-red-500" />
-                  )
+              <ProfileHeader
+                name={name!}
+                role={user?.role.toLowerCase() as string}
+                actionButtons={
+                  <>
+                    {canEditPatient && (
+                      <motion.div variants={itemVariants}>
+                        <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                          <Link
+                            to={`/dashboard/patients/update/${id}`}
+                            className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                          >
+                            <FaPencil size={18} />
+                          </Link>
+                        </Button>
+                      </motion.div>
+                    )}
+                    {canDeletePatient && (
+                      <motion.div variants={itemVariants}>
+                        <DeletePatientButton id={id!} name={name!} />
+                      </motion.div>
+                    )}
+                  </>
                 }
-                label="حالة الحساب"
-                value={status ? "مفعل" : "غير مفعل"}
               />
             </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Info className="text-blue-700" />}
-                label="ملاحظات حالة الحساب"
-                value={info_status!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Users className="text-blue-700" />}
-                label="اسم احد الاقارب"
-                value={another_name!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<BadgeInfo className="text-primary" />}
-                label="ملاحظات"
-                value={description!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<UserCircle2 className="text-primary" />}
-                label="رقم الهوية"
-                value={personal_id!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Phone className="text-green-600" />}
-                label="رقم الهاتف الاول"
-                value={first_phone!}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Phone className="text-purple-600" />}
-                label="رقم الهاتف الثاني"
-                value={second_phone ? second_phone : "لا يوجد"}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Mail className="text-orange-500" />}
-                label="البريد الإلكتروني"
-                value={user?.email as string}
-                sm
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                label="الجنس"
-                value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
-                sm
-                icon={<VenusAndMars className="text-primary" />}
-              />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InfoField
-                icon={<Calendar className="text-teal-500" />}
-                label="تاريخ الإنشاء"
-                value={formatDateTime(created_at!)}
-                sm
-              />
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center gap-2 select-none"
-            >
-              <FileImage className="text-cyan-500" />
-              <h5 className="text-sm text-muted-foreground">صورة الهوية :</h5>
-              {personal_image ? (
-                <ImageModal
-                  src={personal_image}
-                  alt="صورة الهوية"
-                  showThumbnail={false}
-                  trigger={<Button size={"sm"}>عرض الصورة</Button>}
-                />
-              ) : (
-                <p>لا يوجد صورة</p>
-              )}
-            </motion.div>
+          </CardHeader>
+          <motion.div variants={itemVariants} className="px-4">
+            <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
           </motion.div>
-        </CardContent>
-      </Card>
-    </motion.section>
+          <CardContent className="py-4">
+            <motion.div variants={itemVariants}>
+              <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              variants={containerVariants}
+            >
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={
+                    status ? (
+                      <BadgeCheck className="text-green-500" />
+                    ) : (
+                      <BadgeX className="text-red-500" />
+                    )
+                  }
+                  label="حالة الحساب"
+                  value={status ? "مفعل" : "غير مفعل"}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Info className="text-blue-700" />}
+                  label="ملاحظات حالة الحساب"
+                  value={info_status!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Users className="text-blue-700" />}
+                  label="اسم احد الاقارب"
+                  value={another_name!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<BadgeInfo className="text-primary" />}
+                  label="ملاحظات"
+                  value={description!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<UserCircle2 className="text-primary" />}
+                  label="رقم الهوية"
+                  value={personal_id!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Phone className="text-green-600" />}
+                  label="رقم الهاتف الاول"
+                  value={first_phone!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Phone className="text-purple-600" />}
+                  label="رقم الهاتف الثاني"
+                  value={second_phone ? second_phone : "لا يوجد"}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Mail className="text-orange-500" />}
+                  label="البريد الإلكتروني"
+                  value={user?.email as string}
+                  sm
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  label="الجنس"
+                  value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
+                  sm
+                  icon={<VenusAndMars className="text-primary" />}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Calendar className="text-teal-500" />}
+                  label="تاريخ الإنشاء"
+                  value={formatDateTime(created_at!)}
+                  sm
+                />
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex items-center gap-2 select-none"
+              >
+                <FileImage className="text-cyan-500" />
+                <h5 className="text-sm text-muted-foreground">صورة الهوية :</h5>
+                {personal_image ? (
+                  <ImageModal
+                    src={personal_image}
+                    alt="صورة الهوية"
+                    showThumbnail={false}
+                    trigger={<Button size={"sm"}>عرض الصورة</Button>}
+                  />
+                ) : (
+                  <p>لا يوجد صورة</p>
+                )}
+              </motion.div>
+            </motion.div>
+          </CardContent>
+        </Card>
+      </motion.section>
+    </>
   );
 };
 

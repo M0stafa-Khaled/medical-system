@@ -1,22 +1,22 @@
-import CategoriesList from "@/components/dashboard/expensesCategories/CategoriesList";
+import ExpensesTable from "@/components/dashboard/expenses/ExpensesTable";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-const ExpensesCategories = () => {
+
+const Treasuries = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | تصنيفات المصروفات</title>
+        <title>EgProg | الخزائن</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="mt-6"
       >
-        <CategoriesList />
+        <ExpensesTable />
       </motion.section>
     </>
   );
 };
 
-export default ExpensesCategories;
+export default Treasuries;

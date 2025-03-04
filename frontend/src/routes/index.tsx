@@ -79,7 +79,7 @@ const routes = createRoutesFromElements(
       <Route
         path="doctors/:doctorId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_DOCTOR}>
+          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_DOCTOR}>
             <DoctorDetails />
           </ProtectedRoute>
         }
@@ -113,7 +113,7 @@ const routes = createRoutesFromElements(
       <Route
         path="employees/:employeeId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_EMPLOYEE}>
+          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EMPLOYEE}>
             <EmployeeDetails />
           </ProtectedRoute>
         }
@@ -149,7 +149,7 @@ const routes = createRoutesFromElements(
       <Route
         path="patients/:patientId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_PATIENT}>
+          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PATIENT}>
             <PatientDetails />
           </ProtectedRoute>
         }
@@ -201,6 +201,7 @@ const routes = createRoutesFromElements(
           </ProtectedRoute>
         }
       />
+
       <Route
         path="treasuries"
         element={

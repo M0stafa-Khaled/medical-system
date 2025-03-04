@@ -5,8 +5,10 @@ import cookieServices from "@/utils/cookieServices";
 import updateEmployeeSchema from "@/validations/updateEmployeeSchema";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const UpdateEmployee = () => {
   const navigate = useNavigate();
@@ -44,20 +46,31 @@ const UpdateEmployee = () => {
     );
 
   return (
-    <Card className="mt-10 dark:bg-foreground border-muted">
-      <div className="flex flex-col space-y-1.5 p-6">
-        <h1 className="font-semibold leading-none tracking-tight">
-          تحديث بيانات الموظف
-        </h1>
-      </div>
-      <CardContent>
-        <EmployeeForm
-          action={"update"}
-          employee={employee?.data}
-          employeeSchema={updateEmployeeSchema}
-        />
-      </CardContent>
-    </Card>
+    <>
+      <Helmet>
+        <title>EgProg | {employee?.data.name}</title>
+      </Helmet>
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <Card className="mt-10 dark:bg-foreground border-muted">
+          <div className="flex flex-col space-y-1.5 p-6">
+            <h1 className="font-semibold leading-none tracking-tight">
+              تحديث بيانات الموظف
+            </h1>
+          </div>
+          <CardContent>
+            <EmployeeForm
+              action={"update"}
+              employee={employee?.data}
+              employeeSchema={updateEmployeeSchema}
+            />
+          </CardContent>
+        </Card>
+      </motion.section>
+    </>
   );
 };
 

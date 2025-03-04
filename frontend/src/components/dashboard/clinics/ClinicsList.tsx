@@ -55,7 +55,9 @@ const ClinicsList = ({ clinics }: IProps) => {
           {(canEditClinic || canDeleteClinic) && (
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
-                <EditClinicModalButton name={name} id={id} status={status} />
+                {canEditClinic && (
+                  <EditClinicModalButton name={name} id={id} status={status} />
+                )}
                 {canDeleteClinic && <DeleteClinicButton name={name} id={id} />}
               </div>
             </TableCell>
