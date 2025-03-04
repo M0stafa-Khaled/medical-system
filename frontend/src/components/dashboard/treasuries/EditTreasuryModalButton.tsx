@@ -19,39 +19,43 @@ import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import categorySchema from "@/validations/categorySchema";
-import { useUpdateExpenseCategory } from "@/lib/react-query/expensesCategories";
-import { IExpenseCategory } from "@/interfaces/expenseCategory";
+import treasurySchema from "@/validations/treasurySchema";
 import { FaPencil } from "react-icons/fa6";
+import { ITreasury } from "@/interfaces/treasury";
+import { useUpdateTreasury } from "@/lib/react-query/treasuries";
+import { TREASURY_FORM_INPUTS } from "@/constants";
 
 interface IProps {
-  category: IExpenseCategory;
+  treasury: ITreasury;
 }
-const EditCategoryButton = ({ category }: IProps) => {
+
+const EditTreasuryButton = ({ treasury }: IProps) => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
-  const { mutateAsync: updateCategory, isPending } = useUpdateExpenseCategory();
+  const { mutateAsync: updateTreasury, isPending } = useUpdateTreasury();
 
-  const form = useForm<z.infer<typeof categorySchema>>({
-    resolver: zodResolver(categorySchema),
+  const form = useForm<z.infer<typeof treasurySchema>>({
+    resolver: zodResolver(treasurySchema),
     defaultValues: {
-      name: category.name,
+      name: treasury.name,
+      status: treasury.status,
     },
   });
 
-  const onSubmit = async ({ name }: z.infer<typeof categorySchema>) => {
+  const onSubmit = async ({ name, status }: z.infer<typeof treasurySchema>) => {
     try {
-      const { status, message } = await updateCategory({
-        id: `${category.id}`,
+      const { status: serverStatus, message } = await updateTreasury({
+        id: `${treasury.id}`,
         token,
+        status,
         name,
       });
 
       // ! Update failed
-      if (!status) return toast.error(message);
+      if (!serverStatus) return toast.error(message);
 
       // * Update Success
-      return toast.success(message);
+      return toast.success(message || "تم تحديث بيانات الخزينة بنجاح");
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
@@ -74,14 +78,15 @@ const EditCategoryButton = ({ category }: IProps) => {
   const handleCloseModal = () => {
     setIsOpen(false);
     form.reset({
-      name: category.name,
+      name: treasury.name,
     });
   };
   useEffect(() => {
     form.reset({
-      name: category.name,
+      name: treasury.name,
+      status: treasury.status,
     });
-  }, [form, category]);
+  }, [form, treasury]);
 
   return (
     <>
@@ -111,18 +116,15 @@ const EditCategoryButton = ({ category }: IProps) => {
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div custom={"category-name"} variants={itemVariants}>
-              <RenderFormFields
-                input={{
-                  name: "name",
-                  label: "اسم التصنيف",
-                  type: "text",
-                  placeholder: "اسم التصنيف",
-                }}
-                form={form}
-                schema={categorySchema}
-              />
-            </motion.div>
+            {TREASURY_FORM_INPUTS.map((input, idx) => (
+              <motion.div key={input.name} custom={idx} variants={itemVariants}>
+                <RenderFormFields
+                  input={input}
+                  form={form}
+                  schema={treasurySchema}
+                />
+              </motion.div>
+            ))}
 
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
@@ -147,4 +149,4 @@ const EditCategoryButton = ({ category }: IProps) => {
   );
 };
 
-export default EditCategoryButton;
+export default EditTreasuryButton;

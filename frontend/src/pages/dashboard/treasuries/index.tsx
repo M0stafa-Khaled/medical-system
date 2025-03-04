@@ -1,4 +1,4 @@
-import ExpensesTable from "@/components/dashboard/expenses/ExpensesTable";
+import TreasuriesList from "@/components/dashboard/treasuries/TreasuriesList";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
@@ -13,7 +13,7 @@ const Treasuries = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <ExpensesTable />
+        <TreasuriesList />
       </motion.section>
     </>
   );

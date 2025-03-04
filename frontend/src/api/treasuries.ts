@@ -29,11 +29,11 @@ export const createTreasury: ({
   token,
   name,
   status,
-}: ICreateTreasury) => Promise<{ status: boolean; data: ITreasury }> = async ({
-  token,
-  name,
-  status,
-}) => {
+}: ICreateTreasury) => Promise<{
+  status: boolean;
+  message: string;
+  data: ITreasury;
+}> = async ({ token, name, status }) => {
   const { data } = await axiosInstanceAPI.post(
     "/treasuries",
     {
@@ -54,17 +54,16 @@ export const updateTreasury: ({
   id,
   name,
   status,
-}: ICreateTreasury) => Promise<{ status: boolean; data: ITreasury }> = async ({
-  token,
-  id,
-  name,
-  status,
-}) => {
+}: ICreateTreasury) => Promise<{
+  status: boolean;
+  message: string;
+  data: ITreasury;
+}> = async ({ token, id, name, status }) => {
   const { data } = await axiosInstanceAPI.post(
     `treasuries/${id}`,
     {
       name,
-      status,
+      status: status ? 1 : 0,
       _method: "put",
     },
     {
@@ -76,7 +75,7 @@ export const updateTreasury: ({
   return data;
 };
 
-export const convertTreasuries: ({
+export const transferTreasuries: ({
   token,
   from_treasury,
   to_treasury,

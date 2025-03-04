@@ -4,13 +4,13 @@ import {
 } from "@/animations/dashboardAnimations";
 import { Skeleton } from "./skeleton";
 import { motion } from "framer-motion";
-const CategoryCaredSkeleton = () => {
+const CardSkeleton = () => {
   return (
     <motion.div
       key={"skeleton"}
       custom={"skeleton"}
       variants={containerVariants}
-      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 animate-pulse"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse"
     >
       {[...Array(6)].map((_, idx) => (
         <motion.div key={idx} variants={itemVariants} custom={idx}>
@@ -21,4 +21,4 @@ const CategoryCaredSkeleton = () => {
   );
 };
 
-export default CategoryCaredSkeleton;
+export default CardSkeleton;

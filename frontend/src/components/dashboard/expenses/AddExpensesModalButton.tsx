@@ -37,6 +37,7 @@ const AddExpenseButton = () => {
       label: category.name,
     })
   );
+
   const form = useForm<z.infer<typeof addExpenseSchema>>({
     resolver: zodResolver(addExpenseSchema),
     defaultValues: {
@@ -62,7 +63,7 @@ const AddExpenseButton = () => {
       if (!status) return toast.error(message);
 
       // * Create Success
-      return toast.success(message);
+      return toast.success(message || "تم إضافة مصروف جديد بنجاح");
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
@@ -117,7 +118,7 @@ const AddExpenseButton = () => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6"
+            className="space-y-4"
             initial="hidden"
             animate="visible"
             variants={containerVariants}

@@ -93,7 +93,7 @@ const AddCategoryButton = () => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 text-black dark:text-white"
+            className="space-y-4 text-black dark:text-white"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -114,7 +114,7 @@ const AddCategoryButton = () => {
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5h-auto"
+                className="text-black dark:text-white py-2.5 h-auto"
               >
                 إلغاء
               </AlertDialogCancel>

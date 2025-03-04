@@ -22,13 +22,14 @@ const DashboardLayout = () => {
   const canViewExpensesCategories = useHasPermission(
     PERMISSIONS.EXPENSE_CATEGORIES
   );
+  const canViewTreasuries = useHasPermission(PERMISSIONS.TREASURIES);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken();
   const { mutateAsync: checkAuthUser } = useCheckAuth();
 
-  const routeNames = {
+  const routeNames: Record<string, string> = {
     dashboard: "الرئيسية",
     clinics: "العيادات",
     doctors: "الأطباء",
@@ -37,7 +38,7 @@ const DashboardLayout = () => {
     employees: "الموظفين",
     patients: "المرضى",
     drugs: "الأدوية",
-    treasuries: "الخزينة",
+    treasuries: "الخزائن",
     expenses: "المصروفات",
     "expenses-categories": "تصنيفات المصروفات",
   };
@@ -72,7 +73,7 @@ const DashboardLayout = () => {
               ...(canViewPatients
                 ? [{ name: routeNames.patients, path: "/dashboard/patients" }]
                 : []),
-              ...(canViewExpenses
+              ...(canViewTreasuries
                 ? [
                     {
                       name: routeNames.treasuries,

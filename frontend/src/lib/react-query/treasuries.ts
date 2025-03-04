@@ -1,5 +1,5 @@
 import {
-  convertTreasuries,
+  transferTreasuries,
   createTreasury,
   deleteTreasury,
   getAllTreasuries,
@@ -42,11 +42,11 @@ export const useUpdateTreasury = () => {
   });
 };
 
-export const useConvertTreasuries = () => {
+export const useTransferTreasuries = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ from_treasury, to_treasury, token }: IConvertTreasuries) =>
-      convertTreasuries({ token, from_treasury, to_treasury }),
+      transferTreasuries({ token, from_treasury, to_treasury }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_TREASURIES],

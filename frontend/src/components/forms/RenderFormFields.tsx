@@ -80,7 +80,9 @@ const RenderFormFields = ({
           />
         );
 
-      case input.name === "treasury_id":
+      case input.name === "treasury_id" ||
+        input.name === "from_treasury" ||
+        input.name === "to_treasury":
         return (
           <SelectFormItem
             {...commonProps}

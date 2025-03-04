@@ -4,6 +4,8 @@ import DeleteCategoryButton from "./DeleteCategoryModelButton";
 import EditCategoryButton from "./EditCategoryModalButton";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { motion } from "framer-motion";
+import { Folder } from "lucide-react";
 
 interface IProps {
   category: IExpenseCategory;
@@ -16,21 +18,32 @@ const CategoryCard = ({ category }: IProps) => {
   );
 
   return (
-    <Card
-      className={
-        "transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black"
-      }
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
     >
-      <CardContent className="p-4 flex flex-col gap-4">
-        <h3 className="text-lg font-medium text-center line-clamp-1">
-          {category?.name}
-        </h3>
-        <div className="flex items-center justify-center gap-2">
-          {canDeleteCategory && <DeleteCategoryButton category={category} />}
-          {canEditCategory && <EditCategoryButton category={category} />}
-        </div>
-      </CardContent>
-    </Card>
+      <Card
+        className={
+          "transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black"
+        }
+      >
+        <CardContent className="py-6 px-4 flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Folder className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-lg">{category.name}</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              {canEditCategory && <EditCategoryButton category={category} />}
+              {canDeleteCategory && (
+                <DeleteCategoryButton category={category} />
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
 

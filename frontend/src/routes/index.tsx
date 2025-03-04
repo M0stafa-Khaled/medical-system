@@ -171,7 +171,7 @@ const routes = createRoutesFromElements(
         }
       />
 
-      {/* pharmaceutical */}
+      {/* Drugs */}
       <Route path="drugs" element={<Drugs />} />
 
       {/* Expenses */}
@@ -202,6 +202,7 @@ const routes = createRoutesFromElements(
         }
       />
 
+      {/* Treasuries */}
       <Route
         path="treasuries"
         element={
