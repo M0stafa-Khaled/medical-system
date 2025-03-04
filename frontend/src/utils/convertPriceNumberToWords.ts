@@ -1,7 +1,7 @@
 const numberToWords = (num: number): string => {
   if (num === 0) return "صفر جنيه";
 
-  const words = {
+  const words: Record<number, string> = {
     0: "صفر",
     1: "واحد",
     2: "اثنان",
@@ -32,7 +32,7 @@ const numberToWords = (num: number): string => {
     90: "تسعون",
   };
 
-  const levels = {
+  const levels: Record<number, string> = {
     100: "مئة",
     200: "مئتان",
     300: "ثلاثمائة",
@@ -48,12 +48,12 @@ const numberToWords = (num: number): string => {
     return words[num as keyof typeof words];
   } else if (num < 100) {
     return (
-      words[(Math.floor(num / 10) * 10) as keyof typeof words] +
-      (num % 10 !== 0 ? " و" + words[(num % 10) as keyof typeof words] : "")
+      words[Math.floor(num / 10) * 10] +
+      (num % 10 !== 0 ? " و" + words[num % 10] : "")
     );
   } else if (num < 1000) {
     return (
-      levels[(Math.floor(num / 100) * 100) as keyof typeof levels] +
+      levels[Math.floor(num / 100) * 100] +
       (num % 100 !== 0 ? " و" + numberToWords(num % 100) : "")
     );
   } else if (num < 1000000) {

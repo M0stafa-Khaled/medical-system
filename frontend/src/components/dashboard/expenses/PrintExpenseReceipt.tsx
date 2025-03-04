@@ -66,7 +66,7 @@ const PrintExpenseReceipt = ({
                 <img
                   src="/logo.svg"
                   alt="logo"
-                  className="max-w-32 w-full mx-auto"
+                  className="max-h-16 w-full mx-auto"
                 />
               </h2>
               <h3 className="text-center">عيادات أبو لهب</h3>
