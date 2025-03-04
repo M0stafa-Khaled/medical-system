@@ -20,7 +20,7 @@ const PrintExpenseReceipt = () => {
         className="hidden p-3 print:block print:text-black"
         ref={contentRef}
       >
-    <div className="p-6 border-2 border-black w-[600px] mx-auto bg-white relative overflow-hidden h-[400px]">
+    <div className="relative p-4 mx-auto overflow-hidden bg-white border-2 border-gray-500 rounded-lg">
       {/* start cancel */}
       <div className="absolute top-0 right-0 flex items-center justify-center w-full h-full pointer-events-none">
         <div className="absolute top-2 right-2 h-[98%] w-0.5 bg-black transform rotate-45 origin-top-right"></div>
@@ -28,7 +28,7 @@ const PrintExpenseReceipt = () => {
         <div className="absolute bottom-2 left-2 h-[98%] w-0.5 bg-black transform rotate-45 origin-bottom-left"></div>
       </div>
       {/* end cancel */}
-      <div className="relative flex items-center justify-between pb-2 border-b-2 border-black">
+      <div className="relative flex items-center justify-between pb-2 border-b-2 border-gray-500 border-solid">
         <div className="text-center">
           <h2 className="text-lg font-bold">لوجو</h2>
           <h3 className="text-md">عيادات أبو لهم</h3>
@@ -38,12 +38,12 @@ const PrintExpenseReceipt = () => {
           <h1 className="text-lg">NO: 0001</h1>
         </div>
         <div className="text-right">
-          <h2 className="text-md">مدخل البيانات / إسلام الجوهري</h2>
-          <h3 className="text-md">الخزينة / الرئيسية</h3>
-          <h3 className="text-md">التاريخ / 22/2/2025</h3>
+          <h2 className="text-md">المستخدم: إسلام الجوهري</h2>
+          <h3 className="text-md">الخزينة: الرئيسية</h3>
+          <h3 className="text-md">التاريخ: 22/2/2025</h3>
         </div>
       </div>
-      <div className="relative pb-4 mt-4">
+      <div className="relative pb-4 mt-4 space-y-2">
         <h3 className="text-right text-md">تصنيف الصرف :  كهرباء</h3>
         <h3 className="text-right text-md">سند الصرف : كهرباء شقة مصر الجديدة عن شهر أكتوبر 2025</h3>
         <h2 className="text-lg font-semibold text-right">المبلغ المنصرف: 500 جنيه</h2>
