@@ -2,10 +2,8 @@ import WorkingDayForm from "@/components/forms/doctors/WorkingDayForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
 
 const CreateWorkingDay = () => {
-  const { id } = useParams();
 
   return (
     <>
@@ -24,7 +22,7 @@ const CreateWorkingDay = () => {
             </h1>
           </div>
           <CardContent>
-            <WorkingDayForm action={"add"} doctorId={id!} />
+            <WorkingDayForm action={"add"} />
           </CardContent>
         </Card>
       </motion.section>

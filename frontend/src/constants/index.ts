@@ -144,9 +144,9 @@ export const DOCTOR_WORKING_DAY_INPUTS: IFormInput[] = [
   },
   {
     name: "max_visitors",
-    label: "الحد الأقصى",
+    label: "الحد الأقصى لعدد للحجوزات",
     type: "number",
-    placeholder: " الحد الأقصى للحجوزات",
+    placeholder: "الحد الأقصى للحجوزات",
   },
   {
     name: "start_at",

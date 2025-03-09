@@ -15,15 +15,15 @@ import ActionSkeleton from "@/components/ui/ActionSkeleton";
 import SearchInput from "../../SearchInput";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 interface IProps {
   doctorId: string;
-  navigateWorkingDay: (mode?: "create" | "update") => void;
 }
 
-const WorkingDays = ({ doctorId, navigateWorkingDay }: IProps) => {
-  const canViewWorkingDays = useHasPermission(PERMISSIONS.DOCTOR_ACTIONS);
-  const canAddWorkingDay = useHasPermission(PERMISSIONS.ADD_ACTION_DOCTOR);
+const WorkingDays = ({ doctorId }: IProps) => {
+  const canViewWorkingDays = useHasPermission(PERMISSIONS.WORKING_DAYS);
+  const canAddWorkingDay = useHasPermission(PERMISSIONS.ADD_WORKING_DAY);
   const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
@@ -49,12 +49,17 @@ const WorkingDays = ({ doctorId, navigateWorkingDay }: IProps) => {
           {canAddWorkingDay && (
             <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
               <Button
-                onClick={() => navigateWorkingDay("create")}
+                size={"sm"}
                 variant={"outline"}
-                className="w-full md:w-fit bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black h-auto py-3 !rounded-lg font-semibold"
+                className=" h-auto py-0 px-0 bg-primary md:bg-transparent md:text-primary text-primary-foreground hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black !rounded-lg font-semibold"
               >
-                إضافة يوم عمل
-                <FiPlus size={20} />
+                <Link
+                  to={`/dashboard/doctors/${doctorId}/working-days/create`}
+                  className="flex justify-center items-center gap-2 w-full h-full py-4 px-4"
+                >
+                  إضافة يوم عمل
+                  <FiPlus size={20} />
+                </Link>
               </Button>
               <SearchInput
                 searchKeyword={searchTerm}
@@ -81,10 +86,7 @@ const WorkingDays = ({ doctorId, navigateWorkingDay }: IProps) => {
               >
                 {days?.data?.map((day, idx) => (
                   <motion.div variants={itemVariants} custom={idx} key={day.id}>
-                    <WorkingDayCard
-                      day={day}
-                      doctorId={doctorId}
-                    />
+                    <WorkingDayCard day={day} doctorId={doctorId} />
                   </motion.div>
                 ))}
               </motion.div>

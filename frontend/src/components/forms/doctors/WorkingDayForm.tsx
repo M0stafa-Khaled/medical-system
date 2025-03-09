@@ -14,7 +14,7 @@ import {
 import RenderFormFields from "@/components/forms/RenderFormFields";
 import { IWorkingDay } from "@/interfaces/doctors/workingDays";
 import SubmitButton from "../SubmitButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useCreateWorkingDay,
   useUpdateWorkingDay,
@@ -23,21 +23,19 @@ import { formatTime, reverseFormatTime } from "@/utils/formatTime";
 import doctorWorkingDaySchema from "@/validations/doctorWorkingDaySchema";
 import convertDay from "@/utils/convetDayLang";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store";
+import { useGetDoctorById } from "@/lib/react-query/doctors/doctors";
 
 interface IProps {
   day?: IWorkingDay;
   action: "add" | "update";
-  doctorId: string;
 }
 
-const WorkingDayForm = ({ action, day, doctorId }: IProps) => {
+const WorkingDayForm = ({ action, day }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
-
-  const { clinics } = useSelector((state: RootState) => state.doctorClinics);
-  const clinicsOptions = clinics?.map((clinic) => ({
+  const { doctorId } = useParams();
+  const { data: doctor } = useGetDoctorById({ token, id: doctorId! });
+  const clinicsOptions = doctor?.data.clinics?.map((clinic) => ({
     value: clinic.name,
     label: clinic.name,
   }));
@@ -56,14 +54,6 @@ const WorkingDayForm = ({ action, day, doctorId }: IProps) => {
   const form = useForm<z.infer<typeof doctorWorkingDaySchema>>({
     resolver: zodResolver(doctorWorkingDaySchema),
     defaultValues: {
-      clinic_name: {
-        label: "",
-        value: "",
-      },
-      day: {
-        label: "",
-        value: "",
-      },
       deuration: 0,
       max_visitors: 0,
       start_at: "",
@@ -72,21 +62,24 @@ const WorkingDayForm = ({ action, day, doctorId }: IProps) => {
   });
 
   useEffect(() => {
-    form.reset({
-      clinic_name: {
-        label: day?.clinic_name || "",
-        value: day?.clinic_name || "",
-      },
-      day: {
-        label: convertDay(day?.day as string, "en") || "",
-        value: day?.day || "",
-      },
-      deuration: day?.deuration || 0,
-      max_visitors: day?.max_visitors || 0,
-      start_at: reverseFormatTime(day?.start_at as string),
-      end_at: reverseFormatTime(day?.end_at as string),
-    });
-  }, [form, day]);
+    if (action === "update")
+      form.reset({
+        clinic_name: {
+          label: day?.clinic_name || "",
+          value: day?.clinic_name || "",
+        },
+        day: {
+          label: day?.day ? convertDay(day?.day as string, "en") : undefined,
+          value: day?.day ? day.day : undefined,
+        },
+        deuration: day?.deuration || 0,
+        max_visitors: day?.max_visitors || 0,
+        start_at: day?.start_at
+          ? reverseFormatTime(day?.start_at as string)
+          : "",
+        end_at: day?.end_at ? reverseFormatTime(day?.end_at as string) : "",
+      });
+  }, [form, day, action]);
 
   const onSubmit = async (data: z.infer<typeof doctorWorkingDaySchema>) => {
     try {
@@ -99,7 +92,7 @@ const WorkingDayForm = ({ action, day, doctorId }: IProps) => {
             end_at: formatTime(data.end_at),
             clinic_name: data.clinic_name.label,
             day: data.day.value,
-            doctor_id: doctorId,
+            doctor_id: doctorId!,
           },
         });
         if (!status) return toast.error(message);
@@ -114,7 +107,7 @@ const WorkingDayForm = ({ action, day, doctorId }: IProps) => {
             end_at: formatTime(data.end_at),
             clinic_name: data.clinic_name.label,
             day: data.day.value,
-            doctor_id: doctorId,
+            doctor_id: doctorId!,
             id: day?.id,
           },
           token,

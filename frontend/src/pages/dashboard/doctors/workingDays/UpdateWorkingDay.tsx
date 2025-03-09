@@ -30,7 +30,7 @@ const UpdateWorkingDay = () => {
             </h1>
           </div>
           <CardContent>
-            <WorkingDayForm action={"update"} doctorId={id!} day={day?.data} />
+            <WorkingDayForm action={"update"} day={day?.data} />
           </CardContent>
         </Card>
       </motion.section>

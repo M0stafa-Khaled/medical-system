@@ -120,15 +120,15 @@ const routes = createRoutesFromElements(
 
         {/* Doctor Working Days */}
         <Route
-          path="doctors/:id/working-days/create"
+          path="doctors/:doctorId/working-days/create"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_WORKING_DAY}>
-              <CreateWorkingDay  />
+              <CreateWorkingDay />
             </ProtectedRoute>
           }
         />
         <Route
-          path="doctors/:id/working-days/update"
+          path="doctors/:doctorId/working-days/update"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_WORKING_DAY}>
               <UpdateWorkingDay />
