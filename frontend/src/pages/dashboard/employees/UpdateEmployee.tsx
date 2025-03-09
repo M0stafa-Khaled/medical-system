@@ -3,12 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useGetEmployeeById } from "@/lib/react-query/employees";
 import cookieServices from "@/utils/cookieServices";
 import updateEmployeeSchema from "@/validations/updateEmployeeSchema";
-import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import DataLoader from "@/components/ui/DataLoader";
 
 const UpdateEmployee = () => {
   const navigate = useNavigate();
@@ -38,12 +38,7 @@ const UpdateEmployee = () => {
     }
   }, [isError, navigate, employeeId, employee]);
 
-  if (isLoading)
-    return (
-      <div className="mt-20 text-black dark:text-white flex justify-center">
-        <Loader2 className="animate-spin" size={48} />
-      </div>
-    );
+  if (isLoading) return <DataLoader />;
 
   return (
     <>

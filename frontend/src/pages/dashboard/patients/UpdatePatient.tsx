@@ -3,12 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useGetPatientById } from "@/lib/react-query/patients";
 import cookieServices from "@/utils/cookieServices";
 import updatePatientSchema from "@/validations/updatePatientSchema";
-import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import DataLoader from "@/components/ui/DataLoader";
 
 const UpdatePatient = () => {
   const navigate = useNavigate();
@@ -38,12 +38,7 @@ const UpdatePatient = () => {
     }
   }, [isError, navigate, patientId, patient]);
 
-  if (isLoading)
-    return (
-      <div className="mt-20 text-black dark:text-white flex justify-center">
-        <Loader2 className="animate-spin" size={48} />
-      </div>
-    );
+  if (isLoading) return <DataLoader />;
 
   return (
     <>

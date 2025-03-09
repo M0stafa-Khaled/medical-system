@@ -2,13 +2,13 @@ import DoctorForm from "@/components/forms/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
 import cookieServices from "@/utils/cookieServices";
 import updateDoctorSchema from "@/validations/updateDoctorSchema";
-import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { useGetDoctorById } from "@/lib/react-query/doctors/doctors";
+import DataLoader from "@/components/ui/DataLoader";
 const UpdateDoctor = () => {
   const navigate = useNavigate();
   const token = cookieServices.getToken();
@@ -36,12 +36,7 @@ const UpdateDoctor = () => {
     }
   }, [isError, navigate, doctorId, doctor]);
 
-  if (isLoading)
-    return (
-      <div className="mt-20 text-black dark:text-white flex justify-center">
-        <Loader2 className="animate-spin" size={48} />
-      </div>
-    );
+  if (isLoading) return <DataLoader />;
 
   return (
     <>
