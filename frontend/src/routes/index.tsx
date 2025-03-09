@@ -36,6 +36,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 const routes = createRoutesFromElements(
   <>
     {/* Auth */}
+    <Route path="/verify-email" element={<VerifyEmail />} />
     <Route element={<AuthLayout />}>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -58,7 +59,6 @@ const routes = createRoutesFromElements(
         />
       </Route>
 
-      <Route path="/verify-email" element={<VerifyEmail />} />
       {/* Dashboard */}
       <Route
         path="/dashboard"

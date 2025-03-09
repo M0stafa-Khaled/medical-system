@@ -1,5 +1,6 @@
 import { logout } from "@/app/features/auth/authSlice";
 import { setPermissions } from "@/app/features/permissions/permissionsSlice";
+import useNetworkStatus from "@/hooks/useNetworkStatus";
 import { useCheckAuth } from "@/lib/react-query/auth";
 import cookieServices from "@/utils/cookieServices";
 import { memo, useEffect } from "react";
@@ -13,32 +14,32 @@ import {
 import { toast } from "react-toastify";
 
 const RootLayout = () => {
+  useNetworkStatus();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken();
   const { mutateAsync: checkAuthUser } = useCheckAuth();
   const location = useLocation();
+
   useEffect(() => {
     (async () => {
       const { auth, email_verified, status, permissions } = await checkAuthUser(
         token as string
       );
 
-      // ----- User is not authenticated ------ //
-
+      // ----- User is  unauthenticated ------ //
       if (!auth) {
-        // If user is not authenticated and the pathname is / then just logout
+        // If user is unauthenticated and the pathname is / then just logout
         if (location.pathname === "/") {
           return dispatch(logout());
         }
-        // If user is not authenticated and the pathname is not / then navigate to /login
+        // If user is unauthenticated and the pathname is not / then navigate to /login
         dispatch(logout());
         navigate("/login");
         return toast.warn("يرجي تسجيل الدخول");
       }
 
       // ----- User is authenticated ----- //
-
       // Set Permissions in state
       if (auth && permissions) dispatch(setPermissions(permissions));
 

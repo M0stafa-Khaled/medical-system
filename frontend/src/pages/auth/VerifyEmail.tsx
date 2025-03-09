@@ -1,3 +1,4 @@
+import { logout } from "@/app/features/auth/authSlice";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,10 +19,17 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useResendOtp, useVerifyEmail } from "@/lib/react-query/auth";
+import useNetworkStatus from "@/hooks/useNetworkStatus";
+import {
+  useCheckAuth,
+  useResendOtp,
+  useVerifyEmail,
+} from "@/lib/react-query/auth";
 import cookieServices from "@/utils/cookieServices";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as z from "zod";
@@ -36,12 +44,28 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const VerifyEmail = () => {
+  useNetworkStatus();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken();
+  const { mutateAsync: checkAuthUser } = useCheckAuth();
   const { mutateAsync: resendOtp, isPending: isLoadingResendOtp } =
     useResendOtp();
   const { mutateAsync: verifyEmail, isPending: isLoadingVerifyEmail } =
     useVerifyEmail();
+
+  useEffect(() => {
+    (async () => {
+      const { auth, email_verified } = await checkAuthUser(token as string);
+      if (!auth) {
+        dispatch(logout());
+        navigate("/login");
+        return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+      }
+      if (email_verified) return navigate("/dashboard");
+    })();
+    return;
+  }, [checkAuthUser, token, navigate, dispatch]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
