@@ -2,9 +2,14 @@ import { logout } from "@/app/features/auth/authSlice";
 import { setPermissions } from "@/app/features/permissions/permissionsSlice";
 import { useCheckAuth } from "@/lib/react-query/auth";
 import cookieServices from "@/utils/cookieServices";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet, ScrollRestoration, useLocation, useNavigate } from "react-router-dom";
+import {
+  Outlet,
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 
 const RootLayout = () => {
@@ -12,7 +17,7 @@ const RootLayout = () => {
   const navigate = useNavigate();
   const token = cookieServices.getToken();
   const { mutateAsync: checkAuthUser } = useCheckAuth();
-  const location = useLocation()
+  const location = useLocation();
   useEffect(() => {
     (async () => {
       const { auth, email_verified, status, permissions } = await checkAuthUser(
@@ -37,7 +42,7 @@ const RootLayout = () => {
       // Set Permissions in state
       if (auth && permissions) dispatch(setPermissions(permissions));
 
-      // Account is not Active 
+      // Account is not Active
       if (auth && !status) {
         navigate("/not-active");
         return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
@@ -59,4 +64,4 @@ const RootLayout = () => {
   );
 };
 
-export default RootLayout;
+export default memo(RootLayout);

@@ -76,7 +76,7 @@ const ExpenseDetails = () => {
         animate="visible"
       >
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm hover:shadow-md transition-shadow duration-300">
-          <CardHeader>
+          <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
               <CardTitle className="flex items-center gap-2">
                 <Receipt className="h-6 w-6 text-primary" />

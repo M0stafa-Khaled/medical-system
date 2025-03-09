@@ -117,7 +117,7 @@ export const DOCTOR_ACTION_INPUTS: IFormInput[] = [
     name: "price",
     label: "السعر",
     type: "number",
-    placeholder: "ادخل سعر الإجراء",
+    placeholder: "0",
   },
 ];
 

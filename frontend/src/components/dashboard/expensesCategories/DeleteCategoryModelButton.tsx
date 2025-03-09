@@ -4,7 +4,7 @@ import { IExpenseCategory } from "@/interfaces/expenses/expenseCategory";
 import { useDeleteExpenseCategory } from "@/lib/react-query/expenses/expensesCategories";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
@@ -65,4 +65,4 @@ const DeleteCategoryButton = ({ category }: IProps) => {
   );
 };
 
-export default DeleteCategoryButton;
+export default memo(DeleteCategoryButton);

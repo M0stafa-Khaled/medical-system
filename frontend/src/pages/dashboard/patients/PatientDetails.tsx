@@ -93,7 +93,7 @@ const PatientDetails = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
-          <CardHeader>
+          <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
               <ProfileHeader
                 name={name!}

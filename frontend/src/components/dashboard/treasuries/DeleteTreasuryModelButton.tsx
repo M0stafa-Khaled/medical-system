@@ -4,7 +4,7 @@ import { ITreasury } from "@/interfaces/treasury";
 import { useDeleteTreasury } from "@/lib/react-query/treasuries";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
@@ -65,4 +65,4 @@ const DeleteTreasuryButton = ({ treasury }: IProps) => {
   );
 };
 
-export default DeleteTreasuryButton;
+export default memo(DeleteTreasuryButton);

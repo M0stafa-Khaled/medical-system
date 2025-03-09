@@ -6,6 +6,7 @@ import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
 import { Folder } from "lucide-react";
+import { memo } from "react";
 
 interface IProps {
   category: IExpenseCategory;
@@ -47,4 +48,4 @@ const CategoryCard = ({ category }: IProps) => {
   );
 };
 
-export default CategoryCard;
+export default memo(CategoryCard);

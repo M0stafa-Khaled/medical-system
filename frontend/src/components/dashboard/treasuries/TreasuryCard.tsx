@@ -6,6 +6,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import { ITreasury } from "@/interfaces/treasury";
 import { motion } from "framer-motion";
 import { CircleDollarSign, Power, Wallet } from "lucide-react";
+import { memo } from "react";
 
 interface IProps {
   treasury: ITreasury;
@@ -59,7 +60,7 @@ const TreasuryCard = ({ treasury }: IProps) => {
                 size={20}
                 className="text-green-500 flex-shrink-0"
               />
-              <span>إجمالي المصروفات: {treasury.expenses_total}</span>
+              <span>إجمالي المصروفات: {treasury.total}</span>
             </div>
           </div>
         </CardContent>
@@ -68,4 +69,4 @@ const TreasuryCard = ({ treasury }: IProps) => {
   );
 };
 
-export default TreasuryCard;
+export default memo(TreasuryCard);

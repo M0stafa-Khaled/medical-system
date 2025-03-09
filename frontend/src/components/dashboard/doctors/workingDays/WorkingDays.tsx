@@ -16,6 +16,7 @@ import SearchInput from "../../SearchInput";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import CardSkeleton from "@/components/ui/CardSkeleton";
 
 interface IProps {
   doctorId: string;
@@ -47,7 +48,7 @@ const WorkingDays = ({ doctorId }: IProps) => {
         </CardHeader>
         <CardContent className="py-3 px-4">
           {canAddWorkingDay && (
-            <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
+            <div className="mb-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
               <Button
                 size={"sm"}
                 variant={"outline"}
@@ -74,7 +75,12 @@ const WorkingDays = ({ doctorId }: IProps) => {
             animate="visible"
           >
             {isLoading ? (
-              <ActionSkeleton />
+              <CardSkeleton
+                mdLength={1}
+                lgLength={2}
+                count={3}
+                height="200px"
+              />
             ) : !days?.data?.length ? (
               <p className="text-center text-muted-foreground py-3">
                 لا يوجد ايأم عمل

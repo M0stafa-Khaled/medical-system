@@ -3,7 +3,7 @@ import PathIndicator from "@/components/dashboard/PathIndicator";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
-import path from "path";
+import { memo } from "react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const DashboardLayout = () => {
@@ -18,7 +18,7 @@ const DashboardLayout = () => {
   const canViewExpensesCategories = useHasPermission(
     PERMISSIONS.EXPENSE_CATEGORIES
   );
-  const canViewBooking = useHasPermission(PERMISSIONS.BOOKING);
+  // const canViewBooking = useHasPermission(PERMISSIONS.BOOKING);
 
   const routeNames: Record<string, string> = {
     dashboard: "الرئيسية",
@@ -131,4 +131,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default memo(DashboardLayout);

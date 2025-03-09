@@ -2,6 +2,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import SearchInput from "../SearchInput";
 import useHasPermission from "@/hooks/useHasPermission";
 import AddCategoryButton from "./AddCategoryModalButton";
+import { memo } from "react";
 interface IProps {
   searchKeyword: string;
   setSearchKeyword: (value: string) => void;
@@ -22,4 +23,4 @@ const CategoriesActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
   );
 };
 
-export default CategoriesActions;
+export default memo(CategoriesActions);

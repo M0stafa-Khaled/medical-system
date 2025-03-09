@@ -8,6 +8,7 @@ import {
   navItemsVariants,
   sidebarVariants,
 } from "@/animations/navbarAnimations";
+import { memo } from "react";
 
 interface IProps {
   links: ILink[];
@@ -64,4 +65,4 @@ const Sidebar = ({ links }: IProps) => {
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);

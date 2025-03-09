@@ -3,6 +3,7 @@ import SearchInput from "../SearchInput";
 import useHasPermission from "@/hooks/useHasPermission";
 import AddTreasuryButton from "./AddTreasuryModalButton";
 import TransferBetweenTreasuriesButton from "./TransfareBetweenTreasuriesModalButton";
+import { memo } from "react";
 interface IProps {
   searchKeyword: string;
   setSearchKeyword: (value: string) => void;
@@ -26,4 +27,4 @@ const TreasuriesActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
   );
 };
 
-export default TreasuriesActions;
+export default memo(TreasuriesActions);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -113,7 +113,7 @@ const TransferBetweenTreasuriesButton = () => {
                   input={input}
                   form={form}
                   schema={transferTreasurySchema}
-                  options={{ treasuries: treasuriesOptions }}
+                  options={{ treasuries: treasuriesOptions! }}
                 />
               </motion.div>
             ))}
@@ -141,4 +141,4 @@ const TransferBetweenTreasuriesButton = () => {
   );
 };
 
-export default TransferBetweenTreasuriesButton;
+export default memo(TransferBetweenTreasuriesButton);

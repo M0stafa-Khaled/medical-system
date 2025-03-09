@@ -15,16 +15,7 @@ interface IProps {
   doctorId: string;
 }
 const WorkingDayCard = ({
-  day: {
-    clinic_name,
-    day,
-    deuration,
-    doctor,
-    end_at,
-    id,
-    max_visitors,
-    start_at,
-  },
+  day: { clinic_name, day, deuration, end_at, id, max_visitors, start_at },
   doctorId,
 }: IProps) => {
   const canDeleteAction = useHasPermission(PERMISSIONS.DELETE_ACTION_DOCTOR);

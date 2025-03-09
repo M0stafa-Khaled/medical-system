@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -134,4 +134,4 @@ const AddTreasuryButton = () => {
   );
 };
 
-export default AddTreasuryButton;
+export default memo(AddTreasuryButton);

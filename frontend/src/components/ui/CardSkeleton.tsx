@@ -4,17 +4,35 @@ import {
 } from "@/animations/dashboardAnimations";
 import { Skeleton } from "./skeleton";
 import { motion } from "framer-motion";
-const CardSkeleton = () => {
+interface IProps {
+  length?: number;
+  mdLength?: number;
+  lgLength?: number;
+  count?: number;
+  height?: string;
+}
+const CardSkeleton = ({
+  length = 1,
+  mdLength = 2,
+  lgLength = 3,
+  count = 6,
+  height = "100px",
+}: IProps) => {
   return (
     <motion.div
       key={"skeleton"}
       custom={"skeleton"}
       variants={containerVariants}
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse"
+      className={`grid grid-cols-${length} md:grid-cols-${mdLength} lg:grid-cols-${lgLength} gap-4 animate-pulse`}
     >
-      {[...Array(6)].map((_, idx) => (
-        <motion.div key={idx} variants={itemVariants} custom={idx}>
-          <Skeleton className="h-[100px] bg-muted rounded-lg" />
+      {Array.from({ length: count }, (_, idx) => (
+        <motion.div
+          key={idx}
+          variants={itemVariants}
+          custom={idx}
+          className="h-auto"
+        >
+          <Skeleton className={`h-[${height}] bg-muted rounded-lg`} />
         </motion.div>
       ))}
     </motion.div>

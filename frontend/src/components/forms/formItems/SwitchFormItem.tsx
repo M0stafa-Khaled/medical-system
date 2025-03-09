@@ -11,9 +11,11 @@ interface IProps {
 const SwitchFormItem = ({ input, field }: IProps) => {
   return (
     <FormItem>
-      <FormLabel className="w-full">{input.label}</FormLabel>
+      <FormLabel className="w-full" htmlFor={input.name}>
+        {input.label}
+      </FormLabel>
       <div className="flex flex-row items-center justify-between rounded-lg border border-muted p-3">
-        <FormLabel className="cursor-pointer">
+        <FormLabel className="cursor-pointer" htmlFor={input.name}>
           {input.label === "حالة المصروف"
             ? field.value
               ? "معتمد"
@@ -24,6 +26,7 @@ const SwitchFormItem = ({ input, field }: IProps) => {
         </FormLabel>
         <FormControl>
           <Switch
+            id={input.name}
             dir="ltr"
             checked={field.value as boolean | undefined}
             onCheckedChange={field.onChange}

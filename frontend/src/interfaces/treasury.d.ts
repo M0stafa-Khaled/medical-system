@@ -2,7 +2,7 @@ export interface ITreasury {
   id: number;
   name: string;
   status: boolean;
-  expenses_total: string;
+  total: string;
 }
 
 export interface ITreasuriesRes {

@@ -1,6 +1,6 @@
 import useDebounce from "@/hooks/useDebounce";
 import cookieServices from "@/utils/cookieServices";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import TreasuriesActions from "./TreasuriesActions";
 import TreasuryCard from "./TreasuryCard";
@@ -64,4 +64,4 @@ const TreasuriesList = () => {
   );
 };
 
-export default TreasuriesList;
+export default memo(TreasuriesList);

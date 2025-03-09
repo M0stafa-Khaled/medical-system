@@ -18,6 +18,7 @@ class CookieService {
     this.cookies.set("token", token, {
       expires,
       path: "/",
+      secure: import.meta.env.VITE_ENV === "production",
     });
   }
 
@@ -36,6 +37,7 @@ class CookieService {
     this.cookies.set("role", role, {
       expires,
       path: "/",
+      secure: import.meta.env.VITE_ENV === "production",
     });
   }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -149,4 +149,4 @@ const EditTreasuryButton = ({ treasury }: IProps) => {
   );
 };
 
-export default EditTreasuryButton;
+export default memo(EditTreasuryButton);

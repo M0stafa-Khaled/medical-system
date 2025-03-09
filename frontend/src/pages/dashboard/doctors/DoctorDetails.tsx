@@ -101,7 +101,7 @@ const DoctorDetails = () => {
         variants={containerVariants}
       >
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
-          <CardHeader>
+          <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
               <ProfileHeader
                 image={image!}

@@ -34,7 +34,8 @@ const addEmployeeSchema = z.object({
     .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
   job: z
     .string({ message: "الوظفية مطلوبة" })
-    .nonempty({ message: "الوظفية مطلوبة" }),
+    .nonempty({ message: "الوظفية مطلوبة" })
+    .min(1, { message: "الوظفية مطلوبة" }),
   gender: z.object(
     {
       value: z.string({ message: "النوع مطلوب" }),

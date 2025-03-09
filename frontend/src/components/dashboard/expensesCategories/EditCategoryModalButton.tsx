@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -147,4 +147,4 @@ const EditCategoryButton = ({ category }: IProps) => {
   );
 };
 
-export default EditCategoryButton;
+export default memo(EditCategoryButton);
