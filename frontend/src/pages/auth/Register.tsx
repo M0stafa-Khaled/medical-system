@@ -1,10 +1,13 @@
-import ReverseProtectedRoute from "@/components/auth/ReverseProtectedRoute";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   return (
-    <ReverseProtectedRoute>
-      <div className="text-black dark:text-white">Register</div>
-    </ReverseProtectedRoute>
+    <>
+      <Helmet>
+        <title>EgProg | تسجيل الدخول</title>
+      </Helmet>
+      <div className="text-black dark:text-white">Register</div>;
+    </>
   );
 };
 

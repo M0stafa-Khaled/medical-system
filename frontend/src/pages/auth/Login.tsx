@@ -1,6 +1,5 @@
 import { login } from "@/app/features/auth/authSlice";
 import { setPermissions } from "@/app/features/permissions/permissionsSlice";
-import ReverseProtectedRoute from "@/components/auth/ReverseProtectedRoute";
 import ToggleMode from "@/components/ToggleMode";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +17,7 @@ import loginSchema from "@/validations/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -56,12 +56,16 @@ const Login = () => {
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      if (errorObj.response?.data)
+        toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
     }
   };
 
   return (
-    <ReverseProtectedRoute>
+    <>
+      <Helmet>
+        <title>EgProg | تسجيل الدخول</title>
+      </Helmet>
       <div className="relative min-h-screen">
         <div className="absolute bg-black/20 dark:bg-transparent inset-0 bg-[url(/login-bg.svg)] bg-cover bg-left filter blur-sm -z-50" />
         <div className="px-1 lg:px-0 bg-[url(login-img.svg)] bg-no-repeat bg-center bg-cover min-h-screen flex justify-center items-center text-white">
@@ -127,7 +131,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </ReverseProtectedRoute>
+    </>
   );
 };
 

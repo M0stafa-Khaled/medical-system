@@ -1,39 +1,32 @@
-import { logout } from "@/app/features/auth/authSlice";
-import { setPermissions } from "@/app/features/permissions/permissionsSlice";
 import Navbar from "@/components/Navbar";
 import PathIndicator from "@/components/dashboard/PathIndicator";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
-import { useCheckAuth } from "@/lib/react-query/auth";
-import cookieServices from "@/utils/cookieServices";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import path from "path";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const DashboardLayout = () => {
+  // Codes
   const canViewClinics = useHasPermission(PERMISSIONS.CLINICS);
   const canViewDoctors = useHasPermission(PERMISSIONS.DOCTORS);
   const canViewEmployees = useHasPermission(PERMISSIONS.EMPLOYEES);
   const canViewPatients = useHasPermission(PERMISSIONS.PATIENTS);
-
+  const canViewTreasuries = useHasPermission(PERMISSIONS.TREASURIES);
+  // Operations
   const canViewExpenses = useHasPermission(PERMISSIONS.EXPENSES);
   const canViewExpensesCategories = useHasPermission(
     PERMISSIONS.EXPENSE_CATEGORIES
   );
-  const canViewTreasuries = useHasPermission(PERMISSIONS.TREASURIES);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const token = cookieServices.getToken();
-  const { mutateAsync: checkAuthUser } = useCheckAuth();
+  const canViewBooking = useHasPermission(PERMISSIONS.BOOKING);
 
   const routeNames: Record<string, string> = {
     dashboard: "الرئيسية",
     clinics: "العيادات",
     doctors: "الأطباء",
+    "working-days": "ايام العمل",
     add: "إضافة",
+    create: "إضافة",
     update: "تعديل",
     employees: "الموظفين",
     patients: "المرضى",
@@ -41,6 +34,7 @@ const DashboardLayout = () => {
     treasuries: "الخزائن",
     expenses: "المصروفات",
     "expenses-categories": "تصنيفات المصروفات",
+    booking: "الحجوزات",
   };
 
   interface INavLink {
@@ -117,33 +111,6 @@ const DashboardLayout = () => {
     // Medications
     { name: "الأدوية", path: "/dashboard/drugs" },
   ];
-
-  useEffect(() => {
-    (async () => {
-      const { auth, email_verified, status, permissions } = await checkAuthUser(
-        token as string
-      );
-      if (!auth) {
-        dispatch(logout());
-        navigate("/login");
-        return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
-      }
-
-      // Set Permissions in state
-      dispatch(setPermissions(permissions));
-
-      if (!status) {
-        navigate("/not-active");
-        return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
-      }
-
-      if (!email_verified) {
-        navigate("/verify-email");
-        return toast.warn("يرجى تاكيد البريد الالكتروني");
-      }
-    })();
-    return;
-  }, [checkAuthUser, token, navigate, dispatch]);
 
   return (
     <div className="flex font-sans">
