@@ -1,5 +1,4 @@
 import useDebounce from "@/hooks/useDebounce";
-import { useGetAllExpensesCategories } from "@/lib/react-query/expensesCategories";
 import cookieServices from "@/utils/cookieServices";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -11,6 +10,7 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
+import { useGetAllExpensesCategories } from "@/lib/react-query/expenses/expensesCategories";
 
 const CategoriesList = () => {
   const token = cookieServices.getToken()!;

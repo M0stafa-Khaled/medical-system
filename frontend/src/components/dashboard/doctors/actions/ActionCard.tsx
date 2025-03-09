@@ -1,4 +1,4 @@
-import { IDoctorAction } from "@/interfaces/doctorActions";
+import { IDoctorAction } from "@/interfaces/doctors/doctorActions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DeleteActionButton from "./DeleteActionModelButton";
 import EditActionButton from "./EditActionModalButton";

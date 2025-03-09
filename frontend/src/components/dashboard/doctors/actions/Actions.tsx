@@ -24,7 +24,7 @@ const Actions = ({ doctorId }: { doctorId: string }) => {
         <CardHeader className="pb-2">
           <CardTitle>إجراءات الطبيب:</CardTitle>
         </CardHeader>
-        <CardContent className="py-3">
+        <CardContent className="py-3 px-4">
           {canAddAction && (
             <motion.div variants={itemVariants} custom={"addAction"}>
               <AddActionButton doctorId={doctorId} />

@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteDoctorAction } from "@/lib/react-query/doctorActions";
+import { useDeleteDoctorAction } from "@/lib/react-query/doctors/doctorActions";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";

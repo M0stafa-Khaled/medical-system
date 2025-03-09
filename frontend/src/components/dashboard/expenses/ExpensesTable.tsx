@@ -8,7 +8,7 @@ import useDebounce from "@/hooks/useDebounce";
 import ExpensesTableHeader from "./ExpensesTableHeader";
 import ExpensesList from "./ExpensesList";
 import ExpensesTableActions from "./ExpensesTableActions";
-import { useGetAllExpenses } from "@/lib/react-query/expenses";
+import { useGetAllExpenses } from "@/lib/react-query/expenses/expenses";
 
 const ExpensesTable = () => {
   const token = cookieServices.getToken()!;

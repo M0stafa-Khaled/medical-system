@@ -1,4 +1,5 @@
 enum Query_Keys {
+  GET_USER_PROFILE = "user",
   GET_ALL_CLINICS = "clinics",
   GET_ALL_DOCTORS = "doctors",
   GET_ONE_DOCTOR = "doctor",
@@ -6,8 +7,9 @@ enum Query_Keys {
   GET_ONE_EMPLOYEE = "employee",
   GET_ALL_PATIENTS = "patients",
   GET_ONE_PATIENT = "patient",
-  GET_USER_PROFILE = "user",
-  DOCTOR_ACTIONS = "doctorActions",
+  GET_ALL_DOCTOR_ACTIONS = "doctorActions",
+  GET_ALL_DOCTOR_WORKING_DAYS = "doctorWorkingDays",
+  GET_ONE_DOCTOR_WORKING_DAYS = "doctorWorkingDay",
   GET_ALL_MEDICATIONS = "medications",
   GET_ALL_TREASURIES = "treasuries",
   GET_ALL_EXPENSES = "expenses",

@@ -1,0 +1,90 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Query_Keys from "../queryKeys";
+import {
+  createWorkingDay,
+  deleteWorkingDay,
+  getAllWorkingDays,
+  getWorkingDayById,
+  updateWorkingDay,
+} from "@/api/doctors/workingDays";
+import { ICreateWorkingDay } from "@/interfaces/doctors/workingDays";
+
+export const useGetAllWorkingDays = ({
+  doctorId,
+  token,
+  search,
+}: {
+  doctorId: string;
+  token: string;
+  search: string;
+}) =>
+  useQuery({
+    queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS, search],
+    queryFn: () =>
+      getAllWorkingDays({
+        doctorId,
+        token,
+        search,
+      }),
+  });
+
+export const useGetWorkingDayById = ({
+  token,
+  id,
+}: {
+  token: string;
+  id: string;
+}) =>
+  useQuery({
+    queryKey: [Query_Keys.GET_ONE_DOCTOR_WORKING_DAYS, id],
+    queryFn: () => getWorkingDayById({ token, id }),
+  });
+
+export const useCreateWorkingDay = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      formData,
+      token,
+    }: {
+      formData: ICreateWorkingDay;
+      token: string;
+    }) => createWorkingDay({ formData, token }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS],
+      });
+    },
+  });
+};
+
+export const useUpdateWorkingDay = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      formData,
+      token,
+    }: {
+      formData: ICreateWorkingDay;
+      token: string;
+    }) => updateWorkingDay({ formData, token }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS],
+      });
+    },
+  });
+};
+
+export const useDeleteWorkingDay = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, token }: { id: number; token: string }) =>
+      deleteWorkingDay({ id, token }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS],
+      });
+    },
+  });
+};

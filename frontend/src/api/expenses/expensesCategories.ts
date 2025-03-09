@@ -4,7 +4,7 @@ import {
   IExpenseCategoriesRes,
   IAddExpenseCategoryRes,
   IExpenseCategory,
-} from "@/interfaces/expenseCategory";
+} from "@/interfaces/expenses/expenseCategory";
 
 export const getAllExpenseCategories: ({
   token,

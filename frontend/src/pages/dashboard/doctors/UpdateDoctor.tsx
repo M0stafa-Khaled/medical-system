@@ -1,6 +1,5 @@
 import DoctorForm from "@/components/forms/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
-import { useGetDoctorById } from "@/lib/react-query/doctors";
 import cookieServices from "@/utils/cookieServices";
 import updateDoctorSchema from "@/validations/updateDoctorSchema";
 import { Loader2 } from "lucide-react";
@@ -9,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { useGetDoctorById } from "@/lib/react-query/doctors/doctors";
 const UpdateDoctor = () => {
   const navigate = useNavigate();
   const token = cookieServices.getToken();

@@ -238,8 +238,8 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
                   isOptionalField={isOptionalField}
                   schema={employeeSchema}
                   options={{
-                    treasuries: treasuriesOptions,
-                    permissions: permissionsOptions,
+                    treasuries: treasuriesOptions!,
+                    permissions: permissionsOptions!,
                   }}
                 />
               </motion.div>

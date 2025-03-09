@@ -3,10 +3,10 @@ import {
   deleteDoctorAction,
   getDoctorActions,
   updateDoctorAction,
-} from "@/api/doctorActions";
+} from "@/api/doctors/doctorActions";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "./queryKeys";
-import { IActionProps } from "@/interfaces/doctorActions";
+import Query_Keys from "../queryKeys";
+import { IActionProps } from "@/interfaces/doctors/doctorActions";
 
 export const useGetDoctorActions = ({
   doctorId,
@@ -16,7 +16,7 @@ export const useGetDoctorActions = ({
   token: string;
 }) => {
   return useQuery({
-    queryKey: [Query_Keys.DOCTOR_ACTIONS],
+    queryKey: [Query_Keys.GET_ALL_DOCTOR_ACTIONS],
     queryFn: () => getDoctorActions({ doctorId, token }),
     enabled: !!doctorId,
   });
@@ -29,7 +29,7 @@ export const useCreateDoctorAction = () => {
       createDoctorAction({ formData, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.DOCTOR_ACTIONS],
+        queryKey: [Query_Keys.GET_ALL_DOCTOR_ACTIONS],
       });
     },
   });
@@ -42,7 +42,7 @@ export const useUpdateDoctorAction = () => {
       updateDoctorAction({ formData, token, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.DOCTOR_ACTIONS],
+        queryKey: [Query_Keys.GET_ALL_DOCTOR_ACTIONS],
       });
     },
   });
@@ -55,7 +55,7 @@ export const useDeleteDoctorAction = () => {
       deleteDoctorAction({ id, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.DOCTOR_ACTIONS],
+        queryKey: [Query_Keys.GET_ALL_DOCTOR_ACTIONS],
       });
     },
   });

@@ -1,6 +1,5 @@
 import InfoField from "@/components/dashboard/InfoField";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useGetExpenseById } from "@/lib/react-query/expenses";
 import cookieServices from "@/utils/cookieServices";
 import formatDateTime from "@/utils/formatDate";
 import {
@@ -21,8 +20,9 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import DataLoader from "@/components/DataLoader";
+import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
+import { useGetExpenseById } from "@/lib/react-query/expenses/expenses";
 
 const ExpenseDetails = () => {
   const navigate = useNavigate();

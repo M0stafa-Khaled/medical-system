@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteExpense } from "@/lib/react-query/expenses";
+import { useDeleteExpense } from "@/lib/react-query/expenses/expenses";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";

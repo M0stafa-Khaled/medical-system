@@ -1,4 +1,4 @@
-import { useGetAllDoctors } from "@/lib/react-query/doctors";
+import { useGetAllDoctors } from "@/lib/react-query/doctors/doctors";
 import DataTable from "@/components/ui/DataTable";
 import DoctorsTableHeader from "./DoctorsTableHeader";
 import DoctorsTableActions from "./DoctorsTableActions";
@@ -6,7 +6,7 @@ import DoctorsList from "./DoctorsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 
@@ -22,12 +22,10 @@ const DoctorsTable = () => {
     isError,
   } = useGetAllDoctors({ token, page, search });
 
-  useEffect(() => {
-    if (isError) {
-      toast.error("حدث خطأ اثناء تحميل البيانات");
-      return;
-    }
-  }, [isError]);
+  if (isError) {
+    toast.error("حدث خطأ اثناء تحميل البيانات");
+    return;
+  }
 
   return (
     <DataTable

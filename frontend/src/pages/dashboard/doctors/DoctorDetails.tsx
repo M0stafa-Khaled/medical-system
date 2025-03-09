@@ -1,4 +1,3 @@
-import { useGetDoctorById } from "@/lib/react-query/doctors";
 import cookieServices from "@/utils/cookieServices";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -34,12 +33,20 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import DataLoader from "@/components/DataLoader";
+import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
+import { useGetDoctorById } from "@/lib/react-query/doctors/doctors";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import WorkingDays from "@/components/dashboard/doctors/workingDays/WorkingDays";
+import { useDispatch } from "react-redux";
+import { setDoctorClinics } from "@/app/features/doctorClinics/doctorClinicsSlice";
+import { IClinic } from "@/interfaces/clinic";
+
 const DoctorDetails = () => {
   const canEditDoctor = useHasPermission(PERMISSIONS.EDIT_DOCTOR);
   const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken();
   const { doctorId } = useParams();
@@ -58,7 +65,9 @@ const DoctorDetails = () => {
       navigate("/dashboard/doctors");
       return;
     }
-  }, [isError, navigate, doctorId]);
+
+    dispatch(setDoctorClinics(doctor?.data.clinics as IClinic[]));
+  }, [isError, navigate, doctorId, dispatch, doctor]);
 
   if (isLoading) return <DataLoader />;
 
@@ -84,6 +93,15 @@ const DoctorDetails = () => {
     status,
     user,
   } = doctor?.data || {};
+
+  const handleNavigateCreateWorkingDay = (
+    mode: "create" | "update" = "create"
+  ) => {
+    navigate(`/dashboard/doctors/${id}/working-days/${mode}`, {
+      state: { clinics },
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -252,7 +270,35 @@ const DoctorDetails = () => {
           </CardContent>
         </Card>
         <motion.div variants={itemVariants}>
-          <Actions doctorId={doctorId!} />
+          <Tabs
+            defaultValue="working-days"
+            dir="rtl"
+            className="text-black dark:text-white my-2"
+          >
+            <TabsList className="h-auto w-full gap-2">
+              <TabsTrigger
+                value="actions"
+                className="w-1/2 py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
+              >
+                الإجراءات
+              </TabsTrigger>
+              <TabsTrigger
+                value="working-days"
+                className="w-1/2 py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
+              >
+                ايام العمل
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="actions">
+              <Actions doctorId={doctorId!} />
+            </TabsContent>
+            <TabsContent value="working-days">
+              <WorkingDays
+                doctorId={doctorId!}
+                navigateWorkingDay={handleNavigateCreateWorkingDay}
+              />
+            </TabsContent>
+          </Tabs>
         </motion.div>
       </motion.section>
     </>

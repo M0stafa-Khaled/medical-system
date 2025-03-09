@@ -14,45 +14,54 @@ interface IProps {
 
 const PathIndicator = ({ routeNames }: IProps) => {
   const location = useLocation();
-  const pathnames = location.pathname.split("/");
+  const pathnames = location.pathname.split("/").filter(Boolean);
+  // Filter out numeric segments and create a clean path array
+  const cleanPathnames = pathnames.filter((segment) => isNaN(Number(segment)));
+  // Create cumulative paths for navigation
+  const cumulativePaths = cleanPathnames.map((_, index) => {
+    const pathSegments = pathnames.slice(
+      0,
+      pathnames.indexOf(cleanPathnames[index]) + 1
+    );
+    return pathSegments.join("/");
+  });
 
   return (
     <>
       <Breadcrumb>
         <BreadcrumbList>
-          {pathnames.map((name, index) => {
-            const routeTo = `${pathnames.slice(0, index + 1).join("/")}`;
-            const isLast = index === pathnames.length - 1;
+          {cleanPathnames.map((name, index) => {
+            const isLast = index === cleanPathnames.length - 1;
             const arabicName = routeNames?.[name] || name;
+            const routeTo = `/${cumulativePaths[index]}`;
 
-            const isNextItemNumber =
-              index < pathnames.length - 1 &&
-              !isNaN(Number(pathnames[index + 1]));
             return (
               <Fragment key={`${name}-${index}`}>
-                {isNaN(Number(name)) && (
-                  <BreadcrumbItem className="text-black dark:!text-white !text-sm">
-                    {isLast ? (
-                      <BreadcrumbPage className="!text-black dark:!text-white">
-                        {arabicName}
-                      </BreadcrumbPage>
-                    ) : (
-                      <Link
-                        className="!text-black/80 dark:!text-white/70"
-                        to={
-                          routeTo.split("/").pop() === "update"
-                            ? "/dashboard"
-                            : routeTo
-                        }
-                      >
-                        {arabicName}
-                      </Link>
-                    )}
-                  </BreadcrumbItem>
-                )}
-                {!isLast && isNaN(Number(name)) && !isNextItemNumber && (
-                  <BreadcrumbSeparator className="rotate-180" />
-                )}
+                <BreadcrumbItem className="text-black dark:!text-white !text-sm">
+                  {isLast ? (
+                    <BreadcrumbPage className="!text-black dark:!text-white">
+                      {arabicName}
+                    </BreadcrumbPage>
+                  ) : (
+                    <Link
+                      className="!text-black/80 dark:!text-white/70"
+                      to={
+                        [
+                          "update",
+                          "working-days",
+                          "create",
+                          "edit",
+                          "add",
+                        ].includes(routeTo.split("/").pop() || "")
+                          ? "/dashboard"
+                          : routeTo
+                      }
+                    >
+                      {arabicName}
+                    </Link>
+                  )}
+                </BreadcrumbItem>
+                {!isLast && <BreadcrumbSeparator className="rotate-180" />}
               </Fragment>
             );
           })}

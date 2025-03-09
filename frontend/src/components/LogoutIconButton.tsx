@@ -2,15 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { FiLogOut } from "react-icons/fi";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "./ui/alert-dialog";
 import { toast } from "react-toastify";
 import { useLogout } from "@/lib/react-query/auth";
 import { AxiosError } from "axios";
@@ -19,15 +10,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import { logout } from "@/app/features/auth/authSlice";
 import { clearPermissions } from "@/app/features/permissions/permissionsSlice";
+import Modal from "./shared/Modal";
 
 const LogoutIconButton = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   const token = cookieServices.getToken();
-  const { mutateAsync: logoutUser } = useLogout();
+  const { mutateAsync: logoutUser, isPending } = useLogout();
 
   const logoutFromDashboard = async () => {
     try {
@@ -40,9 +32,10 @@ const LogoutIconButton = () => {
       toast.success("تم تسجيل الخروج");
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      if (errorObj.response?.data)
+        toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
     } finally {
-      setIsOpenLogoutModal(false);
+      setIsOpen(false);
     }
   };
 
@@ -50,7 +43,7 @@ const LogoutIconButton = () => {
     <>
       {isAuthenticated && (
         <Button
-          onClick={() => setIsOpenLogoutModal(true)}
+          onClick={() => setIsOpen(true)}
           variant={"destructive"}
           className="h-9 w-9 px-0 py-0 font-bold"
         >
@@ -59,37 +52,20 @@ const LogoutIconButton = () => {
       )}
 
       {/* Confirm Logout Modal */}
-      <AlertDialog
-        open={isOpenLogoutModal}
-        onOpenChange={() => setIsOpenLogoutModal((prev) => !prev)}
-      >
-        <AlertDialogContent className="border-muted !z-[1000] rounded-lg">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-black dark:text-white text-start">
-              تسجيل الخروج
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-start !my-3">
-              هل انت متاكد من{" "}
-              <span className="font-medium text-black dark:text-white">
-                تسجيل الخروج
-              </span>
-              ؟
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="text-start !justify-start gap-2">
-            <AlertDialogCancel className="bg-primary hover:bg-primary/90 hover:text-white text-white dark:text-black">
-              إلغاء
-            </AlertDialogCancel>
-            <Button
-              onClick={logoutFromDashboard}
-              variant={"destructive"}
-              color="red"
-            >
-              تسجيل الخروج
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <Modal
+        description={{
+          text: "هل انت متأكد من تسجيل الخروج؟",
+          color: "text-red-700",
+        }}
+        isOpen={isOpen}
+        onCancel={() => setIsOpen(false)}
+        onConfirm={logoutFromDashboard}
+        confirmText="تسجيل الخروج"
+        isLoading={isPending}
+        title="تسجيل الخروج"
+        onOpenChange={() => setIsOpen(!isOpen)}
+        variant="destructive"
+      />
     </>
   );
 };

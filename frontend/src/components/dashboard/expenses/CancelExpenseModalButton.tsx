@@ -19,7 +19,7 @@ import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import { useCancelExpense } from "@/lib/react-query/expenses";
+import { useCancelExpense } from "@/lib/react-query/expenses/expenses";
 import { MdDoNotDisturbAlt } from "react-icons/md";
 
 const CancelExpenseButton = ({ id }: { id: number }) => {

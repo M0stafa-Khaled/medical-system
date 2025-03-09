@@ -15,7 +15,7 @@ axiosInstanceAPI.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       store.dispatch(logout());
-      toast.warn("تم تسجيل الخروج يرجي تسجيل الدخول مرة اخرى");
+      toast.warn("يرجي تسجيل الدخول");
     } else if (error.status === 500) toast.error("حاول مجدداً في وقت لاحق");
     return Promise.reject(error);
   }

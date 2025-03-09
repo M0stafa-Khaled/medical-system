@@ -4,7 +4,7 @@ import {
   ICreateExpense,
   IExpense,
   IExpensesResponse,
-} from "@/interfaces/expense";
+} from "@/interfaces/expenses/expense";
 
 export const getAllExpenses: ({
   token,

@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { IExpenseCategory } from "@/interfaces/expenseCategory";
+import { IExpenseCategory } from "@/interfaces/expenses/expenseCategory";
 import DeleteCategoryButton from "./DeleteCategoryModelButton";
 import EditCategoryButton from "./EditCategoryModalButton";
 import useHasPermission from "@/hooks/useHasPermission";

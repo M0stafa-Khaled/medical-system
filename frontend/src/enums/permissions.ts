@@ -66,13 +66,15 @@ export enum PERMISSIONS {
 
   // Working Days
   WORKING_DAYS = "ايام-العمل",
-  EDIT_WORKING_DAYS = "تعديل-ايام-العمل",
-  ADD_WORKING_DAYS = "اضافة-ايام-العمل",
-  DELETE_WORKING_DAYS = "حذف-ايام-العمل",
-  VIEW_WORKING_DAYS = "عرض-ايام-العمل",
+  EDIT_WORKING_DAY = "تعديل-ايام-العمل",
+  ADD_WORKING_DAY = "اضافة-ايام-العمل",
+  DELETE_WORKING_DAY = "حذف-ايام-العمل",
+  VIEW_WORKING_DAY = "عرض-ايام-العمل",
 
-  // Appointments
-  APPOINTMENTS = "الحجوزات",
-  ADD_APPOINTMENT = "اضافة-حجز",
-  EDIT_APPOINTMENT = "تعديل-حجز",
+  // BOOKING
+  BOOKING = "الحجوزات",
+  ADD_BOOKING = "اضافة-حجز-مريض",
+  EDIT_BOOKING = "تعديل-حجز-مريض",
+  VIEW_BOOKING = "عرض-حجز-مريض",
+  DELETE_BOOKING = "حذف-حجز-مريض",
 }

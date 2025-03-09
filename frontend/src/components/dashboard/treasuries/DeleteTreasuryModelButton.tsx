@@ -1,7 +1,7 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { ITreasury } from "@/interfaces/treasury";
-import { useDeleteExpenseCategory } from "@/lib/react-query/expensesCategories";
+import { useDeleteTreasury } from "@/lib/react-query/treasuries";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -15,11 +15,11 @@ interface IProps {
 const DeleteTreasuryButton = ({ treasury }: IProps) => {
   const token = cookieServices.getToken()!;
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteCategory, isPending } = useDeleteExpenseCategory();
+  const { mutateAsync: deleteTreasury, isPending } = useDeleteTreasury();
 
   const handleDelete = async () => {
     try {
-      const { message, status } = await deleteCategory({
+      const { message, status } = await deleteTreasury({
         id: `${treasury?.id}`,
         token,
       });

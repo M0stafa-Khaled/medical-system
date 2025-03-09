@@ -1,13 +1,13 @@
 import { IGetTokenPageSearch } from "@/interfaces";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "./queryKeys";
+import Query_Keys from "../queryKeys";
 import {
   createExpenseCategory,
   deleteExpenseCategory,
   getAllExpenseCategories,
   updateExpenseCategory,
   getAllExpenseCategoryById,
-} from "@/api/expensesCategories";
+} from "@/api/expenses/expensesCategories";
 
 export const useGetAllExpensesCategories = ({
   token,

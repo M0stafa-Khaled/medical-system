@@ -25,10 +25,7 @@ interface IProps {
   isOptionalField?: (fieldName: string) => boolean;
   schema: z.ZodSchema;
   options?: {
-    categories?: IOption[];
-    treasuries?: IOption[];
-    permissions?: IOption[];
-    clinics?: IOption[];
+    [key: string]: IOption[];
   };
 }
 
@@ -97,14 +94,22 @@ const RenderFormFields = ({
             isMulti
           />
         );
-      case input.name === "clinics":
+      case input.name === "clinics" ||
+        input.name === "clinic_name" ||
+        input.name === "day": {
+        let setOptions;
+        if (input.name === "clinics") setOptions = options?.clinics;
+        else if (input.name === "clinic_name")
+          setOptions = options?.clinic_name;
+        else if (input.name === "day") setOptions = options?.days;
         return (
           <SelectFormItem
             {...commonProps}
-            options={options?.clinics || []}
-            isMulti
+            options={setOptions || []}
+            isMulti={input.name === "clinics"}
           />
         );
+      }
       default:
         return <InputFormItem {...commonProps} />;
     }

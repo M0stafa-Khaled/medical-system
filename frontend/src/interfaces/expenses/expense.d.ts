@@ -1,7 +1,7 @@
-import { IPaginationMeta } from ".";
-import { IEmployee } from "./employee";
+import { IPaginationMeta } from "..";
+import { IEmployee } from "../employee";
 import { IExpenseCategory } from "./expenseCategory";
-import { ITreasury } from "./treasury";
+import { ITreasury } from "../treasury";
 
 export interface ICreateExpense {
   name: string;

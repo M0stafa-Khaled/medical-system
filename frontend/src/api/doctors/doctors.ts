@@ -4,7 +4,7 @@ import {
   IAddDoctor,
   IResponseDoctor,
   IResponseDoctors,
-} from "@/interfaces/doctor";
+} from "@/interfaces/doctors/doctor";
 
 export const getAllDoctors = async ({
   token,

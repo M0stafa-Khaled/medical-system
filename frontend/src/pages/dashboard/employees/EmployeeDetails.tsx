@@ -33,7 +33,7 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import DataLoader from "@/components/DataLoader";
+import DataLoader from "@/components/ui/DataLoader";
 import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet-async";
 

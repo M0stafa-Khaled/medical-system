@@ -1,14 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "./queryKeys";
+import Query_Keys from "../queryKeys";
 import {
   createExpense,
   deleteExpense,
   getAllExpenses,
   getExpenseById,
   cancelExpense,
-} from "@/api/expenses";
+} from "@/api/expenses/expenses";
 import { IGetTokenPageSearch } from "@/interfaces";
-import { ICreateExpense } from "@/interfaces/expense";
+import { ICreateExpense } from "@/interfaces/expenses/expense";
 
 export const useGetAllExpenses = ({
   token,

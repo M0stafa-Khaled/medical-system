@@ -117,7 +117,58 @@ export const DOCTOR_ACTION_INPUTS: IFormInput[] = [
     name: "price",
     label: "السعر",
     type: "number",
-    placeholder: "ادخل سعر الإجراء ",
+    placeholder: "ادخل سعر الإجراء",
+  },
+];
+
+export const DAYS: {
+  [key: string]: {
+    en: string;
+    ar: string;
+  };
+} = {
+  saturday: { en: "saturday", ar: "السبت" },
+  sunday: { en: "sunday", ar: "الأحد" },
+  monday: { en: "monday", ar: "الاثنين" },
+  tuesday: { en: "tuesday", ar: "الثلاثاء" },
+  wednesday: { en: "wednesday", ar: "الأربعاء" },
+  thursday: { en: "thursday", ar: "الخميس" },
+  friday: { en: "friday", ar: "الجمعة" },
+};
+
+export const DOCTOR_WORKING_DAY_INPUTS: IFormInput[] = [
+  {
+    name: "day",
+    label: "اليوم",
+    type: "select",
+  },
+  {
+    name: "max_visitors",
+    label: "الحد الأقصى",
+    type: "number",
+    placeholder: " الحد الأقصى للحجوزات",
+  },
+  {
+    name: "start_at",
+    label: "بداية وقت العمل",
+    type: "time",
+    placeholder: "نهاية وقت العمل",
+  },
+  {
+    name: "end_at",
+    label: "نهاية وقت العمل",
+    type: "time",
+  },
+  {
+    name: "deuration",
+    label: "مدة الكشف",
+    type: "number",
+    placeholder: "ادخل مدة الكشف",
+  },
+  {
+    name: "clinic_name",
+    label: "العيادة",
+    type: "select",
   },
 ];
 

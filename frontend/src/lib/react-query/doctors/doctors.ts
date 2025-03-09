@@ -1,13 +1,13 @@
-import { IAddDoctor } from "@/interfaces/doctor";
+import { IAddDoctor } from "@/interfaces/doctors/doctor";
 import {
   addDoctor,
   deleteDoctor,
   getAllDoctors,
   getDoctorById,
   updateDoctor,
-} from "@/api/doctors";
+} from "@/api/doctors/doctors";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "./queryKeys";
+import Query_Keys from "../queryKeys";
 
 export const useGetAllDoctors = ({
   token,

@@ -7,7 +7,7 @@ interface IPermissionsState {
 }
 const initialState: IPermissionsState = {
   permissions: localStorage.getItem("permissions")
-    ? decryptData(localStorage.getItem("permissions"))
+    ? decryptData(localStorage.getItem("permissions") || "")
     : [],
 };
 

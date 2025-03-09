@@ -20,9 +20,9 @@ import {
   containerVariants,
 } from "@/animations/dashboardAnimations";
 import categorySchema from "@/validations/categorySchema";
-import { useUpdateExpenseCategory } from "@/lib/react-query/expensesCategories";
-import { IExpenseCategory } from "@/interfaces/expenseCategory";
+import { IExpenseCategory } from "@/interfaces/expenses/expenseCategory";
 import { FaPencil } from "react-icons/fa6";
+import { useUpdateExpenseCategory } from "@/lib/react-query/expenses/expensesCategories";
 
 interface IProps {
   category: IExpenseCategory;
