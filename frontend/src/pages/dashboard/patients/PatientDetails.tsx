@@ -85,7 +85,7 @@ const PatientDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | إضافة مريض</title>
+        <title>EgProg | {name}</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
@@ -104,7 +104,7 @@ const PatientDetails = () => {
                       <motion.div variants={itemVariants}>
                         <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                           <Link
-                            to={`/dashboard/patients/update/${id}`}
+                            to={`/dashboard/patients/${id}/update`}
                             className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                           >
                             <FaPencil size={18} />

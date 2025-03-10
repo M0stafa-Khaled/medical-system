@@ -118,6 +118,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
+        message: string;
       }>;
       if (errorObj?.response?.data.errors) {
         Object.keys(errorObj.response.data.errors).forEach((key) => {
@@ -126,6 +127,11 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
               autoClose: 5000,
             })
           );
+        });
+      }
+      if (errorObj?.response?.data.message) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
         });
       }
     }

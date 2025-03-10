@@ -47,7 +47,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
             variants={tableRowVariants}
             className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
           >
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
               {countSerial({ meta: meta!, index })}
             </TableCell>
             <TableCell className="flex justify-center items-center text-sm text-center text-black dark:text-white py-3 font-medium">
@@ -91,7 +91,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
                   {canEditDoctor && (
                     <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                       <Link
-                        to={`/dashboard/doctors/update/${id}`}
+                        to={`/dashboard/doctors/${id}/update`}
                         className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                       >
                         <FaPencil size={18} />

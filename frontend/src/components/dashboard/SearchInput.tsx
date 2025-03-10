@@ -13,9 +13,10 @@ const SearchInput = ({
   return (
     <Input
       placeholder={placeholder}
-      className="w-full md:max-w-md py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-black/50 dark:placeholder:text-white/50"
+      className="w-full md:max-w-md py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
       onChange={(e) => setSearchKeyword(e.target.value)}
       value={searchKeyword}
+      type="search"
     />
   );
 };

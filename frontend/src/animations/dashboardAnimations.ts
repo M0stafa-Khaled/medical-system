@@ -30,11 +30,6 @@ export const containerVariants = {
   },
 };
 
-// export const itemVariants = {
-//   hidden: { opacity: 0, y: 20 },
-//   visible: { opacity: 1, y: 0 },
-// };
-
 export const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -45,4 +40,17 @@ export const itemVariants = {
       delayChildren: 0.3,
     },
   },
+};
+
+export const tableSkeletonVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  }),
 };

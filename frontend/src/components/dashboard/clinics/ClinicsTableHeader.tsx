@@ -9,8 +9,8 @@ const ClinicsTableHeader = () => {
   return (
     <TableHeader>
       <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
-        <TableHead className="py-4 text-center w-20">العدد</TableHead>
-        <TableHead className="py-4 text-center">اسم العيادة</TableHead>
+      <TableHead className="py-4 text-center w-20">#</TableHead>
+      <TableHead className="py-4 text-center">اسم العيادة</TableHead>
         <TableHead className="py-4 text-center">الحالة</TableHead>
         {(canEditClinic || canDeleteClinic) && (
           <TableHead className="py-4 text-center">الإجراءات</TableHead>

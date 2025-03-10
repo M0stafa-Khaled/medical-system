@@ -10,8 +10,8 @@ const InfoField = ({ label, value, sm, icon }: IProps) => {
     <div className="flex items-center gap-4">
       {icon && <div className="flex-shrink-0">{icon}</div>}
       <div className="flex items-center gap-2">
-        <h5 className="text-sm text-muted-foreground">{label}:</h5>
-        <p className={`font-medium break-all ${sm && "text-sm"}`}>
+        <h5 className="text-sm text-muted-foreground text-nowrap">{label}:</h5>
+        <p className={`font-medium text-wrap ${sm && "text-sm"}`}>
           {value || "لا يوجد"}
         </p>
       </div>

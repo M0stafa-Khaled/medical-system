@@ -1,13 +1,13 @@
+import { tableSkeletonVariants } from "@/animations/dashboardAnimations";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
 } from "@/components/ui/table";
+import { motion } from "framer-motion";
 
 interface IProps {
   columns: number;
@@ -17,23 +17,22 @@ interface IProps {
   showButtons?: boolean;
 }
 
-const SkeletonCaption = () => (
-  <TableCaption className="mt-0 py-4 dark:border-muted bg-white/80 dark:bg-dark/70">
-    <Skeleton className="h-4 w-1/2 md:w-1/4 rounded-lg px-4" />
-  </TableCaption>
-);
-
 const SkeletonHeader = ({ columns }: { columns: number }) => (
   <TableHeader>
-    <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
+    <motion.tr
+      initial="hidden"
+      animate="visible"
+      variants={tableSkeletonVariants}
+      className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70"
+    >
       {Array.from({ length: columns }, (_, idx) => (
-        <TableHead key={idx}>
+        <TableHead key={idx} className="py-5">
           <Skeleton
             className={`mx-auto h-4 ${idx === 0 ? "w-20" : "w-28"} rounded-lg`}
           />
         </TableHead>
       ))}
-    </TableRow>
+    </motion.tr>
   </TableHeader>
 );
 
@@ -67,8 +66,12 @@ const TableSkeleton = ({
   showButtons = true,
 }: IProps) => {
   const renderRow = (idx: number) => (
-    <TableRow
+    <motion.tr
       key={idx}
+      initial="hidden"
+      animate="visible"
+      custom={idx}
+      variants={tableSkeletonVariants}
       className={`dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300 ${
         !hasImage ? "h-14" : ""
       }`}
@@ -83,12 +86,11 @@ const TableSkeleton = ({
         <SkeletonCell key={idx} />
       ))}
       {showButtons && <SkeletonActionsCell buttons={actionButtons} />}
-    </TableRow>
+    </motion.tr>
   );
 
   return (
     <Table className="border dark:border-muted !rounded-lg overflow-hidden">
-      <SkeletonCaption />
       <SkeletonHeader columns={columns + 1} />
       <TableBody>
         {Array.from({ length: rows }).map((_, idx) => renderRow(idx))}

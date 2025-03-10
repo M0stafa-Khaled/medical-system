@@ -69,6 +69,7 @@ const routes = createRoutesFromElements(
         }
         // errorElement={<Error />}
       >
+        {/* Home */}
         <Route
           index
           element={<h1 className="text-primary">الصفحة الرئيسية</h1>}
@@ -110,7 +111,7 @@ const routes = createRoutesFromElements(
           }
         />
         <Route
-          path="doctors/update/:doctorId"
+          path="doctors/:doctorId/update"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_DOCTOR}>
               <UpdateDoctor />
@@ -128,7 +129,7 @@ const routes = createRoutesFromElements(
           }
         />
         <Route
-          path="doctors/:doctorId/working-days/update"
+          path="doctors/:doctorId/working-days/:workingDayId/update"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_WORKING_DAY}>
               <UpdateWorkingDay />
@@ -164,7 +165,7 @@ const routes = createRoutesFromElements(
         />
 
         <Route
-          path="employees/update/:employeeId"
+          path="employees/:employeeId/update"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_EMPLOYEE}>
               <UpdateEmployee />
@@ -198,7 +199,7 @@ const routes = createRoutesFromElements(
           }
         />
         <Route
-          path="patients/update/:patientId"
+          path="patients/:patientId/update"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_PATIENT}>
               <UpdatePatient />

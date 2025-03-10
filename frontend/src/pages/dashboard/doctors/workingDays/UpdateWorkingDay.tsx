@@ -8,9 +8,12 @@ import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 const UpdateWorkingDay = () => {
-  const { id } = useParams();
+  const { workingDayId } = useParams();
   const token = cookieServices.getToken()!;
-  const { data: day, isLoading } = useGetWorkingDayById({ token, id: id! });
+  const { data: day, isLoading } = useGetWorkingDayById({
+    token,
+    id: workingDayId!,
+  });
 
   if (isLoading) return <DataLoader />;
   return (

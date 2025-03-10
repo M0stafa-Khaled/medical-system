@@ -21,7 +21,7 @@ import {
 } from "@/lib/react-query/dashboard/doctors/workingDays";
 import { formatTime, reverseFormatTime } from "@/utils/formatTime";
 import doctorWorkingDaySchema from "@/validations/doctorWorkingDaySchema";
-import convertDay from "@/utils/convetDayLang";
+import convertDay from "@/utils/convertDayLang";
 import { useEffect } from "react";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 
