@@ -68,7 +68,7 @@ const ExpenseDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | {name}</title>
+        <title>EgProg | {name || " "}</title>
       </Helmet>
       <motion.section
         variants={containerVariants}

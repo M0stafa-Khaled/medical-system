@@ -63,15 +63,14 @@ const DoctorDetails = () => {
       navigate("/dashboard/doctors");
       return;
     }
-  }, [isError, navigate]);
+    if (!doctor?.status && doctor?.message) {
+      toast.error(doctor.message);
+      navigate("/dashboard/doctors");
+      return;
+    }
+  }, [isError, navigate, doctor]);
 
   if (isLoading) return <DataLoader />;
-
-  if (!doctor?.status && doctor?.message) {
-    toast.error(doctor.message);
-    navigate("/dashboard/doctors");
-    return null;
-  }
 
   const {
     id,
@@ -93,7 +92,7 @@ const DoctorDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | د / {name}</title>
+        <title>EgProg | د / {name || " "}</title>
       </Helmet>
       <motion.section
         initial="hidden"
@@ -216,6 +215,7 @@ const DoctorDetails = () => {
                   label="البريد الإلكتروني"
                   value={user?.email as string}
                   sm
+                  breakAll
                 />
               </motion.div>
 

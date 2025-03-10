@@ -90,7 +90,7 @@ const EmployeeDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | {name}</title>
+        <title>EgProg | {name || " "}</title>
       </Helmet>
 
       <motion.section
@@ -210,6 +210,7 @@ const EmployeeDetails = () => {
                   value={user?.email as string}
                   icon={<Mail className="text-orange-500" />}
                   sm
+                  breakAll
                 />
               </motion.div>
 

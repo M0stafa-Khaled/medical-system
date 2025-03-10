@@ -85,7 +85,7 @@ const PatientDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | {name}</title>
+        <title>EgProg | {name || " "}</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
@@ -201,6 +201,7 @@ const PatientDetails = () => {
                   label="البريد الإلكتروني"
                   value={user?.email as string}
                   sm
+                  breakAll
                 />
               </motion.div>
 
