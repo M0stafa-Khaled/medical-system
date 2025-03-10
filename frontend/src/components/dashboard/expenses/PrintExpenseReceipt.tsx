@@ -2,7 +2,7 @@ import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { FaPrint } from "react-icons/fa6";
-import { IExpense } from "@/interfaces/expenses/expense";
+import { IExpense } from "@/interfaces/dashboard/expenses/expense";
 import { convertToEgyptianPounds } from "@/utils/convertPriceNumberToWords";
 import formatDateTime from "@/utils/formatDate";
 

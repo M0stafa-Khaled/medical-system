@@ -5,7 +5,7 @@ import {
   ICreateTreasury,
   ITreasuriesRes,
   ITreasury,
-} from "@/interfaces/treasury";
+} from "@/interfaces/dashboard/treasury";
 
 export const getAllTreasuries: ({
   token,

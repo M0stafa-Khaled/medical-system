@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import cookieServices from "@/utils/cookieServices";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/store";
+import { RootState } from "@/store/store";
 import { motion } from "framer-motion";
 import { navItemsVariants } from "@/animations/navbarAnimations";
 const AuthButtons = () => {

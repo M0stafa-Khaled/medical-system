@@ -4,11 +4,14 @@ import {
   deleteTreasury,
   getAllTreasuries,
   updateTreasury,
-} from "@/api/treasuries";
+} from "@/services/dashboard/treasuries";
 import { IGetTokenPageSearch } from "@/interfaces";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
-import { IConvertTreasuries, ICreateTreasury } from "@/interfaces/treasury";
+import {
+  IConvertTreasuries,
+  ICreateTreasury,
+} from "@/interfaces/dashboard/treasury";
 
 export const useGetAllTreasuries = ({ token, search }: IGetTokenPageSearch) =>
   useQuery({

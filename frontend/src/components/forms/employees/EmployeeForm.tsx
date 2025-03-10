@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
 import { Form } from "@/components/ui/form";
 import { EMPLOYEE_FORM_INPUTS } from "@/constants";
-import { IEmployee } from "@/interfaces/employee";
+import { IEmployee } from "@/interfaces/dashboard/employee";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
@@ -20,8 +20,8 @@ import {
 } from "@/animations/dashboardAnimations";
 import RenderFormFields from "../RenderFormFields";
 import { useDispatch } from "react-redux";
-import { setPermissions } from "@/app/features/permissions/permissionsSlice";
-import { logout } from "@/app/features/auth/authSlice";
+import { setPermissions } from "@/store/features/permissions/permissionsSlice";
+import { logout } from "@/store/features/auth/authSlice";
 import { useGetAllTreasuries } from "@/lib/react-query/treasuries";
 interface IProps {
   employee?: IEmployee;

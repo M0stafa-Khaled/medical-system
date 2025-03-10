@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
-import { IExpense } from "@/interfaces/expenses/expense";
+import { IExpense } from "@/interfaces/dashboard/expenses/expense";
 import formatDateTime from "@/utils/formatDate";
 import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";

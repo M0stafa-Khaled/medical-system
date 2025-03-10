@@ -1,4 +1,4 @@
-import { RootState } from "@/app/store";
+import { RootState } from "@/store/store";
 import cookieServices from "@/utils/cookieServices";
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";

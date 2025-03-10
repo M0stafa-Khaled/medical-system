@@ -6,9 +6,9 @@ import {
   getAllExpenses,
   getExpenseById,
   cancelExpense,
-} from "@/api/expenses/expenses";
+} from "@/services/dashboard/expenses/expenses";
 import { IGetTokenPageSearch } from "@/interfaces";
-import { ICreateExpense } from "@/interfaces/expenses/expense";
+import { ICreateExpense } from "@/interfaces/dashboard/expenses/expense";
 
 export const useGetAllExpenses = ({
   token,

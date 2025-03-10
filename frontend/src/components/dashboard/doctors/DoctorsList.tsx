@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { IDoctor } from "@/interfaces/doctors/doctor";
+import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import DeleteDoctorButton from "./DeleteDoctorModalButton";

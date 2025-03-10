@@ -12,7 +12,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import RenderFormFields from "@/components/forms/RenderFormFields";
-import { IWorkingDay } from "@/interfaces/doctors/workingDays";
+import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
 import SubmitButton from "../SubmitButton";
 import { useNavigate, useParams } from "react-router-dom";
 import {

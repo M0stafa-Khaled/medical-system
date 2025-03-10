@@ -4,10 +4,10 @@ import {
   getAllEmployees,
   getEmployeeById,
   updateEmployee,
-} from "@/api/employees";
+} from "@/services/dashboard/employees";
 import Query_Keys from "./queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IAddEmployee } from "@/interfaces/employee";
+import { IAddEmployee } from "@/interfaces/dashboard/employee";
 
 export const useGetAllEmployees = ({
   token,

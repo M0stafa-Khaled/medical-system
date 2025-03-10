@@ -5,7 +5,7 @@ import {
   logout,
   resendOtp,
   verifyEmail,
-} from "@/api/auth";
+} from "@/services/auth/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useLogin = () => {

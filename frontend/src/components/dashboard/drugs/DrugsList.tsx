@@ -1,7 +1,7 @@
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { IPaginationMeta } from "@/interfaces";
-import { IMedication } from "@/interfaces/medication";
+import { IMedication } from "@/interfaces/dashboard/medication";
 import countSerial from "@/utils/countSerial";
 import { motion } from "framer-motion";
 

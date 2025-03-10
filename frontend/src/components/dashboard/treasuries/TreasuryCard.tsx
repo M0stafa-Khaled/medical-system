@@ -3,7 +3,7 @@ import DeleteTreasuryButton from "./DeleteTreasuryModelButton";
 import EditTreasuryButton from "./EditTreasuryModalButton";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { ITreasury } from "@/interfaces/treasury";
+import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { motion } from "framer-motion";
 import { CircleDollarSign, Power, Wallet } from "lucide-react";
 import { memo } from "react";

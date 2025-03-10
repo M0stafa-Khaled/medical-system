@@ -1,7 +1,7 @@
 import { QueryProvider } from "@/Providers/QueryProvider";
 import { Provider } from "react-redux";
 import ThemeProvider from "./ThemeProvider";
-import { store } from "@/app/store";
+import { store } from "@/store/store";
 import { RouterProvider } from "react-router-dom";
 import router from "@/routes";
 

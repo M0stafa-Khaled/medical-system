@@ -4,7 +4,7 @@ import {
   IAddEmployee,
   IEmployeeRes,
   IEmployeesRes,
-} from "@/interfaces/employee";
+} from "@/interfaces/dashboard/employee";
 
 export const getAllEmployees = async ({
   token,

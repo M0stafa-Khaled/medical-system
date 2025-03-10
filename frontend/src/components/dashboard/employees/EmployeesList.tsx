@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
-import { IEmployee } from "@/interfaces/employee";
+import { IEmployee } from "@/interfaces/dashboard/employee";
 import DeleteEmployeeButton from "./DeleteEmployeeModalButton";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";

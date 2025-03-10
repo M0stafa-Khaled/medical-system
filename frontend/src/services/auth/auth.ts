@@ -3,7 +3,7 @@ import {
   IAuthResponse,
   ICheckAuth,
   IResponsePermissions,
-} from "@/interfaces/auth";
+} from "@/interfaces/auth/auth";
 
 export const getAllPermissions: (
   token: string

@@ -21,7 +21,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import treasurySchema from "@/validations/treasurySchema";
 import { FaPencil } from "react-icons/fa6";
-import { ITreasury } from "@/interfaces/treasury";
+import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { useUpdateTreasury } from "@/lib/react-query/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
 

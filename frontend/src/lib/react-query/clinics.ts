@@ -3,10 +3,10 @@ import {
   updateClinic,
   deleteClinic,
   getAllClinics,
-} from "@/api/clinics";
+} from "@/services/dashboard/clinics";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
-import { ICreateClinic } from "@/interfaces/clinic";
+import { ICreateClinic } from "@/interfaces/dashboard/clinic";
 
 export const useGetAllClinics = ({
   token,

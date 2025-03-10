@@ -1,5 +1,5 @@
-import { logout } from "@/app/features/auth/authSlice";
-import { setPermissions } from "@/app/features/permissions/permissionsSlice";
+import { logout } from "@/store/features/auth/authSlice";
+import { setPermissions } from "@/store/features/permissions/permissionsSlice";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
 import { useCheckAuth } from "@/lib/react-query/auth";
 import cookieServices from "@/utils/cookieServices";

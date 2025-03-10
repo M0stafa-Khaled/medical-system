@@ -1,5 +1,5 @@
-import { login } from "@/app/features/auth/authSlice";
-import { setPermissions } from "@/app/features/permissions/permissionsSlice";
+import { login } from "@/store/features/auth/authSlice";
+import { setPermissions } from "@/store/features/permissions/permissionsSlice";
 import ToggleMode from "@/components/ToggleMode";
 import { Button } from "@/components/ui/button";
 import {

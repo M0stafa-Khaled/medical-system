@@ -1,4 +1,4 @@
-import { IPaginationMeta } from "..";
+import { IPaginationMeta } from "../..";
 import { IEmployee } from "../employee";
 import { IExpenseCategory } from "./expenseCategory";
 import { ITreasury } from "../treasury";

@@ -3,7 +3,7 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { motion } from "framer-motion";
 import EditClinicModalButton from "./EditClinicModalButton";
 import DeleteClinicButton from "./DeleteClinicModalButton";
-import { IClinic } from "@/interfaces/clinic";
+import { IClinic } from "@/interfaces/dashboard/clinic";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";

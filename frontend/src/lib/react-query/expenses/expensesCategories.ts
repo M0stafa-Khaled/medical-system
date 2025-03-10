@@ -7,7 +7,7 @@ import {
   getAllExpenseCategories,
   updateExpenseCategory,
   getAllExpenseCategoryById,
-} from "@/api/expenses/expensesCategories";
+} from "@/services/dashboard/expenses/expensesCategories";
 
 export const useGetAllExpensesCategories = ({
   token,

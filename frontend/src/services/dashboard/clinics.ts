@@ -4,7 +4,7 @@ import {
   ICreateClinic,
   ICreateClinicResponse,
   IResponseClinics,
-} from "@/interfaces/clinic";
+} from "@/interfaces/dashboard/clinic";
 
 export const getAllClinics: ({
   token,

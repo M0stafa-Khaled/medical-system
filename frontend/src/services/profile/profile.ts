@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IResponseProfile } from "@/interfaces/profile";
+import { IResponseProfile } from "@/interfaces/profile/profile";
 
 export const getUserProfile: (
   token: string

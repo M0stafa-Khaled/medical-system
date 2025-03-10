@@ -4,7 +4,7 @@ import {
   IActionProps,
   IResponseAction,
   IResponseActions,
-} from "@/interfaces/doctors/doctorActions";
+} from "@/interfaces/dashboard/doctors/doctorActions";
 
 interface IGetAction {
   doctorId: string;

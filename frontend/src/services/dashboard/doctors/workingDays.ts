@@ -4,7 +4,7 @@ import {
   ICreateWorkingDay,
   IWorkingDay,
   IWorkingDaysRes,
-} from "@/interfaces/doctors/workingDays";
+} from "@/interfaces/dashboard/doctors/workingDays";
 
 export const getAllWorkingDays: ({
   doctorId,

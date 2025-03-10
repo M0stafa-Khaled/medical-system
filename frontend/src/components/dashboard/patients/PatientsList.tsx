@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import DeletePatientButton from "./DeletePatientModalButton";
-import { IPatient } from "@/interfaces/patient";
+import { IPatient } from "@/interfaces/dashboard/patient";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";

@@ -72,7 +72,7 @@ export enum PERMISSIONS {
   VIEW_WORKING_DAY = "عرض-ايام-العمل",
 
   // BOOKING
-  BOOKING = "الحجوزات",
+  BOOKINGS = "الحجوزات",
   ADD_BOOKING = "اضافة-حجز-مريض",
   EDIT_BOOKING = "تعديل-حجز-مريض",
   VIEW_BOOKING = "عرض-حجز-مريض",

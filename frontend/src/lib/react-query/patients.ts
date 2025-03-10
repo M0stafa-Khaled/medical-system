@@ -4,10 +4,10 @@ import {
   getAllPatients,
   getPatientById,
   updatePatient,
-} from "@/api/patients";
+} from "@/services/dashboard/patients";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
-import { IAddPatient } from "@/interfaces/patient";
+import { IAddPatient } from "@/interfaces/dashboard/patient";
 
 export const useGetAllPatients = ({
   token,

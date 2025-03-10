@@ -1,6 +1,6 @@
-import { logout } from "@/app/features/auth/authSlice";
+import { logout } from "@/store/features/auth/authSlice";
 import axios from "axios";
-import { store } from "../app/store";
+import { store } from "../store/store";
 import { toast } from "react-toastify";
 
 const axiosInstanceAPI = axios.create({

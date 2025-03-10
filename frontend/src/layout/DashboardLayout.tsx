@@ -18,7 +18,7 @@ const DashboardLayout = () => {
   const canViewExpensesCategories = useHasPermission(
     PERMISSIONS.EXPENSE_CATEGORIES
   );
-  // const canViewBooking = useHasPermission(PERMISSIONS.BOOKING);
+  const canViewBookings = useHasPermission(PERMISSIONS.BOOKINGS);
 
   const routeNames: Record<string, string> = {
     dashboard: "الرئيسية",
@@ -34,7 +34,7 @@ const DashboardLayout = () => {
     treasuries: "الخزائن",
     expenses: "المصروفات",
     "expenses-categories": "تصنيفات المصروفات",
-    booking: "الحجوزات",
+    bookings: "الحجوزات",
   };
 
   interface INavLink {
@@ -48,6 +48,15 @@ const DashboardLayout = () => {
       name: routeNames.dashboard,
       path: "/dashboard",
     },
+    // Booking
+    ...(canViewBookings
+      ? [
+          {
+            name: "الحجوزات",
+            path: "/dashboard/bookings",
+          },
+        ]
+      : []),
     // Codes
     ...(canViewClinics || canViewDoctors || canViewEmployees || canViewPatients
       ? [

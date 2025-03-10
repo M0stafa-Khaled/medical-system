@@ -1,4 +1,4 @@
-import { logout } from "@/app/features/auth/authSlice";
+import { logout } from "@/store/features/auth/authSlice";
 import { Button } from "@/components/ui/button";
 import {
   Card,

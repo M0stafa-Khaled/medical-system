@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Query_Keys from "./queryKeys";
-import { getAllMedications } from "@/api/medications";
+import { getAllMedications } from "@/services/dashboard/medications";
 import { IGetTokenPageSearch } from "@/interfaces";
 
 export const useGetALlMedications = ({

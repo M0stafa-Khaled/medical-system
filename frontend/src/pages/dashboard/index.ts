@@ -1,3 +1,6 @@
+// Booking
+export { default as Bookings } from "./bookings";
+
 // Clinics
 export { default as Clinics } from "./clinics";
 

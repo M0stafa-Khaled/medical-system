@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DeleteWorkingDayButton from "./DeleteWorkingDayModelButton";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { IWorkingDay } from "@/interfaces/doctors/workingDays";
+import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
 import { Clock, Users, Hospital, Calendar } from "lucide-react";
 import convertDay, { convertDayFromEnToAr } from "@/utils/convetDayLang";
 import InfoField from "../../InfoField";

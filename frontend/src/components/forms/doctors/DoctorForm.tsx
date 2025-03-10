@@ -3,12 +3,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
 import { Form } from "@/components/ui/form";
 import { DOCTOR_FORM_INPUTS } from "@/constants";
-import { IDoctor } from "@/interfaces/doctors/doctor";
+import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
-import { useAddDoctor, useUpdateDoctor } from "@/lib/react-query/doctors/doctors";
+import {
+  useAddDoctor,
+  useUpdateDoctor,
+} from "@/lib/react-query/doctors/doctors";
 import { useNavigate } from "react-router-dom";
 import { useGetAllClinics } from "@/lib/react-query/clinics";
 import { useEffect } from "react";

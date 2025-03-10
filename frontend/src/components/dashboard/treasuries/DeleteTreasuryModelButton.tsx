@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { ITreasury } from "@/interfaces/treasury";
+import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { useDeleteTreasury } from "@/lib/react-query/treasuries";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";

@@ -1,11 +1,11 @@
-import { IAddDoctor } from "@/interfaces/doctors/doctor";
+import { IAddDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import {
   addDoctor,
   deleteDoctor,
   getAllDoctors,
   getDoctorById,
   updateDoctor,
-} from "@/api/doctors/doctors";
+} from "@/services/dashboard/doctors/doctors";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "../queryKeys";
 

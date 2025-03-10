@@ -7,9 +7,9 @@ import { useLogout } from "@/lib/react-query/auth";
 import { AxiosError } from "axios";
 import cookieServices from "@/utils/cookieServices";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/app/store";
-import { logout } from "@/app/features/auth/authSlice";
-import { clearPermissions } from "@/app/features/permissions/permissionsSlice";
+import { RootState } from "@/store/store";
+import { logout } from "@/store/features/auth/authSlice";
+import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
 import Modal from "./shared/Modal";
 
 const LogoutIconButton = () => {

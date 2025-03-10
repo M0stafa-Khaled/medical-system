@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { TRole } from "@/types";
 import cookieServices from "@/utils/cookieServices";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/store";
+import { RootState } from "@/store/store";
 import useHasPermission from "@/hooks/useHasPermission";
 
 interface IProps {

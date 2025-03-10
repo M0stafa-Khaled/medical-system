@@ -1,4 +1,4 @@
-import { RootState } from "@/app/store";
+import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 
 const useHasPermission = (requiredPermission: string): boolean => {

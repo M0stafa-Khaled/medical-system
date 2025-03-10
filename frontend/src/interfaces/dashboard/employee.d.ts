@@ -1,5 +1,5 @@
-import { IPaginationMeta } from ".";
-import { IPermission } from "./auth";
+import { IPaginationMeta } from "..";
+import { IPermission } from "../auth/auth";
 
 export interface IEmployee {
   id: number;

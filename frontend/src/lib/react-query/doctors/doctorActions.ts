@@ -3,10 +3,10 @@ import {
   deleteDoctorAction,
   getDoctorActions,
   updateDoctorAction,
-} from "@/api/doctors/doctorActions";
+} from "@/services/dashboard/doctors/doctorActions";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "../queryKeys";
-import { IActionProps } from "@/interfaces/doctors/doctorActions";
+import { IActionProps } from "@/interfaces/dashboard/doctors/doctorActions";
 
 export const useGetDoctorActions = ({
   doctorId,

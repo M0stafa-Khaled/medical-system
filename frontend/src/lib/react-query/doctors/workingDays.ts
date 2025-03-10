@@ -6,8 +6,8 @@ import {
   getAllWorkingDays,
   getWorkingDayById,
   updateWorkingDay,
-} from "@/api/doctors/workingDays";
-import { ICreateWorkingDay } from "@/interfaces/doctors/workingDays";
+} from "@/services/dashboard/doctors/workingDays";
+import { ICreateWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
 
 export const useGetAllWorkingDays = ({
   doctorId,
