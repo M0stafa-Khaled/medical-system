@@ -5,19 +5,16 @@ import {
   getEmployeeById,
   updateEmployee,
 } from "@/services/dashboard/employees";
-import Query_Keys from "./queryKeys";
+import Query_Keys from "../queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { IAddEmployee } from "@/interfaces/dashboard/employee";
+import { IGetWithParams } from "@/interfaces";
 
 export const useGetAllEmployees = ({
   token,
   page = 1,
   search = "",
-}: {
-  token: string;
-  page: number;
-  search: string;
-}) =>
+}: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EMPLOYEES, page, search],
     queryFn: () => getAllEmployees({ token, page, search }),

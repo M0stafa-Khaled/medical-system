@@ -18,12 +18,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   useCreateWorkingDay,
   useUpdateWorkingDay,
-} from "@/lib/react-query/doctors/workingDays";
+} from "@/lib/react-query/dashboard/doctors/workingDays";
 import { formatTime, reverseFormatTime } from "@/utils/formatTime";
 import doctorWorkingDaySchema from "@/validations/doctorWorkingDaySchema";
 import convertDay from "@/utils/convetDayLang";
 import { useEffect } from "react";
-import { useGetDoctorById } from "@/lib/react-query/doctors/doctors";
+import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 
 interface IProps {
   day?: IWorkingDay;

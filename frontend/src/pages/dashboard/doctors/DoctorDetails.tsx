@@ -35,7 +35,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
-import { useGetDoctorById } from "@/lib/react-query/doctors/doctors";
+import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorkingDays from "@/components/dashboard/doctors/workingDays/WorkingDays";
 

@@ -16,7 +16,7 @@ import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { DOCTOR_ACTION_INPUTS } from "@/constants";
 import doctorActionSchema from "@/validations/doctorActionSchema";
-import { useCreateDoctorAction } from "@/lib/react-query/doctors/doctorActions";
+import { useCreateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";
 import {
   containerVariants,

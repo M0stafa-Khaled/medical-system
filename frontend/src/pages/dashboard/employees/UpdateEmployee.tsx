@@ -1,6 +1,6 @@
 import EmployeeForm from "@/components/forms/employees/EmployeeForm";
 import { Card, CardContent } from "@/components/ui/card";
-import { useGetEmployeeById } from "@/lib/react-query/employees";
+import { useGetEmployeeById } from "@/lib/react-query/dashboard/employees";
 import cookieServices from "@/utils/cookieServices";
 import updateEmployeeSchema from "@/validations/updateEmployeeSchema";
 import { useEffect } from "react";

@@ -21,8 +21,9 @@ export interface IPaginationMeta {
 }
 
 // Get interface
-export interface IGetTokenPageSearch {
+export interface IGetWithParams {
   token: string;
   page?: number;
   search?: string;
+  filter?: Record<string, string>;
 }

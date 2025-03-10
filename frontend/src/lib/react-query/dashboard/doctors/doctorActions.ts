@@ -5,7 +5,7 @@ import {
   updateDoctorAction,
 } from "@/services/dashboard/doctors/doctorActions";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "../queryKeys";
+import Query_Keys from "../../queryKeys";
 import { IActionProps } from "@/interfaces/dashboard/doctors/doctorActions";
 
 export const useGetDoctorActions = ({

@@ -22,7 +22,7 @@ import {
 import categorySchema from "@/validations/categorySchema";
 import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
 import { FaPencil } from "react-icons/fa6";
-import { useUpdateExpenseCategory } from "@/lib/react-query/expenses/expensesCategories";
+import { useUpdateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 
 interface IProps {
   category: IExpenseCategory;

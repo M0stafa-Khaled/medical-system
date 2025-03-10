@@ -9,7 +9,7 @@ import {
 import cookieServices from "@/utils/cookieServices";
 import { useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
-import { useGetAllWorkingDays } from "@/lib/react-query/doctors/workingDays";
+import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
 import WorkingDayCard from "./WorkingDayCard";
 import ActionSkeleton from "@/components/ui/ActionSkeleton";
 import SearchInput from "../../SearchInput";

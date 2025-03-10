@@ -6,18 +6,15 @@ import {
   updatePatient,
 } from "@/services/dashboard/patients";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "./queryKeys";
+import Query_Keys from "../queryKeys";
 import { IAddPatient } from "@/interfaces/dashboard/patient";
+import { IGetWithParams } from "@/interfaces";
 
 export const useGetAllPatients = ({
   token,
   page = 1,
   search = "",
-}: {
-  token: string;
-  page: number;
-  search: string;
-}) =>
+}: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_PATIENTS, page, search],
     queryFn: () => getAllPatients({ token, page, search }),

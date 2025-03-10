@@ -18,7 +18,7 @@ import {
   VenusAndMars,
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
-import { useGetPatientById } from "@/lib/react-query/patients";
+import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
 import DeletePatientButton from "@/components/dashboard/patients/DeletePatientModalButton";
 import InfoField from "@/components/dashboard/InfoField";

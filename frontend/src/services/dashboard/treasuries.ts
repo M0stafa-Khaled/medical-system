@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes, IGetTokenPageSearch } from "@/interfaces";
+import { IDeleteRes, IGetWithParams } from "@/interfaces";
 import {
   IConvertTreasuries,
   ICreateTreasury,
@@ -10,10 +10,7 @@ import {
 export const getAllTreasuries: ({
   token,
   search,
-}: IGetTokenPageSearch) => Promise<ITreasuriesRes> = async ({
-  token,
-  search,
-}) => {
+}: IGetWithParams) => Promise<ITreasuriesRes> = async ({ token, search }) => {
   const { data } = await axiosInstanceAPI.get("/treasuries", {
     params: {
       q: search,

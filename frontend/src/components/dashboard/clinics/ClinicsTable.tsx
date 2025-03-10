@@ -1,4 +1,4 @@
-import { useGetAllClinics } from "@/lib/react-query/clinics";
+import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import DataTable from "@/components/ui/DataTable";
 import ClinicsTableHeader from "./ClinicsTableHeader";
 import ClinicsTableActions from "./ClinicsTableActions";

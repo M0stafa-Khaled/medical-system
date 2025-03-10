@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "../queryKeys";
+import Query_Keys from "../../queryKeys";
 import {
   createExpense,
   deleteExpense,
@@ -7,14 +7,10 @@ import {
   getExpenseById,
   cancelExpense,
 } from "@/services/dashboard/expenses/expenses";
-import { IGetTokenPageSearch } from "@/interfaces";
+import { IGetWithParams } from "@/interfaces";
 import { ICreateExpense } from "@/interfaces/dashboard/expenses/expense";
 
-export const useGetAllExpenses = ({
-  token,
-  page,
-  search,
-}: IGetTokenPageSearch) =>
+export const useGetAllExpenses = ({ token, page, search }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EXPENSES, page, search],
     queryFn: () => getAllExpenses({ token, page, search }),

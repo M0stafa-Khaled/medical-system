@@ -1,7 +1,7 @@
 import { logout } from "@/store/features/auth/authSlice";
 import { setPermissions } from "@/store/features/permissions/permissionsSlice";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
-import { useCheckAuth } from "@/lib/react-query/auth";
+import { useCheckAuth } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { memo, useEffect } from "react";
 import { useDispatch } from "react-redux";

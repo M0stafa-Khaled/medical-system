@@ -1,4 +1,4 @@
-import { useGetAllDoctors } from "@/lib/react-query/doctors/doctors";
+import { useGetAllDoctors } from "@/lib/react-query/dashboard/doctors/doctors";
 import DataTable from "@/components/ui/DataTable";
 import DoctorsTableHeader from "./DoctorsTableHeader";
 import DoctorsTableActions from "./DoctorsTableActions";

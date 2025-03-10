@@ -22,8 +22,8 @@ import {
   containerVariants,
 } from "@/animations/dashboardAnimations";
 import addExpenseSchema from "@/validations/addExpenseSchema";
-import { useCreateExpense } from "@/lib/react-query/expenses/expenses";
-import { useGetAllExpensesCategories } from "@/lib/react-query/expenses/expensesCategories";
+import { useCreateExpense } from "@/lib/react-query/dashboard/expenses/expenses";
+import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 
 const AddExpenseButton = () => {
   const token = cookieServices.getToken()!;
@@ -132,10 +132,11 @@ const AddExpenseButton = () => {
                   key={input.name}
                   custom={idx}
                   variants={itemVariants}
-                  className={`${input.name === "name" || input.name === "category_id"
+                  className={`${
+                    input.name === "name" || input.name === "category_id"
                       ? "col-span-full"
                       : ""
-                    }`}
+                  }`}
                 >
                   <RenderFormFields
                     input={input}

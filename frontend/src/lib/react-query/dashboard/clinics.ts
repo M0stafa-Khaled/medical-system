@@ -5,16 +5,14 @@ import {
   getAllClinics,
 } from "@/services/dashboard/clinics";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "./queryKeys";
+import Query_Keys from "../queryKeys";
 import { ICreateClinic } from "@/interfaces/dashboard/clinic";
+import { IGetWithParams } from "@/interfaces";
 
 export const useGetAllClinics = ({
   token,
   search,
-}: {
-  token: string;
-  search?: string;
-}) => {
+}: IGetWithParams) => {
   return useQuery({
     queryFn: () => getAllClinics({ token, search }),
     queryKey: [Query_Keys.GET_ALL_CLINICS, search],

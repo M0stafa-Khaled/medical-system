@@ -1,4 +1,4 @@
-import { useGetEmployeeById } from "@/lib/react-query/employees";
+import { useGetEmployeeById } from "@/lib/react-query/dashboard/employees";
 import cookieServices from "@/utils/cookieServices";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";

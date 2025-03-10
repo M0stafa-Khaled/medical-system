@@ -1,5 +1,5 @@
 import DataLoader from "@/components/ui/DataLoader";
-import { useGetUserProfile } from "@/lib/react-query/profile";
+import { useGetUserProfile } from "@/lib/react-query/profile/profile";
 import cookieServices from "@/utils/cookieServices";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";

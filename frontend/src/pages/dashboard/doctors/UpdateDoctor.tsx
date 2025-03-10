@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { useGetDoctorById } from "@/lib/react-query/doctors/doctors";
+import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import DataLoader from "@/components/ui/DataLoader";
 const UpdateDoctor = () => {
   const navigate = useNavigate();

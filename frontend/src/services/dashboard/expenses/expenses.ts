@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes, IGetTokenPageSearch } from "@/interfaces";
+import { IDeleteRes, IGetWithParams } from "@/interfaces";
 import {
   ICreateExpense,
   IExpense,
@@ -10,7 +10,7 @@ export const getAllExpenses: ({
   token,
   page,
   search,
-}: IGetTokenPageSearch) => Promise<IExpensesResponse> = async ({
+}: IGetWithParams) => Promise<IExpensesResponse> = async ({
   token,
   page,
   search,

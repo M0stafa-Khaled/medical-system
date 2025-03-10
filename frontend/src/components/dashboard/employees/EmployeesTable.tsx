@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import EmployeesList from "./EmployeesList";
 import EmployeesTableHeader from "./EmployeesTableHeader";
-import { useGetAllEmployees } from "@/lib/react-query/employees";
+import { useGetAllEmployees } from "@/lib/react-query/dashboard/employees";
 import EmployeesTableActions from "./EmployeesTableActions";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";

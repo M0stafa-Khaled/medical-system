@@ -22,7 +22,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
-import { useGetExpenseById } from "@/lib/react-query/expenses/expenses";
+import { useGetExpenseById } from "@/lib/react-query/dashboard/expenses/expenses";
 
 const ExpenseDetails = () => {
   const navigate = useNavigate();

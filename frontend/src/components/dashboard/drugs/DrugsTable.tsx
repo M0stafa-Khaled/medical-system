@@ -5,7 +5,7 @@ import cookieServices from "@/utils/cookieServices";
 import DrugsTableHeader from "./DrugsTableHeader";
 import DrugsList from "./DrugsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
-import { useGetALlMedications } from "@/lib/react-query/medications";
+import { useGetALlMedications } from "@/lib/react-query/dashboard/medications";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";

@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteClinic } from "@/lib/react-query/clinics";
+import { useDeleteClinic } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";

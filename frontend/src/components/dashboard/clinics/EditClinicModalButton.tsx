@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import clinicSchema from "@/validations/clinicSchema";
-import { useUpdateClinic } from "@/lib/react-query/clinics";
+import { useUpdateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";

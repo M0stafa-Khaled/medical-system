@@ -9,9 +9,15 @@ import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAddEmployee, useUpdateEmployee } from "@/lib/react-query/employees";
+import {
+  useAddEmployee,
+  useUpdateEmployee,
+} from "@/lib/react-query/dashboard/employees";
 import { useEffect, useState } from "react";
-import { useCheckAuth, useGetAllPermissions } from "@/lib/react-query/auth";
+import {
+  useCheckAuth,
+  useGetAllPermissions,
+} from "@/lib/react-query/auth/auth";
 import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";
 import {

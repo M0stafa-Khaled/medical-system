@@ -11,9 +11,9 @@ import { AxiosError } from "axios";
 import {
   useAddDoctor,
   useUpdateDoctor,
-} from "@/lib/react-query/doctors/doctors";
+} from "@/lib/react-query/dashboard/doctors/doctors";
 import { useNavigate } from "react-router-dom";
-import { useGetAllClinics } from "@/lib/react-query/clinics";
+import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import { useEffect } from "react";
 import SubmitButton from "../SubmitButton";
 import { motion } from "framer-motion";

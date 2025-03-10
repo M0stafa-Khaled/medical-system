@@ -1,7 +1,7 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
-import { useDeleteExpenseCategory } from "@/lib/react-query/expenses/expensesCategories";
+import { useDeleteExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { memo, useState } from "react";

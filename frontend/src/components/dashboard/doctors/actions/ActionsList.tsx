@@ -1,4 +1,4 @@
-import { useGetDoctorActions } from "@/lib/react-query/doctors/doctorActions";
+import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import cookieServices from "@/utils/cookieServices";
 import ActionCard from "./ActionCard";
 import ActionSkeleton from "@/components/ui/ActionSkeleton";

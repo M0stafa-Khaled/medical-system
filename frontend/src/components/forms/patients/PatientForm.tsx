@@ -9,7 +9,10 @@ import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAddPatient, useUpdatePatient } from "@/lib/react-query/patients";
+import {
+  useAddPatient,
+  useUpdatePatient,
+} from "@/lib/react-query/dashboard/patients";
 import { useEffect } from "react";
 import RenderFormFields from "../RenderFormFields";
 import SubmitButton from "../SubmitButton";

@@ -24,7 +24,7 @@ import {
   useCheckAuth,
   useResendOtp,
   useVerifyEmail,
-} from "@/lib/react-query/auth";
+} from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";

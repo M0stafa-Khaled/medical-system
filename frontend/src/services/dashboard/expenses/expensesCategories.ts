@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IGetTokenPageSearch } from "@/interfaces";
+import { IGetWithParams } from "@/interfaces";
 import {
   IExpenseCategoriesRes,
   IAddExpenseCategoryRes,
@@ -9,7 +9,7 @@ import {
 export const getAllExpenseCategories: ({
   token,
   search,
-}: IGetTokenPageSearch) => Promise<IExpenseCategoriesRes> = async ({
+}: IGetWithParams) => Promise<IExpenseCategoriesRes> = async ({
   token,
   search,
 }) => {

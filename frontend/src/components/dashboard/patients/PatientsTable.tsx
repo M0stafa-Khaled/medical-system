@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import PatientsList from "./PatientsList";
 import PatientsTableHeader from "./PatientsTableHeader";
-import { useGetAllPatients } from "@/lib/react-query/patients";
+import { useGetAllPatients } from "@/lib/react-query/dashboard/patients";
 import PatientsTableActions from "./PatientsTableActions";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";

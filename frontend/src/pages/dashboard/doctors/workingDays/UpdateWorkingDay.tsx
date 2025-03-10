@@ -1,7 +1,7 @@
 import WorkingDayForm from "@/components/forms/doctors/WorkingDayForm";
 import { Card, CardContent } from "@/components/ui/card";
 import DataLoader from "@/components/ui/DataLoader";
-import { useGetWorkingDayById } from "@/lib/react-query/doctors/workingDays";
+import { useGetWorkingDayById } from "@/lib/react-query/dashboard/doctors/workingDays";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";

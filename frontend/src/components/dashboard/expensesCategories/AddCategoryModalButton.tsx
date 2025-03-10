@@ -21,7 +21,7 @@ import {
   containerVariants,
 } from "@/animations/dashboardAnimations";
 import categorySchema from "@/validations/categorySchema";
-import { useCreateExpenseCategory } from "@/lib/react-query/expenses/expensesCategories";
+import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 
 const AddCategoryButton = () => {
   const token = cookieServices.getToken()!;

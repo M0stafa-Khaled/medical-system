@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes, IGetTokenPageSearch } from "@/interfaces";
+import { IDeleteRes, IGetWithParams } from "@/interfaces";
 import {
   IAddEmployee,
   IEmployeeRes,
@@ -10,7 +10,7 @@ export const getAllEmployees = async ({
   token,
   page = 1,
   search = "",
-}: IGetTokenPageSearch): Promise<IEmployeesRes> => {
+}: IGetWithParams): Promise<IEmployeesRes> => {
   const { data } = await axiosInstanceAPI.get(`/employees`, {
     params: {
       ...(search ? { q: search } : { page, q: search }),

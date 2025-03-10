@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LOGIN_FORM_INPUTS } from "@/constants";
-import { useLogin } from "@/lib/react-query/auth";
+import { useLogin } from "@/lib/react-query/auth/auth";
 import loginSchema from "@/validations/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";

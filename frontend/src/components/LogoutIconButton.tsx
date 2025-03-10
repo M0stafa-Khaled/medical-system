@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { useLogout } from "@/lib/react-query/auth";
+import { useLogout } from "@/lib/react-query/auth/auth";
 import { AxiosError } from "axios";
 import cookieServices from "@/utils/cookieServices";
 import { useDispatch, useSelector } from "react-redux";

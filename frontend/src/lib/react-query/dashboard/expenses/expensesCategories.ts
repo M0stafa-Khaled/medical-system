@@ -1,6 +1,6 @@
-import { IGetTokenPageSearch } from "@/interfaces";
+import { IGetWithParams } from "@/interfaces";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "../queryKeys";
+import Query_Keys from "../../queryKeys";
 import {
   createExpenseCategory,
   deleteExpenseCategory,
@@ -12,7 +12,7 @@ import {
 export const useGetAllExpensesCategories = ({
   token,
   search,
-}: IGetTokenPageSearch) =>
+}: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EXPENSES_CATEGORIES, search],
     queryFn: () => getAllExpenseCategories({ token, search }),
@@ -26,7 +26,7 @@ export const useGetAllExpensesCategoryById = ({
   token: string;
 }) =>
   useQuery({
-    queryKey: [Query_Keys.GET_ALL_EXPENSES_ONE_CATEGORY, id],
+    queryKey: [Query_Keys.GET_ALL_ONE_EXPENSES_CATEGORY, id],
     queryFn: () => getAllExpenseCategoryById({ token, id }),
   });
 

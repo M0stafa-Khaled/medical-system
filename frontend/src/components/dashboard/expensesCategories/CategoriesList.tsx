@@ -10,7 +10,7 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import { useGetAllExpensesCategories } from "@/lib/react-query/expenses/expensesCategories";
+import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 
 const CategoriesList = () => {
   const token = cookieServices.getToken()!;

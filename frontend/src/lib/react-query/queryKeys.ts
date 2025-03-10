@@ -14,8 +14,10 @@ enum Query_Keys {
   GET_ALL_TREASURIES = "treasuries",
   GET_ALL_EXPENSES = "expenses",
   GET_ONE_EXPENSE = "expense",
-  GET_ALL_EXPENSES_CATEGORIES = "expenses categories",
-  GET_ALL_EXPENSES_ONE_CATEGORY = "expenses category",
+  GET_ALL_EXPENSES_CATEGORIES = "expensesCategories",
+  GET_ALL_ONE_EXPENSES_CATEGORY = "expensesCategory",
+  GET_ALL_BOOKINGS = "bookings",
+  GET_ONE_BOOKING = "booking",
 }
 
 export default Query_Keys;

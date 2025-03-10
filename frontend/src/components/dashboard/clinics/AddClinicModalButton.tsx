@@ -10,7 +10,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import clinicSchema from "@/validations/clinicSchema";
-import { useCreateClinic } from "@/lib/react-query/clinics";
+import { useCreateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";

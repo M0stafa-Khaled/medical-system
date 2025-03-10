@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteWorkingDay } from "@/lib/react-query/doctors/workingDays";
+import { useDeleteWorkingDay } from "@/lib/react-query/dashboard/doctors/workingDays";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
