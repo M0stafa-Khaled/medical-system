@@ -26,4 +26,5 @@ export interface IGetWithParams {
   page?: number;
   search?: string;
   filter?: Record<string, string>;
+  sort?: string;
 }

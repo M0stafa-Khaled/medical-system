@@ -1,0 +1,168 @@
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { format } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Input } from "@/components/ui/input";
+import { CalendarIcon } from "lucide-react";
+
+interface IProps {
+  filters: {
+    doctor: string;
+    patient: string;
+    created_at: string | null;
+    booking_date: string | null;
+    status: string;
+    clinic_name: string;
+  };
+  setFilters: (filters: any) => void;
+}
+const BookingsFilters = ({ filters, setFilters }: IProps) => {
+  const handleFilterChange = (key: string, value: any) => {
+    setFilters({ ...filters, [key]: value });
+    console.log(key, value);
+  };
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+      <Input
+        placeholder="ابحث باسم الطبيب"
+        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        type="search"
+        value={filters.doctor}
+        onChange={(e) => handleFilterChange("doctor", e.target.value)}
+      />
+      <Input
+        placeholder="ابحث باسم المريض"
+        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        type="search"
+        value={filters.patient}
+        onChange={(e) => handleFilterChange("patient", e.target.value)}
+      />
+      <Input
+        placeholder="ابحث بالعيادة"
+        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        type="search"
+        value={filters.clinic_name}
+        onChange={(e) => handleFilterChange("clinic_name", e.target.value)}
+      />
+
+      {/* Created Date */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className={
+              "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-black/20 dark:border-white/40"
+            }
+          >
+            <CalendarIcon className="ml-2 h-4 w-4" />
+            {filters.created_at ? (
+              format(filters.created_at, "dd-MM-yyyy")
+            ) : (
+              <span className="text-muted-foreground">تاريخ الإنشاء</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className="w-full p-0 px-3 border-black/20 dark:border-white/40 bg-foreground"
+          align="start"
+        >
+          <Calendar
+            mode="single"
+            dir="rtl"
+            selected={
+              filters.created_at ? new Date(filters.created_at) : undefined
+            }
+            onSelect={(date) => handleFilterChange("created_at", date)}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
+
+      {/* Booking Date */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className={
+              "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-black/20 dark:border-white/40"
+            }
+          >
+            <CalendarIcon className="ml-2 h-4 w-4" />
+            {filters.booking_date ? (
+              format(filters.booking_date, "dd-MM-yyyy")
+            ) : (
+              <span className="text-muted-foreground">تاريخ الحجز</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className="w-full p-0 px-3 border-black/20 dark:border-white/40 bg-foreground"
+          align="start"
+        >
+          <Calendar
+            mode="single"
+            dir="rtl"
+            selected={
+              filters.booking_date ? new Date(filters.booking_date) : undefined
+            }
+            onSelect={(date) => handleFilterChange("booking_date", date)}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
+
+      {/* Status */}
+      <Select
+        value={filters.status}
+        onValueChange={(value) => handleFilterChange("status", value)}
+        dir="rtl"
+      >
+        <SelectTrigger
+          className={`border-black/20 dark:border-white/40 !h-12  ${
+            filters.status
+              ? "text-black dark:text-white"
+              : "text-muted-foreground"
+          }`}
+        >
+          <SelectValue
+            placeholder="الحالة"
+            className={`py-4 text-muted-foreground`}
+          />
+        </SelectTrigger>
+        <SelectContent className="text-black dark:text-white bg-foreground border-black/20 dark:border-white/40">
+          <SelectItem value="all" className="py-2 cursor-pointer">
+            الكل
+          </SelectItem>
+          <SelectItem value="pending" className="py-2 cursor-pointer">
+            قيد الانتظار
+          </SelectItem>
+          <SelectItem value="collected" className="py-2 cursor-pointer">
+            تم التحصيل
+          </SelectItem>
+          <SelectItem value="cancelled" className="py-2 cursor-pointer">
+            ملغي
+          </SelectItem>
+          <SelectItem value="no-show" className="py-2 cursor-pointer">
+            لم يحضر
+          </SelectItem>
+          <SelectItem value="ended" className="py-2 cursor-pointer">
+            منتهى
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};
+
+export default BookingsFilters;

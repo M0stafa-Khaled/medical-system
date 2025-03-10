@@ -29,6 +29,10 @@ import {
   ExpenseDetails,
   CreateWorkingDay,
   UpdateWorkingDay,
+  Bookings,
+  BookingDetails,
+  UpdateBooking,
+  CreateBooking
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -73,6 +77,40 @@ const routes = createRoutesFromElements(
         <Route
           index
           element={<h1 className="text-primary">الصفحة الرئيسية</h1>}
+        />
+
+        {/* Bookings */}
+        <Route
+          path="bookings"
+          element={
+            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+              <Bookings />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="bookings/:bookingId"
+          element={
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
+              <BookingDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="bookings/create"
+          element={
+            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_BOOKING}>
+              <CreateBooking />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="bookings/:bookingId/update"
+          element={
+            <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_BOOKING}>
+              <UpdateBooking />
+            </ProtectedRoute>
+          }
         />
 
         {/* Clinics */}
