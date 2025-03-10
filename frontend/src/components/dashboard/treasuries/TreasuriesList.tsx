@@ -10,7 +10,7 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import { useGetAllTreasuries } from "@/lib/react-query/treasuries";
+import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 
 const TreasuriesList = () => {
   const token = cookieServices.getToken()!;

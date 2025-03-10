@@ -28,7 +28,7 @@ import RenderFormFields from "../RenderFormFields";
 import { useDispatch } from "react-redux";
 import { setPermissions } from "@/store/features/permissions/permissionsSlice";
 import { logout } from "@/store/features/auth/authSlice";
-import { useGetAllTreasuries } from "@/lib/react-query/treasuries";
+import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 interface IProps {
   employee?: IEmployee;
   action: "add" | "update";

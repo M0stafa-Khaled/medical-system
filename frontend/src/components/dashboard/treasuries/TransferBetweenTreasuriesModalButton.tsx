@@ -25,7 +25,7 @@ import { TRANSFER_TREASURIES_FORM_INPUTS } from "@/constants";
 import {
   useGetAllTreasuries,
   useTransferTreasuries,
-} from "@/lib/react-query/treasuries";
+} from "@/lib/react-query/dashboard/treasuries";
 
 const TransferBetweenTreasuriesButton = () => {
   const token = cookieServices.getToken()!;

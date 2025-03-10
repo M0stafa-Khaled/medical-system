@@ -22,7 +22,7 @@ import {
 import treasurySchema from "@/validations/treasurySchema";
 import { FaPencil } from "react-icons/fa6";
 import { ITreasury } from "@/interfaces/dashboard/treasury";
-import { useUpdateTreasury } from "@/lib/react-query/treasuries";
+import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
 
 interface IProps {

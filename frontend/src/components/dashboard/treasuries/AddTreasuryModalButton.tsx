@@ -21,7 +21,7 @@ import {
   containerVariants,
 } from "@/animations/dashboardAnimations";
 import treasurySchema from "@/validations/treasurySchema";
-import { useCreateTreasury } from "@/lib/react-query/treasuries";
+import { useCreateTreasury } from "@/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
 
 const AddTreasuryButton = () => {
