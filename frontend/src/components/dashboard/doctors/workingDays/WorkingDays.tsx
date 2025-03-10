@@ -11,7 +11,6 @@ import { useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
 import WorkingDayCard from "./WorkingDayCard";
-import ActionSkeleton from "@/components/ui/ActionSkeleton";
 import SearchInput from "../../SearchInput";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
@@ -75,12 +74,7 @@ const WorkingDays = ({ doctorId }: IProps) => {
             animate="visible"
           >
             {isLoading ? (
-              <CardSkeleton
-                mdLength={1}
-                lgLength={2}
-                count={3}
-                height="200px"
-              />
+              <CardSkeleton mdLength={1} lgLength={2} count={3} />
             ) : !days?.data?.length ? (
               <p className="text-center text-muted-foreground py-3">
                 لا يوجد ايأم عمل

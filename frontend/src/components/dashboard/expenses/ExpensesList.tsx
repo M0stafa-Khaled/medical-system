@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { TableCell, TableRow } from "@/components/ui/table";
+import { TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
@@ -30,14 +30,19 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
 
   if (!expenses.length)
     return (
-      <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
+      <motion.tr
+        initial="hidden"
+        animate="visible"
+        variants={tableRowVariants}
+        className="dark:border-muted !bg-white/40 dark:!bg-dark/40 hover:!bg-gray-200 dark:hover:!bg-dark transition-all duration-300"
+      >
         <TableCell
           colSpan={9}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
           لا يوجد مصروفات
         </TableCell>
-      </TableRow>
+      </motion.tr>
     );
   return (
     <>
@@ -48,7 +53,7 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
           animate="visible"
           custom={index}
           variants={tableRowVariants}
-          className="dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300"
+          className="dark:border-muted !bg-white/40 dark:!bg-dark/40 hover:!bg-gray-200 dark:hover:!bg-dark transition-all duration-300"
         >
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
             {countSerial({ meta: meta!, index })}

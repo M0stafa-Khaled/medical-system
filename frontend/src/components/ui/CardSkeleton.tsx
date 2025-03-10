@@ -9,14 +9,12 @@ interface IProps {
   mdLength?: number;
   lgLength?: number;
   count?: number;
-  height?: string;
 }
 const CardSkeleton = ({
   length = 1,
   mdLength = 2,
   lgLength = 3,
   count = 6,
-  height = "100px",
 }: IProps) => {
   return (
     <motion.div
@@ -32,7 +30,7 @@ const CardSkeleton = ({
           custom={idx}
           className="h-auto"
         >
-          <Skeleton className={`h-[${height}] bg-muted rounded-lg`} />
+          <Skeleton className={`h-28 bg-muted rounded-lg`} />
         </motion.div>
       ))}
     </motion.div>
