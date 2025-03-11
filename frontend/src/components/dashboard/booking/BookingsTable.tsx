@@ -1,6 +1,6 @@
 import DataTable from "@/components/ui/DataTable";
 import BookingsTableHeader from "./BookingsTableHeader";
-import BookingsFilter from "./BookingsHeaderActions";
+import BookingsHeaderActions from "./BookingsHeaderActions";
 import BookingsList from "./BookingsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
@@ -57,8 +57,8 @@ const BookingsTable = () => {
       ...(filters.patient && { patient }),
       ...(filters.created_at && { created_at }),
       ...(filters.booking_date && { booking_date }),
-      ...(filters.status && filters.status !== "all" && { status }),
-      ...(filters.clinic_name && { clinic_name }),
+      ...(filters.status && status !== "all" && { status }),
+      ...(filters.clinic_name && clinic_name !== "all" && { clinic_name }),
     },
   });
 
@@ -70,7 +70,9 @@ const BookingsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={<BookingsFilter filters={filters} setFilters={setFilters} />}
+      actions={
+        <BookingsHeaderActions filters={filters} setFilters={setFilters} />
+      }
       header={<BookingsTableHeader setSort={setSort} sort={sort} />}
       list={<BookingsList bookings={bookings?.data.items || []} />}
       skeleton={<TableSkeleton columns={7} rows={6} actionButtons={3} />}

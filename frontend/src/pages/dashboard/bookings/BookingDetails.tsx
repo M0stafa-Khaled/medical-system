@@ -38,7 +38,7 @@ const BookingDetails = () => {
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
   const { bookingId } = useParams();
-  console.log(bookingId);
+
   const {
     data: booking,
     isLoading,

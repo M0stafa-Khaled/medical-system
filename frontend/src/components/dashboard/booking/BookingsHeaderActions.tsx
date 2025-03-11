@@ -17,7 +17,7 @@ interface IProps {
   setFilters: (filters: any) => void;
 }
 
-const BookingsFilter = ({ filters, setFilters }: IProps) => {
+const BookingsHeaderActions = ({ filters, setFilters }: IProps) => {
   const canCreateBooking = useHasPermission(PERMISSIONS.ADD_BOOKING);
 
   return (
@@ -44,4 +44,4 @@ const BookingsFilter = ({ filters, setFilters }: IProps) => {
   );
 };
 
-export default BookingsFilter;
+export default BookingsHeaderActions;

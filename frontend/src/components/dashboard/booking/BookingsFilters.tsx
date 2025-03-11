@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { CalendarIcon } from "lucide-react";
+import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
+import cookieServices from "@/utils/cookieServices";
 
 interface IProps {
   filters: {
@@ -28,10 +30,12 @@ interface IProps {
   setFilters: (filters: any) => void;
 }
 const BookingsFilters = ({ filters, setFilters }: IProps) => {
-  const handleFilterChange = (key: string, value: any) => {
+  const token = cookieServices.getToken()!;
+  const { data: clinics } = useGetAllClinics({ token });
+
+  const handleFilterChange = (key: string, value: any) =>
     setFilters({ ...filters, [key]: value });
-    console.log(key, value);
-  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
       <Input
@@ -42,19 +46,45 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
         onChange={(e) => handleFilterChange("doctor", e.target.value)}
       />
       <Input
-        placeholder="ابحث باسم المريض"
+        placeholder="ابحث باسم المريض او رقم الهاتف"
         className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
         type="search"
         value={filters.patient}
         onChange={(e) => handleFilterChange("patient", e.target.value)}
       />
-      <Input
-        placeholder="ابحث بالعيادة"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
-        type="search"
+      {/* Clinic */}
+      <Select
         value={filters.clinic_name}
-        onChange={(e) => handleFilterChange("clinic_name", e.target.value)}
-      />
+        onValueChange={(value) => handleFilterChange("clinic_name", value)}
+        dir="rtl"
+      >
+        <SelectTrigger
+          className={`border-black/20 dark:border-white/40 !h-12  ${
+            filters.clinic_name
+              ? "text-black dark:text-white"
+              : "text-muted-foreground"
+          }`}
+        >
+          <SelectValue
+            placeholder="العيادة"
+            className={`py-4 text-muted-foreground`}
+          />
+        </SelectTrigger>
+        <SelectContent className="text-black dark:text-white bg-foreground border-black/20 dark:border-white/40">
+          <SelectItem value="all" className="py-2.5 cursor-pointer">
+            الكل
+          </SelectItem>
+          {clinics?.data.map((clinic) => (
+            <SelectItem
+              key={clinic.name}
+              value={clinic.name.trim()}
+              className="py-2.5 cursor-pointer"
+            >
+              {clinic.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       {/* Created Date */}
       <Popover>
@@ -141,22 +171,22 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           />
         </SelectTrigger>
         <SelectContent className="text-black dark:text-white bg-foreground border-black/20 dark:border-white/40">
-          <SelectItem value="all" className="py-2 cursor-pointer">
+          <SelectItem value="all" className="py-2.5 cursor-pointer">
             الكل
           </SelectItem>
-          <SelectItem value="pending" className="py-2 cursor-pointer">
+          <SelectItem value="pending" className="py-2.5 cursor-pointer">
             قيد الانتظار
           </SelectItem>
-          <SelectItem value="collected" className="py-2 cursor-pointer">
+          <SelectItem value="collected" className="py-2.5 cursor-pointer">
             تم التحصيل
           </SelectItem>
-          <SelectItem value="cancelled" className="py-2 cursor-pointer">
+          <SelectItem value="cancelled" className="py-2.5 cursor-pointer">
             ملغي
           </SelectItem>
-          <SelectItem value="no-show" className="py-2 cursor-pointer">
+          <SelectItem value="no-show" className="py-2.5 cursor-pointer">
             لم يحضر
           </SelectItem>
-          <SelectItem value="ended" className="py-2 cursor-pointer">
+          <SelectItem value="ended" className="py-2.5 cursor-pointer">
             منتهى
           </SelectItem>
         </SelectContent>
