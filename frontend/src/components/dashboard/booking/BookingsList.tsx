@@ -2,7 +2,6 @@ import { TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import DeleteBookingButton from "./DeleteBookingModalButton";
-import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
@@ -11,8 +10,9 @@ import useHasPermission from "@/hooks/useHasPermission";
 import truncateText from "@/utils/truncateText";
 import { IBooking } from "@/interfaces/dashboard/bookings";
 import convertDay from "@/utils/convertDayLang";
-import BookingStatus from "./BookingStatus";
 import formatDateTime from "@/utils/formatDate";
+import UpdateBookingModalButton from "./UpdateBookingModalButton";
+import UpdateBookingStatus from "./UpdateBookingStatus";
 
 interface IProps {
   bookings: IBooking[];
@@ -34,7 +34,7 @@ const BookingsList = ({ bookings }: IProps) => {
           colSpan={10}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
-          لا يوجد حجوزات
+          لا يوجد حجوزات اليوم
         </TableCell>
       </motion.tr>
     );
@@ -81,7 +81,14 @@ const BookingsList = ({ bookings }: IProps) => {
             </TableCell>
 
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-              <BookingStatus status={status} />
+              <UpdateBookingStatus
+                status={status}
+                id={`${id}`}
+                clinic_name={clinic}
+                doctor_id={`${doctor?.id}`}
+                patient_id={`${patient?.id}`}
+                working_day_id={`${""}`}
+              />
             </TableCell>
 
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
@@ -108,14 +115,17 @@ const BookingsList = ({ bookings }: IProps) => {
                     </Button>
                   )}
                   {canEditBooking && (
-                    <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                      <Link
-                        to={`/dashboard/bookings/${id}/update`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                      >
-                        <FaPencil size={18} />
-                      </Link>
-                    </Button>
+                    <UpdateBookingModalButton
+                      id={`${id}`}
+                      clinic_name={clinic}
+                      doctor={doctor}
+                      patient={patient}
+                      working_day={{
+                        id: 1,
+                        day: "",
+                      }}
+                      status={status}
+                    />
                   )}
                   {canDeleteBooking && status !== "cancelled" && (
                     <DeleteBookingButton

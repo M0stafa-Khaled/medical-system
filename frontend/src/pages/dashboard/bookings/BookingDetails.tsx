@@ -4,7 +4,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DataLoader from "@/components/ui/DataLoader";
-import { useGetBookingById } from "@/lib/react-query/dashboard/booking";
+import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";
 import cookieServices from "@/utils/cookieServices";
 import {
   User2,
@@ -29,7 +29,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import { Button } from "@/components/ui/button";
 import { FaPencil } from "react-icons/fa6";
 import DeleteBookingButton from "@/components/dashboard/booking/DeleteBookingModalButton";
-import BookingStatus from "@/components/dashboard/booking/BookingStatus";
+import UpdateBookingStatus from "@/components/dashboard/booking/UpdateBookingStatus";
 
 const BookingDetails = () => {
   const canEditBooking = useHasPermission(PERMISSIONS.EDIT_BOOKING);
@@ -74,6 +74,7 @@ const BookingDetails = () => {
     patient,
     start_at,
     status,
+    employee,
   } = booking?.data || {};
 
   return (
@@ -162,6 +163,15 @@ const BookingDetails = () => {
                   />
                 </Link>
               </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link to={`/dashboard/employees/${employee?.id}`}>
+                  <InfoField
+                    icon={<UserCircle2 className="h-5 w-5 text-blue-500" />}
+                    label="الموظف"
+                    value={employee?.name || ""}
+                  />
+                </Link>
+              </motion.div>
 
               <motion.div variants={itemVariants}>
                 <InfoField
@@ -213,7 +223,14 @@ const BookingDetails = () => {
                     <h5 className="text-sm text-muted-foreground text-nowrap">
                       الحالة:
                     </h5>
-                    <BookingStatus status={status!} />
+                    <UpdateBookingStatus
+                      status={status!}
+                      clinic_name={clinic!}
+                      id={`${id}`}
+                      doctor_id={`${doctor?.id}`}
+                      patient_id={`${patient?.id}`}
+                      working_day_id={`${day}`}
+                    />
                   </div>
                 </div>
               </motion.div>

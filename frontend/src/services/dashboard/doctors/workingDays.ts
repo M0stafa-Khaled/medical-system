@@ -13,16 +13,16 @@ export const getAllWorkingDays: ({
 }: {
   doctorId: string;
   token: string;
-  search: string;
+  search?: string;
 }) => Promise<IWorkingDaysRes> = async ({ doctorId, token, search }) => {
-  const { data } = await axiosInstanceAPI.get(
-    `${doctorId}/working-days${search && `?clinic_name=${search}`}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const { data } = await axiosInstanceAPI.get(`${doctorId}/working-days`, {
+    params: {
+      ...(search && { clinic_name: search }),
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 };
 

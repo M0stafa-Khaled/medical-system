@@ -18,6 +18,7 @@ enum Query_Keys {
   GET_ALL_ONE_EXPENSES_CATEGORY = "expensesCategory",
   GET_ALL_BOOKINGS = "bookings",
   GET_ONE_BOOKING = "booking",
+  GET_ALL_DOCTORS_CLINICS = "doctorsClinics",
 }
 
 export default Query_Keys;

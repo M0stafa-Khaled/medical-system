@@ -1,6 +1,6 @@
 import DataTable from "@/components/ui/DataTable";
 import BookingsTableHeader from "./BookingsTableHeader";
-import BookingsHeaderActions from "./BookingsHeaderActions";
+import BookingsHeaderActions from "./BookingsActions";
 import BookingsList from "./BookingsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
-import { useGetAllBookings } from "@/lib/react-query/dashboard/booking";
+import { useGetAllBookings } from "@/lib/react-query/dashboard/bookings";
 
 const BookingsTable = () => {
   const token = cookieServices.getToken()!;
@@ -33,10 +33,12 @@ const BookingsTable = () => {
     filters.booking_date
   ).toLocaleDateString("en-CA", formattedDateOptions);
 
-  const formattedCreatedAt = new Date(filters.created_at).toLocaleDateString(
-    "en-CA",
-    formattedDateOptions
-  );
+  const formattedCreatedAt = filters.created_at
+    ? new Date(filters.created_at).toLocaleDateString(
+        "en-CA",
+        formattedDateOptions
+      )
+    : "";
 
   const doctor = useDebounce(filters.doctor, 500);
   const patient = useDebounce(filters.patient, 500);
@@ -44,6 +46,7 @@ const BookingsTable = () => {
   const booking_date = useDebounce(formattedBookingDate, 500);
   const clinic_name = useDebounce(filters.clinic_name, 500);
   const status = useDebounce(filters.status, 500);
+
   const {
     data: bookings,
     isLoading,
@@ -51,12 +54,14 @@ const BookingsTable = () => {
   } = useGetAllBookings({
     token,
     page,
-    sort: sort ? "created_at" : "-created_at",
+    sort: sort ? "date" : "-date",
     filter: {
       ...(filters.doctor && { doctor }),
       ...(filters.patient && { patient }),
-      ...(filters.created_at && { created_at }),
-      ...(filters.booking_date && { booking_date }),
+      ...(filters.created_at &&
+        created_at !== "Invalid Date" && { created_at }),
+      ...(filters.booking_date &&
+        booking_date !== "Invalid Date" && { booking_date }),
       ...(filters.status && status !== "all" && { status }),
       ...(filters.clinic_name && clinic_name !== "all" && { clinic_name }),
     },

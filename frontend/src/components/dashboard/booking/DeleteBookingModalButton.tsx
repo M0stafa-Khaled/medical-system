@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteBooking } from "@/lib/react-query/dashboard/booking";
+import { useDeleteBooking } from "@/lib/react-query/dashboard/bookings";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";

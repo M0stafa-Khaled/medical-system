@@ -23,7 +23,7 @@ const BookingsTableHeader = ({ setSort, sort }: IProps) => {
           onClick={() => setSort(!sort)}
         >
           <div className="flex items-center justify-center gap-2">
-            رقم الكشف
+            كود الحجز
             <motion.button
               animate={{ rotate: sort ? 180 : 0 }}
               transition={{ duration: 0.2 }}
@@ -35,7 +35,9 @@ const BookingsTableHeader = ({ setSort, sort }: IProps) => {
         <TableHead className="py-4 text-center w-48 text-nowrap">
           المريض
         </TableHead>
-        <TableHead className="py-4 text-center">رقم الهاتف</TableHead>
+        <TableHead className="py-4 text-center text-nowrap">
+          رقم الهاتف
+        </TableHead>
         <TableHead className="py-4 text-center">العيادة</TableHead>
         <TableHead className="py-4 text-center">الطبيب</TableHead>
         <TableHead className="py-4 text-center w-28">الحالة</TableHead>
