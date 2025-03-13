@@ -205,7 +205,10 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           );
         });
       }
-      if (errorObj?.response?.data.message) {
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
         toast.error(errorObj?.response?.data.message, {
           autoClose: 5000,
         });

@@ -26,7 +26,7 @@ import RenderFormFields from "@/components/forms/RenderFormFields";
 
 const AddClinicModalButton = () => {
   const token = cookieServices.getToken()!;
-  const [isOpenAddModal, setIsOpenAddModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: createClinic, isPending } = useCreateClinic();
 
   const form = useForm<z.infer<typeof clinicSchema>>({
@@ -68,36 +68,42 @@ const AddClinicModalButton = () => {
           );
         });
       }
-      if (errorObj?.response?.data.message) {
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
         toast.error(errorObj?.response?.data.message, {
           autoClose: 5000,
         });
       }
     } finally {
-      setIsOpenAddModal(false);
-      form.reset();
+      handleCloseModal();
     }
   };
 
   const handleCloseModal = () => {
-    setIsOpenAddModal(false);
+    setIsOpen(false);
     form.reset();
+  };
+
+  const isOptionalField = (fieldName: string) => {
+    const optionalFields = ["skip"];
+
+    return optionalFields.includes(fieldName);
   };
 
   return (
     <>
       <Button
-        onClick={() => setIsOpenAddModal(true)}
-        size={"sm"}
-        variant={"outline"}
-        className="bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-[1.4rem] !rounded-lg font-semibold"
+        onClick={() => setIsOpen(true)}
+        className="flex items-center gap-2 h-auto py-3"
       >
         إضافة عيادة جديدة
         <FiPlus size={20} />
       </Button>
 
       <Modal
-        isOpen={isOpenAddModal}
+        isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="إضافة عيادة جديدة"
         description={{
@@ -111,7 +117,7 @@ const AddClinicModalButton = () => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-5 text-black dark:text-white"
+            className="space-y-2 text-black dark:text-white"
           >
             {CLINIC_FORM_INPUTS.map((input, idx) => (
               <motion.div variants={itemVariants} key={input.name} custom={idx}>
@@ -119,6 +125,7 @@ const AddClinicModalButton = () => {
                   input={input}
                   form={form}
                   schema={clinicSchema}
+                  isOptionalField={isOptionalField}
                 />
               </motion.div>
             ))}

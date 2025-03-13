@@ -7,7 +7,7 @@ import ProfileMenu from "./dashboard/ProfileMenu";
 import AuthButtons from "./dashboard/AuthButtons";
 import ToggleMode from "./ToggleMode";
 import LogoutIconButton from "./LogoutIconButton";
-import NavList from "./dashboard/NavList";
+import NavList from "./NavList";
 import {
   menuIconVariants,
   navVariants,
@@ -15,12 +15,10 @@ import {
   logoVariants,
   navItemsVariants,
 } from "@/animations/navbarAnimations";
+import { ILink } from "@/interfaces";
 
 interface IProps {
-  links: {
-    name: string;
-    path: string;
-  }[];
+  links: ILink[];
   dashboard?: boolean;
 }
 

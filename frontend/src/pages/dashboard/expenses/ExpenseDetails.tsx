@@ -38,8 +38,10 @@ const ExpenseDetails = () => {
   });
 
   useEffect(() => {
+    if (isNaN(Number(expenseId))) return navigate(-1);
+
     if (isError) {
-      toast.error("فشل في تحميل بيانات الموظف");
+      toast.error("فشل في تحميل بيانات المصروف");
       navigate(-1);
       return;
     }
@@ -49,7 +51,7 @@ const ExpenseDetails = () => {
       navigate(-1);
       return;
     }
-  }, [expense, isError, navigate]);
+  }, [expense, isError, navigate, expenseId]);
 
   if (isLoading) return <DataLoader />;
 

@@ -85,8 +85,7 @@ const TransferBetweenTreasuriesButton = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        size={"sm"}
-        className="md:w-28 bg-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-[1.4rem] !rounded-lg font-semibold"
+        className="md:w-28 gap-2 h-auto py-3"
       >
         تحويل
         <FaMoneyBillTransfer size={20} />

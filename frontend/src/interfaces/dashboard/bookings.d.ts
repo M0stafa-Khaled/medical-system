@@ -2,6 +2,7 @@ import { TBookingStatus } from "@/types";
 import { IPaginationMeta } from "..";
 import { IDoctor } from "./doctors/doctor";
 import { IPatient } from "./patient";
+import { IEmployee } from "./employee";
 
 export interface IBooking {
   id: number;
@@ -14,6 +15,7 @@ export interface IBooking {
   created_at: string;
   patient: IPatient;
   doctor: IDoctor;
+  employee: IEmployee;
 }
 
 export interface IBookingsRes {

@@ -46,30 +46,25 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   const form = useForm<z.infer<typeof doctorSchema>>({
     resolver: zodResolver(doctorSchema),
     defaultValues: {
-      name: doctor?.name || "",
-      personal_id: doctor?.personal_id || "",
-      first_phone: doctor?.first_phone || "",
-      second_phone: doctor?.second_phone ? doctor.second_phone : "",
-      email: doctor?.user?.email || "",
-      register_id: doctor?.register_id || "",
+      name: "",
+      personal_id: "",
+      first_phone: "",
+      second_phone: "",
+      email: "",
+      register_id: "",
       gender: {
-        value: doctor?.gender || "male",
-        label: doctor?.gender === "female" ? "أنثى" : "ذكر",
+        value: "male",
+        label: "ذكر",
       },
       password: "",
-      commission:
-        doctor?.commission?.slice(0, doctor?.commission?.length - 1) || "0",
-      status: Boolean(status) || true,
+      commission: "0",
+      status: true,
       image: undefined,
       signature: undefined,
-      clinics:
-        doctor?.clinics?.map((clinic) => ({
-          value: clinic.id.toString(),
-          label: clinic.name,
-        })) || [],
+      clinics: [],
     },
   });
-
+  
   useEffect(() => {
     if (!doctor) return;
     form.reset({
@@ -139,7 +134,10 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
           );
         });
       }
-      if (errorObj?.response?.data.message) {
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
         toast.error(errorObj?.response?.data.message, {
           autoClose: 5000,
         });

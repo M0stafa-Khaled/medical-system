@@ -6,9 +6,10 @@ import SwitchFormItem from "./formItems/SwitchFormItem";
 import GenderFormItem from "./formItems/GenderFormItem";
 import FileFormItem from "./formItems/FileFormItem";
 import InputFormItem from "./formItems/InputFormItem";
-import SelectFormItem from "./formItems/SelectFormItem";
+import MultiSelectFormItem from "./formItems/MultiSelectFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { ROLES } from "@/constants";
+import SelectFormItem from "./formItems/SelectFormItem";
 
 interface IOption {
   value: string;
@@ -62,7 +63,7 @@ const RenderFormFields = ({
         );
       case input.name === "role":
         return (
-          <SelectFormItem
+          <MultiSelectFormItem
             {...commonProps}
             isOptionalField={isOptionalField!}
             options={ROLES}
@@ -70,7 +71,7 @@ const RenderFormFields = ({
         );
       case input.name === "category_id":
         return (
-          <SelectFormItem
+          <MultiSelectFormItem
             {...commonProps}
             isOptionalField={isOptionalField!}
             options={options?.categories || []}
@@ -81,19 +82,58 @@ const RenderFormFields = ({
         input.name === "from_treasury" ||
         input.name === "to_treasury":
         return (
-          <SelectFormItem
+          <MultiSelectFormItem
             {...commonProps}
             options={options?.treasuries || []}
           />
         );
       case input.name === "permissions":
         return (
-          <SelectFormItem
+          <MultiSelectFormItem
             {...commonProps}
             options={options?.permissions || []}
             isMulti
           />
         );
+
+      // Bookings
+      case input.type === "doctor_id":
+        return (
+          <SelectFormItem
+            input={input}
+            field={field}
+            form={form}
+            options={options?.doctorsOptions || []}
+          />
+        );
+      case input.type === "patient_id":
+        return (
+          <SelectFormItem
+            input={input}
+            field={field}
+            form={form}
+            options={options?.patients || []}
+          />
+        );
+      case input.type === "working_day_id":
+        return (
+          <SelectFormItem
+            input={input}
+            field={field}
+            form={form}
+            options={options?.workingDaysOptions || []}
+          />
+        );
+      case input.type === "clinic_name":
+        return (
+          <SelectFormItem
+            input={input}
+            form={form}
+            field={field}
+            options={options?.clinicsOptions || []}
+          />
+        );
+
       case input.name === "clinics" ||
         input.name === "clinic_name" ||
         input.name === "day": {
@@ -103,7 +143,7 @@ const RenderFormFields = ({
           setOptions = options?.clinic_name;
         else if (input.name === "day") setOptions = options?.days;
         return (
-          <SelectFormItem
+          <MultiSelectFormItem
             {...commonProps}
             options={setOptions || []}
             isMulti={input.name === "clinics"}

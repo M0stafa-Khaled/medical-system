@@ -51,11 +51,29 @@ const AddActionButton = ({ doctorId }: { doctorId: string }) => {
       // * Create Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      const errorObj = error as AxiosError<{
+        errors: { [key: string]: string[] };
+        message: string;
+      }>;
+      if (errorObj?.response?.data.errors) {
+        Object.keys(errorObj.response.data.errors).forEach((key) => {
+          errorObj?.response?.data.errors[key].forEach((error) =>
+            toast.error(error, {
+              autoClose: 5000,
+            })
+          );
+        });
+      }
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
+      }
     } finally {
-      setIsOpenAddModal(false);
-      form.reset();
+      handleCloseModal();
     }
   };
 
@@ -68,8 +86,7 @@ const AddActionButton = ({ doctorId }: { doctorId: string }) => {
     <>
       <Button
         onClick={() => setIsOpenAddModal(true)}
-        variant={"outline"}
-        className="w-full md:w-fit bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black h-auto py-3 !rounded-lg font-semibold"
+        className="flex items-center gap-2 h-auto py-3"
       >
         إضافة إجراء
         <FiPlus size={20} />

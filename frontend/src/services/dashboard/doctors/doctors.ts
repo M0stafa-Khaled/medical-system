@@ -9,11 +9,11 @@ import {
 export const getAllDoctors = async ({
   token,
   page = 1,
-  search = " ",
+  search = "",
 }: IGetWithParams): Promise<IResponseDoctors> => {
   const { data } = await axiosInstanceAPI.get(`/doctors`, {
     params: {
-      ...(search ? { q: search } : { page, q: search }),
+      ...(search && search !== "" ? { q: search } : { page, q: search }),
     },
     headers: {
       Authorization: `Bearer ${token}`,

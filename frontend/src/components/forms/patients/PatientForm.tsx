@@ -39,20 +39,20 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   const form = useForm<z.infer<typeof patientSchema>>({
     resolver: zodResolver(patientSchema),
     defaultValues: {
-      name: patient?.name || "",
-      another_name: patient?.another_name || "",
-      personal_id: patient?.personal_id || "",
-      first_phone: patient?.first_phone || "",
-      second_phone: patient?.second_phone || "",
-      email: patient?.user?.email || "",
-      description: patient?.description || "",
-      info_status: patient?.info_status || "",
+      name: "",
+      another_name: "",
+      personal_id: "",
+      first_phone: "",
+      second_phone: "",
+      email: "",
+      description: "",
+      info_status: "",
       gender: {
-        value: patient?.gender?.toLowerCase() || "male",
-        label: patient?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
+        value: "male",
+        label: "ذكر",
       },
       password: "",
-      status: Boolean(patient?.status) || true,
+      status: true,
       personal_image: undefined,
     },
   });
@@ -129,7 +129,10 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
           );
         });
       }
-      if (errorObj?.response?.data.message) {
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
         toast.error(errorObj?.response?.data.message, {
           autoClose: 5000,
         });

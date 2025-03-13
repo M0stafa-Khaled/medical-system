@@ -57,8 +57,27 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
       // * Create Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      const errorObj = error as AxiosError<{
+        errors: { [key: string]: string[] };
+        message: string;
+      }>;
+      if (errorObj?.response?.data.errors) {
+        Object.keys(errorObj.response.data.errors).forEach((key) => {
+          errorObj?.response?.data.errors[key].forEach((error) =>
+            toast.error(error, {
+              autoClose: 5000,
+            })
+          );
+        });
+      }
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
+      }
     } finally {
       handleCloseModal();
     }

@@ -1,8 +1,6 @@
 // Booking
 export { default as Bookings } from "./bookings";
 export { default as BookingDetails } from "./bookings/BookingDetails";
-export { default as CreateBooking } from "./bookings/CreateBooking";
-export { default as UpdateBooking } from "./bookings/UpdateBooking";
 
 // Clinics
 export { default as Clinics } from "./clinics";

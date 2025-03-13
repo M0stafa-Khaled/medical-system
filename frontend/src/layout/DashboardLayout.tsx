@@ -3,7 +3,20 @@ import PathIndicator from "@/components/dashboard/PathIndicator";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
+import { ILink } from "@/interfaces";
+import {
+  Bookmark,
+  Building2,
+  HomeIcon,
+  Settings,
+  Users,
+  Wallet,
+  Workflow,
+  WorkflowIcon,
+} from "lucide-react";
 import { memo } from "react";
+import { FaUserDoctor } from "react-icons/fa6";
+import { MdAttachMoney, MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const DashboardLayout = () => {
@@ -37,16 +50,11 @@ const DashboardLayout = () => {
     bookings: "الحجوزات",
   };
 
-  interface INavLink {
-    name: string;
-    path: string;
-    children?: INavLink[];
-  }
-
-  const NAV_LINKS: INavLink[] = [
+  const NAV_LINKS: ILink[] = [
     {
       name: routeNames.dashboard,
       path: "/dashboard",
+      icon: <HomeIcon size={18} />,
     },
     // Booking
     ...(canViewBookings
@@ -54,6 +62,7 @@ const DashboardLayout = () => {
           {
             name: "الحجوزات",
             path: "/dashboard/bookings",
+            icon: <Bookmark size={18} />,
           },
         ]
       : []),
@@ -63,24 +72,50 @@ const DashboardLayout = () => {
           {
             name: "التكويدات",
             path: "",
+            icon: <Settings size={18} />,
             children: [
               ...(canViewClinics
-                ? [{ name: routeNames.clinics, path: "/dashboard/clinics" }]
+                ? [
+                    {
+                      name: routeNames.clinics,
+                      path: "/dashboard/clinics",
+                      icon: <Building2 size={18} />,
+                    },
+                  ]
                 : []),
               ...(canViewDoctors
-                ? [{ name: routeNames.doctors, path: "/dashboard/doctors" }]
+                ? [
+                    {
+                      name: routeNames.doctors,
+                      path: "/dashboard/doctors",
+                      icon: <FaUserDoctor size={18} />,
+                    },
+                  ]
                 : []),
               ...(canViewEmployees
-                ? [{ name: routeNames.employees, path: "/dashboard/employees" }]
+                ? [
+                    {
+                      name: routeNames.employees,
+                      path: "/dashboard/employees",
+                      icon: <WorkflowIcon />,
+                    },
+                  ]
                 : []),
               ...(canViewPatients
-                ? [{ name: routeNames.patients, path: "/dashboard/patients" }]
+                ? [
+                    {
+                      name: routeNames.patients,
+                      path: "/dashboard/patients",
+                      icon: <Users size={18} />,
+                    },
+                  ]
                 : []),
               ...(canViewTreasuries
                 ? [
                     {
                       name: routeNames.treasuries,
                       path: "/dashboard/treasuries",
+                      icon: <Wallet size={18} />,
                     },
                   ]
                 : []),
@@ -89,6 +124,7 @@ const DashboardLayout = () => {
                     {
                       name: routeNames["expenses-categories"],
                       path: "/dashboard/expenses-categories",
+                      icon: <Workflow size={18} />,
                     },
                   ]
                 : []),
@@ -103,12 +139,14 @@ const DashboardLayout = () => {
           {
             name: "الحسابات",
             path: "",
+            icon: <MdAttachMoney size={18} />,
             children: [
               ...(canViewExpenses
                 ? [
                     {
                       name: routeNames.expenses,
                       path: "/dashboard/expenses",
+                      icon: <MdAttachMoney />,
                     },
                   ]
                 : []),
@@ -118,7 +156,11 @@ const DashboardLayout = () => {
       : []),
 
     // Medications
-    { name: "الأدوية", path: "/dashboard/drugs" },
+    {
+      name: "الأدوية",
+      path: "/dashboard/drugs",
+      icon: <MdMedication size={18} />,
+    },
   ];
 
   return (

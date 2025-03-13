@@ -28,6 +28,7 @@ export const useGetAllExpensesCategoryById = ({
   useQuery({
     queryKey: [Query_Keys.GET_ALL_ONE_EXPENSES_CATEGORY, id],
     queryFn: () => getAllExpenseCategoryById({ token, id }),
+    enabled: !!id,
   });
 
 export const useCreateExpenseCategory = () => {

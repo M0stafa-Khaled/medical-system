@@ -16,10 +16,11 @@ export const useGetAllWorkingDays = ({
 }: {
   doctorId: string;
   token: string;
-  search: string;
-}) =>
-  useQuery({
-    queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS, search],
+  search?: string;
+}) => {
+  return useQuery({
+    queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS, doctorId, search],
+    enabled: !!doctorId,
     queryFn: () =>
       getAllWorkingDays({
         doctorId,
@@ -27,6 +28,7 @@ export const useGetAllWorkingDays = ({
         search,
       }),
   });
+};
 
 export const useGetWorkingDayById = ({
   token,

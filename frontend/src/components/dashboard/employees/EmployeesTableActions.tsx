@@ -15,14 +15,10 @@ const EmployeesTableActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
   return (
     <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
       {canAddEmployee && (
-        <Button
-          size={"sm"}
-          variant={"outline"}
-          className=" h-auto py-0 px-0 bg-primary md:bg-transparent md:text-primary text-primary-foreground hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black !rounded-lg font-semibold"
-        >
+        <Button className=" h-auto py-0 px-0">
           <Link
             to="/dashboard/employees/add"
-            className="flex justify-center items-center gap-2 w-full h-full py-4 px-4"
+            className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
           >
             إضافة موظف جديد
             <FiPlus size={20} />

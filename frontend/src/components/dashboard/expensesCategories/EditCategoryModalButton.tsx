@@ -66,6 +66,14 @@ const EditCategoryButton = ({ category }: IProps) => {
           );
         });
       }
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
+      }
     } finally {
       handleCloseModal();
     }

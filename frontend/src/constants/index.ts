@@ -1,4 +1,5 @@
 import { IFormInput } from "@/interfaces";
+import { TBookingStatus } from "@/types";
 
 export const LOGIN_FORM_INPUTS: IFormInput[] = [
   {
@@ -19,6 +20,12 @@ export const CLINIC_FORM_INPUTS: IFormInput[] = [
     name: "name",
     type: "text",
     placeholder: "اسم العيادة",
+  },
+  {
+    label: "تخطي حجز كل",
+    name: "skip",
+    type: "number",
+    placeholder: "تخطي حجز كل",
   },
   {
     label: "حالة العيادة",
@@ -404,5 +411,49 @@ export const TRANSFER_TREASURIES_FORM_INPUTS: IFormInput[] = [
     name: "to_treasury",
     label: "إلي",
     type: "select",
+  },
+];
+
+export const BOOKING_FORM_INPUTS: IFormInput[] = [
+  {
+    name: "clinic_name",
+    label: "العيادة",
+    type: "clinic_name",
+  },
+  {
+    name: "doctor_id",
+    label: "الطبيب",
+    type: "doctor_id",
+  },
+  {
+    name: "working_day_id",
+    label: "يوم الحجز",
+    type: "working_day_id",
+  },
+];
+
+export const BOOKING_STATUS_OPTIONS: {
+  label: string;
+  value: TBookingStatus;
+}[] = [
+  {
+    label: "تم التحصيل",
+    value: "collected",
+  },
+  {
+    label: "منتهي",
+    value: "ended",
+  },
+  {
+    label: "قيد الانتظار",
+    value: "pending",
+  },
+  {
+    label: "ملغي",
+    value: "cancelled",
+  },
+  {
+    label: "لم يحضر",
+    value: "no-show",
   },
 ];

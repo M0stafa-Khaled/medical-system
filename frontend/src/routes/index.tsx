@@ -31,8 +31,6 @@ import {
   UpdateWorkingDay,
   Bookings,
   BookingDetails,
-  UpdateBooking,
-  CreateBooking
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -93,22 +91,6 @@ const routes = createRoutesFromElements(
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
               <BookingDetails />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="bookings/create"
-          element={
-            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_BOOKING}>
-              <CreateBooking />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="bookings/:bookingId/update"
-          element={
-            <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_BOOKING}>
-              <UpdateBooking />
             </ProtectedRoute>
           }
         />

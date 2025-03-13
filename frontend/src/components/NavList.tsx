@@ -1,15 +1,9 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { GoDot } from "react-icons/go";
 import { motion, AnimatePresence } from "framer-motion";
 import { linkVariants, navItemsVariants } from "@/animations/navbarAnimations";
-
-export interface ILink {
-  name: string;
-  path?: string;
-  children?: ILink[];
-}
+import { ILink } from "@/interfaces";
 
 interface IProps {
   links: ILink[];
@@ -21,14 +15,15 @@ const NavList = ({ links, sidebar }: IProps) => {
     [key: string]: boolean;
   }>({});
 
-  const activeLink = useLocation().pathname.split("/")[2];
-
   const toggleLinkExpansion = (linkName: string) => {
-    setExpandedLinks((prev) => ({
-      ...prev,
-      [linkName]: !prev[linkName],
-    }));
+    setExpandedLinks((prev) => {
+      return {
+        ...prev,
+        [linkName]: !prev[linkName],
+      };
+    });
   };
+  const pathname = useLocation().pathname;
 
   const renderLinks = (links: ILink[], level = 0) => {
     return links.map((link, idx) => {
@@ -36,6 +31,7 @@ const NavList = ({ links, sidebar }: IProps) => {
       const isExpanded = hasChildren && (expandedLinks[link.name] || false);
       const isChildLink = level > 0;
 
+      const activeLink = link.path === pathname && link.path !== "/";
       return (
         <motion.li
           key={idx}
@@ -47,13 +43,16 @@ const NavList = ({ links, sidebar }: IProps) => {
             {hasChildren ? (
               <motion.div
                 variants={navItemsVariants}
-                className={`select-none w-full px-4 cursor-pointer py-2 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
+                className={`select-none w-full px-4 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleLinkExpansion(link.name);
                 }}
               >
-                <span className="flex-grow">{link.name}</span>
+                <span className="flex-grow flex items-center gap-2">
+                  {link.icon}
+                  {link.name}
+                </span>
                 <motion.button
                   animate={{ rotate: isExpanded ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
@@ -71,14 +70,17 @@ const NavList = ({ links, sidebar }: IProps) => {
                   to={link.path || "#"}
                   className={`w-full ${
                     isChildLink ? "mt-2" : ""
-                  } py-2 px-4 pl-4 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 ${
-                    activeLink === (link.path ? link.path.split("/")[2] : "")
+                  } py-2.5 px-4 pl-4 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 ${
+                    activeLink
                       ? "bg-dark/20 dark:bg-dark"
                       : "hover:bg-dark/10 dark:hover:bg-dark/50"
                   }`}
                 >
-                  {isChildLink && <GoDot size={16} />}
-                  <span className="flex-grow">{link.name}</span>
+                  <span className="flex-grow flex items-center gap-2">
+                    {link.icon}
+
+                    {link.name}
+                  </span>
                 </NavLink>
               </motion.div>
             )}

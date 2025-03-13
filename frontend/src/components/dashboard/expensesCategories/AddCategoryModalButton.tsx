@@ -61,6 +61,14 @@ const AddCategoryButton = () => {
           );
         });
       }
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
+      }
     } finally {
       handleCloseModal();
     }
@@ -75,9 +83,7 @@ const AddCategoryButton = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        size={"sm"}
-        variant={"outline"}
-        className="bg-primary md:bg-transparent md:text-primary text-primary-foreground gap-2 hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black py-[1.4rem] !rounded-lg font-semibold"
+        className="flex items-center gap-2 h-auto py-3"
       >
         إضافة تصنيف
         <FiPlus size={20} />

@@ -1,3 +1,10 @@
+export interface ILink {
+  name: string;
+  path?: string;
+  icon?: ReactNode;
+  children?: ILink[];
+}
+
 export interface IDeleteRes {
   status: boolean;
   message: string;

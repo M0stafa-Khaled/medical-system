@@ -22,6 +22,7 @@ const useNetworkStatus = () => {
   useEffect(() => {
     if (!isOnline) {
       toast.warn("لا يوجد اتصال بالانترنت", {
+        autoClose: false,
         icon: <WifiOff className="text-muted-foreground" />,
       });
     }

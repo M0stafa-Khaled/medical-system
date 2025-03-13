@@ -1,7 +1,7 @@
 import ProfileMenu from "./ProfileMenu";
 import ToggleMode from "../ToggleMode";
 import LogoutIconButton from "../LogoutIconButton";
-import NavList, { ILink } from "./NavList";
+import NavList from "../NavList";
 import { motion } from "framer-motion";
 import {
   logoVariants,
@@ -9,6 +9,7 @@ import {
   sidebarVariants,
 } from "@/animations/navbarAnimations";
 import { memo } from "react";
+import { ILink } from "@/interfaces";
 
 interface IProps {
   links: ILink[];

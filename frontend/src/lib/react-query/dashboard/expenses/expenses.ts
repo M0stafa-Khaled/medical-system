@@ -26,6 +26,7 @@ export const useGetExpenseById = ({
   useQuery({
     queryKey: [Query_Keys.GET_ONE_EXPENSE, id],
     queryFn: () => getExpenseById({ token, id }),
+    enabled: !!id,
   });
 
 export const useCreateExpense = () => {
