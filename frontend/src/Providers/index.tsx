@@ -1,4 +1,4 @@
-import { QueryProvider } from "@/Providers/QueryProvider";
+import { QueryProvider } from "@/providers/QueryProvider";
 import { Provider } from "react-redux";
 import ThemeProvider from "./ThemeProvider";
 import { store } from "@/store/store";
