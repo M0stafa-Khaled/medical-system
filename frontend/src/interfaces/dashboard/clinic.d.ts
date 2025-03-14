@@ -2,7 +2,7 @@ export interface IClinic {
   id: number;
   name: string;
   status: boolean;
-  company_id: number;
+  virtual_number: string;
   created_at: string;
   updated_at: string;
 }
@@ -17,7 +17,8 @@ export interface ICreateClinic {
   id?: number;
   name: string;
   status: boolean;
-  token: string | null;
+  token: string;
+  virtual_number?: number;
 }
 
 export interface ICreateClinicResponse {

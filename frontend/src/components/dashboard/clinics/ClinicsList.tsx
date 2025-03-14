@@ -35,7 +35,7 @@ const ClinicsList = ({ clinics }: IProps) => {
 
   return (
     <>
-      {clinics.map(({ id, name, status }, index) => (
+      {clinics.map(({ id, name, status, virtual_number }, index) => (
         <motion.tr
           key={id}
           initial="hidden"
@@ -61,7 +61,12 @@ const ClinicsList = ({ clinics }: IProps) => {
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
                 {canEditClinic && (
-                  <EditClinicModalButton name={name} id={id} status={status} />
+                  <EditClinicModalButton
+                    name={name}
+                    id={id}
+                    status={status}
+                    virtual_number={+virtual_number}
+                  />
                 )}
                 {canDeleteClinic && <DeleteClinicButton name={name} id={id} />}
               </div>

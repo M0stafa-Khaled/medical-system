@@ -31,7 +31,7 @@ export const createClinic: ({
 }) => {
   const { data } = await axiosInstanceAPI.post(
     "/clinics",
-    { name, status: status ? "1" : "0" },
+    { name, status: status ? "1" : "0", virtual_number: 5 },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -56,20 +56,16 @@ export const deleteClinic: ({
   return data;
 };
 
-export const updateClinic: ({
+export const updateClinic = async ({
   id,
   name,
   status,
   token,
-}: ICreateClinic) => Promise<ICreateClinicResponse> = async ({
-  id,
-  name,
-  status,
-  token,
-}) => {
-  const { data } = await axiosInstanceAPI.put(
-    `/clinics/${id}?name=${name}&status=${status ? "1" : "0"}`,
-    {},
+  virtual_number,
+}: ICreateClinic): Promise<ICreateClinicResponse> => {
+  const { data } = await axiosInstanceAPI.post(
+    `/clinics/${id}`,
+    { name, status: status ? "1" : "0", virtual_number, _method: "put" },
     {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -9,10 +9,7 @@ import Query_Keys from "../queryKeys";
 import { ICreateClinic } from "@/interfaces/dashboard/clinic";
 import { IGetWithParams } from "@/interfaces";
 
-export const useGetAllClinics = ({
-  token,
-  search,
-}: IGetWithParams) => {
+export const useGetAllClinics = ({ token, search }: IGetWithParams) => {
   return useQuery({
     queryFn: () => getAllClinics({ token, search }),
     queryKey: [Query_Keys.GET_ALL_CLINICS, search],
@@ -22,8 +19,8 @@ export const useGetAllClinics = ({
 export const useCreateClinic = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ name, status, token }: ICreateClinic) =>
-      createClinic({ name, status, token }),
+    mutationFn: ({ name, status, token, virtual_number }: ICreateClinic) =>
+      createClinic({ name, status, token, virtual_number }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_CLINICS],
@@ -48,8 +45,8 @@ export const useDeleteClinic = () => {
 export const useUpdateClinic = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, name, status, token }: ICreateClinic) =>
-      updateClinic({ id, name, status, token }),
+    mutationFn: ({ id, name, status, virtual_number, token }: ICreateClinic) =>
+      updateClinic({ id, name, status, token, virtual_number }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_CLINICS],

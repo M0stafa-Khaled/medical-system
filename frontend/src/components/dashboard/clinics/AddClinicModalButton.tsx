@@ -34,10 +34,15 @@ const AddClinicModalButton = () => {
     defaultValues: {
       name: "",
       status: true,
+      virtual_number: 0,
     },
   });
 
-  const onSubmit = async ({ name, status }: z.infer<typeof clinicSchema>) => {
+  const onSubmit = async ({
+    name,
+    status,
+    virtual_number,
+  }: z.infer<typeof clinicSchema>) => {
     try {
       const {
         status: statusServer,
@@ -47,6 +52,7 @@ const AddClinicModalButton = () => {
         name,
         status,
         token,
+        virtual_number,
       });
 
       // ! Create failed
@@ -87,7 +93,7 @@ const AddClinicModalButton = () => {
   };
 
   const isOptionalField = (fieldName: string) => {
-    const optionalFields = ["skip"];
+    const optionalFields = ["virtual_number"];
 
     return optionalFields.includes(fieldName);
   };

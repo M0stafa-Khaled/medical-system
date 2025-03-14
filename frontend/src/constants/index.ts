@@ -23,7 +23,7 @@ export const CLINIC_FORM_INPUTS: IFormInput[] = [
   },
   {
     label: "تخطي حجز كل",
-    name: "skip",
+    name: "virtual_number",
     type: "number",
     placeholder: "تخطي حجز كل",
   },

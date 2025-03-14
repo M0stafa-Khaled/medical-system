@@ -29,8 +29,14 @@ interface IProps {
   id: number;
   name: string;
   status: boolean;
+  virtual_number: number;
 }
-const EditClinicModalButton = ({ id, name, status }: IProps) => {
+const EditClinicModalButton = ({
+  id,
+  name,
+  status,
+  virtual_number,
+}: IProps) => {
   const token = cookieServices.getToken() || "";
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -41,15 +47,20 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
     defaultValues: {
       name: name,
       status: status,
+      virtual_number: virtual_number,
     },
   });
-  const onSubmit = async ({ name, status }: z.infer<typeof clinicSchema>) => {
+  const onSubmit = async ({
+    name,
+    status,
+    virtual_number,
+  }: z.infer<typeof clinicSchema>) => {
     try {
       const {
         status: statusServer,
         message,
         data,
-      } = await updateClinic({ id, name, status, token });
+      } = await updateClinic({ id, name, status, virtual_number, token });
 
       // ! Update failed
       if (!statusServer) return toast.error(message);
@@ -87,7 +98,7 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
     form.reset();
   };
   const isOptionalField = (fieldName: string) => {
-    const optionalFields = ["skip"];
+    const optionalFields = ["virtual_number"];
 
     return optionalFields.includes(fieldName);
   };
@@ -96,8 +107,9 @@ const EditClinicModalButton = ({ id, name, status }: IProps) => {
     form.reset({
       name: name,
       status: status,
+      virtual_number: virtual_number,
     });
-  }, [name, status, form]);
+  }, [name, status, form, virtual_number]);
 
   return (
     <div>
