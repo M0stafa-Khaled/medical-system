@@ -1,5 +1,8 @@
 import { logout } from "@/store/features/auth/authSlice";
-import { setPermissions } from "@/store/features/permissions/permissionsSlice";
+import {
+  clearPermissions,
+  setPermissions,
+} from "@/store/features/permissions/permissionsSlice";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
 import { useCheckAuth } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
@@ -17,26 +20,26 @@ const RootLayout = () => {
   useNetworkStatus();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = cookieServices.getToken();
+  const token = cookieServices.getToken()!;
   const { mutateAsync: checkAuthUser } = useCheckAuth();
   const location = useLocation();
 
   useEffect(() => {
     (async () => {
       const { auth, email_verified, status, permissions } = await checkAuthUser(
-        token as string
+        token
       );
 
       // ----- User is  unauthenticated ------ //
       if (!auth) {
-        // If user is unauthenticated and the pathname is / then just logout
-        if (location.pathname === "/") {
-          return dispatch(logout());
-        }
-        // If user is unauthenticated and the pathname is not / then navigate to /login
+        // If user is unauthenticated
         dispatch(logout());
-        navigate("/login");
-        return toast.warn("يرجي تسجيل الدخول");
+        dispatch(clearPermissions());
+        if (location.pathname !== "/") {
+          navigate("/login");
+          toast.warn("يرجي تسجيل الدخول");
+        }
+        return;
       }
 
       // ----- User is authenticated ----- //
@@ -45,7 +48,6 @@ const RootLayout = () => {
 
       // Account is not Active
       if (auth && !status) {
-        navigate("/not-active");
         return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
       }
 

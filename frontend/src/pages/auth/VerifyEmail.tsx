@@ -33,6 +33,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as z from "zod";
+import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
 
 const formSchema = z.object({
   otp: z
@@ -47,8 +48,10 @@ const VerifyEmail = () => {
   useNetworkStatus();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = cookieServices.getToken();
-  const { mutateAsync: checkAuthUser } = useCheckAuth();
+  const token = cookieServices.getToken()!;
+  const role = cookieServices.getRole()!;
+  const { mutateAsync: checkAuth } = useCheckAuth();
+
   const { mutateAsync: resendOtp, isPending: isLoadingResendOtp } =
     useResendOtp();
   const { mutateAsync: verifyEmail, isPending: isLoadingVerifyEmail } =
@@ -56,16 +59,20 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     (async () => {
-      const { auth, email_verified } = await checkAuthUser(token as string);
+      const { auth, email_verified } = await checkAuth(token);
+
       if (!auth) {
         dispatch(logout());
+        dispatch(clearPermissions())
         navigate("/login");
-        return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+        return;
       }
-      if (email_verified) return navigate("/dashboard");
+      if (email_verified && (role === "admin" || role === "employee"))
+        navigate("/dashboard");
+      if (email_verified && role === "patient") navigate("/bookings");
+      if (email_verified && role === "doctor") navigate("/doctor");
     })();
-    return;
-  }, [checkAuthUser, token, navigate, dispatch]);
+  }, [navigate, dispatch, role, checkAuth, token]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
