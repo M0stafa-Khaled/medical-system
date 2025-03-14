@@ -58,7 +58,7 @@ export const useUpdateBooking = () => {
       updateBooking({ formData, token, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ALL_BOOKINGS],
+        queryKey: [Query_Keys.GET_ONE_BOOKING],
       });
     },
   });

@@ -26,10 +26,9 @@ import convertDay from "@/utils/convertDayLang";
 import formatDateTime from "@/utils/formatDate";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { Button } from "@/components/ui/button";
-import { FaPencil } from "react-icons/fa6";
 import DeleteBookingButton from "@/components/dashboard/booking/DeleteBookingModalButton";
 import UpdateBookingStatus from "@/components/dashboard/booking/UpdateBookingStatus";
+import UpdateBookingModalButton from "@/components/dashboard/booking/UpdateBookingModalButton";
 
 const BookingDetails = () => {
   const canEditBooking = useHasPermission(PERMISSIONS.EDIT_BOOKING);
@@ -75,6 +74,7 @@ const BookingDetails = () => {
     start_at,
     status,
     employee,
+    working_day,
   } = booking?.data || {};
 
   return (
@@ -100,14 +100,14 @@ const BookingDetails = () => {
               <div className="flex gap-2">
                 {canEditBooking && (
                   <motion.div variants={itemVariants}>
-                    <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                      <Link
-                        to={`/dashboard/bookings/${id}/update`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                      >
-                        <FaPencil size={18} />
-                      </Link>
-                    </Button>
+                    <UpdateBookingModalButton
+                      id={`${id}`}
+                      clinic_name={clinic!}
+                      doctor={doctor!}
+                      patient={patient!}
+                      working_day={working_day!}
+                      status={status!}
+                    />{" "}
                   </motion.div>
                 )}
                 {canDeleteBooking && status !== "cancelled" && (
@@ -229,7 +229,7 @@ const BookingDetails = () => {
                       id={`${id}`}
                       doctor_id={`${doctor?.id}`}
                       patient_id={`${patient?.id}`}
-                      working_day_id={`${day}`}
+                      working_day_id={`${working_day?.id}`}
                     />
                   </div>
                 </div>

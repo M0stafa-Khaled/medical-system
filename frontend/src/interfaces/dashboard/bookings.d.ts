@@ -3,6 +3,7 @@ import { IPaginationMeta } from "..";
 import { IDoctor } from "./doctors/doctor";
 import { IPatient } from "./patient";
 import { IEmployee } from "./employee";
+import { IWorkingDay } from "./doctors/workingDays";
 
 export interface IBooking {
   id: number;
@@ -16,6 +17,7 @@ export interface IBooking {
   patient: IPatient;
   doctor: IDoctor;
   employee: IEmployee;
+  working_day: IWorkingDay;
 }
 
 export interface IBookingsRes {

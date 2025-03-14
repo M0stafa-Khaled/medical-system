@@ -43,10 +43,9 @@ const UpdateBookingStatus = ({
   const token = cookieServices.getToken()!;
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [value, setValue] = useState<TBookingStatus>(status);
   const { mutateAsync: updateBooking } = useUpdateBooking();
 
-  const submit = async () => {
+  const submit = async (bookingStatus: TBookingStatus) => {
     try {
       const { status, message } = await updateBooking({
         formData: {
@@ -54,7 +53,7 @@ const UpdateBookingStatus = ({
           doctor_id: doctor_id,
           patient_id: patient_id,
           working_day_id: working_day_id,
-          status: value,
+          status: bookingStatus!,
         },
         id,
         token,
@@ -89,10 +88,7 @@ const UpdateBookingStatus = ({
   };
 
   const handleStatusChange = (currentValue: string) => {
-    setValue(
-      currentValue === value ? status : (currentValue as TBookingStatus)
-    );
-    submit();
+    submit(currentValue as TBookingStatus)
     setOpen(false);
   };
   return (

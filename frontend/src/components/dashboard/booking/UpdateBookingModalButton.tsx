@@ -108,6 +108,7 @@ const UpdateBookingModalButton = ({
     },
   });
   useEffect(() => {
+    setClinicId(selectedClinic?.id.toString())
     form.reset({
       patient_id: {
         label: patient?.name,
@@ -199,10 +200,10 @@ const UpdateBookingModalButton = ({
   const handleCloseModal = () => {
     setIsOpen(false);
     form.reset();
-    setClinicId("");
-    form.setValue("doctor_id", { label: "", value: "" });
-    form.setValue("working_day_id", { label: "", value: "" });
-    setDoctorId("");
+    // setClinicId("");
+    // form.setValue("doctor_id", { label: "", value: "" });
+    // form.setValue("working_day_id", { label: "", value: "" });
+    // setDoctorId("");
   };
 
   return (

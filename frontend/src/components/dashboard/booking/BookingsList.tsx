@@ -53,6 +53,7 @@ const BookingsList = ({ bookings }: IProps) => {
             booking_date,
             day,
             start_at,
+            working_day,
           },
           index
         ) => (
@@ -87,7 +88,7 @@ const BookingsList = ({ bookings }: IProps) => {
                 clinic_name={clinic}
                 doctor_id={`${doctor?.id}`}
                 patient_id={`${patient?.id}`}
-                working_day_id={`${""}`}
+                working_day_id={`${working_day.id}`}
               />
             </TableCell>
 
@@ -120,10 +121,7 @@ const BookingsList = ({ bookings }: IProps) => {
                       clinic_name={clinic}
                       doctor={doctor}
                       patient={patient}
-                      working_day={{
-                        id: 1,
-                        day: "",
-                      }}
+                      working_day={working_day}
                       status={status}
                     />
                   )}

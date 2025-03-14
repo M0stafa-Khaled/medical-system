@@ -151,10 +151,19 @@ const CreateBookingModalButton = () => {
   const handleCloseModal = () => {
     setIsOpen(false);
     form.reset({
-      clinic_name: undefined,
-      doctor_id: undefined,
-      patient_id: undefined,
-      working_day_id: undefined,
+      clinic_name: {
+        label: "",
+        value: "",
+      },
+      doctor_id: {
+        label: "",
+        value: "",
+      },
+      patient_id: {
+        label: "",
+        value: "",
+      },
+      working_day_id: { label: "", value: "" },
     });
     setClinicId("");
     form.setValue("doctor_id", { label: "", value: "" });
