@@ -33,7 +33,7 @@ const TransferBetweenTreasuriesButton = () => {
   const { data: treasuries } = useGetAllTreasuries({ token });
   const { mutateAsync: transferTreasury, isPending } = useTransferTreasuries();
 
-  const treasuriesOptions = treasuries?.data.map((treasury) => ({
+  const treasuriesOptions = treasuries?.data?.map((treasury) => ({
     value: treasury?.id.toString(),
     label: treasury?.name,
   }));

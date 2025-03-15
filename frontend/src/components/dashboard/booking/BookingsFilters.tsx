@@ -74,7 +74,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           <SelectItem value="all" className="py-2.5 cursor-pointer">
             الكل
           </SelectItem>
-          {clinics?.data.map((clinic) => (
+          {clinics?.data?.map((clinic) => (
             <SelectItem
               key={clinic.name}
               value={clinic.name.trim()}

@@ -1,15 +1,15 @@
 import { IPaginationMeta } from "..";
 
-export interface IMedication {
+export interface IDrug {
   name: string;
   form: string;
 }
 
-export interface IMedicationsResponse {
+export interface IDrugsResponse {
   status: boolean;
-  message: null | string;
+  message: string | null;
   data: {
-    items: IMedication[];
+    items: IDrug[];
     meta: IPaginationMeta;
   };
 }

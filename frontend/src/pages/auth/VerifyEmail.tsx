@@ -63,7 +63,7 @@ const VerifyEmail = () => {
 
       if (!auth) {
         dispatch(logout());
-        dispatch(clearPermissions())
+        dispatch(clearPermissions());
         navigate("/login");
         return;
       }
@@ -89,7 +89,6 @@ const VerifyEmail = () => {
       });
       if (!status) return toast.error(message);
       toast.success("تم تأكيد البريد الإلكتروني بنجاح");
-      window.location.reload();
       navigate("/");
     } catch (_error) {
       toast.error("حدث خطأ أثناء تأكيد البريد الإلكتروني");
@@ -108,94 +107,99 @@ const VerifyEmail = () => {
   };
 
   return (
-    <div className="container flex items-center justify-center min-h-screen">
-      <Card className="border-muted bg-foreground shadow-none">
-        <div className="flex justify-center items-center max-w-xs mx-auto">
-          <img src="/verify-email.svg" alt="verify email" className="w-56" />
-        </div>
-        <CardHeader className="text-center">
-          <CardTitle className="leading-relaxed">
-            تأكيد البريد الإلكتروني
-          </CardTitle>
-          <CardDescription className="leading-relaxed">
-            الرجاء إدخال رمز التحقق المرسل إلى بريدك الإلكتروني
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-              <FormField
-                control={form.control}
-                name="otp"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="flex justify-center " dir="ltr">
-                        <InputOTP
-                          maxLength={6}
-                          value={field.value}
-                          onChange={field.onChange}
-                          autoFocus
-                        >
-                          <InputOTPGroup>
-                            <InputOTPSlot
-                              index={0}
-                              className="border-muted w-12 h-12"
-                            />
-                            <InputOTPSlot
-                              index={1}
-                              className="border-muted w-12 h-12"
-                            />
-                            <InputOTPSlot
-                              index={2}
-                              className="border-muted w-12 h-12"
-                            />
-                            <InputOTPSlot
-                              index={3}
-                              className="border-muted w-12 h-12"
-                            />
-                            <InputOTPSlot
-                              index={4}
-                              className="border-muted w-12 h-12"
-                            />
-                            <InputOTPSlot
-                              index={5}
-                              className="border-muted w-12 h-12"
-                            />
-                          </InputOTPGroup>
-                        </InputOTP>
-                      </div>
-                    </FormControl>
-                    <FormMessage className="text-center" />
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                type="submit"
-                className="w-full h-auto py-3"
-                disabled={isLoadingVerifyEmail}
+    <>
+      <main className="container flex items-center justify-center min-h-screen">
+        <Card className="border-muted bg-foreground shadow-none">
+          <div className="flex justify-center items-center max-w-xs mx-auto">
+            <img src="/verify-email.svg" alt="verify email" className="w-56" />
+          </div>
+          <CardHeader className="text-center">
+            <CardTitle className="leading-relaxed">
+              تأكيد البريد الإلكتروني
+            </CardTitle>
+            <CardDescription className="leading-relaxed">
+              الرجاء إدخال رمز التحقق المرسل إلى بريدك الإلكتروني
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-3"
               >
-                تأكيد
-              </Button>
+                <FormField
+                  control={form.control}
+                  name="otp"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex justify-center " dir="ltr">
+                          <InputOTP
+                            maxLength={6}
+                            value={field.value}
+                            onChange={field.onChange}
+                            autoFocus
+                          >
+                            <InputOTPGroup>
+                              <InputOTPSlot
+                                index={0}
+                                className="border-muted w-12 h-12"
+                              />
+                              <InputOTPSlot
+                                index={1}
+                                className="border-muted w-12 h-12"
+                              />
+                              <InputOTPSlot
+                                index={2}
+                                className="border-muted w-12 h-12"
+                              />
+                              <InputOTPSlot
+                                index={3}
+                                className="border-muted w-12 h-12"
+                              />
+                              <InputOTPSlot
+                                index={4}
+                                className="border-muted w-12 h-12"
+                              />
+                              <InputOTPSlot
+                                index={5}
+                                className="border-muted w-12 h-12"
+                              />
+                            </InputOTPGroup>
+                          </InputOTP>
+                        </div>
+                      </FormControl>
+                      <FormMessage className="text-center" />
+                    </FormItem>
+                  )}
+                />
 
-              <p className="text-center text-muted-foreground text-sm">
-                لم يصلك رمز التحقق؟{" "}
                 <Button
-                  variant="link"
-                  className="p-0"
-                  onClick={handleResendOtp}
-                  type="button"
-                  disabled={isLoadingResendOtp}
+                  type="submit"
+                  className="w-full h-auto py-3"
+                  disabled={isLoadingVerifyEmail}
                 >
-                  اضغط لإعادة الإرسال
+                  تأكيد
                 </Button>
-              </p>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-    </div>
+
+                <p className="text-center text-muted-foreground text-sm">
+                  لم يصلك رمز التحقق؟{" "}
+                  <Button
+                    variant="link"
+                    className="p-0"
+                    onClick={handleResendOtp}
+                    type="button"
+                    disabled={isLoadingResendOtp}
+                  >
+                    اضغط لإعادة الإرسال
+                  </Button>
+                </p>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </main>
+    </>
   );
 };
 

@@ -31,7 +31,7 @@ const CreateExpense = () => {
   const { data: expensesCategories } = useGetAllExpensesCategories({ token });
   const { mutateAsync: createExpense, isPending } = useCreateExpense();
 
-  const expensesCategoriesOptions = expensesCategories?.data.map(
+  const expensesCategoriesOptions = expensesCategories?.data?.map(
     (category) => ({
       value: category.id.toString(),
       label: category.name,

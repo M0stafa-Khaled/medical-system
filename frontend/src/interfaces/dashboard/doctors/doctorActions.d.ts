@@ -24,7 +24,7 @@ export interface IResponseDoctorAction {
 
 export interface IResponseDoctorActions {
   status: boolean;
-  message: null;
+  message: string | null;
   data: {
     items: IDoctorAction[];
     meta: IPaginationMeta;

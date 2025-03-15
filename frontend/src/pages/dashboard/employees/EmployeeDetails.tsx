@@ -60,12 +60,12 @@ const EmployeeDetails = () => {
       return;
     }
 
-    if (!employee?.status && employee?.message) {
+    if (employee?.message) {
       toast.error(employee.message);
       navigate("/dashboard/employees");
       return;
     }
-  }, [employee, isError, navigate]);
+  }, [employee?.message, isError, navigate]);
 
   if (isLoading) return <DataLoader />;
 

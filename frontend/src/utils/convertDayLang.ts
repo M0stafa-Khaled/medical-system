@@ -2,6 +2,7 @@ import { DAYS } from "@/constants";
 
 type Language = "en" | "ar";
 const convertDay = (day: string, fromLang: Language): string => {
+  if (!day) return "";
   const normalizedDay = day.toLowerCase().trim();
 
   if (fromLang === "en") {

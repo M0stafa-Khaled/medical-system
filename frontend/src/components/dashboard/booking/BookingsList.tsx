@@ -41,7 +41,7 @@ const BookingsList = ({ bookings }: IProps) => {
 
   return (
     <>
-      {bookings.map(
+      {bookings?.map(
         (
           {
             id,

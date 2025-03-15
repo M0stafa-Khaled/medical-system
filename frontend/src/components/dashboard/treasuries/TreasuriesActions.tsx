@@ -2,7 +2,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import SearchInput from "../SearchInput";
 import useHasPermission from "@/hooks/useHasPermission";
 import CreateTreasury from "./CreateTreasury";
-import TransferBetweenTreasuriesButton from "./TransferBetweenTreasuriesModalButton";
+import TransferBetweenTreasuriesButton from "./TransferBetweenTreasuries";
 import { memo } from "react";
 interface IProps {
   searchKeyword: string;

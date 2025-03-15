@@ -53,12 +53,12 @@ const BookingDetails = () => {
       navigate("/dashboard/bookings");
       return;
     }
-    if (!booking?.status && booking?.message) {
+    if (booking?.message) {
       toast.error(booking.message);
       navigate("/dashboard/bookings");
       return;
     }
-  }, [isError, navigate, booking]);
+  }, [isError, navigate, booking?.message]);
 
   if (isLoading) return <DataLoader />;
 

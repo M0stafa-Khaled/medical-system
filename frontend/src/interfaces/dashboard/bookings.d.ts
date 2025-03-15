@@ -22,6 +22,7 @@ export interface IBooking {
 
 export interface IBookingsRes {
   status: boolean;
+  message: string | null;
   data: {
     items: IBooking[];
     meta: IPaginationMeta;

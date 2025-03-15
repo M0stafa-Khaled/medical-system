@@ -24,11 +24,12 @@ const EmployeesTable = () => {
   } = useGetAllEmployees({ token, page, search });
 
   useEffect(() => {
+    if (employees?.message) toast.error(employees.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [isError]);
+  }, [employees?.message, isError]);
 
   return (
     <DataTable
@@ -42,8 +43,8 @@ const EmployeesTable = () => {
       header={<EmployeesTableHeader />}
       list={
         <EmployeesList
-          meta={employees?.data && employees.data.meta}
-          employees={employees?.data.items || []}
+          meta={employees?.data && employees.data?.meta}
+          employees={employees?.data?.items || []}
         />
       }
       skeleton={
@@ -51,7 +52,7 @@ const EmployeesTable = () => {
       }
       pagination={
         employees?.data && {
-          meta: employees.data.meta,
+          meta: employees.data?.meta,
         }
       }
     />

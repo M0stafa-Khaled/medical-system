@@ -24,11 +24,12 @@ const DrugsTable = () => {
   } = useGetALlMedications({ page, token, search });
 
   useEffect(() => {
+    if (drugs?.message) toast.error(drugs.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [isError]);
+  }, [drugs?.message, isError]);
 
   return (
     <DataTable
@@ -42,14 +43,14 @@ const DrugsTable = () => {
       header={<DrugsTableHeader />}
       list={
         <DrugsList
-          medications={drugs?.data.items || []}
-          meta={drugs?.data && drugs.data.meta}
+          medications={drugs?.data?.items || []}
+          meta={drugs?.data && drugs.data?.meta}
         />
       }
       skeleton={<TableSkeleton columns={2} rows={6} showButtons={false} />}
       pagination={
         drugs?.data && {
-          meta: drugs.data.meta,
+          meta: drugs.data?.meta,
         }
       }
     />

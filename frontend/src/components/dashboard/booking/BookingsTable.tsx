@@ -5,7 +5,7 @@ import BookingsList from "./BookingsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllBookings } from "@/lib/react-query/dashboard/bookings";
@@ -67,10 +67,13 @@ const BookingsTable = () => {
     },
   });
 
-  if (isError) {
-    toast.error("حدث خطأ اثناء تحميل البيانات");
-    return;
-  }
+  useEffect(() => {
+    if (bookings?.message) toast.error(bookings.message);
+    if (isError) {
+      toast.error("حدث خطأ اثناء تحميل البيانات");
+      return;
+    }
+  }, [bookings?.message, isError]);
 
   return (
     <DataTable
@@ -79,11 +82,11 @@ const BookingsTable = () => {
         <BookingsHeaderActions filters={filters} setFilters={setFilters} />
       }
       header={<BookingsTableHeader setSort={setSort} sort={sort} />}
-      list={<BookingsList bookings={bookings?.data.items || []} />}
+      list={<BookingsList bookings={bookings?.data?.items || []} />}
       skeleton={<TableSkeleton columns={7} rows={6} actionButtons={3} />}
       pagination={
         bookings?.data && {
-          meta: bookings.data.meta,
+          meta: bookings.data?.meta,
         }
       }
     />

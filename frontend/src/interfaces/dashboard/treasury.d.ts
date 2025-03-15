@@ -7,7 +7,7 @@ export interface ITreasury {
 
 export interface ITreasuriesRes {
   status: boolean;
-  message: null | string;
+  message: string | null;
   data: ITreasury[];
 }
 

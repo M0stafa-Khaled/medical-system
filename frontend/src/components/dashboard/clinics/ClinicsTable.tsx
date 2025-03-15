@@ -18,13 +18,13 @@ const ClinicsTable = () => {
     isLoading,
     isError,
   } = useGetAllClinics({ token, search });
-
   useEffect(() => {
+    if (clinics?.message) toast.error(clinics.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [isError]);
+  }, [clinics?.message, isError]);
 
   return (
     <DataTable

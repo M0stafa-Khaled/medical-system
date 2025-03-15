@@ -26,12 +26,13 @@ const TreasuriesList = () => {
   });
 
   useEffect(() => {
+    if (treasuries?.message) toast.error(treasuries.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [isError]);
-
+  }, [treasuries?.message, isError]);
+  
   return (
     <motion.div
       className="space-y-6"

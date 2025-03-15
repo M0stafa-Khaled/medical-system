@@ -26,11 +26,12 @@ const CategoriesList = () => {
   });
 
   useEffect(() => {
+    if (categories?.message) toast.error(categories.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [isError]);
+  }, [categories?.message, isError]);
 
   return (
     <motion.div

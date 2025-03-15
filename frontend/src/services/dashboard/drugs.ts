@@ -1,12 +1,12 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/interfaces";
-import { IMedicationsResponse } from "@/interfaces/dashboard/medication";
+import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
 
 export const getAllMedications: ({
   token,
   page,
   search,
-}: IGetWithParams) => Promise<IMedicationsResponse> = async ({
+}: IGetWithParams) => Promise<IDrugsResponse> = async ({
   token,
   page = 1,
   search,

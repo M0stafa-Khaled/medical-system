@@ -1,12 +1,12 @@
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { TableCell } from "@/components/ui/table";
 import { IPaginationMeta } from "@/interfaces";
-import { IMedication } from "@/interfaces/dashboard/medication";
+import { IDrug } from "@/interfaces/dashboard/drugs";
 import countSerial from "@/utils/countSerial";
 import { motion } from "framer-motion";
 
 interface IProps {
-  medications: IMedication[];
+  medications: IDrug[];
   meta?: IPaginationMeta;
 }
 

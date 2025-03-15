@@ -46,12 +46,12 @@ const ExpenseDetails = () => {
       return;
     }
 
-    if (!expense?.status && expense?.message) {
+    if (expense?.message) {
       toast.error(expense.message);
       navigate(-1);
       return;
     }
-  }, [expense, isError, navigate, expenseId]);
+  }, [expense?.message, isError, navigate, expenseId]);
 
   if (isLoading) return <DataLoader />;
 

@@ -5,11 +5,11 @@ export interface IExpenseCategory {
 
 export interface ICreateExpenseCategoryRes {
   status: boolean;
-  message;
+  message: string;
 }
 
 export interface IExpenseCategoriesRes {
   status: true;
-  message: null;
+  message: string | null;
   data: IExpenseCategory[];
 }

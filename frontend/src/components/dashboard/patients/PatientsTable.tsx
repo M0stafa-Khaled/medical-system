@@ -23,11 +23,12 @@ const PatientsTable = () => {
   } = useGetAllPatients({ token, page, search });
 
   useEffect(() => {
+    if (patients?.message) toast.error(patients.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [isError]);
+  }, [patients?.message, isError]);
 
   return (
     <DataTable
@@ -41,8 +42,8 @@ const PatientsTable = () => {
       header={<PatientsTableHeader />}
       list={
         <PatientsList
-          meta={patients?.data && patients.data.meta}
-          patients={patients?.data.items || []}
+          meta={patients?.data && patients.data?.meta}
+          patients={patients?.data?.items || []}
         />
       }
       skeleton={
@@ -50,7 +51,7 @@ const PatientsTable = () => {
       }
       pagination={
         patients?.data && {
-          meta: patients.data.meta,
+          meta: patients.data?.meta,
         }
       }
     />

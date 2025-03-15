@@ -9,7 +9,7 @@ export interface IClinic {
 
 export interface IResponseClinics {
   status: boolean;
-  message: string;
+  message: string | null;
   data: IClinic[];
 }
 

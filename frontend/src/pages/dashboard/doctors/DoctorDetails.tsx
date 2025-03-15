@@ -46,15 +46,15 @@ const DoctorDetails = () => {
   const canViewDoctorWorkingDays = useHasPermission(PERMISSIONS.WORKING_DAYS);
 
   const navigate = useNavigate();
-  const token = cookieServices.getToken();
+  const token = cookieServices.getToken()!;
   const { doctorId } = useParams();
   const {
     data: doctor,
     isLoading,
     isError,
   } = useGetDoctorById({
-    id: doctorId as string,
-    token: token as string,
+    id: doctorId!,
+    token,
   });
 
   useEffect(() => {
@@ -63,12 +63,12 @@ const DoctorDetails = () => {
       navigate("/dashboard/doctors");
       return;
     }
-    if (!doctor?.status && doctor?.message) {
+    if (doctor?.message) {
       toast.error(doctor.message);
       navigate("/dashboard/doctors");
       return;
     }
-  }, [isError, navigate, doctor]);
+  }, [isError, navigate, doctor?.message]);
 
   if (isLoading) return <DataLoader />;
 

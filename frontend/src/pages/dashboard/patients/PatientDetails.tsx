@@ -38,7 +38,7 @@ const PatientDetails = () => {
   const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
 
   const navigate = useNavigate();
-  const token = cookieServices.getToken();
+  const token = cookieServices.getToken()!;
   const { patientId } = useParams();
 
   const {
@@ -46,8 +46,8 @@ const PatientDetails = () => {
     isLoading,
     isError,
   } = useGetPatientById({
-    id: patientId as string,
-    token: token as string,
+    id: patientId!,
+    token,
   });
 
   useEffect(() => {
@@ -57,12 +57,12 @@ const PatientDetails = () => {
       return;
     }
 
-    if (!patient?.status && patient?.message) {
+    if (patient?.message) {
       toast.error(patient.message);
       navigate("/dashboard/employees");
       return;
     }
-  }, [patient, isError, navigate]);
+  }, [patient?.message, isError, navigate]);
 
   if (isLoading) return <DataLoader />;
 

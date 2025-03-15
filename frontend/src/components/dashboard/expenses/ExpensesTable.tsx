@@ -24,11 +24,12 @@ const ExpensesTable = () => {
   } = useGetAllExpenses({ token, page, search });
 
   useEffect(() => {
+    if (expenses?.message) toast.error(expenses.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [isError]);
+  }, [expenses?.message, isError]);
 
   return (
     <DataTable
@@ -42,14 +43,14 @@ const ExpensesTable = () => {
       header={<ExpensesTableHeader />}
       list={
         <ExpensesList
-          meta={expenses?.data && expenses.data.meta}
-          expenses={expenses?.data.items || []}
+          meta={expenses?.data && expenses.data?.meta}
+          expenses={expenses?.data?.items || []}
         />
       }
       skeleton={<TableSkeleton columns={8} rows={6} actionButtons={3} />}
       pagination={
         expenses?.data && {
-          meta: expenses.data.meta,
+          meta: expenses.data?.meta,
         }
       }
     />

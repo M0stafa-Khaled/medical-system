@@ -6,7 +6,7 @@ import DoctorsList from "./DoctorsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 
@@ -22,10 +22,13 @@ const DoctorsTable = () => {
     isError,
   } = useGetAllDoctors({ token, page, search });
 
-  if (isError) {
-    toast.error("حدث خطأ اثناء تحميل البيانات");
-    return;
-  }
+  useEffect(() => {
+    if (doctors?.message) toast.error(doctors.message);
+    if (isError) {
+      toast.error("حدث خطأ اثناء تحميل البيانات");
+      return;
+    }
+  }, [doctors?.message, isError]);
 
   return (
     <DataTable
@@ -39,8 +42,8 @@ const DoctorsTable = () => {
       header={<DoctorsTableHeader />}
       list={
         <DoctorsList
-          meta={doctors?.data && doctors.data.meta}
-          doctors={doctors?.data.items || []}
+          meta={doctors?.data && doctors.data?.meta}
+          doctors={doctors?.data?.items || []}
         />
       }
       skeleton={
@@ -48,7 +51,7 @@ const DoctorsTable = () => {
       }
       pagination={
         doctors?.data && {
-          meta: doctors.data.meta,
+          meta: doctors.data?.meta,
         }
       }
     />
