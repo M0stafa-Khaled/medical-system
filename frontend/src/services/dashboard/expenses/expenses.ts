@@ -16,7 +16,7 @@ export const getAllExpenses: ({
   search,
 }) => {
   const { data } = await axiosInstanceAPI.get("/expenses", {
-    params: { ...(search ? { q: search } : { q: search, page }) },
+    params: { ...(search ? { q: search, page } : { page }) },
     headers: {
       Authorization: `Bearer ${token}`,
     },

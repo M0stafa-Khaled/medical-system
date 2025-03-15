@@ -12,9 +12,7 @@ export const getAllEmployees = async ({
   search = "",
 }: IGetWithParams): Promise<IEmployeesRes> => {
   const { data } = await axiosInstanceAPI.get(`/employees`, {
-    params: {
-      ...(search ? { q: search } : { page, q: search }),
-    },
+    params: { ...(search ? { q: search, page } : { page }) },
     headers: {
       Authorization: `Bearer ${token}`,
     },

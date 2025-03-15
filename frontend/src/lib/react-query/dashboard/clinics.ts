@@ -13,6 +13,7 @@ export const useGetAllClinics = ({ token, search }: IGetWithParams) => {
   return useQuery({
     queryFn: () => getAllClinics({ token, search }),
     queryKey: [Query_Keys.GET_ALL_CLINICS, search],
+    staleTime: 30 * 1000,
   });
 };
 

@@ -13,7 +13,7 @@ import { IGetWithParams } from "@/interfaces";
 export const useGetAllEmployees = ({
   token,
   page = 1,
-  search = "",
+  search,
 }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EMPLOYEES, page, search],

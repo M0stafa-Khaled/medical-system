@@ -11,9 +11,8 @@ export const getAllClinics: ({
   search,
 }: IGetWithParams) => Promise<IResponseClinics> = async ({ token, search }) => {
   const { data } = await axiosInstanceAPI.get("/clinics", {
-    params: {
-      q: search,
-    },
+    params: { ...(search && { q: search }) },
+
     headers: {
       Authorization: `Bearer ${token}`,
     },

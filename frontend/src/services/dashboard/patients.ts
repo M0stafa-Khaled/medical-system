@@ -9,12 +9,10 @@ import {
 export const getAllPatients = async ({
   token,
   page = 1,
-  search = "",
+  search,
 }: IGetWithParams): Promise<IResponsePatients> => {
   const { data } = await axiosInstanceAPI.get(`/patients`, {
-    params: {
-      ...(search ? { q: search } : { page, q: search }),
-    },
+    params: { ...(search ? { q: search, page } : { page }) },
     headers: {
       Authorization: `Bearer ${token}`,
     },

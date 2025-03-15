@@ -9,7 +9,6 @@ export const getAllClinicsDoctors: ({
   clinic_id: string;
 }) => Promise<IDoctorClinicsRes> = async ({ token, clinic_id }) => {
   const { data } = await axiosInstanceAPI.get(`/${clinic_id}/doctors`, {
-    params: {},
     headers: {
       Authorization: `Bearer ${token}`,
     },

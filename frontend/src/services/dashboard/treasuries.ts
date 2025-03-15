@@ -12,9 +12,7 @@ export const getAllTreasuries: ({
   search,
 }: IGetWithParams) => Promise<ITreasuriesRes> = async ({ token, search }) => {
   const { data } = await axiosInstanceAPI.get("/treasuries", {
-    params: {
-      q: search,
-    },
+    params: { ...(search && { q: search }) },
     headers: {
       Authorization: `Bearer ${token}`,
     },

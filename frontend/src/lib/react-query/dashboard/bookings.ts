@@ -21,8 +21,8 @@ export const useGetAllBookings = ({
 }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_BOOKINGS, filter, page, sort],
-    staleTime: 30 * 1000,
     queryFn: () => getAllBookings({ token, page, filter, sort }),
+    staleTime: 30 * 1000,
   });
 
 export const useGetBookingById = ({

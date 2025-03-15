@@ -16,9 +16,7 @@ export const getAllWorkingDays: ({
   search?: string;
 }) => Promise<IWorkingDaysRes> = async ({ doctorId, token, search }) => {
   const { data } = await axiosInstanceAPI.get(`${doctorId}/working-days`, {
-    params: {
-      ...(search && { clinic_name: search }),
-    },
+    params: { ...(search && { q: search }) },
     headers: {
       Authorization: `Bearer ${token}`,
     },

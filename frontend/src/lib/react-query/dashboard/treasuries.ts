@@ -17,6 +17,7 @@ export const useGetAllTreasuries = ({ token, search }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_TREASURIES, search],
     queryFn: () => getAllTreasuries({ token, search }),
+    staleTime: 30 * 1000,
   });
 
 export const useCreateTreasury = () => {

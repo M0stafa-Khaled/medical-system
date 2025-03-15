@@ -14,6 +14,7 @@ export const useGetAllExpenses = ({ token, page, search }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EXPENSES, page, search],
     queryFn: () => getAllExpenses({ token, page, search }),
+    staleTime: 30 * 1000,
   });
 
 export const useGetExpenseById = ({
