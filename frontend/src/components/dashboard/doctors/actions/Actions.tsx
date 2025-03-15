@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ActionsList from "./ActionsList";
-import AddActionButton from "./AddActionModalButton";
+import CreateAction from "./CreateAction";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ import {
 
 const Actions = ({ doctorId }: { doctorId: string }) => {
   const canViewActions = useHasPermission(PERMISSIONS.DOCTOR_ACTIONS);
-  const canAddAction = useHasPermission(PERMISSIONS.ADD_ACTION_DOCTOR);
+  const canCreateAction = useHasPermission(PERMISSIONS.ADD_ACTION_DOCTOR);
 
   if (!canViewActions) return null;
   return (
@@ -25,9 +25,9 @@ const Actions = ({ doctorId }: { doctorId: string }) => {
           <CardTitle>إجراءات الطبيب:</CardTitle>
         </CardHeader>
         <CardContent className="py-3 px-4">
-          {canAddAction && (
-            <motion.div variants={itemVariants} custom={"addAction"}>
-              <AddActionButton doctorId={doctorId} />
+          {canCreateAction && (
+            <motion.div variants={itemVariants} custom={"createAction"}>
+              <CreateAction doctorId={doctorId} />
             </motion.div>
           )}
           <motion.div

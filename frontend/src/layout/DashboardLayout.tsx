@@ -38,7 +38,6 @@ const DashboardLayout = () => {
     clinics: "العيادات",
     doctors: "الأطباء",
     "working-days": "ايام العمل",
-    add: "إضافة",
     create: "إضافة",
     update: "تعديل",
     employees: "الموظفين",

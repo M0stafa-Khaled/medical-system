@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
-import DeleteCategoryButton from "./DeleteCategoryModelButton";
-import EditCategoryButton from "./EditCategoryModalButton";
+import DeleteExpenseCategory from "./DeleteExpenseCategory";
+import UpdateExpenseCategory from "./UpdateExpenseCategory";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const CategoryCard = ({ category }: IProps) => {
-  const canEditCategory = useHasPermission(PERMISSIONS.EDIT_EXPENSE_CATEGORY);
+  const canUpdateCategory = useHasPermission(PERMISSIONS.UPDATE_EXPENSE_CATEGORY);
   const canDeleteCategory = useHasPermission(
     PERMISSIONS.DELETE_EXPENSE_CATEGORY
   );
@@ -36,9 +36,9 @@ const CategoryCard = ({ category }: IProps) => {
               <h3 className="font-semibold text-lg">{category.name}</h3>
             </div>
             <div className="flex items-center gap-2">
-              {canEditCategory && <EditCategoryButton category={category} />}
+              {canUpdateCategory && <UpdateExpenseCategory category={category} />}
               {canDeleteCategory && (
-                <DeleteCategoryButton category={category} />
+                <DeleteExpenseCategory category={category} />
               )}
             </div>
           </div>

@@ -20,7 +20,7 @@ import {
 import ImageModal from "@/components/shared/ImageModal";
 import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
-import DeletePatientButton from "@/components/dashboard/patients/DeletePatientModalButton";
+import DeletePatient from "@/components/dashboard/patients/DeletePatient";
 import InfoField from "@/components/dashboard/InfoField";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -34,7 +34,7 @@ import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 
 const PatientDetails = () => {
-  const canEditPatient = useHasPermission(PERMISSIONS.EDIT_PATIENT);
+  const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);
   const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
 
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ const PatientDetails = () => {
                 role={user?.role.toLowerCase() as string}
                 actionButtons={
                   <>
-                    {canEditPatient && (
+                    {canUpdatePatient && (
                       <motion.div variants={itemVariants}>
                         <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                           <Link
@@ -114,7 +114,7 @@ const PatientDetails = () => {
                     )}
                     {canDeletePatient && (
                       <motion.div variants={itemVariants}>
-                        <DeletePatientButton id={id!} name={name!} />
+                        <DeletePatient id={id!} name={name!} />
                       </motion.div>
                     )}
                   </>

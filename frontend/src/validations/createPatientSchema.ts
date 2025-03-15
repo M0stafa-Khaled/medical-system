@@ -1,11 +1,12 @@
 import { z } from "zod";
 import { MAX_FILE_SIZE, ACCEPTED_IMAGE_TYPES } from "@/utils/file";
 
-const addDoctorSchema = z.object({
+const createPatientSchema = z.object({
   name: z
     .string({ message: "الاسم مطلوب" })
     .min(3, "الاسم يجب أن يكون 3 أحرف على الأقل")
     .trim(),
+  another_name: z.string({ message: "الاسم مطلوب" }).trim().optional(),
   personal_id: z
     .string({ message: "رقم الهوية مطلوب" })
     .min(1, "رقم الهوية مطلوب")
@@ -19,13 +20,6 @@ const addDoctorSchema = z.object({
     .refine((val) => !val || /^\d+$/.test(val), {
       message: "يجب ادخال رقم هاتف صالح",
     }),
-  register_id: z
-    .string({ message: "رقم الهوية مطلوب" })
-    .min(1, "رقم الهوية مطلوب"),
-  commission: z
-    .string({ message: "العمولة مطلوبة" })
-    .regex(/^(100|[0-9]{1,2}(\.[0-9]+)?)$/, "يجب ادخال عمولة صالحة")
-    .trim(),
   status: z.boolean().default(true),
   email: z
     .string({ message: "البريد الإلكترونى مطلوب" })
@@ -34,6 +28,8 @@ const addDoctorSchema = z.object({
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
     .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
+  description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
+  info_status: z.string({ message: "الملاحظات مطلوبة" }).optional(),
   gender: z.object(
     {
       value: z.string({ message: "النوع مطلوب" }),
@@ -41,7 +37,7 @@ const addDoctorSchema = z.object({
     },
     { message: "النوع مطلوب" }
   ),
-  image: z.union([
+  personal_image: z.union([
     z.undefined(),
     z
       .instanceof(File, { message: "يجب أن يكون الملف صورة" })
@@ -52,25 +48,6 @@ const addDoctorSchema = z.object({
         message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
       }),
   ]),
-  signature: z.union([
-    z.undefined(),
-    z
-      .instanceof(File, { message: "يجب أن يكون الملف صورة" })
-      .refine((file) => file.size <= MAX_FILE_SIZE, {
-        message: "حجم الصورة يجب أن يكون أقل من 5MB",
-      })
-      .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
-      }),
-  ]),
-  clinics: z
-    .array(
-      z.object({
-        value: z.string(),
-        label: z.string(),
-      })
-    )
-    .min(1, "يجب اختيار عيادة واحدة على الأقل"),
 });
 
-export default addDoctorSchema;
+export default createPatientSchema;

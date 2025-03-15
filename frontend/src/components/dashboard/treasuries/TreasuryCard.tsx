@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import DeleteTreasuryButton from "./DeleteTreasuryModelButton";
-import EditTreasuryButton from "./EditTreasuryModalButton";
+import DeleteTreasuryButton from "./DeleteTreasury";
+import UpdateTreasury from "./UpdateTreasury";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { ITreasury } from "@/interfaces/dashboard/treasury";
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const TreasuryCard = ({ treasury }: IProps) => {
-  const canEditCategory = useHasPermission(PERMISSIONS.EDIT_TREASURY);
+  const canUpdateCategory = useHasPermission(PERMISSIONS.UPDATE_TREASURY);
   const canDeleteCategory = useHasPermission(PERMISSIONS.DELETE_TREASURY);
 
   return (
@@ -47,7 +47,7 @@ const TreasuryCard = ({ treasury }: IProps) => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {canEditCategory && <EditTreasuryButton treasury={treasury} />}
+              {canUpdateCategory && <UpdateTreasury treasury={treasury} />}
               {canDeleteCategory && (
                 <DeleteTreasuryButton treasury={treasury} />
               )}

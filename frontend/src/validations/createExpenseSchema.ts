@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const addExpenseSchema = z.object({
+const createExpenseSchema = z.object({
   name: z
     .string({ message: "الاسم مطلوب" })
     .nonempty({ message: "الاسم مطلوب" })
@@ -21,4 +21,4 @@ const addExpenseSchema = z.object({
   description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
 });
 
-export default addExpenseSchema;
+export default createExpenseSchema;

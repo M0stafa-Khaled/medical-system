@@ -18,7 +18,7 @@ interface IProps {
   bookings: IBooking[];
 }
 const BookingsList = ({ bookings }: IProps) => {
-  const canEditBooking = useHasPermission(PERMISSIONS.EDIT_BOOKING);
+  const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
   const canDeleteBooking = useHasPermission(PERMISSIONS.DELETE_BOOKING);
   const canViewBooking = useHasPermission(PERMISSIONS.VIEW_BOOKING);
 
@@ -102,7 +102,7 @@ const BookingsList = ({ bookings }: IProps) => {
               {formatDateTime(booking_date!)}
             </TableCell>
 
-            {(canDeleteBooking || canEditBooking || canViewBooking) && (
+            {(canDeleteBooking || canUpdateBooking || canViewBooking) && (
               <TableCell className="text-center">
                 <div className="flex justify-center items-center gap-2">
                   {canViewBooking && (
@@ -115,7 +115,7 @@ const BookingsList = ({ bookings }: IProps) => {
                       </Link>
                     </Button>
                   )}
-                  {canEditBooking && (
+                  {canUpdateBooking && (
                     <UpdateBookingModalButton
                       id={`${id}`}
                       clinic_name={clinic}

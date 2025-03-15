@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { TableCell } from "@/components/ui/table";
 import { motion } from "framer-motion";
-import EditClinicModalButton from "./EditClinicModalButton";
-import DeleteClinicButton from "./DeleteClinicModalButton";
+import UpdateClinic from "./UpdateClinic";
+import DeleteClinic from "./DeleteClinic";
 import { IClinic } from "@/interfaces/dashboard/clinic";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import useHasPermission from "@/hooks/useHasPermission";
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const ClinicsList = ({ clinics }: IProps) => {
-  const canEditClinic = useHasPermission(PERMISSIONS.EDIT_CLINIC);
+  const canUpdateClinic = useHasPermission(PERMISSIONS.UPDATE_CLINIC);
   const canDeleteClinic = useHasPermission(PERMISSIONS.DELETE_CLINIC);
 
   if (!clinics.length) {
@@ -57,18 +57,18 @@ const ClinicsList = ({ clinics }: IProps) => {
               <Badge variant={"destructive"}>غير متاحة</Badge>
             )}
           </TableCell>
-          {(canEditClinic || canDeleteClinic) && (
+          {(canUpdateClinic || canDeleteClinic) && (
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
-                {canEditClinic && (
-                  <EditClinicModalButton
+                {canUpdateClinic && (
+                  <UpdateClinic
                     name={name}
                     id={id}
                     status={status}
                     virtual_number={+virtual_number}
                   />
                 )}
-                {canDeleteClinic && <DeleteClinicButton name={name} id={id} />}
+                {canDeleteClinic && <DeleteClinic name={name} id={id} />}
               </div>
             </TableCell>
           )}

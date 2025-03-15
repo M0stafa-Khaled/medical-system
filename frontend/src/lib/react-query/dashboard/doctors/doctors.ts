@@ -1,6 +1,6 @@
-import { IAddDoctor } from "@/interfaces/dashboard/doctors/doctor";
+import { ICreateDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import {
-  addDoctor,
+  createDoctor,
   deleteDoctor,
   getAllDoctors,
   getDoctorById,
@@ -31,11 +31,11 @@ export const useGetDoctorById = ({
     enabled: !!id,
   });
 
-export const useAddDoctor = () => {
+export const useCreateDoctor = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ data, token }: { data: IAddDoctor; token: string }) =>
-      addDoctor({
+    mutationFn: ({ data, token }: { data: ICreateDoctor; token: string }) =>
+      createDoctor({
         dataForm: data,
         token,
       }),
@@ -50,7 +50,7 @@ export const useAddDoctor = () => {
 export const useUpdateDoctor = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ data, token }: { data: IAddDoctor; token: string }) =>
+    mutationFn: ({ data, token }: { data: ICreateDoctor; token: string }) =>
       updateDoctor({
         dataForm: data,
         token,

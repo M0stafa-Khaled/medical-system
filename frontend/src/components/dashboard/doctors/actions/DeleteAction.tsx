@@ -1,11 +1,10 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteEmployee } from "@/lib/react-query/dashboard/employees";
+import { useDeleteDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface IProps {
@@ -13,20 +12,19 @@ interface IProps {
   id: number;
 }
 
-const DeleteEmployeeButton = ({ name, id }: IProps) => {
-  const navigate = useNavigate();
+const DeleteAction = ({ name, id }: IProps) => {
   const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteEmployee, isPending } = useDeleteEmployee();
+  const { mutateAsync: deleteAction, isPending } = useDeleteDoctorAction();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deleteEmployee({ id, token });
+      const { message, status } = await deleteAction({ id: `${id}`, token });
 
       // ! Delete failed
       if (!status) return toast.error(message);
+
       // * Delete Success
-      navigate("/dashboard/employees");
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
@@ -50,9 +48,10 @@ const DeleteEmployeeButton = ({ name, id }: IProps) => {
       <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف موظف"
+        title="حذف إجراء"
         description={{
-          text: `هل انت متاكد من حذف الموظف ${name}؟`,
+          text: `هل انت متاكد من حذف إجراء ${name}؟`,
+          color: "text-red-700",
         }}
         onConfirm={handleDelete}
         confirmText="حذف"
@@ -63,4 +62,4 @@ const DeleteEmployeeButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteEmployeeButton;
+export default DeleteAction;

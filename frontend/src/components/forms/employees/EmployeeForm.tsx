@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import {
-  useAddEmployee,
+  useCreateEmployee,
   useUpdateEmployee,
 } from "@/lib/react-query/dashboard/employees";
 import { useEffect, useState } from "react";
@@ -31,7 +31,7 @@ import { logout } from "@/store/features/auth/authSlice";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 interface IProps {
   employee?: IEmployee;
-  action: "add" | "update";
+  action: "create" | "update";
   employeeSchema: ZodSchema;
 }
 
@@ -45,8 +45,8 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   const token = cookieServices.getToken()!;
 
   const { data: permissions } = useGetAllPermissions(token!);
-  const { mutateAsync: addEmployee, isPending: isLoadingAdd } =
-    useAddEmployee();
+  const { mutateAsync: createEmployee, isPending: isLoadingCreate } =
+    useCreateEmployee();
   const { mutateAsync: updateEmployee, isPending: isLoadingUpdate } =
     useUpdateEmployee();
   const { data: treasuries } = useGetAllTreasuries({ token });
@@ -170,8 +170,8 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
 
   const onSubmit = async (formData: z.infer<typeof employeeSchema>) => {
     try {
-      if (action === "add") {
-        const { status, message } = await addEmployee({
+      if (action === "create") {
+        const { status, message } = await createEmployee({
           data: formData,
           token,
         });
@@ -219,7 +219,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   return (
     <Form {...form}>
       <motion.form
-        key={employee?.id || "add"}
+        key={employee?.id || "create"}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 dark:text-white"
         initial="hidden"
@@ -258,9 +258,9 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         <motion.div variants={containerVariants}>
           <SubmitButton
             action={action}
-            isLoadingAdd={isLoadingAdd}
+            isLoadingCreate={isLoadingCreate}
             isLoadingUpdate={isLoadingUpdate}
-            addText="إضافة موظف"
+            createText="إضافة موظف"
             updateText="تحديث بيانات الموظف"
           />
         </motion.div>

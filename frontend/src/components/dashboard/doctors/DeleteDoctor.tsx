@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeletePatient } from "@/lib/react-query/dashboard/patients";
+import { useDeleteDoctor } from "@/lib/react-query/dashboard/doctors/doctors";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -13,20 +13,20 @@ interface IProps {
   id: number;
 }
 
-const DeletePatientButton = ({ name, id }: IProps) => {
+const DeleteDoctor = ({ name, id }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deletePatient, isPending } = useDeletePatient();
+  const { mutateAsync: deleteDoctor, isPending } = useDeleteDoctor();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deletePatient({ id, token });
+      const { status, message } = await deleteDoctor({ id, token });
 
       // ! Delete failed
       if (!status) return toast.error(message);
       // * Delete Success
-      navigate("/dashboard/patients");
+      navigate("/dashboard/doctors");
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
@@ -50,9 +50,9 @@ const DeletePatientButton = ({ name, id }: IProps) => {
       <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف مريض"
+        title="حذف طبيب"
         description={{
-          text: `هل انت متاكد من حذف المريض ${name}؟`,
+          text: `هل انت متاكد من حذف الطبيب ${name}؟`,
           color: "text-red-700",
         }}
         onConfirm={handleDelete}
@@ -64,4 +64,4 @@ const DeletePatientButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeletePatientButton;
+export default DeleteDoctor;

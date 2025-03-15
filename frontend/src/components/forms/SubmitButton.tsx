@@ -2,37 +2,37 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 interface SubmitButtonProps {
-  action: "add" | "update";
-  isLoadingAdd: boolean;
+  action: "create" | "update";
+  isLoadingCreate: boolean;
   isLoadingUpdate?: boolean;
-  addText?: string;
-  loadingAddText?: string;
+  createText?: string;
+  loadingCreateText?: string;
   updateText?: string;
   loadingUpdateText?: string;
 }
 
 const SubmitButton = ({
   action,
-  isLoadingAdd,
+  isLoadingCreate,
   isLoadingUpdate,
-  addText = "إضافة",
-  loadingAddText = "جاري الإضافة",
+  createText = "إضافة",
+  loadingCreateText = "جاري الإضافة",
   updateText = "تحديث",
   loadingUpdateText = "جاري التحديث",
 }: SubmitButtonProps) => (
   <Button
     type="submit"
-    disabled={isLoadingAdd || isLoadingUpdate}
+    disabled={isLoadingCreate || isLoadingUpdate}
     className="py-6 w-full md:w-fit"
   >
-    {action === "add"
-      ? isLoadingAdd
-        ? loadingAddText
-        : addText
+    {action === "create"
+      ? isLoadingCreate
+        ? loadingCreateText
+        : createText
       : isLoadingUpdate
       ? loadingUpdateText
       : updateText}
-    {(isLoadingAdd || isLoadingUpdate) && (
+    {(isLoadingCreate || isLoadingUpdate) && (
       <Loader2 className="animate-spin ml-2" />
     )}
   </Button>

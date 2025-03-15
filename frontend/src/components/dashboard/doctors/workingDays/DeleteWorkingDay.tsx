@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteExpense } from "@/lib/react-query/dashboard/expenses/expenses";
+import { useDeleteWorkingDay } from "@/lib/react-query/dashboard/doctors/workingDays";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -8,21 +8,18 @@ import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
 interface IProps {
-  id: number;
   name: string;
+  id: number;
 }
 
-const DeleteExpenseButton = ({ id, name }: IProps) => {
-  const token = cookieServices.getToken()!;
+const DeleteWorkingDay = ({ name, id }: IProps) => {
+  const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteExpense, isPending } = useDeleteExpense();
+  const { mutateAsync: deleteWorkingDay, isPending } = useDeleteWorkingDay();
 
   const handleDelete = async () => {
     try {
-      const { message, status } = await deleteExpense({
-        id: `${id}`,
-        token,
-      });
+      const { message, status } = await deleteWorkingDay({ id, token });
 
       // ! Delete failed
       if (!status) return toast.error(message);
@@ -51,9 +48,9 @@ const DeleteExpenseButton = ({ id, name }: IProps) => {
       <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف مصروف"
+        title="حذف يوم عمل"
         description={{
-          text: `هل انت متاكد من حذف مصروف ${name}؟`,
+          text: `هل انت متاكد من حذف يوم العمل ${name}؟`,
           color: "text-red-700",
         }}
         onConfirm={handleDelete}
@@ -65,4 +62,4 @@ const DeleteExpenseButton = ({ id, name }: IProps) => {
   );
 };
 
-export default DeleteExpenseButton;
+export default DeleteWorkingDay;

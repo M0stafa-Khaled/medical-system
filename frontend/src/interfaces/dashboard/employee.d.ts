@@ -28,7 +28,7 @@ export interface IEmployee {
   permissions: IPermission[];
 }
 
-export interface IAddEmployee {
+export interface ICreateEmployee {
   id?: string;
   name: string;
   personal_id: string;

@@ -11,9 +11,9 @@ interface IProps {
 }
 
 const BookingsTableHeader = ({ setSort, sort }: IProps) => {
-  const canEditDoctor = useHasPermission(PERMISSIONS.EDIT_DOCTOR);
-  const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
-  const canViewDoctor = useHasPermission(PERMISSIONS.VIEW_DOCTOR);
+  const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
+  const canDeleteBooking = useHasPermission(PERMISSIONS.DELETE_BOOKING);
+  const canViewBooking = useHasPermission(PERMISSIONS.VIEW_BOOKING);
 
   return (
     <TableHeader>
@@ -48,7 +48,7 @@ const BookingsTableHeader = ({ setSort, sort }: IProps) => {
         <TableHead className="py-4 text-center text-nowrap">
           تاريخ الحجز
         </TableHead>
-        {(canDeleteDoctor || canEditDoctor || canViewDoctor) && (
+        {(canDeleteBooking || canUpdateBooking || canViewBooking) && (
           <TableHead className="py-4 text-center">الإجراءات</TableHead>
         )}
       </TableRow>

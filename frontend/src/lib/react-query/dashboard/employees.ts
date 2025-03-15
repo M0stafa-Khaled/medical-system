@@ -1,5 +1,5 @@
 import {
-  addEmployee,
+  createEmployee,
   deleteEmployee,
   getAllEmployees,
   getEmployeeById,
@@ -7,7 +7,7 @@ import {
 } from "@/services/dashboard/employees";
 import Query_Keys from "../queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IAddEmployee } from "@/interfaces/dashboard/employee";
+import { ICreateEmployee } from "@/interfaces/dashboard/employee";
 import { IGetWithParams } from "@/interfaces";
 
 export const useGetAllEmployees = ({
@@ -34,11 +34,11 @@ export const useGetEmployeeById = ({
     enabled: !!id,
   });
 
-export const useAddEmployee = () => {
+export const useCreateEmployee = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ data, token }: { data: IAddEmployee; token: string }) =>
-      addEmployee({ dataForm: data, token }),
+    mutationFn: ({ data, token }: { data: ICreateEmployee; token: string }) =>
+      createEmployee({ dataForm: data, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EMPLOYEES],
@@ -50,7 +50,7 @@ export const useAddEmployee = () => {
 export const useUpdateEmployee = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ data, token }: { data: IAddEmployee; token: string }) =>
+    mutationFn: ({ data, token }: { data: ICreateEmployee; token: string }) =>
       updateEmployee({ dataForm: data, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({

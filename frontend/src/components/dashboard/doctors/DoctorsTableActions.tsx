@@ -11,13 +11,13 @@ interface IProps {
 }
 
 const DoctorsTableActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
-  const canAddDoctor = useHasPermission(PERMISSIONS.ADD_DOCTOR);
+  const canCreateDoctor = useHasPermission(PERMISSIONS.ADD_DOCTOR);
   return (
     <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
-      {canAddDoctor && (
+      {canCreateDoctor && (
         <Button className=" h-auto py-0 px-0">
           <Link
-            to="/dashboard/doctors/add"
+            to="/dashboard/doctors/create"
             className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
           >
             إضافة طبيب جديد

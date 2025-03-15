@@ -27,7 +27,7 @@ import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 
 interface IProps {
   day?: IWorkingDay;
-  action: "add" | "update";
+  action: "create" | "update";
 }
 
 const WorkingDayForm = ({ action, day }: IProps) => {
@@ -83,7 +83,7 @@ const WorkingDayForm = ({ action, day }: IProps) => {
 
   const onSubmit = async (data: z.infer<typeof doctorWorkingDaySchema>) => {
     try {
-      if (action === "add") {
+      if (action === "create") {
         const { status, message } = await createWorkingDay({
           token,
           formData: {
@@ -145,7 +145,7 @@ const WorkingDayForm = ({ action, day }: IProps) => {
   return (
     <Form {...form}>
       <motion.form
-        key={day?.id || "add"}
+        key={day?.id || "createWorkingDay"}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6"
         initial="hidden"
@@ -173,9 +173,9 @@ const WorkingDayForm = ({ action, day }: IProps) => {
         <motion.div variants={containerVariants}>
           <SubmitButton
             action={action}
-            isLoadingAdd={isLoadingCreate}
+            isLoadingCreate={isLoadingCreate}
             isLoadingUpdate={isLoadingUpdate}
-            addText="إضافة يوم عمل"
+            createText="إضافة يوم عمل"
             updateText="تحديث يوم العمل"
           />
         </motion.div>

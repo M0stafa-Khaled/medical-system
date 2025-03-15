@@ -1,10 +1,11 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteWorkingDay } from "@/lib/react-query/dashboard/doctors/workingDays";
+import { useDeletePatient } from "@/lib/react-query/dashboard/patients";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface IProps {
@@ -12,19 +13,20 @@ interface IProps {
   id: number;
 }
 
-const DeleteWorkingDayButton = ({ name, id }: IProps) => {
+const DeletePatient = ({ name, id }: IProps) => {
+  const navigate = useNavigate();
   const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteWorkingDay, isPending } = useDeleteWorkingDay();
+  const { mutateAsync: deletePatient, isPending } = useDeletePatient();
 
   const handleDelete = async () => {
     try {
-      const { message, status } = await deleteWorkingDay({ id, token });
+      const { status, message } = await deletePatient({ id, token });
 
       // ! Delete failed
       if (!status) return toast.error(message);
-
       // * Delete Success
+      navigate("/dashboard/patients");
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
@@ -48,9 +50,9 @@ const DeleteWorkingDayButton = ({ name, id }: IProps) => {
       <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف يوم عمل"
+        title="حذف مريض"
         description={{
-          text: `هل انت متاكد من حذف يوم العمل ${name}؟`,
+          text: `هل انت متاكد من حذف المريض ${name}؟`,
           color: "text-red-700",
         }}
         onConfirm={handleDelete}
@@ -62,4 +64,4 @@ const DeleteWorkingDayButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteWorkingDayButton;
+export default DeletePatient;

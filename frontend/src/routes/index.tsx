@@ -9,28 +9,35 @@ import {
   Route,
 } from "react-router-dom";
 import {
-  AddDoctor,
   Clinics,
-  DoctorDetails,
+  // Doctors
   Doctors,
-  Employees,
-  UpdateDoctor,
-  AddEmployee,
-  UpdateEmployee,
-  Patients,
-  AddPatient,
-  UpdatePatient,
-  EmployeeDetails,
-  PatientDetails,
-  Drugs,
-  Treasuries,
-  Expenses,
-  ExpensesCategories,
-  ExpenseDetails,
+  DoctorDetails,
+  CreateDoctor,
   CreateWorkingDay,
   UpdateWorkingDay,
-  Bookings,
-  BookingDetails,
+  // Employees
+  Employees,
+  EmployeeDetails,
+  UpdateDoctor,
+  CreateEmployee,
+  UpdateEmployee,
+  // Patients
+  Patients,
+  CreatePatient,
+  UpdatePatient,
+  PatientDetails,
+  // Drugs
+  Drugs,
+  // Treasuries
+  Treasuries,
+  Expenses,
+  // Expenses
+  ExpensesCategories,
+  ExpenseDetails,
+  // Bookings
+  DashboardBookings,
+  DashboardBookingDetails,
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -82,7 +89,7 @@ const routes = createRoutesFromElements(
           path="bookings"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-              <Bookings />
+              <DashboardBookings />
             </ProtectedRoute>
           }
         />
@@ -90,7 +97,7 @@ const routes = createRoutesFromElements(
           path="bookings/:bookingId"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
-              <BookingDetails />
+              <DashboardBookingDetails />
             </ProtectedRoute>
           }
         />
@@ -123,17 +130,17 @@ const routes = createRoutesFromElements(
           }
         />
         <Route
-          path="doctors/add"
+          path="doctors/create"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
-              <AddDoctor />
+              <CreateDoctor />
             </ProtectedRoute>
           }
         />
         <Route
           path="doctors/:doctorId/update"
           element={
-            <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_DOCTOR}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
               <UpdateDoctor />
             </ProtectedRoute>
           }
@@ -151,7 +158,7 @@ const routes = createRoutesFromElements(
         <Route
           path="doctors/:doctorId/working-days/:workingDayId/update"
           element={
-            <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_WORKING_DAY}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_WORKING_DAY}>
               <UpdateWorkingDay />
             </ProtectedRoute>
           }
@@ -176,10 +183,10 @@ const routes = createRoutesFromElements(
         />
 
         <Route
-          path="employees/add"
+          path="employees/create"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_EMPLOYEE}>
-              <AddEmployee />
+              <CreateEmployee />
             </ProtectedRoute>
           }
         />
@@ -187,7 +194,7 @@ const routes = createRoutesFromElements(
         <Route
           path="employees/:employeeId/update"
           element={
-            <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_EMPLOYEE}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_EMPLOYEE}>
               <UpdateEmployee />
             </ProtectedRoute>
           }
@@ -211,17 +218,17 @@ const routes = createRoutesFromElements(
           }
         />
         <Route
-          path="patients/add"
+          path="patients/create"
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
-              <AddPatient />
+              <CreatePatient />
             </ProtectedRoute>
           }
         />
         <Route
           path="patients/:patientId/update"
           element={
-            <ProtectedRoute requiredPermission={PERMISSIONS.EDIT_PATIENT}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
               <UpdatePatient />
             </ProtectedRoute>
           }

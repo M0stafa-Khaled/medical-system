@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { MAX_FILE_SIZE, ACCEPTED_IMAGE_TYPES } from "@/utils/file";
 
-const addEmployeeSchema = z.object({
+const createDoctorSchema = z.object({
   name: z
     .string({ message: "الاسم مطلوب" })
     .min(3, "الاسم يجب أن يكون 3 أحرف على الأقل")
@@ -19,11 +19,13 @@ const addEmployeeSchema = z.object({
     .refine((val) => !val || /^\d+$/.test(val), {
       message: "يجب ادخال رقم هاتف صالح",
     }),
-  salary: z
-    .string({ message: " الراتب مطلوب" })
-    .regex(/^\d*\.?\d+$/, "يجب إدخال رقم صالح")
+  register_id: z
+    .string({ message: "رقم الهوية مطلوب" })
+    .min(1, "رقم الهوية مطلوب"),
+  commission: z
+    .string({ message: "العمولة مطلوبة" })
+    .regex(/^(100|[0-9]{1,2}(\.[0-9]+)?)$/, "يجب ادخال عمولة صالحة")
     .trim(),
-
   status: z.boolean().default(true),
   email: z
     .string({ message: "البريد الإلكترونى مطلوب" })
@@ -32,10 +34,6 @@ const addEmployeeSchema = z.object({
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
     .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
-  job: z
-    .string({ message: "الوظفية مطلوبة" })
-    .nonempty({ message: "الوظفية مطلوبة" })
-    .min(1, { message: "الوظفية مطلوبة" }),
   gender: z.object(
     {
       value: z.string({ message: "النوع مطلوب" }),
@@ -43,27 +41,6 @@ const addEmployeeSchema = z.object({
     },
     { message: "النوع مطلوب" }
   ),
-  role: z.object(
-    {
-      value: z.string({ message: "الدور مطلوب" }),
-      label: z.string({ message: "الدور مطلوب" }),
-    },
-    { message: "الدور مطلوب" }
-  ),
-  treasury_id: z
-    .object({
-      value: z.string(),
-      label: z.string(),
-    })
-    .optional(),
-  permissions: z
-    .array(
-      z.object({
-        value: z.string(),
-        label: z.string(),
-      })
-    )
-    .optional(),
   image: z.union([
     z.undefined(),
     z
@@ -75,7 +52,7 @@ const addEmployeeSchema = z.object({
         message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
       }),
   ]),
-  personal_image: z.union([
+  signature: z.union([
     z.undefined(),
     z
       .instanceof(File, { message: "يجب أن يكون الملف صورة" })
@@ -86,6 +63,14 @@ const addEmployeeSchema = z.object({
         message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
       }),
   ]),
+  clinics: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(1, "يجب اختيار عيادة واحدة على الأقل"),
 });
 
-export default addEmployeeSchema;
+export default createDoctorSchema;

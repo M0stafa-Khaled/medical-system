@@ -1,7 +1,7 @@
 import { IDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DeleteActionButton from "./DeleteActionModelButton";
-import EditActionButton from "./EditActionModalButton";
+import DeleteAction from "./DeleteAction";
+import UpdateAction from "./UpdateAction";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
@@ -11,7 +11,7 @@ interface IProps {
 }
 const ActionCard = ({ action, doctorId }: IProps) => {
   const canDeleteAction = useHasPermission(PERMISSIONS.DELETE_ACTION_DOCTOR);
-  const canEditAction = useHasPermission(PERMISSIONS.EDIT_ACTION_DOCTOR);
+  const canUpdateAction = useHasPermission(PERMISSIONS.UPDATE_ACTION_DOCTOR);
 
   return (
     <Card className="border-muted bg-background dark:bg-dark flex justify-between items-center">
@@ -28,13 +28,13 @@ const ActionCard = ({ action, doctorId }: IProps) => {
           </p>
         </CardContent>
       </div>
-      {(canDeleteAction || canEditAction) && (
+      {(canDeleteAction || canUpdateAction) && (
         <div className="flex flex-col px-4 gap-2">
           {canDeleteAction && (
-            <DeleteActionButton id={action.id} name={action.name} />
+            <DeleteAction id={action.id} name={action.name} />
           )}
-          {canEditAction && (
-            <EditActionButton doctorId={doctorId} action={action} />
+          {canUpdateAction && (
+            <UpdateAction doctorId={doctorId} action={action} />
           )}
         </div>
       )}

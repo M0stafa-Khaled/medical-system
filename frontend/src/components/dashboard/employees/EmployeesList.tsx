@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { IEmployee } from "@/interfaces/dashboard/employee";
-import DeleteEmployeeButton from "./DeleteEmployeeModalButton";
+import DeleteEmployee from "./DeleteEmployee";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const EmployeesList = ({ employees, meta }: IProps) => {
-  const canEditEmployee = useHasPermission(PERMISSIONS.EDIT_EMPLOYEE);
+  const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
   const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
   const canViewEmployee = useHasPermission(PERMISSIONS.VIEW_EMPLOYEE);
 
@@ -75,7 +75,7 @@ const EmployeesList = ({ employees, meta }: IProps) => {
               <Badge variant={"destructive"}>غير مفعل</Badge>
             )}
           </TableCell>
-          {(canDeleteEmployee || canEditEmployee || canViewEmployee) && (
+          {(canDeleteEmployee || canUpdateEmployee || canViewEmployee) && (
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
                 {canViewEmployee && (
@@ -88,7 +88,7 @@ const EmployeesList = ({ employees, meta }: IProps) => {
                     </Link>
                   </Button>
                 )}
-                {canEditEmployee && (
+                {canUpdateEmployee && (
                   <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                     <Link
                       to={`/dashboard/employees/${id}/update`}
@@ -98,9 +98,7 @@ const EmployeesList = ({ employees, meta }: IProps) => {
                     </Link>
                   </Button>
                 )}
-                {canDeleteEmployee && (
-                  <DeleteEmployeeButton name={name} id={id} />
-                )}
+                {canDeleteEmployee && <DeleteEmployee name={name} id={id} />}
               </div>
             </TableCell>
           )}

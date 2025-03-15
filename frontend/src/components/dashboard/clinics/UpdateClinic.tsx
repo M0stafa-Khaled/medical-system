@@ -1,55 +1,66 @@
-import { useState } from "react";
+import { FaPencil } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { FiPlus } from "react-icons/fi";
+import clinicSchema from "@/validations/clinicSchema";
+import { useUpdateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
-import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
-import { DOCTOR_ACTION_INPUTS } from "@/constants";
-import doctorActionSchema from "@/validations/doctorActionSchema";
-import { useCreateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
-import { motion } from "framer-motion";
+import Modal from "@/components/shared/Modal";
+import { CLINIC_FORM_INPUTS } from "@/constants";
+import RenderFormFields from "@/components/forms/RenderFormFields";
 import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "@/components/forms/RenderFormFields";
+import { motion } from "framer-motion";
 
-const AddActionButton = ({ doctorId }: { doctorId: string }) => {
+interface IProps {
+  id: number;
+  name: string;
+  status: boolean;
+  virtual_number: number;
+}
+const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
   const token = cookieServices.getToken() || "";
-  const [isOpenAddModal, setIsOpenAddModal] = useState(false);
-  const { mutateAsync: createDoctorAction, isPending } =
-    useCreateDoctorAction();
-  const form = useForm<z.infer<typeof doctorActionSchema>>({
-    resolver: zodResolver(doctorActionSchema),
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { mutateAsync: updateClinic, isPending } = useUpdateClinic();
+
+  const form = useForm<z.infer<typeof clinicSchema>>({
+    resolver: zodResolver(clinicSchema),
     defaultValues: {
-      name: "",
-      price: 0,
+      name: name,
+      status: status,
+      virtual_number: virtual_number,
     },
   });
-
   const onSubmit = async ({
     name,
-    price,
-  }: z.infer<typeof doctorActionSchema>) => {
+    status,
+    virtual_number,
+  }: z.infer<typeof clinicSchema>) => {
     try {
-      const { message, status } = await createDoctorAction({
-        token,
-        formData: { name, price: `${price}`, doctor_id: doctorId },
-      });
-      // ! Create failed
-      if (!status) return toast.error(message);
-      // * Create Success
-      return toast.success(message);
+      const {
+        status: statusServer,
+        message,
+        data,
+      } = await updateClinic({ id, name, status, virtual_number, token });
+
+      // ! Update failed
+      if (!statusServer) return toast.error(message);
+      // * Update Success
+      return toast.success(`${message} (${data.name})`);
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
@@ -78,26 +89,41 @@ const AddActionButton = ({ doctorId }: { doctorId: string }) => {
   };
 
   const handleCloseModal = () => {
-    setIsOpenAddModal(false);
+    setIsOpen(false);
     form.reset();
   };
+  const isOptionalField = (fieldName: string) => {
+    const optionalFields = ["virtual_number"];
+
+    return optionalFields.includes(fieldName);
+  };
+
+  useEffect(() => {
+    form.reset({
+      name: name,
+      status: status,
+      virtual_number: virtual_number,
+    });
+  }, [name, status, form, virtual_number]);
 
   return (
-    <>
+    <div>
       <Button
-        onClick={() => setIsOpenAddModal(true)}
-        className="flex items-center gap-2 h-auto py-3"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
       >
-        إضافة إجراء
-        <FiPlus size={20} />
+        <FaPencil size={24} />
       </Button>
 
+      {/* Update Modal */}
       <Modal
-        isOpen={isOpenAddModal}
+        isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="إضافة إجراء"
+        title="تعديل عيادة"
         description={{
-          text: "يمكنك اضافة إجراء جديد من هنا",
+          text: "يمكنك تعديل العيادة المحددة هنا",
         }}
         showFooter={false}
       >
@@ -109,20 +135,18 @@ const AddActionButton = ({ doctorId }: { doctorId: string }) => {
             animate="visible"
             variants={containerVariants}
           >
-            {DOCTOR_ACTION_INPUTS.map((input, idx) => (
+            {CLINIC_FORM_INPUTS.map((input, idx) => (
               <motion.div variants={itemVariants} key={input.name} custom={idx}>
                 <RenderFormFields
                   input={input}
                   form={form}
-                  schema={doctorActionSchema}
+                  schema={clinicSchema}
+                  isOptionalField={isOptionalField}
                 />
               </motion.div>
             ))}
             <AlertDialogFooter className="text-start !justify-start gap-2">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
-              >
+              <AlertDialogCancel className="text-black dark:text-white py-2.5 h-auto">
                 إلغاء
               </AlertDialogCancel>
               <Button
@@ -130,15 +154,15 @@ const AddActionButton = ({ doctorId }: { doctorId: string }) => {
                 disabled={isPending}
                 className="py-2.5 h-auto"
               >
-                إضافة
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                حفظ
+                {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>
         </Form>
       </Modal>
-    </>
+    </div>
   );
 };
 
-export default AddActionButton;
+export default UpdateClinic;

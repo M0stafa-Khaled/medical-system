@@ -1,7 +1,7 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IDeleteRes, IGetWithParams } from "@/interfaces";
 import {
-  IAddEmployee,
+  ICreateEmployee,
   IEmployeeRes,
   IEmployeesRes,
 } from "@/interfaces/dashboard/employee";
@@ -52,11 +52,11 @@ export const deleteEmployee: ({
   return data;
 };
 
-export const addEmployee: ({
+export const createEmployee: ({
   dataForm,
   token,
 }: {
-  dataForm: IAddEmployee;
+  dataForm: ICreateEmployee;
   token: string;
 }) => Promise<IEmployeeRes> = async ({
   dataForm,
@@ -97,7 +97,7 @@ export const updateEmployee: ({
   dataForm,
   token,
 }: {
-  dataForm: IAddEmployee;
+  dataForm: ICreateEmployee;
   token: string;
 }) => Promise<IEmployeeRes> = async ({
   dataForm,

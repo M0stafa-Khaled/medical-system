@@ -3,7 +3,7 @@ export enum PERMISSIONS {
   CLINICS = "العيادات",
   ADD_CLINIC = "اضافة-عيادة",
   VIEW_CLINIC = "عرض-عيادة",
-  EDIT_CLINIC = "تعديل-عيادة",
+  UPDATE_CLINIC = "تعديل-عيادة",
   DELETE_CLINIC = "حذف-عيادة",
 
   // Doctors
@@ -11,11 +11,11 @@ export enum PERMISSIONS {
   ADD_DOCTOR = "اضافة-طبيب",
   VIEW_DOCTOR = "عرض-طبيب",
   DELETE_DOCTOR = "حذف-طبيب",
-  EDIT_DOCTOR = "تعديل-طبيب",
+  UPDATE_DOCTOR = "تعديل-طبيب",
 
   // Doctors actions
   ADD_ACTION_DOCTOR = "اضافة-اجراء-للطبيب",
-  EDIT_ACTION_DOCTOR = "تعديل-اجراء-للطبيب",
+  UPDATE_ACTION_DOCTOR = "تعديل-اجراء-للطبيب",
   DELETE_ACTION_DOCTOR = "حذف-اجراء-للطبيب",
   DOCTOR_ACTIONS = "اجراءات الاطباء",
   VIEW_ACTION_DOCTOR = "عرض-اجراء-للطبيب",
@@ -25,11 +25,11 @@ export enum PERMISSIONS {
   DELETE_PATIENT = "حذف-مريض",
   VIEW_PATIENT = "عرض-مريض",
   ADD_PATIENT = "اضافة-مريض",
-  EDIT_PATIENT = "تعديل-مريض",
+  UPDATE_PATIENT = "تعديل-مريض",
 
   // Employees
   EMPLOYEES = "الموظفين",
-  EDIT_EMPLOYEE = "تعديل-موظف",
+  UPDATE_EMPLOYEE = "تعديل-موظف",
   ADD_EMPLOYEE = "اضافة-موظف",
   DELETE_EMPLOYEE = "حذف-موظف",
   VIEW_EMPLOYEE = "عرض-موظف",
@@ -43,13 +43,13 @@ export enum PERMISSIONS {
 
   // Expense categories
   ADD_EXPENSE_CATEGORY = "اضافة-قسم-للمصروف",
-  EDIT_EXPENSE_CATEGORY = "تعديل-قسم-للمصروف",
+  UPDATE_EXPENSE_CATEGORY = "تعديل-قسم-للمصروف",
   DELETE_EXPENSE_CATEGORY = "حذف-قسم-للمصروف",
   EXPENSE_CATEGORIES = "اقسام المصاريف",
   VIEW_EXPENSE_CATEGORY = "عرض-قسم-للمصروف",
 
   // Treasuries
-  EDIT_TREASURY = "تعديل-خزنة",
+  UPDATE_TREASURY = "تعديل-خزنة",
   ADD_TREASURY = "اضافة-خزنة",
   DELETE_TREASURY = "حذف-خزنة",
   VIEW_TREASURY = "عرض-خزنة",
@@ -66,7 +66,7 @@ export enum PERMISSIONS {
 
   // Working Days
   WORKING_DAYS = "ايام-العمل",
-  EDIT_WORKING_DAY = "تعديل-ايام-العمل",
+  UPDATE_WORKING_DAY = "تعديل-ايام-العمل",
   ADD_WORKING_DAY = "اضافة-ايام-العمل",
   DELETE_WORKING_DAY = "حذف-ايام-العمل",
   VIEW_WORKING_DAY = "عرض-ايام-العمل",
@@ -74,7 +74,7 @@ export enum PERMISSIONS {
   // BOOKING
   BOOKINGS = "الحجوزات",
   ADD_BOOKING = "اضافة-حجز-مريض",
-  EDIT_BOOKING = "تعديل-حجز-مريض",
+  UPDATE_BOOKING = "تعديل-حجز-مريض",
   VIEW_BOOKING = "عرض-حجز-مريض",
   DELETE_BOOKING = "حذف-حجز-مريض",
 }

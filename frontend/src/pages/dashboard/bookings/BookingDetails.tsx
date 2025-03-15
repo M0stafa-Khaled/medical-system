@@ -31,7 +31,7 @@ import UpdateBookingStatus from "@/components/dashboard/booking/UpdateBookingSta
 import UpdateBookingModalButton from "@/components/dashboard/booking/UpdateBookingModalButton";
 
 const BookingDetails = () => {
-  const canEditBooking = useHasPermission(PERMISSIONS.EDIT_BOOKING);
+  const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
   const canDeleteBooking = useHasPermission(PERMISSIONS.DELETE_BOOKING);
 
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ const BookingDetails = () => {
                 <span>تفاصيل الحجز:</span>
               </CardTitle>
               <div className="flex gap-2">
-                {canEditBooking && (
+                {canUpdateBooking && (
                   <motion.div variants={itemVariants}>
                     <UpdateBookingModalButton
                       id={`${id}`}

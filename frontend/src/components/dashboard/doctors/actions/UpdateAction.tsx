@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -8,43 +8,52 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
+import { DOCTOR_ACTION_INPUTS } from "@/constants";
+import doctorActionSchema from "@/validations/doctorActionSchema";
+import { useUpdateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
+import { FaPencil } from "react-icons/fa6";
+import { IDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/RenderFormFields";
 import {
-  itemVariants,
   containerVariants,
+  itemVariants,
 } from "@/animations/dashboardAnimations";
-import categorySchema from "@/validations/categorySchema";
-import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
+import RenderFormFields from "@/components/forms/RenderFormFields";
 
-const AddCategoryButton = () => {
-  const token = cookieServices.getToken()!;
+interface IProps {
+  doctorId: string;
+  action: IDoctorAction;
+}
+const UpdateAction = ({ doctorId, action }: IProps) => {
+  const token = cookieServices.getToken() || "";
   const [isOpen, setIsOpen] = useState(false);
-  const { mutateAsync: createCategory, isPending } = useCreateExpenseCategory();
-
-  const form = useForm<z.infer<typeof categorySchema>>({
-    resolver: zodResolver(categorySchema),
+  const { mutateAsync: updateDoctorAction, isPending } =
+    useUpdateDoctorAction();
+  const form = useForm<z.infer<typeof doctorActionSchema>>({
+    resolver: zodResolver(doctorActionSchema),
     defaultValues: {
-      name: "",
+      name: action.name,
+      price: action.price,
     },
   });
 
-  const onSubmit = async ({ name }: z.infer<typeof categorySchema>) => {
+  const onSubmit = async ({
+    name,
+    price,
+  }: z.infer<typeof doctorActionSchema>) => {
     try {
-      const { status, message } = await createCategory({
+      const { message, status } = await updateDoctorAction({
         token,
-        name,
+        formData: { name, price: `${price}`, doctor_id: doctorId },
+        id: `${action.id}`,
       });
-
-      // ! Create failed
+      // ! Update failed
       if (!status) return toast.error(message);
-
       // * Create Success
       return toast.success(message);
     } catch (error) {
@@ -79,44 +88,50 @@ const AddCategoryButton = () => {
     form.reset();
   };
 
+  useEffect(() => {
+    form.reset({
+      name: action.name,
+      price: action.price,
+    });
+  }, [action, form]);
+
   return (
     <>
       <Button
-        onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-auto py-3"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
       >
-        إضافة تصنيف
-        <FiPlus size={20} />
+        <FaPencil size={24} />
       </Button>
 
       <Modal
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="إضافة تصنيف جديد"
-        description={{ text: "يمكنك اضافة تصنيف جديد من هنا" }}
+        title="تعديل إجراء"
+        description={{
+          text: "يمكنك تعديل الإجراء المحدد هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 text-black dark:text-white"
+            className="space-y-5 text-black dark:text-white"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div custom={"category-name"} variants={itemVariants}>
-              <RenderFormFields
-                input={{
-                  name: "name",
-                  label: "اسم التصنيف",
-                  type: "text",
-                  placeholder: "اسم التصنيف",
-                }}
-                form={form}
-                schema={categorySchema}
-              />
-            </motion.div>
-
+            {DOCTOR_ACTION_INPUTS.map((input, idx) => (
+              <motion.div variants={itemVariants} key={input.name} custom={idx}>
+                <RenderFormFields
+                  input={input}
+                  form={form}
+                  schema={doctorActionSchema}
+                />
+              </motion.div>
+            ))}
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
@@ -129,7 +144,7 @@ const AddCategoryButton = () => {
                 disabled={isPending}
                 className="py-2.5 h-auto"
               >
-                إضافة
+                تعديل
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>
@@ -140,4 +155,4 @@ const AddCategoryButton = () => {
   );
 };
 
-export default memo(AddCategoryButton);
+export default UpdateAction;

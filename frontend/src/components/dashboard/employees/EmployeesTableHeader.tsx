@@ -4,7 +4,7 @@ import useHasPermission from "@/hooks/useHasPermission";
 import { memo } from "react";
 
 const EmployeesTableHeader = () => {
-  const canEditEmployee = useHasPermission(PERMISSIONS.EDIT_EMPLOYEE);
+  const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
   const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
   const canViewEmployee = useHasPermission(PERMISSIONS.VIEW_EMPLOYEE);
 
@@ -16,7 +16,7 @@ const EmployeesTableHeader = () => {
         <TableHead className="py-4 text-center max-w-44">اسم الموظف</TableHead>
         <TableHead className="py-4 text-center">رقم الهاتف</TableHead>
         <TableHead className="py-4 text-center">حالة الحساب</TableHead>
-        {(canDeleteEmployee || canEditEmployee || canViewEmployee) && (
+        {(canDeleteEmployee || canUpdateEmployee || canViewEmployee) && (
           <TableHead className="py-4 text-center">الإجراءات</TableHead>
         )}
       </TableRow>

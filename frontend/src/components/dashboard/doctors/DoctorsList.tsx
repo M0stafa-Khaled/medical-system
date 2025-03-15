@@ -3,7 +3,7 @@ import { TableCell } from "@/components/ui/table";
 import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import DeleteDoctorButton from "./DeleteDoctorModalButton";
+import DeleteDoctor from "./DeleteDoctor";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
@@ -19,7 +19,7 @@ interface IProps {
   meta?: IPaginationMeta;
 }
 const DoctorsList = ({ doctors, meta }: IProps) => {
-  const canEditDoctor = useHasPermission(PERMISSIONS.EDIT_DOCTOR);
+  const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
   const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
   const canViewDoctor = useHasPermission(PERMISSIONS.VIEW_DOCTOR);
 
@@ -80,7 +80,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
               )}
             </TableCell>
 
-            {(canDeleteDoctor || canEditDoctor || canViewDoctor) && (
+            {(canDeleteDoctor || canUpdateDoctor || canViewDoctor) && (
               <TableCell className="text-center">
                 <div className="flex justify-center items-center gap-2">
                   {canViewDoctor && (
@@ -93,7 +93,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
                       </Link>
                     </Button>
                   )}
-                  {canEditDoctor && (
+                  {canUpdateDoctor && (
                     <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                       <Link
                         to={`/dashboard/doctors/${id}/update`}
@@ -103,9 +103,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
                       </Link>
                     </Button>
                   )}
-                  {canDeleteDoctor && (
-                    <DeleteDoctorButton name={name} id={id} />
-                  )}
+                  {canDeleteDoctor && <DeleteDoctor name={name} id={id} />}
                 </div>
               </TableCell>
             )}

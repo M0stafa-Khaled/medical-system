@@ -1,9 +1,9 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IDeleteRes } from "@/interfaces";
 import {
-  IActionProps,
-  IResponseAction,
-  IResponseActions,
+  IDoctorActionProps,
+  IResponseDoctorAction,
+  IResponseDoctorActions,
 } from "@/interfaces/dashboard/doctors/doctorActions";
 
 interface IGetAction {
@@ -14,7 +14,10 @@ interface IGetAction {
 export const getDoctorActions: ({
   doctorId,
   token,
-}: IGetAction) => Promise<IResponseActions> = async ({ doctorId, token }) => {
+}: IGetAction) => Promise<IResponseDoctorActions> = async ({
+  doctorId,
+  token,
+}) => {
   const { data } = await axiosInstanceAPI.get(`/${doctorId}/actions`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -26,7 +29,10 @@ export const getDoctorActions: ({
 export const createDoctorAction: ({
   token,
   formData,
-}: IActionProps) => Promise<IResponseAction> = async ({ formData, token }) => {
+}: IDoctorActionProps) => Promise<IResponseDoctorAction> = async ({
+  formData,
+  token,
+}) => {
   const { data } = await axiosInstanceAPI.post("actions", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -39,7 +45,7 @@ export const updateDoctorAction: ({
   formData,
   token,
   id,
-}: IActionProps) => Promise<IResponseAction> = async ({
+}: IDoctorActionProps) => Promise<IResponseDoctorAction> = async ({
   formData,
   token,
   id,

@@ -6,25 +6,23 @@ export interface IDoctorAction {
   price: number;
 }
 
-export interface IActionProps {
-  formData: IAddAction;
+export interface IDoctorActionProps {
+  formData: {
+    doctor_id: string;
+    name: string;
+    price: string;
+  };
   token: string;
   id?: string;
 }
 
-export interface IAddAction {
-  doctor_id: string;
-  name: string;
-  price: string;
-}
-
-export interface IResponseAction {
+export interface IResponseDoctorAction {
   status: boolean;
   message: string;
   data: IDoctorAction;
 }
 
-export interface IResponseActions {
+export interface IResponseDoctorActions {
   status: boolean;
   message: null;
   data: {

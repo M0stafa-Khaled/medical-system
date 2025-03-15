@@ -20,7 +20,7 @@ import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
-import DeleteDoctorButton from "@/components/dashboard/doctors/DeleteDoctorModalButton";
+import DeleteDoctor from "@/components/dashboard/doctors/DeleteDoctor";
 import { FaPencil } from "react-icons/fa6";
 import ImageModal from "@/components/shared/ImageModal";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
@@ -40,7 +40,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorkingDays from "@/components/dashboard/doctors/workingDays/WorkingDays";
 
 const DoctorDetails = () => {
-  const canEditDoctor = useHasPermission(PERMISSIONS.EDIT_DOCTOR);
+  const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
   const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
   const canViewDoctorActions = useHasPermission(PERMISSIONS.DOCTOR_ACTIONS);
   const canViewDoctorWorkingDays = useHasPermission(PERMISSIONS.WORKING_DAYS);
@@ -108,7 +108,7 @@ const DoctorDetails = () => {
                 role={user?.role.toLowerCase() as string}
                 actionButtons={
                   <>
-                    {canEditDoctor && (
+                    {canUpdateDoctor && (
                       <motion.div variants={itemVariants}>
                         <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                           <Link
@@ -122,7 +122,7 @@ const DoctorDetails = () => {
                     )}
                     {canDeleteDoctor && (
                       <motion.div variants={itemVariants}>
-                        <DeleteDoctorButton id={id!} name={name!} />
+                        <DeleteDoctor id={id!} name={name!} />
                       </motion.div>
                     )}
                   </>

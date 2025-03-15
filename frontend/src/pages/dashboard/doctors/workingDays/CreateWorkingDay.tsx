@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
 const CreateWorkingDay = () => {
-
   return (
     <>
       <Helmet>
@@ -22,7 +21,7 @@ const CreateWorkingDay = () => {
             </h1>
           </div>
           <CardContent>
-            <WorkingDayForm action={"add"} />
+            <WorkingDayForm action={"create"} />
           </CardContent>
         </Card>
       </motion.section>

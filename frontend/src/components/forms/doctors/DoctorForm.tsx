@@ -9,7 +9,7 @@ import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import {
-  useAddDoctor,
+  useCreateDoctor,
   useUpdateDoctor,
 } from "@/lib/react-query/dashboard/doctors/doctors";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ import RenderFormFields from "../RenderFormFields";
 
 interface IProps {
   doctor?: IDoctor;
-  action: "add" | "update";
+  action: "create" | "update";
   doctorSchema: ZodSchema;
 }
 
@@ -33,7 +33,8 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   const token = cookieServices.getToken() || "";
   const navigate = useNavigate();
 
-  const { mutateAsync: addDoctor, isPending: isLoadingAdd } = useAddDoctor();
+  const { mutateAsync: CreateDoctor, isPending: isLoadingCreate } =
+    useCreateDoctor();
   const { data: clinicsData } = useGetAllClinics({ token });
   const { mutateAsync: updateDoctor, isPending: isLoadingUpdate } =
     useUpdateDoctor();
@@ -64,7 +65,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       clinics: [],
     },
   });
-  
+
   useEffect(() => {
     if (!doctor) return;
     form.reset({
@@ -101,8 +102,8 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
 
   const onSubmit = async (formData: z.infer<typeof doctorSchema>) => {
     try {
-      if (action === "add") {
-        const { status, message } = await addDoctor({
+      if (action === "create") {
+        const { status, message } = await CreateDoctor({
           data: formData,
           token,
         });
@@ -148,7 +149,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   return (
     <Form {...form}>
       <motion.form
-        key={doctor?.id || "add"}
+        key={doctor?.id || "create"}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6"
         initial="hidden"
@@ -177,9 +178,9 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         <motion.div variants={containerVariants}>
           <SubmitButton
             action={action}
-            isLoadingAdd={isLoadingAdd}
+            isLoadingCreate={isLoadingCreate}
             isLoadingUpdate={isLoadingUpdate}
-            addText="إضافة طبيب"
+            createText="إضافة طبيب"
             updateText="تحديث بيانات الطبيب"
           />
         </motion.div>

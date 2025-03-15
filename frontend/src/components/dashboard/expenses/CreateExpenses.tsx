@@ -21,11 +21,11 @@ import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import addExpenseSchema from "@/validations/addExpenseSchema";
+import createExpenseSchema from "@/validations/createExpenseSchema";
 import { useCreateExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 
-const AddExpenseButton = () => {
+const CreateExpense = () => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
   const { data: expensesCategories } = useGetAllExpensesCategories({ token });
@@ -38,8 +38,8 @@ const AddExpenseButton = () => {
     })
   );
 
-  const form = useForm<z.infer<typeof addExpenseSchema>>({
-    resolver: zodResolver(addExpenseSchema),
+  const form = useForm<z.infer<typeof createExpenseSchema>>({
+    resolver: zodResolver(createExpenseSchema),
     defaultValues: {
       name: "",
       status: true,
@@ -47,7 +47,7 @@ const AddExpenseButton = () => {
     },
   });
 
-  const onSubmit = async (dataForm: z.infer<typeof addExpenseSchema>) => {
+  const onSubmit = async (dataForm: z.infer<typeof createExpenseSchema>) => {
     try {
       const { status, message } = await createExpense({
         token,
@@ -141,7 +141,7 @@ const AddExpenseButton = () => {
                   <RenderFormFields
                     input={input}
                     form={form as any}
-                    schema={addExpenseSchema}
+                    schema={createExpenseSchema}
                     options={{ categories: expensesCategoriesOptions! }}
                   />
                 </motion.div>
@@ -171,4 +171,4 @@ const AddExpenseButton = () => {
   );
 };
 
-export default AddExpenseButton;
+export default CreateExpense;

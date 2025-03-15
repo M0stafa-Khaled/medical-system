@@ -1,12 +1,11 @@
 import { z } from "zod";
 import { MAX_FILE_SIZE, ACCEPTED_IMAGE_TYPES } from "@/utils/file";
 
-const addPatientSchema = z.object({
+const createEmployeeSchema = z.object({
   name: z
     .string({ message: "الاسم مطلوب" })
     .min(3, "الاسم يجب أن يكون 3 أحرف على الأقل")
     .trim(),
-  another_name: z.string({ message: "الاسم مطلوب" }).trim().optional(),
   personal_id: z
     .string({ message: "رقم الهوية مطلوب" })
     .min(1, "رقم الهوية مطلوب")
@@ -20,6 +19,11 @@ const addPatientSchema = z.object({
     .refine((val) => !val || /^\d+$/.test(val), {
       message: "يجب ادخال رقم هاتف صالح",
     }),
+  salary: z
+    .string({ message: " الراتب مطلوب" })
+    .regex(/^\d*\.?\d+$/, "يجب إدخال رقم صالح")
+    .trim(),
+
   status: z.boolean().default(true),
   email: z
     .string({ message: "البريد الإلكترونى مطلوب" })
@@ -28,8 +32,10 @@ const addPatientSchema = z.object({
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
     .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
-  description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
-  info_status: z.string({ message: "الملاحظات مطلوبة" }).optional(),
+  job: z
+    .string({ message: "الوظفية مطلوبة" })
+    .nonempty({ message: "الوظفية مطلوبة" })
+    .min(1, { message: "الوظفية مطلوبة" }),
   gender: z.object(
     {
       value: z.string({ message: "النوع مطلوب" }),
@@ -37,6 +43,38 @@ const addPatientSchema = z.object({
     },
     { message: "النوع مطلوب" }
   ),
+  role: z.object(
+    {
+      value: z.string({ message: "الدور مطلوب" }),
+      label: z.string({ message: "الدور مطلوب" }),
+    },
+    { message: "الدور مطلوب" }
+  ),
+  treasury_id: z
+    .object({
+      value: z.string(),
+      label: z.string(),
+    })
+    .optional(),
+  permissions: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .optional(),
+  image: z.union([
+    z.undefined(),
+    z
+      .instanceof(File, { message: "يجب أن يكون الملف صورة" })
+      .refine((file) => file.size <= MAX_FILE_SIZE, {
+        message: "حجم الصورة يجب أن يكون أقل من 5MB",
+      })
+      .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
+        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
+      }),
+  ]),
   personal_image: z.union([
     z.undefined(),
     z
@@ -50,4 +88,4 @@ const addPatientSchema = z.object({
   ]),
 });
 
-export default addPatientSchema;
+export default createEmployeeSchema;

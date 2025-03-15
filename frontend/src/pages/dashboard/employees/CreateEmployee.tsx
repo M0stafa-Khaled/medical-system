@@ -1,10 +1,10 @@
 import EmployeeForm from "@/components/forms/employees/EmployeeForm";
 import { Card, CardContent } from "@/components/ui/card";
-import addEmployeeSchema from "@/validations/addEmployeeSchema";
+import createEmployeeSchema from "@/validations/createEmployeeSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
-const AddEmployee = () => {
+const CreateEmployee = () => {
   return (
     <>
       <Helmet>
@@ -20,7 +20,10 @@ const AddEmployee = () => {
             <h1 className="font-semibold leading-relaxed">إضافة موظف جديد</h1>
           </div>
           <CardContent>
-            <EmployeeForm action={"add"} employeeSchema={addEmployeeSchema} />
+            <EmployeeForm
+              action={"create"}
+              employeeSchema={createEmployeeSchema}
+            />
           </CardContent>
         </Card>
       </motion.section>
@@ -28,4 +31,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default CreateEmployee;

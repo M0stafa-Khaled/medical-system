@@ -3,7 +3,7 @@ import { IDeleteRes, IGetWithParams } from "@/interfaces";
 import {
   IResponsePatients,
   IResponsePatient,
-  IAddPatient,
+  ICreatePatient,
 } from "@/interfaces/dashboard/patient";
 
 export const getAllPatients = async ({
@@ -37,12 +37,12 @@ export const getPatientById: ({
   return data;
 };
 
-export const addPatient: ({
+export const createPatient: ({
   token,
   dataForm,
 }: {
   token: string;
-  dataForm: IAddPatient;
+  dataForm: ICreatePatient;
 }) => Promise<IResponsePatient> = async ({ token, dataForm }) => {
   const formData = new FormData();
   formData.append("name", dataForm.name);
@@ -75,7 +75,7 @@ export const updatePatient: ({
   dataForm,
 }: {
   token: string;
-  dataForm: IAddPatient;
+  dataForm: ICreatePatient;
 }) => Promise<IResponsePatient> = async ({ token, dataForm }) => {
   const formData = new FormData();
   formData.append("name", dataForm.name);

@@ -4,7 +4,7 @@ import useHasPermission from "@/hooks/useHasPermission";
 import { memo } from "react";
 
 const ClinicsTableHeader = () => {
-  const canEditClinic = useHasPermission(PERMISSIONS.EDIT_CLINIC);
+  const canUpdateClinic = useHasPermission(PERMISSIONS.UPDATE_CLINIC);
   const canDeleteClinic = useHasPermission(PERMISSIONS.DELETE_CLINIC);
   return (
     <TableHeader>
@@ -12,7 +12,7 @@ const ClinicsTableHeader = () => {
       <TableHead className="py-4 text-center w-20">#</TableHead>
       <TableHead className="py-4 text-center">اسم العيادة</TableHead>
         <TableHead className="py-4 text-center">الحالة</TableHead>
-        {(canEditClinic || canDeleteClinic) && (
+        {(canUpdateClinic || canDeleteClinic) && (
           <TableHead className="py-4 text-center">الإجراءات</TableHead>
         )}
       </TableRow>

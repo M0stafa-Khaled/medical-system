@@ -1,32 +1,33 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteDoctor } from "@/lib/react-query/dashboard/doctors/doctors";
+import { useDeleteExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface IProps {
-  name: string;
   id: number;
+  name: string;
 }
 
-const DeleteDoctorButton = ({ name, id }: IProps) => {
-  const navigate = useNavigate();
-  const token = cookieServices.getToken() || "";
+const DeleteExpense = ({ id, name }: IProps) => {
+  const token = cookieServices.getToken()!;
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteDoctor, isPending } = useDeleteDoctor();
+  const { mutateAsync: deleteExpense, isPending } = useDeleteExpense();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deleteDoctor({ id, token });
+      const { message, status } = await deleteExpense({
+        id: `${id}`,
+        token,
+      });
 
       // ! Delete failed
       if (!status) return toast.error(message);
+
       // * Delete Success
-      navigate("/dashboard/doctors");
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
@@ -50,9 +51,9 @@ const DeleteDoctorButton = ({ name, id }: IProps) => {
       <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف طبيب"
+        title="حذف مصروف"
         description={{
-          text: `هل انت متاكد من حذف الطبيب ${name}؟`,
+          text: `هل انت متاكد من حذف مصروف ${name}؟`,
           color: "text-red-700",
         }}
         onConfirm={handleDelete}
@@ -64,4 +65,4 @@ const DeleteDoctorButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteDoctorButton;
+export default DeleteExpense;

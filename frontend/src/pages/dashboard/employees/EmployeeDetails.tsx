@@ -25,7 +25,7 @@ import ImageModal from "@/components/shared/ImageModal";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
 import InfoField from "@/components/dashboard/InfoField";
 import { FaPencil } from "react-icons/fa6";
-import DeleteEmployeeButton from "@/components/dashboard/employees/DeleteEmployeeModalButton";
+import DeleteEmployee from "@/components/dashboard/employees/DeleteEmployee";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
@@ -38,7 +38,7 @@ import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet-async";
 
 const EmployeeDetails = () => {
-  const canEditEmployee = useHasPermission(PERMISSIONS.EDIT_EMPLOYEE);
+  const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
   const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
@@ -107,7 +107,7 @@ const EmployeeDetails = () => {
                 role={user?.role.toLowerCase() as string}
                 actionButtons={
                   <>
-                    {canEditEmployee && (
+                    {canUpdateEmployee && (
                       <motion.div variants={itemVariants}>
                         <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                           <Link
@@ -121,7 +121,7 @@ const EmployeeDetails = () => {
                     )}
                     {canDeleteEmployee && (
                       <motion.div variants={itemVariants}>
-                        <DeleteEmployeeButton id={id!} name={name!} />
+                        <DeleteEmployee id={id!} name={name!} />
                       </motion.div>
                     )}
                   </>

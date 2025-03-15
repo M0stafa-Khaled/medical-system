@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
@@ -19,43 +20,33 @@ import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import treasurySchema from "@/validations/treasurySchema";
-import { FaPencil } from "react-icons/fa6";
-import { ITreasury } from "@/interfaces/dashboard/treasury";
-import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";
-import { TREASURY_FORM_INPUTS } from "@/constants";
+import categorySchema from "@/validations/categorySchema";
+import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 
-interface IProps {
-  treasury: ITreasury;
-}
-
-const EditTreasuryButton = ({ treasury }: IProps) => {
+const CreateExpenseCategory = () => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
-  const { mutateAsync: updateTreasury, isPending } = useUpdateTreasury();
+  const { mutateAsync: createCategory, isPending } = useCreateExpenseCategory();
 
-  const form = useForm<z.infer<typeof treasurySchema>>({
-    resolver: zodResolver(treasurySchema),
+  const form = useForm<z.infer<typeof categorySchema>>({
+    resolver: zodResolver(categorySchema),
     defaultValues: {
-      name: treasury.name,
-      status: treasury.status,
+      name: "",
     },
   });
 
-  const onSubmit = async ({ name, status }: z.infer<typeof treasurySchema>) => {
+  const onSubmit = async ({ name }: z.infer<typeof categorySchema>) => {
     try {
-      const { status: serverStatus, message } = await updateTreasury({
-        id: `${treasury.id}`,
+      const { status, message } = await createCategory({
         token,
-        status,
         name,
       });
 
-      // ! Update failed
-      if (!serverStatus) return toast.error(message);
+      // ! Create failed
+      if (!status) return toast.error(message);
 
-      // * Update Success
-      return toast.success(message || "تم تحديث بيانات الخزينة بنجاح");
+      // * Create Success
+      return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
@@ -85,35 +76,24 @@ const EditTreasuryButton = ({ treasury }: IProps) => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    form.reset({
-      name: treasury.name,
-    });
+    form.reset();
   };
-  useEffect(() => {
-    form.reset({
-      name: treasury.name,
-      status: treasury.status,
-    });
-  }, [form, treasury]);
 
   return (
     <>
       <Button
-        onClick={() => {
-          setIsOpen(true);
-        }}
-        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
+        onClick={() => setIsOpen(true)}
+        className="flex items-center gap-2 h-auto py-3"
       >
-        <FaPencil size={24} />
+        إضافة تصنيف
+        <FiPlus size={20} />
       </Button>
 
       <Modal
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="تعديل تصنيف"
-        description={{
-          text: "يمكنك تعديل التصنيف المحدد هنا",
-        }}
+        title="إضافة تصنيف جديد"
+        description={{ text: "يمكنك اضافة تصنيف جديد من هنا" }}
         showFooter={false}
       >
         <Form {...form}>
@@ -124,15 +104,18 @@ const EditTreasuryButton = ({ treasury }: IProps) => {
             animate="visible"
             variants={containerVariants}
           >
-            {TREASURY_FORM_INPUTS.map((input, idx) => (
-              <motion.div key={input.name} custom={idx} variants={itemVariants}>
-                <RenderFormFields
-                  input={input}
-                  form={form}
-                  schema={treasurySchema}
-                />
-              </motion.div>
-            ))}
+            <motion.div custom={"category-name"} variants={itemVariants}>
+              <RenderFormFields
+                input={{
+                  name: "name",
+                  label: "اسم التصنيف",
+                  type: "text",
+                  placeholder: "اسم التصنيف",
+                }}
+                form={form}
+                schema={categorySchema}
+              />
+            </motion.div>
 
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
@@ -146,7 +129,7 @@ const EditTreasuryButton = ({ treasury }: IProps) => {
                 disabled={isPending}
                 className="py-2.5 h-auto"
               >
-                تعديل
+                إضافة
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>
@@ -157,4 +140,4 @@ const EditTreasuryButton = ({ treasury }: IProps) => {
   );
 };
 
-export default memo(EditTreasuryButton);
+export default memo(CreateExpenseCategory);

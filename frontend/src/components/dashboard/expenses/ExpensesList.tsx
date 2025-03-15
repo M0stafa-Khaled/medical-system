@@ -11,8 +11,8 @@ import { IExpense } from "@/interfaces/dashboard/expenses/expense";
 import formatDateTime from "@/utils/formatDate";
 import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";
-import DeleteExpenseButton from "./DeleteExpenseModalButton";
-import CancelExpenseButton from "./CancelExpenseModalButton";
+import DeleteExpense from "./DeleteExpense";
+import CancelExpense from "./CancelExpense";
 import truncateText from "@/utils/truncateText";
 import PrintExpenseReceipt from "./PrintExpenseReceipt";
 
@@ -110,10 +110,10 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
                 )}
                 {canViewExpense && <PrintExpenseReceipt expense={expense} />}
                 {canCancelExpense && expense?.status && (
-                  <CancelExpenseButton id={expense?.id} />
+                  <CancelExpense id={expense?.id} />
                 )}
                 {canDeleteExpense && !expense?.status && (
-                  <DeleteExpenseButton id={expense?.id} name={expense?.name} />
+                  <DeleteExpense id={expense?.id} name={expense?.name} />
                 )}
               </div>
             </TableCell>

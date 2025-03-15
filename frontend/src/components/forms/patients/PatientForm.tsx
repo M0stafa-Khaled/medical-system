@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import {
-  useAddPatient,
+  useCreatePatient,
   useUpdatePatient,
 } from "@/lib/react-query/dashboard/patients";
 import { useEffect } from "react";
@@ -24,7 +24,7 @@ import {
 
 interface IProps {
   patient?: IPatient;
-  action: "add" | "update";
+  action: "create" | "update";
   patientSchema: ZodSchema;
 }
 
@@ -32,7 +32,8 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   const token = cookieServices.getToken() || "";
   const navigate = useNavigate();
 
-  const { mutateAsync: addPatient, isPending: isLoadingAdd } = useAddPatient();
+  const { mutateAsync: createPatient, isPending: isLoadingCreate } =
+    useCreatePatient();
   const { mutateAsync: updatePatient, isPending: isLoadingUpdate } =
     useUpdatePatient();
 
@@ -96,8 +97,8 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
 
   const onSubmit = async (formData: z.infer<typeof patientSchema>) => {
     try {
-      if (action === "add") {
-        const { status, message } = await addPatient({
+      if (action === "create") {
+        const { status, message } = await createPatient({
           data: formData,
           token,
         });
@@ -143,7 +144,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   return (
     <Form {...form}>
       <motion.form
-        key={patient?.id || "add"}
+        key={patient?.id || "create"}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6"
         initial="hidden"
@@ -169,9 +170,9 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
         <motion.div variants={containerVariants}>
           <SubmitButton
             action={action}
-            isLoadingAdd={isLoadingAdd}
+            isLoadingCreate={isLoadingCreate}
             isLoadingUpdate={isLoadingUpdate}
-            addText="إضافة مريض"
+            createText="إضافة مريض"
             updateText="تحديث بيانات المريض"
           />
         </motion.div>

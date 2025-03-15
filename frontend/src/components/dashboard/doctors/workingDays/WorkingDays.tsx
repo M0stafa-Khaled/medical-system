@@ -23,7 +23,7 @@ interface IProps {
 
 const WorkingDays = ({ doctorId }: IProps) => {
   const canViewWorkingDays = useHasPermission(PERMISSIONS.WORKING_DAYS);
-  const canAddWorkingDay = useHasPermission(PERMISSIONS.ADD_WORKING_DAY);
+  const canCreateWorkingDay = useHasPermission(PERMISSIONS.ADD_WORKING_DAY);
   const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
@@ -46,7 +46,7 @@ const WorkingDays = ({ doctorId }: IProps) => {
           <CardTitle>ايام العمل:</CardTitle>
         </CardHeader>
         <CardContent className="py-3 px-4">
-          {canAddWorkingDay && (
+          {canCreateWorkingDay && (
             <div className="mb-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
               <Button
                 size={"sm"}

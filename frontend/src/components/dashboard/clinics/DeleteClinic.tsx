@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
+import { useDeleteClinic } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -12,14 +12,14 @@ interface IProps {
   id: number;
 }
 
-const DeleteActionButton = ({ name, id }: IProps) => {
+const DeleteClinic = ({ name, id }: IProps) => {
   const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteAction, isPending } = useDeleteDoctorAction();
+  const { mutateAsync: deleteClinic, isPending } = useDeleteClinic();
 
   const handleDelete = async () => {
     try {
-      const { message, status } = await deleteAction({ id: `${id}`, token });
+      const { status, message } = await deleteClinic({ id, token });
 
       // ! Delete failed
       if (!status) return toast.error(message);
@@ -48,9 +48,9 @@ const DeleteActionButton = ({ name, id }: IProps) => {
       <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف إجراء"
+        title="حذف العيادة"
         description={{
-          text: `هل انت متاكد من حذف إجراء ${name}؟`,
+          text: `هل انت متاكد من حذف عيادة ${name}؟`,
           color: "text-red-700",
         }}
         onConfirm={handleDelete}
@@ -62,4 +62,4 @@ const DeleteActionButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteActionButton;
+export default DeleteClinic;

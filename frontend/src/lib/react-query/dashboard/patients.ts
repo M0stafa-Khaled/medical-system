@@ -1,5 +1,5 @@
 import {
-  addPatient,
+  createPatient,
   deletePatient,
   getAllPatients,
   getPatientById,
@@ -7,7 +7,7 @@ import {
 } from "@/services/dashboard/patients";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "../queryKeys";
-import { IAddPatient } from "@/interfaces/dashboard/patient";
+import { ICreatePatient } from "@/interfaces/dashboard/patient";
 import { IGetWithParams } from "@/interfaces";
 
 export const useGetAllPatients = ({
@@ -34,11 +34,11 @@ export const useGetPatientById = ({
     enabled: !!id,
   });
 
-export const useAddPatient = () => {
+export const useCreatePatient = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, data }: { token: string; data: IAddPatient }) =>
-      addPatient({ token, dataForm: data }),
+    mutationFn: ({ token, data }: { token: string; data: ICreatePatient }) =>
+      createPatient({ token, dataForm: data }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENTS],
@@ -49,7 +49,7 @@ export const useAddPatient = () => {
 export const useUpdatePatient = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, data }: { token: string; data: IAddPatient }) =>
+    mutationFn: ({ token, data }: { token: string; data: ICreatePatient }) =>
       updatePatient({ token, dataForm: data }),
     onSuccess: () => {
       queryClient.invalidateQueries({

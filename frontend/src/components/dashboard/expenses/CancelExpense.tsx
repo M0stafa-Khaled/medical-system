@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -19,38 +19,40 @@ import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import categorySchema from "@/validations/categorySchema";
-import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
-import { FaPencil } from "react-icons/fa6";
-import { useUpdateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
+import { useCancelExpense } from "@/lib/react-query/dashboard/expenses/expenses";
+import { MdDoNotDisturbAlt } from "react-icons/md";
 
-interface IProps {
-  category: IExpenseCategory;
-}
-const EditCategoryButton = ({ category }: IProps) => {
+const CancelExpense = ({ id }: { id: number }) => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
-  const { mutateAsync: updateCategory, isPending } = useUpdateExpenseCategory();
+  const { mutateAsync: cancelExpense, isPending } = useCancelExpense();
+  const cancelExpenseSchema = z.object({
+    cancelled_info: z
+      .string({ message: "السبب مطلوب" })
+      .nonempty({ message: "السبب مطلوب" }),
+  });
 
-  const form = useForm<z.infer<typeof categorySchema>>({
-    resolver: zodResolver(categorySchema),
+  const form = useForm<z.infer<typeof cancelExpenseSchema>>({
+    resolver: zodResolver(cancelExpenseSchema),
     defaultValues: {
-      name: category.name,
+      cancelled_info: "",
     },
   });
 
-  const onSubmit = async ({ name }: z.infer<typeof categorySchema>) => {
+  const onSubmit = async ({
+    cancelled_info,
+  }: z.infer<typeof cancelExpenseSchema>) => {
     try {
-      const { status, message } = await updateCategory({
-        id: `${category.id}`,
+      const { status, message } = await cancelExpense({
         token,
-        name,
+        id: `${id}`,
+        cancelled_info,
       });
 
-      // ! Update failed
+      // ! Cancel failed
       if (!status) return toast.error(message);
 
-      // * Update Success
+      // * Cancel Success
       return toast.success(message);
     } catch (error) {
       const errorObj = error as AxiosError<{
@@ -66,69 +68,60 @@ const EditCategoryButton = ({ category }: IProps) => {
           );
         });
       }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
+      if (errorObj?.response?.data.message) {
         toast.error(errorObj?.response?.data.message, {
           autoClose: 5000,
         });
       }
     } finally {
-      handleCloseModal();
+      setIsOpen(false);
+      form.reset();
     }
   };
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    form.reset({
-      name: category.name,
-    });
+    form.reset();
   };
-  useEffect(() => {
-    form.reset({
-      name: category.name,
-    });
-  }, [form, category]);
 
   return (
     <>
       <Button
-        onClick={() => {
-          setIsOpen(true);
-        }}
-        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
+        size={"sm"}
+        onClick={() => setIsOpen(true)}
+        className="bg-gray-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600 text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
       >
-        <FaPencil size={24} />
+        <MdDoNotDisturbAlt size={24} />
       </Button>
 
       <Modal
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="تعديل تصنيف"
+        title="إلغاء مصروف"
         description={{
-          text: "يمكنك تعديل التصنيف المحدد هنا",
+          text: "يرجى العلم أن الإلغاء لا يمكن التراجع عنه!",
+          color: "text-red-700",
         }}
         showFooter={false}
       >
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 text-black dark:text-white"
+            className="space-y-6 text-black dark:text-white"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div custom={"category-name"} variants={itemVariants}>
+            <motion.div variants={itemVariants}>
               <RenderFormFields
                 input={{
-                  name: "name",
-                  label: "اسم التصنيف",
+                  name: "cancelled_info",
+                  label: "سبب الإلغاء",
                   type: "text",
-                  placeholder: "اسم التصنيف",
+                  placeholder: "اذكر سبب الإلغاء",
                 }}
-                form={form}
-                schema={categorySchema}
+                form={form as any}
+                schema={cancelExpenseSchema}
               />
             </motion.div>
 
@@ -143,8 +136,9 @@ const EditCategoryButton = ({ category }: IProps) => {
                 type="submit"
                 disabled={isPending}
                 className="py-2.5 h-auto"
+                variant={"destructive"}
               >
-                تعديل
+                تأكيد
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>
@@ -155,4 +149,4 @@ const EditCategoryButton = ({ category }: IProps) => {
   );
 };
 
-export default memo(EditCategoryButton);
+export default CancelExpense;

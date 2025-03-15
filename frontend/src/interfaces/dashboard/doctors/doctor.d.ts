@@ -1,4 +1,4 @@
-import {  IPaginationMeta } from ".";
+import { IPaginationMeta } from ".";
 import { IClinic } from "./clinic";
 
 export interface IDoctor {
@@ -39,7 +39,7 @@ export interface IResponseDoctor {
   data: IDoctor;
 }
 
-export interface IAddDoctor {
+export interface ICreateDoctor {
   id?: string;
   name: string;
   personal_id: string;

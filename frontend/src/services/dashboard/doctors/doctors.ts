@@ -1,7 +1,7 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IDeleteRes, IGetWithParams } from "@/interfaces";
 import {
-  IAddDoctor,
+  ICreateDoctor,
   IResponseDoctor,
   IResponseDoctors,
 } from "@/interfaces/dashboard/doctors/doctor";
@@ -37,11 +37,11 @@ export const getDoctorById: ({
   return data;
 };
 
-export const addDoctor: ({
+export const createDoctor: ({
   dataForm,
   token,
 }: {
-  dataForm: IAddDoctor;
+  dataForm: ICreateDoctor;
   token: string;
 }) => Promise<IResponseDoctor> = async ({ dataForm, token }) => {
   const formData = new FormData();
@@ -72,7 +72,7 @@ export const updateDoctor: ({
   dataForm,
   token,
 }: {
-  dataForm: IAddDoctor;
+  dataForm: ICreateDoctor;
   token: string;
 }) => Promise<IResponseDoctor> = async ({ dataForm, token }) => {
   const formData = new FormData();

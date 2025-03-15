@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
-import DeletePatientButton from "./DeletePatientModalButton";
+import DeletePatient from "./DeletePatient";
 import { IPatient } from "@/interfaces/dashboard/patient";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const PatientsList = ({ patients, meta }: IProps) => {
-  const canEditPatient = useHasPermission(PERMISSIONS.EDIT_PATIENT);
+  const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);
   const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
   const canViewPatient = useHasPermission(PERMISSIONS.VIEW_PATIENT);
 
@@ -68,7 +68,7 @@ const PatientsList = ({ patients, meta }: IProps) => {
               <Badge variant={"destructive"}>غير مفعل</Badge>
             )}
           </TableCell>
-          {(canDeletePatient || canEditPatient || canViewPatient) && (
+          {(canDeletePatient || canUpdatePatient || canViewPatient) && (
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
                 {canViewPatient && (
@@ -81,7 +81,7 @@ const PatientsList = ({ patients, meta }: IProps) => {
                     </Link>
                   </Button>
                 )}
-                {canEditPatient && (
+                {canUpdatePatient && (
                   <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                     <Link
                       to={`/dashboard/patients/${id}/update`}
@@ -91,9 +91,7 @@ const PatientsList = ({ patients, meta }: IProps) => {
                     </Link>
                   </Button>
                 )}
-                {canDeletePatient && (
-                  <DeletePatientButton name={name} id={id} />
-                )}
+                {canDeletePatient && <DeletePatient name={name} id={id} />}
               </div>
             </TableCell>
           )}

@@ -1,10 +1,10 @@
 import DoctorForm from "@/components/forms/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
-import AddDoctorSchema from "@/validations/addDoctorSchema";
+import CreateDoctorSchema from "@/validations/createDoctorSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
-const AddDoctor = () => {
+const CreateDoctor = () => {
   return (
     <>
       <Helmet>
@@ -20,7 +20,7 @@ const AddDoctor = () => {
             <h1 className="font-semibold leading-relaxed">إضافة طبيب جديد</h1>
           </div>
           <CardContent>
-            <DoctorForm action={"add"} doctorSchema={AddDoctorSchema} />
+            <DoctorForm action={"create"} doctorSchema={CreateDoctorSchema} />
           </CardContent>
         </Card>
       </motion.section>
@@ -28,4 +28,4 @@ const AddDoctor = () => {
   );
 };
 
-export default AddDoctor;
+export default CreateDoctor;

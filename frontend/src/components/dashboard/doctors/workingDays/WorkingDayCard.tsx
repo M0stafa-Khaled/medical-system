@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DeleteWorkingDayButton from "./DeleteWorkingDayModelButton";
+import DeleteWorkingDay from "./DeleteWorkingDay";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
@@ -19,7 +19,7 @@ const WorkingDayCard = ({
   doctorId,
 }: IProps) => {
   const canDeleteAction = useHasPermission(PERMISSIONS.DELETE_ACTION_DOCTOR);
-  const canEditAction = useHasPermission(PERMISSIONS.EDIT_ACTION_DOCTOR);
+  const canUpdateAction = useHasPermission(PERMISSIONS.UPDATE_ACTION_DOCTOR);
 
   return (
     <Card className="border-muted bg-background dark:bg-dark hover:shadow-lg transition-shadow duration-300">
@@ -54,12 +54,12 @@ const WorkingDayCard = ({
           />
         </CardContent>
       </div>
-      {(canDeleteAction || canEditAction) && (
+      {(canDeleteAction || canUpdateAction) && (
         <div className="flex px-4 gap-2 mb-3">
           {canDeleteAction && (
-            <DeleteWorkingDayButton id={id} name={convertDay(day, "en")} />
+            <DeleteWorkingDay id={id} name={convertDay(day, "en")} />
           )}
-          {canEditAction && (
+          {canUpdateAction && (
             <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
               <Link
                 to={`/dashboard/doctors/${doctorId}/working-days/update/${id}`}

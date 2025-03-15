@@ -20,7 +20,7 @@ export interface IPatient {
   };
 }
 
-export interface IAddPatient {
+export interface ICreatePatient {
   id?: string;
   name: string;
   another_name: string;

@@ -2,7 +2,7 @@ import axiosInstanceAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/interfaces";
 import {
   IExpenseCategoriesRes,
-  IAddExpenseCategoryRes,
+  ICreateExpenseCategoryRes,
   IExpenseCategory,
 } from "@/interfaces/dashboard/expenses/expenseCategory";
 
@@ -46,7 +46,7 @@ export const createExpenseCategory: ({
 }: {
   token: string;
   name: string;
-}) => Promise<IAddExpenseCategoryRes> = async ({ token, name }) => {
+}) => Promise<ICreateExpenseCategoryRes> = async ({ token, name }) => {
   const { data } = await axiosInstanceAPI.post(
     "/expenses-categories",
     { name: name },
@@ -67,7 +67,7 @@ export const updateExpenseCategory: ({
   token: string;
   id: string;
   name: string;
-}) => Promise<IAddExpenseCategoryRes> = async ({ token, id, name }) => {
+}) => Promise<ICreateExpenseCategoryRes> = async ({ token, id, name }) => {
   const { data } = await axiosInstanceAPI.post(
     `/expenses-categories/${id}`,
     { name, _method: "put" },

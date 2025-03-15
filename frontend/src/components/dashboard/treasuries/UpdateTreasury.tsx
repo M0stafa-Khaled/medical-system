@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -13,49 +13,49 @@ import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
-import { DOCTOR_ACTION_INPUTS } from "@/constants";
-import doctorActionSchema from "@/validations/doctorActionSchema";
-import { useUpdateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
-import { FaPencil } from "react-icons/fa6";
-import { IDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
 import RenderFormFields from "@/components/forms/RenderFormFields";
+import {
+  itemVariants,
+  containerVariants,
+} from "@/animations/dashboardAnimations";
+import treasurySchema from "@/validations/treasurySchema";
+import { FaPencil } from "react-icons/fa6";
+import { ITreasury } from "@/interfaces/dashboard/treasury";
+import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";
+import { TREASURY_FORM_INPUTS } from "@/constants";
 
 interface IProps {
-  doctorId: string;
-  action: IDoctorAction;
+  treasury: ITreasury;
 }
-const EditActionButton = ({ doctorId, action }: IProps) => {
-  const token = cookieServices.getToken() || "";
+
+const UpdateTreasury = ({ treasury }: IProps) => {
+  const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
-  const { mutateAsync: updateDoctorAction, isPending } =
-    useUpdateDoctorAction();
-  const form = useForm<z.infer<typeof doctorActionSchema>>({
-    resolver: zodResolver(doctorActionSchema),
+  const { mutateAsync: updateTreasury, isPending } = useUpdateTreasury();
+
+  const form = useForm<z.infer<typeof treasurySchema>>({
+    resolver: zodResolver(treasurySchema),
     defaultValues: {
-      name: action.name,
-      price: action.price,
+      name: treasury.name,
+      status: treasury.status,
     },
   });
 
-  const onSubmit = async ({
-    name,
-    price,
-  }: z.infer<typeof doctorActionSchema>) => {
+  const onSubmit = async ({ name, status }: z.infer<typeof treasurySchema>) => {
     try {
-      const { message, status } = await updateDoctorAction({
+      const { status: serverStatus, message } = await updateTreasury({
+        id: `${treasury.id}`,
         token,
-        formData: { name, price: `${price}`, doctor_id: doctorId },
-        id: `${action.id}`,
+        status,
+        name,
       });
+
       // ! Update failed
-      if (!status) return toast.error(message);
-      // * Create Success
-      return toast.success(message);
+      if (!serverStatus) return toast.error(message);
+
+      // * Update Success
+      return toast.success(message || "تم تحديث بيانات الخزينة بنجاح");
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };
@@ -85,15 +85,16 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    form.reset();
+    form.reset({
+      name: treasury.name,
+    });
   };
-
   useEffect(() => {
     form.reset({
-      name: action.name,
-      price: action.price,
+      name: treasury.name,
+      status: treasury.status,
     });
-  }, [action, form]);
+  }, [form, treasury]);
 
   return (
     <>
@@ -101,7 +102,7 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
         onClick={() => {
           setIsOpen(true);
         }}
-        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
+        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
       >
         <FaPencil size={24} />
       </Button>
@@ -109,29 +110,30 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
       <Modal
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="تعديل إجراء"
+        title="تعديل تصنيف"
         description={{
-          text: "يمكنك تعديل الإجراء المحدد هنا",
+          text: "يمكنك تعديل التصنيف المحدد هنا",
         }}
         showFooter={false}
       >
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-5 text-black dark:text-white"
+            className="space-y-4 text-black dark:text-white"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
           >
-            {DOCTOR_ACTION_INPUTS.map((input, idx) => (
-              <motion.div variants={itemVariants} key={input.name} custom={idx}>
+            {TREASURY_FORM_INPUTS.map((input, idx) => (
+              <motion.div key={input.name} custom={idx} variants={itemVariants}>
                 <RenderFormFields
                   input={input}
                   form={form}
-                  schema={doctorActionSchema}
+                  schema={treasurySchema}
                 />
               </motion.div>
             ))}
+
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel
                 onClick={handleCloseModal}
@@ -155,4 +157,4 @@ const EditActionButton = ({ doctorId, action }: IProps) => {
   );
 };
 
-export default EditActionButton;
+export default memo(UpdateTreasury);

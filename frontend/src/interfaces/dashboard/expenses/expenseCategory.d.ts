@@ -3,8 +3,7 @@ export interface IExpenseCategory {
   name: string;
 }
 
-
-export interface IAddExpenseCategoryRes {
+export interface ICreateExpenseCategoryRes {
   status: boolean;
   message;
 }

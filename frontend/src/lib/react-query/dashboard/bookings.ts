@@ -60,6 +60,9 @@ export const useUpdateBooking = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ONE_BOOKING],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_BOOKINGS],
+      });
     },
   });
 };

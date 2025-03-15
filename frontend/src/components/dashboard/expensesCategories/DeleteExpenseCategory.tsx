@@ -1,25 +1,28 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useDeleteClinic } from "@/lib/react-query/dashboard/clinics";
+import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
+import { useDeleteExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
 interface IProps {
-  name: string;
-  id: number;
+  category: IExpenseCategory;
 }
 
-const DeleteClinicButton = ({ name, id }: IProps) => {
-  const token = cookieServices.getToken() || "";
+const DeleteExpenseCategory = ({ category }: IProps) => {
+  const token = cookieServices.getToken()!;
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
-  const { mutateAsync: deleteClinic, isPending } = useDeleteClinic();
+  const { mutateAsync: deleteCategory, isPending } = useDeleteExpenseCategory();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deleteClinic({ id, token });
+      const { message, status } = await deleteCategory({
+        id: `${category?.id}`,
+        token,
+      });
 
       // ! Delete failed
       if (!status) return toast.error(message);
@@ -40,7 +43,7 @@ const DeleteClinicButton = ({ name, id }: IProps) => {
         size={"sm"}
         onClick={() => setIsOpenDeleteModal(true)}
         variant={"destructive"}
-        className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+        className="text-white gap-2 text-sm  py-1 px-1 w-8 h-8"
       >
         <MdDelete size={24} />
       </Button>
@@ -48,9 +51,9 @@ const DeleteClinicButton = ({ name, id }: IProps) => {
       <Modal
         isOpen={isOpenDeleteModal}
         onOpenChange={() => setIsOpenDeleteModal(false)}
-        title="حذف العيادة"
+        title="حذف تصنيف"
         description={{
-          text: `هل انت متاكد من حذف عيادة ${name}؟`,
+          text: `هل أنت متأكد من حذف تصنيف ${category?.name}؟`,
           color: "text-red-700",
         }}
         onConfirm={handleDelete}
@@ -62,4 +65,4 @@ const DeleteClinicButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteClinicButton;
+export default memo(DeleteExpenseCategory);

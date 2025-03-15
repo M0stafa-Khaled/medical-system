@@ -11,13 +11,13 @@ interface IProps {
 }
 
 const EmployeesTableActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
-  const canAddEmployee = useHasPermission(PERMISSIONS.ADD_EMPLOYEE);
+  const canCreateEmployee = useHasPermission(PERMISSIONS.ADD_EMPLOYEE);
   return (
     <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
-      {canAddEmployee && (
+      {canCreateEmployee && (
         <Button className=" h-auto py-0 px-0">
           <Link
-            to="/dashboard/employees/add"
+            to="/dashboard/employees/create"
             className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
           >
             إضافة موظف جديد
