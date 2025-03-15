@@ -81,7 +81,7 @@ const routes = createRoutesFromElements(
         {/* Home */}
         <Route
           index
-          element={<h1 className="text-primary">الصفحة الرئيسية</h1>}
+          element={<h1 className="text-primary font-alexandria">الصفحة الرئيسية</h1>}
         />
 
         {/* Bookings */}

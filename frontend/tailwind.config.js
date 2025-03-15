@@ -15,7 +15,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Alexandria", "serif"],
+        alexandria: ["Alexandria", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",

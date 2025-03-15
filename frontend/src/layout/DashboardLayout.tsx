@@ -163,7 +163,7 @@ const DashboardLayout = () => {
   ];
 
   return (
-    <div className="flex font-sans">
+    <div className="flex">
       <ScrollRestoration />
       <div className="fixed inset-y-0 right-0 overflow-y-auto">
         <Sidebar links={NAV_LINKS} />

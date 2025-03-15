@@ -57,9 +57,72 @@
   }
 }
 
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alexandria";
+  src: url("./assets/fonts/Alexandria-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+}
+
 @layer base {
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-alexandria antialiased bg-background text-foreground;
     scroll-behavior: smooth;
   }
 }
