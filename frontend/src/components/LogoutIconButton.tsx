@@ -28,7 +28,9 @@ const LogoutIconButton = () => {
       // * Logout Success
       dispatch(logout());
       dispatch(clearPermissions());
-      navigate("/login");
+      navigate("/login", {
+        replace: true,
+      });
       toast.success("تم تسجيل الخروج");
     } catch (error) {
       const errorObj = error as AxiosError<{ message: string }>;
