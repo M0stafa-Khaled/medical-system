@@ -4,19 +4,22 @@ import { IDoctor } from "./doctors/doctor";
 import { IPatient } from "./patient";
 import { IEmployee } from "./employee";
 import { IWorkingDay } from "./doctors/workingDays";
+import { IDoctorAction } from "./doctors/doctorActions";
+import { IClinic } from "./clinic";
 
 export interface IBooking {
   id: number;
-  status: TBookingStatus;
   code: number;
+  status: TBookingStatus;
   day: string;
-  clinic: string;
   booking_date: string;
   start_at: string;
   created_at: string;
   patient: IPatient;
   doctor: IDoctor;
   employee: IEmployee;
+  action: IDoctorAction;
+  clinic: IClinic;
   working_day: IWorkingDay;
 }
 
@@ -29,22 +32,16 @@ export interface IBookingsRes {
   };
 }
 export interface ICreateBooking {
+  id?: string;
   token: string;
   formData: {
+    status?: string;
     patient_id: string;
     doctor_id: string;
     working_day_id: string;
-    clinic_name: string;
-  };
-}
-
-export interface IUpdateBooking extends ICreateBooking {
-  id: string;
-  formData: {
-    patient_id: string;
-    doctor_id: string;
-    working_day_id: string;
-    clinic_name: string;
-    status: TBookingStatus;
+    clinic_id: string;
+    doctor_action_id: string;
+    date: string;
+    start_at: string;
   };
 }

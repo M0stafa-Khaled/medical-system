@@ -14,13 +14,13 @@ import {
   useUpdatePatient,
 } from "@/lib/react-query/dashboard/patients";
 import { useEffect } from "react";
-import RenderFormFields from "../RenderFormFields";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
+import RenderPatientFormFields from "./RenderPatientFormFields";
 
 interface IProps {
   patient?: IPatient;
@@ -157,7 +157,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
         >
           {PATIENT_FORM_INPUTS.map((input, index) => (
             <motion.div key={input.name} variants={itemVariants} custom={index}>
-              <RenderFormFields
+              <RenderPatientFormFields
                 form={form}
                 handleFileChange={handleFileChange}
                 input={input}

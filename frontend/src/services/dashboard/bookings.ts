@@ -4,7 +4,6 @@ import {
   IBooking,
   IBookingsRes,
   ICreateBooking,
-  IUpdateBooking,
 } from "@/interfaces/dashboard/bookings";
 
 export const getAllBookings: ({
@@ -62,7 +61,7 @@ export const updateBooking: ({
   formData,
   token,
   id,
-}: IUpdateBooking) => Promise<{
+}: ICreateBooking) => Promise<{
   status: boolean;
   message: string;
 }> = async ({ formData, token, id }) => {

@@ -45,10 +45,10 @@ export const getWorkingDayById: ({
 export const createWorkingDay: ({
   token,
   formData,
-}: {
-  token: string;
-  formData: ICreateWorkingDay;
-}) => Promise<IWorkingDaysRes> = async ({ formData, token }) => {
+}: ICreateWorkingDay) => Promise<IWorkingDaysRes> = async ({
+  formData,
+  token,
+}) => {
   const { data } = await axiosInstanceAPI.post("/working-days", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -60,10 +60,10 @@ export const createWorkingDay: ({
 export const updateWorkingDay: ({
   token,
   formData,
-}: {
-  token: string;
-  formData: ICreateWorkingDay;
-}) => Promise<IWorkingDaysRes> = async ({ formData, token }) => {
+}: ICreateWorkingDay) => Promise<IWorkingDaysRes> = async ({
+  formData,
+  token,
+}) => {
   const { data } = await axiosInstanceAPI.post(
     `/working-days/${formData.id}`,
     { ...formData, _method: "put" },

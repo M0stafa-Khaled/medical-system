@@ -2,10 +2,11 @@ import { PERMISSIONS } from "@/enums/permissions";
 import { Button } from "@/components/ui/button";
 import useHasPermission from "@/hooks/useHasPermission";
 import BookingsFilters from "./BookingsFilters";
-import CreateBookingModalButton from "./CreateBookingModalButton";
 import { Eraser } from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
+import { FiPlus } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 interface IProps {
   filters: {
@@ -36,7 +37,17 @@ const BookingsHeaderActions = ({ filters, setFilters }: IProps) => {
     <div className="space-y-4 mb-4">
       <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
         <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-4 ">
-          {canCreateBooking && <CreateBookingModalButton />}
+          {canCreateBooking && (
+            <Button className="h-auto py-0 px-0">
+              <Link
+                to={"/dashboard/bookings/create"}
+                className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
+              >
+                إضافة حجز جديد
+                <FiPlus size={20} />
+              </Link>
+            </Button>
+          )}
           <div className="text-lg font-semibold text-black dark:text-white">
             {format(new Date(), "EEEE, d MMMM yyyy", { locale: ar })}
           </div>

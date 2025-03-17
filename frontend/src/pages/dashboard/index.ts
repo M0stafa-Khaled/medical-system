@@ -30,6 +30,8 @@ export { default as ExpenseDetails } from "./expenses/ExpenseDetails";
 // Booking
 export { default as DashboardBookings } from "./bookings";
 export { default as DashboardBookingDetails } from "./bookings/BookingDetails";
+export { default as DashboardCreateBooking } from "./bookings/CreateBooking";
+export { default as DashboardUpdateBooking } from "./bookings/UpdateBooking";
 
 // Treasuries
 export { default as Treasuries } from "./treasuries";

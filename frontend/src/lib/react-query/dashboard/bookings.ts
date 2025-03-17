@@ -1,7 +1,4 @@
-import {
-  ICreateBooking,
-  IUpdateBooking,
-} from "../../../interfaces/dashboard/bookings";
+import { ICreateBooking } from "../../../interfaces/dashboard/bookings";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "../queryKeys";
 import {
@@ -54,7 +51,7 @@ export const useCreateBooking = () => {
 export const useUpdateBooking = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, formData, id }: IUpdateBooking) =>
+    mutationFn: ({ token, formData, id }: ICreateBooking) =>
       updateBooking({ formData, token, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({

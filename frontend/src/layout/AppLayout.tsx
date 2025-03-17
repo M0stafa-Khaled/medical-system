@@ -10,7 +10,7 @@ const AppLayout = () => {
       ? [
           {
             name: "لوحة التحكم",
-            path: "/dashboard/",
+            path: "/dashboard",
           },
         ]
       : []),

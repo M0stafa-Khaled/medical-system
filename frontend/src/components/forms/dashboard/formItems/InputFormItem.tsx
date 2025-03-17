@@ -4,7 +4,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "../../ui/input";
+import { Input } from "../../../ui/input";
 import { IFormInput } from "@/interfaces";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 

@@ -9,7 +9,6 @@ import InputFormItem from "./formItems/InputFormItem";
 import MultiSelectFormItem from "./formItems/MultiSelectFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { ROLES } from "@/constants";
-import SelectFormItem from "./formItems/SelectFormItem";
 
 interface IOption {
   value: string;
@@ -96,51 +95,12 @@ const RenderFormFields = ({
           />
         );
 
-      // Bookings
-      case input.type === "doctor_id":
-        return (
-          <SelectFormItem
-            input={input}
-            field={field}
-            form={form}
-            options={options?.doctorsOptions || []}
-          />
-        );
-      case input.type === "patient_id":
-        return (
-          <SelectFormItem
-            input={input}
-            field={field}
-            form={form}
-            options={options?.patients || []}
-          />
-        );
-      case input.type === "working_day_id":
-        return (
-          <SelectFormItem
-            input={input}
-            field={field}
-            form={form}
-            options={options?.workingDaysOptions || []}
-          />
-        );
-      case input.type === "clinic_name":
-        return (
-          <SelectFormItem
-            input={input}
-            form={form}
-            field={field}
-            options={options?.clinicsOptions || []}
-          />
-        );
-
       case input.name === "clinics" ||
-        input.name === "clinic_name" ||
+        input.name === "clinic" ||
         input.name === "day": {
         let setOptions;
         if (input.name === "clinics") setOptions = options?.clinics;
-        else if (input.name === "clinic_name")
-          setOptions = options?.clinic_name;
+        else if (input.name === "clinic") setOptions = options?.clinic_name;
         else if (input.name === "day") setOptions = options?.days;
         return (
           <MultiSelectFormItem

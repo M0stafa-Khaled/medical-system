@@ -15,13 +15,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import { useEffect } from "react";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "../RenderFormFields";
+import RenderDoctorFormFields from "./RenderDoctorFormFields";
 
 interface IProps {
   doctor?: IDoctor;
@@ -162,7 +162,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         >
           {DOCTOR_FORM_INPUTS.map((input, index) => (
             <motion.div key={input.name} variants={itemVariants} custom={index}>
-              <RenderFormFields
+              <RenderDoctorFormFields
                 input={input}
                 form={form}
                 handleFileChange={handleFileChange}

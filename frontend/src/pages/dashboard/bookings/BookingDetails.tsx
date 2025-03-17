@@ -26,9 +26,11 @@ import convertDay from "@/utils/convertDayLang";
 import formatDateTime from "@/utils/formatDate";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import DeleteBookingButton from "@/components/dashboard/booking/DeleteBookingModalButton";
+import DeleteBooking from "@/components/dashboard/booking/DeleteBooking";
 import UpdateBookingStatus from "@/components/dashboard/booking/UpdateBookingStatus";
-import UpdateBookingModalButton from "@/components/dashboard/booking/UpdateBookingModalButton";
+import { IBooking } from "@/interfaces/dashboard/bookings";
+import { Button } from "@/components/ui/button";
+import { FaPencil } from "react-icons/fa6";
 
 const BookingDetails = () => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
@@ -74,7 +76,6 @@ const BookingDetails = () => {
     start_at,
     status,
     employee,
-    working_day,
   } = booking?.data || {};
 
   return (
@@ -100,19 +101,19 @@ const BookingDetails = () => {
               <div className="flex gap-2">
                 {canUpdateBooking && (
                   <motion.div variants={itemVariants}>
-                    <UpdateBookingModalButton
-                      id={`${id}`}
-                      clinic_name={clinic!}
-                      doctor={doctor!}
-                      patient={patient!}
-                      working_day={working_day!}
-                      status={status!}
-                    />{" "}
+                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
+                      <Link
+                        to={`/dashboard/bookings/${booking?.data.id}/update`}
+                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
+                      >
+                        <FaPencil size={24} />
+                      </Link>
+                    </Button>
                   </motion.div>
                 )}
                 {canDeleteBooking && status !== "cancelled" && (
                   <motion.div variants={itemVariants}>
-                    <DeleteBookingButton
+                    <DeleteBooking
                       name={patient?.name as string}
                       id={id?.toString() as string}
                     />
@@ -177,7 +178,7 @@ const BookingDetails = () => {
                 <InfoField
                   icon={<Building2 className="h-5 w-5 text-purple-500" />}
                   label="العيادة"
-                  value={clinic!}
+                  value={clinic?.name as string}
                 />
               </motion.div>
 
@@ -223,14 +224,7 @@ const BookingDetails = () => {
                     <h5 className="text-sm text-muted-foreground text-nowrap">
                       الحالة:
                     </h5>
-                    <UpdateBookingStatus
-                      status={status!}
-                      clinic_name={clinic!}
-                      id={`${id}`}
-                      doctor_id={`${doctor?.id}`}
-                      patient_id={`${patient?.id}`}
-                      working_day_id={`${working_day?.id}`}
-                    />
+                    <UpdateBookingStatus booking={booking?.data as IBooking} />
                   </div>
                 </div>
               </motion.div>

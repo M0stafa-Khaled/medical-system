@@ -1,4 +1,4 @@
-import EmployeeForm from "@/components/forms/employees/EmployeeForm";
+import EmployeeForm from "@/components/forms/dashboard/employees/EmployeeForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetEmployeeById } from "@/lib/react-query/dashboard/employees";
 import cookieServices from "@/utils/cookieServices";

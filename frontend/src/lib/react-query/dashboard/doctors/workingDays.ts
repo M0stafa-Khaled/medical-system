@@ -46,13 +46,8 @@ export const useGetWorkingDayById = ({
 export const useCreateWorkingDay = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      formData,
-      token,
-    }: {
-      formData: ICreateWorkingDay;
-      token: string;
-    }) => createWorkingDay({ formData, token }),
+    mutationFn: ({ formData, token }: ICreateWorkingDay) =>
+      createWorkingDay({ formData, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS],
@@ -64,13 +59,8 @@ export const useCreateWorkingDay = () => {
 export const useUpdateWorkingDay = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      formData,
-      token,
-    }: {
-      formData: ICreateWorkingDay;
-      token: string;
-    }) => updateWorkingDay({ formData, token }),
+    mutationFn: ({ formData, token }: ICreateWorkingDay) =>
+      updateWorkingDay({ formData, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOCTOR_WORKING_DAYS],

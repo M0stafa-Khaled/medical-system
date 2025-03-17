@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const bookingSchema = z.object({
+const createBookingSchema = z.object({
   patient_id: z
     .object(
       {
@@ -15,8 +15,10 @@ const bookingSchema = z.object({
         message: "المريض مطلوب",
       }
     )
-    .refine((data) => data.value, { message: "المريض مطلوب" }),
-  clinic_name: z
+    .refine((data) => data.value, {
+      message: "المريض مطلوب",
+    }),
+  clinic_id: z
     .object(
       {
         label: z
@@ -29,7 +31,6 @@ const bookingSchema = z.object({
       { message: "العيادة مطلوبة" }
     )
     .refine((data) => data.value, { message: "العيادة مطلوبة" }),
-
   doctor_id: z
     .object(
       {
@@ -48,16 +49,29 @@ const bookingSchema = z.object({
   working_day_id: z
     .object(
       {
-        label: z
-          .string({ message: "يوم الحجز مطلوب" })
-          .nonempty({ message: "يوم الحجز مطلوب" }),
-        value: z
-          .string({ message: "يوم الحجز مطلوب" })
-          .nonempty({ message: "يوم الحجز مطلوب" }),
+        label: z.string({ message: "يوم الحجز مطلوب" }),
+        value: z.string({ message: "يوم الحجز مطلوب" }),
       },
       { message: "يوم الحجز مطلوب" }
     )
     .refine((data) => data.value, { message: "يوم الحجز مطلوب" }),
+  doctor_action_id: z
+    .object(
+      {
+        label: z.string({ message: "يوم الحجز مطلوب" }),
+        value: z.string({ message: "يوم الحجز مطلوب" }),
+      },
+      { message: "يوم الحجز مطلوب" }
+    )
+    .refine((data) => data.value, { message: "يوم الحجز مطلوب" }),
+
+  start_at: z
+    .string({ message: "وقت الحجز مطلوب" })
+    .nonempty({ message: "وقت الحجز مطلوب" }),
+
+  date: z.string({ message: "تاريخ الحجز مطلوب" }).nonempty({
+    message: "تاريخ الحجز مطلوب",
+  }),
 });
 
-export default bookingSchema;
+export default createBookingSchema;

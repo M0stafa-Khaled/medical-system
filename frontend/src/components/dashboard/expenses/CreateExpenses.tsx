@@ -16,7 +16,7 @@ import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { EXPENSE_FORM_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/RenderFormFields";
+import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,

@@ -22,7 +22,7 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "@/components/forms/RenderFormFields";
+import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 
 const CreateAction = ({ doctorId }: { doctorId: string }) => {
   const token = cookieServices.getToken() || "";

@@ -1,3 +1,4 @@
+import { IClinic } from "../clinic";
 import { IDoctor } from "./doctor";
 
 export interface IWorkingDay {
@@ -6,7 +7,7 @@ export interface IWorkingDay {
   start_at: string;
   end_at: string;
   max_visitors: number;
-  clinic_name: string;
+  clinic: IClinic;
   deuration: number;
   doctor: IDoctor;
 }
@@ -18,12 +19,15 @@ export interface IWorkingDaysRes {
 }
 
 export interface ICreateWorkingDay {
-  id?: number;
-  day: string;
-  start_at: string;
-  end_at: string;
-  max_visitors: number;
-  doctor_id: string;
-  clinic_name: string;
-  deuration: number;
+  token: string;
+  formData: {
+    id?: number;
+    day: string;
+    start_at: string;
+    end_at: string;
+    max_visitors: number;
+    doctor_id: string;
+    clinic_id: string;
+    deuration: number;
+  };
 }

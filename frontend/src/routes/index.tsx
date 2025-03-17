@@ -38,6 +38,8 @@ import {
   // Bookings
   DashboardBookings,
   DashboardBookingDetails,
+  DashboardCreateBooking,
+  DashboardUpdateBooking,
 } from "@/pages/dashboard";
 import { Profile } from "@/pages/profile";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -81,7 +83,9 @@ const routes = createRoutesFromElements(
         {/* Home */}
         <Route
           index
-          element={<h1 className="text-primary font-alexandria">الصفحة الرئيسية</h1>}
+          element={
+            <h1 className="text-primary font-alexandria">الصفحة الرئيسية</h1>
+          }
         />
 
         {/* Bookings */}
@@ -98,6 +102,22 @@ const routes = createRoutesFromElements(
           element={
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
               <DashboardBookingDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="bookings/create"
+          element={
+            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+              <DashboardCreateBooking />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="bookings/:bookingId/update"
+          element={
+            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+              <DashboardUpdateBooking />
             </ProtectedRoute>
           }
         />

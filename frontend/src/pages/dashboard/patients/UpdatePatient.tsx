@@ -1,4 +1,4 @@
-import PatientForm from "@/components/forms/patients/PatientForm";
+import PatientForm from "@/components/forms/dashboard/patients/PatientForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
 import cookieServices from "@/utils/cookieServices";

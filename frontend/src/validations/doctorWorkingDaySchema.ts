@@ -8,7 +8,7 @@ const doctorWorkingDaySchema = z.object({
     },
     { message: "اليوم مطلوب" }
   ),
-  clinic_name: z.object(
+  clinic_id: z.object(
     {
       value: z.string({ message: "العيادة مطلوبة" }),
       label: z.string({ message: "العيادة مطلوبة" }),
@@ -19,7 +19,7 @@ const doctorWorkingDaySchema = z.object({
     .number({
       message: "ادخل مدة كشف صالحة",
     })
-    .min(0, { message: "ادخل مدة كشف صالحة" }),
+    .min(1, { message: "ادخل مدة كشف صالحة" }),
   max_visitors: z.coerce
     .number({
       message: "ادخل حد اقصى صالح",

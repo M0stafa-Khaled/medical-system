@@ -1,5 +1,9 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDoctorClinicsRes } from "@/interfaces/bookings/bookings";
+import {
+  IAvailableTimesRes,
+  IDoctorClinicsRes,
+  IGetAvailableTimes,
+} from "@/interfaces/bookings/bookings";
 
 export const getAllClinicsDoctors: ({
   token,
@@ -13,5 +17,32 @@ export const getAllClinicsDoctors: ({
       Authorization: `Bearer ${token}`,
     },
   });
+  return data;
+};
+
+export const getAvailableBookingsTimes: ({
+  doctor_id,
+  working_day_id,
+  clinic_id,
+  token,
+  booking_date,
+}: IGetAvailableTimes) => Promise<IAvailableTimesRes> = async ({
+  doctor_id,
+  working_day_id,
+  clinic_id,
+  booking_date,
+  token,
+}) => {
+  const { data } = await axiosInstanceAPI.get(
+    `/bookings/${doctor_id}/avaliable-times/${working_day_id}/clinic/${clinic_id}`,
+    {
+      params: {
+        booking_date,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return data;
 };

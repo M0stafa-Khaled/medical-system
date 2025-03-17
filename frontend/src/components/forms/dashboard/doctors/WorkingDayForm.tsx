@@ -11,9 +11,8 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "@/components/forms/RenderFormFields";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../../SubmitButton";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useCreateWorkingDay,
@@ -24,6 +23,7 @@ import doctorWorkingDaySchema from "@/validations/doctorWorkingDaySchema";
 import convertDay from "@/utils/convertDayLang";
 import { useEffect } from "react";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
+import DayRenderFormFields from "./RenderWorkingDayFormFields";
 
 interface IProps {
   day?: IWorkingDay;
@@ -36,8 +36,8 @@ const WorkingDayForm = ({ action, day }: IProps) => {
   const { doctorId } = useParams();
   const { data: doctor } = useGetDoctorById({ token, id: doctorId! });
   const clinicsOptions = doctor?.data.clinics?.map((clinic) => ({
-    value: clinic.name,
     label: clinic.name,
+    value: clinic.id.toString(),
   }));
 
   const daysOptions = Object.entries(DAYS).map(([, value]) => ({
@@ -61,16 +61,18 @@ const WorkingDayForm = ({ action, day }: IProps) => {
     },
   });
 
+  console.log(form.formState.errors);
+
   useEffect(() => {
     if (action === "update")
       form.reset({
-        clinic_name: {
-          label: day?.clinic_name || "",
-          value: day?.clinic_name || "",
+        clinic_id: {
+          label: day?.clinic.name || undefined,
+          value: day?.clinic.id.toString() || undefined,
         },
         day: {
-          label: day?.day ? convertDay(day?.day as string, "en") : undefined,
-          value: day?.day ? day.day : undefined,
+          label: day?.day ? convertDay(day?.day as string, "en") : "",
+          value: day?.day ? day.day : "",
         },
         deuration: day?.deuration || 0,
         max_visitors: day?.max_visitors || 0,
@@ -90,7 +92,7 @@ const WorkingDayForm = ({ action, day }: IProps) => {
             ...data,
             start_at: formatTime(data.start_at),
             end_at: formatTime(data.end_at),
-            clinic_name: data.clinic_name.label,
+            clinic_id: data.clinic_id.value,
             day: data.day.value,
             doctor_id: doctorId!,
           },
@@ -105,7 +107,7 @@ const WorkingDayForm = ({ action, day }: IProps) => {
             ...data,
             start_at: formatTime(data.start_at),
             end_at: formatTime(data.end_at),
-            clinic_name: data.clinic_name.label,
+            clinic_id: data.clinic_id.value,
             day: data.day.value,
             doctor_id: doctorId!,
             id: day?.id,
@@ -158,12 +160,12 @@ const WorkingDayForm = ({ action, day }: IProps) => {
         >
           {DOCTOR_WORKING_DAY_INPUTS.map((input, idx) => (
             <motion.div variants={itemVariants} key={input.name} custom={idx}>
-              <RenderFormFields
+              <DayRenderFormFields
                 input={input}
                 form={form}
                 schema={doctorWorkingDaySchema}
                 options={{
-                  clinic_name: clinicsOptions!,
+                  clinics: clinicsOptions!,
                   days: daysOptions,
                 }}
               />

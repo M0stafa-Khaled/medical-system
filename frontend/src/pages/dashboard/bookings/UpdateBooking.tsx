@@ -1,47 +1,48 @@
-import DoctorForm from "@/components/forms/dashboard/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
 import cookieServices from "@/utils/cookieServices";
-import updateDoctorSchema from "@/validations/updateDoctorSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import DataLoader from "@/components/ui/DataLoader";
-const UpdateDoctor = () => {
-  const navigate = useNavigate();
-  const token = cookieServices.getToken();
+import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";
+import BookingForm from "@/components/forms/dashboard/bookings/BookingForm";
+import updateBookingSchema from "@/validations/updateBookingSchema";
 
-  const { doctorId } = useParams();
+const UpdateBooking = () => {
+  const navigate = useNavigate();
+  const token = cookieServices.getToken()!;
+
+  const { bookingId } = useParams();
   const {
-    data: doctor,
+    data: booking,
     isLoading,
     isError,
-  } = useGetDoctorById({
-    id: doctorId!,
-    token: token!,
+  } = useGetBookingById({
+    id: bookingId!,
+    token,
   });
 
   useEffect(() => {
     if (isError) {
-      toast.error("فشل في تحميل بيانات الطبيب");
-      navigate("/dashboard/doctors");
+      toast.error("فشل في تحميل بيانات الحجز");
+      navigate("/dashboard/bookings");
       return;
     }
-    if (!doctor?.status && doctor?.message) {
-      toast.error(doctor.message);
-      navigate("/dashboard/doctors");
+    if (booking?.message) {
+      toast.error(booking.message);
+      navigate("/dashboard/bookings");
       return;
     }
-  }, [isError, navigate, doctorId, doctor]);
+  }, [isError, navigate, bookingId, booking?.message]);
 
   if (isLoading) return <DataLoader />;
 
   return (
     <>
       <Helmet>
-        <title>EgProg | د / {doctor?.data.name}</title>
+        <title>EgProg | تعديل حجز</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
@@ -56,10 +57,10 @@ const UpdateDoctor = () => {
             </h1>
           </div>
           <CardContent>
-            <DoctorForm
+            <BookingForm
               action={"update"}
-              doctor={doctor?.data}
-              doctorSchema={updateDoctorSchema}
+              bookingSchema={updateBookingSchema}
+              booking={booking?.data}
             />
           </CardContent>
         </Card>
@@ -68,4 +69,4 @@ const UpdateDoctor = () => {
   );
 };
 
-export default UpdateDoctor;
+export default UpdateBooking;

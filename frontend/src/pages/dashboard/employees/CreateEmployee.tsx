@@ -1,4 +1,4 @@
-import EmployeeForm from "@/components/forms/employees/EmployeeForm";
+import EmployeeForm from "@/components/forms/dashboard/employees/EmployeeForm";
 import { Card, CardContent } from "@/components/ui/card";
 import createEmployeeSchema from "@/validations/createEmployeeSchema";
 import { motion } from "framer-motion";

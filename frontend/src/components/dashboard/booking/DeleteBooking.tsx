@@ -13,7 +13,7 @@ interface IProps {
   id: string;
 }
 
-const DeleteBookingButton = ({ name, id }: IProps) => {
+const DeleteBooking = ({ name, id }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken() || "";
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -64,4 +64,4 @@ const DeleteBookingButton = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteBookingButton;
+export default DeleteBooking;

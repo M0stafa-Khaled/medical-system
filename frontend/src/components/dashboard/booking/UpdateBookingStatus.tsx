@@ -22,40 +22,33 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useUpdateBooking } from "@/lib/react-query/dashboard/bookings";
 import cookieServices from "@/utils/cookieServices";
+import { IBooking } from "@/interfaces/dashboard/bookings";
 
 interface IProps {
-  status: TBookingStatus;
-  clinic_name: string;
-  doctor_id: string;
-  working_day_id: string;
-  patient_id: string;
-  id: string;
+  booking: IBooking;
 }
 
-const UpdateBookingStatus = ({
-  status,
-  clinic_name,
-  doctor_id,
-  working_day_id,
-  patient_id,
-  id,
-}: IProps) => {
+const UpdateBookingStatus = ({ booking }: IProps) => {
   const token = cookieServices.getToken()!;
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const { mutateAsync: updateBooking } = useUpdateBooking();
 
   const submit = async (bookingStatus: TBookingStatus) => {
+    if (bookingStatus === booking.status) return;
     try {
       const { status, message } = await updateBooking({
         formData: {
-          clinic_name: clinic_name,
-          doctor_id: doctor_id,
-          patient_id: patient_id,
-          working_day_id: working_day_id,
+          clinic_id: booking?.clinic.id.toString(),
+          doctor_id: booking?.doctor.id.toString(),
+          patient_id: booking?.patient.id.toString(),
+          working_day_id: booking?.working_day.id.toString(),
+          date: booking?.booking_date,
+          doctor_action_id: booking.action.id.toString(),
+          start_at: booking.start_at,
           status: bookingStatus!,
         },
-        id,
+        id: booking.id.toString(),
         token,
       });
       // ! Create failed
@@ -88,7 +81,7 @@ const UpdateBookingStatus = ({
   };
 
   const handleStatusChange = (currentValue: string) => {
-    submit(currentValue as TBookingStatus)
+    submit(currentValue as TBookingStatus);
     setOpen(false);
   };
   return (
@@ -101,7 +94,7 @@ const UpdateBookingStatus = ({
             aria-expanded={open}
             className={`p-0 bg-transparent border-0 hover:bg-transparent m-0`}
           >
-            <BookingStatus status={status} />
+            <BookingStatus status={booking?.status} />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[250px] p-0 z-[1000] border-black/20 dark:border-white/40">
@@ -124,7 +117,9 @@ const UpdateBookingStatus = ({
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        status === option.value ? "opacity-100" : "opacity-0"
+                        booking?.status === option.value
+                          ? "opacity-100"
+                          : "opacity-0"
                       )}
                     />
                     {option.label}

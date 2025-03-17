@@ -18,7 +18,7 @@ import { Loader2 } from "lucide-react";
 import cookieServices from "@/utils/cookieServices";
 import Modal from "@/components/shared/Modal";
 import { CLINIC_FORM_INPUTS } from "@/constants";
-import RenderFormFields from "@/components/forms/RenderFormFields";
+import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   containerVariants,
   itemVariants,

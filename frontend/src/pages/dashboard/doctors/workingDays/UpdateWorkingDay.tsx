@@ -1,4 +1,4 @@
-import WorkingDayForm from "@/components/forms/doctors/WorkingDayForm";
+import WorkingDayForm from "@/components/forms/dashboard/doctors/WorkingDayForm";
 import { Card, CardContent } from "@/components/ui/card";
 import DataLoader from "@/components/ui/DataLoader";
 import { useGetWorkingDayById } from "@/lib/react-query/dashboard/doctors/workingDays";

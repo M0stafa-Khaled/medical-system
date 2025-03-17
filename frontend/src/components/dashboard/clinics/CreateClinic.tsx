@@ -22,7 +22,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import { CLINIC_FORM_INPUTS } from "@/constants";
-import RenderFormFields from "@/components/forms/RenderFormFields";
+import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 
 const CreateClinic = () => {
   const token = cookieServices.getToken()!;

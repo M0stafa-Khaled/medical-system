@@ -18,17 +18,17 @@ import {
   useCheckAuth,
   useGetAllPermissions,
 } from "@/lib/react-query/auth/auth";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "../RenderFormFields";
 import { useDispatch } from "react-redux";
 import { setPermissions } from "@/store/features/permissions/permissionsSlice";
 import { logout } from "@/store/features/auth/authSlice";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
+import RenderEmployeeFormFields from "./RenderEmployeeFormFields";
 interface IProps {
   employee?: IEmployee;
   action: "create" | "update";
@@ -240,7 +240,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
                   input.name === "permissions" ? "col-span-full" : ""
                 }`}
               >
-                <RenderFormFields
+                <RenderEmployeeFormFields
                   input={input}
                   form={form}
                   handleFileChange={handleFileChange}

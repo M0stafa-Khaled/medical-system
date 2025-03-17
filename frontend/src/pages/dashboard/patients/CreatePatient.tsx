@@ -1,4 +1,4 @@
-import PatientForm from "@/components/forms/patients/PatientForm";
+import PatientForm from "@/components/forms/dashboard/patients/PatientForm";
 import { Card, CardContent } from "@/components/ui/card";
 import createPatientSchema from "@/validations/createPatientSchema";
 import { motion } from "framer-motion";

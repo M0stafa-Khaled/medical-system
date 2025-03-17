@@ -23,7 +23,7 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "@/components/forms/RenderFormFields";
+import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 
 interface IProps {
   doctorId: string;

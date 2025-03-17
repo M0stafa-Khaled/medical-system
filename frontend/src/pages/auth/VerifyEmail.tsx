@@ -34,6 +34,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as z from "zod";
 import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
+import { Helmet } from "react-helmet-async";
 
 const formSchema = z.object({
   otp: z
@@ -108,6 +109,9 @@ const VerifyEmail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>EgProg | تأكيد الحساب</title>
+      </Helmet>
       <main className="container flex items-center justify-center min-h-screen">
         <Card className="border-muted bg-foreground shadow-none">
           <div className="flex justify-center items-center max-w-xs mx-auto">

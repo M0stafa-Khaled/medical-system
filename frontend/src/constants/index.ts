@@ -173,7 +173,7 @@ export const DOCTOR_WORKING_DAY_INPUTS: IFormInput[] = [
     placeholder: "ادخل مدة الكشف",
   },
   {
-    name: "clinic_name",
+    name: "clinic_id",
     label: "العيادة",
     type: "select",
   },
@@ -244,15 +244,14 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     type: "select",
   },
   {
-    name: "image",
-    label: "صورة شخصية",
-    type: "file",
-    accept: "image/*",
-  },
-  {
     name: "gender",
     label: "النوع",
     type: "select",
+  },
+  {
+    name: "status",
+    label: "حالة الحساب",
+    type: "switch",
   },
   {
     name: "personal_image",
@@ -261,9 +260,10 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     accept: "image/*",
   },
   {
-    name: "status",
-    label: "حالة الحساب",
-    type: "switch",
+    name: "image",
+    label: "صورة شخصية",
+    type: "file",
+    accept: "image/*",
   },
 ];
 
@@ -322,12 +322,6 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
     type: "select",
   },
   {
-    name: "personal_image",
-    label: "صورة الهوية",
-    type: "file",
-    accept: "image/*",
-  },
-  {
     name: "status",
     label: "حالة الحساب",
     type: "switch",
@@ -337,6 +331,12 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
     label: "ملاحظات حالة الحساب",
     type: "text",
     placeholder: "ادخل ملاحظات",
+  },
+  {
+    name: "personal_image",
+    label: "صورة الهوية",
+    type: "file",
+    accept: "image/*",
   },
 ];
 
@@ -416,19 +416,44 @@ export const TRANSFER_TREASURIES_FORM_INPUTS: IFormInput[] = [
 
 export const BOOKING_FORM_INPUTS: IFormInput[] = [
   {
-    name: "clinic_name",
+    name: "clinic_id",
     label: "العيادة",
-    type: "clinic_name",
+    type: "select",
   },
   {
     name: "doctor_id",
     label: "الطبيب",
-    type: "doctor_id",
+    type: "select",
+  },
+  {
+    name: "doctor_action_id",
+    label: "الخدمة",
+    type: "select",
   },
   {
     name: "working_day_id",
     label: "يوم الحجز",
-    type: "working_day_id",
+    type: "select",
+  },
+  {
+    name: "date",
+    label: "تاريخ الحجز",
+    type: "date",
+  },
+  {
+    name: "start_at",
+    label: "الأوقات المتاحة للحجز",
+    type: "select",
+  },
+  {
+    name: "patient_id",
+    label: "المريض",
+    type: "select",
+  },
+  {
+    name: "status",
+    label: "الحالة",
+    type: "select",
   },
 ];
 

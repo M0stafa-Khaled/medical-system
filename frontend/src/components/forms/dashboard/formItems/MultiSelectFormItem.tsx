@@ -1,6 +1,11 @@
 import { IFormInput } from "@/interfaces";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { FormControl, FormItem, FormLabel, FormMessage } from "../../ui/form";
+import {
+  FormControl,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../ui/form";
 import Select, { StylesConfig } from "react-select";
 import { useTheme } from "next-themes";
 
@@ -54,6 +59,7 @@ const MultiSelectFormItem = ({
           options={options}
           isClearable={true}
           onChange={(selectedOptions) => {
+            console.log(selectedOptions);
             field.onChange(selectedOptions);
           }}
           styles={selectStyles}
