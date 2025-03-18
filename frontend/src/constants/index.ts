@@ -412,6 +412,11 @@ export const TRANSFER_TREASURIES_FORM_INPUTS: IFormInput[] = [
     label: "إلي",
     type: "select",
   },
+  {
+    name: "amount",
+    label: "المبلغ",
+    type: "number",
+  },
 ];
 
 export const BOOKING_FORM_INPUTS: IFormInput[] = [

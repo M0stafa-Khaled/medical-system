@@ -14,7 +14,6 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
@@ -26,6 +25,7 @@ import {
   useGetAllTreasuries,
   useTransferTreasuries,
 } from "@/lib/react-query/dashboard/treasuries";
+import RenderTransferBetweenTreasuriesFormFields from "@/components/forms/dashboard/expenses/RenderTransferBetweenTreasuriesFormFields";
 
 const TransferBetweenTreasuriesButton = () => {
   const token = cookieServices.getToken()!;
@@ -39,17 +39,22 @@ const TransferBetweenTreasuriesButton = () => {
   }));
   const form = useForm<z.infer<typeof transferTreasurySchema>>({
     resolver: zodResolver(transferTreasurySchema),
+    defaultValues: {
+      amount: 0,
+    },
   });
 
   const onSubmit = async ({
     from_treasury,
     to_treasury,
+    amount,
   }: z.infer<typeof transferTreasurySchema>) => {
     try {
       const { status, message } = await transferTreasury({
         token,
         from_treasury: from_treasury.value,
         to_treasury: to_treasury.value,
+        amount: amount,
       });
 
       // ! Transfer failed
@@ -71,6 +76,14 @@ const TransferBetweenTreasuriesButton = () => {
           );
         });
       }
+      if (
+        errorObj?.response?.data.message &&
+        !errorObj?.response?.data.errors
+      ) {
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
+      }
     } finally {
       handleCloseModal();
     }
@@ -78,7 +91,17 @@ const TransferBetweenTreasuriesButton = () => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    form.reset({});
+    form.reset({
+      amount: 0,
+      from_treasury: {
+        label: "",
+        value: "",
+      },
+      to_treasury: {
+        label: "",
+        value: "",
+      },
+    });
   };
 
   return (
@@ -108,7 +131,7 @@ const TransferBetweenTreasuriesButton = () => {
           >
             {TRANSFER_TREASURIES_FORM_INPUTS.map((input, idx) => (
               <motion.div key={input.name} custom={idx} variants={itemVariants}>
-                <RenderFormFields
+                <RenderTransferBetweenTreasuriesFormFields
                   input={input}
                   form={form}
                   schema={transferTreasurySchema}

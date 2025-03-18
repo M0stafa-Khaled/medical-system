@@ -48,7 +48,7 @@ const TreasuryCard = ({ treasury }: IProps) => {
             </div>
             <div className="flex items-center gap-2">
               {canUpdateCategory && <UpdateTreasury treasury={treasury} />}
-              {canDeleteCategory && (
+              {canDeleteCategory && treasury.id !== 1 && (
                 <DeleteTreasuryButton treasury={treasury} />
               )}
             </div>
@@ -60,7 +60,7 @@ const TreasuryCard = ({ treasury }: IProps) => {
                 size={20}
                 className="text-green-500 flex-shrink-0"
               />
-              <span>إجمالي المصروفات: {treasury.total}</span>
+              <span>الإجمالي: {treasury.total}</span>
             </div>
           </div>
         </CardContent>

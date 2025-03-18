@@ -74,15 +74,17 @@ export const transferTreasuries: ({
   token,
   from_treasury,
   to_treasury,
+  amount,
 }: IConvertTreasuries) => Promise<{
   status: boolean;
   message: string;
-}> = async ({ token, from_treasury, to_treasury }) => {
+}> = async ({ token, from_treasury, to_treasury, amount }) => {
   const { data } = await axiosInstanceAPI.post(
     "/convert-treasuries",
     {
       from_treasury,
       to_treasury,
+      amount,
     },
     {
       headers: {

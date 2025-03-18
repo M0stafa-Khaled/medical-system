@@ -15,6 +15,7 @@ export interface IConvertTreasuries {
   token: string;
   from_treasury: string;
   to_treasury: string;
+  amount: number;
 }
 
 export interface ICreateTreasury {
