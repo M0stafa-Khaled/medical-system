@@ -7,7 +7,7 @@ import {
   updateDoctor,
 } from "@/services/dashboard/doctors/doctors";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "../../queryKeys";
+import Query_Keys from "@/enums/queryKeys";
 import { IGetWithParams } from "@/interfaces";
 
 export const useGetAllDoctors = ({ token, page, search }: IGetWithParams) => {

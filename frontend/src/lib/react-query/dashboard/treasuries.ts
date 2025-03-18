@@ -7,7 +7,7 @@ import {
 } from "@/services/dashboard/treasuries";
 import { IGetWithParams } from "@/interfaces";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "../queryKeys";
+import Query_Keys from "@/enums/queryKeys";
 import {
   IConvertTreasuries,
   ICreateTreasury,

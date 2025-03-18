@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import Query_Keys from "../queryKeys";
+import Query_Keys from "@/enums/queryKeys";
 import {
   getAllClinicsDoctors,
   getAvailableBookingsTimes,

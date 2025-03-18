@@ -2,7 +2,7 @@ import axiosInstanceAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/interfaces";
 import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
 
-export const getAllMedications: ({
+export const getAllDrugs: ({
   token,
   page,
   search,

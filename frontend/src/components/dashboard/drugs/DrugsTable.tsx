@@ -5,7 +5,7 @@ import cookieServices from "@/utils/cookieServices";
 import DrugsTableHeader from "./DrugsTableHeader";
 import DrugsList from "./DrugsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
-import { useGetALlMedications } from "@/lib/react-query/dashboard/medications";
+import { useGetALlDrugs } from "@/lib/react-query/dashboard/drug";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
@@ -21,7 +21,7 @@ const DrugsTable = () => {
     data: drugs,
     isLoading,
     isError,
-  } = useGetALlMedications({ page, token, search });
+  } = useGetALlDrugs({ page, token, search });
 
   useEffect(() => {
     if (drugs?.message) toast.error(drugs.message);

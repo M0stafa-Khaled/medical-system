@@ -5,7 +5,7 @@ import {
   getEmployeeById,
   updateEmployee,
 } from "@/services/dashboard/employees";
-import Query_Keys from "../queryKeys";
+import Query_Keys from "@/enums/queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ICreateEmployee } from "@/interfaces/dashboard/employee";
 import { IGetWithParams } from "@/interfaces";

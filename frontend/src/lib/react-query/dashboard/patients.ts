@@ -6,7 +6,7 @@ import {
   updatePatient,
 } from "@/services/dashboard/patients";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "../queryKeys";
+import Query_Keys from "@/enums/queryKeys";
 import { ICreatePatient } from "@/interfaces/dashboard/patient";
 import { IGetWithParams } from "@/interfaces";
 

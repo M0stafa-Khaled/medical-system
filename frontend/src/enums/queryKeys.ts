@@ -20,6 +20,8 @@ enum Query_Keys {
   GET_ONE_BOOKING = "booking",
   GET_ALL_DOCTORS_CLINICS = "doctorsClinics",
   GET_AVAILABLE_BOOKINGS_TIME = "availableBookingsTimes",
+  GET_ALL_TRANSACTIONS = "transactions",
+  GET_ONE_TRANSACTION = "transaction",
 }
 
 export default Query_Keys;
