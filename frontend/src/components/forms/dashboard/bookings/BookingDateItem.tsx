@@ -24,6 +24,7 @@ interface IProps {
   allowedDay: string;
 }
 const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
+  const today = new Date();
   return (
     <FormField
       control={form.control}
@@ -69,16 +70,14 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                     field.onChange(formattedDated);
                   }}
                   disabled={(date) => {
+                    // check if the day is allowed and not past date
                     const dayName = date
                       .toLocaleDateString("en-US", { weekday: "long" })
                       .toLowerCase();
-
-                    const isDisabled = dayName !== allowedDay;
-
-                    console.log(
-                      `Checking day: ${dayName}, Allowed day: ${allowedDay}, Disabled: ${isDisabled}`
-                    );
-
+                    const isNotAllowedDay = dayName !== allowedDay;
+                    const isPastDate =
+                      date.getTime() < today.setHours(0, 0, 0, 0);
+                    const isDisabled = isNotAllowedDay || isPastDate;
                     return isDisabled;
                   }}
                   initialFocus

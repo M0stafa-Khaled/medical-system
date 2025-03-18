@@ -37,7 +37,7 @@ export const getAvailableBookingsTimes: ({
     `/bookings/${doctor_id}/avaliable-times/${working_day_id}/clinic/${clinic_id}`,
     {
       params: {
-        booking_date,
+        booking_date: booking_date,
       },
       headers: {
         Authorization: `Bearer ${token}`,

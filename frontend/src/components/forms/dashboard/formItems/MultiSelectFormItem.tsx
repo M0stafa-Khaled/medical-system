@@ -59,7 +59,6 @@ const MultiSelectFormItem = ({
           options={options}
           isClearable={true}
           onChange={(selectedOptions) => {
-            console.log(selectedOptions);
             field.onChange(selectedOptions);
           }}
           styles={selectStyles}

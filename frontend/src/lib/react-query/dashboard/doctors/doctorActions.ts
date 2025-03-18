@@ -16,7 +16,7 @@ export const useGetDoctorActions = ({
   token: string;
 }) => {
   return useQuery({
-    queryKey: [Query_Keys.GET_ALL_DOCTOR_ACTIONS],
+    queryKey: [Query_Keys.GET_ALL_DOCTOR_ACTIONS, doctorId],
     queryFn: () => getDoctorActions({ doctorId, token }),
     enabled: !!doctorId,
   });

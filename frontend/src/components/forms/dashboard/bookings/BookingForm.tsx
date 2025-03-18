@@ -73,10 +73,10 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
 
   const { data: availableTimes } = useGetAvailableBookingsTime({
     token,
-    doctor_id: doctorId!,
-    working_day_id: workingDayId!,
-    clinic_id: clinicId!,
-    booking_date: bookingDate!,
+    doctor_id: doctorId,
+    working_day_id: workingDayId,
+    clinic_id: clinicId,
+    booking_date: bookingDate,
   });
 
   // If req to get date return with Messages
@@ -154,8 +154,6 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
       },
     },
   });
-
-  console.log(form.formState.errors);
 
   const initialBookingStatus = useCallback(() => {
     if (booking?.status === "cancelled")

@@ -61,8 +61,6 @@ const WorkingDayForm = ({ action, day }: IProps) => {
     },
   });
 
-  console.log(form.formState.errors);
-
   useEffect(() => {
     if (action === "update")
       form.reset({
