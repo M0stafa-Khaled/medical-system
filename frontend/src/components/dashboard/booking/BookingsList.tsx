@@ -54,7 +54,7 @@ const BookingsList = ({ bookings }: IProps) => {
             {booking?.code}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {truncateText(booking?.patient?.name, 18)}
+            {truncateText(booking?.patient?.name, 20)}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
             {booking?.patient?.first_phone}

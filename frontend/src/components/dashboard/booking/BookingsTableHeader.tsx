@@ -32,9 +32,7 @@ const BookingsTableHeader = ({ setSort, sort }: IProps) => {
             </motion.button>
           </div>
         </TableHead>
-        <TableHead className="py-4 text-center w-48 text-nowrap">
-          المريض
-        </TableHead>
+        <TableHead className="py-4 text-center text-nowrap">المريض</TableHead>
         <TableHead className="py-4 text-center text-nowrap">
           رقم الهاتف
         </TableHead>
