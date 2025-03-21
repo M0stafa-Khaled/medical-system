@@ -24,26 +24,10 @@ const BookingsTable = () => {
     clinic_name: "",
   });
 
-  const formattedDateOptions: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  };
-  const formattedBookingDate = new Date(
-    filters.booking_date
-  ).toLocaleDateString("en-CA", formattedDateOptions);
-
-  const formattedCreatedAt = filters.created_at
-    ? new Date(filters.created_at).toLocaleDateString(
-        "en-CA",
-        formattedDateOptions
-      )
-    : "";
-
   const doctor = useDebounce(filters.doctor, 500);
   const patient = useDebounce(filters.patient, 500);
-  const created_at = useDebounce(formattedCreatedAt, 500);
-  const booking_date = useDebounce(formattedBookingDate, 500);
+  const created_at = useDebounce(filters.created_at, 500);
+  const booking_date = useDebounce(filters.booking_date, 500);
   const clinic_name = useDebounce(filters.clinic_name, 500);
   const status = useDebounce(filters.status, 500);
 
@@ -51,6 +35,7 @@ const BookingsTable = () => {
     data: bookings,
     isLoading,
     isError,
+    isRefetching,
   } = useGetAllBookings({
     token,
     page,
@@ -58,10 +43,8 @@ const BookingsTable = () => {
     filter: {
       ...(filters.doctor && { doctor }),
       ...(filters.patient && { patient }),
-      ...(filters.created_at &&
-        created_at !== "Invalid Date" && { created_at }),
-      ...(filters.booking_date &&
-        booking_date !== "Invalid Date" && { booking_date }),
+      ...(filters.created_at && created_at && { created_at }),
+      ...(filters.booking_date && booking_date && { booking_date }),
       ...(filters.status && status !== "all" && { status }),
       ...(filters.clinic_name && clinic_name !== "all" && { clinic_name }),
     },
@@ -79,7 +62,11 @@ const BookingsTable = () => {
     <DataTable
       isLoading={isLoading}
       actions={
-        <BookingsHeaderActions filters={filters} setFilters={setFilters} />
+        <BookingsHeaderActions
+          filters={filters}
+          setFilters={setFilters}
+          isLoading={isRefetching}
+        />
       }
       header={<BookingsTableHeader setSort={setSort} sort={sort} />}
       list={<BookingsList bookings={bookings?.data?.items || []} />}

@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import RefetchDateButton from "@/components/RefetchDateButton";
 
 interface IProps {
   filters: {
@@ -18,9 +19,10 @@ interface IProps {
     clinic_name: string;
   };
   setFilters: (filters: any) => void;
+  isLoading: boolean;
 }
 
-const BookingsHeaderActions = ({ filters, setFilters }: IProps) => {
+const BookingsHeaderActions = ({ filters, setFilters, isLoading }: IProps) => {
   const canCreateBooking = useHasPermission(PERMISSIONS.ADD_BOOKING);
   const handleClearFilters = () => {
     setFilters({
@@ -53,13 +55,19 @@ const BookingsHeaderActions = ({ filters, setFilters }: IProps) => {
           </div>
         </div>
 
-        <Button
-          onClick={handleClearFilters}
-          className="flex items-center gap-2 h-auto py-3"
-        >
-          <Eraser className="w-4 h-4" />
-          مسح الفلاتر
-        </Button>
+        <div className="flex gap-2">
+          <RefetchDateButton
+            isLoading={isLoading}
+            queryKey={"GET_ALL_BOOKINGS"}
+          />
+          <Button
+            onClick={handleClearFilters}
+            className="w-full flex items-center gap-2 h-auto py-3"
+          >
+            <Eraser className="w-4 h-4" />
+            مسح الفلاتر
+          </Button>
+        </div>
       </div>
       <BookingsFilters filters={filters} setFilters={setFilters} />
     </div>

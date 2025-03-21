@@ -6,7 +6,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -97,7 +96,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
             {filters.created_at ? (
-              format(filters.created_at, "dd-MM-yyyy")
+              filters.created_at
             ) : (
               <span className="text-muted-foreground">تاريخ الإنشاء</span>
             )}
@@ -110,10 +109,19 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           <Calendar
             mode="single"
             dir="rtl"
-            selected={
-              filters.created_at ? new Date(filters.created_at) : undefined
+            selected={new Date(filters.created_at!)}
+            onSelect={(date) =>
+              handleFilterChange(
+                "created_at",
+                date
+                  ? new Date(date).toLocaleDateString("en-CA", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                  : ""
+              )
             }
-            onSelect={(date) => handleFilterChange("created_at", date)}
             initialFocus
           />
         </PopoverContent>
@@ -130,7 +138,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
             {filters.booking_date ? (
-              format(filters.booking_date, "dd-MM-yyyy")
+              filters.booking_date
             ) : (
               <span className="text-muted-foreground">تاريخ الحجز</span>
             )}
@@ -143,10 +151,19 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           <Calendar
             mode="single"
             dir="rtl"
-            selected={
-              filters.booking_date ? new Date(filters.booking_date) : undefined
+            selected={new Date(filters.booking_date!)}
+            onSelect={(date) =>
+              handleFilterChange(
+                "booking_date",
+                date
+                  ? new Date(date).toLocaleDateString("en-CA", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                  : ""
+              )
             }
-            onSelect={(date) => handleFilterChange("booking_date", date)}
             initialFocus
           />
         </PopoverContent>
