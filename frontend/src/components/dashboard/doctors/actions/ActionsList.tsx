@@ -18,7 +18,7 @@ const ActionsList = ({ doctorId }: IProps) => {
   if (isLoading) return <ActionSkeleton />;
   return (
     <>
-      {!actions?.data?.items.length ? (
+      {!actions?.data?.length ? (
         <p className="text-center text-muted-foreground py-3">
           لا يوجد إجراءات
         </p>
@@ -27,7 +27,7 @@ const ActionsList = ({ doctorId }: IProps) => {
           variants={containerVariants}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4"
         >
-          {actions?.data?.items.map((action, idx) => (
+          {actions?.data?.map((action, idx) => (
             <motion.div variants={itemVariants} custom={idx} key={action.id}>
               <ActionCard action={action} doctorId={doctorId} />
             </motion.div>

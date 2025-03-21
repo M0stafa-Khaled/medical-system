@@ -1,5 +1,3 @@
-import { IPaginationMeta } from ".";
-
 export interface IDoctorAction {
   id: number;
   name: string;
@@ -25,8 +23,5 @@ export interface IResponseDoctorAction {
 export interface IResponseDoctorActions {
   status: boolean;
   message: string | null;
-  data: {
-    items: IDoctorAction[];
-    meta: IPaginationMeta;
-  };
+  data: IDoctorAction[];
 }

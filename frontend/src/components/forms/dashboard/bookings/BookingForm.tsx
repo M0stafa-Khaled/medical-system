@@ -95,7 +95,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   ]);
 
   // Create options from data to add it in select with label and value
-  const doctorActionsOptions = doctorActions?.data.items.map((action) => ({
+  const doctorActionsOptions = doctorActions?.data?.map((action) => ({
     value: action.id.toString(),
     label: `${action.name} - ${action.price} جنيه`,
   }));
@@ -280,25 +280,29 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
         if (!status) return toast.error(message);
         // * Update Success
         toast.success(message);
-        return navigate("/dashboard/bookings");
       }
-      const { status, message } = await createBooking({
-        formData: {
-          clinic_id: data.clinic_id.value,
-          doctor_id: data.doctor_id.value,
-          patient_id: data.patient_id.value,
-          working_day_id: data.working_day_id.value,
-          doctor_action_id: data.doctor_action_id.value,
-          date: data.date,
-          start_at: data.start_at,
-        },
-        token,
-      });
-      // ! Create failed
-      if (!status) return toast.error(message);
-      // * Create Success
-      toast.success(message);
-      handleResetFrom();
+
+      // Create Booking
+      if (action === "create") {
+        const { status, message } = await createBooking({
+          formData: {
+            clinic_id: data.clinic_id.value,
+            doctor_id: data.doctor_id.value,
+            patient_id: data.patient_id.value,
+            working_day_id: data.working_day_id.value,
+            doctor_action_id: data.doctor_action_id.value,
+            date: data.date,
+            start_at: data.start_at,
+          },
+          token,
+        });
+        // ! Create failed
+        if (!status) return toast.error(message);
+        // * Create Success
+        toast.success(message);
+        handleResetFrom();
+      }
+      return navigate("/dashboard/bookings");
     } catch (error) {
       const errorObj = error as AxiosError<{
         errors: { [key: string]: string[] };

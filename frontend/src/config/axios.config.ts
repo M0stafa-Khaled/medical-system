@@ -13,10 +13,10 @@ const axiosInstanceAPI = axios.create({
 axiosInstanceAPI.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response.status === 401) {
+    if (error?.response?.status === 401) {
       store.dispatch(logout());
       toast.warn("يرجي تسجيل الدخول");
-    } else if (error.status === 500) toast.error("حاول مجدداً في وقت لاحق");
+    } else if (error?.status === 500) toast.error("حاول مجدداً في وقت لاحق");
     return Promise.reject(error);
   }
 );
