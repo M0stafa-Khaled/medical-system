@@ -46,7 +46,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
         onChange={(e) => handleFilterChange("doctor", e.target.value)}
       />
       <Input
-        placeholder="ابحث باسم المريض او رقم الهاتف"
+        placeholder="ابحث باسم المريض او رقم الهاتف الأول"
         className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
         type="search"
         value={filters.patient}
