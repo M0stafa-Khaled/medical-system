@@ -5,12 +5,12 @@ import Query_Keys from "@/enums/queryKeys";
 
 interface IProps extends ButtonProps {
   isLoading: boolean;
-  queryKey: keyof typeof Query_Keys;
+  queryKey: Query_Keys;
 }
+
 const RefetchDateButton = ({ isLoading, queryKey, ...rest }: IProps) => {
   const queryClient = useQueryClient();
-
-  const handelRefreshDate = () => {
+  const handelRefetchDate = () => {
     queryClient.invalidateQueries({
       queryKey: [queryKey],
     });
@@ -19,7 +19,7 @@ const RefetchDateButton = ({ isLoading, queryKey, ...rest }: IProps) => {
   return (
     <Button
       {...rest}
-      onClick={handelRefreshDate}
+      onClick={handelRefetchDate}
       className="flex items-center gap-2 h-auto py-3"
     >
       <RefreshCcw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
