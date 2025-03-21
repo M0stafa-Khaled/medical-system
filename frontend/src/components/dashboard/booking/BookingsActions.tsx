@@ -8,6 +8,7 @@ import { ar } from "date-fns/locale";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import RefetchDateButton from "@/components/RefetchDateButton";
+import Query_Keys from "@/enums/queryKeys";
 
 interface IProps {
   filters: {
@@ -58,7 +59,7 @@ const BookingsHeaderActions = ({ filters, setFilters, isLoading }: IProps) => {
         <div className="flex gap-2">
           <RefetchDateButton
             isLoading={isLoading}
-            queryKey={"GET_ALL_BOOKINGS"}
+            queryKey={Query_Keys.GET_ALL_BOOKINGS}
           />
           <Button
             onClick={handleClearFilters}

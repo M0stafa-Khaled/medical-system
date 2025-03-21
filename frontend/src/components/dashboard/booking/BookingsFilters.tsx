@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
+import { format } from "date-fns";
 
 interface IProps {
   filters: {
@@ -96,7 +97,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
             {filters.created_at ? (
-              filters.created_at
+              format(new Date(filters.created_at), "dd-MM-yyyy")
             ) : (
               <span className="text-muted-foreground">تاريخ الإنشاء</span>
             )}
@@ -109,7 +110,9 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           <Calendar
             mode="single"
             dir="rtl"
-            selected={new Date(filters.created_at!)}
+            selected={
+              filters.created_at ? new Date(filters.created_at) : undefined
+            }
             onSelect={(date) =>
               handleFilterChange(
                 "created_at",
@@ -119,7 +122,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
                       month: "2-digit",
                       day: "2-digit",
                     })
-                  : ""
+                  : null
               )
             }
             initialFocus
@@ -138,7 +141,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
             {filters.booking_date ? (
-              filters.booking_date
+              format(new Date(filters.booking_date), "dd-MM-yyyy")
             ) : (
               <span className="text-muted-foreground">تاريخ الحجز</span>
             )}
@@ -151,7 +154,9 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           <Calendar
             mode="single"
             dir="rtl"
-            selected={new Date(filters.booking_date!)}
+            selected={
+              filters.booking_date ? new Date(filters.booking_date) : undefined
+            }
             onSelect={(date) =>
               handleFilterChange(
                 "booking_date",
@@ -161,7 +166,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
                       month: "2-digit",
                       day: "2-digit",
                     })
-                  : ""
+                  : null
               )
             }
             initialFocus
