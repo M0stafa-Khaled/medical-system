@@ -6,7 +6,7 @@ const Patients = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | المرضى</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | المرضى</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

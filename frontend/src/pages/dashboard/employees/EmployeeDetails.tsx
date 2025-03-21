@@ -90,7 +90,7 @@ const EmployeeDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | {name || " "}</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | {name || " "}</title>
       </Helmet>
 
       <motion.section

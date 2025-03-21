@@ -81,7 +81,9 @@ const BookingDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | {patient?.name || " "}</title>
+        <title>
+          {import.meta.env.VITE_WEB_NAME} | {patient?.name || " "}
+        </title>
       </Helmet>
       <motion.section
         initial="hidden"

@@ -42,7 +42,7 @@ const UpdateBooking = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | تعديل حجز</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | تعديل حجز</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

@@ -8,7 +8,7 @@ const CreateBooking = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | إضافة حجز</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | إضافة حجز</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

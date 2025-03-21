@@ -43,7 +43,7 @@ const UpdatePatient = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | {patient?.data.name}</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | {patient?.data?.name}</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

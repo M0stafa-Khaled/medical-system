@@ -92,7 +92,9 @@ const DoctorDetails = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | د / {name || " "}</title>
+        <title>
+          {import.meta.env.VITE_WEB_NAME} | د / {name || " "}
+        </title>
       </Helmet>
       <motion.section
         initial="hidden"

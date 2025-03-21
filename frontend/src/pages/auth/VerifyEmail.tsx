@@ -110,7 +110,7 @@ const VerifyEmail = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | تأكيد الحساب</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | تأكيد الحساب</title>
       </Helmet>
       <main className="container flex items-center justify-center min-h-screen">
         <Card className="border-muted bg-foreground shadow-none">

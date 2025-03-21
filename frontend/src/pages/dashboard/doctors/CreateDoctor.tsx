@@ -8,7 +8,7 @@ const CreateDoctor = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | إضافة طبيب</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | إضافة طبيب</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

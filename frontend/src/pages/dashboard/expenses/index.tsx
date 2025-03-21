@@ -6,7 +6,7 @@ const Expenses = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | المصروفات</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | المصروفات</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

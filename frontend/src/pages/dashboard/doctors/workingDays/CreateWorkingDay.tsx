@@ -7,7 +7,7 @@ const CreateWorkingDay = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | إضافة يوم عمل</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | إضافة يوم عمل</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

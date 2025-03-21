@@ -64,7 +64,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | تسجيل الدخول</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | تسجيل الدخول</title>
       </Helmet>
       <div className="relative min-h-screen">
         <div className="absolute bg-black/20 dark:bg-transparent inset-0 bg-[url(/login-bg.svg)] bg-cover bg-left filter blur-sm -z-50" />

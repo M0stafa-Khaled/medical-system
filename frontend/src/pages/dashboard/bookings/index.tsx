@@ -6,7 +6,7 @@ const Bookings = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | الحجوزات</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | الحجوزات</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

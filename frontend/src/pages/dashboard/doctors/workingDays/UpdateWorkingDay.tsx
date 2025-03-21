@@ -19,7 +19,7 @@ const UpdateWorkingDay = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | تحديث يوم عمل</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | تحديث يوم عمل</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

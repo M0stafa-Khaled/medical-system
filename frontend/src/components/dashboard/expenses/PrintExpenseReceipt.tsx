@@ -35,7 +35,7 @@ const PrintExpenseReceipt = ({
       document.title = `إذن صرف - ${name} - ${formattedDate}`;
     },
     onAfterPrint: () => {
-      document.title = "Medical System | EgProg";
+      document.title = `Medical System | ${import.meta.env.VITE_WEB_NAME}`;
     },
   });
 

@@ -41,7 +41,9 @@ const UpdateDoctor = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | د / {doctor?.data.name}</title>
+        <title>
+          {import.meta.env.VITE_WEB_NAME} | د / {doctor?.data.name}
+        </title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

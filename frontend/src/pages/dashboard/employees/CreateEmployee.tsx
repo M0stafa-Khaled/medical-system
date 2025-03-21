@@ -8,7 +8,7 @@ const CreateEmployee = () => {
   return (
     <>
       <Helmet>
-        <title>EgProg | إضافة موظف</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | إضافة موظف</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
