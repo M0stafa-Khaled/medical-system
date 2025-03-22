@@ -90,9 +90,9 @@ const PatientDetails = () => {
         </title>
       </Helmet>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
           <CardHeader className="py-4">
@@ -131,10 +131,8 @@ const PatientDetails = () => {
             <motion.div variants={itemVariants}>
               <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
             </motion.div>
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-              variants={containerVariants}
-            >
+
+            <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <motion.div variants={itemVariants}>
                 <InfoField
                   icon={

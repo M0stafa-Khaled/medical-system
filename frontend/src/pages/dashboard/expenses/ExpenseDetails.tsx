@@ -11,6 +11,7 @@ import {
   Wallet,
   BadgeCheck,
   BadgeX,
+  Hash,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -48,7 +49,7 @@ const ExpenseDetails = () => {
 
     if (expense?.message) {
       toast.error(expense.message);
-      navigate(-1);
+      navigate("/dashboard/expenses");
       return;
     }
   }, [expense?.message, isError, navigate, expenseId]);
@@ -70,7 +71,9 @@ const ExpenseDetails = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | {name || " "}</title>
+        <title>
+          {import.meta.env.VITE_WEB_NAME} | {name || " "}
+        </title>
       </Helmet>
       <motion.section
         variants={containerVariants}
@@ -78,7 +81,7 @@ const ExpenseDetails = () => {
         animate="visible"
       >
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm hover:shadow-md transition-shadow duration-300">
-          <CardHeader className="py-4">
+          <CardHeader className="py-4 mb-4">
             <motion.div variants={itemVariants}>
               <CardTitle className="flex items-center gap-2">
                 <Receipt className="h-6 w-6 text-primary" />
@@ -92,6 +95,14 @@ const ExpenseDetails = () => {
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               variants={containerVariants}
             >
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  label="رقم الإيصال"
+                  value={code!}
+                  icon={<Hash className="h-5 w-5 text-purple-500" />}
+                />
+              </motion.div>
+
               <motion.div variants={itemVariants}>
                 <InfoField
                   label="اسم المصروف"
@@ -166,14 +177,6 @@ const ExpenseDetails = () => {
                   })}
                   icon={<Calendar className="h-5 w-5 text-orange-500" />}
                   sm
-                />
-              </motion.div>
-
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  label="رقم الإيصال"
-                  value={code!}
-                  icon={<Receipt className="h-5 w-5 text-purple-500" />}
                 />
               </motion.div>
 

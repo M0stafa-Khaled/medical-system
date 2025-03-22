@@ -11,9 +11,9 @@ interface IProps {
   showButtons?: boolean;
 }
 
-const SkeletonCell = ({ width = "w-24" }: { width?: string }) => (
+const SkeletonCell = () => (
   <TableCell>
-    <Skeleton className={`mx-auto h-3 ${width} rounded-lg`} />
+    <Skeleton className={`mx-auto h-3 w-16 rounded-lg`} />
   </TableCell>
 );
 
@@ -51,7 +51,7 @@ const TableSkeleton = ({
         !hasImage ? "h-14" : ""
       }`}
     >
-      <SkeletonCell width="w-16" />
+      <SkeletonCell />
       {hasImage && <SkeletonImageCell />}
       {Array.from({
         length:

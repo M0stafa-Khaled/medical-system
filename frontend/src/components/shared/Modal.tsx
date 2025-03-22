@@ -48,7 +48,7 @@ const Modal = ({
             {title}
           </AlertDialogTitle>
           <AlertDialogDescription
-            className={`text-center ${
+            className={`text-center max-w-sm mx-auto ${
               description.color ? description.color : ""
             }`}
           >
