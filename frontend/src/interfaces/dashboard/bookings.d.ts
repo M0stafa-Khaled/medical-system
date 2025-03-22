@@ -45,3 +45,12 @@ export interface ICreateBooking {
     start_at: string;
   };
 }
+
+export interface IBookingsFilter {
+  doctor: string;
+  patient: string;
+  created_at: string | null;
+  booking_date: string | null;
+  status: string;
+  clinic_name: string;
+}

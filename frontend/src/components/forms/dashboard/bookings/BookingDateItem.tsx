@@ -1,5 +1,9 @@
 import { IFormInput } from "@/interfaces";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import {
+  ControllerRenderProps,
+  FieldValues,
+  UseFormReturn,
+} from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
@@ -20,11 +24,15 @@ import {
 interface IProps {
   field: ControllerRenderProps<FieldValues, string>;
   input: IFormInput;
-  form: any;
+  form: UseFormReturn;
   allowedDay: string;
 }
 const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
   const today = new Date();
+
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 30);
+
   return (
     <FormField
       control={form.control}
@@ -32,7 +40,10 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
       render={({ field }) => (
         <FormItem>
           <FormLabel htmlFor={input.name} className="text-nowrap">
-            {input.label}
+            {input.label}{" "}
+            <span className="text-xs text-muted-foreground text-wrap">
+              (لا يمكن ان يتجاوز موعد الحجز شهر من الان)
+            </span>
           </FormLabel>
           <FormControl>
             <Popover>
@@ -70,16 +81,19 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                     field.onChange(formattedDated);
                   }}
                   disabled={(date) => {
-                    // check if the day is allowed and not past date
+                    date.setHours(0, 0, 0, 0);
                     const dayName = date
                       .toLocaleDateString("en-US", { weekday: "long" })
                       .toLowerCase();
                     const isNotAllowedDay = dayName !== allowedDay;
-                    const isPastDate =
-                      date.getTime() < today.setHours(0, 0, 0, 0);
-                    const isDisabled = isNotAllowedDay || isPastDate;
+                    const isBeforeToday = date < today;
+                    const isAfterMaxDate = date > maxDate;
+                    const isDisabled =
+                      isNotAllowedDay || isBeforeToday || isAfterMaxDate;
+
                     return isDisabled;
                   }}
+                  defaultMonth={today}
                   initialFocus
                 />
               </PopoverContent>

@@ -9,17 +9,11 @@ import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import RefetchDateButton from "@/components/RefetchDateButton";
 import Query_Keys from "@/enums/queryKeys";
+import { IBookingsFilter } from "@/interfaces/dashboard/bookings";
 
 interface IProps {
-  filters: {
-    doctor: string;
-    patient: string;
-    created_at: string | null;
-    booking_date: string | null;
-    status: string;
-    clinic_name: string;
-  };
-  setFilters: (filters: any) => void;
+  filters: IBookingsFilter;
+  setFilters: (filters: IBookingsFilter) => void;
   isLoading: boolean;
 }
 

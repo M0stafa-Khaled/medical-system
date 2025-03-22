@@ -17,23 +17,17 @@ import { CalendarIcon } from "lucide-react";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
 import { format } from "date-fns";
+import { IBookingsFilter } from "@/interfaces/dashboard/bookings";
 
 interface IProps {
-  filters: {
-    doctor: string;
-    patient: string;
-    created_at: string | null;
-    booking_date: string | null;
-    status: string;
-    clinic_name: string;
-  };
-  setFilters: (filters: any) => void;
+  filters: IBookingsFilter;
+  setFilters: (filters: IBookingsFilter) => void;
 }
 const BookingsFilters = ({ filters, setFilters }: IProps) => {
   const token = cookieServices.getToken()!;
   const { data: clinics } = useGetAllClinics({ token });
 
-  const handleFilterChange = (key: string, value: any) =>
+  const handleFilterChange = (key: string, value: string | null) =>
     setFilters({ ...filters, [key]: value });
 
   return (

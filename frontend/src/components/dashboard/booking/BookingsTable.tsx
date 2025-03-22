@@ -9,13 +9,14 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllBookings } from "@/lib/react-query/dashboard/bookings";
+import { IBookingsFilter } from "@/interfaces/dashboard/bookings";
 
 const BookingsTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const [sort, setSort] = useState(false);
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<IBookingsFilter>({
     doctor: "",
     patient: "",
     created_at: "",
@@ -26,10 +27,6 @@ const BookingsTable = () => {
 
   const doctor = useDebounce(filters.doctor, 500);
   const patient = useDebounce(filters.patient, 500);
-  const created_at = useDebounce(filters.created_at, 500);
-  const booking_date = useDebounce(filters.booking_date, 500);
-  const clinic_name = useDebounce(filters.clinic_name, 500);
-  const status = useDebounce(filters.status, 500);
 
   const {
     data: bookings,
@@ -43,10 +40,17 @@ const BookingsTable = () => {
     filter: {
       ...(filters.doctor && { doctor }),
       ...(filters.patient && { patient }),
-      ...(filters.created_at && created_at && { created_at }),
-      ...(filters.booking_date && booking_date && { booking_date }),
-      ...(filters.status && status !== "all" && { status }),
-      ...(filters.clinic_name && clinic_name !== "all" && { clinic_name }),
+
+      ...(filters.created_at && { created_at: filters.created_at }),
+      ...(filters.booking_date && { booking_date: filters.booking_date }),
+
+      ...(filters.status !== "all" &&
+        filters.status !== "" && { status: filters.status }),
+
+      ...(filters.clinic_name !== "all" &&
+        filters.clinic_name !== "" && {
+          clinic_name: filters.clinic_name,
+        }),
     },
   });
 
