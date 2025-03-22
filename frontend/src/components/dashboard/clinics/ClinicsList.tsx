@@ -52,9 +52,15 @@ const ClinicsList = ({ clinics }: IProps) => {
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white">
             {status ? (
-              <Badge className="bg-green-500 hover:bg-green-500">متاحة</Badge>
+              <Badge className="bg-emerald-600/30 dark:bg-emerald-600/20 hover:bg-emerald-600/10 text-emerald-800 dark:text-emerald-500 shadow-none rounded-full">
+                <div className="h-1.5 w-1.5 rounded-full bg-emerald-800 dark:bg-emerald-500 ml-2" />
+                نشط
+              </Badge>
             ) : (
-              <Badge variant={"destructive"}>غير متاحة</Badge>
+              <Badge className="bg-red-600/30 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">
+                <div className="h-1.5 w-1.5 rounded-full bg-red-500 ml-2" />
+                غير نشط
+              </Badge>
             )}
           </TableCell>
           {(canUpdateClinic || canDeleteClinic) && (

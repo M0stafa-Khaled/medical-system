@@ -85,7 +85,9 @@ const PatientDetails = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | {name || " "}</title>
+        <title>
+          {import.meta.env.VITE_WEB_NAME} | {name || " "}
+        </title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
@@ -143,7 +145,7 @@ const PatientDetails = () => {
                     )
                   }
                   label="حالة الحساب"
-                  value={status ? "مفعل" : "غير مفعل"}
+                  value={status ? "نشط" : "غير نشط"}
                 />
               </motion.div>
 

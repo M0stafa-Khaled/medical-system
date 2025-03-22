@@ -29,13 +29,11 @@ const DataTable = ({
   return (
     <>
       {actions}
-      {isLoading ? (
-        skeleton
-      ) : (
+      {
         <>
           <Table className="border dark:border-muted !rounded-lg overflow-hidden">
             {header}
-            <TableBody>{list}</TableBody>
+            {isLoading ? skeleton : <TableBody>{list}</TableBody>}
             {header}
           </Table>
           {shouldShowPagination && (
@@ -45,7 +43,7 @@ const DataTable = ({
             />
           )}
         </>
-      )}
+      }
     </>
   );
 };

@@ -31,7 +31,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
     setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 my-4">
       <Input
         placeholder="ابحث باسم الطبيب"
         className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"

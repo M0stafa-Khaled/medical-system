@@ -11,12 +11,15 @@ interface IProps {
 
 const TreasuriesActions = ({ searchKeyword, setSearchKeyword }: IProps) => {
   const canCreateTreasury = useHasPermission(PERMISSIONS.ADD_TREASURY);
+  const canTransferTreasury = useHasPermission(
+    PERMISSIONS.TRANSFER_BETWEEN_TREASURIES
+  );
 
   return (
     <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
       <div className="flex flex-col md:flex-row md:items-center gap-4">
         {canCreateTreasury && <CreateTreasury />}
-        {canCreateTreasury && <TransferBetweenTreasuriesButton />}
+        {canTransferTreasury && <TransferBetweenTreasuriesButton />}
       </div>
       <SearchInput
         searchKeyword={searchKeyword}

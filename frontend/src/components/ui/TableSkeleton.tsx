@@ -1,12 +1,6 @@
 import { tableSkeletonVariants } from "@/animations/dashboardAnimations";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-} from "@/components/ui/table";
+import { TableBody, TableCell } from "@/components/ui/table";
 import { motion } from "framer-motion";
 
 interface IProps {
@@ -16,25 +10,6 @@ interface IProps {
   actionButtons?: number;
   showButtons?: boolean;
 }
-
-const SkeletonHeader = ({ columns }: { columns: number }) => (
-  <TableHeader>
-    <motion.tr
-      initial="hidden"
-      animate="visible"
-      variants={tableSkeletonVariants}
-      className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70"
-    >
-      {Array.from({ length: columns }, (_, idx) => (
-        <TableHead key={idx} className="py-5">
-          <Skeleton
-            className={`mx-auto h-4 ${idx === 0 ? "w-20" : "w-28"} rounded-lg`}
-          />
-        </TableHead>
-      ))}
-    </motion.tr>
-  </TableHeader>
-);
 
 const SkeletonCell = ({ width = "w-24" }: { width?: string }) => (
   <TableCell>
@@ -90,12 +65,9 @@ const TableSkeleton = ({
   );
 
   return (
-    <Table className="border dark:border-muted !rounded-lg overflow-hidden">
-      <SkeletonHeader columns={columns + 1} />
-      <TableBody>
-        {Array.from({ length: rows }).map((_, idx) => renderRow(idx))}
-      </TableBody>
-    </Table>
+    <TableBody>
+      {Array.from({ length: rows }).map((_, idx) => renderRow(idx))}
+    </TableBody>
   );
 };
 

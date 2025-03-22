@@ -46,9 +46,7 @@ const PatientsTable = () => {
           patients={patients?.data?.items || []}
         />
       }
-      skeleton={
-        <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
-      }
+      skeleton={<TableSkeleton columns={4} rows={6} actionButtons={3} />}
       pagination={
         patients?.data && {
           meta: patients.data?.meta,

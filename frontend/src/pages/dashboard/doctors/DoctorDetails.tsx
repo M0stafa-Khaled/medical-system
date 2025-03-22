@@ -168,7 +168,7 @@ const DoctorDetails = () => {
                     )
                   }
                   label="حالة الحساب"
-                  value={status ? "مفعل" : "غير مفعل"}
+                  value={status ? "نشط" : "غير نشط"}
                 />
               </motion.div>
               <motion.div variants={itemVariants}>

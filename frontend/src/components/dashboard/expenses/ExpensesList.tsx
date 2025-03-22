@@ -80,9 +80,15 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
             {expense?.status ? (
-              <Badge className="bg-green-500 hover:bg-green-500">معتمد</Badge>
+              <Badge className="bg-emerald-600/30 dark:bg-emerald-600/20 hover:bg-emerald-600/10 text-emerald-800 dark:text-emerald-500 shadow-none rounded-full">
+                <div className="h-1.5 w-1.5 rounded-full bg-emerald-800 dark:bg-emerald-500 ml-2" />
+                معتمد
+              </Badge>
             ) : (
-              <Badge variant={"destructive"}>ملغي</Badge>
+              <Badge className="bg-red-600/30 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">
+                <div className="h-1.5 w-1.5 rounded-full bg-red-500 ml-2" />
+                ملغي
+              </Badge>
             )}
           </TableCell>
           <TableCell className="min-w-40 text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">

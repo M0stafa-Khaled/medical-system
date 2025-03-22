@@ -9,18 +9,39 @@ const BookingStatus = ({ status }: IProps) => {
     switch (status) {
       case "pending":
         return (
-          <Badge className="bg-yellow-500 hover:bg-yellow-500">انتظار</Badge>
+          <Badge className="bg-amber-600/20 dark:bg-amber-600/20 hover:bg-amber-600/10 text-amber-500 shadow-none rounded-full">
+            <div className="h-1.5 w-1.5 rounded-full bg-amber-500 ml-2" />
+            قيد الإنتظار
+          </Badge>
         );
       case "collected":
         return (
-          <Badge className="bg-green-500 hover:bg-green-500">تم التحصيل</Badge>
+          <Badge className="bg-emerald-600/30 dark:bg-emerald-600/20 hover:bg-emerald-600/10 text-emerald-800 dark:text-emerald-500 shadow-none rounded-full">
+            <div className="h-1.5 w-1.5 rounded-full bg-emerald-800 dark:bg-emerald-500 ml-2" />
+            تم التحصيل
+          </Badge>
         );
       case "cancelled":
-        return <Badge className="bg-red-500 hover:bg-red-500">ملغي</Badge>;
+        return (
+          <Badge className="bg-red-600/30 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">
+            <div className="h-1.5 w-1.5 rounded-full bg-red-500 ml-2" />
+            ملغي
+          </Badge>
+        );
       case "ended":
-        return <Badge className="bg-gray-400 hover:bg-gray-400">انتهى</Badge>;
+        return (
+          <Badge className="bg-primary/30 dark:bg-primary/20 hover:bg-primary/30 dark:hover:bg-primary/20 text-primary dark:text-gray-300 shadow-none rounded-full">
+            <div className="h-1.5 w-1.5 rounded-full bg-primary dark:bg-gray-300 ml-2" />
+            منتهى
+          </Badge>
+        );
       case "no-show":
-        return <Badge>لم يحضر</Badge>;
+        return (
+          <Badge className="bg-primary/30 dark:bg-primary/20 hover:bg-primary/30 dark:hover:bg-primary/20 text-primary dark:text-gray-300 shadow-none rounded-full">
+            <div className="h-1.5 w-1.5 rounded-full bg-primary dark:bg-gray-300 ml-2" />
+            لم يحضر
+          </Badge>
+        );
       default:
         return <Badge>غير معروف</Badge>;
     }

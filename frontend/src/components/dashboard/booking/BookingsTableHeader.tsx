@@ -26,7 +26,7 @@ const BookingsTableHeader = ({ setSort, sort }: IProps) => {
         </TableHead>
         <TableHead className="py-4 text-center">العيادة</TableHead>
         <TableHead className="py-4 text-center">الطبيب</TableHead>
-        <TableHead className="py-4 text-center w-28">الحالة</TableHead>
+        <TableHead className="py-4 text-center">الحالة</TableHead>
         <TableHead className="py-4 text-center">اليوم</TableHead>
         <TableHead className="py-4 text-center text-nowrap">
           موعد الدخول

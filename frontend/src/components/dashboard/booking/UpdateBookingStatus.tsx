@@ -92,7 +92,7 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
             id="patient_id"
             role="combobox"
             aria-expanded={open}
-            className={`p-0 bg-transparent border-0 hover:bg-transparent m-0`}
+            className="p-0 bg-transparent border-0 hover:bg-transparent m-0 shadow-none"
           >
             <BookingStatus status={booking?.status} />
           </Button>

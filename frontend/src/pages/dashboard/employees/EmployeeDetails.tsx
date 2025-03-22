@@ -90,7 +90,9 @@ const EmployeeDetails = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | {name || " "}</title>
+        <title>
+          {import.meta.env.VITE_WEB_NAME} | {name || " "}
+        </title>
       </Helmet>
 
       <motion.section
@@ -145,7 +147,7 @@ const EmployeeDetails = () => {
               <motion.div variants={itemVariants}>
                 <InfoField
                   label="حالة الحساب"
-                  value={status ? "مفعل" : "غير مفعل"}
+                  value={status ? "نشط" : "غير نشط"}
                   icon={
                     status ? (
                       <BadgeCheck className="text-green-500" />
