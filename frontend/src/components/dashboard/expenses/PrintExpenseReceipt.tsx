@@ -5,6 +5,7 @@ import { FaPrint } from "react-icons/fa6";
 import { IExpense } from "@/interfaces/dashboard/expenses/expense";
 import { convertToEgyptianPounds } from "@/utils/convertPriceNumberToWords";
 import formatDateTime from "@/utils/formatDate";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 interface IProps {
   expense: IExpense;
@@ -40,13 +41,15 @@ const PrintExpenseReceipt = ({
   });
 
   return (
-    <div>
-      <Button
-        onClick={() => reactToPrintFn()}
-        className="text-sm text-white bg-blue-600 hover:bg-blue-700 h-9 w-9"
-      >
-        <FaPrint size={24} />
-      </Button>
+    <>
+      <TooltipButton title="طباعة">
+        <Button
+          onClick={() => reactToPrintFn()}
+          className="text-sm text-white bg-blue-600 hover:bg-blue-700 h-9 w-9"
+        >
+          <FaPrint size={24} />
+        </Button>
+      </TooltipButton>
       <div
         dir="rtl"
         className="hidden p-3 print:block print:text-black"
@@ -124,7 +127,7 @@ const PrintExpenseReceipt = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

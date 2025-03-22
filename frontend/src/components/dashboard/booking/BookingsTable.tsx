@@ -74,7 +74,7 @@ const BookingsTable = () => {
       }
       header={<BookingsTableHeader setSort={setSort} sort={sort} />}
       list={<BookingsList bookings={bookings?.data?.items || []} />}
-      skeleton={<TableSkeleton columns={9} rows={6} actionButtons={3} />}
+      skeleton={<TableSkeleton columns={9} rows={6} actionButtons={4} />}
       pagination={
         bookings?.data && {
           meta: bookings.data?.meta,

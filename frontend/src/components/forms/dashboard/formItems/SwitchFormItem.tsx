@@ -21,8 +21,8 @@ const SwitchFormItem = ({ input, field }: IProps) => {
               ? "معتمد"
               : "ملغي"
             : field.value
-            ? " مفعل "
-            : " غير مفعل "}
+            ? " نشط "
+            : " غير نشط "}
         </FormLabel>
         <FormControl>
           <Switch

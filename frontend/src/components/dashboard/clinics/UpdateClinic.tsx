@@ -24,7 +24,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import { motion } from "framer-motion";
-
+import TooltipButton from "@/components/ui/TooltipButton";
 interface IProps {
   id: number;
   name: string;
@@ -107,15 +107,17 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
   }, [name, status, form, virtual_number]);
 
   return (
-    <div>
-      <Button
-        onClick={() => {
-          setIsOpen(true);
-        }}
-        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
-      >
-        <FaPencil size={24} />
-      </Button>
+    <>
+      <TooltipButton title="تعديل">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
+        >
+          <FaPencil size={24} />
+        </Button>
+      </TooltipButton>
 
       {/* Update Modal */}
       <Modal
@@ -161,7 +163,7 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
           </motion.form>
         </Form>
       </Modal>
-    </div>
+    </>
   );
 };
 

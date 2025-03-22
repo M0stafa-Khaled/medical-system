@@ -15,6 +15,7 @@ import DeleteExpense from "./DeleteExpense";
 import CancelExpense from "./CancelExpense";
 import truncateText from "@/utils/truncateText";
 import PrintExpenseReceipt from "./PrintExpenseReceipt";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 interface IProps {
   expenses: IExpense[];
@@ -105,14 +106,16 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
                 {canViewExpense && (
-                  <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
-                    <Link
-                      to={`/dashboard/expenses/${expense?.id}`}
-                      className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
-                    >
-                      <FiEye size={24} />
-                    </Link>
-                  </Button>
+                  <TooltipButton title="عرض">
+                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
+                      <Link
+                        to={`/dashboard/expenses/${expense?.id}`}
+                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
+                      >
+                        <FiEye size={24} />
+                      </Link>
+                    </Button>
+                  </TooltipButton>
                 )}
                 {canViewExpense && <PrintExpenseReceipt expense={expense} />}
                 {canCancelExpense && expense?.status && (

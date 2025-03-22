@@ -38,6 +38,7 @@ import { Helmet } from "react-helmet-async";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorkingDays from "@/components/dashboard/doctors/workingDays/WorkingDays";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 const DoctorDetails = () => {
   const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
@@ -112,14 +113,16 @@ const DoctorDetails = () => {
                   <>
                     {canUpdateDoctor && (
                       <motion.div variants={itemVariants}>
-                        <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                          <Link
-                            to={`/dashboard/doctors/${id}/update`}
-                            className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                          >
-                            <FaPencil size={18} />
-                          </Link>
-                        </Button>
+                        <TooltipButton title="تعديل">
+                          <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                            <Link
+                              to={`/dashboard/doctors/${id}/update`}
+                              className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                            >
+                              <FaPencil size={18} />
+                            </Link>
+                          </Button>
+                        </TooltipButton>
                       </motion.div>
                     )}
                     {canDeleteDoctor && (

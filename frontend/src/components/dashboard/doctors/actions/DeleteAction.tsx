@@ -6,6 +6,7 @@ import { AxiosError } from "axios";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 interface IProps {
   name: string;
@@ -36,14 +37,16 @@ const DeleteAction = ({ name, id }: IProps) => {
 
   return (
     <>
-      <Button
-        size={"sm"}
-        onClick={() => setIsOpenDeleteModal(true)}
-        variant={"destructive"}
-        className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
-      >
-        <MdDelete size={24} />
-      </Button>
+      <TooltipButton title="حذف">
+        <Button
+          size={"sm"}
+          onClick={() => setIsOpenDeleteModal(true)}
+          variant={"destructive"}
+          className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+        >
+          <MdDelete size={24} />
+        </Button>
+      </TooltipButton>
 
       <Modal
         isOpen={isOpenDeleteModal}

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import TooltipButton from "@/components/ui/TooltipButton";
 interface IProps {
   name: string;
   id: number;
@@ -16,7 +16,7 @@ interface IProps {
 const DeleteDoctor = ({ name, id }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken() || "";
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: deleteDoctor, isPending } = useDeleteDoctor();
 
   const handleDelete = async () => {
@@ -32,24 +32,25 @@ const DeleteDoctor = ({ name, id }: IProps) => {
       const errorObj = error as AxiosError<{ message: string }>;
       toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
     } finally {
-      setIsOpenDeleteModal(false);
+      setIsOpen(false);
     }
   };
 
   return (
     <>
-      <Button
-        size={"sm"}
-        onClick={() => setIsOpenDeleteModal(true)}
-        variant={"destructive"}
-        className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
-      >
-        <MdDelete size={24} />
-      </Button>
-
+      <TooltipButton title="حذف">
+        <Button
+          size={"sm"}
+          onClick={() => setIsOpen(true)}
+          variant={"destructive"}
+          className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+        >
+          <MdDelete size={24} />
+        </Button>
+      </TooltipButton>
       <Modal
-        isOpen={isOpenDeleteModal}
-        onOpenChange={() => setIsOpenDeleteModal(false)}
+        isOpen={isOpen}
+        onOpenChange={() => setIsOpen(false)}
         title="حذف طبيب"
         description={{
           text: `هل انت متاكد من حذف الطبيب ${name}؟`,

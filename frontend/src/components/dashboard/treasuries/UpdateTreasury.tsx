@@ -24,6 +24,7 @@ import { FaPencil } from "react-icons/fa6";
 import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 interface IProps {
   treasury: ITreasury;
@@ -98,14 +99,16 @@ const UpdateTreasury = ({ treasury }: IProps) => {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          setIsOpen(true);
-        }}
-        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
-      >
-        <FaPencil size={24} />
-      </Button>
+      <TooltipButton title="تعديل">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
+        >
+          <FaPencil size={24} />
+        </Button>
+      </TooltipButton>
 
       <Modal
         isOpen={isOpen}

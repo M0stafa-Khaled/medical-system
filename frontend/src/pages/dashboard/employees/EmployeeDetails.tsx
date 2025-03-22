@@ -36,6 +36,7 @@ import {
 import DataLoader from "@/components/ui/DataLoader";
 import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet-async";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 const EmployeeDetails = () => {
   const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
@@ -111,14 +112,16 @@ const EmployeeDetails = () => {
                   <>
                     {canUpdateEmployee && (
                       <motion.div variants={itemVariants}>
-                        <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                          <Link
-                            to={`/dashboard/employees/${id}/update`}
-                            className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                          >
-                            <FaPencil size={18} />
-                          </Link>
-                        </Button>
+                        <TooltipButton title="تعديل">
+                          <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                            <Link
+                              to={`/dashboard/employees/${id}/update`}
+                              className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                            >
+                              <FaPencil size={18} />
+                            </Link>
+                          </Button>
+                        </TooltipButton>
                       </motion.div>
                     )}
                     {canDeleteEmployee && (

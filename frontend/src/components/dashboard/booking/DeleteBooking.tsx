@@ -1,5 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
+import TooltipButton from "@/components/ui/TooltipButton";
 import { useDeleteBooking } from "@/lib/react-query/dashboard/bookings";
 import cookieServices from "@/utils/cookieServices";
 import { AxiosError } from "axios";
@@ -38,14 +39,16 @@ const DeleteBooking = ({ name, id }: IProps) => {
 
   return (
     <>
-      <Button
-        size={"sm"}
-        onClick={() => setIsOpen(true)}
-        variant={"destructive"}
-        className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
-      >
-        <MdDelete size={24} />
-      </Button>
+      <TooltipButton title="حذف">
+        <Button
+          size={"sm"}
+          onClick={() => setIsOpen(true)}
+          variant={"destructive"}
+          className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+        >
+          <MdDelete size={24} />
+        </Button>
+      </TooltipButton>
 
       <Modal
         isOpen={isOpen}

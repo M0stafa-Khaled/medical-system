@@ -24,6 +24,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 interface IProps {
   doctorId: string;
@@ -97,14 +98,16 @@ const UpdateAction = ({ doctorId, action }: IProps) => {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          setIsOpen(true);
-        }}
-        className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
-      >
-        <FaPencil size={24} />
-      </Button>
+      <TooltipButton title="تعديل">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
+        >
+          <FaPencil size={24} />
+        </Button>
+      </TooltipButton>
 
       <Modal
         isOpen={isOpen}

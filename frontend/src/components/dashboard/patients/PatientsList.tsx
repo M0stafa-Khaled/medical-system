@@ -13,6 +13,7 @@ import useHasPermission from "@/hooks/useHasPermission";
 import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";
 import truncateText from "@/utils/truncateText";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 interface IProps {
   patients: IPatient[];
@@ -78,24 +79,28 @@ const PatientsList = ({ patients, meta }: IProps) => {
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
                 {canViewPatient && (
-                  <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
-                    <Link
-                      to={`/dashboard/patients/${id}`}
-                      className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
-                    >
-                      <FiEye size={24} />
-                    </Link>
-                  </Button>
+                  <TooltipButton title="عرض">
+                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
+                      <Link
+                        to={`/dashboard/patients/${id}`}
+                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
+                      >
+                        <FiEye size={24} />
+                      </Link>
+                    </Button>
+                  </TooltipButton>
                 )}
                 {canUpdatePatient && (
-                  <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                    <Link
-                      to={`/dashboard/patients/${id}/update`}
-                      className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                    >
-                      <FaPencil size={18} />
-                    </Link>
-                  </Button>
+                  <TooltipButton title="تعديل">
+                    <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                      <Link
+                        to={`/dashboard/patients/${id}/update`}
+                        className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                      >
+                        <FaPencil size={18} />
+                      </Link>
+                    </Button>
+                  </TooltipButton>
                 )}
                 {canDeletePatient && <DeletePatient name={name} id={id} />}
               </div>

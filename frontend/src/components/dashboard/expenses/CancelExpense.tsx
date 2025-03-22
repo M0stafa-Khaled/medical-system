@@ -21,6 +21,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import { useCancelExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import { MdDoNotDisturbAlt } from "react-icons/md";
+import TooltipButton from "@/components/ui/TooltipButton";
 
 const CancelExpense = ({ id }: { id: number }) => {
   const token = cookieServices.getToken()!;
@@ -86,13 +87,15 @@ const CancelExpense = ({ id }: { id: number }) => {
 
   return (
     <>
-      <Button
-        size={"sm"}
-        onClick={() => setIsOpen(true)}
-        className="bg-gray-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600 text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
-      >
-        <MdDoNotDisturbAlt size={24} />
-      </Button>
+      <TooltipButton title="إلغاء">
+        <Button
+          size={"sm"}
+          onClick={() => setIsOpen(true)}
+          className="bg-gray-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600 text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+        >
+          <MdDoNotDisturbAlt size={24} />
+        </Button>
+      </TooltipButton>
 
       <Modal
         isOpen={isOpen}
