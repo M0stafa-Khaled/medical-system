@@ -1,5 +1,5 @@
 import { IFormInput } from "@/interfaces";
-import { TBookingStatus } from "@/types";
+import { TBookingStatus, TPaymentMethod } from "@/types";
 
 export const LOGIN_FORM_INPUTS: IFormInput[] = [
   {
@@ -485,5 +485,32 @@ export const BOOKING_STATUS_OPTIONS: {
   {
     label: "لم يحضر",
     value: "no-show",
+  },
+];
+
+export const TRANSACTION_FORM_INPUTS: IFormInput[] = [
+  {
+    name: "payment_method",
+    label: "وسيلة الدفع",
+    type: "select",
+  },
+  {
+    name: "price",
+    label: "المبلغ",
+    type: "number",
+  },
+];
+
+export const PaymentMethods: {
+  label: string;
+  value: TPaymentMethod;
+}[] = [
+  {
+    label: "بطاقة بنكية",
+    value: "visa",
+  },
+  {
+    label: "نقدي",
+    value: "cash",
   },
 ];

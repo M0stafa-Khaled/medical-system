@@ -77,4 +77,13 @@ export enum PERMISSIONS {
   UPDATE_BOOKING = "تعديل-حجز-مريض",
   VIEW_BOOKING = "عرض-حجز-مريض",
   DELETE_BOOKING = "حذف-حجز-مريض",
+
+  // Transactions
+  REFUND_TRANSACTION = "استرداد-تحصيل",
+  ADD_TRANSACTION = "اضافة-تحصيل",
+  VIEW_TRANSACTION = "عرض-تحصيل",
+  TRANSACTIONS = "التحصيلات",
+  LAST_PATIENT_TRANSACTIONS = "اخر-تحصيلات-المريض",
+  PATIENT_TRANSACTIONS = "تحصيلات-المريض",
+  ADD_PATIENT_PAYMENT = "اضافة-دفع-للمريض",
 }

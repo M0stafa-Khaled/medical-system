@@ -6,3 +6,7 @@ export type TBookingStatus =
   | "cancelled"
   | "no-show"
   | "ended";
+
+export type TPaymentMethod = "cash" | "visa";
+
+export type TBalanceType = "inquiry" | "payment";

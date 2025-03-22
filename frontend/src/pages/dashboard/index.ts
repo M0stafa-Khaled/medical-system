@@ -35,3 +35,8 @@ export { default as DashboardUpdateBooking } from "./bookings/UpdateBooking";
 
 // Treasuries
 export { default as Treasuries } from "./treasuries";
+
+// Transaction
+export { default as Transactions } from "./transactions";
+export { default as TransactionDetails } from "./transactions/TransactionDetails";
+export { default as LastVisits } from "./transactions/LastVisits";

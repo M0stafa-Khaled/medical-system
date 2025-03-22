@@ -34,6 +34,10 @@ import {
   DashboardBookingDetails,
   DashboardCreateBooking,
   DashboardUpdateBooking,
+  // Transactions
+  Transactions,
+  TransactionDetails,
+  LastVisits,
 } from "@/pages/dashboard";
 
 import { PERMISSIONS } from "@/enums/permissions";
@@ -277,6 +281,35 @@ const dashboardRoutes = createRoutesFromElements(
           </ProtectedRoute>
         }
         id="dashboard-expenses-categories"
+      />
+
+      {/* Transactions */}
+      <Route
+        path="transactions"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.TRANSACTIONS}>
+            <Transactions />
+          </ProtectedRoute>
+        }
+        id="dashboard-transactions"
+      />
+      <Route
+        path="transactions/:transactionId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_TRANSACTION}>
+            <TransactionDetails />
+          </ProtectedRoute>
+        }
+        id="dashboard-transaction-details"
+      />
+      <Route
+        path="last-visits/:patientId/transactions/:doctorId"
+        element={
+          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_TRANSACTION}>
+            <LastVisits />
+          </ProtectedRoute>
+        }
+        id="dashboard-last-visits"
       />
 
       {/* Treasuries */}

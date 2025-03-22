@@ -5,6 +5,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { ILink } from "@/interfaces";
 import {
+  BadgeDollarSign,
   Bookmark,
   Building2,
   HomeIcon,
@@ -31,6 +32,8 @@ const DashboardLayout = () => {
   const canViewExpensesCategories = useHasPermission(
     PERMISSIONS.EXPENSE_CATEGORIES
   );
+  const canViewTransactions = useHasPermission(PERMISSIONS.TRANSACTIONS);
+  // Bookings
   const canViewBookings = useHasPermission(PERMISSIONS.BOOKINGS);
 
   const routeNames: Record<string, string> = {
@@ -47,6 +50,8 @@ const DashboardLayout = () => {
     expenses: "المصروفات",
     "expenses-categories": "تصنيفات المصروفات",
     bookings: "الحجوزات",
+    transactions: "التحصيلات",
+    "last-visits": "أخر الزيارات",
   };
 
   const NAV_LINKS: ILink[] = [
@@ -145,7 +150,16 @@ const DashboardLayout = () => {
                     {
                       name: routeNames.expenses,
                       path: "/dashboard/expenses",
-                      icon: <MdAttachMoney />,
+                      icon: <MdAttachMoney size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewTransactions
+                ? [
+                    {
+                      name: routeNames.transactions,
+                      path: "/dashboard/transactions",
+                      icon: <BadgeDollarSign size={18} />,
                     },
                   ]
                 : []),
