@@ -15,7 +15,7 @@ interface IProps {
   doctorId: string;
 }
 const WorkingDayCard = ({
-  day: { clinic_name, day, deuration, end_at, id, max_visitors, start_at },
+  day: { clinic, day, deuration, end_at, id, max_visitors, start_at },
   doctorId,
 }: IProps) => {
   const canDeleteAction = useHasPermission(PERMISSIONS.DELETE_ACTION_DOCTOR);
@@ -32,7 +32,7 @@ const WorkingDayCard = ({
             </h2>
             <h3 className="flex justify-center items-center gap-2 font-medium">
               <Hospital className="w-4 h-4" />
-              <span>{clinic_name}</span>
+              <span>{clinic.name}</span>
             </h3>
           </CardTitle>
         </CardHeader>
