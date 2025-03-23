@@ -1,5 +1,6 @@
 import Cookies from "universal-cookie";
 import { TRole } from "../types";
+import { decryptData, encryptData } from "./encryptData";
 
 class CookieService {
   private cookies: Cookies;
@@ -50,6 +51,27 @@ class CookieService {
     this.cookies.remove("token", { path: "/" });
     this.cookies.remove("role", { path: "/" });
     this.cookies.remove("permissions", { path: "/" });
+  }
+
+  setCanResetPass() {
+    const encryptReset = encryptData("true");
+    this.cookies.set("c_r_p", encryptReset, {
+      path: "/",
+      secure: import.meta.env.VITE_ENV === "production",
+      expires: new Date(Date.now() + 60 * 60 * 1000),
+    });
+  }
+
+  getCanResetPass(): boolean {
+    const canResetPass = this.cookies.get("c_r_p");
+    if (!canResetPass) return false;
+    const decryptCanReset = decryptData(canResetPass);
+    if (decryptCanReset === "true") return true;
+    return false;
+  }
+
+  clearCanResetPass() {
+    this.cookies.remove("c_r_p", { path: "/" });
   }
 }
 

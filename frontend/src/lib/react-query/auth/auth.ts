@@ -1,9 +1,12 @@
+import { IResetPassword } from "@/interfaces/auth/auth";
 import {
   checkAuth,
+  forgotPassword,
   getAllPermissions,
   login,
   logout,
   resendOtp,
+  resetPassword,
   verifyEmail,
 } from "@/services/auth/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -45,3 +48,18 @@ export const useGetAllPermissions = (token: string) => {
     queryFn: () => getAllPermissions(token),
   });
 };
+
+export const useForgotPassword = () =>
+  useMutation({
+    mutationFn: (email: string) => forgotPassword({ email }),
+  });
+
+export const useResetPassword = () =>
+  useMutation({
+    mutationFn: ({ code, password, password_confirmation }: IResetPassword) =>
+      resetPassword({
+        code,
+        password,
+        password_confirmation,
+      }),
+  });

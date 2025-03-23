@@ -27,3 +27,9 @@ export interface IResponsePermissions {
   message: string | null;
   data: IPermission[];
 }
+
+export interface IResetPassword {
+  code: string;
+  password: string;
+  password_confirmation: string;
+}

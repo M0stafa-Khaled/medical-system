@@ -1,5 +1,4 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import { AppLayout, RootLayout } from "@/layout";
 import NotFound from "@/pages/NotFound";
 import UnAuthorized from "@/pages/UnAuthorized";
 import {
@@ -7,11 +6,13 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-
-import { Profile } from "@/pages/profile";
 import authRoutes from "./auth";
+import { lazy } from "react";
 import dashboardRoutes from "./dashboard";
+const RootLayout = lazy(() => import("@/layout/RootLayout"));
+const AppLayout = lazy(() => import("@/layout/AppLayout"));
 
+const Profile = lazy(() => import("@/pages/profile/Profile"));
 const routes = createRoutesFromElements(
   <>
     <Route

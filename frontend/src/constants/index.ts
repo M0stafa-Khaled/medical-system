@@ -4,12 +4,35 @@ import { TBookingStatus, TPaymentMethod } from "@/types";
 export const LOGIN_FORM_INPUTS: IFormInput[] = [
   {
     label: "البريد الإلكتروني",
+    placeholder: "البريد الإلكتروني",
     name: "email",
     type: "text",
   },
   {
     label: "كلمة المرور",
+    placeholder: "كلمة المرور",
     name: "password",
+    type: "password",
+  },
+];
+
+export const RESET_PASSWORD_FORM_INPUTS: IFormInput[] = [
+  {
+    label: "رمز التحقق",
+    placeholder: "رمز التحقق",
+    name: "code",
+    type: "text",
+  },
+  {
+    label: "كلمة المرور الجديدة",
+    placeholder: "كلمة المرور",
+    name: "password",
+    type: "password",
+  },
+  {
+    label: "تأكيد كلمة المرور الجديدة",
+    placeholder: "تأكيد كلمة المرور",
+    name: "password_confirmation",
     type: "password",
   },
 ];

@@ -1,7 +1,5 @@
 import { login } from "@/store/features/auth/authSlice";
 import { setPermissions } from "@/store/features/permissions/permissionsSlice";
-import ToggleMode from "@/components/ToggleMode";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,19 +8,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { LOGIN_FORM_INPUTS } from "@/constants";
 import { useLogin } from "@/lib/react-query/auth/auth";
-import loginSchema from "@/validations/loginSchema";
+import { loginSchema } from "@/validations/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
-import { Loader2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
+import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -60,77 +59,78 @@ const Login = () => {
         toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
     }
   };
-
   return (
     <>
       <Helmet>
         <title>{import.meta.env.VITE_WEB_NAME} | تسجيل الدخول</title>
       </Helmet>
-      <div className="relative min-h-screen">
-        <div className="absolute bg-black/20 dark:bg-transparent inset-0 bg-[url(/login-bg.svg)] bg-cover bg-left filter blur-sm -z-50" />
-        <div className="px-1 lg:px-0 bg-[url(login-img.svg)] bg-no-repeat bg-center bg-cover min-h-screen flex justify-center items-center text-white">
-          <div className="py-9 px-4 md:px-6 max-w-md w-full rounded-xl shadow-lg bg-white dark:bg-foreground border border-black/20 dark:border-white/20">
-            <div className="relative">
-              <div className="absolute top-0 right-0">
-                <ToggleMode />
-              </div>
-            </div>
-            <div className="flex justify-center items-center max-w-28 mx-auto">
-              <img src="/logo.svg" alt="logo" className="max-w-full" />
-            </div>
-            <h1 className="my-3 text-black dark:text-white font-bold text-center text-xl">
-              تسجيل الدخول
-            </h1>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4 text-white dark:text-white"
-              >
-                {LOGIN_FORM_INPUTS.map(({ label, name, type }, idx) => (
+
+      <div className="flex flex-col justify-center items-center gap-2 mb-6">
+        <img src="/logo.svg" alt="logo" className="w-20" />
+        <h1 className="font-semibold text-black text-xl text-center">
+          تسجيل الدخول
+        </h1>
+        <p className="text-sm font-medium text-black/70 text-center">
+          مرحبا بعودتك، يرجى تسجيل الدخول للمتابعة
+        </p>
+      </div>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-3 w-full max-w-md md:max-w-sm"
+        >
+          <div>
+            <div className="space-y-4">
+              {LOGIN_FORM_INPUTS.map((input) => (
+                <div className="w-full" key={input.name}>
                   <FormField
-                    key={idx}
                     control={form.control}
-                    name={name as "email" | "password"}
+                    name={input.name as keyof z.infer<typeof loginSchema>}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-black dark:text-white">
-                          {label}
+                        <FormLabel className="text-black" htmlFor={input.name}>
+                          {input.label}
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder={label}
-                            type={type}
+                            id={input.name}
+                            placeholder={input.placeholder}
+                            type={input.type}
                             {...field}
-                            className="py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-black/50 dark:placeholder:text-white/50"
+                            className="px-2 py-3 focus-visible:ring-[#bababa] placeholder:h-14 h-auto border-black/20 text-black placeholder:text-black/50"
                           />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                ))}
-                <Button
-                  type="submit"
-                  className="py-6 w-full text-base"
-                  disabled={isPending}
-                >
-                  تسجيل الدخول
-                  {isPending && <Loader2 className="animate-spin" />}
-                </Button>
-              </form>
-            </Form>
-            <p className="mt-2 text-sm text-black dark:text-white/80">
-              ليس لديك حساب؟{" "}
+                </div>
+              ))}
+            </div>
+            <p className="mr-2 mt-1">
               <Link
-                to={"/register"}
-                className="underline text-[#000] dark:text-white"
+                to={"/forgot-password"}
+                className="text-sm underline text-black"
               >
-                تسجيل حساب جديد
+                هل نسيت كلمة المرور؟
               </Link>
             </p>
           </div>
-        </div>
-      </div>
+          <Button
+            disabled={isPending}
+            className="h-auto bg-[#16a0cf] hover:bg-[#16a0cf]/90 text-white w-full py-3 px-4 flex justify-center items-center gap-4"
+          >
+            تسحيل الدخول
+            {isPending && <Loader2 className="animate-spin" />}
+          </Button>
+        </form>
+      </Form>
+      <p className="mt-2 text-sm text-black">
+        ليس لديك حساب؟{" "}
+        <Link to={"/register"} className="underline text-[#000]">
+          تسجيل حساب جديد
+        </Link>
+      </p>
     </>
   );
 };

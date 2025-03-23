@@ -33,7 +33,7 @@ const createDoctorSchema = z.object({
     .email("ادخل بريد إلكترونى صالح"),
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
-    .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
+    .min(8, "كلمة المرور يجب ان تكون 8 احرف على الاقل"),
   gender: z.object(
     {
       value: z.string({ message: "النوع مطلوب" }),

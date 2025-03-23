@@ -6,7 +6,7 @@ const Register = () => {
       <Helmet>
         <title>{import.meta.env.VITE_WEB_NAME} | تسجيل الدخول</title>
       </Helmet>
-      <div className="text-black dark:text-white">Register</div>;
+      <div className="text-black dark:text-white">Register</div>
     </>
   );
 };

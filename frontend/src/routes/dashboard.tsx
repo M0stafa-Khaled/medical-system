@@ -1,46 +1,91 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { DashboardLayout, RootLayout } from "@/layout";
 import { createRoutesFromElements, Route } from "react-router-dom";
-
-import {
-  Clinics,
-  // Doctors
-  Doctors,
-  DoctorDetails,
-  CreateDoctor,
-  CreateWorkingDay,
-  UpdateWorkingDay,
-  // Employees
-  Employees,
-  EmployeeDetails,
-  UpdateDoctor,
-  CreateEmployee,
-  UpdateEmployee,
-  // Patients
-  Patients,
-  CreatePatient,
-  UpdatePatient,
-  PatientDetails,
-  // Drugs
-  Drugs,
-  // Treasuries
-  Treasuries,
-  Expenses,
-  // Expenses
-  ExpensesCategories,
-  ExpenseDetails,
-  // Bookings
-  DashboardBookings,
-  DashboardBookingDetails,
-  DashboardCreateBooking,
-  DashboardUpdateBooking,
-  // Transactions
-  Transactions,
-  TransactionDetails,
-  LastVisits,
-} from "@/pages/dashboard";
-
 import { PERMISSIONS } from "@/enums/permissions";
+import { lazy } from "react";
+
+// Clinics
+const Clinics = lazy(() => import("@/pages/dashboard/clinics"));
+
+// Doctors
+const Doctors = lazy(() => import("@/pages/dashboard/doctors"));
+const DoctorDetails = lazy(
+  () => import("@/pages/dashboard/doctors/DoctorDetails")
+);
+const CreateDoctor = lazy(
+  () => import("@/pages/dashboard/doctors/CreateDoctor")
+);
+const UpdateDoctor = lazy(
+  () => import("@/pages/dashboard/doctors/UpdateDoctor")
+);
+
+// Working Days
+const CreateWorkingDay = lazy(
+  () => import("@/pages/dashboard/doctors/workingDays/CreateWorkingDay")
+);
+const UpdateWorkingDay = lazy(
+  () => import("@/pages/dashboard/doctors/workingDays/UpdateWorkingDay")
+);
+
+// Employees
+const Employees = lazy(() => import("@/pages/dashboard/employees"));
+const EmployeeDetails = lazy(
+  () => import("@/pages/dashboard/employees/EmployeeDetails")
+);
+const CreateEmployee = lazy(
+  () => import("@/pages/dashboard/employees/CreateEmployee")
+);
+const UpdateEmployee = lazy(
+  () => import("@/pages/dashboard/employees/UpdateEmployee")
+);
+
+// Patients
+const Patients = lazy(() => import("@/pages/dashboard/patients"));
+const PatientDetails = lazy(
+  () => import("@/pages/dashboard/patients/PatientDetails")
+);
+const CreatePatient = lazy(
+  () => import("@/pages/dashboard/patients/CreatePatient")
+);
+const UpdatePatient = lazy(
+  () => import("@/pages/dashboard/patients/UpdatePatient")
+);
+
+// Drugs
+const Drugs = lazy(() => import("@/pages/dashboard/drugs"));
+
+// Treasuries
+const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
+const Expenses = lazy(() => import("@/pages/dashboard/expenses"));
+
+// Expenses
+const ExpensesCategories = lazy(
+  () => import("@/pages/dashboard/expensesCategories")
+);
+const ExpenseDetails = lazy(
+  () => import("@/pages/dashboard/expenses/ExpenseDetails")
+);
+
+// Bookings
+const DashboardBookings = lazy(() => import("@/pages/dashboard/bookings"));
+const DashboardBookingDetails = lazy(
+  () => import("@/pages/dashboard/bookings/BookingDetails")
+);
+const DashboardCreateBooking = lazy(
+  () => import("@/pages/dashboard/bookings/CreateBooking")
+);
+const DashboardUpdateBooking = lazy(
+  () => import("@/pages/dashboard/bookings/UpdateBooking")
+);
+
+// Transactions
+const Transactions = lazy(() => import("@/pages/dashboard/transactions"));
+const TransactionDetails = lazy(
+  () => import("@/pages/dashboard/transactions/TransactionDetails")
+);
+const LastVisits = lazy(
+  () => import("@/pages/dashboard/transactions/LastVisits")
+);
 
 const dashboardRoutes = createRoutesFromElements(
   <Route element={<RootLayout />} id="dashboard-root">

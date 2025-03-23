@@ -4,19 +4,22 @@ import ThemeProvider from "./ThemeProvider";
 import { store } from "@/store/store";
 import { RouterProvider } from "react-router-dom";
 import router from "@/routes";
+import { HelmetProvider } from "react-helmet-async";
 
 const Providers = () => {
   return (
-    <QueryProvider>
-      <Provider store={store}>
-        <ThemeProvider>
-          <RouterProvider
-            router={router}
-            future={{ v7_startTransition: true }}
-          />
-        </ThemeProvider>
-      </Provider>
-    </QueryProvider>
+    <HelmetProvider>
+      <QueryProvider>
+        <Provider store={store}>
+          <ThemeProvider>
+            <RouterProvider
+              router={router}
+              future={{ v7_startTransition: true }}
+            />
+          </ThemeProvider>
+        </Provider>
+      </QueryProvider>
+    </HelmetProvider>
   );
 };
 

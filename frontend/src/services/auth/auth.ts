@@ -2,6 +2,7 @@ import axiosInstanceAPI from "@/config/axios.config";
 import {
   IAuthResponse,
   ICheckAuth,
+  IResetPassword,
   IResponsePermissions,
 } from "@/interfaces/auth/auth";
 
@@ -94,5 +95,32 @@ export const verifyEmail: ({
       },
     }
   );
+  return data;
+};
+
+export const forgotPassword: ({ email }: { email: string }) => Promise<{
+  status: boolean;
+  message: string;
+}> = async ({ email }) => {
+  const { data } = await axiosInstanceAPI.post(
+    "/password/confirmation-notification",
+    { email, company_name: "Al-CarmaClinic" }
+  );
+  return data;
+};
+
+export const resetPassword: ({
+  code,
+  password,
+  password_confirmation,
+}: IResetPassword) => Promise<{
+  status: boolean;
+  message: string;
+}> = async ({ code, password, password_confirmation }) => {
+  const { data } = await axiosInstanceAPI.post("/password/reset", {
+    code,
+    password,
+    password_confirmation,
+  });
   return data;
 };
