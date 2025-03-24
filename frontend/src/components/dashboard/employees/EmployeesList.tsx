@@ -99,7 +99,7 @@ const EmployeesList = ({ employees, meta }: IProps) => {
                 )}
                 {canUpdateEmployee && (
                   <TooltipButton title="تعديل">
-                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm">
+                    <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
                       <Link
                         to={`/dashboard/employees/${id}/update`}
                         className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
