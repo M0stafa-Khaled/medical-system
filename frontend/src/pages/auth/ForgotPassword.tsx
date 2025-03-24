@@ -46,7 +46,7 @@ const ForgotPassword = () => {
       const errorObj = error as AxiosError<{
         message: { [key: string]: string[] };
       }>;
-      if (errorObj?.response?.data.message) {
+      if (typeof errorObj?.response?.data.message === "object") {
         Object.keys(errorObj.response.data.message).forEach((key) => {
           errorObj?.response?.data.message[key].forEach((error) =>
             toast.error(error, {
@@ -55,6 +55,10 @@ const ForgotPassword = () => {
           );
         });
       }
+      if (typeof errorObj?.response?.data.message === "string")
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
     }
   };
   return (

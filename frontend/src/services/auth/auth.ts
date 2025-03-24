@@ -22,6 +22,7 @@ export const login: (user: {
   password: string;
 }) => Promise<IAuthResponse> = async ({ email, password }) => {
   const { data } = await axiosInstanceAPI.post("/auth", {
+    slug: "al-carmaclinic",
     email,
     password,
   });
@@ -104,7 +105,7 @@ export const forgotPassword: ({ email }: { email: string }) => Promise<{
 }> = async ({ email }) => {
   const { data } = await axiosInstanceAPI.post(
     "/password/confirmation-notification",
-    { email, company_name: "Al-CarmaClinic" }
+    { email, slug: "Al-CarmaClinic" }
   );
   return data;
 };
