@@ -522,6 +522,11 @@ export const TRANSACTION_FORM_INPUTS: IFormInput[] = [
     label: "المبلغ",
     type: "number",
   },
+  {
+    name: "doctor_action_id",
+    label: "الخدمة",
+    type: "select",
+  },
 ];
 
 export const PaymentMethods: {

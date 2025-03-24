@@ -39,11 +39,19 @@ const RenderTransactionFormFields = ({
     switch (true) {
       case input.name === "status":
         return <SwitchFormItem {...commonProps} />;
+
       case input.name === "payment_method":
         return (
           <SelectFormItem
             {...commonProps}
             options={options?.paymentMethods || []}
+          />
+        );
+      case input.name === "doctor_action_id":
+        return (
+          <SelectFormItem
+            {...commonProps}
+            options={options?.doctorActions || []}
           />
         );
       default:

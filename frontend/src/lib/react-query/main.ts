@@ -3,8 +3,8 @@ import Query_Keys from "@/enums/queryKeys";
 import {
   getAllClinicsDoctors,
   getAvailableBookingsTimes,
-} from "@/services/bookings/bookings";
-import { IGetAvailableTimes } from "@/interfaces/bookings/bookings";
+} from "@/services/main";
+import { IGetAvailableTimes } from "@/interfaces";
 
 export const useGetAllDoctorsClinics = ({
   token,

@@ -32,7 +32,7 @@ export interface IBookingsRes {
   };
 }
 export interface ICreateBooking {
-  id?: string;
+  id?: number;
   token: string;
   formData: {
     status?: string;
@@ -44,6 +44,12 @@ export interface ICreateBooking {
     date: string;
     start_at: string;
   };
+}
+
+export interface IUpdateBookingStatus {
+  status: TBookingStatus;
+  id: number;
+  token: string;
 }
 
 export interface IBookingsFilter {

@@ -27,6 +27,7 @@ import { TPaymentMethod } from "@/types";
 import TooltipButton from "@/components/ui/TooltipButton";
 import { Link } from "react-router-dom";
 import { IBooking } from "@/interfaces/dashboard/bookings";
+import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 
 interface IProps {
   booking: IBooking;
@@ -34,6 +35,16 @@ interface IProps {
 const CreateTransaction = ({ booking }: IProps) => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: doctorActions } = useGetDoctorActions({
+    doctorId: isOpen ? booking.doctor.id.toString() : "",
+    token,
+  });
+
+  const doctorActionsOptions = doctorActions?.data?.map((action) => ({
+    value: action.name,
+    label: `${action.name} - ${action.price} جنيه`,
+  }));
 
   const { mutateAsync: createTransaction, isPending } = useCreateTransaction();
 
@@ -138,6 +149,7 @@ const CreateTransaction = ({ booking }: IProps) => {
                   schema={transactionSchema}
                   options={{
                     paymentMethods: PaymentMethods,
+                    doctorActions: doctorActionsOptions!,
                   }}
                 />
               </motion.div>

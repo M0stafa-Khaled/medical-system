@@ -84,9 +84,9 @@ const TransactionDetails = () => {
         <title>{import.meta.env.VITE_WEB_NAME}</title>
       </Helmet>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm hover:shadow-md transition-shadow duration-300">
           <CardHeader className="py-4 mb-4">
@@ -157,7 +157,7 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants}>
                 <InfoField
                   label="الخدمة"
-                  value={action?.name as string}
+                  value={action as string}
                   icon={<ClipboardList className="h-5 w-5 text-cyan-500" />}
                 />
               </motion.div>

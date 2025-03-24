@@ -4,6 +4,7 @@ import {
   IBooking,
   IBookingsRes,
   ICreateBooking,
+  IUpdateBookingStatus,
 } from "@/interfaces/dashboard/bookings";
 
 export const getAllBookings: ({
@@ -68,6 +69,28 @@ export const updateBooking: ({
   const { data } = await axiosInstanceAPI.post(
     `/patients-bookings/${id}`,
     { ...formData, _method: "put" },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return data;
+};
+
+export const updateBookingStatus: ({
+  token,
+  status,
+  id,
+}: IUpdateBookingStatus) => Promise<{
+  status: boolean;
+  message: string;
+}> = async ({ token, status, id }) => {
+  const { data } = await axiosInstanceAPI.post(
+    `/pateint-bookings/${id}/status`,
+    {
+      status,
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,

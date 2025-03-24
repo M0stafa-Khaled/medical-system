@@ -1,4 +1,7 @@
-import { ICreateBooking } from "../../../interfaces/dashboard/bookings";
+import {
+  ICreateBooking,
+  IUpdateBookingStatus,
+} from "../../../interfaces/dashboard/bookings";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "@/enums/queryKeys";
 import {
@@ -7,6 +10,7 @@ import {
   getAllBookings,
   getBookingById,
   updateBooking,
+  updateBookingStatus,
 } from "@/services/dashboard/bookings";
 import { IGetWithParams } from "@/interfaces";
 
@@ -53,6 +57,21 @@ export const useUpdateBooking = () => {
   return useMutation({
     mutationFn: ({ token, formData, id }: ICreateBooking) =>
       updateBooking({ formData, token, id }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_BOOKING],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_BOOKINGS],
+      });
+    },
+  });
+};
+export const useUpdateBookingStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ token, status, id }: IUpdateBookingStatus) =>
+      updateBookingStatus({ status, token, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ONE_BOOKING],

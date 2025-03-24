@@ -75,6 +75,7 @@ export enum PERMISSIONS {
   BOOKINGS = "الحجوزات",
   ADD_BOOKING = "اضافة-حجز-مريض",
   UPDATE_BOOKING = "تعديل-حجز-مريض",
+  UPDATE_BOOKING_STATUS = "تحديث-حالة-الحجز",
   VIEW_BOOKING = "عرض-حجز-مريض",
   DELETE_BOOKING = "حذف-حجز-مريض",
 

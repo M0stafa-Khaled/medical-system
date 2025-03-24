@@ -3,7 +3,7 @@ import {
   IAvailableTimesRes,
   IDoctorClinicsRes,
   IGetAvailableTimes,
-} from "@/interfaces/bookings/bookings";
+} from "@/interfaces";
 
 export const getAllClinicsDoctors: ({
   token,

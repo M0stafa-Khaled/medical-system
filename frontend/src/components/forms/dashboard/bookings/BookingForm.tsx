@@ -20,7 +20,7 @@ import convertDay from "@/utils/convertDayLang";
 import {
   useGetAllDoctorsClinics,
   useGetAvailableBookingsTime,
-} from "@/lib/react-query/bookings/bookings";
+} from "@/lib/react-query/main";
 import {
   useCreateBooking,
   useUpdateBooking,
@@ -263,7 +263,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     try {
       if (action === "update") {
         const { message, status } = await updateBooking({
-          id: booking?.id.toString(),
+          id: booking?.id,
           formData: {
             clinic_id: data.clinic_id.value,
             doctor_id: data.doctor_id.value,

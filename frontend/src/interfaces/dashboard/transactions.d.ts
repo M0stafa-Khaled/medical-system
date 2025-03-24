@@ -2,7 +2,6 @@ import { TPaymentMethod } from "@/types";
 import { IPaginationMeta } from "..";
 import { IBalance } from "./balances";
 import { IDoctor } from "./doctors/doctor";
-import { IDoctorAction } from "./doctors/doctorActions";
 import { IEmployee } from "./employee";
 import { IPatient } from "./patient";
 import { ITreasury } from "./treasury";
@@ -18,7 +17,7 @@ export interface ITransaction {
   employee: IEmployee;
   treasury: ITreasury;
   balance: IBalance;
-  action: IDoctorAction;
+  action: string;
   doctor: IDoctor;
   patient: IPatient;
 }

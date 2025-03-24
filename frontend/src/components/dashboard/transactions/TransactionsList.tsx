@@ -61,7 +61,7 @@ const TransactionsList = ({ transactions }: IProps) => {
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {transaction.action.name}
+            {transaction.action}
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
