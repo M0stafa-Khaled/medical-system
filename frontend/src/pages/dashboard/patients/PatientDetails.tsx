@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
 import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
-import ProfileHeader from "@/components/dashboard/ProfileHeader";
+import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
 import DeletePatient from "@/components/dashboard/patients/DeletePatient";
 import InfoField from "@/components/dashboard/InfoField";
 import useHasPermission from "@/hooks/useHasPermission";
@@ -97,7 +97,7 @@ const PatientDetails = () => {
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
           <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
-              <ProfileHeader
+              <HeaderUserDetails
                 name={name!}
                 role={user?.role.toLowerCase() as string}
                 actionButtons={

@@ -7,7 +7,7 @@ interface IProps {
   role: string;
   actionButtons: ReactNode;
 }
-const ProfileHeader = ({ image, name, role, actionButtons }: IProps) => {
+const HeaderUserDetails = ({ image, name, role, actionButtons }: IProps) => {
   return (
     <div className="flex flex-col sm:flex-row items-center sm:items-end gap-x-6 gap-y-3 pb-2">
       <div className="w-36 h-36 overflow-hidden">
@@ -44,4 +44,4 @@ const ProfileHeader = ({ image, name, role, actionButtons }: IProps) => {
   );
 };
 
-export default ProfileHeader;
+export default HeaderUserDetails;

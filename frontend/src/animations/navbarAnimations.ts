@@ -39,14 +39,14 @@ export const navVariants = {
 
 export const menuIconVariants = {
   hidden: {
-    scale: 0,
+    rotate: 45,
     opacity: 0,
   },
   visible: {
-    scale: 1,
+    rotate: 0,
     opacity: 1,
     transition: {
-      duration: 0.2,
+      duration: 0.1,
     },
   },
 };

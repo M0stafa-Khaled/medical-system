@@ -43,9 +43,6 @@ const RootLayout = () => {
       }
 
       // ----- User is authenticated ----- //
-      // Set Permissions in state
-      if (auth && permissions) dispatch(setPermissions(permissions));
-
       // Account is not Active
       if (auth && !status) {
         return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
@@ -56,6 +53,9 @@ const RootLayout = () => {
         navigate("/verify-email");
         return toast.warn("يرجى تاكيد البريد الالكتروني");
       }
+
+      // Set Permissions in state
+      if (auth && permissions) dispatch(setPermissions(permissions));
     })();
   }, [checkAuthUser, token, navigate, dispatch, location]);
 

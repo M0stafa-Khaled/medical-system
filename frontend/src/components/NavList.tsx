@@ -43,7 +43,9 @@ const NavList = ({ links, sidebar }: IProps) => {
             {hasChildren ? (
               <motion.div
                 variants={navItemsVariants}
-                className={`select-none w-full px-4 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
+                className={`select-none w-full px-4 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg ${
+                  sidebar ? "border border-muted" : ""
+                } flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleLinkExpansion(link.name);
@@ -70,7 +72,9 @@ const NavList = ({ links, sidebar }: IProps) => {
                   to={link.path || "#"}
                   className={`w-full ${
                     isChildLink ? "mt-2" : ""
-                  } py-2.5 px-4 pl-4 text-black dark:text-white transition-all duration-300 rounded-lg border border-muted flex items-center justify-between gap-2 ${
+                  } py-2.5 px-4 pl-4 text-black dark:text-white transition-all duration-300 rounded-lg ${
+                    sidebar ? "border border-muted" : ""
+                  } flex items-center justify-between gap-2 ${
                     activeLink
                       ? "bg-dark/20 dark:bg-dark"
                       : "hover:bg-dark/10 dark:hover:bg-dark/50"

@@ -1,5 +1,5 @@
 import { IPaginationMeta } from ".";
-import { IClinic } from "./clinic";
+import { IClinic } from "../clinics";
 
 export interface IDoctor {
   id: number;

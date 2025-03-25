@@ -1,5 +1,8 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IResponseProfile } from "@/interfaces/profile/profile";
+import {
+  IChangePassword,
+  IResponseProfile,
+} from "@/interfaces/profile/profile";
 
 export const getUserProfile: (
   token: string
@@ -13,3 +16,26 @@ export const getUserProfile: (
 };
 
 export const updateProfile = async () => {};
+
+export const changePassword: ({
+  token,
+  password,
+  password_confirmation,
+}: IChangePassword) => Promise<{
+  status: boolean;
+  message: string;
+}> = async ({ password, password_confirmation, token }) => {
+  const { data } = await axiosInstanceAPI.post(
+    "/me",
+    {
+      password,
+      password_confirmation,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return data;
+};

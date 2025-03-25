@@ -5,7 +5,7 @@ import { IPatient } from "./patient";
 import { IEmployee } from "./employee";
 import { IWorkingDay } from "./doctors/workingDays";
 import { IDoctorAction } from "./doctors/doctorActions";
-import { IClinic } from "./clinic";
+import { IClinic } from "./clinics";
 
 export interface IBooking {
   id: number;

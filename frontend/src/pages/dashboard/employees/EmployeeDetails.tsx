@@ -22,7 +22,7 @@ import {
   Wallet,
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
-import ProfileHeader from "@/components/dashboard/ProfileHeader";
+import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
 import InfoField from "@/components/dashboard/InfoField";
 import { FaPencil } from "react-icons/fa6";
 import DeleteEmployee from "@/components/dashboard/employees/DeleteEmployee";
@@ -104,7 +104,7 @@ const EmployeeDetails = () => {
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
           <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
-              <ProfileHeader
+              <HeaderUserDetails
                 image={image!}
                 name={name!}
                 role={user?.role.toLowerCase() as string}

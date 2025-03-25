@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import DeleteDoctor from "@/components/dashboard/doctors/DeleteDoctor";
 import { FaPencil } from "react-icons/fa6";
 import ImageModal from "@/components/shared/ImageModal";
-import ProfileHeader from "@/components/dashboard/ProfileHeader";
+import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
 import InfoField from "@/components/dashboard/InfoField";
 import Actions from "@/components/dashboard/doctors/actions/Actions";
 import useHasPermission from "@/hooks/useHasPermission";
@@ -105,7 +105,7 @@ const DoctorDetails = () => {
         <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
           <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
-              <ProfileHeader
+              <HeaderUserDetails
                 image={image!}
                 name={name!}
                 role={user?.role.toLowerCase() as string}

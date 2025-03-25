@@ -1,28 +1,15 @@
-import { TRole } from "@/types";
-
-export interface IProfile {
-  id: number;
-  name: string;
-  another_name?: string;
-  first_phone: string;
-  second_phone: string | null;
-  personal_id: string;
-  personal_image?: string | null;
-  status: boolean;
-  gender: string;
-  description?: string;
-  user: {
-    id: number;
-    email: string;
-    role: TRole;
-  };
-  image?: "";
-  job?: TRole;
-  salary?: string;
-}
+import { IDoctor } from "../dashboard/doctors/doctor";
+import { IPatient } from "../dashboard/patient";
+import { IEmployee } from "../dashboard/employee";
 
 export interface IResponseProfile {
-  data: IProfile;
+  data: IDoctor | IPatient | IEmployee;
   message: null;
   status: boolean;
+}
+
+export interface IChangePassword {
+  token: string;
+  password: string;
+  password_confirmation: string;
 }

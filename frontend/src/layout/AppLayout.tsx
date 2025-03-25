@@ -21,13 +21,11 @@ const AppLayout = () => {
   ];
 
   return (
-    <div>
+    <>
       <ScrollRestoration />
       <Navbar links={navLinks} />
-      <main>
-        <Outlet />
-      </main>
-    </div>
+      <Outlet />
+    </>
   );
 };
 

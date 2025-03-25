@@ -9,8 +9,7 @@ import {
 import authRoutes from "./auth";
 import { lazy } from "react";
 import dashboardRoutes from "./dashboard";
-const RootLayout = lazy(() => import("@/layout/RootLayout"));
-const AppLayout = lazy(() => import("@/layout/AppLayout"));
+import { AppLayout, RootLayout } from "@/layout";
 
 const Profile = lazy(() => import("@/pages/profile/Profile"));
 const routes = createRoutesFromElements(

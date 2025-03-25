@@ -38,13 +38,13 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
       variants={sidebarVariants}
       className={`container ${
         dashboard && "lg:hidden"
-      } pt-1 fixed w-full right-0 top-0 left-0 z-50`}
+      } pt-1 fixed w-full right-0 top-0 left-0 z-50 max-w-[1400px]`}
     >
       <motion.nav
         initial="hidden"
         animate="visible"
         variants={navItemsVariants}
-        className={`flex bg-foreground flex-wrap items-center justify-between py-1 border border-muted rounded-xl`}
+        className={`flex  bg-[#fff] dark:bg-foreground flex-wrap items-center justify-between py-1 border border-gray-200 dark:border-muted rounded-xl`}
       >
         <div className="flex items-center justify-between w-full px-3">
           <div className={`hidden lg:flex gap-3 items-center w-full`}>

@@ -6,7 +6,7 @@ import {
 } from "@/services/dashboard/clinics";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "@/enums/queryKeys";
-import { ICreateClinic } from "@/interfaces/dashboard/clinic";
+import { ICreateClinic } from "@/interfaces/dashboard/clinics";
 import { IGetWithParams } from "@/interfaces";
 
 export const useGetAllClinics = ({ token, search }: IGetWithParams) => {

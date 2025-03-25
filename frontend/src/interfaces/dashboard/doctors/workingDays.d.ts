@@ -1,4 +1,4 @@
-import { IClinic } from "../clinic";
+import { IClinic } from "../clinics";
 import { IDoctor } from "./doctor";
 
 export interface IWorkingDay {
