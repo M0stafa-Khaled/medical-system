@@ -4,7 +4,7 @@ import { store } from "../store/store";
 import { toast } from "react-toastify";
 
 const axiosInstanceAPI = axios.create({
-  baseURL: `/api`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
   headers: {
     Accept: "application/json",
   },
