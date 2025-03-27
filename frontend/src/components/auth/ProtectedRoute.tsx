@@ -32,12 +32,12 @@ const ProtectedRoute = ({
       ? requiredRole
       : [requiredRole];
     if (!role || !allowedRoles.includes(role)) {
-      return <Navigate to="/unauthorized" replace />;
+      return <Navigate to="/not-found" replace />;
     }
   }
 
   if (requiredPermission && !hasPermission) {
-    return <Navigate to="/unauthorized" replace />;
+    return <Navigate to="/not-found" replace />;
   }
 
   return children;

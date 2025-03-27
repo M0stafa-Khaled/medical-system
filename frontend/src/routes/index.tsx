@@ -1,6 +1,5 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import NotFound from "@/pages/NotFound";
-import UnAuthorized from "@/pages/UnAuthorized";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -40,7 +39,11 @@ const routes = createRoutesFromElements(
 
     {/* Errors */}
     <Route path="*" element={<NotFound />} id="not-found" />
-    <Route path="/unauthorized" element={<UnAuthorized />} id="unauthorized" />
+    <Route
+      path="/not-found"
+      element={<NotFound />}
+      id="not-round-unauthorized"
+    />
   </>
 );
 
