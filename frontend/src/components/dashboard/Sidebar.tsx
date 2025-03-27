@@ -1,6 +1,6 @@
 import ProfileMenu from "./ProfileMenu";
 import ToggleMode from "../ToggleMode";
-import LogoutIconButton from "../LogoutIconButton";
+import LogoutButton from "../LogoutButton";
 import NavList from "../NavList";
 import { motion } from "framer-motion";
 import {
@@ -46,7 +46,7 @@ const Sidebar = ({ links }: IProps) => {
             className="flex justify-center items-center gap-4"
           >
             <motion.div variants={navItemsVariants}>
-              <LogoutIconButton />
+              <LogoutButton />
             </motion.div>
             <motion.div variants={navItemsVariants}>
               <ProfileMenu />

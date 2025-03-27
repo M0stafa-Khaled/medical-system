@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { Button } from "../ui/button";
 import { TRole } from "@/types";
+import ChangePassword from "./ChangePassword";
+import UpdateDoctorProfile from "./UpdateDoctorProfile";
+import UpdatePatientProfile from "./UpdatePatientProfile";
 interface IProps {
   image: string;
   name: string;
@@ -33,13 +35,13 @@ const ProfileHeader = ({ image, name, role, firstPhone }: IProps) => {
           />
         </div>
       </motion.div>
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-x-8 gap-y-2 mt-2 md:pr-10 pb-4">
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-x-8 gap-y-2 mt-2 md:pr-16 pb-4">
         {/* Name & Role */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="space-y-2"
+          className="space-y-2 min-w-[150px]"
         >
           <div className="space-y-1">
             <h1 className="text-center md:text-start text-xl font-semibold">
@@ -58,10 +60,9 @@ const ProfileHeader = ({ image, name, role, firstPhone }: IProps) => {
           <p className="text-center md:text-start">{firstPhone}</p>
         </motion.div>
         <div className="flex flex-col md:flex-row gap-x-3 gap-y-2">
-          {(role === "doctor" || role === "patient") && (
-            <Button className="px-4 !font-medium">تعديل</Button>
-          )}
-          <Button className="px-4 !font-medium">تغيير كلمة المرور</Button>
+          {role === "doctor" && <UpdateDoctorProfile />}
+          {role === "patient" && <UpdatePatientProfile />}
+          <ChangePassword />
         </div>
       </div>
     </motion.div>

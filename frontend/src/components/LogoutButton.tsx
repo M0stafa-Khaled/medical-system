@@ -12,7 +12,7 @@ import { logout } from "@/store/features/auth/authSlice";
 import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
 import Modal from "./shared/Modal";
 
-const LogoutIconButton = () => {
+const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,9 +47,14 @@ const LogoutIconButton = () => {
         <Button
           onClick={() => setIsOpen(true)}
           variant={"destructive"}
-          className="h-9 w-9 px-0 py-0 font-bold"
+          className={`${
+            icon
+              ? "h-9 w-9 px-0 py-0 font-bold"
+              : "w-full h-auto py-3 flex justify-center items-center gap-2"
+          }`}
         >
           <FiLogOut size={20} />
+          {icon ? null : "تسجيل الخروج"}
         </Button>
       )}
 
@@ -72,4 +77,4 @@ const LogoutIconButton = () => {
   );
 };
 
-export default LogoutIconButton;
+export default LogoutButton;

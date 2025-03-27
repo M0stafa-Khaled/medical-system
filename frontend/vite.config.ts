@@ -18,7 +18,7 @@ export default defineConfig({
   //       target: "https://clinic-api.egprog.com",
   //       changeOrigin: true,
   //       secure: true,
-  //       rewrite: (path) => path.replace(/^\/*api/, "/api"),
+  //       rewrite: (path) => path.replace(/^\/api/, "/api"),
   //     },
   //   },
   // },

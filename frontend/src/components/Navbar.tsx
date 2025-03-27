@@ -6,7 +6,7 @@ import ProfileMenu from "./dashboard/ProfileMenu";
 
 import AuthButtons from "./dashboard/AuthButtons";
 import ToggleMode from "./ToggleMode";
-import LogoutIconButton from "./LogoutIconButton";
+import LogoutButton from "./LogoutButton";
 import NavList from "./NavList";
 import {
   menuIconVariants,
@@ -89,7 +89,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
               className="flex justify-center items-center gap-3"
             >
               <motion.div variants={navItemsVariants}>
-                <LogoutIconButton />
+                <LogoutButton />
               </motion.div>
               <motion.div variants={navItemsVariants}>
                 <ProfileMenu />

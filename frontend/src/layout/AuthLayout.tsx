@@ -31,7 +31,7 @@ const AuthLayout = () => {
             className="flex-1 w-full flex flex-col items-center justify-center"
           >
             <Outlet />
-            <Button className="bg-cyan-900 hover:bg-cyan-900/95 text-white h-auto w-auto p-0 mt-3">
+            <Button className="bg-cyan-900 hover:bg-cyan-900/95 text-[#fff] h-auto w-auto p-0 mt-3">
               <Link
                 to={"/"}
                 className="py-2.5 px-4 flex justify-center items-center gap-2"
@@ -52,7 +52,7 @@ const AuthLayout = () => {
               <img
                 src="/login.jpg"
                 alt="login"
-                className="w-[70%] md:w-full mx-auto"
+                className="w-[60%] md:w-[90%] mx-auto"
               />
             </div>
           </motion.div>

@@ -17,10 +17,10 @@ const DoctorClinics = ({ clinics }: IProps) => {
       <h3 className="text-center md:text-start text-lg font-medium">
         العيادات
       </h3>
-      <div className="mt-4 pr-6 flex justify-center md:justify-start flex-wrap gap-x-1 gap-y-1">
+      <div className="mt-4 md:pr-6 flex justify-center md:justify-start flex-wrap gap-x-1 gap-y-1">
         {clinics?.map((clinic) => (
           <motion.div key={clinic.id} variants={itemVariants}>
-            <Badge>{clinic.name}</Badge>
+            <Badge className="py-1 px-8 text-sm">{clinic.name}</Badge>
           </motion.div>
         ))}
       </div>

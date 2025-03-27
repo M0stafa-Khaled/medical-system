@@ -159,7 +159,7 @@ const Profile = () => {
                 />
                 <motion.div
                   variants={itemVariants}
-                  className="flex items-center gap-2"
+                  className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-2"
                 >
                   <h5 className="text-muted-foreground text-nowrap font-medium">
                     التوقيع:
