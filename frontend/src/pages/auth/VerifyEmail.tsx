@@ -35,6 +35,7 @@ import { toast } from "react-toastify";
 import * as z from "zod";
 import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
 import { Helmet } from "react-helmet-async";
+import { AxiosError } from "axios";
 
 const formSchema = z.object({
   otp: z
@@ -91,8 +92,23 @@ const VerifyEmail = () => {
       if (!status) return toast.error(message);
       toast.success("تم تأكيد البريد الإلكتروني بنجاح");
       navigate("/");
-    } catch (_error) {
-      toast.error("حدث خطأ أثناء تأكيد البريد الإلكتروني");
+    } catch (error) {
+      const errorObj = error as AxiosError<{
+        message: { [key: string]: string[] };
+      }>;
+      if (typeof errorObj?.response?.data.message === "object") {
+        Object.keys(errorObj.response.data.message).forEach((key) => {
+          errorObj?.response?.data.message[key].forEach((error) =>
+            toast.error(error, {
+              autoClose: 5000,
+            })
+          );
+        });
+      }
+      if (typeof errorObj?.response?.data.message === "string")
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
     }
   };
 
@@ -102,8 +118,23 @@ const VerifyEmail = () => {
       if (!status) return toast.error(message);
 
       toast.success("تم ارسال رمز التحقق مرة اخرى");
-    } catch (_error) {
-      toast.error("حدث خطأ أثناء ارسال الرمز");
+    } catch (error) {
+      const errorObj = error as AxiosError<{
+        message: { [key: string]: string[] };
+      }>;
+      if (typeof errorObj?.response?.data.message === "object") {
+        Object.keys(errorObj.response.data.message).forEach((key) => {
+          errorObj?.response?.data.message[key].forEach((error) =>
+            toast.error(error, {
+              autoClose: 5000,
+            })
+          );
+        });
+      }
+      if (typeof errorObj?.response?.data.message === "string")
+        toast.error(errorObj?.response?.data.message, {
+          autoClose: 5000,
+        });
     }
   };
 
@@ -129,7 +160,7 @@ const VerifyEmail = () => {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-3"
+                className="space-y-2"
               >
                 <FormField
                   control={form.control}
@@ -185,12 +216,11 @@ const VerifyEmail = () => {
                 >
                   تأكيد
                 </Button>
-
                 <p className="text-center text-muted-foreground text-sm">
                   لم يصلك رمز التحقق؟{" "}
                   <Button
                     variant="link"
-                    className="p-0"
+                    className="p-0 h-auto"
                     onClick={handleResendOtp}
                     type="button"
                     disabled={isLoadingResendOtp}
@@ -199,6 +229,18 @@ const VerifyEmail = () => {
                   </Button>
                 </p>
               </form>
+              <Button
+                onClick={() => {
+                  dispatch(logout());
+                  dispatch(clearPermissions());
+                  navigate("/login");
+                }}
+                variant={"destructive"}
+                type="submit"
+                className="w-full h-auto py-3 mt-2"
+              >
+                تسجيل الخروج
+              </Button>
             </Form>
           </CardContent>
         </Card>
