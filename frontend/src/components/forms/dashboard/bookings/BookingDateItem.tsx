@@ -81,17 +81,31 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                     field.onChange(formattedDated);
                   }}
                   disabled={(date) => {
-                    date.setHours(0, 0, 0, 0);
+                    date.setHours(0, 0, 0, 0); // ضبط الساعة للصفر لضمان مقارنة صحيحة
+
                     const dayName = date
                       .toLocaleDateString("en-US", { weekday: "long" })
                       .toLowerCase();
                     const isNotAllowedDay = dayName !== allowedDay;
-                    const isBeforeToday = date < today;
-                    const isAfterMaxDate = date > maxDate;
-                    const isDisabled =
-                      isNotAllowedDay || isBeforeToday || isAfterMaxDate;
+                    const todayDate = new Date();
+                    todayDate.setHours(0, 0, 0, 0);
+                    const firstAvailableDay = new Date(todayDate);
+                    if (dayName !== allowedDay) {
+                      while (
+                        firstAvailableDay
+                          .toLocaleDateString("en-US", { weekday: "long" })
+                          .toLowerCase() !== allowedDay
+                      ) {
+                        firstAvailableDay.setDate(
+                          firstAvailableDay.getDate() + 1
+                        );
+                      }
+                    }
 
-                    return isDisabled;
+                    const isBeforeToday = date < todayDate;
+                    const isAfterMaxDate = date > maxDate;
+
+                    return isNotAllowedDay || isBeforeToday || isAfterMaxDate;
                   }}
                   defaultMonth={today}
                   initialFocus
