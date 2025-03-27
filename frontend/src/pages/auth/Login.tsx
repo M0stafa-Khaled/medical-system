@@ -120,7 +120,7 @@ const Login = () => {
             disabled={isPending}
             className="h-auto bg-[#16a0cf] hover:bg-[#16a0cf]/90 text-[#fff] w-full py-3 px-4 flex justify-center items-center gap-4"
           >
-            تسحيل الدخول
+            تسجيل الدخول
             {isPending && <Loader2 className="animate-spin" />}
           </Button>
         </form>
