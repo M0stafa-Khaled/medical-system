@@ -119,7 +119,8 @@ const CreateTransaction = ({ booking }: IProps) => {
         onOpenChange={handleCloseModal}
         title="تحصيل"
         description={{
-          text: `تحصيل من حجز قم ${booking.code}`,
+          text: `تحصيل من حجز قم ${booking.code} للمريض ${booking.patient.name}`,
+          color: "text-black dark:text-white",
         }}
         showFooter={false}
       >
