@@ -87,7 +87,7 @@ export const updateBookingStatus: ({
   message: string;
 }> = async ({ token, status, id }) => {
   const { data } = await axiosInstanceAPI.post(
-    `/pateint-bookings/${id}/status`,
+    `/patients-bookings/${id}/status`,
     {
       status,
     },
