@@ -168,7 +168,7 @@ const DashboardLayout = () => {
         ]
       : []),
 
-    // Medications
+    // Drugs
     {
       name: "الأدوية",
       path: "/dashboard/drugs",
@@ -179,7 +179,7 @@ const DashboardLayout = () => {
   return (
     <div className="flex">
       <ScrollRestoration />
-      <div className="fixed inset-y-0 right-0 overflow-y-auto">
+      <div className="fixed inset-y-0 right-0">
         <Sidebar links={NAV_LINKS} />
       </div>
       <div className="container flex-1 flex flex-col overflow-hidden lg:mr-[275px]">

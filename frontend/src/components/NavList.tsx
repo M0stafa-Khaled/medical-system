@@ -109,9 +109,9 @@ const NavList = ({ links, sidebar }: IProps) => {
 
   return (
     <motion.ul
-      className={`w-full ${
-        sidebar ? "mt-4" : ""
-      } flex flex-col gap-2 justify-start ${sidebar ? "" : "lg:flex-row"}`}
+      className={`w-full h-full flex flex-col gap-2 justify-start pb-3 max-h-full overflow-y-auto custom-scrollbar ${
+        sidebar ? "" : "lg:flex-row"
+      }`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

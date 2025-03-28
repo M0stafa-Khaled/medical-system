@@ -10,7 +10,6 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
@@ -22,6 +21,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import categorySchema from "@/validations/categorySchema";
 import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
+import handleResErr from "@/utils/handleResponseError";
 
 const CreateExpenseCategory = () => {
   const token = cookieServices.getToken()!;
@@ -48,27 +48,7 @@ const CreateExpenseCategory = () => {
       // * Create Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     } finally {
       handleCloseModal();
     }

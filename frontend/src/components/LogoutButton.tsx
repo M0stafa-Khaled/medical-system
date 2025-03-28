@@ -4,13 +4,13 @@ import { Button } from "./ui/button";
 import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useLogout } from "@/lib/react-query/auth/auth";
-import { AxiosError } from "axios";
 import cookieServices from "@/utils/cookieServices";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { logout } from "@/store/features/auth/authSlice";
 import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
 import Modal from "./shared/Modal";
+import handleResErr from "@/utils/handleResponseError";
 
 const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
   const navigate = useNavigate();
@@ -33,9 +33,7 @@ const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
       });
       toast.success("تم تسجيل الخروج");
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      if (errorObj.response?.data)
-        toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      handleResErr(error);
     } finally {
       setIsOpen(false);
     }

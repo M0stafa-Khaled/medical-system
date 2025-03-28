@@ -12,7 +12,6 @@ import { FiPlus } from "react-icons/fi";
 import clinicSchema from "@/validations/clinicSchema";
 import { useCreateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
@@ -23,6 +22,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import { CLINIC_FORM_INPUTS } from "@/constants";
 import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
+import handleResErr from "@/utils/handleResponseError";
 
 const CreateClinic = () => {
   const token = cookieServices.getToken()!;
@@ -61,27 +61,7 @@ const CreateClinic = () => {
       // * Create Success
       return toast.success(`${message} '${data.name}'`);
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     } finally {
       handleCloseModal();
     }

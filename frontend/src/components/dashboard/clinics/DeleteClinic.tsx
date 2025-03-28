@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import TooltipButton from "@/components/ui/TooltipButton";
 import { useDeleteClinic } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
-import { AxiosError } from "axios";
+import handleResErr from "@/utils/handleResponseError";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const DeleteClinic = ({ name, id }: IProps) => {
-  const token = cookieServices.getToken() || "";
+  const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: deleteClinic, isPending } = useDeleteClinic();
 
@@ -28,8 +28,7 @@ const DeleteClinic = ({ name, id }: IProps) => {
       // * Delete Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      handleResErr(error);
     } finally {
       setIsOpen(false);
     }

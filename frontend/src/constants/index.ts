@@ -547,12 +547,16 @@ export const BOOKING_STATUS_OPTIONS: {
   value: TBookingStatus;
 }[] = [
   {
-    label: "منتهي",
-    value: "ended",
+    label: "مكتمل",
+    value: "completed",
   },
   {
     label: "قيد الانتظار",
     value: "pending",
+  },
+  {
+    label: "منتهي",
+    value: "ended",
   },
 ];
 

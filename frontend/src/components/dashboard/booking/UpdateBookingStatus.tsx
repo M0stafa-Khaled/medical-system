@@ -19,12 +19,12 @@ import { BOOKING_STATUS_OPTIONS } from "@/constants";
 import BookingStatus from "./BookingStatus";
 import { TBookingStatus } from "@/types";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { useUpdateBookingStatus } from "@/lib/react-query/dashboard/bookings";
 import cookieServices from "@/utils/cookieServices";
 import { IBooking } from "@/interfaces/dashboard/bookings";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {
   booking: IBooking;
@@ -53,27 +53,7 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
       // * Create Success
       return toast.success("تم تحديث حالة الحجز بنجاح");
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     }
   };
 

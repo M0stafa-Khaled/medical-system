@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import cookieServices from "@/utils/cookieServices";
 import { DAYS, DOCTOR_WORKING_DAY_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
@@ -24,6 +23,7 @@ import convertDay from "@/utils/convertDayLang";
 import { useEffect } from "react";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import DayRenderFormFields from "./RenderWorkingDayFormFields";
+import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {
   day?: IWorkingDay;
@@ -118,27 +118,7 @@ const WorkingDayForm = ({ action, day }: IProps) => {
       navigate(-1);
       form.reset();
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     }
   };
 

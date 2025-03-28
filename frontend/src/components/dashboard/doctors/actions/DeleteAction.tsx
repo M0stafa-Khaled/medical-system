@@ -2,11 +2,11 @@ import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { useDeleteDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import cookieServices from "@/utils/cookieServices";
-import { AxiosError } from "axios";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import TooltipButton from "@/components/ui/TooltipButton";
+import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {
   name: string;
@@ -28,8 +28,7 @@ const DeleteAction = ({ name, id }: IProps) => {
       // * Delete Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      handleResErr(error);
     } finally {
       setIsOpenDeleteModal(false);
     }

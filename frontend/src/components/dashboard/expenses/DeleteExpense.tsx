@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import TooltipButton from "@/components/ui/TooltipButton";
 import { useDeleteExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import cookieServices from "@/utils/cookieServices";
-import { AxiosError } from "axios";
+import handleResErr from "@/utils/handleResponseError";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -31,8 +31,7 @@ const DeleteExpense = ({ id, name }: IProps) => {
       // * Delete Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      handleResErr(error);
     } finally {
       setIsOpen(false);
     }

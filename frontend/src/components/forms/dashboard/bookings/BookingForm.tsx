@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import {
@@ -29,6 +28,7 @@ import RenderBookingFormFields from "./RenderBookingFromFields";
 import SubmitButton from "@/components/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
+import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {
   booking?: IBooking;
@@ -304,27 +304,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
       }
       return navigate("/dashboard/bookings");
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     }
   };
 

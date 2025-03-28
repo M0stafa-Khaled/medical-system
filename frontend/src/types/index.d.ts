@@ -5,7 +5,8 @@ export type TBookingStatus =
   | "collected"
   | "cancelled"
   | "no-show"
-  | "ended";
+  | "ended"
+  | "completed";
 
 export type TPaymentMethod = "cash" | "visa";
 

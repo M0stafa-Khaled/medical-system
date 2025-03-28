@@ -4,7 +4,7 @@ import TooltipButton from "@/components/ui/TooltipButton";
 import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
 import { useDeleteExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import cookieServices from "@/utils/cookieServices";
-import { AxiosError } from "axios";
+import handleResErr from "@/utils/handleResponseError";
 import { memo, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -31,8 +31,7 @@ const DeleteExpenseCategory = ({ category }: IProps) => {
       // * Delete Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      handleResErr(error);
     } finally {
       setIsOpen(false);
     }

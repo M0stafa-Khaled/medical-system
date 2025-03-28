@@ -2,7 +2,6 @@ import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { useRefundTransaction } from "@/lib/react-query/dashboard/transactions";
 import cookieServices from "@/utils/cookieServices";
-import { AxiosError } from "axios";
 import { Loader2, RefreshCcwDot } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -17,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormField } from "@/components/ui/form";
 import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
+import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {
   code: string;
@@ -53,27 +53,7 @@ const RefundTransaction = ({ code, id }: IProps) => {
       // * Refund Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     } finally {
       handleCloseModal();
     }

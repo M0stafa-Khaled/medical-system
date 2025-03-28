@@ -7,7 +7,6 @@ import { IPatient } from "@/interfaces/dashboard/patient";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   useCreatePatient,
@@ -21,6 +20,7 @@ import {
   containerVariants,
 } from "@/animations/dashboardAnimations";
 import RenderPatientFormFields from "./RenderPatientFormFields";
+import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {
   patient?: IPatient;
@@ -117,27 +117,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       navigate(-1);
       form.reset();
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     }
   };
 

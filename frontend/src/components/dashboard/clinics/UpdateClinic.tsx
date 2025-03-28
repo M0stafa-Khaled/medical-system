@@ -13,7 +13,6 @@ import { z } from "zod";
 import clinicSchema from "@/validations/clinicSchema";
 import { useUpdateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import cookieServices from "@/utils/cookieServices";
 import Modal from "@/components/shared/Modal";
@@ -25,6 +24,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import { motion } from "framer-motion";
 import TooltipButton from "@/components/ui/TooltipButton";
+import handleResErr from "@/utils/handleResponseError";
 interface IProps {
   id: number;
   name: string;
@@ -62,27 +62,7 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
       // * Update Success
       return toast.success(`${message} (${data.name})`);
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     } finally {
       handleCloseModal();
     }

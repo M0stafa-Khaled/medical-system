@@ -12,7 +12,6 @@ import { LOGIN_FORM_INPUTS } from "@/constants";
 import { useLogin } from "@/lib/react-query/auth/auth";
 import { loginSchema } from "@/validations/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AxiosError } from "axios";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -22,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import handleResErr from "@/utils/handleResponseError";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -54,9 +54,7 @@ const Login = () => {
       dispatch(setPermissions(data.permissions));
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      if (errorObj.response?.data)
-        toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      handleResErr(error);
     }
   };
   return (

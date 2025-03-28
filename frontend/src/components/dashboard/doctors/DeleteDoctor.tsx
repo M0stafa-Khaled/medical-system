@@ -2,12 +2,12 @@ import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { useDeleteDoctor } from "@/lib/react-query/dashboard/doctors/doctors";
 import cookieServices from "@/utils/cookieServices";
-import { AxiosError } from "axios";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TooltipButton from "@/components/ui/TooltipButton";
+import handleResErr from "@/utils/handleResponseError";
 interface IProps {
   name: string;
   id: number;
@@ -29,8 +29,7 @@ const DeleteDoctor = ({ name, id }: IProps) => {
       navigate("/dashboard/doctors");
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{ message: string }>;
-      toast.error(errorObj.response?.data.message || "هناك خطأ حاول لاحقا");
+      handleResErr(error);
     } finally {
       setIsOpen(false);
     }

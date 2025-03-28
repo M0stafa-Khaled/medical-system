@@ -10,7 +10,6 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { doctorUpdateProfileSchema } from "@/validations/authSchema";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
@@ -23,6 +22,7 @@ import { UPDATE_PROFILE_DOCTOR_INPUTS } from "@/constants";
 import { useUpdateProfile } from "@/lib/react-query/profile/profile";
 import RenderDoctorFormFields from "../forms/dashboard/doctors/RenderDoctorFormFields";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
+import handleResErr from "@/utils/handleResponseError";
 
 const UpdateDoctorProfile = () => {
   const token = cookieServices.getToken()!;
@@ -59,27 +59,7 @@ const UpdateDoctorProfile = () => {
       // * Update Success
       return toast.success(message);
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     } finally {
       handleCloseModal();
     }

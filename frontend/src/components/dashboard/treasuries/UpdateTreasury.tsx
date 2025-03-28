@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
@@ -25,6 +24,7 @@ import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
 import TooltipButton from "@/components/ui/TooltipButton";
+import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {
   treasury: ITreasury;
@@ -58,27 +58,7 @@ const UpdateTreasury = ({ treasury }: IProps) => {
       // * Update Success
       return toast.success(message || "تم تحديث بيانات الخزينة بنجاح");
     } catch (error) {
-      const errorObj = error as AxiosError<{
-        errors: { [key: string]: string[] };
-        message: string;
-      }>;
-      if (errorObj?.response?.data.errors) {
-        Object.keys(errorObj.response.data.errors).forEach((key) => {
-          errorObj?.response?.data.errors[key].forEach((error) =>
-            toast.error(error, {
-              autoClose: 5000,
-            })
-          );
-        });
-      }
-      if (
-        errorObj?.response?.data.message &&
-        !errorObj?.response?.data.errors
-      ) {
-        toast.error(errorObj?.response?.data.message, {
-          autoClose: 5000,
-        });
-      }
+      handleResErr(error);
     } finally {
       handleCloseModal();
     }

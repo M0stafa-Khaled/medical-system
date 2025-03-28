@@ -21,46 +21,47 @@ const Sidebar = ({ links }: IProps) => {
       initial="hidden"
       animate="visible"
       variants={sidebarVariants}
-      className="hidden lg:block h-full overflow-hidden bg-foreground border-l border-muted"
+      className="hidden lg:block h-full bg-foreground border-l border-muted"
     >
-      <div className="h-full min-w-[270px] max-w-[350px] overflow-y-auto custom-scrollbar pb-3 px-4 flex flex-col justify-between">
-        <div>
-          {/* Logo */}
-          <motion.div
+      <div className="min-w-[270px] max-w-[350px] h-screen px-4 flex flex-col">
+        {/* Fixed section - Logo */}
+        <motion.div
+          variants={logoVariants}
+          className="flex justify-center items-center p-3"
+        >
+          <motion.img
+            src={"/logo.svg"}
+            alt="logo"
+            initial="hidden"
+            animate="visible"
             variants={logoVariants}
-            className="flex justify-center items-center p-3"
-          >
-            <motion.img
-              src={"/logo.svg"}
-              alt="logo"
-              initial="hidden"
-              animate="visible"
-              variants={logoVariants}
-              className="max-w-24 flex justify-center items-center"
-            />
-          </motion.div>
+            className="max-w-24 flex justify-center items-center"
+          />
+        </motion.div>
 
-          {/* Profile Menu & Toggle Mode */}
-          <motion.div
-            variants={navItemsVariants}
-            className="flex justify-center items-center gap-4"
-          >
-            <motion.div variants={navItemsVariants}>
-              <LogoutButton />
-            </motion.div>
-            <motion.div variants={navItemsVariants}>
-              <ProfileMenu />
-            </motion.div>
-            <motion.div variants={navItemsVariants}>
-              <ToggleMode />
-            </motion.div>
+        {/* Fixed section - Profile Menu & Toggle Mode */}
+        <motion.div
+          variants={navItemsVariants}
+          className="flex justify-center items-center gap-4 mb-4"
+        >
+          <motion.div variants={navItemsVariants}>
+            <LogoutButton />
           </motion.div>
+          <motion.div variants={navItemsVariants}>
+            <ProfileMenu />
+          </motion.div>
+          <motion.div variants={navItemsVariants}>
+            <ToggleMode />
+          </motion.div>
+        </motion.div>
 
-          {/* Links */}
-          <motion.nav variants={navItemsVariants}>
-            <NavList links={links} sidebar />
-          </motion.nav>
-        </div>
+        {/* Scrollable section - Links */}
+        <motion.nav
+          variants={navItemsVariants}
+          className="flex-1 overflow-hidden"
+        >
+          <NavList links={links} sidebar />
+        </motion.nav>
       </div>
     </motion.aside>
   );

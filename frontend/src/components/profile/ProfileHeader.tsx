@@ -19,7 +19,7 @@ const ProfileHeader = ({ image, name, role, firstPhone }: IProps) => {
       className="bg-[#fff] dark:bg-dark rounded-2xl overflow-hidden shadow-md"
     >
       {/* Cover */}
-      <div className="w-full h-40 md:h-56 text-black bg-gradient-to-tr from-[#f8e3ad] to-[#f5cfcc]" />
+      <div className="w-full h-40 md:h-56 text-black bg-gradient-to-tr from-[#9FD8EC] to-[#019DCB] dark:from-[#487687] dark:to-[#025B75]" />
       {/* Profile Image */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
