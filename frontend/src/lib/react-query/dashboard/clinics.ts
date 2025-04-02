@@ -9,10 +9,10 @@ import Query_Keys from "@/enums/queryKeys";
 import { ICreateClinic } from "@/interfaces/dashboard/clinics";
 import { IGetWithParams } from "@/interfaces";
 
-export const useGetAllClinics = ({ token, search }: IGetWithParams) => {
+export const useGetAllClinics = ({ token, filter }: IGetWithParams) => {
   return useQuery({
-    queryFn: () => getAllClinics({ token, search }),
-    queryKey: [Query_Keys.GET_ALL_CLINICS, search],
+    queryFn: () => getAllClinics({ token, filter }),
+    queryKey: [Query_Keys.GET_ALL_CLINICS, filter],
     staleTime: 30 * 1000,
   });
 };

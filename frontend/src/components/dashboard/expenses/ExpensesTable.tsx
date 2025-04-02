@@ -2,20 +2,19 @@ import DataTable from "@/components/ui/DataTable";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 import ExpensesTableHeader from "./ExpensesTableHeader";
 import ExpensesList from "./ExpensesList";
-import ExpensesTableActions from "./ExpensesTableActions";
+import ExpensesHeader from "./ExpensesHeader";
 import { useGetAllExpenses } from "@/lib/react-query/dashboard/expenses/expenses";
 
 const ExpensesTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const [searchTerm, setSearchTerm] = useState("");
-  const search = useDebounce(searchTerm, 500);
+  const search = useDebounce(searchParams.get("q"), 500)!;
 
   const {
     data: expenses,
@@ -34,13 +33,8 @@ const ExpensesTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={
-        <ExpensesTableActions
-          searchKeyword={searchTerm}
-          setSearchKeyword={setSearchTerm}
-        />
-      }
-      header={<ExpensesTableHeader />}
+      header={<ExpensesHeader />}
+      tableHeader={<ExpensesTableHeader />}
       list={
         <ExpensesList
           meta={expenses?.data && expenses.data?.meta}

@@ -76,7 +76,6 @@ const RenderEmployeeFormFields = ({
           <MultiSelectFormItem
             {...commonProps}
             options={options?.permissions || []}
-            isMulti
           />
         );
 

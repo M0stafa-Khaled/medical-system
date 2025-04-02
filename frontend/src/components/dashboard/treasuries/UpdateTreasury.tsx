@@ -9,22 +9,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2, Pen } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import treasurySchema from "@/validations/treasurySchema";
-import { FaPencil } from "react-icons/fa6";
+import { createTreasurySchema } from "@/validations/treasurySchema";
 import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
+import RenderTreasuryFormFields from "@/components/forms/dashboard/treasuries/RenderTreasuryFormFields";
 
 interface IProps {
   treasury: ITreasury;
@@ -35,15 +34,18 @@ const UpdateTreasury = ({ treasury }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: updateTreasury, isPending } = useUpdateTreasury();
 
-  const form = useForm<z.infer<typeof treasurySchema>>({
-    resolver: zodResolver(treasurySchema),
+  const form = useForm<z.infer<typeof createTreasurySchema>>({
+    resolver: zodResolver(createTreasurySchema),
     defaultValues: {
       name: treasury.name,
       status: treasury.status,
     },
   });
 
-  const onSubmit = async ({ name, status }: z.infer<typeof treasurySchema>) => {
+  const onSubmit = async ({
+    name,
+    status,
+  }: z.infer<typeof createTreasurySchema>) => {
     try {
       const { status: serverStatus, message } = await updateTreasury({
         id: `${treasury.id}`,
@@ -86,7 +88,7 @@ const UpdateTreasury = ({ treasury }: IProps) => {
           }}
           className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
         >
-          <FaPencil size={24} />
+          <Pen size={20} />
         </Button>
       </TooltipButton>
 
@@ -109,10 +111,10 @@ const UpdateTreasury = ({ treasury }: IProps) => {
           >
             {TREASURY_FORM_INPUTS.map((input, idx) => (
               <motion.div key={input.name} custom={idx} variants={itemVariants}>
-                <RenderFormFields
+                <RenderTreasuryFormFields
                   input={input}
                   form={form}
-                  schema={treasurySchema}
+                  schema={createTreasurySchema}
                 />
               </motion.div>
             ))}

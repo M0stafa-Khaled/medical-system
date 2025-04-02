@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import DataLoader from "@/components/ui/DataLoader";
 import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";
 import BookingForm from "@/components/forms/dashboard/bookings/BookingForm";
-import updateBookingSchema from "@/validations/updateBookingSchema";
+import { updateBookingSchema } from "@/validations/bookingSchema";
 
 const UpdateBooking = () => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const UpdateBooking = () => {
         <Card className="mt-10 dark:bg-foreground border-muted">
           <div className="flex flex-col space-y-1.5 p-6">
             <h1 className="font-semibold leading-none tracking-tight">
-              تحديث بيانات طبيب
+              تحديث بيانات الحجز
             </h1>
           </div>
           <CardContent>

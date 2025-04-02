@@ -6,10 +6,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "../../../ui/input";
 import { IFormInput } from "@/interfaces";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { ControllerRenderProps } from "react-hook-form";
 
 interface IProps {
-  field: ControllerRenderProps<FieldValues, string>;
+  field: ControllerRenderProps<any>;
   input: IFormInput;
   isOptionalField?: (name: string) => boolean;
 }

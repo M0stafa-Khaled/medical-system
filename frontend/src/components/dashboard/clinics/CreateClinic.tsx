@@ -21,8 +21,8 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import { CLINIC_FORM_INPUTS } from "@/constants";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import handleResErr from "@/utils/handleResponseError";
+import RenderClinicsFormFields from "@/components/forms/dashboard/clinics/RenderClinicsFormFields";
 
 const CreateClinic = () => {
   const token = cookieServices.getToken()!;
@@ -107,10 +107,9 @@ const CreateClinic = () => {
           >
             {CLINIC_FORM_INPUTS.map((input, idx) => (
               <motion.div variants={itemVariants} key={input.name} custom={idx}>
-                <RenderFormFields
+                <RenderClinicsFormFields
                   input={input}
                   form={form}
-                  schema={clinicSchema}
                   isOptionalField={isOptionalField}
                 />
               </motion.div>

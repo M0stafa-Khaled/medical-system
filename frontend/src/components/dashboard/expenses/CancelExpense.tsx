@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form, FormField } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
@@ -13,7 +13,6 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
@@ -22,16 +21,14 @@ import { useCancelExpense } from "@/lib/react-query/dashboard/expenses/expenses"
 import { MdDoNotDisturbAlt } from "react-icons/md";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
+import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
+import { cancelExpenseSchema } from "@/validations/expenseSchema";
+import RenderExpensesFormFields from "@/components/forms/dashboard/expenses/RenderExpensesFormFields";
 
 const CancelExpense = ({ id }: { id: number }) => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: cancelExpense, isPending } = useCancelExpense();
-  const cancelExpenseSchema = z.object({
-    cancelled_info: z
-      .string({ message: "السبب مطلوب" })
-      .nonempty({ message: "السبب مطلوب" }),
-  });
 
   const form = useForm<z.infer<typeof cancelExpenseSchema>>({
     resolver: zodResolver(cancelExpenseSchema),
@@ -99,14 +96,29 @@ const CancelExpense = ({ id }: { id: number }) => {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <RenderFormFields
+              <FormField
+                control={form.control}
+                name={"cancelled_info"}
+                render={({ field }) => (
+                  <InputFormItem
+                    field={field}
+                    input={{
+                      name: "cancelled_info",
+                      label: "سبب الإلغاء",
+                      type: "text",
+                      placeholder: "اذكر سبب الإلغاء",
+                    }}
+                  />
+                )}
+              />
+              <RenderExpensesFormFields
+                form={form}
                 input={{
                   name: "cancelled_info",
                   label: "سبب الإلغاء",
                   type: "text",
                   placeholder: "اذكر سبب الإلغاء",
                 }}
-                form={form as any}
                 schema={cancelExpenseSchema}
               />
             </motion.div>

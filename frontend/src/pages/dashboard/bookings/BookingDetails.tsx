@@ -15,6 +15,7 @@ import {
   Tag,
   CheckCheck,
   Phone,
+  Pen,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
@@ -30,7 +31,6 @@ import DeleteBooking from "@/components/dashboard/booking/DeleteBooking";
 import UpdateBookingStatus from "@/components/dashboard/booking/UpdateBookingStatus";
 import { IBooking } from "@/interfaces/dashboard/bookings";
 import { Button } from "@/components/ui/button";
-import { FaPencil } from "react-icons/fa6";
 
 const BookingDetails = () => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
@@ -108,7 +108,7 @@ const BookingDetails = () => {
                         to={`/dashboard/bookings/${booking?.data.id}/update`}
                         className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
                       >
-                        <FaPencil size={24} />
+                        <Pen size={20} />
                       </Link>
                     </Button>
                   </motion.div>

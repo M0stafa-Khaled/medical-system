@@ -1,4 +1,3 @@
-import { FaPencil } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
@@ -13,11 +12,10 @@ import { z } from "zod";
 import clinicSchema from "@/validations/clinicSchema";
 import { useUpdateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2, Pen } from "lucide-react";
 import cookieServices from "@/utils/cookieServices";
 import Modal from "@/components/shared/Modal";
 import { CLINIC_FORM_INPUTS } from "@/constants";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   containerVariants,
   itemVariants,
@@ -25,6 +23,7 @@ import {
 import { motion } from "framer-motion";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
+import RenderClinicsFormFields from "@/components/forms/dashboard/clinics/RenderClinicsFormFields";
 interface IProps {
   id: number;
   name: string;
@@ -95,7 +94,7 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
           }}
           className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
         >
-          <FaPencil size={24} />
+          <Pen size={20} />
         </Button>
       </TooltipButton>
 
@@ -119,10 +118,9 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
           >
             {CLINIC_FORM_INPUTS.map((input, idx) => (
               <motion.div variants={itemVariants} key={input.name} custom={idx}>
-                <RenderFormFields
+                <RenderClinicsFormFields
                   input={input}
                   form={form}
-                  schema={clinicSchema}
                   isOptionalField={isOptionalField}
                 />
               </motion.div>

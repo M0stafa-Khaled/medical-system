@@ -4,7 +4,7 @@ import { z } from "zod";
 import InputFormItem from "../formItems/InputFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import SelectFormItem from "../formItems/SelectFormItem";
-import PatientSelectItem from "./PatientSelectItem";
+import PatientSelectItem from "../formItems/PatientSelectItem";
 import BookingDateItem from "./BookingDateItem";
 import BookingAvailableTimeSelectItem from "./BookingAvailableTimeSelectItem";
 

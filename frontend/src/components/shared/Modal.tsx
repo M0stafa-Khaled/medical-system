@@ -10,7 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
-interface IProps {
+interface IProps
+  extends React.ComponentPropsWithoutRef<typeof AlertDialogContent> {
   isOpen: boolean;
   onOpenChange: () => void;
   title: string;
@@ -39,10 +40,14 @@ const Modal = ({
   isLoading = false,
   showFooter = true,
   variant = "default",
+  ...rest
 }: IProps) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="border-muted !z-[1000] rounded-lg">
+      <AlertDialogContent
+        className="border-muted !z-[1000] rounded-lg max-w-lg"
+        {...rest}
+      >
         <AlertDialogHeader>
           <AlertDialogTitle className="text-black dark:text-white text-center">
             {title}

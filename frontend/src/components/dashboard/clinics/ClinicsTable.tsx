@@ -1,23 +1,16 @@
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import DataTable from "@/components/ui/DataTable";
 import ClinicsTableHeader from "./ClinicsTableHeader";
-import ClinicsTableActions from "./ClinicsTableActions";
+import ClinicsHeader from "./ClinicsHeader";
 import ClinicsList from "./ClinicsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
-import useDebounce from "@/hooks/useDebounce";
 
 const ClinicsTable = () => {
   const token = cookieServices.getToken()!;
-  const [searchTerm, setSearchTerm] = useState("");
-  const search = useDebounce(searchTerm, 500);
-  const {
-    data: clinics,
-    isLoading,
-    isError,
-  } = useGetAllClinics({ token, search });
+  const { data: clinics, isLoading, isError } = useGetAllClinics({ token });
   useEffect(() => {
     if (clinics?.message) toast.error(clinics.message);
     if (isError) {
@@ -29,13 +22,8 @@ const ClinicsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={
-        <ClinicsTableActions
-          searchKeyword={searchTerm}
-          setSearchKeyword={setSearchTerm}
-        />
-      }
-      header={<ClinicsTableHeader />}
+      header={<ClinicsHeader />}
+      tableHeader={<ClinicsTableHeader />}
       list={<ClinicsList clinics={clinics?.data || []} />}
       skeleton={<TableSkeleton columns={3} rows={8} />}
     />

@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FaPencil } from "react-icons/fa6";
 import { Separator } from "@/components/ui/separator";
 import formatDateTime from "@/utils/formatDate";
 import {
@@ -12,6 +11,7 @@ import {
   FileImage,
   Info,
   Mail,
+  Pen,
   Phone,
   UserCircle2,
   Users,
@@ -109,7 +109,7 @@ const PatientDetails = () => {
                             to={`/dashboard/patients/${id}/update`}
                             className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                           >
-                            <FaPencil size={18} />
+                            <Pen size={20} />
                           </Link>
                         </Button>
                       </motion.div>

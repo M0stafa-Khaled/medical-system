@@ -1,7 +1,7 @@
 import DoctorForm from "@/components/forms/dashboard/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
 import cookieServices from "@/utils/cookieServices";
-import updateDoctorSchema from "@/validations/updateDoctorSchema";
+import { updateDoctorSchema } from "@/validations/doctorSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";

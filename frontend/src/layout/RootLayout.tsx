@@ -60,10 +60,10 @@ const RootLayout = () => {
   }, [checkAuthUser, token, navigate, dispatch, location]);
 
   return (
-    <main>
+    <>
       <ScrollRestoration />
       <Outlet />
-    </main>
+    </>
   );
 };
 

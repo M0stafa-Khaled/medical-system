@@ -1,6 +1,6 @@
 import BookingForm from "@/components/forms/dashboard/bookings/BookingForm";
 import { Card, CardContent } from "@/components/ui/card";
-import createBookingSchema from "@/validations/createBookingSchema";
+import { createBookingSchema } from "@/validations/bookingSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
@@ -16,7 +16,7 @@ const CreateBooking = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <Card className="dark:bg-foreground border-gray-300 dark:border-muted shadow-none">
-          <div className="flex flex-col space-y-1.5 p-6">
+          <div className="space-y-1.5 p-6">
             <h1 className="font-semibold leading-relaxed">إضافة حجز جديد</h1>
           </div>
           <CardContent>

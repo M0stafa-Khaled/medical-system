@@ -7,14 +7,13 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import cookieServices from "@/utils/cookieServices";
-import { useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
 import WorkingDayCard from "./WorkingDayCard";
 import SearchInput from "../../SearchInput";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import CardSkeleton from "@/components/ui/CardSkeleton";
 
 interface IProps {
@@ -25,8 +24,8 @@ const WorkingDays = ({ doctorId }: IProps) => {
   const canViewWorkingDays = useHasPermission(PERMISSIONS.WORKING_DAYS);
   const canCreateWorkingDay = useHasPermission(PERMISSIONS.ADD_WORKING_DAY);
   const token = cookieServices.getToken()!;
-  const [searchTerm, setSearchTerm] = useState("");
-  const search = useDebounce(searchTerm, 500);
+  const [searchParams] = useSearchParams();
+  const search = useDebounce(searchParams.get("q"), 500)!;
   const { data: days, isLoading } = useGetAllWorkingDays({
     token,
     doctorId,
@@ -61,11 +60,7 @@ const WorkingDays = ({ doctorId }: IProps) => {
                   <FiPlus size={20} />
                 </Link>
               </Button>
-              <SearchInput
-                searchKeyword={searchTerm}
-                setSearchKeyword={setSearchTerm}
-                placeholder="ابحث باسم العيادة"
-              />
+              <SearchInput placeholder="ابحث باسم العيادة" />
             </div>
           )}
           <motion.div

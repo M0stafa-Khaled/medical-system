@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { useDeleteDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import cookieServices from "@/utils/cookieServices";
 import { useState } from "react";
-import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
+import { Trash2 } from "lucide-react";
 
 interface IProps {
   name: string;
@@ -43,7 +43,7 @@ const DeleteAction = ({ name, id }: IProps) => {
           variant={"destructive"}
           className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
         >
-          <MdDelete size={24} />
+          <Trash2 size={20} />
         </Button>
       </TooltipButton>
 

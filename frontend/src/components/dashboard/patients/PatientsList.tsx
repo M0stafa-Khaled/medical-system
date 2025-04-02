@@ -2,7 +2,6 @@ import { Badge } from "@/components/ui/badge";
 import { TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import DeletePatient from "./DeletePatient";
 import { IPatient } from "@/interfaces/dashboard/patient";
@@ -14,6 +13,7 @@ import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";
 import truncateText from "@/utils/truncateText";
 import TooltipButton from "@/components/ui/TooltipButton";
+import { Pen } from "lucide-react";
 
 interface IProps {
   patients: IPatient[];
@@ -97,7 +97,7 @@ const PatientsList = ({ patients, meta }: IProps) => {
                         to={`/dashboard/patients/${id}/update`}
                         className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                       >
-                        <FaPencil size={18} />
+                        <Pen size={20} />
                       </Link>
                     </Button>
                   </TooltipButton>

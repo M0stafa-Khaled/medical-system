@@ -15,13 +15,13 @@ import {
   BadgeInfo,
   Building2,
   Percent,
+  Pen,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
 import DeleteDoctor from "@/components/dashboard/doctors/DeleteDoctor";
-import { FaPencil } from "react-icons/fa6";
 import ImageModal from "@/components/shared/ImageModal";
 import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
 import InfoField from "@/components/dashboard/InfoField";
@@ -119,7 +119,7 @@ const DoctorDetails = () => {
                               to={`/dashboard/doctors/${id}/update`}
                               className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                             >
-                              <FaPencil size={18} />
+                              <Pen size={20} />
                             </Link>
                           </Button>
                         </TooltipButton>

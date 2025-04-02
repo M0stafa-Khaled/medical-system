@@ -1,5 +1,5 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import cookieServices from "@/utils/cookieServices";
 
 const AppLayout = () => {
@@ -23,7 +23,7 @@ const AppLayout = () => {
   return (
     <>
       <ScrollRestoration />
-      <Navbar links={navLinks} />
+      <Header links={navLinks} />
       <Outlet />
     </>
   );

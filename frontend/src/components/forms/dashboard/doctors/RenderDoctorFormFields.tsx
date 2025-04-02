@@ -17,7 +17,7 @@ interface IOption {
 
 interface IProps {
   input: IFormInput;
-  form: UseFormReturn;
+  form: UseFormReturn<any>;
   handleFileChange?: (
     e: ChangeEvent<HTMLInputElement>,
     fieldChange: (value: File) => void
@@ -66,10 +66,20 @@ const RenderDoctorFormFields = ({
           <MultiSelectFormItem
             {...commonProps}
             options={options?.clinics || []}
-            isMulti
           />
         );
       }
+
+      // Working Day
+      case input.name === "clinic_id":
+        return (
+          <SelectFormItem {...commonProps} options={options?.clinics || []} />
+        );
+
+      case input.name === "day":
+        return (
+          <SelectFormItem {...commonProps} options={options?.days || []} />
+        );
 
       default:
         return <InputFormItem {...commonProps} />;

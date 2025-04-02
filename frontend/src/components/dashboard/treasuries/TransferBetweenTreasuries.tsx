@@ -17,14 +17,14 @@ import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import transferTreasurySchema from "@/validations/transferTreasurySchema";
+import { transferTreasurySchema } from "@/validations/treasurySchema";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { TRANSFER_TREASURIES_FORM_INPUTS } from "@/constants";
 import {
   useGetAllTreasuries,
   useTransferTreasuries,
 } from "@/lib/react-query/dashboard/treasuries";
-import RenderTransferBetweenTreasuriesFormFields from "@/components/forms/dashboard/expenses/RenderTransferBetweenTreasuriesFormFields";
+import RenderTreasuryFormFields from "@/components/forms/dashboard/treasuries/RenderTreasuryFormFields";
 import handleResErr from "@/utils/handleResponseError";
 
 const TransferBetweenTreasuriesButton = () => {
@@ -111,7 +111,7 @@ const TransferBetweenTreasuriesButton = () => {
           >
             {TRANSFER_TREASURIES_FORM_INPUTS.map((input, idx) => (
               <motion.div key={input.name} custom={idx} variants={itemVariants}>
-                <RenderTransferBetweenTreasuriesFormFields
+                <RenderTreasuryFormFields
                   input={input}
                   form={form}
                   schema={transferTreasurySchema}

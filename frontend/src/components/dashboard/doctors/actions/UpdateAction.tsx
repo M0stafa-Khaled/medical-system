@@ -9,22 +9,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2, Pen } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { DOCTOR_ACTION_INPUTS } from "@/constants";
 import doctorActionSchema from "@/validations/doctorActionSchema";
 import { useUpdateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
-import { FaPencil } from "react-icons/fa6";
 import { IDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";
 import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
+import RenderDoctorFormFields from "@/components/forms/dashboard/doctors/RenderDoctorFormFields";
 
 interface IProps {
   doctorId: string;
@@ -85,7 +84,7 @@ const UpdateAction = ({ doctorId, action }: IProps) => {
           }}
           className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
         >
-          <FaPencil size={24} />
+          <Pen size={20} />
         </Button>
       </TooltipButton>
 
@@ -108,7 +107,7 @@ const UpdateAction = ({ doctorId, action }: IProps) => {
           >
             {DOCTOR_ACTION_INPUTS.map((input, idx) => (
               <motion.div variants={itemVariants} key={input.name} custom={idx}>
-                <RenderFormFields
+                <RenderDoctorFormFields
                   input={input}
                   form={form}
                   schema={doctorActionSchema}

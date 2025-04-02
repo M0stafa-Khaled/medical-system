@@ -5,6 +5,8 @@ import SwitchFormItem from "../formItems/SwitchFormItem";
 import InputFormItem from "../formItems/InputFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import SelectFormItem from "../formItems/SelectFormItem";
+import MultiSelectFormItem from "../formItems/MultiSelectFormItem";
+import PatientSelectItem from "../formItems/PatientSelectItem";
 
 interface IOption {
   value: string;
@@ -47,13 +49,17 @@ const RenderTransactionFormFields = ({
             options={options?.paymentMethods || []}
           />
         );
-      case input.name === "doctor_action_id":
+      case input.name === "doctor_actions":
         return (
-          <SelectFormItem
+          <MultiSelectFormItem
             {...commonProps}
             options={options?.doctorActions || []}
           />
         );
+
+      case input.name === "patient_id":
+        return <PatientSelectItem form={form} input={input} />;
+
       default:
         return <InputFormItem {...commonProps} />;
     }

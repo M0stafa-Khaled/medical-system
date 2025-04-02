@@ -14,30 +14,33 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import treasurySchema from "@/validations/treasurySchema";
+import { createTreasurySchema } from "@/validations/treasurySchema";
 import { useCreateTreasury } from "@/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
 import handleResErr from "@/utils/handleResponseError";
+import RenderTreasuryFormFields from "@/components/forms/dashboard/treasuries/RenderTreasuryFormFields";
 
 const CreateTreasury = () => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: createTreasury, isPending } = useCreateTreasury();
 
-  const form = useForm<z.infer<typeof treasurySchema>>({
-    resolver: zodResolver(treasurySchema),
+  const form = useForm<z.infer<typeof createTreasurySchema>>({
+    resolver: zodResolver(createTreasurySchema),
     defaultValues: {
       name: "",
       status: true,
     },
   });
 
-  const onSubmit = async ({ name, status }: z.infer<typeof treasurySchema>) => {
+  const onSubmit = async ({
+    name,
+    status,
+  }: z.infer<typeof createTreasurySchema>) => {
     try {
       const { status: serverStatus, message } = await createTreasury({
         name,
@@ -89,10 +92,10 @@ const CreateTreasury = () => {
           >
             {TREASURY_FORM_INPUTS.map((input, idx) => (
               <motion.div key={input.name} custom={idx} variants={itemVariants}>
-                <RenderFormFields
+                <RenderTreasuryFormFields
                   input={input}
                   form={form}
-                  schema={treasurySchema}
+                  schema={createTreasurySchema}
                 />
               </motion.div>
             ))}

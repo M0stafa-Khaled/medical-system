@@ -1,0 +1,61 @@
+import { FormField } from "@/components/ui/form";
+import { IFormInput } from "@/interfaces";
+import { z } from "zod";
+import InputFormItem from "../formItems/InputFormItem";
+import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
+import SelectFormItem from "../formItems/SelectFormItem";
+import SwitchFormItem from "../formItems/SwitchFormItem";
+
+interface IOption {
+  value: string;
+  label: string;
+}
+
+interface IProps {
+  input: IFormInput;
+  form: UseFormReturn<any>;
+  schema: z.ZodSchema;
+  options?: {
+    [key: string]: IOption[];
+  };
+}
+
+const RenderTreasuryFormFields = ({
+  input,
+  form,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  schema,
+  options,
+}: IProps) => {
+  const renderField = ({ field }: { field: ControllerRenderProps }) => {
+    switch (true) {
+      case input.name === "treasury_id" ||
+        input.name === "from_treasury" ||
+        input.name === "to_treasury":
+        return (
+          <SelectFormItem
+            input={input}
+            field={field}
+            options={options?.treasuries || []}
+          />
+        );
+
+      case input.name === "status":
+        return <SwitchFormItem field={field} input={input} />;
+
+      default:
+        return <InputFormItem input={input} field={field} />;
+    }
+  };
+
+  return (
+    <FormField
+      key={input.name}
+      control={form.control}
+      name={input.name as keyof z.infer<typeof schema> as string}
+      render={renderField}
+    />
+  );
+};
+
+export default RenderTreasuryFormFields;

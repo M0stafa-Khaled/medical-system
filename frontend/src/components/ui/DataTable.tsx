@@ -5,8 +5,8 @@ import { IPaginationMeta } from "@/interfaces";
 
 interface DataTableProps {
   isLoading: boolean;
-  actions: ReactNode;
   header: ReactNode;
+  tableHeader: ReactNode;
   list: ReactNode;
   skeleton: ReactNode;
   pagination?: {
@@ -16,8 +16,8 @@ interface DataTableProps {
 
 const DataTable = ({
   isLoading,
-  actions,
   header,
+  tableHeader,
   list,
   skeleton,
   pagination,
@@ -28,13 +28,13 @@ const DataTable = ({
     : 1;
   return (
     <>
-      {actions}
+      {header}
       {
         <>
           <Table className="border dark:border-muted !rounded-lg overflow-hidden">
-            {header}
+            {tableHeader}
             {isLoading ? skeleton : <TableBody>{list}</TableBody>}
-            {header}
+            {tableHeader}
           </Table>
           {shouldShowPagination && (
             <DataTablePagination

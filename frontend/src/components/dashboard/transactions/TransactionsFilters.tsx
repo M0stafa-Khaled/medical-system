@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import cookieServices from "@/utils/cookieServices";
-import { ITransactionsFilter } from "@/interfaces/dashboard/transactions";
+import { ITransactionsFilter } from "@/interfaces/dashboard/transactions/transactions";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 
 interface IProps {

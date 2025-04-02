@@ -21,8 +21,8 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import handleResErr from "@/utils/handleResponseError";
+import RenderDoctorFormFields from "@/components/forms/dashboard/doctors/RenderDoctorFormFields";
 
 const CreateAction = ({ doctorId }: { doctorId: string }) => {
   const token = cookieServices.getToken() || "";
@@ -91,7 +91,7 @@ const CreateAction = ({ doctorId }: { doctorId: string }) => {
           >
             {DOCTOR_ACTION_INPUTS.map((input, idx) => (
               <motion.div variants={itemVariants} key={input.name} custom={idx}>
-                <RenderFormFields
+                <RenderDoctorFormFields
                   input={input}
                   form={form}
                   schema={doctorActionSchema}

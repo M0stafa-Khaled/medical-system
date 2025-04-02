@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form, FormField } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
@@ -9,21 +9,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2, Pen } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import categorySchema from "@/validations/categorySchema";
 import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
-import { FaPencil } from "react-icons/fa6";
 import { useUpdateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
+import { expenseCategorySchema } from "@/validations/expenseSchema";
+import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
 
 interface IProps {
   category: IExpenseCategory;
@@ -33,14 +32,14 @@ const UpdateExpenseCategory = ({ category }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: updateCategory, isPending } = useUpdateExpenseCategory();
 
-  const form = useForm<z.infer<typeof categorySchema>>({
-    resolver: zodResolver(categorySchema),
+  const form = useForm<z.infer<typeof expenseCategorySchema>>({
+    resolver: zodResolver(expenseCategorySchema),
     defaultValues: {
       name: category.name,
     },
   });
 
-  const onSubmit = async ({ name }: z.infer<typeof categorySchema>) => {
+  const onSubmit = async ({ name }: z.infer<typeof expenseCategorySchema>) => {
     try {
       const { status, message } = await updateCategory({
         id: `${category.id}`,
@@ -81,7 +80,7 @@ const UpdateExpenseCategory = ({ category }: IProps) => {
           }}
           className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
         >
-          <FaPencil size={24} />
+          <Pen size={20} />
         </Button>
       </TooltipButton>
 
@@ -103,15 +102,20 @@ const UpdateExpenseCategory = ({ category }: IProps) => {
             variants={containerVariants}
           >
             <motion.div custom={"category-name"} variants={itemVariants}>
-              <RenderFormFields
-                input={{
-                  name: "name",
-                  label: "اسم التصنيف",
-                  type: "text",
-                  placeholder: "اسم التصنيف",
-                }}
-                form={form}
-                schema={categorySchema}
+              <FormField
+                control={form.control}
+                name={"name"}
+                render={({ field }) => (
+                  <InputFormItem
+                    field={field}
+                    input={{
+                      name: "name",
+                      label: "اسم التصنيف",
+                      type: "text",
+                      placeholder: "اسم التصنيف",
+                    }}
+                  />
+                )}
               />
             </motion.div>
 

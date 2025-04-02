@@ -89,7 +89,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
 
   const checkAuth = async () => {
     const { auth, email_verified, status, permissions } = await checkAuthUser(
-      token as string
+      token
     );
     if (!auth) {
       dispatch(logout());

@@ -21,7 +21,7 @@ const Sidebar = ({ links }: IProps) => {
       initial="hidden"
       animate="visible"
       variants={sidebarVariants}
-      className="hidden lg:block h-full bg-foreground border-l border-muted"
+      className="hidden lg:block h-full bg-foreground border-l border-muted fixed inset-y-0 right-0"
     >
       <div className="min-w-[270px] max-w-[350px] h-screen px-4 flex flex-col">
         {/* Fixed section - Logo */}

@@ -4,7 +4,6 @@ import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import DeleteDoctor from "./DeleteDoctor";
-import { FaPencil } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
@@ -14,6 +13,7 @@ import { IPaginationMeta } from "@/interfaces";
 import countSerial from "@/utils/countSerial";
 import truncateText from "@/utils/truncateText";
 import TooltipButton from "@/components/ui/TooltipButton";
+import { Pen } from "lucide-react";
 
 interface IProps {
   doctors: IDoctor[];
@@ -63,7 +63,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
                 className="w-12 h-12 rounded-full object-cover"
               />
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-nowrap">
               {truncateText(name, 15)}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
@@ -109,7 +109,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
                           to={`/dashboard/doctors/${id}/update`}
                           className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                         >
-                          <FaPencil size={18} />
+                          <Pen size={20} />
                         </Link>
                       </Button>
                     </TooltipButton>

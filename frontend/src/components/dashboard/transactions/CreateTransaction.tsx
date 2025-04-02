@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -17,9 +17,9 @@ import {
   containerVariants,
   itemVariants,
 } from "@/animations/dashboardAnimations";
-import { PaymentMethods, TRANSACTION_FORM_INPUTS } from "@/constants";
-import transactionSchema from "@/validations/transactionSchema";
-import { useCreateTransaction } from "@/lib/react-query/dashboard/transactions";
+import { PAYMENT_METHODS, TRANSACTION_FORM_INPUTS } from "@/constants";
+import { createTransactionSchema } from "@/validations/transactionSchema";
+import { useCreateTransaction } from "@/lib/react-query/dashboard/transactions/transactions";
 import RenderTransactionFormFields from "@/components/forms/dashboard/transactions/RenderTransactionFormFields";
 import { TPaymentMethod } from "@/types";
 import TooltipButton from "@/components/ui/TooltipButton";
@@ -27,41 +27,76 @@ import { Link } from "react-router-dom";
 import { IBooking } from "@/interfaces/dashboard/bookings";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import handleResErr from "@/utils/handleResponseError";
+import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/patientBalances";
+import InfoField from "../InfoField";
 
 interface IProps {
   booking: IBooking;
 }
 const CreateTransaction = ({ booking }: IProps) => {
-  const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
+  const [showVisa, setShowVisa] = useState(false);
+
+  const token = cookieServices.getToken()!;
 
   const { data: doctorActions } = useGetDoctorActions({
     doctorId: isOpen ? booking.doctor.id.toString() : "",
     token,
   });
 
+  const { data: patientBalances } = useGetPatientBalances({
+    patientId: isOpen ? booking.patient.id.toString() : "",
+    token,
+  });
+
   const doctorActionsOptions = doctorActions?.data?.map((action) => ({
-    value: action.name,
+    value: action.id.toString(),
     label: `${action.name} - ${action.price} جنيه`,
   }));
 
   const { mutateAsync: createTransaction, isPending } = useCreateTransaction();
 
-  const form = useForm<z.infer<typeof transactionSchema>>({
-    resolver: zodResolver(transactionSchema),
+  const form = useForm<z.infer<typeof createTransactionSchema>>({
+    resolver: zodResolver(createTransactionSchema),
     defaultValues: {
       price: 0,
+      doctor_actions: [],
+      payment_method: {
+        label: "نقدي",
+        value: "cash",
+      },
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof transactionSchema>) => {
+  useEffect(() => {
+    const subscription = form.watch((value, { name }) => {
+      if (name === "payment_method") {
+        setShowVisa(value.payment_method?.value === "visa");
+      }
+      if (name === "doctor_actions") {
+        const selectedActions = value.doctor_actions?.map((action) =>
+          doctorActions?.data.find((a) => a.id.toString() === action?.value)
+        );
+        const totalPrice = selectedActions?.reduce((total, action) => {
+          return total + (action?.price || 0);
+        }, 0);
+        form.setValue("price", totalPrice!);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form, doctorActions?.data]);
+
+  const onSubmit = async (data: z.infer<typeof createTransactionSchema>) => {
+    if (showVisa) {
+      if (!data.visa_code) return toast.warn("ادخل رقم عملية البطاقة البنكية");
+    }
     try {
       const { message, status } = await createTransaction({
         token,
-        formData: {
-          booking_id: booking.id,
+        dataForm: {
+          booking_id: booking.id.toString(),
           contract_type: "egyption",
-          doctor_action_id: booking.action.id,
+          doctor_actions: data.doctor_actions,
           payment_method: data.payment_method.value as TPaymentMethod,
           price: data.price,
         },
@@ -72,8 +107,6 @@ const CreateTransaction = ({ booking }: IProps) => {
       return toast.success(message);
     } catch (error) {
       handleResErr(error);
-    } finally {
-      handleCloseModal();
     }
   };
 
@@ -103,6 +136,27 @@ const CreateTransaction = ({ booking }: IProps) => {
         }}
         showFooter={false}
       >
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1"
+        >
+          <InfoField
+            label="إجمالي المبلغ"
+            value={patientBalances?.data.total_amount_due as number}
+          />
+          <InfoField
+            label="إجمالي المبلغ المدفوع"
+            value={patientBalances?.data.total_amount_paid as number}
+          />
+          <InfoField
+            label="إجمالي المبلغ المسترد"
+            value={patientBalances?.data.refund_amount as number}
+          />
+          <InfoField
+            label="إجمالي المبلغ المستحق"
+            value={patientBalances?.data.total_balance as string}
+          />
+        </motion.div>
         <Form {...form}>
           <motion.form
             initial="hidden"
@@ -120,20 +174,36 @@ const CreateTransaction = ({ booking }: IProps) => {
               </Link>
             </Button>
 
-            <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm "></Button>
-            {TRANSACTION_FORM_INPUTS.map((input, idx) => (
-              <motion.div variants={itemVariants} key={input.name} custom={idx}>
-                <RenderTransactionFormFields
-                  input={input}
-                  form={form}
-                  schema={transactionSchema}
-                  options={{
-                    paymentMethods: PaymentMethods,
-                    doctorActions: doctorActionsOptions!,
-                  }}
-                />
-              </motion.div>
-            ))}
+            <motion.div
+              variants={containerVariants}
+              className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2"
+            >
+              {TRANSACTION_FORM_INPUTS.map((input, idx) =>
+                input.name === "visa_code" && !showVisa ? null : (
+                  <motion.div
+                    variants={itemVariants}
+                    key={input.name}
+                    custom={idx}
+                    className={`${
+                      input.name === "doctor_actions" ||
+                      (input.name === "price" && showVisa)
+                        ? "md:col-span-2"
+                        : ""
+                    }`}
+                  >
+                    <RenderTransactionFormFields
+                      input={input}
+                      form={form}
+                      schema={createTransactionSchema}
+                      options={{
+                        paymentMethods: PAYMENT_METHODS,
+                        doctorActions: doctorActionsOptions!,
+                      }}
+                    />
+                  </motion.div>
+                )
+              )}
+            </motion.div>
 
             <AlertDialogFooter className="text-start !justify-start gap-2">
               <AlertDialogCancel

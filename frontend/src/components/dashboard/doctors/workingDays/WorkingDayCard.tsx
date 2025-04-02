@@ -3,11 +3,10 @@ import DeleteWorkingDay from "./DeleteWorkingDay";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
-import { Clock, Users, Hospital, Calendar } from "lucide-react";
+import { Clock, Users, Hospital, Calendar, Pen } from "lucide-react";
 import convertDay, { convertDayFromEnToAr } from "@/utils/convertDayLang";
 import InfoField from "../../InfoField";
 import { Button } from "@/components/ui/button";
-import { FaPencil } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 interface IProps {
@@ -65,7 +64,7 @@ const WorkingDayCard = ({
                 to={`/dashboard/doctors/${doctorId}/working-days/update/${id}`}
                 className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
               >
-                <FaPencil size={18} />
+                <Pen size={20} />
               </Link>
             </Button>
           )}

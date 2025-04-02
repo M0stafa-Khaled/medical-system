@@ -1,8 +1,4 @@
 import { TableCell } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import DeleteBooking from "./DeleteBooking";
-import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -12,9 +8,12 @@ import { IBooking } from "@/interfaces/dashboard/bookings";
 import convertDay from "@/utils/convertDayLang";
 import formatDateTime from "@/utils/formatDate";
 import UpdateBookingStatus from "./UpdateBookingStatus";
-import { FaPencil } from "react-icons/fa6";
 import CreateTransaction from "../transactions/CreateTransaction";
 import TooltipButton from "@/components/ui/TooltipButton";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { Eye, Pen } from "lucide-react";
+import DeleteBooking from "./DeleteBooking";
 
 interface IProps {
   bookings: IBooking[];
@@ -83,7 +82,6 @@ const BookingsList = ({ bookings }: IProps) => {
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
             {formatDateTime(booking?.booking_date as string)}
           </TableCell>
-
           {(canDeleteBooking ||
             canUpdateBooking ||
             canViewBooking ||
@@ -100,7 +98,7 @@ const BookingsList = ({ bookings }: IProps) => {
                         to={`/dashboard/bookings/${booking?.id}`}
                         className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
                       >
-                        <FiEye size={24} />
+                        <Eye size={20} />
                       </Link>
                     </Button>
                   </TooltipButton>
@@ -112,7 +110,7 @@ const BookingsList = ({ bookings }: IProps) => {
                         to={`/dashboard/bookings/${booking?.id}/update`}
                         className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
                       >
-                        <FaPencil size={24} />
+                        <Pen size={20} />
                       </Link>
                     </Button>
                   </TooltipButton>

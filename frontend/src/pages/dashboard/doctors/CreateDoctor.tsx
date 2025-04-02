@@ -1,6 +1,6 @@
 import DoctorForm from "@/components/forms/dashboard/doctors/DoctorForm";
 import { Card, CardContent } from "@/components/ui/card";
-import CreateDoctorSchema from "@/validations/createDoctorSchema";
+import { createDoctorSchema } from "@/validations/doctorSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
@@ -20,7 +20,7 @@ const CreateDoctor = () => {
             <h1 className="font-semibold leading-relaxed">إضافة طبيب جديد</h1>
           </div>
           <CardContent>
-            <DoctorForm action={"create"} doctorSchema={CreateDoctorSchema} />
+            <DoctorForm action={"create"} doctorSchema={createDoctorSchema} />
           </CardContent>
         </Card>
       </motion.section>

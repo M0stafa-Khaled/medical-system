@@ -1,6 +1,6 @@
 import EmployeeForm from "@/components/forms/dashboard/employees/EmployeeForm";
 import { Card, CardContent } from "@/components/ui/card";
-import createEmployeeSchema from "@/validations/createEmployeeSchema";
+import { createEmployeeSchema } from "@/validations/employeeSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 

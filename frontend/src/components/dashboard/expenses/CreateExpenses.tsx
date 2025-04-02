@@ -15,15 +15,15 @@ import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { EXPENSE_FORM_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import createExpenseSchema from "@/validations/createExpenseSchema";
+import { createExpenseSchema } from "@/validations/expenseSchema";
 import { useCreateExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import handleResErr from "@/utils/handleResponseError";
+import RenderExpensesFormFields from "@/components/forms/dashboard/expenses/RenderExpensesFormFields";
 
 const CreateExpense = () => {
   const token = cookieServices.getToken()!;
@@ -118,11 +118,11 @@ const CreateExpense = () => {
                       : ""
                   }`}
                 >
-                  <RenderFormFields
+                  <RenderExpensesFormFields
                     input={input}
-                    form={form as any}
+                    form={form}
                     schema={createExpenseSchema}
-                    options={{ categories: expensesCategoriesOptions! }}
+                    categories={expensesCategoriesOptions!}
                   />
                 </motion.div>
               ))}

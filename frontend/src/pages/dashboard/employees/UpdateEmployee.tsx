@@ -2,7 +2,7 @@ import EmployeeForm from "@/components/forms/dashboard/employees/EmployeeForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetEmployeeById } from "@/lib/react-query/dashboard/employees";
 import cookieServices from "@/utils/cookieServices";
-import updateEmployeeSchema from "@/validations/updateEmployeeSchema";
+import { updateEmployeeSchema } from "@/validations/employeeSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";

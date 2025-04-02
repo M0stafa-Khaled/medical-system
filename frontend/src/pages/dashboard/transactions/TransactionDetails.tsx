@@ -27,7 +27,7 @@ import {
 } from "@/animations/dashboardAnimations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
-import { useGetTransactionById } from "@/lib/react-query/dashboard/transactions";
+import { useGetTransactionById } from "@/lib/react-query/dashboard/transactions/transactions";
 import RefundTransaction from "@/components/dashboard/transactions/RefundTransaction";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -65,7 +65,7 @@ const TransactionDetails = () => {
   if (isLoading) return <DataLoader />;
 
   const {
-    action,
+    actions,
     balance,
     code,
     created_at,
@@ -157,7 +157,9 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants}>
                 <InfoField
                   label="الخدمة"
-                  value={action as string}
+                  value={
+                    actions?.map((action) => action.name).join(", ") as string
+                  }
                   icon={<ClipboardList className="h-5 w-5 text-cyan-500" />}
                 />
               </motion.div>

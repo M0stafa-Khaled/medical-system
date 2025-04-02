@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form, FormField } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
@@ -14,28 +14,28 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import RenderFormFields from "@/components/forms/dashboard/RenderFormFields";
 import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import categorySchema from "@/validations/categorySchema";
 import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import handleResErr from "@/utils/handleResponseError";
+import { expenseCategorySchema } from "@/validations/expenseSchema";
+import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
 
 const CreateExpenseCategory = () => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: createCategory, isPending } = useCreateExpenseCategory();
 
-  const form = useForm<z.infer<typeof categorySchema>>({
-    resolver: zodResolver(categorySchema),
+  const form = useForm<z.infer<typeof expenseCategorySchema>>({
+    resolver: zodResolver(expenseCategorySchema),
     defaultValues: {
       name: "",
     },
   });
 
-  const onSubmit = async ({ name }: z.infer<typeof categorySchema>) => {
+  const onSubmit = async ({ name }: z.infer<typeof expenseCategorySchema>) => {
     try {
       const { status, message } = await createCategory({
         token,
@@ -84,16 +84,21 @@ const CreateExpenseCategory = () => {
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div custom={"category-name"} variants={itemVariants}>
-              <RenderFormFields
-                input={{
-                  name: "name",
-                  label: "اسم التصنيف",
-                  type: "text",
-                  placeholder: "اسم التصنيف",
-                }}
-                form={form}
-                schema={categorySchema}
+            <motion.div variants={itemVariants}>
+              <FormField
+                control={form.control}
+                name={"name"}
+                render={({ field }) => (
+                  <InputFormItem
+                    field={field}
+                    input={{
+                      name: "name",
+                      label: "اسم التصنيف",
+                      type: "text",
+                      placeholder: "اسم التصنيف",
+                    }}
+                  />
+                )}
               />
             </motion.div>
 

@@ -1,32 +1,47 @@
 import DataTable from "@/components/ui/DataTable";
 import TransactionsTableHeader from "./TransactionsTableHeader";
-import TransactionsActions from "./TransactionsActions";
+import TransactionsHeader from "./TransactionsHeader";
 import TransactionsList from "./TransactionsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
-import { useGetAllTransactions } from "@/lib/react-query/dashboard/transactions";
-import { ITransactionsFilter } from "@/interfaces/dashboard/transactions";
+import { useGetAllTransactions } from "@/lib/react-query/dashboard/transactions/transactions";
+import { ITransactionsFilter } from "@/interfaces/dashboard/transactions/transactions";
 
 const TransactionTable = () => {
   const token = cookieServices.getToken()!;
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const [sort, setSort] = useState(false);
 
-  const [filters, setFilters] = useState<ITransactionsFilter>({
-    doctor: "",
-    action: "",
-    treasury: "",
-    status: "",
-    created_at: "",
-    patient: "",
-    code: "",
-    employee: "",
-  });
+  const filters: ITransactionsFilter = useMemo(
+    () => ({
+      doctor: searchParams.get("doctor") || "",
+      action: searchParams.get("action") || "",
+      patient: searchParams.get("patient") || "",
+      code: searchParams.get("code") || "",
+      employee: searchParams.get("employee") || "",
+      treasury: searchParams.get("treasury") || "",
+      created_at: searchParams.get("created_at") || "",
+      status: searchParams.get("status") || "",
+    }),
+    [searchParams]
+  );
+
+  const setFilters = (newFilters: ITransactionsFilter) => {
+    const params = new URLSearchParams(searchParams);
+
+    // update each filter param
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    });
+
+    setSearchParams(params);
+  };
 
   const doctor = useDebounce(filters.doctor, 500);
   const action = useDebounce(filters.action, 500);
@@ -69,10 +84,8 @@ const TransactionTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={
-        <TransactionsActions filters={filters} setFilters={setFilters} />
-      }
-      header={<TransactionsTableHeader setSort={setSort} sort={sort} />}
+      header={<TransactionsHeader filters={filters} setFilters={setFilters} />}
+      tableHeader={<TransactionsTableHeader setSort={setSort} sort={sort} />}
       list={<TransactionsList transactions={transactions?.data?.items || []} />}
       skeleton={<TableSkeleton columns={8} rows={6} actionButtons={3} />}
       pagination={

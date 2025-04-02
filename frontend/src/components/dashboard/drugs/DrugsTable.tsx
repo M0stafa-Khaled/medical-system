@@ -1,6 +1,6 @@
 import DataTable from "@/components/ui/DataTable";
-import DrugsTableActions from "./DrugsTableActions";
-import { useEffect, useState } from "react";
+import DrugsHeader from "./DrugsHeader";
+import { useEffect } from "react";
 import cookieServices from "@/utils/cookieServices";
 import DrugsTableHeader from "./DrugsTableHeader";
 import DrugsList from "./DrugsList";
@@ -12,10 +12,9 @@ import useDebounce from "@/hooks/useDebounce";
 
 const DrugsTable = () => {
   const token = cookieServices.getToken()!;
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const search = useDebounce(searchTerm, 500);
+  const search = useDebounce(searchParams.get("q"), 500)!;
 
   const {
     data: drugs,
@@ -34,13 +33,8 @@ const DrugsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={
-        <DrugsTableActions
-          searchKeyword={searchTerm}
-          setSearchKeyword={setSearchTerm}
-        />
-      }
-      header={<DrugsTableHeader />}
+      header={<DrugsHeader />}
+      tableHeader={<DrugsTableHeader />}
       list={
         <DrugsList
           medications={drugs?.data?.items || []}

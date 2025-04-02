@@ -5,8 +5,8 @@ import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategor
 import { useDeleteExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import cookieServices from "@/utils/cookieServices";
 import handleResErr from "@/utils/handleResponseError";
+import { Trash2 } from "lucide-react";
 import { memo, useState } from "react";
-import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
 interface IProps {
@@ -46,7 +46,7 @@ const DeleteExpenseCategory = ({ category }: IProps) => {
           variant={"destructive"}
           className="text-white gap-2 text-sm  py-1 px-1 w-8 h-8"
         >
-          <MdDelete size={24} />
+          <Trash2 size={20} />
         </Button>
       </TooltipButton>
 

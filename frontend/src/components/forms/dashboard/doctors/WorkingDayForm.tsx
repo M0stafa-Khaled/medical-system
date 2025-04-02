@@ -22,8 +22,8 @@ import doctorWorkingDaySchema from "@/validations/doctorWorkingDaySchema";
 import convertDay from "@/utils/convertDayLang";
 import { useEffect } from "react";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
-import DayRenderFormFields from "./RenderWorkingDayFormFields";
 import handleResErr from "@/utils/handleResponseError";
+import RenderDoctorFormFields from "./RenderDoctorFormFields";
 
 interface IProps {
   day?: IWorkingDay;
@@ -138,7 +138,7 @@ const WorkingDayForm = ({ action, day }: IProps) => {
         >
           {DOCTOR_WORKING_DAY_INPUTS.map((input, idx) => (
             <motion.div variants={itemVariants} key={input.name} custom={idx}>
-              <DayRenderFormFields
+              <RenderDoctorFormFields
                 input={input}
                 form={form}
                 schema={doctorWorkingDaySchema}

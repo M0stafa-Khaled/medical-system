@@ -54,7 +54,12 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   );
 
   // Get data from api
-  const { data: clinics } = useGetAllClinics({ token });
+  const { data: clinics } = useGetAllClinics({
+    token,
+    filter: {
+      status: "1",
+    },
+  });
 
   const { data: doctors } = useGetAllDoctorsClinics({
     token,

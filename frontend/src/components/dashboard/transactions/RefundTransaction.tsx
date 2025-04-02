@@ -1,6 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { useRefundTransaction } from "@/lib/react-query/dashboard/transactions";
+import { useRefundTransaction } from "@/lib/react-query/dashboard/transactions/transactions";
 import cookieServices from "@/utils/cookieServices";
 import { Loader2, RefreshCcwDot } from "lucide-react";
 import { useState } from "react";
@@ -129,7 +129,7 @@ const RefundTransaction = ({ code, id }: IProps) => {
                 variant={"destructive"}
                 className="py-2.5 h-auto"
               >
-                استرجاع
+                استرداد
                 {isPending && <Loader2 className="animate-spin ml-2" />}
               </Button>
             </AlertDialogFooter>

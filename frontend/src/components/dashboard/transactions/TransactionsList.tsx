@@ -8,7 +8,7 @@ import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import truncateText from "@/utils/truncateText";
-import { ITransaction } from "@/interfaces/dashboard/transactions";
+import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
 
@@ -61,7 +61,7 @@ const TransactionsList = ({ transactions }: IProps) => {
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {transaction.action}
+            {transaction.actions.map((action) => action.name).join(", ")}
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">

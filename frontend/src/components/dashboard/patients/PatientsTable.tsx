@@ -2,11 +2,11 @@ import DataTable from "@/components/ui/DataTable";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PatientsList from "./PatientsList";
 import PatientsTableHeader from "./PatientsTableHeader";
 import { useGetAllPatients } from "@/lib/react-query/dashboard/patients";
-import PatientsTableActions from "./PatientsTableActions";
+import PatientsHeader from "./PatientsHeader";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 
@@ -14,8 +14,7 @@ const PatientsTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const [searchTerm, setSearchTerm] = useState("");
-  const search = useDebounce(searchTerm, 500);
+  const search = useDebounce(searchParams.get("q"), 500)!;
   const {
     data: patients,
     isLoading,
@@ -33,13 +32,8 @@ const PatientsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={
-        <PatientsTableActions
-          searchKeyword={searchTerm}
-          setSearchKeyword={setSearchTerm}
-        />
-      }
-      header={<PatientsTableHeader />}
+      header={<PatientsHeader />}
+      tableHeader={<PatientsTableHeader />}
       list={
         <PatientsList
           meta={patients?.data && patients.data?.meta}

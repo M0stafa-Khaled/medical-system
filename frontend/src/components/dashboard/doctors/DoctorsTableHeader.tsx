@@ -19,7 +19,9 @@ const DoctorsTableHeader = () => {
           اسم الطبيب
         </TableHead>
         <TableHead className="py-4 text-center">العيادة</TableHead>
-        <TableHead className="py-4 text-center">رقم الهاتف</TableHead>
+        <TableHead className="py-4 text-center text-nowrap">
+          رقم الهاتف
+        </TableHead>
         <TableHead className="py-4 text-center text-nowrap">
           حالة الحساب
         </TableHead>

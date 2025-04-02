@@ -2,11 +2,11 @@ import DataTable from "@/components/ui/DataTable";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import EmployeesList from "./EmployeesList";
 import EmployeesTableHeader from "./EmployeesTableHeader";
 import { useGetAllEmployees } from "@/lib/react-query/dashboard/employees";
-import EmployeesTableActions from "./EmployeesTableActions";
+import EmployeesHeader from "./EmployeesHeader";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 
@@ -14,8 +14,8 @@ const EmployeesTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const [searchTerm, setSearchTerm] = useState("");
-  const search = useDebounce(searchTerm, 500);
+
+  const search = useDebounce(searchParams.get("q"), 500)!;
 
   const {
     data: employees,
@@ -34,13 +34,8 @@ const EmployeesTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={
-        <EmployeesTableActions
-          searchKeyword={searchTerm}
-          setSearchKeyword={setSearchTerm}
-        />
-      }
-      header={<EmployeesTableHeader />}
+      header={<EmployeesHeader />}
+      tableHeader={<EmployeesTableHeader />}
       list={
         <EmployeesList
           meta={employees?.data && employees.data?.meta}

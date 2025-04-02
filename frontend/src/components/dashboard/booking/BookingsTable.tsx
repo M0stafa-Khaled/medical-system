@@ -1,11 +1,11 @@
 import DataTable from "@/components/ui/DataTable";
 import BookingsTableHeader from "./BookingsTableHeader";
-import BookingsHeaderActions from "./BookingsActions";
+import BookingsHeader from "./BookingsHeader";
 import BookingsList from "./BookingsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllBookings } from "@/lib/react-query/dashboard/bookings";
@@ -13,17 +13,36 @@ import { IBookingsFilter } from "@/interfaces/dashboard/bookings";
 
 const BookingsTable = () => {
   const token = cookieServices.getToken()!;
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const [sort, setSort] = useState(false);
-  const [filters, setFilters] = useState<IBookingsFilter>({
-    doctor: "",
-    patient: "",
-    created_at: "",
-    booking_date: "",
-    status: "",
-    clinic_name: "",
-  });
+
+  const filters: IBookingsFilter = useMemo(
+    () => ({
+      doctor: searchParams.get("doctor") || "",
+      patient: searchParams.get("patient") || "",
+      created_at: searchParams.get("created_at") || "",
+      booking_date: searchParams.get("booking_date") || "",
+      status: searchParams.get("status") || "",
+      clinic_name: searchParams.get("clinic_name") || "",
+    }),
+    [searchParams]
+  );
+
+  const setFilters = (newFilters: IBookingsFilter) => {
+    const params = new URLSearchParams(searchParams);
+
+    // Update each filter param
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    });
+
+    setSearchParams(params);
+  };
 
   const doctor = useDebounce(filters.doctor, 500);
   const patient = useDebounce(filters.patient, 500);
@@ -65,14 +84,14 @@ const BookingsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      actions={
-        <BookingsHeaderActions
+      header={
+        <BookingsHeader
           filters={filters}
           setFilters={setFilters}
           isLoading={isRefetching}
         />
       }
-      header={<BookingsTableHeader setSort={setSort} sort={sort} />}
+      tableHeader={<BookingsTableHeader setSort={setSort} sort={sort} />}
       list={<BookingsList bookings={bookings?.data?.items || []} />}
       skeleton={<TableSkeleton columns={9} rows={6} actionButtons={4} />}
       pagination={

@@ -1,8 +1,8 @@
 import useDebounce from "@/hooks/useDebounce";
 import cookieServices from "@/utils/cookieServices";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 import { toast } from "react-toastify";
-import CategoriesActions from "./CategoriesActions";
+import CategoriesHeader from "./CategoriesHeader";
 import CategoryCard from "./CategoryCard";
 import CardSkeleton from "@/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
@@ -11,11 +11,12 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
+import { useSearchParams } from "react-router-dom";
 
 const CategoriesList = () => {
   const token = cookieServices.getToken()!;
-  const [searchTerm, setSearchTerm] = useState("");
-  const search = useDebounce(searchTerm, 500);
+  const [searchParams] = useSearchParams();
+  const search = useDebounce(searchParams.get("q"), 500)!;
   const {
     data: categories,
     isLoading,
@@ -40,10 +41,7 @@ const CategoriesList = () => {
       animate="visible"
       variants={containerVariants}
     >
-      <CategoriesActions
-        searchKeyword={searchTerm}
-        setSearchKeyword={setSearchTerm}
-      />
+      <CategoriesHeader />
 
       {isLoading ? (
         <CardSkeleton />

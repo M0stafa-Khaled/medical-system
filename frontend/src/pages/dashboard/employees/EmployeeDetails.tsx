@@ -15,6 +15,7 @@ import {
   CircleDollarSign,
   FileImage,
   Mail,
+  Pen,
   Phone,
   ShieldUser,
   UserCircle2,
@@ -24,7 +25,6 @@ import {
 import ImageModal from "@/components/shared/ImageModal";
 import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
 import InfoField from "@/components/dashboard/InfoField";
-import { FaPencil } from "react-icons/fa6";
 import DeleteEmployee from "@/components/dashboard/employees/DeleteEmployee";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -118,7 +118,7 @@ const EmployeeDetails = () => {
                               to={`/dashboard/employees/${id}/update`}
                               className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
                             >
-                              <FaPencil size={18} />
+                              <Pen size={20} />
                             </Link>
                           </Button>
                         </TooltipButton>

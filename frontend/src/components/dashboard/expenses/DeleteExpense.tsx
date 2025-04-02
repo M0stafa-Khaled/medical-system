@@ -4,8 +4,8 @@ import TooltipButton from "@/components/ui/TooltipButton";
 import { useDeleteExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import cookieServices from "@/utils/cookieServices";
 import handleResErr from "@/utils/handleResponseError";
+import { Trash2 } from "lucide-react";
 import { useState } from "react";
-import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
 interface IProps {
@@ -46,8 +46,8 @@ const DeleteExpense = ({ id, name }: IProps) => {
           variant={"destructive"}
           className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
         >
-          <MdDelete size={24} />
-        </Button>
+          <Trash2 size={20} />
+          </Button>
       </TooltipButton>
 
       <Modal
