@@ -177,16 +177,20 @@ const DashboardLayout = () => {
   ];
 
   return (
-    <div className="flex container">
-      <Header links={NAV_LINKS} dashboard />
+    <div className="flex">
       <ScrollRestoration />
-      <Sidebar links={NAV_LINKS} />
-      <main className="flex-1 mt-20 lg:mt-6 bg-background flex flex-col overflow-hidden lg:mr-[275px]">
-        <PathIndicator routeNames={routeNames} />
-        <div className="my-5">
-          <Outlet />
-        </div>
-      </main>
+      <div className="fixed inset-y-0 right-0">
+        <Sidebar links={NAV_LINKS} />
+      </div>
+      <div className="container flex-1 flex flex-col overflow-hidden lg:mr-[275px]">
+        <Header links={NAV_LINKS} dashboard />
+        <main className="flex-1 mt-20 lg:mt-6 bg-background">
+          <PathIndicator routeNames={routeNames} />
+          <div className="my-3">
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

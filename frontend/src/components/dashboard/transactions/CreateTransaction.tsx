@@ -29,6 +29,8 @@ import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorA
 import handleResErr from "@/utils/handleResponseError";
 import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/patientBalances";
 import InfoField from "../InfoField";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 interface IProps {
   booking: IBooking;
@@ -36,7 +38,7 @@ interface IProps {
 const CreateTransaction = ({ booking }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showVisa, setShowVisa] = useState(false);
-
+  const canViewLastVisits = useHasPermission(PERMISSIONS.LAST_PATIENT_TRANSACTIONS)
   const token = cookieServices.getToken()!;
 
   const { data: doctorActions } = useGetDoctorActions({
@@ -104,6 +106,7 @@ const CreateTransaction = ({ booking }: IProps) => {
       // ! Create failed
       if (!status) return toast.error(message);
       // * Create Success
+      handleCloseModal();
       return toast.success(message);
     } catch (error) {
       handleResErr(error);
@@ -136,27 +139,29 @@ const CreateTransaction = ({ booking }: IProps) => {
         }}
         showFooter={false}
       >
-        <motion.div
+       {canViewLastVisits && (
+          <motion.div
           variants={containerVariants}
           className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1"
         >
           <InfoField
-            label="إجمالي المبلغ"
+            label="الإجمالي"
             value={patientBalances?.data.total_amount_due as number}
           />
           <InfoField
-            label="إجمالي المبلغ المدفوع"
+            label="إجمالي المدفوع"
             value={patientBalances?.data.total_amount_paid as number}
           />
           <InfoField
-            label="إجمالي المبلغ المسترد"
+            label="إجمالي المسترد"
             value={patientBalances?.data.refund_amount as number}
           />
           <InfoField
-            label="إجمالي المبلغ المستحق"
+            label="إجمالي الباقي"
             value={patientBalances?.data.total_balance as string}
           />
         </motion.div>
+       )}
         <Form {...form}>
           <motion.form
             initial="hidden"
@@ -168,6 +173,7 @@ const CreateTransaction = ({ booking }: IProps) => {
             <Button className="h-auto w-full py-0 px-0 gap-2 text-sm ">
               <Link
                 to={`/dashboard/last-visits/${booking.patient.id}/transactions/${booking.doctor.id}`}
+                target="_blank"
                 className="flex justify-center items-center gap-2 py-3 px-1 w-full"
               >
                 أخر زيارات المريض لدي الطبيب

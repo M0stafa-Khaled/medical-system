@@ -6,10 +6,9 @@ import { ArrowUpDown } from "lucide-react";
 
 interface IProps {
   setSort: Dispatch<SetStateAction<boolean>>;
-  sort: boolean;
 }
 
-const BookingsTableHeader = ({ setSort, sort }: IProps) => {
+const BookingsTableHeader = ({ setSort }: IProps) => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
   const canDeleteBooking = useHasPermission(PERMISSIONS.DELETE_BOOKING);
   const canViewBooking = useHasPermission(PERMISSIONS.VIEW_BOOKING);
@@ -33,7 +32,7 @@ const BookingsTableHeader = ({ setSort, sort }: IProps) => {
         </TableHead>
         <TableHead
           className="py-4 hover:bg-dark/10 dark:hover:bg-white/10 transition-colors duration-200 text-center text-nowrap cursor-pointer"
-          onClick={() => setSort(!sort)}
+          onClick={() => setSort((prev) => !prev)}
         >
           <div className="flex items-center justify-center gap-2">
             تاريخ الحجز

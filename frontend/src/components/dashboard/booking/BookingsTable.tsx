@@ -91,7 +91,7 @@ const BookingsTable = () => {
           isLoading={isRefetching}
         />
       }
-      tableHeader={<BookingsTableHeader setSort={setSort} sort={sort} />}
+      tableHeader={<BookingsTableHeader setSort={setSort} />}
       list={<BookingsList bookings={bookings?.data?.items || []} />}
       skeleton={<TableSkeleton columns={9} rows={6} actionButtons={4} />}
       pagination={

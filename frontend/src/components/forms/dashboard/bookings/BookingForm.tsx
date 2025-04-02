@@ -187,7 +187,12 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
         label: "منتهي",
         value: "ended",
       };
-  }, [booking?.status]);
+    if (booking?.status === "completed")
+      return {
+        label: "مكتمل",
+        value: "completed",
+      };
+  }, [booking]);
 
   useEffect(() => {
     setClinicId(booking?.clinic?.id.toString() || "");
@@ -220,8 +225,12 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
       },
       start_at: booking?.start_at || "",
       date: booking?.booking_date || "",
-      status: initialBookingStatus() || "",
+      status: {
+        label: initialBookingStatus()?.label || "",
+        value: initialBookingStatus()?.value || "",
+      },
     });
+    console.log(initialBookingStatus());
   }, [form, booking, initialBookingStatus]);
 
   useEffect(() => {
@@ -264,6 +273,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     });
     return () => subscription.unsubscribe();
   }, [form]);
+
   const onSubmit = async (data: z.infer<typeof bookingSchema>) => {
     try {
       if (action === "update") {

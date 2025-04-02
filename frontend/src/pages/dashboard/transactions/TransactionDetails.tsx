@@ -122,9 +122,25 @@ const TransactionDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  label="المبلغ"
+                  label="المبلغ المدفوع"
                   value={balance?.amount_paid as string}
                   icon={<DollarSign className="h-5 w-5 text-green-500" />}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  label="إجمالي المبلغ"
+                  value={balance?.total_amount_due as string}
+                  icon={<PiggyBank className="h-5 w-5 text-red-500" />}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  label="المبلغ المستحق"
+                  value={balance?.balance as string}
+                  icon={<PiggyBank className="h-5 w-5 text-red-500" />}
                 />
               </motion.div>
 
@@ -135,14 +151,6 @@ const TransactionDetails = () => {
                     balance?.payment_method === "cash" ? "نقدي" : "بطاقة بنكية"
                   }
                   icon={<CreditCard className="h-5 w-5 text-blue-500" />}
-                />
-              </motion.div>
-
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  label="اجمالي المبلغ المستحق"
-                  value={balance?.total_amount_due as string}
-                  icon={<PiggyBank className="h-5 w-5 text-red-500" />}
                 />
               </motion.div>
 
@@ -206,7 +214,7 @@ const TransactionDetails = () => {
                 </motion.div>
               )}
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="flex items-center">
                 <Link
                   to={`/dashboard/doctors/${doctor?.id}`}
                   className="block hover:text-primary transition-colors duration-200"
@@ -219,7 +227,7 @@ const TransactionDetails = () => {
                 </Link>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="flex items-center">
                 <Link
                   to={`/dashboard/patients/${patient?.id}`}
                   className="block hover:text-primary transition-colors duration-200"
@@ -232,7 +240,7 @@ const TransactionDetails = () => {
                 </Link>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="flex items-center">
                 <Link
                   to={`/dashboard/employees/${employee?.id}`}
                   className="block hover:text-primary transition-colors duration-200"

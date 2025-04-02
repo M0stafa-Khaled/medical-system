@@ -21,6 +21,13 @@ const BookingStatus = ({ status }: IProps) => {
             تم التحصيل
           </Badge>
         );
+      case "completed":
+        return (
+          <Badge className="bg-emerald-600/30 dark:bg-emerald-600/20 hover:bg-emerald-600/10 text-emerald-800 dark:text-emerald-500 shadow-none rounded-full">
+            <div className="h-1.5 w-1.5 rounded-full bg-emerald-800 dark:bg-emerald-500 ml-2" />
+            مكتمل
+          </Badge>
+        );
       case "cancelled":
         return (
           <Badge className="bg-red-600/30 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">

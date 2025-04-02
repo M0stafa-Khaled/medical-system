@@ -6,7 +6,6 @@ import cookieServices from "@/utils/cookieServices";
 import handleResErr from "@/utils/handleResponseError";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface IProps {
@@ -15,7 +14,6 @@ interface IProps {
 }
 
 const DeleteBooking = ({ name, id }: IProps) => {
-  const navigate = useNavigate();
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: deleteBooking, isPending } = useDeleteBooking();
@@ -27,7 +25,6 @@ const DeleteBooking = ({ name, id }: IProps) => {
       // ! Delete failed
       if (!status) return toast.error(message);
       // * Delete Success
-      navigate("/dashboard/bookings");
       return toast.success(message);
     } catch (error) {
       handleResErr(error);

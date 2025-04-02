@@ -103,18 +103,20 @@ const BookingsList = ({ bookings }: IProps) => {
                     </Button>
                   </TooltipButton>
                 )}
-                {canUpdateBooking && (
-                  <TooltipButton title="تعديل">
-                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
-                      <Link
-                        to={`/dashboard/bookings/${booking?.id}/update`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
-                      >
-                        <Pen size={20} />
-                      </Link>
-                    </Button>
-                  </TooltipButton>
-                )}
+                {canUpdateBooking &&
+                  booking.status !== "collected" &&
+                  booking.status !== "completed" && (
+                    <TooltipButton title="تعديل">
+                      <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
+                        <Link
+                          to={`/dashboard/bookings/${booking?.id}/update`}
+                          className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
+                        >
+                          <Pen size={20} />
+                        </Link>
+                      </Button>
+                    </TooltipButton>
+                  )}
                 {canDeleteBooking && booking.status !== "cancelled" && (
                   <DeleteBooking
                     name={booking?.patient?.name}

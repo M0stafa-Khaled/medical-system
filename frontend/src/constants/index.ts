@@ -551,6 +551,10 @@ export const BOOKING_STATUS_OPTIONS: {
     value: "pending",
   },
   {
+    label: "لم  يحضر",
+    value: "no-show",
+  },
+  {
     label: "منتهي",
     value: "ended",
   },

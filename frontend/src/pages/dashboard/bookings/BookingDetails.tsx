@@ -101,18 +101,20 @@ const BookingDetails = () => {
                 <span>تفاصيل الحجز:</span>
               </CardTitle>
               <div className="flex gap-2">
-                {canUpdateBooking && (
-                  <motion.div variants={itemVariants}>
-                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
-                      <Link
-                        to={`/dashboard/bookings/${booking?.data.id}/update`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
-                      >
-                        <Pen size={20} />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                )}
+                {canUpdateBooking &&
+                  status !== "collected" &&
+                  status !== "completed" && (
+                    <motion.div variants={itemVariants}>
+                      <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
+                        <Link
+                          to={`/dashboard/bookings/${booking?.data.id}/update`}
+                          className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
+                        >
+                          <Pen size={20} />
+                        </Link>
+                      </Button>
+                    </motion.div>
+                  )}
                 {canDeleteBooking && status !== "cancelled" && (
                   <motion.div variants={itemVariants}>
                     <DeleteBooking
@@ -130,7 +132,7 @@ const BookingDetails = () => {
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               variants={containerVariants}
             >
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="flex items-center">
                 <Link to={`/dashboard/patients/${patient?.id}`}>
                   <InfoField
                     icon={<User2 className="h-5 w-5 text-primary" />}
@@ -157,7 +159,7 @@ const BookingDetails = () => {
                 />
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="flex items-center">
                 <Link to={`/dashboard/doctors/${doctor?.id}`}>
                   <InfoField
                     icon={<UserCircle2 className="h-5 w-5 text-blue-500" />}

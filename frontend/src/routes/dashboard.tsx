@@ -350,7 +350,9 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="last-visits/:patientId/transactions/:doctorId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_TRANSACTION}>
+          <ProtectedRoute
+            requiredPermission={PERMISSIONS.LAST_PATIENT_TRANSACTIONS}
+          >
             <LastVisits />
           </ProtectedRoute>
         }

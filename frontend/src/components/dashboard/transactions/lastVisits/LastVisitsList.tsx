@@ -1,23 +1,21 @@
 import { TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import RefundTransaction from "./RefundTransaction";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
-import truncateText from "@/utils/truncateText";
 import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
-import { encryptData } from "@/utils/encryptData";
+import RefundTransaction from "../RefundTransaction";
 
 interface IProps {
   transactions: ITransaction[];
 }
 
-const TransactionsList = ({ transactions }: IProps) => {
+const LastVisitsList = ({ transactions }: IProps) => {
   const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
   const canViewTransaction = useHasPermission(PERMISSIONS.VIEW_TRANSACTION);
 
@@ -58,19 +56,13 @@ const TransactionsList = ({ transactions }: IProps) => {
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {transaction.treasury.name}
-          </TableCell>
-
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
             {transaction.actions.map((action) => action.name).join(", ")}
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {truncateText(transaction.employee.name, 15)}
-          </TableCell>
-
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {truncateText(transaction.patient.name, 15)}
+            {transaction.balance.payment_method === "visa"
+              ? "بطاقة بنكية"
+              : "نقدي"}
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
@@ -97,9 +89,7 @@ const TransactionsList = ({ transactions }: IProps) => {
                 {canViewTransaction && (
                   <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
                     <Link
-                      to={`/dashboard/transactions/${encryptData(
-                        transaction?.id
-                      )}`}
+                      to={`/dashboard/transactions/${transaction?.id}`}
                       className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
                     >
                       <FiEye size={24} />
@@ -122,4 +112,4 @@ const TransactionsList = ({ transactions }: IProps) => {
   );
 };
 
-export default TransactionsList;
+export default LastVisitsList;

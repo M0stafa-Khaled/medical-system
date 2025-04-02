@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, FormField } from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
@@ -21,7 +21,6 @@ import { useCancelExpense } from "@/lib/react-query/dashboard/expenses/expenses"
 import { MdDoNotDisturbAlt } from "react-icons/md";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
-import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
 import { cancelExpenseSchema } from "@/validations/expenseSchema";
 import RenderExpensesFormFields from "@/components/forms/dashboard/expenses/RenderExpensesFormFields";
 
@@ -96,21 +95,6 @@ const CancelExpense = ({ id }: { id: number }) => {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <FormField
-                control={form.control}
-                name={"cancelled_info"}
-                render={({ field }) => (
-                  <InputFormItem
-                    field={field}
-                    input={{
-                      name: "cancelled_info",
-                      label: "سبب الإلغاء",
-                      type: "text",
-                      placeholder: "اذكر سبب الإلغاء",
-                    }}
-                  />
-                )}
-              />
               <RenderExpensesFormFields
                 form={form}
                 input={{
