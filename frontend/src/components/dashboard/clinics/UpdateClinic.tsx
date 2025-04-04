@@ -50,16 +50,18 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
     virtual_number,
   }: z.infer<typeof clinicSchema>) => {
     try {
-      const {
-        status: statusServer,
-        message,
-        data,
-      } = await updateClinic({ id, name, status, virtual_number, token });
+      const { status: statusServer, message } = await updateClinic({
+        id,
+        name,
+        status,
+        virtual_number,
+        token,
+      });
 
       // ! Update failed
       if (!statusServer) return toast.error(message);
       // * Update Success
-      return toast.success(`${message} (${data.name})`);
+      return toast.success(message);
     } catch (error) {
       handleResErr(error);
     } finally {

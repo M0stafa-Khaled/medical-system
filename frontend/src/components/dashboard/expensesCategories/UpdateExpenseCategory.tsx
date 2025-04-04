@@ -17,7 +17,7 @@ import {
   itemVariants,
   containerVariants,
 } from "@/animations/dashboardAnimations";
-import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
+import { IExpenseCategory } from "@/interfaces/dashboard/expenses";
 import { useUpdateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";

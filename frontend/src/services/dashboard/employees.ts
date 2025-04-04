@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes, IGetWithParams } from "@/interfaces";
+import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
   ICreateEmployee,
   IEmployeeRes,
@@ -20,13 +20,13 @@ export const getAllEmployees = async ({
   return data;
 };
 
-export const getEmployeeById: ({
-  token,
+export const getEmployeeById = async ({
   id,
+  token,
 }: {
   id: string;
   token: string;
-}) => Promise<IEmployeeRes> = async ({ id, token }) => {
+}): Promise<IEmployeeRes> => {
   const { data } = await axiosInstanceAPI.get(`/employees/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ export const deleteEmployee: ({
 }: {
   id: number;
   token: string;
-}) => Promise<IDeleteRes> = async ({ id, token }) => {
+}) => Promise<IStatusMsg> = async ({ id, token }) => {
   const { data } = await axiosInstanceAPI.delete(`/employees/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

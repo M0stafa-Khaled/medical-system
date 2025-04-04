@@ -7,15 +7,11 @@ import {
 } from "@/interfaces";
 import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
 
-export const getAllDrugs: ({
-  token,
-  page,
-  search,
-}: IGetWithParams) => Promise<IDrugsResponse> = async ({
+export const getAllDrugs = async ({
   token,
   page = 1,
   search,
-}) => {
+}: IGetWithParams): Promise<IDrugsResponse> => {
   const { data } = await axiosInstanceAPI.get("/drugs", {
     params: { ...(search ? { q: search, page } : { page }) },
 
@@ -27,13 +23,13 @@ export const getAllDrugs: ({
   return data;
 };
 
-export const getAllClinicsDoctors: ({
+export const getAllClinicsDoctors = async ({
   token,
   clinic_id,
 }: {
   token: string;
   clinic_id: string;
-}) => Promise<IDoctorClinicsRes> = async ({ token, clinic_id }) => {
+}): Promise<IDoctorClinicsRes> => {
   const { data } = await axiosInstanceAPI.get(`/${clinic_id}/doctors`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,19 +38,13 @@ export const getAllClinicsDoctors: ({
   return data;
 };
 
-export const getAvailableBookingsTimes: ({
-  doctor_id,
-  working_day_id,
-  clinic_id,
-  token,
-  booking_date,
-}: IGetAvailableTimes) => Promise<IAvailableTimesRes> = async ({
+export const getAvailableBookingsTimes = async ({
   doctor_id,
   working_day_id,
   clinic_id,
   booking_date,
   token,
-}) => {
+}: IGetAvailableTimes): Promise<IAvailableTimesRes> => {
   const { data } = await axiosInstanceAPI.get(
     `/bookings/${doctor_id}/avaliable-times/${working_day_id}/clinic/${clinic_id}`,
     {

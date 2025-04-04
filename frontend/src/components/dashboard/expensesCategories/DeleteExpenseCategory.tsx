@@ -1,7 +1,7 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import TooltipButton from "@/components/ui/TooltipButton";
-import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
+import { IExpenseCategory } from "@/interfaces/dashboard/expenses";
 import { useDeleteExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import cookieServices from "@/utils/cookieServices";
 import handleResErr from "@/utils/handleResponseError";

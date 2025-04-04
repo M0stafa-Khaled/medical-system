@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes, IGetWithParams } from "@/interfaces";
+import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
   ICreateDoctor,
   IResponseDoctor,
@@ -20,13 +20,13 @@ export const getAllDoctors = async ({
   return data;
 };
 
-export const getDoctorById: ({
+export const getDoctorById = async ({
   id,
   token,
 }: {
   id: string;
   token: string;
-}) => Promise<IResponseDoctor> = async ({ id, token }) => {
+}): Promise<IResponseDoctor> => {
   const { data } = await axiosInstanceAPI.get(`doctors/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -35,13 +35,13 @@ export const getDoctorById: ({
   return data;
 };
 
-export const createDoctor: ({
+export const createDoctor = async ({
   dataForm,
   token,
 }: {
   dataForm: ICreateDoctor;
   token: string;
-}) => Promise<IResponseDoctor> = async ({ dataForm, token }) => {
+}): Promise<IStatusMsg> => {
   const formData = new FormData();
   formData.append("name", dataForm.name);
   formData.append("personal_id", dataForm.personal_id);
@@ -66,13 +66,13 @@ export const createDoctor: ({
   return data;
 };
 
-export const updateDoctor: ({
+export const updateDoctor = async ({
   dataForm,
   token,
 }: {
   dataForm: ICreateDoctor;
   token: string;
-}) => Promise<IResponseDoctor> = async ({ dataForm, token }) => {
+}): Promise<IStatusMsg> => {
   const formData = new FormData();
   formData.append("name", dataForm.name);
   formData.append("personal_id", dataForm.personal_id);
@@ -107,13 +107,13 @@ export const updateDoctor: ({
   return data;
 };
 
-export const deleteDoctor: ({
+export const deleteDoctor = async ({
   id,
   token,
 }: {
   id: number;
   token: string;
-}) => Promise<IDeleteRes> = async ({ id, token }) => {
+}): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.delete(`/doctors/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

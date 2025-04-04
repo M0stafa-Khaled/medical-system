@@ -1,13 +1,14 @@
 import axiosInstanceAPI from "@/config/axios.config";
+import { IStatusMsg } from "@/interfaces";
 import {
   IChangePassword,
   IResponseProfile,
   IUpdateProfile,
 } from "@/interfaces/profile/profile";
 
-export const getUserProfile: (
+export const getUserProfile = async (
   token: string
-) => Promise<IResponseProfile> = async (token) => {
+): Promise<IResponseProfile> => {
   const { data } = await axiosInstanceAPI.get("/me", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -16,14 +17,11 @@ export const getUserProfile: (
   return data;
 };
 
-export const updateProfile: ({
-  token,
+export const updateProfile = async ({
   role,
+  token,
   dataForm,
-}: IUpdateProfile) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ role, token, dataForm }) => {
+}: IUpdateProfile): Promise<IStatusMsg> => {
   // * Doctor
   if (role === "doctor") {
     const formData = new FormData();
@@ -57,16 +55,18 @@ export const updateProfile: ({
     });
     return data;
   }
+
+  return {
+    status: false,
+    message: "This role is not supported",
+  };
 };
 
-export const changePassword: ({
+export const changePassword = async ({
   token,
   password,
   password_confirmation,
-}: IChangePassword) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ password, password_confirmation, token }) => {
+}: IChangePassword): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     "/password/update",
     {

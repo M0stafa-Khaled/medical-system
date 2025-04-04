@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { IExpenseCategory } from "@/interfaces/dashboard/expenses/expenseCategory";
+import { IExpenseCategory } from "@/interfaces/dashboard/expenses";
 import DeleteExpenseCategory from "./DeleteExpenseCategory";
 import UpdateExpenseCategory from "./UpdateExpenseCategory";
 import useHasPermission from "@/hooks/useHasPermission";

@@ -4,7 +4,7 @@ export interface IDoctorAction {
   price: number;
 }
 
-export interface IDoctorActionProps {
+export interface ICreateDoctorAction {
   formData: {
     doctor_id: string;
     name: string;
@@ -12,12 +12,6 @@ export interface IDoctorActionProps {
   };
   token: string;
   id?: string;
-}
-
-export interface IResponseDoctorAction {
-  status: boolean;
-  message: string;
-  data: IDoctorAction;
 }
 
 export interface IResponseDoctorActions {

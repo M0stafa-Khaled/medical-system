@@ -5,7 +5,7 @@ import {
   updateDoctorAction,
 } from "@/services/dashboard/doctors/doctorActions";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IDoctorActionProps } from "@/interfaces/dashboard/doctors/doctorActions";
+import { ICreateDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
 import Query_Keys from "@/enums/queryKeys";
 
 export const useGetDoctorActions = ({
@@ -25,7 +25,7 @@ export const useGetDoctorActions = ({
 export const useCreateDoctorAction = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ formData, token }: IDoctorActionProps) =>
+    mutationFn: ({ formData, token }: ICreateDoctorAction) =>
       createDoctorAction({ formData, token }),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -38,7 +38,7 @@ export const useCreateDoctorAction = () => {
 export const useUpdateDoctorAction = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ formData, token, id }: IDoctorActionProps) =>
+    mutationFn: ({ formData, token, id }: ICreateDoctorAction) =>
       updateDoctorAction({ formData, token, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({

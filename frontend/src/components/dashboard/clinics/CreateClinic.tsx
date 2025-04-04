@@ -44,11 +44,7 @@ const CreateClinic = () => {
     virtual_number,
   }: z.infer<typeof clinicSchema>) => {
     try {
-      const {
-        status: statusServer,
-        message,
-        data,
-      } = await createClinic({
+      const { status: statusServer, message } = await createClinic({
         name,
         status,
         token,
@@ -59,7 +55,7 @@ const CreateClinic = () => {
       if (!statusServer) return toast.error(message);
 
       // * Create Success
-      return toast.success(`${message} '${data.name}'`);
+      return toast.success(message);
     } catch (error) {
       handleResErr(error);
     } finally {

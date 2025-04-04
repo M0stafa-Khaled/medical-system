@@ -1,12 +1,12 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes } from "@/interfaces";
+import { IStatusMsg } from "@/interfaces";
 import {
   ICreateWorkingDay,
   IWorkingDay,
   IWorkingDaysRes,
 } from "@/interfaces/dashboard/doctors/workingDays";
 
-export const getAllWorkingDays: ({
+export const getAllWorkingDays = async ({
   doctorId,
   token,
   search,
@@ -14,7 +14,7 @@ export const getAllWorkingDays: ({
   doctorId: string;
   token: string;
   search?: string;
-}) => Promise<IWorkingDaysRes> = async ({ doctorId, token, search }) => {
+}): Promise<IWorkingDaysRes> => {
   const { data } = await axiosInstanceAPI.get(`${doctorId}/working-days`, {
     params: { ...(search && { q: search }) },
     headers: {
@@ -24,16 +24,13 @@ export const getAllWorkingDays: ({
   return data;
 };
 
-export const getWorkingDayById: ({
+export const getWorkingDayById = async ({
   id,
   token,
 }: {
   id: string;
   token: string;
-}) => Promise<{ status: boolean; data: IWorkingDay }> = async ({
-  id,
-  token,
-}) => {
+}): Promise<{ status: boolean; data: IWorkingDay }> => {
   const { data } = await axiosInstanceAPI.get(`/working-days/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,13 +39,10 @@ export const getWorkingDayById: ({
   return data;
 };
 
-export const createWorkingDay: ({
-  token,
-  formData,
-}: ICreateWorkingDay) => Promise<IWorkingDaysRes> = async ({
+export const createWorkingDay = async ({
   formData,
   token,
-}) => {
+}: ICreateWorkingDay): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post("/working-days", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -57,13 +51,10 @@ export const createWorkingDay: ({
   return data;
 };
 
-export const updateWorkingDay: ({
-  token,
-  formData,
-}: ICreateWorkingDay) => Promise<IWorkingDaysRes> = async ({
+export const updateWorkingDay = async ({
   formData,
   token,
-}) => {
+}: ICreateWorkingDay): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     `/working-days/${formData.id}`,
     { ...formData, _method: "put" },
@@ -76,13 +67,13 @@ export const updateWorkingDay: ({
   return data;
 };
 
-export const deleteWorkingDay: ({
-  token,
+export const deleteWorkingDay = async ({
   id,
+  token,
 }: {
   id: number;
   token: string;
-}) => Promise<IDeleteRes> = async ({ id, token }) => {
+}): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.delete(`/working-days/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

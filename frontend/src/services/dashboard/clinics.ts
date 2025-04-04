@@ -1,15 +1,14 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes, IGetWithParams } from "@/interfaces";
+import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
   ICreateClinic,
-  ICreateClinicResponse,
   IResponseClinics,
 } from "@/interfaces/dashboard/clinics";
 
-export const getAllClinics: ({
+export const getAllClinics = async ({
   token,
   filter,
-}: IGetWithParams) => Promise<IResponseClinics> = async ({ token, filter }) => {
+}: IGetWithParams): Promise<IResponseClinics> => {
   const { data } = await axiosInstanceAPI.get("/clinics", {
     params: { ...(filter && { filter }) },
 
@@ -20,14 +19,11 @@ export const getAllClinics: ({
   return data;
 };
 
-export const createClinic: ({
-  name,
-  status,
-}: ICreateClinic) => Promise<ICreateClinicResponse> = async ({
+export const createClinic = async ({
   name,
   status,
   token,
-}) => {
+}: ICreateClinic): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     "/clinics",
     { name, status: status ? "1" : "0", virtual_number: 5 },
@@ -40,13 +36,13 @@ export const createClinic: ({
   return data;
 };
 
-export const deleteClinic: ({
+export const deleteClinic = async ({
   id,
   token,
 }: {
   id: number;
   token: string;
-}) => Promise<IDeleteRes> = async ({ id, token }) => {
+}): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.delete(`/clinics/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -61,7 +57,7 @@ export const updateClinic = async ({
   status,
   token,
   virtual_number,
-}: ICreateClinic): Promise<ICreateClinicResponse> => {
+}: ICreateClinic): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     `/clinics/${id}`,
     { name, status: status ? "1" : "0", virtual_number, _method: "put" },

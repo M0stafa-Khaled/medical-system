@@ -1,5 +1,5 @@
 import axiosInstanceAPI from "@/config/axios.config";
-import { IDeleteRes, IGetWithParams } from "@/interfaces";
+import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   IBooking,
   IBookingsRes,
@@ -7,17 +7,12 @@ import {
   IUpdateBookingStatus,
 } from "@/interfaces/dashboard/bookings";
 
-export const getAllBookings: ({
+export const getAllBookings = async ({
   token,
   page,
   filter,
   sort,
-}: IGetWithParams) => Promise<IBookingsRes> = async ({
-  token,
-  page,
-  filter,
-  sort,
-}) => {
+}: IGetWithParams): Promise<IBookingsRes> => {
   const { data } = await axiosInstanceAPI.get(`/patients-bookings`, {
     params: { page, sort, ...(filter && { filter }) },
     headers: {
@@ -27,16 +22,13 @@ export const getAllBookings: ({
 
   return data;
 };
-export const getBookingById: ({
+export const getBookingById = async ({
   id,
   token,
 }: {
   token: string;
   id: string;
-}) => Promise<{ status: boolean; message: string; data: IBooking }> = async ({
-  id,
-  token,
-}) => {
+}): Promise<{ status: boolean; message: string; data: IBooking }> => {
   const { data } = await axiosInstanceAPI(`/patients-bookings/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -46,10 +38,10 @@ export const getBookingById: ({
   return data;
 };
 
-export const createBooking: ({ formData, token }: ICreateBooking) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ formData, token }) => {
+export const createBooking = async ({
+  formData,
+  token,
+}: ICreateBooking): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post("/patients-bookings", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -58,14 +50,11 @@ export const createBooking: ({ formData, token }: ICreateBooking) => Promise<{
   return data;
 };
 
-export const updateBooking: ({
+export const updateBooking = async ({
   formData,
   token,
   id,
-}: ICreateBooking) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ formData, token, id }) => {
+}: ICreateBooking): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     `/patients-bookings/${id}`,
     { ...formData, _method: "put" },
@@ -78,14 +67,11 @@ export const updateBooking: ({
   return data;
 };
 
-export const updateBookingStatus: ({
+export const updateBookingStatus = async ({
   token,
   status,
   id,
-}: IUpdateBookingStatus) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ token, status, id }) => {
+}: IUpdateBookingStatus): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     `/patients-bookings/${id}/status`,
     {
@@ -100,13 +86,13 @@ export const updateBookingStatus: ({
   return data;
 };
 
-export const deleteBooking: ({
-  id,
+export const deleteBooking = async ({
   token,
+  id,
 }: {
   token: string;
   id: string;
-}) => Promise<IDeleteRes> = async ({ token, id }) => {
+}): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.delete(`/patients-bookings/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

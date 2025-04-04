@@ -20,9 +20,3 @@ export interface ICreateClinic {
   token: string;
   virtual_number?: number;
 }
-
-export interface ICreateClinicResponse {
-  status: boolean;
-  message: string;
-  data: ICreateClinic;
-}
