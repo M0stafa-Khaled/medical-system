@@ -10,10 +10,12 @@ import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllTransactions } from "@/lib/react-query/dashboard/transactions/transactions";
 import { ITransactionsFilter } from "@/interfaces/dashboard/transactions/transactions";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const TransactionTable = () => {
   const token = cookieServices.getToken()!;
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const [sort, setSort] = useState(false);
 
@@ -30,18 +32,6 @@ const TransactionTable = () => {
     }),
     [searchParams]
   );
-
-  const setFilters = (newFilters: ITransactionsFilter) => {
-    const params = new URLSearchParams(searchParams);
-
-    // update each filter param
-    Object.entries(newFilters).forEach(([key, value]) => {
-      if (value) params.set(key, value);
-      else params.delete(key);
-    });
-
-    setSearchParams(params);
-  };
 
   const doctor = useDebounce(filters.doctor, 500);
   const action = useDebounce(filters.action, 500);
@@ -81,13 +71,22 @@ const TransactionTable = () => {
     }
   }, [transactions?.message, isError]);
 
+  const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
+  const canViewTransaction = useHasPermission(PERMISSIONS.VIEW_TRANSACTION);
+
   return (
     <DataTable
       isLoading={isLoading}
-      header={<TransactionsHeader filters={filters} setFilters={setFilters} />}
-      tableHeader={<TransactionsTableHeader setSort={setSort} sort={sort} />}
+      header={<TransactionsHeader filters={filters} />}
+      tableHeader={<TransactionsTableHeader setSort={setSort} />}
       list={<TransactionsList transactions={transactions?.data?.items || []} />}
-      skeleton={<TableSkeleton columns={8} rows={6} actionButtons={3} />}
+      skeleton={
+        <TableSkeleton
+          columns={canRefundTransaction || canViewTransaction ? 8 : 7}
+          rows={6}
+          actionButtons={3}
+        />
+      }
       pagination={
         transactions?.data && {
           meta: transactions.data?.meta,

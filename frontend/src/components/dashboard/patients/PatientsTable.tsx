@@ -9,6 +9,8 @@ import { useGetAllPatients } from "@/lib/react-query/dashboard/patients";
 import PatientsHeader from "./PatientsHeader";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const PatientsTable = () => {
   const token = cookieServices.getToken()!;
@@ -29,6 +31,10 @@ const PatientsTable = () => {
     }
   }, [patients?.message, isError]);
 
+  const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);
+  const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
+  const canViewPatient = useHasPermission(PERMISSIONS.VIEW_PATIENT);
+
   return (
     <DataTable
       isLoading={isLoading}
@@ -40,7 +46,15 @@ const PatientsTable = () => {
           patients={patients?.data?.items || []}
         />
       }
-      skeleton={<TableSkeleton columns={4} rows={6} actionButtons={3} />}
+      skeleton={
+        <TableSkeleton
+          columns={
+            canDeletePatient || canViewPatient || canUpdatePatient ? 4 : 3
+          }
+          rows={6}
+          actionButtons={3}
+        />
+      }
       pagination={
         patients?.data && {
           meta: patients.data?.meta,

@@ -11,7 +11,7 @@ const AuthLayout = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   if (isAuthenticated) {
-    const role = cookieServices.getRole();
+    const role = cookieServices.getUser()?.role;
 
     if (role === "admin" || role === "employee")
       return <Navigate to="/dashboard" replace />;

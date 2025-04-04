@@ -7,6 +7,8 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const ClinicsTable = () => {
   const token = cookieServices.getToken()!;
@@ -19,13 +21,21 @@ const ClinicsTable = () => {
     }
   }, [clinics?.message, isError]);
 
+  const canUpdateClinic = useHasPermission(PERMISSIONS.UPDATE_CLINIC);
+  const canDeleteClinic = useHasPermission(PERMISSIONS.DELETE_CLINIC);
+
   return (
     <DataTable
       isLoading={isLoading}
       header={<ClinicsHeader />}
       tableHeader={<ClinicsTableHeader />}
       list={<ClinicsList clinics={clinics?.data || []} />}
-      skeleton={<TableSkeleton columns={3} rows={8} />}
+      skeleton={
+        <TableSkeleton
+          columns={canDeleteClinic || canUpdateClinic ? 3 : 2}
+          rows={8}
+        />
+      }
     />
   );
 };

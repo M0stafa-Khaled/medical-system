@@ -1,7 +1,7 @@
-import { IPaginationMeta } from "../..";
-import { IEmployee } from "../employee";
+import { IPaginationMeta } from "..";
+import { IEmployee } from "./employee";
 import { IExpenseCategory } from "./expenseCategory";
-import { ITreasury } from "../treasury";
+import { ITreasury } from "./treasury";
 
 export interface ICreateExpense {
   name: string;
@@ -30,4 +30,23 @@ export interface IExpensesResponse {
     items: IExpense[];
     meta: IPaginationMeta;
   };
+}
+
+export interface IExpensesFilter {
+  treasury: string;
+  status: string;
+  created_at: string | null;
+  code: string;
+  employee: string;
+}
+
+export interface IExpenseCategory {
+  id: number;
+  name: string;
+}
+
+export interface IExpenseCategoriesRes {
+  status: true;
+  message: string | null;
+  data: IExpenseCategory[];
 }

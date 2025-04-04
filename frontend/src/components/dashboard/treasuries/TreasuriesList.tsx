@@ -1,6 +1,6 @@
 import useDebounce from "@/hooks/useDebounce";
 import cookieServices from "@/utils/cookieServices";
-import { memo, useEffect,  } from "react";
+import { memo, useEffect } from "react";
 import { toast } from "react-toastify";
 import TreasuriesHeader from "./TreasuriesHeader";
 import TreasuryCard from "./TreasuryCard";

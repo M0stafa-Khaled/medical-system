@@ -3,7 +3,29 @@ import {
   IAvailableTimesRes,
   IDoctorClinicsRes,
   IGetAvailableTimes,
+  IGetWithParams,
 } from "@/interfaces";
+import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
+
+export const getAllDrugs: ({
+  token,
+  page,
+  search,
+}: IGetWithParams) => Promise<IDrugsResponse> = async ({
+  token,
+  page = 1,
+  search,
+}) => {
+  const { data } = await axiosInstanceAPI.get("/drugs", {
+    params: { ...(search ? { q: search, page } : { page }) },
+
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return data;
+};
 
 export const getAllClinicsDoctors: ({
   token,

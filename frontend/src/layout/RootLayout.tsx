@@ -15,6 +15,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { toast } from "react-toastify";
+import echo from "@/lib/pusher/echo";
 
 const RootLayout = () => {
   useNetworkStatus();
@@ -58,6 +59,18 @@ const RootLayout = () => {
       if (auth && permissions) dispatch(setPermissions(permissions));
     })();
   }, [checkAuthUser, token, navigate, dispatch, location]);
+
+  const user = cookieServices.getUser();
+
+  useEffect(() => {
+    echo.private(`users.${user?.id}`).notification((data: any) => {
+      alert(data.message);
+    });
+
+    return () => {
+      echo.leaveChannel("subscription-usage");
+    };
+  }, [user]);
 
   return (
     <>

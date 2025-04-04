@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import cookieServices from "@/utils/cookieServices";
 
 const AppLayout = () => {
-  const role = cookieServices.getRole();
+  const role = cookieServices.getUser()?.role;
 
   const navLinks = [
     ...(["admin", "employee"].includes(role!)

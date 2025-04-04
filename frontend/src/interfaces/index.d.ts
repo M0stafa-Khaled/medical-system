@@ -6,10 +6,6 @@ export interface ILink {
   children?: ILink[];
 }
 
-export interface IDeleteRes {
-  status: boolean;
-  message: string;
-}
 // Form Input Interfaces
 export interface IFormInput {
   name: string;
@@ -29,6 +25,11 @@ export interface IPaginationMeta {
 }
 
 // Get interface
+export interface IStatusMsg {
+  status: boolean;
+  message: string;
+}
+
 export interface IGetWithParams {
   token: string;
   page?: number;

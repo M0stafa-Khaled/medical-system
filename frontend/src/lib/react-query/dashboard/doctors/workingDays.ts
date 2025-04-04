@@ -27,7 +27,6 @@ export const useGetAllWorkingDays = ({
         token,
         search,
       }),
-    staleTime: 30 * 1000,
   });
 };
 

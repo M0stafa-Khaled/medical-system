@@ -5,13 +5,26 @@ import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { ITransactionsFilter } from "@/interfaces/dashboard/transactions/transactions";
 import CreatePatientPayment from "./CreatePatientPayment";
+import { useSearchParams } from "react-router-dom";
 
 interface IProps {
   filters: ITransactionsFilter;
-  setFilters: (filters: ITransactionsFilter) => void;
 }
 
-const TransactionsHeader = ({ filters, setFilters }: IProps) => {
+const TransactionsHeader = ({ filters }: IProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const setFilters = (newFilters: ITransactionsFilter) => {
+    const params = new URLSearchParams(searchParams);
+
+    // update each filter param
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    });
+
+    setSearchParams(params);
+  };
   const handleClearFilters = () => {
     setFilters({
       doctor: "",

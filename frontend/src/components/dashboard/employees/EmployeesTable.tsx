@@ -9,6 +9,8 @@ import { useGetAllEmployees } from "@/lib/react-query/dashboard/employees";
 import EmployeesHeader from "./EmployeesHeader";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
+import { PERMISSIONS } from "@/enums/permissions";
+import useHasPermission from "@/hooks/useHasPermission";
 
 const EmployeesTable = () => {
   const token = cookieServices.getToken()!;
@@ -31,6 +33,10 @@ const EmployeesTable = () => {
     }
   }, [employees?.message, isError]);
 
+  const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
+  const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
+  const canViewEmployee = useHasPermission(PERMISSIONS.VIEW_EMPLOYEE);
+
   return (
     <DataTable
       isLoading={isLoading}
@@ -43,7 +49,14 @@ const EmployeesTable = () => {
         />
       }
       skeleton={
-        <TableSkeleton columns={5} rows={6} hasImage actionButtons={3} />
+        <TableSkeleton
+          columns={
+            canViewEmployee || canDeleteEmployee || canUpdateEmployee ? 5 : 4
+          }
+          rows={6}
+          hasImage
+          actionButtons={3}
+        />
       }
       pagination={
         employees?.data && {

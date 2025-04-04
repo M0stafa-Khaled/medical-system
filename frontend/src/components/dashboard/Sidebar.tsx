@@ -10,12 +10,15 @@ import {
 } from "@/animations/navbarAnimations";
 import { memo } from "react";
 import { ILink } from "@/interfaces";
+import cookieServices from "@/utils/cookieServices";
+import truncateText from "@/utils/truncateText";
 
 interface IProps {
   links: ILink[];
 }
 
 const Sidebar = ({ links }: IProps) => {
+  const name = cookieServices.getUser()?.name;
   return (
     <motion.aside
       initial="hidden"
@@ -23,7 +26,7 @@ const Sidebar = ({ links }: IProps) => {
       variants={sidebarVariants}
       className="hidden lg:block h-full bg-foreground border-l border-muted fixed inset-y-0 right-0"
     >
-      <div className="min-w-[270px] max-w-[350px] h-screen px-4 flex flex-col">
+      <div className="min-w-[270px] max-w-[350px] h-screen px-4 flex flex-col gap-y-3">
         {/* Fixed section - Logo */}
         <motion.div
           variants={logoVariants}
@@ -39,10 +42,10 @@ const Sidebar = ({ links }: IProps) => {
           />
         </motion.div>
 
-        {/* Fixed section - Profile Menu & Toggle Mode */}
+        {/* Profile Menu & Toggle Mode */}
         <motion.div
           variants={navItemsVariants}
-          className="flex justify-center items-center gap-4 mb-4"
+          className="flex justify-center items-center gap-4"
         >
           <motion.div variants={navItemsVariants}>
             <LogoutButton />
@@ -54,6 +57,12 @@ const Sidebar = ({ links }: IProps) => {
             <ToggleMode />
           </motion.div>
         </motion.div>
+        <motion.h3
+          variants={navItemsVariants}
+          className="text-lg text-center font-semibold text-dark dark:text-white"
+        >
+          {truncateText(name!, 18)}
+        </motion.h3>
 
         {/* Scrollable section - Links */}
         <motion.nav

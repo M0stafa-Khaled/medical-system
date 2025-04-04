@@ -8,13 +8,17 @@ import {
   cancelExpense,
 } from "@/services/dashboard/expenses/expenses";
 import { IGetWithParams } from "@/interfaces";
-import { ICreateExpense } from "@/interfaces/dashboard/expenses/expense";
+import { ICreateExpense } from "@/interfaces/dashboard/expenses";
 
-export const useGetAllExpenses = ({ token, page, search }: IGetWithParams) =>
+export const useGetAllExpenses = ({
+  token,
+  page,
+  sort,
+  filter,
+}: IGetWithParams) =>
   useQuery({
-    queryKey: [Query_Keys.GET_ALL_EXPENSES, page, search],
-    queryFn: () => getAllExpenses({ token, page, search }),
-    staleTime: 30 * 1000,
+    queryKey: [Query_Keys.GET_ALL_EXPENSES, page, sort, filter],
+    queryFn: () => getAllExpenses({ token, page, sort, filter }),
   });
 
 export const useGetExpenseById = ({

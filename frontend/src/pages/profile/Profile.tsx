@@ -108,7 +108,7 @@ const Profile = () => {
         >
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2"
           >
             {/* Patient Info */}
             {user?.role === "patient" && (

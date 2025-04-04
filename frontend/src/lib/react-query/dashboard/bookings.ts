@@ -23,7 +23,6 @@ export const useGetAllBookings = ({
   useQuery({
     queryKey: [Query_Keys.GET_ALL_BOOKINGS, filter, page, sort],
     queryFn: () => getAllBookings({ token, page, filter, sort }),
-    staleTime: 30 * 1000,
   });
 
 export const useGetBookingById = ({

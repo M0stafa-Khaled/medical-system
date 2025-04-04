@@ -51,7 +51,7 @@ const VerifyEmail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
-  const role = cookieServices.getRole()!;
+  const role = cookieServices.getUser()?.role;
   const { mutateAsync: checkAuth } = useCheckAuth();
 
   const { mutateAsync: resendOtp, isPending: isLoadingResendOtp } =

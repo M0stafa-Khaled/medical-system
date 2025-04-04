@@ -82,11 +82,11 @@ const Header = ({ links, dashboard = false }: IProps) => {
           {/* Toggle Mode */}
           <motion.div
             variants={navItemsVariants}
-            className="flex justify-center items-center gap-4 p-1"
+            className="flex justify-center items-center gap-3 p-1"
           >
             <motion.div
               variants={navItemsVariants}
-              className="flex justify-center items-center gap-3"
+              className="flex justify-center items-center gap-2"
             >
               <motion.div variants={navItemsVariants}>
                 <LogoutButton />
@@ -98,7 +98,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
                 <ToggleMode />
               </motion.div>
             </motion.div>
-            <motion.div variants={logoVariants} className="w-14">
+            <motion.div variants={logoVariants} className="w-12">
               <Link to={"/"}>
                 <motion.img
                   src={"/logo.svg"}

@@ -2,9 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import Query_Keys from "@/enums/queryKeys";
 import {
   getAllClinicsDoctors,
+  getAllDrugs,
   getAvailableBookingsTimes,
 } from "@/services/main";
-import { IGetAvailableTimes } from "@/interfaces";
+import { IGetAvailableTimes, IGetWithParams } from "@/interfaces";
+
+export const useGetALlDrugs = ({ token, page, search }: IGetWithParams) =>
+  useQuery({
+    queryKey: [Query_Keys.GET_ALL_MEDICATIONS, page, search],
+    queryFn: () => getAllDrugs({ token, page, search }),
+  });
 
 export const useGetAllDoctorsClinics = ({
   token,

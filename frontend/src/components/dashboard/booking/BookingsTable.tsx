@@ -10,6 +10,8 @@ import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllBookings } from "@/lib/react-query/dashboard/bookings";
 import { IBookingsFilter } from "@/interfaces/dashboard/bookings";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const BookingsTable = () => {
   const token = cookieServices.getToken()!;
@@ -81,6 +83,12 @@ const BookingsTable = () => {
     }
   }, [bookings?.message, isError]);
 
+  const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
+  const canDeleteBooking = useHasPermission(PERMISSIONS.DELETE_BOOKING);
+  const canViewBooking = useHasPermission(PERMISSIONS.VIEW_BOOKING);
+
+  const canCreateTransaction = useHasPermission(PERMISSIONS.ADD_TRANSACTION);
+
   return (
     <DataTable
       isLoading={isLoading}
@@ -93,7 +101,20 @@ const BookingsTable = () => {
       }
       tableHeader={<BookingsTableHeader setSort={setSort} />}
       list={<BookingsList bookings={bookings?.data?.items || []} />}
-      skeleton={<TableSkeleton columns={9} rows={6} actionButtons={4} />}
+      skeleton={
+        <TableSkeleton
+          columns={
+            canCreateTransaction ||
+            canDeleteBooking ||
+            canUpdateBooking ||
+            canViewBooking
+              ? 9
+              : 8
+          }
+          rows={6}
+          actionButtons={4}
+        />
+      }
       pagination={
         bookings?.data && {
           meta: bookings.data?.meta,

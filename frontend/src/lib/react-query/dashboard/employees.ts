@@ -18,7 +18,6 @@ export const useGetAllEmployees = ({
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EMPLOYEES, page, search],
     queryFn: () => getAllEmployees({ token, page, search }),
-    staleTime: 30 * 1000,
   });
 
 export const useGetEmployeeById = ({

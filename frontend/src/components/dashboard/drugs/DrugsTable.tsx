@@ -5,10 +5,10 @@ import cookieServices from "@/utils/cookieServices";
 import DrugsTableHeader from "./DrugsTableHeader";
 import DrugsList from "./DrugsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
-import { useGetALlDrugs } from "@/lib/react-query/dashboard/drug";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
+import { useGetALlDrugs } from "@/lib/react-query/main";
 
 const DrugsTable = () => {
   const token = cookieServices.getToken()!;

@@ -9,6 +9,8 @@ export interface IAuthResponse {
   status: boolean;
   message: string;
   data: {
+    id: number;
+    name: string;
     token: string;
     role: TRole;
     permissions: IPermission[];

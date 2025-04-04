@@ -14,7 +14,6 @@ export const useGetAllDoctors = ({ token, page, search }: IGetWithParams) => {
   return useQuery({
     queryKey: [Query_Keys.GET_ALL_DOCTORS, page, search],
     queryFn: () => getAllDoctors({ token, page, search }),
-    staleTime: 30 * 1000,
   });
 };
 

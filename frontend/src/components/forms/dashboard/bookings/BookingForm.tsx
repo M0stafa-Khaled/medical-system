@@ -230,7 +230,6 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
         value: initialBookingStatus()?.value || "",
       },
     });
-    console.log(initialBookingStatus());
   }, [form, booking, initialBookingStatus]);
 
   useEffect(() => {

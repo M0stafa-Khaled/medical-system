@@ -4,6 +4,9 @@ interface ImportMetaEnv {
   readonly VITE_ENCRYPT_SECRET_KEY: string;
   readonly VITE_ENV: string;
   readonly VITE_WEB_NAME: string;
+  readonly VITE_PUSHER_APP_KEY: string;
+  readonly VITE_PUSHER_PORT: string;
+  readonly VITE_PUSHER_SCHEME: string;
 }
 
 interface ImportMeta {

@@ -7,10 +7,8 @@ import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
-import { IExpense } from "@/interfaces/dashboard/expenses/expense";
+import { IExpense } from "@/interfaces/dashboard/expenses";
 import formatDateTime from "@/utils/formatDate";
-import { IPaginationMeta } from "@/interfaces";
-import countSerial from "@/utils/countSerial";
 import DeleteExpense from "./DeleteExpense";
 import CancelExpense from "./CancelExpense";
 import truncateText from "@/utils/truncateText";
@@ -19,10 +17,9 @@ import TooltipButton from "@/components/ui/TooltipButton";
 
 interface IProps {
   expenses: IExpense[];
-  meta?: IPaginationMeta;
 }
 
-const ExpensesList = ({ expenses, meta }: IProps) => {
+const ExpensesList = ({ expenses }: IProps) => {
   const canDeleteExpense = useHasPermission(
     PERMISSIONS.DELETE_EXPENSE_CATEGORY
   );
@@ -38,7 +35,7 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
         className="dark:border-muted !bg-white/40 dark:!bg-dark/40 hover:!bg-gray-200 dark:hover:!bg-dark transition-all duration-300"
       >
         <TableCell
-          colSpan={9}
+          colSpan={8}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
           لا يوجد مصروفات
@@ -57,9 +54,6 @@ const ExpensesList = ({ expenses, meta }: IProps) => {
           className="dark:border-muted !bg-white/40 dark:!bg-dark/40 hover:!bg-gray-200 dark:hover:!bg-dark transition-all duration-300"
         >
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
-            {countSerial({ meta: meta!, index })}
-          </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
             {expense?.code}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">

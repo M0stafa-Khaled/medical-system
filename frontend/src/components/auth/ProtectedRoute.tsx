@@ -18,7 +18,7 @@ const ProtectedRoute = ({
   requiredPermission,
 }: IProps) => {
   const token = cookieServices.getToken();
-  const role = cookieServices.getRole();
+  const role = cookieServices.getUser()?.role;
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   const hasPermission = useHasPermission(requiredPermission || "");

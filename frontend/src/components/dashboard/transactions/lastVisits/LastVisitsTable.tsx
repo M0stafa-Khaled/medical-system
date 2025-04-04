@@ -9,6 +9,8 @@ import { useGetPatientLastVisits } from "@/lib/react-query/dashboard/transaction
 import LastVisitsTableHeader from "./LastVisitsTableHeader";
 import LastVisitsList from "./LastVisitsList";
 import DataLoader from "@/components/ui/DataLoader";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const LastVisitsTable = () => {
   const token = cookieServices.getToken()!;
@@ -23,6 +25,9 @@ const LastVisitsTable = () => {
     doctorId: doctorId!,
     patientId: patientId!,
   });
+
+  const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
+  const canViewTransaction = useHasPermission(PERMISSIONS.VIEW_TRANSACTION);
 
   useEffect(() => {
     if (transactions?.message) toast.error(transactions.message);
@@ -40,7 +45,13 @@ const LastVisitsTable = () => {
       header={<LastVisitsHeader name={transactions?.data[0].patient.name} />}
       tableHeader={<LastVisitsTableHeader />}
       list={<LastVisitsList transactions={transactions?.data || []} />}
-      skeleton={<TableSkeleton columns={6} rows={6} actionButtons={3} />}
+      skeleton={
+        <TableSkeleton
+          columns={canRefundTransaction || canViewTransaction ? 6 : 5}
+          rows={6}
+          actionButtons={3}
+        />
+      }
     />
   );
 };

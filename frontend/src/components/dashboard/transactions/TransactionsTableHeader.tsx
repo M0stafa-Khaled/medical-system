@@ -6,10 +6,9 @@ import { ArrowUpDown } from "lucide-react";
 
 interface IProps {
   setSort: Dispatch<SetStateAction<boolean>>;
-  sort: boolean;
 }
 
-const TransactionsTableHeader = ({ setSort, sort }: IProps) => {
+const TransactionsTableHeader = ({ setSort }: IProps) => {
   const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
   const canViewTransaction = useHasPermission(PERMISSIONS.VIEW_TRANSACTION);
 
@@ -27,7 +26,7 @@ const TransactionsTableHeader = ({ setSort, sort }: IProps) => {
         <TableHead className="py-4 text-center">الحالة</TableHead>
         <TableHead
           className="py-4 hover:bg-dark/10 dark:hover:bg-white/10 transition-colors duration-200 text-center text-nowrap cursor-pointer"
-          onClick={() => setSort(!sort)}
+          onClick={() => setSort((prev) => !prev)}
         >
           <div className="flex items-center justify-center gap-2">
             تاريخ التحصيل

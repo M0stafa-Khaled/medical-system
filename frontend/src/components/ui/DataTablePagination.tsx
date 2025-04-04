@@ -23,7 +23,7 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
 
   const renderPageNumbers = () => {
     const pages: (number | string)[] = [];
-    const maxVisiblePages = 7;
+    const maxVisiblePages = 5;
 
     // Always show first page
     pages.push(1);
@@ -36,16 +36,10 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
     } else {
       if (currentPage <= 3) {
         // Near start
-        pages.push(2, 3, 4, "...", totalPages);
+        pages.push(2, 3, "...", totalPages);
       } else if (currentPage >= totalPages - 2) {
         // Near end
-        pages.push(
-          "...",
-          totalPages - 3,
-          totalPages - 2,
-          totalPages - 1,
-          totalPages
-        );
+        pages.push("...", totalPages - 2, totalPages - 1, totalPages);
       } else {
         // Middle
         pages.push(
@@ -67,13 +61,14 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
       <PaginationContent>
         <PaginationItem>
           <Button
-            onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+            onClick={() => handlePageChange(currentPage - 1)}
             className={`gap-1 ${
-              currentPage <= 1 ? "cursor-not-allowed opacity-50" : ""
+              currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
             }`}
+            disabled={currentPage === 1}
           >
             <ChevronLeft className="h-4 w-4" />
-            <span>السابق</span>
+            <span className="hidden sm:inline-block">السابق</span>
           </Button>
         </PaginationItem>
 
@@ -92,7 +87,7 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
                 isActive={currentPage === page}
                 className={
                   currentPage === page
-                    ? "text-secondary cursor-pointer bg-primary hover:bg-primary/90 border-muted opacity-100 min-w-10 w-fit px-1 hover:text-primary"
+                    ? "text-secondary cursor-pointer bg-primary hover:bg-primary/90 border-muted opacity-100 min-w-10 w-fit px-1 hover:text-secondary"
                     : "text-primary cursor-pointer border-muted bg-muted/20 hover:bg-muted/80 opacity-80 min-w-10 w-fit px-1"
                 }
               >
@@ -104,14 +99,13 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
 
         <PaginationItem>
           <Button
-            onClick={() =>
-              currentPage < totalPages && handlePageChange(currentPage + 1)
-            }
+            onClick={() => handlePageChange(currentPage + 1)}
             className={`gap-1 ${
-              currentPage >= totalPages ? "cursor-not-allowed opacity-50" : ""
+              currentPage === totalPages ? "cursor-not-allowed opacity-50" : ""
             }`}
+            disabled={currentPage === totalPages}
           >
-            <span>التالي</span>
+            <span className="hidden sm:inline-block">التالي</span>
             <ChevronRight className="h-4 w-4" />
           </Button>
         </PaginationItem>

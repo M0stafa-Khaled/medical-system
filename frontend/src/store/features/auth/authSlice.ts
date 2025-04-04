@@ -16,15 +16,24 @@ const authSlice = createSlice({
   reducers: {
     login: (
       state,
-      action: PayloadAction<{
+      {
+        payload: { user, token },
+      }: PayloadAction<{
         token: string;
-        role: TRole;
+        user: {
+          id: number;
+          name: string;
+          role: TRole;
+        };
       }>
     ) => {
       state.isAuthenticated = true;
       // Set the token and role in cookies
-      CookieService.setToken(action.payload.token, 1);
-      CookieService.setRole(action.payload.role, 1);
+      CookieService.setToken(token, 1);
+      CookieService.setUser(
+        { id: user.id, name: user.name, role: user.role },
+        1
+      );
     },
 
     logout: (state) => {

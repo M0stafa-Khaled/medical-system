@@ -48,7 +48,11 @@ const Login = () => {
       dispatch(
         login({
           token: data.token,
-          role: data.role,
+          user: {
+            role: data.role,
+            id: data.id,
+            name: data.name,
+          },
         })
       );
       dispatch(setPermissions(data.permissions));

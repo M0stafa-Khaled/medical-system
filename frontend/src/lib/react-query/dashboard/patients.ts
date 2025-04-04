@@ -18,7 +18,6 @@ export const useGetAllPatients = ({
   useQuery({
     queryKey: [Query_Keys.GET_ALL_PATIENTS, page, search],
     queryFn: () => getAllPatients({ token, page, search }),
-    staleTime: 30 * 1000,
   });
 
 export const useGetPatientById = ({

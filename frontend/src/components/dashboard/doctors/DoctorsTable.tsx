@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const DoctorsTable = () => {
   const token = cookieServices.getToken()!;
@@ -29,6 +31,10 @@ const DoctorsTable = () => {
     }
   }, [doctors?.message, isError]);
 
+  const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
+  const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
+  const canViewDoctor = useHasPermission(PERMISSIONS.VIEW_DOCTOR);
+
   return (
     <DataTable
       isLoading={isLoading}
@@ -41,7 +47,12 @@ const DoctorsTable = () => {
         />
       }
       skeleton={
-        <TableSkeleton columns={6} rows={6} hasImage actionButtons={3} />
+        <TableSkeleton
+          columns={canViewDoctor || canDeleteDoctor || canUpdateDoctor ? 6 : 5}
+          rows={6}
+          hasImage
+          actionButtons={3}
+        />
       }
       pagination={
         doctors?.data && {
