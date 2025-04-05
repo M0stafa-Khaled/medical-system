@@ -26,6 +26,7 @@ class CookieService {
       expires,
       path: "/",
       secure: import.meta.env.VITE_ENV === "production",
+      sameSite: "strict",
     });
   }
 
@@ -46,6 +47,7 @@ class CookieService {
       expires,
       path: "/",
       secure: import.meta.env.VITE_ENV === "production",
+      sameSite: "strict",
     });
   }
 
@@ -64,6 +66,7 @@ class CookieService {
       path: "/",
       secure: import.meta.env.VITE_ENV === "production",
       expires: new Date(Date.now() + 60 * 60 * 1000),
+      sameSite: "strict",
     });
   }
 
