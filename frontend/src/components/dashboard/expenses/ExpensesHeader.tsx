@@ -1,6 +1,6 @@
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
-import CreateExpense from "./CreateExpenses";
+import CreateExpense from "./CreateExpense";
 import { useSearchParams } from "react-router-dom";
 import { IExpensesFilter } from "@/interfaces/dashboard/expenses";
 import ExpensesFilters from "./ExpensesFilters";

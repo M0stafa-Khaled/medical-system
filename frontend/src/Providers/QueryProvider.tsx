@@ -5,8 +5,6 @@ import { ReactNode } from "react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 2,
-      retryDelay: 2000,
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
       refetchOnMount: true,
@@ -15,7 +13,7 @@ const queryClient = new QueryClient({
   },
 });
 
-export const QueryProvider = ({ children }: { children: ReactNode }) => {
+const QueryProvider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
@@ -23,3 +21,5 @@ export const QueryProvider = ({ children }: { children: ReactNode }) => {
     </QueryClientProvider>
   );
 };
+
+export default QueryProvider;

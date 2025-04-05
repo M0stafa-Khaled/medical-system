@@ -1,10 +1,12 @@
-import { QueryProvider } from "@/providers/QueryProvider";
 import { Provider } from "react-redux";
-import ThemeProvider from "./ThemeProvider";
 import { store } from "@/store/store";
 import { RouterProvider } from "react-router-dom";
 import router from "@/routes";
 import { HelmetProvider } from "react-helmet-async";
+import { lazy } from "react";
+
+const QueryProvider = lazy(() => import("@/providers/QueryProvider"));
+import ThemeProvider from "@/providers/ThemeProvider";
 
 const Providers = () => {
   return (

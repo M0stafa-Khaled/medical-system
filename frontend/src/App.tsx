@@ -1,4 +1,6 @@
-import Providers from "./providers";
+import { lazy } from "react";
+const Providers = lazy(() => import("./providers"));
+
 const App = () => {
   return <Providers />;
 };

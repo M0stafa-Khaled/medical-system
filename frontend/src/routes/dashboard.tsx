@@ -1,8 +1,10 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import { DashboardLayout, RootLayout } from "@/layout";
+import { RootLayout } from "@/layout";
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { PERMISSIONS } from "@/enums/permissions";
 import { lazy } from "react";
+
+const DashboardLayout = lazy(() => import("@/layout/DashboardLayout"));
 
 // Clinics
 const Clinics = lazy(() => import("@/pages/dashboard/clinics"));
