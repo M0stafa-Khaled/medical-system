@@ -11,7 +11,6 @@ import truncateText from "@/utils/truncateText";
 import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
-import { encryptData } from "@/utils/encryptData";
 
 interface IProps {
   transactions: ITransaction[];
@@ -97,9 +96,7 @@ const TransactionsList = ({ transactions }: IProps) => {
                 {canViewTransaction && (
                   <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
                     <Link
-                      to={`/dashboard/transactions/${encryptData(
-                        transaction?.id
-                      )}`}
+                      to={`/dashboard/transactions/${transaction?.id}`}
                       className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
                     >
                       <FiEye size={24} />
