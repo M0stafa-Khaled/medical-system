@@ -94,7 +94,7 @@ const ResetPassword = () => {
         <div className="flex flex-col justify-center items-center gap-2 mb-6 max-w-md md:max-w-sm">
           <img src="/logo.svg" alt="logo" className="w-20" />
           <h1 className="font-semibold text-black text-xl text-center">
-            إعادة تعيين كلمة المرور{" "}
+            إعادة تعيين كلمة المرو
           </h1>
           <p className="text-sm text-black/70 text-center leading-relaxed">
             فضلاً، أدخل رمز التحقق الذي أرسلناه إلى بريدك الإلكتروني، واختر كلمة
