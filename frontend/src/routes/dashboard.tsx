@@ -55,6 +55,7 @@ const UpdatePatient = lazy(
 
 // Drugs
 const Drugs = lazy(() => import("@/pages/dashboard/drugs"));
+const Analytics = lazy(() => import("@/pages/dashboard/analytics"));
 
 // Treasuries
 const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
@@ -298,6 +299,11 @@ const dashboardRoutes = createRoutesFromElements(
 
       {/* Drugs */}
       <Route path="drugs" element={<Drugs />} id="dashboard-drugs" />
+      <Route
+        path="analytics"
+        element={<Analytics />}
+        id="dashboard-analytics"
+      />
 
       {/* Expenses */}
       <Route

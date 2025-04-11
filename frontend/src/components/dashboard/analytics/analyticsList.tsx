@@ -1,17 +1,17 @@
 import { tableRowVariants } from "@/animations/dashboardAnimations";
 import { TableCell } from "@/components/ui/table";
 import { IPaginationMeta } from "@/interfaces";
-import { IDrug } from "@/interfaces/dashboard/drugs";
+import { IAnalysis } from "@/interfaces/dashboard/analysis";
 import countSerial from "@/utils/countSerial";
 import { motion } from "framer-motion";
 
 interface IProps {
-  drugs: IDrug[];
+  analytics: IAnalysis[];
   meta?: IPaginationMeta;
 }
 
-const DrugsList = ({ drugs, meta }: IProps) => {
-  if (!drugs.length)
+const AnalyticsList = ({ analytics, meta }: IProps) => {
+  if (!analytics.length)
     return (
       <motion.tr
         initial="hidden"
@@ -20,17 +20,17 @@ const DrugsList = ({ drugs, meta }: IProps) => {
         className="dark:border-muted !bg-white/40 dark:!bg-dark/40 hover:!bg-gray-200 dark:hover:!bg-dark transition-all duration-300"
       >
         <TableCell
-          colSpan={3}
+          colSpan={4}
           className="text-sm text-center text-black dark:text-white py-5 font-medium"
         >
-          لا يوجد أدوية
+          لا يوجد تحاليل
         </TableCell>
       </motion.tr>
     );
 
   return (
     <>
-      {drugs.map(({ form, name }, index) => (
+      {analytics.map(({ name, arabic_name, abbreviation }, index) => (
         <motion.tr
           key={index}
           initial="hidden"
@@ -44,15 +44,18 @@ const DrugsList = ({ drugs, meta }: IProps) => {
           </TableCell>
           <TableCell
             dir="ltr"
-            className="text-sm text-center text-black dark:text-white py-5 font-medium"
+            className="text-sm text-center text-black dark:text-white py-5 font-medium text-nowrap"
           >
             {name}
           </TableCell>
+          <TableCell className="text-sm text-center text-black dark:text-white py-5 font-medium text-nowrap">
+            {arabic_name}
+          </TableCell>
           <TableCell
             dir="ltr"
-            className="text-sm text-center text-black dark:text-white py-5 font-medium"
+            className="text-sm text-center text-black dark:text-white py-5 font-medium text-nowrap"
           >
-            {form}
+            {abbreviation}
           </TableCell>
         </motion.tr>
       ))}
@@ -60,4 +63,4 @@ const DrugsList = ({ drugs, meta }: IProps) => {
   );
 };
 
-export default DrugsList;
+export default AnalyticsList;

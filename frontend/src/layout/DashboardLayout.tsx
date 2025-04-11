@@ -15,6 +15,7 @@ import {
   Workflow,
   WorkflowIcon,
 } from "lucide-react";
+import { TbReportAnalytics } from "react-icons/tb";
 import { memo } from "react";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAttachMoney, MdMedication } from "react-icons/md";
@@ -52,6 +53,7 @@ const DashboardLayout = () => {
     bookings: "الحجوزات",
     transactions: "التحصيلات",
     "last-visits": "أخر الزيارات",
+    analytics: "التحاليل",
   };
 
   const NAV_LINKS: ILink[] = [
@@ -173,6 +175,12 @@ const DashboardLayout = () => {
       name: "الأدوية",
       path: "/dashboard/drugs",
       icon: <MdMedication size={18} />,
+    },
+    // Analysis
+    {
+      name: "التحاليل",
+      path: "/dashboard/analytics",
+      icon: <TbReportAnalytics size={18} />,
     },
   ];
 

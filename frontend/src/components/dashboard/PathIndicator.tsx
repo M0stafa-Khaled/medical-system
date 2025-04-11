@@ -32,9 +32,9 @@ const PathIndicator = ({ routeNames }: IProps) => {
         <BreadcrumbList>
           {cleanPathnames.map((name, index) => {
             const isLast = index === cleanPathnames.length - 1;
-            const arabicName = routeNames?.[name] || name;
+            const arabicName =
+              routeNames?.[name.toLowerCase()] || name.toLowerCase();
             const routeTo = `/${cumulativePaths[index]}`;
-
             return (
               <Fragment key={`${name}-${index}`}>
                 <BreadcrumbItem className="text-black dark:!text-white !text-sm">

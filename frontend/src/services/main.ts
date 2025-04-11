@@ -5,6 +5,7 @@ import {
   IGetAvailableTimes,
   IGetWithParams,
 } from "@/interfaces";
+import { IAnalysisRes } from "@/interfaces/dashboard/analysis";
 import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
 
 export const getAllDrugs = async ({
@@ -56,5 +57,20 @@ export const getAvailableBookingsTimes = async ({
       },
     }
   );
+  return data;
+};
+
+export const getAllAnalytics = async ({
+  token,
+  page,
+  search,
+}: IGetWithParams): Promise<IAnalysisRes> => {
+  const { data } = await axiosInstanceAPI.get("/analysis", {
+    params: { ...(search ? { q: search, page } : { page }) },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   return data;
 };
