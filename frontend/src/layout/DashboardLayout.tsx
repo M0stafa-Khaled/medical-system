@@ -10,6 +10,7 @@ import {
   Building2,
   HomeIcon,
   Settings,
+  UserRoundSearch,
   Users,
   Wallet,
   Workflow,
@@ -54,6 +55,7 @@ const DashboardLayout = () => {
     transactions: "التحصيلات",
     "last-visits": "أخر الزيارات",
     analytics: "التحاليل",
+    scans: "الأشعات",
   };
 
   const NAV_LINKS: ILink[] = [
@@ -176,11 +178,16 @@ const DashboardLayout = () => {
       path: "/dashboard/drugs",
       icon: <MdMedication size={18} />,
     },
-    // Analysis
+    // Analytics
     {
       name: "التحاليل",
       path: "/dashboard/analytics",
       icon: <TbReportAnalytics size={18} />,
+    },
+    {
+      name: "الأشعات",
+      path: "/dashboard/scans",
+      icon: <UserRoundSearch size={18} />,
     },
   ];
 

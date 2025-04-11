@@ -12,6 +12,7 @@ enum Query_Keys {
   GET_ONE_DOCTOR_WORKING_DAYS = "doctorWorkingDay",
   GET_ALL_DRUGS = "drugs",
   GET_ALL_ANALYTICS = "analysis",
+  GET_ALL_SCANS = "scans",
   GET_ALL_TREASURIES = "treasuries",
   GET_ALL_EXPENSES = "expenses",
   GET_ONE_EXPENSE = "expense",

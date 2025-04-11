@@ -120,10 +120,12 @@
   font-display: swap;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 @layer base {
   body {
     @apply font-alexandria antialiased bg-background text-foreground;
-    scroll-behavior: smooth;
   }
 }
 

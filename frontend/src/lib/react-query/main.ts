@@ -4,6 +4,7 @@ import {
   getAllAnalytics,
   getAllClinicsDoctors,
   getAllDrugs,
+  getAllScans,
   getAvailableBookingsTimes,
 } from "@/services/main";
 import { IGetAvailableTimes, IGetWithParams } from "@/interfaces";
@@ -18,6 +19,12 @@ export const useGetAllAnalytics = ({ token, page, search }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_ANALYTICS, page, search],
     queryFn: () => getAllAnalytics({ token, page, search }),
+  });
+
+export const useGetAllScans = ({ token, page, search }: IGetWithParams) =>
+  useQuery({
+    queryKey: [Query_Keys.GET_ALL_SCANS, page, search],
+    queryFn: () => getAllScans({ token, page, search }),
   });
 
 export const useGetAllDoctorsClinics = ({
