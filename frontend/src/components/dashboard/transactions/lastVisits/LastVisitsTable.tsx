@@ -42,7 +42,7 @@ const LastVisitsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      header={<LastVisitsHeader name={transactions?.data[0].patient.name} />}
+      header={<LastVisitsHeader name={transactions?.data[0]?.patient.name} />}
       tableHeader={<LastVisitsTableHeader />}
       list={<LastVisitsList transactions={transactions?.data || []} />}
       skeleton={
