@@ -8,7 +8,7 @@ import { ControllerRenderProps, FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { changePasswordSchema } from "@/validations/authSchema";
+import { changePasswordSchema } from "@/validations/profileSchema";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";

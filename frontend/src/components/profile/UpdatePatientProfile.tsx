@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { patientUpdateProfileSchema } from "@/validations/authSchema";
+import { patientUpdateProfileSchema } from "@/validations/profileSchema";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
