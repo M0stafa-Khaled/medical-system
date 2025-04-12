@@ -54,6 +54,9 @@ export const useCreateTransaction = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_LAST_VISITS],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_PATIENT_TRANSACTIONS_BALANCES],
+      });
     },
   });
 };
@@ -75,6 +78,9 @@ export const useRefundTransaction = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_LAST_VISITS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_PATIENT_TRANSACTIONS_BALANCES],
       });
     },
   });

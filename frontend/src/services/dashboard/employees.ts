@@ -65,8 +65,8 @@ export const createEmployee: ({
   formData.append("personal_id", dataForm.personal_id);
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
-  formData.append("role", dataForm.role.value);
-  formData.append("gender", dataForm.gender.value);
+  formData.append("role", dataForm.role);
+  formData.append("gender", dataForm.gender);
   formData.append("job", dataForm.job);
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
@@ -75,14 +75,14 @@ export const createEmployee: ({
     formData.append("second_phone", dataForm?.second_phone);
 
   if (dataForm.treasury_id)
-    formData.append("treasury_id", dataForm?.treasury_id.value);
+    formData.append("treasury_id", dataForm?.treasury_id);
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
 
-  if (dataForm.permissions && dataForm.role.value === "employee")
+  if (dataForm.permissions && dataForm.role === "employee")
     dataForm.permissions.map((permission, idx) =>
-      formData.append(`permissions[${idx}]`, permission.value)
+      formData.append(`permissions[${idx}]`, permission)
     );
   const { data } = await axiosInstanceAPI.post("/employees", formData, {
     headers: {
@@ -106,8 +106,8 @@ export const updateEmployee: ({
   formData.append("personal_id", dataForm.personal_id);
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
-  formData.append("role", dataForm.role.value);
-  formData.append("gender", dataForm.gender.value);
+  formData.append("role", dataForm.role);
+  formData.append("gender", dataForm.gender);
   formData.append("job", dataForm.job);
   formData.append("salary", dataForm.salary);
   formData.append("first_phone", dataForm.first_phone);
@@ -117,7 +117,7 @@ export const updateEmployee: ({
     formData.append("personal_image", dataForm.personal_image);
 
   if (dataForm.treasury_id)
-    formData.append("treasury_id", dataForm?.treasury_id.value);
+    formData.append("treasury_id", dataForm?.treasury_id);
 
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.personal_image) {
@@ -125,7 +125,7 @@ export const updateEmployee: ({
   }
   if (dataForm.permissions)
     dataForm.permissions.map((permission, idx) =>
-      formData.append(`permissions[${idx}]`, permission.value)
+      formData.append(`permissions[${idx}]`, permission)
     );
   formData.append("_method", "put");
   const { data } = await axiosInstanceAPI.post(

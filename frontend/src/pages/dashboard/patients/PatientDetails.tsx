@@ -32,10 +32,14 @@ import {
 } from "@/animations/dashboardAnimations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import PatientBalances from "@/components/dashboard/patients/patientBalances/PatientBalances";
 
 const PatientDetails = () => {
   const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);
   const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
+
+  const canViewPatientBalances = useHasPermission(PERMISSIONS.PATIENT_BALANCES);
 
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
@@ -243,6 +247,32 @@ const PatientDetails = () => {
             </motion.div>
           </CardContent>
         </Card>
+
+        <motion.div variants={itemVariants}>
+          {canViewPatientBalances && (
+            <Tabs
+              defaultValue={"balances"}
+              dir="rtl"
+              className="text-black dark:text-white my-2"
+            >
+              <TabsList className="h-auto w-full gap-2">
+                {canViewPatientBalances && (
+                  <TabsTrigger
+                    value="balances"
+                    className="w-full py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
+                  >
+                    مدفوعات المريض
+                  </TabsTrigger>
+                )}
+              </TabsList>
+              {canViewPatientBalances && (
+                <TabsContent value="balances">
+                  <PatientBalances patientId={patientId!} />
+                </TabsContent>
+              )}
+            </Tabs>
+          )}
+        </motion.div>
       </motion.section>
     </>
   );

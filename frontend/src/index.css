@@ -145,3 +145,12 @@ html {
 .custom-scrollbar::-webkit-scrollbar {
   width: 0px;
 }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

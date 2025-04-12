@@ -4,6 +4,7 @@ import {
   getAllAnalytics,
   getAllClinicsDoctors,
   getAllDrugs,
+  getAllPatientBalancesTransactions,
   getAllScans,
   getAvailableBookingsTimes,
 } from "@/services/main";
@@ -58,4 +59,25 @@ export const useGetAvailableBookingsTime = ({
         token,
       }),
     enabled: !!doctor_id && !!working_day_id && !!clinic_id && !!booking_date,
+  });
+
+export const useGetAllPatientTransactionsBalances = ({
+  token,
+  search,
+  patientId,
+}: {
+  token: string;
+  search: string;
+  patientId: string;
+}) =>
+  useQuery({
+    queryKey: [
+      Query_Keys.GET_ALL_PATIENT_TRANSACTIONS_BALANCES,
+      token,
+      search,
+      patientId,
+    ],
+    queryFn: () =>
+      getAllPatientBalancesTransactions({ token, search, patientId }),
+    enabled: !!patientId,
   });

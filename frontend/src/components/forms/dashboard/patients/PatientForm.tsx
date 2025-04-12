@@ -48,10 +48,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       email: "",
       description: "",
       info_status: "",
-      gender: {
-        value: "male",
-        label: "ذكر",
-      },
+      gender: "male",
       password: "",
       status: true,
       personal_image: undefined,
@@ -69,10 +66,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       email: patient?.user?.email,
       description: patient?.description || "",
       info_status: patient?.info_status || "",
-      gender: {
-        value: patient?.gender?.toLowerCase(),
-        label: patient?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
-      },
+      gender: patient?.gender?.toLowerCase(),
       status: Boolean(patient?.status),
     });
   }, [form, patient]);

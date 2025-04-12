@@ -30,13 +30,9 @@ export const createPatientSchema = z.object({
     .min(8, "كلمة المرور يجب ان تكون 8 حروف على الاقل"),
   description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
   info_status: z.string({ message: "الملاحظات مطلوبة" }).optional(),
-  gender: z.object(
-    {
-      value: z.string({ message: "النوع مطلوب" }),
-      label: z.string({ message: "النوع مطلوب" }),
-    },
-    { message: "النوع مطلوب" }
-  ),
+  gender: z
+    .string({ message: "النوع مطلوب" })
+    .nonempty({ message: "النوع مطلوب" }),
   personal_image: z.union([
     z.undefined(),
     z
@@ -81,13 +77,9 @@ export const updatePatientSchema = z.object({
     .refine((val) => !val || /\S+@\S+\.\S+/.test(val), {
       message: "البريد الإلكتروني غير صالح",
     }),
-  gender: z.object(
-    {
-      value: z.string({ message: "النوع مطلوب" }),
-      label: z.string({ message: "النوع مطلوب" }),
-    },
-    { message: "النوع مطلوب" }
-  ),
+  gender: z
+    .string({ message: "النوع مطلوب" })
+    .nonempty({ message: "النوع مطلوب" }),
   password: z
     .string()
     .optional()

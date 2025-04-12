@@ -47,7 +47,7 @@ export const createPatient = async ({
   formData.append("personal_id", dataForm.personal_id);
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
-  formData.append("gender", dataForm.gender.value);
+  formData.append("gender", dataForm.gender);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
   if (dataForm.description)
@@ -80,7 +80,7 @@ export const updatePatient = async ({
   formData.append("personal_id", dataForm.personal_id);
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
-  formData.append("gender", dataForm.gender.value);
+  formData.append("gender", dataForm.gender);
   formData.append("first_phone", dataForm.first_phone);
   formData.append("status", dataForm.status ? "1" : "0");
   formData.append("_method", "put");

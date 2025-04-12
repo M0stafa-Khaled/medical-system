@@ -53,10 +53,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       second_phone: "",
       email: "",
       register_id: "",
-      gender: {
-        value: "male",
-        label: "ذكر",
-      },
+      gender: "male",
       password: "",
       commission: "0",
       status: true,
@@ -75,16 +72,10 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
       second_phone: doctor?.second_phone || "",
       email: doctor?.user?.email,
       register_id: doctor?.register_id,
-      gender: {
-        value: doctor?.gender?.toLowerCase(),
-        label: doctor?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
-      },
+      gender: doctor?.gender?.toLowerCase(),
       commission: doctor?.commission?.slice(0, doctor?.commission?.length - 1),
       status: Boolean(doctor?.status),
-      clinics: doctor?.clinics?.map((clinic) => ({
-        value: clinic?.id.toString(),
-        label: clinic?.name,
-      })),
+      clinics: doctor?.clinics?.map((clinic) => clinic?.id.toString()),
     });
   }, [form, doctor]);
 

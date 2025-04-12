@@ -7,6 +7,7 @@ import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import SelectFormItem from "../formItems/SelectFormItem";
 import MultiSelectFormItem from "../formItems/MultiSelectFormItem";
 import PatientSelectItem from "../formItems/PatientSelectItem";
+import PatientBalancesSelect from "@/components/dashboard/transactions/PatientBalancesSelect";
 
 interface IOption {
   value: string;
@@ -21,6 +22,7 @@ interface IProps {
   options?: {
     [key: string]: IOption[];
   };
+  patientId?: string;
 }
 
 const RenderTransactionFormFields = ({
@@ -30,6 +32,7 @@ const RenderTransactionFormFields = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   schema,
   options,
+  patientId,
 }: IProps) => {
   const renderField = ({ field }: { field: ControllerRenderProps }) => {
     const commonProps = {
@@ -54,6 +57,15 @@ const RenderTransactionFormFields = ({
           <MultiSelectFormItem
             {...commonProps}
             options={options?.doctorActions || []}
+          />
+        );
+
+      case input.name === "transaction_code":
+        return (
+          <PatientBalancesSelect
+            form={form}
+            input={input}
+            patientId={patientId!}
           />
         );
 

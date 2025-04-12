@@ -37,7 +37,7 @@ export interface ICreateTransaction {
   dataForm: {
     price: number;
     booking_id: string;
-    doctor_actions: { value: string }[];
+    doctor_actions: string[];
     contract_type: "insurance" | "egyption";
     payment_method: TPaymentMethod;
     card_number?: string;

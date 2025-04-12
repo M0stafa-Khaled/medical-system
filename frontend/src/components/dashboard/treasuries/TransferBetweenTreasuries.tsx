@@ -41,6 +41,8 @@ const TransferBetweenTreasuriesButton = () => {
     resolver: zodResolver(transferTreasurySchema),
     defaultValues: {
       amount: 0,
+      from_treasury: "",
+      to_treasury: "",
     },
   });
 
@@ -52,8 +54,8 @@ const TransferBetweenTreasuriesButton = () => {
     try {
       const { status, message } = await transferTreasury({
         token,
-        from_treasury: from_treasury.value,
-        to_treasury: to_treasury.value,
+        from_treasury,
+        to_treasury,
         amount: amount,
       });
 
@@ -73,14 +75,8 @@ const TransferBetweenTreasuriesButton = () => {
     setIsOpen(false);
     form.reset({
       amount: 0,
-      from_treasury: {
-        label: "",
-        value: "",
-      },
-      to_treasury: {
-        label: "",
-        value: "",
-      },
+      from_treasury: "",
+      to_treasury: "",
     });
   };
 

@@ -63,10 +63,9 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
               className={`border-muted w-full !h-12 text-black dark:text-white justify-between overflow-hidden`}
             >
               {truncateText(
-                field.value?.value
-                  ? options.find(
-                      (option) => option.value === field.value?.value
-                    )?.label || "اختر..."
+                field.value
+                  ? options.find((option) => option.value === field.value)
+                      ?.label || "اختر..."
                   : "اختر...",
                 50
               )}
@@ -97,17 +96,14 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
                       {...field}
                       value={option.label}
                       onSelect={() => {
-                        field.onChange({
-                          value: option.value,
-                          label: option.label,
-                        });
+                        field.onChange(option.value);
                         setOpen(false);
                       }}
                     >
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          field.value?.value === option.value
+                          field.value === option.value
                             ? "opacity-100"
                             : "opacity-0"
                         )}

@@ -22,10 +22,7 @@ const ExpensesTableHeader = ({ setSort, sort }: IProps) => {
         </TableHead>
         <TableHead
           className="py-4 hover:bg-dark/10 dark:hover:bg-white/10 transition-colors duration-200 text-center text-nowrap cursor-pointer"
-          onClick={() => {
-            console.log("clicked");
-            setSort(!sort);
-          }}
+          onClick={() => setSort(!sort)}
         >
           <div className="flex items-center justify-center gap-2">
             تاريخ الصرف

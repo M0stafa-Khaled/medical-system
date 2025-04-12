@@ -34,13 +34,7 @@ export const createDoctorSchema = z.object({
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
     .min(8, "كلمة المرور يجب ان تكون 8 احرف على الاقل"),
-  gender: z.object(
-    {
-      value: z.string({ message: "النوع مطلوب" }),
-      label: z.string({ message: "النوع مطلوب" }),
-    },
-    { message: "النوع مطلوب" }
-  ),
+  gender: z.string({ message: "النوع مطلوب" }).nonempty("النوع مطلوب"),
   image: z.union([
     z.undefined(),
     z
@@ -64,12 +58,7 @@ export const createDoctorSchema = z.object({
       }),
   ]),
   clinics: z
-    .array(
-      z.object({
-        value: z.string(),
-        label: z.string(),
-      })
-    )
+    .array(z.string({ message: "العيادة مطلوبة" }))
     .min(1, "يجب اختيار عيادة واحدة على الأقل"),
 });
 
@@ -109,20 +98,9 @@ export const updateDoctorSchema = z.object({
     .refine((val) => !val || /\S+@\S+\.\S+/.test(val), {
       message: "البريد الإلكتروني غير صالح",
     }),
-  gender: z.object(
-    {
-      value: z.string({ message: "النوع مطلوب" }),
-      label: z.string({ message: "النوع مطلوب" }),
-    },
-    { message: "النوع مطلوب" }
-  ),
+  gender: z.string({ message: "النوع مطلوب" }).nonempty("النوع مطلوب"),
   clinics: z
-    .array(
-      z.object({
-        value: z.string(),
-        label: z.string(),
-      })
-    )
+    .array(z.string({ message: "العيادة مطلوبة" }))
     .min(1, "يجب اختيار عيادة واحدة على الأقل"),
   password: z
     .string()

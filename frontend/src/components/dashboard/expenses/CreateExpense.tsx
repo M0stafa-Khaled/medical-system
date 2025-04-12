@@ -44,6 +44,7 @@ const CreateExpense = () => {
       name: "",
       status: true,
       price: 0,
+      category_id: "",
     },
   });
 
@@ -53,7 +54,7 @@ const CreateExpense = () => {
         token,
         dataForm: {
           status: dataForm.status ? "1" : "0",
-          category_id: dataForm.category_id.value,
+          category_id: dataForm.category_id,
           name: dataForm.name,
           price: dataForm.price,
         },

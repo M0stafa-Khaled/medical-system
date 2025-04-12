@@ -51,9 +51,9 @@ export const createDoctor = async ({
   formData.append("email", dataForm.email);
   formData.append("password", dataForm.password);
   formData.append("register_id", dataForm.register_id);
-  formData.append("gender", dataForm.gender.value);
+  formData.append("gender", dataForm.gender);
   dataForm.clinics.map((clinic, idx) =>
-    formData.append(`clinics[${idx}]`, clinic.value)
+    formData.append(`clinics[${idx}]`, clinic)
   );
   formData.append("second_phone", dataForm?.second_phone || "");
   if (dataForm.image) formData.append("image", dataForm.image);
@@ -83,14 +83,14 @@ export const updateDoctor = async ({
   formData.append("password", dataForm.password);
   formData.append("_method", "put");
   formData.append("register_id", dataForm.register_id);
-  formData.append("gender", dataForm.gender.value.toLowerCase());
+  formData.append("gender", dataForm.gender.toLowerCase());
   formData.append(
     "second_phone",
     dataForm?.second_phone ? dataForm?.second_phone : ""
   );
 
   dataForm.clinics.map((clinic, idx) =>
-    formData.append(`clinics[${idx}]`, clinic.value)
+    formData.append(`clinics[${idx}]`, clinic)
   );
 
   if (dataForm.image) formData.append("image", dataForm.image);

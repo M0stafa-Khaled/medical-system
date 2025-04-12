@@ -40,12 +40,10 @@ const CreatePatientPayment = () => {
     resolver: zodResolver(createPatientPaymentSchema),
     defaultValues: {
       amount: 0,
-      payment_method: {
-        label: "نقدي",
-        value: "cash",
-      },
-      transaction_code: "0",
+      payment_method: "cash",
+      transaction_code: "",
       visa_code: "0",
+      patient_id: "",
     },
   });
 
@@ -57,10 +55,10 @@ const CreatePatientPayment = () => {
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
       if (name === "payment_method") {
-        setShowVisa(value.payment_method?.value === "visa");
+        setShowVisa(value.payment_method === "visa");
       }
       if (name === "patient_id") {
-        setPatientId(value.patient_id?.value);
+        setPatientId(value.patient_id);
       }
     });
     return () => subscription.unsubscribe();
@@ -80,9 +78,9 @@ const CreatePatientPayment = () => {
         token,
         patientId: patientId!,
         transaction: {
-          transaction_code,
+          transaction_code: transaction_code,
           amount,
-          payment_method: payment_method.value,
+          payment_method: payment_method,
           ...(visa_code ? { visa_code } : {}),
         },
       });
@@ -101,14 +99,8 @@ const CreatePatientPayment = () => {
     setIsOpen(false);
     form.reset({
       amount: 0,
-      patient_id: {
-        label: "",
-        value: "",
-      },
-      payment_method: {
-        label: "نقدي",
-        value: "cash",
-      },
+      patient_id: "",
+      payment_method: "cash",
       transaction_code: "",
       visa_code: "",
     });
@@ -145,7 +137,7 @@ const CreatePatientPayment = () => {
                 variants={itemVariants}
                 className="text-dark dark:text-white"
               >
-                تفاصيل تحصيلات المريض السابقة:
+                تحصيلات المريض السابقة:
               </motion.h4>
               <motion.div
                 variants={containerVariants}
@@ -203,6 +195,7 @@ const CreatePatientPayment = () => {
                       options={{
                         paymentMethods: PAYMENT_METHODS,
                       }}
+                      patientId={patientId!}
                     />
                   </motion.div>
                 )

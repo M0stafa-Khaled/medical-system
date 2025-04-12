@@ -57,7 +57,7 @@ export const createTransaction = async ({
   formData.append("contract_type", dataForm.contract_type);
   formData.append("price", dataForm.price.toString());
   dataForm.doctor_actions.map((action, idx) =>
-    formData.append(`doctor_actions[${idx}]`, action.value)
+    formData.append(`doctor_actions[${idx}]`, action)
   );
   const { data } = await axiosInstanceAPI.post("/transactions", formData, {
     headers: { Authorization: `Bearer ${token}` },

@@ -34,15 +34,11 @@ export interface ICreateEmployee {
   personal_id: string;
   email: string;
   password: string;
-  role: {
-    value: "admin" | "employee";
-  };
-  treasury_id?: {
-    value: string;
-  };
-  gender: {
-    value: "male" | "female";
-  };
+  role: "admin" | "employee";
+
+  treasury_id?: string;
+  gender: "male" | "female";
+
   job: string;
   status: boolean;
   salary: string;
@@ -50,9 +46,7 @@ export interface ICreateEmployee {
   second_phone?: string | null;
   image?: File | undefined;
   personal_image?: File | undefined;
-  permissions: {
-    value: string;
-  }[];
+  permissions: string[]
 }
 
 export interface IEmployeesRes {

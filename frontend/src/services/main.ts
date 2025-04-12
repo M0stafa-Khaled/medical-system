@@ -4,6 +4,7 @@ import {
   IDoctorClinicsRes,
   IGetAvailableTimes,
   IGetWithParams,
+  IPatientBalancesTransactionsRes,
 } from "@/interfaces";
 import { IAnalysisRes } from "@/interfaces/dashboard/analysis";
 import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
@@ -58,6 +59,23 @@ export const getAvailableBookingsTimes = async ({
       },
     }
   );
+  return data;
+};
+
+export const getAllPatientBalancesTransactions = async ({
+  token,
+  patientId,
+  search,
+}: {
+  token: string;
+  patientId: string;
+  search: string;
+}): Promise<IPatientBalancesTransactionsRes> => {
+  const { data } = await axiosInstanceAPI.get(`/${patientId}/balances`, {
+    params: { ...(search ? { code: search } : {}) },
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
   return data;
 };
 

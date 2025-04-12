@@ -29,9 +29,7 @@ export interface ICreatePatient {
   personal_id: string;
   email: string;
   password: string;
-  gender: {
-    value: "male" | "female";
-  };
+  gender: "male" | "female";
   status: boolean;
   info_status?: string | null;
   personal_image?: File | undefined;

@@ -19,7 +19,6 @@ import {
 } from "@/lib/react-query/dashboard/doctors/workingDays";
 import { formatTime, reverseFormatTime } from "@/utils/formatTime";
 import doctorWorkingDaySchema from "@/validations/doctorWorkingDaySchema";
-import convertDay from "@/utils/convertDayLang";
 import { useEffect } from "react";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import handleResErr from "@/utils/handleResponseError";
@@ -34,7 +33,9 @@ const WorkingDayForm = ({ action, day }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
   const { doctorId } = useParams();
+
   const { data: doctor } = useGetDoctorById({ token, id: doctorId! });
+
   const clinicsOptions = doctor?.data.clinics?.map((clinic) => ({
     label: clinic.name,
     value: clinic.id.toString(),
@@ -64,14 +65,8 @@ const WorkingDayForm = ({ action, day }: IProps) => {
   useEffect(() => {
     if (action === "update")
       form.reset({
-        clinic_id: {
-          label: day?.clinic.name || undefined,
-          value: day?.clinic.id.toString() || undefined,
-        },
-        day: {
-          label: day?.day ? convertDay(day?.day as string, "en") : "",
-          value: day?.day ? day.day : "",
-        },
+        clinic_id: day?.clinic.id.toString() || "",
+        day: day?.day ? day.day : "",
         deuration: day?.deuration || 0,
         max_visitors: day?.max_visitors || 0,
         start_at: day?.start_at
@@ -90,8 +85,8 @@ const WorkingDayForm = ({ action, day }: IProps) => {
             ...data,
             start_at: formatTime(data.start_at),
             end_at: formatTime(data.end_at),
-            clinic_id: data.clinic_id.value,
-            day: data.day.value,
+            clinic_id: data.clinic_id,
+            day: data.day,
             doctor_id: doctorId!,
           },
         });
@@ -105,8 +100,8 @@ const WorkingDayForm = ({ action, day }: IProps) => {
             ...data,
             start_at: formatTime(data.start_at),
             end_at: formatTime(data.end_at),
-            clinic_id: data.clinic_id.value,
-            day: data.day.value,
+            clinic_id: data.clinic_id,
+            day: data.day,
             doctor_id: doctorId!,
             id: day?.id,
           },

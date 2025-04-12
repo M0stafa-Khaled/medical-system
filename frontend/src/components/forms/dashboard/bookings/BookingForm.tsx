@@ -137,61 +137,25 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   const form = useForm<z.infer<typeof bookingSchema>>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      clinic_id: {
-        label: "",
-        value: "",
-      },
-      doctor_id: {
-        label: "",
-        value: "",
-      },
-      patient_id: {
-        label: "",
-        value: "",
-      },
-      working_day_id: { label: "", value: "" },
-      doctor_action_id: { label: "", value: "" },
+      clinic_id: "",
+      doctor_id: "",
+      patient_id: "",
+      working_day_id: "",
+      doctor_action_id: "",
       start_at: "",
       date: "",
-      status: {
-        label: "",
-        value: "",
-      },
+      status: "",
     },
   });
 
   const initialBookingStatus = useCallback(() => {
-    if (booking?.status === "cancelled")
-      return {
-        label: "ملغي",
-        value: "cancelled",
-      };
-    if (booking?.status === "collected")
-      return {
-        label: "تم التحصيل",
-        value: "collected",
-      };
-    if (booking?.status === "no-show")
-      return {
-        label: "لم يحضر",
-        value: "no-show",
-      };
+    if (booking?.status === "cancelled") return "cancelled";
+    if (booking?.status === "collected") return "collected";
+    if (booking?.status === "no-show") return "no-show";
 
-    if (booking?.status === "pending")
-      return {
-        label: "قيد الانتظار",
-        value: "pending",
-      };
-    if (booking?.status === "ended")
-      return {
-        label: "منتهي",
-        value: "ended",
-      };
-    if (booking?.status === "completed")
-      return {
-        label: "مكتمل",
-        value: "completed",
-      };
+    if (booking?.status === "pending") return "pending";
+    if (booking?.status === "ended") return "ended";
+    if (booking?.status === "completed") return "completed";
   }, [booking]);
 
   useEffect(() => {
@@ -201,46 +165,27 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     setBookingDate(booking?.booking_date || "");
     form.setValue("start_at", booking?.start_at);
     form.reset({
-      patient_id: {
-        label: booking?.patient?.name || "",
-        value: booking?.patient.id.toString() || "",
-      },
-      doctor_id: {
-        label: booking?.doctor?.name || "",
-        value: booking?.doctor?.id.toString() || "",
-      },
-      clinic_id: {
-        label: booking?.clinic?.name || "",
-        value: booking?.clinic?.id.toString() || "",
-      },
-      working_day_id: {
-        label: convertDay(booking?.working_day.day as string, "en") || "",
-        value: booking?.working_day.id.toString() || "",
-      },
-      doctor_action_id: {
-        value: booking?.action.id.toString() || "",
-        label: booking?.action
-          ? `${booking?.action.name} - ${booking?.action.price} جنيه`
-          : "",
-      },
+      patient_id: booking?.patient.id.toString() || "",
+
+      doctor_id: booking?.doctor?.id.toString() || "",
+      clinic_id: booking?.clinic?.id.toString() || "",
+      working_day_id: booking?.working_day.id.toString() || "",
+      doctor_action_id: booking?.action.id.toString() || "",
       start_at: booking?.start_at || "",
       date: booking?.booking_date || "",
-      status: {
-        label: initialBookingStatus()?.label || "",
-        value: initialBookingStatus()?.value || "",
-      },
+      status: initialBookingStatus(),
     });
   }, [form, booking, initialBookingStatus]);
 
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
       if (name === "clinic_id") {
-        const clinicValue = value.clinic_id?.value as string;
+        const clinicValue = value.clinic_id as string;
         setClinicId(clinicValue);
         // Reset values when change clinic
-        form.setValue("doctor_id", { label: "", value: "" });
-        form.setValue("working_day_id", { label: "", value: "" });
-        form.setValue("doctor_action_id", { label: "", value: "" });
+        form.setValue("doctor_id", "");
+        form.setValue("working_day_id", "");
+        form.setValue("doctor_action_id", "");
         form.setValue("date", "");
         form.setValue("start_at", "");
         setDoctorId("");
@@ -248,9 +193,9 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
       }
 
       if (name === "doctor_id") {
-        const doctorValue = value.doctor_id?.value as string;
-        form.setValue("working_day_id", { label: "", value: "" });
-        form.setValue("doctor_action_id", { label: "", value: "" });
+        const doctorValue = value.doctor_id as string;
+        form.setValue("working_day_id", "");
+        form.setValue("doctor_action_id", "");
         form.setValue("date", "");
         form.setValue("start_at", "");
         setWorkingDayId("");
@@ -258,7 +203,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
       }
 
       if (name === "working_day_id") {
-        const workingDayValue = value.working_day_id?.value as string;
+        const workingDayValue = value.working_day_id as string;
         form.setValue("date", "");
         form.setValue("start_at", "");
         setWorkingDayId(workingDayValue);
@@ -279,14 +224,14 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
         const { message, status } = await updateBooking({
           id: booking?.id,
           formData: {
-            clinic_id: data.clinic_id.value,
-            doctor_id: data.doctor_id.value,
-            patient_id: data.patient_id.value,
-            working_day_id: data.working_day_id.value,
-            doctor_action_id: data.doctor_action_id.value,
+            clinic_id: data.clinic_id,
+            doctor_id: data.doctor_id,
+            patient_id: data.patient_id,
+            working_day_id: data.working_day_id,
+            doctor_action_id: data.doctor_action_id,
             date: data.date,
             start_at: data.start_at,
-            status: data.status.value,
+            status: data.status,
           },
           token,
         });
@@ -300,11 +245,11 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
       if (action === "create") {
         const { status, message } = await createBooking({
           formData: {
-            clinic_id: data.clinic_id.value,
-            doctor_id: data.doctor_id.value,
-            patient_id: data.patient_id.value,
-            working_day_id: data.working_day_id.value,
-            doctor_action_id: data.doctor_action_id.value,
+            clinic_id: data.clinic_id,
+            doctor_id: data.doctor_id,
+            patient_id: data.patient_id,
+            working_day_id: data.working_day_id,
+            doctor_action_id: data.doctor_action_id,
             date: data.date,
             start_at: data.start_at,
           },

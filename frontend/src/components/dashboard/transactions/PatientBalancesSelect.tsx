@@ -21,31 +21,53 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import useDebounce from "@/hooks/useDebounce";
-import { useGetAllPatients } from "@/lib/react-query/dashboard/patients";
 import cookieServices from "@/utils/cookieServices";
 import { IFormInput } from "@/interfaces";
+import { useGetAllPatientTransactionsBalances } from "@/lib/react-query/main";
 
 interface IProps {
   form: any;
   input: IFormInput;
+  patientId: string;
 }
 
-const PatientSelectItem = ({ form, input }: IProps) => {
+const PatientBalancesSelect = ({ form, input, patientId }: IProps) => {
   const [open, setOpen] = useState(false);
+
   const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
-  const { data: patients } = useGetAllPatients({
-    token,
-    search,
-  });
-  const patientsOption = patients?.data.items.map((patient) => ({
-    value: patient.id.toString(),
-    label: patient.name,
-  }));
+
+  const { data: patientTransactionsBalances } =
+    useGetAllPatientTransactionsBalances({
+      patientId: patientId ? patientId?.toString() : "",
+      token,
+      search,
+    });
+    
+  useEffect(() => {
+    const subscription = form.watch(
+      (value: any, { name }: { name: string }) => {
+        if (name === "transaction_code") {
+          const balance = patientTransactionsBalances?.data.find(
+            (balance) => balance.transaction_code === value.transaction_code
+          );
+          form.setValue("amount", balance?.balance);
+        }
+      }
+    );
+    return () => subscription.unsubscribe();
+  }, [form, patientTransactionsBalances?.data]);
+
+  const patientsOption = patientTransactionsBalances?.data.map(
+    (patientBalance) => ({
+      value: patientBalance.transaction_code,
+      label: patientBalance.transaction_code,
+    })
+  );
   return (
     <FormField
       control={form.control}
@@ -76,7 +98,7 @@ const PatientSelectItem = ({ form, input }: IProps) => {
               <PopoverContent className="w-[250px] p-0 z-[1000] border-black/20 dark:border-white/40">
                 <Command className="text-black dark:text-white bg-foreground">
                   <CommandInput
-                    placeholder="اختر او ابحث بالاسم او رقم الهاتف"
+                    placeholder="اختر او ابحث برقم الإيصال"
                     value={searchTerm}
                     onValueChange={setSearchTerm}
                   />
@@ -117,4 +139,4 @@ const PatientSelectItem = ({ form, input }: IProps) => {
   );
 };
 
-export default PatientSelectItem;
+export default PatientBalancesSelect;

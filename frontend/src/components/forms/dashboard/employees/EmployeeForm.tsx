@@ -71,18 +71,12 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       salary: "",
       email: "",
       job: "",
-      gender: {
-        value: "male",
-        label: "ذكر",
-      },
+      gender: "male",
       password: "",
       status: true,
       image: undefined,
       personal_image: undefined,
-      role: {
-        value: "employee",
-        label: "موظف",
-      },
+      role: "employee",
       permissions: [],
     },
   });
@@ -127,25 +121,12 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       salary: employee?.salary ? `${employee?.salary}` : "",
       email: employee?.user?.email || "",
       job: employee?.job || "",
-      gender: {
-        value: employee?.gender?.toLowerCase(),
-        label: employee?.gender?.toLowerCase() === "female" ? "أنثى" : "ذكر",
-      },
+      gender: employee?.gender?.toLowerCase(),
       password: "",
       status: Boolean(employee?.status),
-      treasury_id: {
-        value: employee?.treasury?.id.toString() || "",
-        label: employee?.treasury?.name || "",
-      },
-      role: {
-        value: employee?.user?.role || "employee",
-        label: employee?.user?.role === "admin" ? "مسؤول" : "موظف",
-      },
-      permissions:
-        employee?.permissions?.map((p) => ({
-          value: p.id.toString(),
-          label: p.name,
-        })) || [],
+      treasury_id: employee?.treasury?.id.toString() || "",
+      role: employee?.user?.role || "employee",
+      permissions: employee?.permissions?.map((p) => p.id.toString()) || [],
     });
 
     return () => subscription.unsubscribe();

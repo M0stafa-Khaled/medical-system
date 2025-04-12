@@ -53,28 +53,14 @@ const MultiSelectFormItem = ({
   }, [options, searchValue]);
 
   const handleSelect = (value: string) => {
-    const selectedOption = options.find((option) => option.value === value);
-    if (!selectedOption) return;
-
-    const currentValues: IOption[] = Array.isArray(field.value)
+    const currentValues: string[] = Array.isArray(field.value)
       ? field.value
       : [];
-
-    const valueExists = currentValues.some((item) => item.value === value);
-
-    const newValues = valueExists
-      ? currentValues.filter((item) => item.value !== value)
-      : [
-          ...currentValues,
-          { value: selectedOption.value, label: selectedOption.label },
-        ];
+    const newValues = currentValues.includes(value)
+      ? currentValues.filter((val) => val !== value)
+      : [...currentValues, value];
 
     field.onChange(newValues);
-  };
-
-  const isValueSelected = (value: string): boolean => {
-    if (!field.value || !Array.isArray(field.value)) return false;
-    return field.value.some((item: IOption) => item.value === value);
   };
 
   return (
@@ -98,12 +84,12 @@ const MultiSelectFormItem = ({
               {field.value &&
               Array.isArray(field.value) &&
               field.value.length > 0
-                ? field.value.map((item: IOption, idx: number) => (
+                ? field.value.map((item, idx: number) => (
                     <span
                       key={idx}
                       className="text-sm text-black dark:text-white px-2 py-1 rounded-full bg-blue-400/20"
                     >
-                      {item.label}
+                      {options.find((option) => option.value === item)?.label}
                     </span>
                   ))
                 : `اختر ${input.label}...`}
@@ -116,7 +102,7 @@ const MultiSelectFormItem = ({
           >
             <Command
               id={input.name}
-              className="text-black dark:text-white bg-foreground"
+              className="text-black dark:text-white bg-foreground border border-black/20 dark:border-white/40"
             >
               <CommandInput
                 placeholder="ابحث ..."
@@ -136,7 +122,7 @@ const MultiSelectFormItem = ({
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          isValueSelected(option.value)
+                          field.value.includes(option.value)
                             ? "opacity-100"
                             : "opacity-0"
                         )}

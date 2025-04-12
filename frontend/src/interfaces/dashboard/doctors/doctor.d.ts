@@ -49,13 +49,10 @@ export interface ICreateDoctor {
   status: boolean;
   register_id: string;
   email: string;
-  gender: {
-    value: "male" | "female";
-  };
+  gender: "male" | "female";
+
   password: string;
   image?: File | undefined;
   signature?: File | undefined;
-  clinics: {
-    value: string;
-  }[];
+  clinics: string[];
 }

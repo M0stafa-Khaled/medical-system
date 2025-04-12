@@ -1,4 +1,5 @@
 import { IDoctor } from "../dashboard/doctors/doctor";
+import { IBalance } from "./dashboard/transactions/patientBalances";
 export interface ILink {
   name: string;
   path?: string;
@@ -57,4 +58,10 @@ export interface IAvailableTimesRes {
   status: boolean;
   message: string | null;
   data: string[];
+}
+
+export interface IPatientBalancesTransactionsRes {
+  status: boolean;
+  message: null | string;
+  data: IBalance[];
 }

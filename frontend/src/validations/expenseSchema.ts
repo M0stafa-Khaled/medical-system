@@ -10,13 +10,9 @@ export const createExpenseSchema = z.object({
       message: "ادخل مبلغ صالح",
     })
     .min(1, { message: "ادخل مبلغ صالح" }),
-  category_id: z.object(
-    {
-      value: z.string({ message: "التصنيف مطلوب" }),
-      label: z.string({ message: "التصنيف مطلوب" }),
-    },
-    { message: "التصنيف مطلوب" }
-  ),
+  category_id: z
+    .string({ message: "التصنيف مطلوب" })
+    .nonempty({ message: "التصنيف مطلوب" }),
   description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
 });
 

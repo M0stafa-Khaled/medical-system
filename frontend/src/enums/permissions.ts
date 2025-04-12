@@ -71,7 +71,7 @@ export enum PERMISSIONS {
   DELETE_WORKING_DAY = "حذف-ايام-العمل",
   VIEW_WORKING_DAY = "عرض-ايام-العمل",
 
-  // BOOKING
+  // Bookings
   BOOKINGS = "الحجوزات",
   ADD_BOOKING = "اضافة-حجز-مريض",
   UPDATE_BOOKING = "تعديل-حجز-مريض",
@@ -85,6 +85,8 @@ export enum PERMISSIONS {
   VIEW_TRANSACTION = "عرض-تحصيل",
   TRANSACTIONS = "التحصيلات",
   LAST_PATIENT_TRANSACTIONS = "اخر-تحصيلات-المريض",
-  PATIENT_TRANSACTIONS = "تحصيلات-المريض",
+
+  // Patient balances
+  PATIENT_BALANCES = "تحصيلات-المريض",
   ADD_PATIENT_PAYMENT = "اضافة-دفع-للمريض",
 }

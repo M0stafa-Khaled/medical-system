@@ -1,20 +1,12 @@
 import { z } from "zod";
 
 const doctorWorkingDaySchema = z.object({
-  day: z.object(
-    {
-      value: z.string({ message: "اليوم مطلوب" }),
-      label: z.string({ message: "اليوم مطلوب" }),
-    },
-    { message: "اليوم مطلوب" }
-  ),
-  clinic_id: z.object(
-    {
-      value: z.string({ message: "العيادة مطلوبة" }),
-      label: z.string({ message: "العيادة مطلوبة" }),
-    },
-    { message: "العيادة مطلوبة" }
-  ),
+  day: z
+    .string({ message: "اليوم مطلوب" })
+    .nonempty({ message: "اليوم مطلوب" }),
+  clinic_id: z
+    .string({ message: "العيادة مطلوبة" })
+    .nonempty({ message: "العيادة مطلوبة" }),
   deuration: z.coerce
     .number({
       message: "ادخل مدة كشف صالحة",

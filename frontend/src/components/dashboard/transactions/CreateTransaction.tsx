@@ -38,7 +38,9 @@ interface IProps {
 const CreateTransaction = ({ booking }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showVisa, setShowVisa] = useState(false);
-  const canViewLastVisits = useHasPermission(PERMISSIONS.LAST_PATIENT_TRANSACTIONS)
+  const canViewLastVisits = useHasPermission(
+    PERMISSIONS.LAST_PATIENT_TRANSACTIONS
+  );
   const token = cookieServices.getToken()!;
 
   const { data: doctorActions } = useGetDoctorActions({
@@ -63,21 +65,18 @@ const CreateTransaction = ({ booking }: IProps) => {
     defaultValues: {
       price: 0,
       doctor_actions: [],
-      payment_method: {
-        label: "نقدي",
-        value: "cash",
-      },
+      payment_method: "cash",
     },
   });
 
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
       if (name === "payment_method") {
-        setShowVisa(value.payment_method?.value === "visa");
+        setShowVisa(value.payment_method === "visa");
       }
       if (name === "doctor_actions") {
         const selectedActions = value.doctor_actions?.map((action) =>
-          doctorActions?.data.find((a) => a.id.toString() === action?.value)
+          doctorActions?.data.find((a) => a.id.toString() === action)
         );
         const totalPrice = selectedActions?.reduce((total, action) => {
           return total + (action?.price || 0);
@@ -99,7 +98,7 @@ const CreateTransaction = ({ booking }: IProps) => {
           booking_id: booking.id.toString(),
           contract_type: "egyption",
           doctor_actions: data.doctor_actions,
-          payment_method: data.payment_method.value as TPaymentMethod,
+          payment_method: data.payment_method as TPaymentMethod,
           price: data.price,
         },
       });
@@ -139,29 +138,29 @@ const CreateTransaction = ({ booking }: IProps) => {
         }}
         showFooter={false}
       >
-       {canViewLastVisits && (
+        {canViewLastVisits && (
           <motion.div
-          variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1"
-        >
-          <InfoField
-            label="الإجمالي"
-            value={patientBalances?.data.total_amount_due as number}
-          />
-          <InfoField
-            label="إجمالي المدفوع"
-            value={patientBalances?.data.total_amount_paid as number}
-          />
-          <InfoField
-            label="إجمالي المسترد"
-            value={patientBalances?.data.refund_amount as number}
-          />
-          <InfoField
-            label="إجمالي الباقي"
-            value={patientBalances?.data.total_balance as string}
-          />
-        </motion.div>
-       )}
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1"
+          >
+            <InfoField
+              label="الإجمالي"
+              value={patientBalances?.data.total_amount_due as number}
+            />
+            <InfoField
+              label="إجمالي المدفوع"
+              value={patientBalances?.data.total_amount_paid as number}
+            />
+            <InfoField
+              label="إجمالي المسترد"
+              value={patientBalances?.data.refund_amount as number}
+            />
+            <InfoField
+              label="إجمالي الباقي"
+              value={patientBalances?.data.total_balance as string}
+            />
+          </motion.div>
+        )}
         <Form {...form}>
           <motion.form
             initial="hidden"
