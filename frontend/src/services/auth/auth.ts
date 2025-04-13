@@ -15,7 +15,7 @@ export const login: (user: ILogin) => Promise<ILoginRes> = async ({
   password,
 }) => {
   const { data } = await axiosInstanceAPI.post("/auth", {
-    slug: "al-carmaclinic",
+    slug: import.meta.env.VITE_SLUG,
     email,
     password,
   });
@@ -36,7 +36,7 @@ export const register = async (user: IRegister): Promise<IRegisterRes> => {
 
   const { data } = await axiosInstanceAPI.post("/register", formData, {
     headers: {
-      slug: "al-carmaclinic",
+      slug: import.meta.env.VITE_SLUG,
     },
   });
   return data;
