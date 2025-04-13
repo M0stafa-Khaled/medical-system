@@ -109,7 +109,7 @@ export const verifyEmail: ({
 export const forgotPassword = async (email: string): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     "/password/confirmation-notification",
-    { email, slug: "Al-CarmaClinic" }
+    { email, slug: import.meta.env.VITE_SLUG }
   );
   return data;
 };
