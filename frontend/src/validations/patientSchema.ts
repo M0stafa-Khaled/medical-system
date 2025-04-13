@@ -41,7 +41,7 @@ export const createPatientSchema = z.object({
         message: "حجم الصورة يجب أن يكون أقل من 5MB",
       })
       .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
+        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .svg",
       }),
   ]),
 });
@@ -94,7 +94,7 @@ export const updatePatientSchema = z.object({
         message: "حجم الصورة يجب أن يكون أقل من 5MB",
       })
       .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
+        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .svg",
       }),
   ]),
 });

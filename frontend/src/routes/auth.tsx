@@ -10,7 +10,11 @@ import { createRoutesFromElements, Route } from "react-router-dom";
 
 const authRoutes = createRoutesFromElements(
   <>
-    <Route path="/verify-email" element={<VerifyEmail />} id="verify-email" />
+    <Route
+      path="/verify-account"
+      element={<VerifyEmail />}
+      id="verify-account"
+    />
 
     <Route element={<AuthLayout />} id="auth-layout">
       <Route path="/login" element={<Login />} id="login" />

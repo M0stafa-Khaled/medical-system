@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import { forgotPasswordSchema } from "@/validations/authSchema";
 import { useForgotPassword } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
+import Swal from "sweetalert2";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -37,11 +38,20 @@ const ForgotPassword = () => {
       const { status, message } = await forgotPassword(email);
 
       // ! Send failed
-      if (!status) return toast.error(message);
+      if (!status)
+        return Swal.fire({
+          icon: "error",
+          title: "خطأ",
+          text: message,
+        });
       // * Send Success
       cookieServices.setCanResetPass();
       navigate("/reset-password");
-      return toast.success(message);
+      return Swal.fire({
+        icon: "success",
+        title: "تم",
+        text: message,
+      });
     } catch (error) {
       const errorObj = error as AxiosError<{
         message: { [key: string]: string[] };
@@ -117,7 +127,7 @@ const ForgotPassword = () => {
             </div>
             <Button
               disabled={isPending}
-              className="h-auto bg-[#16a0cf] hover:bg-[#16a0cf]/90 text-white w-full py-3 px-4 flex justify-center items-center gap-4"
+              className="h-auto bg-[#16a0cf] hover:bg-[#16a0cf]/90 text-white w-full py-3.5 px-4 flex justify-center items-center gap-4"
             >
               إرسال رمز إعادة التعيين
               {isPending && <Loader2 className="animate-spin" />}

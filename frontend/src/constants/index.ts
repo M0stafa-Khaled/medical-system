@@ -16,6 +16,57 @@ export const LOGIN_FORM_INPUTS: IFormInput[] = [
   },
 ];
 
+export const REGISTER_FORM_INPUTS: IFormInput[] = [
+  {
+    name: "name",
+    label: "الاسم بالكامل",
+    placeholder: "ادخل الاسم بالكامل",
+    type: "text",
+  },
+  {
+    name: "email",
+    label: "البريد الإلكتروني",
+    placeholder: "ادخل البريد الإلكتروني",
+    type: "text",
+  },
+  {
+    name: "password",
+    label: "كلمة المرور",
+    placeholder: "ادخل كلمة المرور",
+    type: "password",
+  },
+  {
+    name: "another_name",
+    label: "اسم احد الاقارب",
+    placeholder: "ادخل اسم احد الاقارب",
+    type: "text",
+  },
+  {
+    name: "personal_id",
+    label: "رقم الهوية",
+    placeholder: "ادخل رقم الهوية",
+    type: "text",
+  },
+  {
+    name: "first_phone",
+    label: "رقم الهاتف الأول",
+    placeholder: "ادخل رقم الهاتف",
+    type: "text",
+  },
+  {
+    name: "second_phone",
+    label: "رقم الهاتف الثاني",
+    placeholder: "ادخل رقم الهاتف الثاني",
+    type: "text",
+  },
+  {
+    name: "personal_image",
+    label: "صورة الهوية",
+    type: "file",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
+  },
+];
+
 export const RESET_PASSWORD_FORM_INPUTS: IFormInput[] = [
   {
     label: "رمز التحقق",
@@ -75,7 +126,7 @@ export const UPDATE_PROFILE_PATIENT_INPUTS: IFormInput[] = [
     name: "personal_image",
     label: "صورة الهوية",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
 ];
 
@@ -84,13 +135,13 @@ export const UPDATE_PROFILE_DOCTOR_INPUTS: IFormInput[] = [
     name: "image",
     label: "صورة شخصية",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
   {
     name: "signature",
     label: "توقيع الطبيب",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
 ];
 
@@ -178,13 +229,13 @@ export const DOCTOR_FORM_INPUTS: IFormInput[] = [
     name: "image",
     label: "صورة شخصية",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
   {
     name: "signature",
     label: "توقيع الطبيب",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
   {
     name: "status",
@@ -337,13 +388,13 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
     name: "personal_image",
     label: "صورة الهوية",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
   {
     name: "image",
     label: "صورة شخصية",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
 ];
 
@@ -416,7 +467,7 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
     name: "personal_image",
     label: "صورة الهوية",
     type: "file",
-    accept: "image/*",
+    accept: "image/jpeg, image/png, image/jpg, image/svg",
   },
 ];
 
@@ -598,6 +649,7 @@ export const TRANSACTION_FORM_INPUTS: IFormInput[] = [
     type: "select",
   },
 ];
+
 export const PATIENT_PAYMENT_FORM_INPUTS: IFormInput[] = [
   {
     name: "patient_id",

@@ -36,6 +36,7 @@ import * as z from "zod";
 import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
 import { Helmet } from "react-helmet-async";
 import { AxiosError } from "axios";
+import Swal from "sweetalert2";
 
 const formSchema = z.object({
   otp: z
@@ -89,8 +90,17 @@ const VerifyEmail = () => {
         token: token as string,
         otp: values.otp,
       });
-      if (!status) return toast.error(message);
-      toast.success("تم تأكيد البريد الإلكتروني بنجاح");
+      if (!status)
+        return Swal.fire({
+          icon: "error",
+          title: "خطأ",
+          text: message,
+        });
+      Swal.fire({
+        icon: "success",
+        title: "تم التأكيد",
+        text: "تم تأكيد البريد الإلكتروني بنجاح",
+      });
       navigate("/");
     } catch (error) {
       const errorObj = error as AxiosError<{
@@ -211,7 +221,7 @@ const VerifyEmail = () => {
 
                 <Button
                   type="submit"
-                  className="w-full h-auto py-3"
+                  className="w-full h-auto py-3.5"
                   disabled={isLoadingVerifyEmail}
                 >
                   تأكيد

@@ -21,7 +21,7 @@ import {
 import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import handleResErr from "@/utils/handleResponseError";
 import { expenseCategorySchema } from "@/validations/expenseSchema";
-import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
+import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
 const CreateExpenseCategory = () => {
   const token = cookieServices.getToken()!;

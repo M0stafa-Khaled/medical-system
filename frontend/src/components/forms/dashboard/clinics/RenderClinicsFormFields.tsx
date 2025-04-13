@@ -1,8 +1,9 @@
 import { FormField } from "@/components/ui/form";
 import { IFormInput } from "@/interfaces";
 import { z } from "zod";
-import SwitchFormItem from "../formItems/SwitchFormItem";
-import InputFormItem from "../formItems/InputFormItem";
+import SwitchFormItem from "../../formItems/SwitchFormItem";
+import InputFormItem from "../../formItems/InputFormItem";
+
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import clinicSchema from "@/validations/clinicSchema";
 

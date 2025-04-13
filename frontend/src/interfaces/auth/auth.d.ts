@@ -1,20 +1,39 @@
 import { TRole } from "@/types";
 
-export interface IPermission {
-  id: number;
-  name: string;
+export interface ILogin {
+  email: string;
+  password: string;
 }
 
-export interface IAuthResponse {
+export interface IAuthUser {
+  id: number;
+  name: string;
+  token: string;
+  role: TRole;
+  permissions: IPermission[];
+}
+export interface ILoginRes {
   status: boolean;
   message: string;
-  data: {
-    id: number;
-    name: string;
-    token: string;
-    role: TRole;
-    permissions: IPermission[];
-  };
+  data: IAuthUser;
+}
+
+export interface IRegister {
+  name: string;
+  first_phone: string;
+  personal_id: string;
+  gender: string;
+  another_name?: string;
+  second_phone?: string;
+  email: string;
+  password: string;
+  personal_image: File;
+}
+
+export interface IRegisterRes {
+  status: boolean;
+  message: string;
+  data: IAuthUser;
 }
 
 export interface ICheckAuth {
@@ -24,7 +43,12 @@ export interface ICheckAuth {
   permissions: IPermission[];
 }
 
-export interface IResponsePermissions {
+export interface IPermission {
+  id: number;
+  name: string;
+}
+
+export interface IPermissionsRes {
   status: boolean;
   message: string | null;
   data: IPermission[];

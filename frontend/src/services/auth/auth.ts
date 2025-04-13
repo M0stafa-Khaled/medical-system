@@ -1,26 +1,19 @@
 import axiosInstanceAPI from "@/config/axios.config";
+import { IStatusMsg } from "@/interfaces";
 import {
-  IAuthResponse,
+  ILogin,
+  ILoginRes,
+  IRegister,
+  IRegisterRes,
   ICheckAuth,
   IResetPassword,
-  IResponsePermissions,
+  IPermissionsRes,
 } from "@/interfaces/auth/auth";
 
-export const getAllPermissions: (
-  token: string
-) => Promise<IResponsePermissions> = async (token) => {
-  const { data } = await axiosInstanceAPI.get("/permissions", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return data;
-};
-
-export const login: (user: {
-  email: string;
-  password: string;
-}) => Promise<IAuthResponse> = async ({ email, password }) => {
+export const login: (user: ILogin) => Promise<ILoginRes> = async ({
+  email,
+  password,
+}) => {
   const { data } = await axiosInstanceAPI.post("/auth", {
     slug: "al-carmaclinic",
     email,
@@ -29,9 +22,27 @@ export const login: (user: {
   return data;
 };
 
-export const logout: (token: string) => Promise<IAuthResponse> = async (
-  token
-) => {
+export const register = async (user: IRegister): Promise<IRegisterRes> => {
+  const formData = new FormData();
+  formData.append("name", user.name);
+  formData.append("email", user.email);
+  formData.append("password", user.password);
+  formData.append("first_phone", user.first_phone);
+  formData.append("personal_id", user.personal_id);
+  formData.append("gender", user.gender);
+  formData.append("personal_image", user.personal_image);
+  if (user.second_phone) formData.append("second_phone", user.second_phone);
+  if (user.another_name) formData.append("another_name", user.another_name);
+
+  const { data } = await axiosInstanceAPI.post("/register", formData, {
+    headers: {
+      slug: "al-carmaclinic",
+    },
+  });
+  return data;
+};
+
+export const logout: (token: string) => Promise<IStatusMsg> = async (token) => {
   const { data } = await axiosInstanceAPI.post(
     "/logout",
     {},
@@ -59,10 +70,9 @@ export const checkAuth: (token: string) => Promise<ICheckAuth> = async (
   return data;
 };
 
-export const resendOtp: (token: string) => Promise<{
-  status: boolean;
-  message: string;
-}> = async (token) => {
+export const resendOtp: (token: string) => Promise<IStatusMsg> = async (
+  token
+) => {
   const { data } = await axiosInstanceAPI.post(
     "/email/verification-notification",
     {},
@@ -81,10 +91,7 @@ export const verifyEmail: ({
 }: {
   token: string;
   otp: string;
-}) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ token, otp }) => {
+}) => Promise<IStatusMsg> = async ({ token, otp }) => {
   const { data } = await axiosInstanceAPI.post(
     "email/verify",
     {
@@ -99,10 +106,7 @@ export const verifyEmail: ({
   return data;
 };
 
-export const forgotPassword: ({ email }: { email: string }) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ email }) => {
+export const forgotPassword = async (email: string): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post(
     "/password/confirmation-notification",
     { email, slug: "Al-CarmaClinic" }
@@ -110,18 +114,26 @@ export const forgotPassword: ({ email }: { email: string }) => Promise<{
   return data;
 };
 
-export const resetPassword: ({
+export const resetPassword = async ({
   code,
   password,
   password_confirmation,
-}: IResetPassword) => Promise<{
-  status: boolean;
-  message: string;
-}> = async ({ code, password, password_confirmation }) => {
+}: IResetPassword): Promise<IStatusMsg> => {
   const { data } = await axiosInstanceAPI.post("/password/reset", {
     code,
     password,
     password_confirmation,
+  });
+  return data;
+};
+
+export const getAllPermissions: (
+  token: string
+) => Promise<IPermissionsRes> = async (token) => {
+  const { data } = await axiosInstanceAPI.get("/permissions", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   return data;
 };

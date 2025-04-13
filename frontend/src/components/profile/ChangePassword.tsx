@@ -19,7 +19,7 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import { CHANGE_PASSWORD_INPUTS } from "@/constants";
-import InputFormItem from "../forms/dashboard/formItems/InputFormItem";
+import InputFormItem from "../forms/formItems/InputFormItem";
 import { useChangePassword } from "@/lib/react-query/profile/profile";
 import handleResErr from "@/utils/handleResponseError";
 

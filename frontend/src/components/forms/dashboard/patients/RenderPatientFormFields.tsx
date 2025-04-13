@@ -2,12 +2,12 @@ import { FormField } from "@/components/ui/form";
 import { IFormInput } from "@/interfaces";
 import { z } from "zod";
 import { ChangeEvent } from "react";
-import SwitchFormItem from "../formItems/SwitchFormItem";
-import FileFormItem from "../formItems/FileFormItem";
-import InputFormItem from "../formItems/InputFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { GENDER } from "@/constants";
-import SelectFormItem from "../formItems/SelectFormItem";
+import SwitchFormItem from "../../formItems/SwitchFormItem";
+import SelectFormItem from "../../formItems/SelectFormItem";
+import FileFormItem from "../../formItems/FileFormItem";
+import InputFormItem from "../../formItems/InputFormItem";
 
 interface IProps {
   input: IFormInput;

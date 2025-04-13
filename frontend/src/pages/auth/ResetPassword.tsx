@@ -22,6 +22,7 @@ import { resetPasswordSchema } from "@/validations/authSchema";
 import { useResetPassword } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { RESET_PASSWORD_FORM_INPUTS } from "@/constants";
+import Swal from "sweetalert2";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -53,12 +54,21 @@ const ResetPassword = () => {
         password_confirmation,
       });
       // ! Rest failed
-      if (!status) return toast.error(message);
+      if (!status)
+        return Swal.fire({
+          icon: "error",
+          title: "خطأ",
+          text: message,
+        });
 
       // * Reset Success
       navigate("/login");
       cookieServices.clearCanResetPass();
-      return toast.success(message);
+      return Swal.fire({
+        icon: "success",
+        title: "تم",
+        text: "تم إعادة تعيين كلمة المرور بنجاح",
+      });
     } catch (error) {
       const errorObj = error as AxiosError<{
         message: { [key: string]: string[] };
@@ -169,7 +179,7 @@ const ResetPassword = () => {
             </div>
             <Button
               disabled={isPending}
-              className="h-auto bg-[#16a0cf] hover:bg-[#16a0cf]/90 text-white w-full py-3 px-4 flex justify-center items-center gap-4"
+              className="h-auto bg-[#16a0cf] hover:bg-[#16a0cf]/90 text-white w-full py-3.5 px-4 flex justify-center items-center gap-4"
             >
               إعادة تعيين كلمة المرور
               {isPending && <Loader2 className="animate-spin" />}

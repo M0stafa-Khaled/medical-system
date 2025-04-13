@@ -4,7 +4,7 @@ export const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
   "image/png",
-  "image/webp",
+  "image/svg",
 ];
 
 export const isValidFileType = (file: File, acceptedTypes: string[]): boolean =>

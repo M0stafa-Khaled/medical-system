@@ -5,7 +5,7 @@ import {
   isValidFileType,
 } from "@/utils/file";
 
-export const useUploadImgHandler = (form: UseFormReturn) => {
+export const useUploadImgHandler = (form: UseFormReturn<any>) => {
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     fieldChange: (value: File) => void
@@ -14,7 +14,7 @@ export const useUploadImgHandler = (form: UseFormReturn) => {
     if (file) {
       if (!isValidFileType(file, ACCEPTED_IMAGE_TYPES)) {
         form.setError(e.target.name, {
-          message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png أو .webp",
+          message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png أو .svg",
         });
         return;
       }

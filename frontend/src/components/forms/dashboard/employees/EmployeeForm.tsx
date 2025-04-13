@@ -100,7 +100,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     }
 
     if (!email_verified) {
-      navigate("/verify-email");
+      navigate("/verify-account");
       return toast.warn("يرجى تاكيد البريد الالكتروني");
     }
   };

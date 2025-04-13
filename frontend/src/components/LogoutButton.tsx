@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { FiLogOut } from "react-icons/fi";
-import { toast } from "react-toastify";
 import { useLogout } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +10,7 @@ import { logout } from "@/store/features/auth/authSlice";
 import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
 import Modal from "./shared/Modal";
 import handleResErr from "@/utils/handleResponseError";
+import Swal from "sweetalert2";
 
 const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
   const navigate = useNavigate();
@@ -23,15 +23,25 @@ const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
 
   const logoutFromDashboard = async () => {
     try {
-      await logoutUser(token as string);
+      const { message, status } = await logoutUser(token as string);
       // ! Logout failed
+      if (!status)
+        return Swal.fire({
+          title: "حدث خطأ",
+          icon: "error",
+          text: message,
+        });
+
       // * Logout Success
       dispatch(logout());
       dispatch(clearPermissions());
       navigate("/login", {
         replace: true,
       });
-      toast.success("تم تسجيل الخروج");
+      Swal.fire({
+        title: "تم تسجيل الخروج بنجاح",
+        icon: "success",
+      });
     } catch (error) {
       handleResErr(error);
     } finally {

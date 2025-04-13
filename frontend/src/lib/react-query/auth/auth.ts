@@ -1,19 +1,33 @@
-import { IResetPassword } from "@/interfaces/auth/auth";
+import Query_Keys from "@/enums/queryKeys";
+import { ILogin, IRegister, IResetPassword } from "@/interfaces/auth/auth";
 import {
   checkAuth,
   forgotPassword,
   getAllPermissions,
   login,
   logout,
+  register,
   resendOtp,
   resetPassword,
   verifyEmail,
 } from "@/services/auth/auth";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useLogin = () => {
   return useMutation({
-    mutationFn: (user: { email: string; password: string }) => login(user),
+    mutationFn: (user: ILogin) => login(user),
+  });
+};
+
+export const useRegister = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (user: IRegister) => register(user),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ALL_PATIENTS],
+      });
+    },
   });
 };
 
@@ -51,7 +65,7 @@ export const useGetAllPermissions = (token: string) => {
 
 export const useForgotPassword = () =>
   useMutation({
-    mutationFn: (email: string) => forgotPassword({ email }),
+    mutationFn: (email: string) => forgotPassword(email),
   });
 
 export const useResetPassword = () =>

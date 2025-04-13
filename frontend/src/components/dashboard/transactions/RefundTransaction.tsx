@@ -15,7 +15,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormField } from "@/components/ui/form";
-import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
+import InputFormItem from "@/components/forms/formItems/InputFormItem";
 import handleResErr from "@/utils/handleResponseError";
 
 interface IProps {

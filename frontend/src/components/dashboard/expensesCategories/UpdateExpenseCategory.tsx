@@ -22,7 +22,7 @@ import { useUpdateExpenseCategory } from "@/lib/react-query/dashboard/expenses/e
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
 import { expenseCategorySchema } from "@/validations/expenseSchema";
-import InputFormItem from "@/components/forms/dashboard/formItems/InputFormItem";
+import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
 interface IProps {
   category: IExpenseCategory;

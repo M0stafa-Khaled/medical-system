@@ -44,15 +44,15 @@ const RootLayout = () => {
       }
 
       // ----- User is authenticated ----- //
+      // Account is not verified
+      if (auth && !email_verified) {
+        navigate("/verify-account");
+        return toast.warn("يرجى تاكيد البريد الالكتروني");
+      }
+
       // Account is not Active
       if (auth && !status) {
         return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
-      }
-
-      // Account is not verified
-      if (auth && !email_verified) {
-        navigate("/verify-email");
-        return toast.warn("يرجى تاكيد البريد الالكتروني");
       }
 
       // Set Permissions in state

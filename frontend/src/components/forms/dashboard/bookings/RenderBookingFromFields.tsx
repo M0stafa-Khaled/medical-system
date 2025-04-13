@@ -1,10 +1,10 @@
 import { FormField } from "@/components/ui/form";
 import { IFormInput } from "@/interfaces";
 import { z } from "zod";
-import InputFormItem from "../formItems/InputFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import SelectFormItem from "../formItems/SelectFormItem";
-import PatientSelectItem from "../formItems/PatientSelectItem";
+import SelectFormItem from "../../formItems/SelectFormItem";
+import InputFormItem from "../../formItems/InputFormItem";
+import PatientSelectItem from "../../formItems/PatientSelectItem";
 import BookingDateItem from "./BookingDateItem";
 import BookingAvailableTimeSelectItem from "./BookingAvailableTimeSelectItem";
 

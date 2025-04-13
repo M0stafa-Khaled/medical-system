@@ -4,11 +4,11 @@ import { z } from "zod";
 import { ChangeEvent } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { GENDER, ROLES } from "@/constants";
-import SwitchFormItem from "../formItems/SwitchFormItem";
-import FileFormItem from "../formItems/FileFormItem";
-import MultiSelectFormItem from "../formItems/MultiSelectFormItem";
-import InputFormItem from "../formItems/InputFormItem";
-import SelectFormItem from "../formItems/SelectFormItem";
+import SwitchFormItem from "../../formItems/SwitchFormItem";
+import SelectFormItem from "../../formItems/SelectFormItem";
+import FileFormItem from "../../formItems/FileFormItem";
+import MultiSelectFormItem from "../../formItems/MultiSelectFormItem";
+import InputFormItem from "../../formItems/InputFormItem";
 
 interface IOption {
   value: string;
