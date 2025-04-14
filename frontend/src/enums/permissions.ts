@@ -57,13 +57,6 @@ export enum PERMISSIONS {
   ANALYZE_TREASURIES = "تحليل-الخزائن",
   TRANSFER_BETWEEN_TREASURIES = "التحويل-بين-الخزائن",
 
-  // Subscription
-  SUBSCRIPTION_FOLLOW_UP = "متابعة-الاشتراك",
-
-  // Company Information
-  COMPANY_INFO = "معلومات-الشركة",
-  UPDATE_COMPANY_INFO = "تحديث-معلومات-الشركة",
-
   // Working Days
   WORKING_DAYS = "ايام-العمل",
   UPDATE_WORKING_DAY = "تعديل-ايام-العمل",
@@ -89,4 +82,18 @@ export enum PERMISSIONS {
   // Patient balances
   PATIENT_BALANCES = "تحصيلات-المريض",
   ADD_PATIENT_PAYMENT = "اضافة-دفع-للمريض",
+
+  // Dosages
+  DOSAGES = "الجرعات",
+  ADD_DOSAGE = "اضافة-جرعة",
+  UPDATE_DOSAGE = "تعديل-جرعة",
+  VIEW_DOSAGE = "عرض-جرعة",
+  DELETE_DOSAGE = "حذف-جرعة",
+
+  // Subscription
+  SUBSCRIPTION_FOLLOW_UP = "متابعة-الاشتراك",
+
+  // Company Information
+  COMPANY_INFO = "معلومات-الشركة",
+  UPDATE_COMPANY_INFO = "تحديث-معلومات-الشركة",
 }

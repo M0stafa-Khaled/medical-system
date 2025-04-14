@@ -8,7 +8,6 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
       refetchOnMount: true,
-      enabled: navigator.onLine,
     },
   },
 });

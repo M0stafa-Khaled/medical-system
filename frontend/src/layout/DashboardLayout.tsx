@@ -16,6 +16,7 @@ import {
   Workflow,
   WorkflowIcon,
 } from "lucide-react";
+import { GiMedicinePills } from "react-icons/gi";
 import { TbReportAnalytics } from "react-icons/tb";
 import { memo } from "react";
 import { FaUserDoctor } from "react-icons/fa6";
@@ -38,6 +39,9 @@ const DashboardLayout = () => {
   // Bookings
   const canViewBookings = useHasPermission(PERMISSIONS.BOOKINGS);
 
+  // Dosages
+  const canViewDosages = useHasPermission(PERMISSIONS.DOSAGES);
+
   const routeNames: Record<string, string> = {
     dashboard: "الرئيسية",
     clinics: "العيادات",
@@ -56,6 +60,7 @@ const DashboardLayout = () => {
     "last-visits": "أخر الزيارات",
     analytics: "التحاليل",
     scans: "الأشعات",
+    dosages: "الجرعات",
   };
 
   const NAV_LINKS: ILink[] = [
@@ -136,6 +141,16 @@ const DashboardLayout = () => {
                     },
                   ]
                 : []),
+              // Dosages
+              ...(canViewDosages
+                ? [
+                    {
+                      name: routeNames.dosages,
+                      path: "/dashboard/dosages",
+                      icon: <GiMedicinePills size={18} />,
+                    },
+                  ]
+                : []),
             ],
           },
         ]
@@ -174,18 +189,18 @@ const DashboardLayout = () => {
 
     // Drugs
     {
-      name: "الأدوية",
+      name: routeNames.drugs,
       path: "/dashboard/drugs",
       icon: <MdMedication size={18} />,
     },
     // Analytics
     {
-      name: "التحاليل",
+      name: routeNames.analytics,
       path: "/dashboard/analytics",
       icon: <TbReportAnalytics size={18} />,
     },
     {
-      name: "الأشعات",
+      name: routeNames.scans,
       path: "/dashboard/scans",
       icon: <UserRoundSearch size={18} />,
     },

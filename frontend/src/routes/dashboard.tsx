@@ -1,9 +1,9 @@
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { RootLayout } from "@/layout";
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { PERMISSIONS } from "@/enums/permissions";
-import { lazy } from "react";
-
+import { lazy, Suspense } from "react";
+import LoadingSpinnerPage from "@/components/LoadingSpinnerPage";
+const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 const DashboardLayout = lazy(() => import("@/layout/DashboardLayout"));
 
 // Clinics
@@ -91,18 +91,22 @@ const LastVisits = lazy(
   () => import("@/pages/dashboard/transactions/LastVisits")
 );
 
+// Dosages
+const Dosages = lazy(() => import("@/pages/dashboard/dosages"));
+
 const dashboardRoutes = createRoutesFromElements(
   <Route element={<RootLayout />} id="dashboard-root">
     {/* Dashboard */}
     <Route
       path="/dashboard"
       element={
-        <ProtectedRoute requiredRole={["admin", "employee"]}>
-          <DashboardLayout />
-        </ProtectedRoute>
+        <Suspense fallback={<LoadingSpinnerPage />}>
+          <ProtectedRoute requiredRole={["admin", "employee"]}>
+            <DashboardLayout />
+          </ProtectedRoute>
+        </Suspense>
       }
       id="dashboard-layout"
-      // errorElement={<Error />}
     >
       {/* Home */}
       <Route
@@ -117,36 +121,44 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="bookings"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-            <DashboardBookings />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+              <DashboardBookings />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-bookings"
       />
       <Route
         path="bookings/:bookingId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
-            <DashboardBookingDetails />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
+              <DashboardBookingDetails />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-booking-details"
       />
       <Route
         path="bookings/create"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-            <DashboardCreateBooking />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+              <DashboardCreateBooking />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-create-booking"
       />
       <Route
         path="bookings/:bookingId/update"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-            <DashboardUpdateBooking />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+              <DashboardUpdateBooking />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-update-booking"
       />
@@ -155,9 +167,11 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="clinics"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.CLINICS}>
-            <Clinics />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.CLINICS}>
+              <Clinics />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-clinics"
       />
@@ -166,36 +180,44 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.DOCTORS}>
-            <Doctors />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.DOCTORS}>
+              <Doctors />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-doctors"
       />
       <Route
         path="doctors/:doctorId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_DOCTOR}>
-            <DoctorDetails />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_DOCTOR}>
+              <DoctorDetails />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-doctor-details"
       />
       <Route
         path="doctors/create"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
-            <CreateDoctor />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
+              <CreateDoctor />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-create-doctor"
       />
       <Route
         path="doctors/:doctorId/update"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
-            <UpdateDoctor />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
+              <UpdateDoctor />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-update-doctor"
       />
@@ -204,18 +226,22 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors/:doctorId/working-days/create"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.ADD_WORKING_DAY}>
-            <CreateWorkingDay />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_WORKING_DAY}>
+              <CreateWorkingDay />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-create-working-day"
       />
       <Route
         path="doctors/:doctorId/working-days/:workingDayId/update"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_WORKING_DAY}>
-            <UpdateWorkingDay />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_WORKING_DAY}>
+              <UpdateWorkingDay />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-update-working-day"
       />
@@ -224,38 +250,44 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="employees"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.EMPLOYEES}>
-            <Employees />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.EMPLOYEES}>
+              <Employees />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-employees"
       />
       <Route
         path="employees/:employeeId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EMPLOYEE}>
-            <EmployeeDetails />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EMPLOYEE}>
+              <EmployeeDetails />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-employee-details"
       />
-
       <Route
         path="employees/create"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.ADD_EMPLOYEE}>
-            <CreateEmployee />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_EMPLOYEE}>
+              <CreateEmployee />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-create-employee"
       />
-
       <Route
         path="employees/:employeeId/update"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_EMPLOYEE}>
-            <UpdateEmployee />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_EMPLOYEE}>
+              <UpdateEmployee />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-update-employee"
       />
@@ -264,65 +296,97 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="patients"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS}>
-            <Patients />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS}>
+              <Patients />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-patients"
       />
       <Route
         path="patients/:patientId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PATIENT}>
-            <PatientDetails />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PATIENT}>
+              <PatientDetails />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-patient-details"
       />
       <Route
         path="patients/create"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
-            <CreatePatient />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
+              <CreatePatient />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-create-patient"
       />
       <Route
         path="patients/:patientId/update"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
-            <UpdatePatient />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
+              <UpdatePatient />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-update-patient"
       />
 
       {/* Drugs */}
-      <Route path="drugs" element={<Drugs />} id="dashboard-drugs" />
+      <Route
+        path="drugs"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <Drugs />
+          </Suspense>
+        }
+        id="dashboard-drugs"
+      />
       <Route
         path="analytics"
-        element={<Analytics />}
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <Analytics />
+          </Suspense>
+        }
         id="dashboard-analytics"
       />
-      <Route path="scans" element={<Scans />} id="dashboard-scans" />
+      <Route
+        path="scans"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <Scans />
+          </Suspense>
+        }
+        id="dashboard-scans"
+      />
 
       {/* Expenses */}
       <Route
         path="expenses"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES}>
-            <Expenses />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES}>
+              <Expenses />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-expenses"
       />
       <Route
         path="expenses/:expenseId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EXPENSE}>
-            <ExpenseDetails />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EXPENSE}>
+              <ExpenseDetails />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-expense-details"
       />
@@ -331,9 +395,11 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="expenses-categories"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_CATEGORIES}>
-            <ExpensesCategories />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_CATEGORIES}>
+              <ExpensesCategories />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-expenses-categories"
       />
@@ -342,29 +408,35 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="transactions"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.TRANSACTIONS}>
-            <Transactions />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.TRANSACTIONS}>
+              <Transactions />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-transactions"
       />
       <Route
         path="transactions/:transactionId"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_TRANSACTION}>
-            <TransactionDetails />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_TRANSACTION}>
+              <TransactionDetails />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-transaction-details"
       />
       <Route
         path="last-visits/:patientId/transactions/:doctorId"
         element={
-          <ProtectedRoute
-            requiredPermission={PERMISSIONS.LAST_PATIENT_TRANSACTIONS}
-          >
-            <LastVisits />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute
+              requiredPermission={PERMISSIONS.LAST_PATIENT_TRANSACTIONS}
+            >
+              <LastVisits />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-last-visits"
       />
@@ -373,11 +445,26 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="treasuries"
         element={
-          <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
-            <Treasuries />
-          </ProtectedRoute>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
+              <Treasuries />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-treasuries"
+      />
+
+      {/* Dosages */}
+      <Route
+        path="dosages"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.DOSAGES}>
+              <Dosages />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-dosages"
       />
     </Route>
   </Route>

@@ -6,4 +6,14 @@ export interface IDosage {
 export interface IDosagesRes {
   status: boolean;
   message: string;
+  data: IDosage[];
+}
+
+export interface ICreateDosage {
+  name: string;
+  token: strings;
+}
+
+export interface IUpdateDosage extends ICreateDosage {
+  id: number;
 }
