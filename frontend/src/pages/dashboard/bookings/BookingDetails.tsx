@@ -27,8 +27,8 @@ import convertDay from "@/utils/convertDayLang";
 import formatDateTime from "@/utils/formatDate";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import DeleteBooking from "@/components/dashboard/booking/DeleteBooking";
-import UpdateBookingStatus from "@/components/dashboard/booking/UpdateBookingStatus";
+import DeleteBooking from "@/components/dashboard/bookings/DeleteBooking";
+import UpdateBookingStatus from "@/components/dashboard/bookings/UpdateBookingStatus";
 import { IBooking } from "@/interfaces/dashboard/bookings";
 import { Button } from "@/components/ui/button";
 

@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import BookingsTable from "@/components/dashboard/booking/BookingsTable";
+import BookingsTable from "@/components/dashboard/bookings/BookingsTable";
 
 const Bookings = () => {
   return (
