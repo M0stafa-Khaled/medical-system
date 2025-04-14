@@ -26,12 +26,12 @@ const EmployeesTable = () => {
   } = useGetAllEmployees({ token, page, search });
 
   useEffect(() => {
-    if (employees?.message) toast.error(employees.message);
+    if (employees?.message && !employees.status) toast.error(employees.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [employees?.message, isError]);
+  }, [employees?.message, employees?.status, isError]);
 
   const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
   const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);

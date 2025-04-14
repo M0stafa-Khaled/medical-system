@@ -7,13 +7,27 @@ import {
   itemVariants,
 } from "@/animations/dashboardAnimations";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 interface IProps {
   doctorId: string;
 }
 
 const ActionsList = ({ doctorId }: IProps) => {
   const token = cookieServices.getToken()!;
-  const { data: actions, isLoading } = useGetDoctorActions({ token, doctorId });
+  const {
+    data: actions,
+    isLoading,
+    isError,
+  } = useGetDoctorActions({ token, doctorId });
+
+  useEffect(() => {
+    if (actions?.message && !actions.status) toast.error(actions.message);
+    if (isError) {
+      toast.error("حدث خطأ اثناء تحميل البيانات");
+      return;
+    }
+  }, [actions?.message, isError, actions?.status]);
 
   if (isLoading) return <ActionSkeleton />;
   return (

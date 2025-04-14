@@ -52,12 +52,12 @@ const ExpensesTable = () => {
   });
 
   useEffect(() => {
-    if (expenses?.message) toast.error(expenses.message);
+    if (expenses?.message && !expenses.status) toast.error(expenses.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [expenses?.message, isError]);
+  }, [expenses?.message, expenses?.status, isError]);
 
   const canDeleteExpense = useHasPermission(
     PERMISSIONS.DELETE_EXPENSE_CATEGORY

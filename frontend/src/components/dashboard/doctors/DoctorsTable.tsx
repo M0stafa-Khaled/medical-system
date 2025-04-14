@@ -24,12 +24,12 @@ const DoctorsTable = () => {
   } = useGetAllDoctors({ token, page, search });
 
   useEffect(() => {
-    if (doctors?.message) toast.error(doctors.message);
+    if (doctors?.message && !doctors.status) toast.error(doctors.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [doctors?.message, isError]);
+  }, [doctors?.message, isError, doctors?.status]);
 
   const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
   const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);

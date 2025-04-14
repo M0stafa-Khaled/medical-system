@@ -15,6 +15,7 @@ export interface IBalance {
 
 export interface IPatientBalancesRes {
   status: boolean;
+  message: string | null;
   data: {
     items: IBalance[];
     total_amount_due: number;

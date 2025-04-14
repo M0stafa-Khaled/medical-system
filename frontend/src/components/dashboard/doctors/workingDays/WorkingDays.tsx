@@ -15,6 +15,8 @@ import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 import CardSkeleton from "@/components/ui/CardSkeleton";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface IProps {
   doctorId: string;
@@ -26,11 +28,23 @@ const WorkingDays = ({ doctorId }: IProps) => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const search = useDebounce(searchParams.get("q"), 500)!;
-  const { data: days, isLoading } = useGetAllWorkingDays({
+  const {
+    data: days,
+    isLoading,
+    isError,
+  } = useGetAllWorkingDays({
     token,
     doctorId,
     search,
   });
+
+  useEffect(() => {
+    if (days?.message && !days.status) toast.error(days.message);
+    if (isError) {
+      toast.error("حدث خطأ اثناء تحميل البيانات");
+      return;
+    }
+  }, [days?.message, isError, days?.status]);
 
   if (!canViewWorkingDays) return null;
 

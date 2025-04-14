@@ -120,15 +120,6 @@
   font-display: swap;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-@layer base {
-  body {
-    @apply font-alexandria antialiased bg-background text-foreground;
-  }
-}
-
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--muted));
   border-radius: 10px;
@@ -150,7 +141,12 @@ html {
   * {
     @apply border-border;
   }
+
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply font-alexandria antialiased bg-background text-foreground;
   }
 }

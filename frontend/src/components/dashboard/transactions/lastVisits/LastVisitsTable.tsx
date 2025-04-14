@@ -30,12 +30,13 @@ const LastVisitsTable = () => {
   const canViewTransaction = useHasPermission(PERMISSIONS.VIEW_TRANSACTION);
 
   useEffect(() => {
-    if (transactions?.message) toast.error(transactions.message);
+    if (transactions?.message && !transactions.status)
+      toast.error(transactions.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [transactions?.message, isError]);
+  }, [transactions?.message, isError, transactions?.status]);
 
   if (isLoading) return <DataLoader />;
 

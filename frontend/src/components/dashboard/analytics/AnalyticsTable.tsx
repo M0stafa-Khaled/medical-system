@@ -10,7 +10,6 @@ import AnalyticsHeader from "./AnalyticsHeader";
 import AnalyticsTableHeader from "./AnalyticsTableHeader";
 import AnalyticsList from "./AnalyticsList";
 
-
 const AnalyticsTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
@@ -24,12 +23,12 @@ const AnalyticsTable = () => {
   } = useGetAllAnalytics({ page, token, search });
 
   useEffect(() => {
-    if (analytics?.message) toast.error(analytics.message);
+    if (analytics?.message && !analytics.status) toast.error(analytics.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [analytics?.message, isError]);
+  }, [analytics?.message, analytics?.status, isError]);
 
   return (
     <DataTable

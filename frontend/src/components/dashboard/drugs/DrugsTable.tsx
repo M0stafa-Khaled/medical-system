@@ -23,12 +23,12 @@ const DrugsTable = () => {
   } = useGetALlDrugs({ page, token, search });
 
   useEffect(() => {
-    if (drugs?.message) toast.error(drugs.message);
+    if (drugs?.message && !drugs.status) toast.error(drugs.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [drugs?.message, isError]);
+  }, [drugs?.message, isError, drugs?.status]);
 
   return (
     <DataTable

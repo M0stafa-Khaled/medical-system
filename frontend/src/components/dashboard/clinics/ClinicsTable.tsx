@@ -13,13 +13,14 @@ import { PERMISSIONS } from "@/enums/permissions";
 const ClinicsTable = () => {
   const token = cookieServices.getToken()!;
   const { data: clinics, isLoading, isError } = useGetAllClinics({ token });
+
   useEffect(() => {
-    if (clinics?.message) toast.error(clinics.message);
+    if (clinics?.message && !clinics?.status) toast.error(clinics.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [clinics?.message, isError]);
+  }, [clinics?.message, isError, clinics?.status]);
 
   const canUpdateClinic = useHasPermission(PERMISSIONS.UPDATE_CLINIC);
   const canDeleteClinic = useHasPermission(PERMISSIONS.DELETE_CLINIC);

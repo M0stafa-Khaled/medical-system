@@ -5,16 +5,32 @@ import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import PatientBalancesTable from "./PatientBalancesTable";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface IProps {
   patientId: string;
 }
 const PatientBalances = ({ patientId }: IProps) => {
   const token = cookieServices.getToken()!;
-  const { data: patientBalances, isLoading } = useGetPatientBalances({
+
+  const {
+    data: patientBalances,
+    isLoading,
+    isError,
+  } = useGetPatientBalances({
     patientId,
     token,
   });
+
+  useEffect(() => {
+    if (patientBalances?.message && !patientBalances.status)
+      toast.error(patientBalances.message);
+    if (isError) {
+      toast.error("حدث خطأ اثناء تحميل البيانات");
+      return;
+    }
+  }, [patientBalances?.message, isError, patientBalances?.status]);
 
   if (isLoading) return <DataLoader />;
 

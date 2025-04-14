@@ -23,12 +23,12 @@ const ScansTable = () => {
   } = useGetAllScans({ page, token, search });
 
   useEffect(() => {
-    if (scans?.message) toast.error(scans.message);
+    if (scans?.message && !scans.status) toast.error(scans.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [scans?.message, isError]);
+  }, [scans?.message, scans?.status, isError]);
 
   return (
     <DataTable

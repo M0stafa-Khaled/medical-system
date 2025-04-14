@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg", "robots.txt", "apple-touch-icon.png"],
+      includeAssets: ["favicon.svg", "robots.txt"],
       manifest: {
         name: "Clinics Medical System",
         short_name: "Clinics Management",
@@ -40,14 +40,4 @@ export default defineConfig({
   build: {
     sourcemap: false,
   },
-  // server: {
-  //   proxy: {
-  //     "/api": {
-  //       target: "https://clinic-api.egprog.com",
-  //       changeOrigin: true,
-  //       secure: true,
-  //       rewrite: (path) => path.replace(/^\/api/, "/api"),
-  //     },
-  //   },
-  // },
 });

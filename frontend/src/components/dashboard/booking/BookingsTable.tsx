@@ -76,12 +76,12 @@ const BookingsTable = () => {
   });
 
   useEffect(() => {
-    if (bookings?.message) toast.error(bookings.message);
+    if (bookings?.message && !bookings.status) toast.error(bookings.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [bookings?.message, isError]);
+  }, [bookings?.message, bookings?.status, isError]);
 
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
   const canDeleteBooking = useHasPermission(PERMISSIONS.DELETE_BOOKING);
