@@ -29,10 +29,7 @@ import DeleteEmployee from "@/components/dashboard/employees/DeleteEmployee";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet-async";

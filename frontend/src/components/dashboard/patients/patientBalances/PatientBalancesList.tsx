@@ -1,6 +1,6 @@
 import { TableCell } from "@/components/ui/table";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations";
 import { IBalance } from "@/interfaces/dashboard/transactions/patientBalances";
 import formatDateTime from "@/utils/formatDate";
 

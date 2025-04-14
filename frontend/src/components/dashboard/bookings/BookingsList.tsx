@@ -1,6 +1,6 @@
 import { TableCell } from "@/components/ui/table";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import truncateText from "@/utils/truncateText";

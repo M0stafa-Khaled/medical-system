@@ -1,6 +1,6 @@
 import { IPermission } from "@/interfaces/auth/auth";
 import { Badge } from "../ui/badge";
-import { itemVariants } from "@/animations/dashboardAnimations";
+import { itemVariants } from "@/animations";
 import { motion } from "framer-motion";
 
 interface IProps {

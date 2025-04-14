@@ -14,10 +14,7 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { CHANGE_PASSWORD_INPUTS } from "@/constants";
 import InputFormItem from "../forms/formItems/InputFormItem";
 import { useChangePassword } from "@/lib/react-query/profile/profile";

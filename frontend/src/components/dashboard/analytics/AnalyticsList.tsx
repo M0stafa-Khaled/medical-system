@@ -1,4 +1,4 @@
-import { tableRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations";
 import { TableCell } from "@/components/ui/table";
 import { IPaginationMeta } from "@/interfaces";
 import { IAnalysis } from "@/interfaces/dashboard/analysis";

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import UpdateClinic from "./UpdateClinic";
 import DeleteClinic from "./DeleteClinic";
 import { IClinic } from "@/interfaces/dashboard/clinics";
-import { tableRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 interface IProps {

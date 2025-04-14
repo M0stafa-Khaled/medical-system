@@ -13,10 +13,7 @@ import { Loader2, Plus } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_PAYMENT_FORM_INPUTS, PAYMENT_METHODS } from "@/constants";
 import RenderTransactionFormFields from "@/components/forms/dashboard/transactions/RenderTransactionFormFields";
 import handleResErr from "@/utils/handleResponseError";

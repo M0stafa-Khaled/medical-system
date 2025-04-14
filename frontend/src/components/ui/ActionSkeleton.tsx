@@ -1,7 +1,4 @@
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { Skeleton } from "./skeleton";
 import { motion } from "framer-motion";
 

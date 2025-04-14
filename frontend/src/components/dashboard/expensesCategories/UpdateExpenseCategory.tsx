@@ -13,10 +13,7 @@ import { Loader2, Pen } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import { IExpenseCategory } from "@/interfaces/dashboard/expenses";
 import { useUpdateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import TooltipButton from "@/components/ui/TooltipButton";

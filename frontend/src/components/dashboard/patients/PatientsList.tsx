@@ -6,7 +6,7 @@ import { FiEye } from "react-icons/fi";
 import DeletePatient from "./DeletePatient";
 import { IPatient } from "@/interfaces/dashboard/patient";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { IPaginationMeta } from "@/interfaces";

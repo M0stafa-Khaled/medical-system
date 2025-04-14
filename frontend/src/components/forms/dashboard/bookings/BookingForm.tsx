@@ -9,10 +9,7 @@ import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { BOOKING_FORM_INPUTS, BOOKING_STATUS_OPTIONS } from "@/constants";
 import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
 import convertDay from "@/utils/convertDayLang";

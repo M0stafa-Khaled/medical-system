@@ -2,7 +2,7 @@ import { TableCell } from "@/components/ui/table";
 import { motion } from "framer-motion";
 import UpdateDosage from "./UpdateDosage";
 import DeleteClinic from "./DeleteDosage";
-import { tableRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { IDosage } from "@/interfaces/dashboard/dosages";

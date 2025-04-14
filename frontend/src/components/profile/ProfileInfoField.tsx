@@ -1,4 +1,4 @@
-import { itemVariants } from "@/animations/dashboardAnimations";
+import { itemVariants } from "@/animations";
 import { motion } from "framer-motion";
 interface IProps {
   label: string;

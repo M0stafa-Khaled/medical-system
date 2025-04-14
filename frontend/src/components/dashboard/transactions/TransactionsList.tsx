@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import RefundTransaction from "./RefundTransaction";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations/dashboardAnimations";
+import { tableRowVariants } from "@/animations";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import truncateText from "@/utils/truncateText";

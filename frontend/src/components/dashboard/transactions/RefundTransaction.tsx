@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { containerVariants } from "@/animations/dashboardAnimations";
+import { containerVariants } from "@/animations";
 import {
   AlertDialogCancel,
   AlertDialogFooter,

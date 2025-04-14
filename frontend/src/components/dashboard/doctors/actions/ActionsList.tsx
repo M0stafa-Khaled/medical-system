@@ -2,10 +2,7 @@ import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorA
 import cookieServices from "@/utils/cookieServices";
 import ActionCard from "./ActionCard";
 import ActionSkeleton from "@/components/ui/ActionSkeleton";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { toast } from "react-toastify";

@@ -16,10 +16,7 @@ import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import { useEffect } from "react";
 import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import RenderDoctorFormFields from "./RenderDoctorFormFields";
 import handleResErr from "@/utils/handleResponseError";
 

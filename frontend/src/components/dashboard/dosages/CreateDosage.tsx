@@ -14,10 +14,7 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import handleResErr from "@/utils/handleResponseError";
 import { useCreateDosage } from "@/lib/react-query/dashboard/dosages";
 import dosageSchema from "@/validations/dosageSchema";

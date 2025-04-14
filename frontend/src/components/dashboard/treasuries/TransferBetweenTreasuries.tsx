@@ -13,10 +13,7 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import { transferTreasurySchema } from "@/validations/treasurySchema";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { TRANSFER_TREASURIES_FORM_INPUTS } from "@/constants";

@@ -17,10 +17,7 @@ import doctorActionSchema from "@/validations/doctorActionSchema";
 import { useUpdateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import { IDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
 import RenderDoctorFormFields from "@/components/forms/dashboard/doctors/RenderDoctorFormFields";

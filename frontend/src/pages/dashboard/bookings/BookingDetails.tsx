@@ -1,7 +1,4 @@
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DataLoader from "@/components/ui/DataLoader";
 import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";

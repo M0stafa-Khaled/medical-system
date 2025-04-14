@@ -17,10 +17,7 @@ import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { useGetExpenseById } from "@/lib/react-query/dashboard/expenses/expenses";

@@ -15,10 +15,7 @@ import {
 import { useEffect } from "react";
 import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import RenderPatientFormFields from "./RenderPatientFormFields";
 import handleResErr from "@/utils/handleResponseError";
 

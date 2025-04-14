@@ -29,10 +29,7 @@ import Actions from "@/components/dashboard/doctors/actions/Actions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";

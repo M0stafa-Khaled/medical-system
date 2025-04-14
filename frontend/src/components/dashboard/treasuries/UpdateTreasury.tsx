@@ -13,10 +13,7 @@ import { Loader2, Pen } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import { createTreasurySchema } from "@/validations/treasurySchema";
 import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";

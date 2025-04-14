@@ -6,10 +6,7 @@ import { toast } from "react-toastify";
 import cookieServices from "@/utils/cookieServices";
 import { DAYS, DOCTOR_WORKING_DAY_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
 import SubmitButton from "../../../SubmitButton";
 import { useNavigate, useParams } from "react-router-dom";

@@ -17,10 +17,7 @@ import { DOCTOR_ACTION_INPUTS } from "@/constants";
 import doctorActionSchema from "@/validations/doctorActionSchema";
 import { useCreateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import handleResErr from "@/utils/handleResponseError";
 import RenderDoctorFormFields from "@/components/forms/dashboard/doctors/RenderDoctorFormFields";
 

@@ -16,9 +16,9 @@ const AuthLayout = () => {
     const role = cookieServices.getUser()?.role;
 
     if (role === "admin" || role === "employee")
-      return <Navigate to="/dashboard" replace />;
+      return <Navigate to="/dashboard/bookings" replace />;
     if (role === "doctor") return <Navigate to="/doctor" replace />;
-    return <Navigate to="/" replace />;
+    return <Navigate to="/bookings" replace />;
   }
 
   return (

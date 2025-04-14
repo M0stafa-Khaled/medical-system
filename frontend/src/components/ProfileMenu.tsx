@@ -10,9 +10,12 @@ import {
 import { FaUser } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import cookieServices from "@/utils/cookieServices";
 
 const ProfileMenu = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const role = cookieServices.getUser()?.role;
+
   if (isAuthenticated)
     return (
       <DropdownMenu>
@@ -30,11 +33,22 @@ const ProfileMenu = () => {
               الملف الشخصي
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link to="" className="block w-full h-full py-2">
-              الإعدادات
-            </Link>
-          </DropdownMenuItem>
+
+          {role === "patient" && (
+            <DropdownMenuItem>
+              <Link to="/bookings" className="block w-full h-full py-2">
+                الحجوزات
+              </Link>
+            </DropdownMenuItem>
+          )}
+
+          {(role === "admin" || role === "employee") && (
+            <DropdownMenuItem>
+              <Link to="/settings" className="block w-full h-full py-2">
+                الإعدادات
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     );

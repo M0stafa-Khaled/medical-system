@@ -19,10 +19,7 @@ import {
 } from "@/lib/react-query/auth/auth";
 import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import { useDispatch } from "react-redux";
 import { setPermissions } from "@/store/features/permissions/permissionsSlice";
 import { logout } from "@/store/features/auth/authSlice";

@@ -14,10 +14,7 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import handleResErr from "@/utils/handleResponseError";
 import { expenseCategorySchema } from "@/validations/expenseSchema";

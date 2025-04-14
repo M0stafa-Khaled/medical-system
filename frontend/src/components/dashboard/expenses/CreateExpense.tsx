@@ -15,10 +15,7 @@ import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { EXPENSE_FORM_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
-import {
-  itemVariants,
-  containerVariants,
-} from "@/animations/dashboardAnimations";
+import { itemVariants, containerVariants } from "@/animations";
 import { createExpenseSchema } from "@/validations/expenseSchema";
 import { useCreateExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";

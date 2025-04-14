@@ -1,4 +1,4 @@
-import { containerVariants } from "@/animations/dashboardAnimations";
+import { containerVariants } from "@/animations";
 import { Card, CardHeader } from "@/components/ui/card";
 import DataLoader from "@/components/ui/DataLoader";
 import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/patientBalances";

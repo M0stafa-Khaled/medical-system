@@ -6,10 +6,7 @@ import CategoriesHeader from "./CategoriesHeader";
 import CategoryCard from "./CategoryCard";
 import CardSkeleton from "@/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import { useSearchParams } from "react-router-dom";
 

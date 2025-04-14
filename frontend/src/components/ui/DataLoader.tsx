@@ -1,9 +1,6 @@
 import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 
 const DataLoader = () => {
   return (

@@ -16,10 +16,7 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { CLINIC_FORM_INPUTS } from "@/constants";
 import handleResErr from "@/utils/handleResponseError";
 import RenderClinicsFormFields from "@/components/forms/dashboard/clinics/RenderClinicsFormFields";

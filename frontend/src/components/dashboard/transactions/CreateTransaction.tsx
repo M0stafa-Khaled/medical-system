@@ -13,10 +13,7 @@ import { Loader2, Wallet } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { PAYMENT_METHODS, TRANSACTION_FORM_INPUTS } from "@/constants";
 import { createTransactionSchema } from "@/validations/transactionSchema";
 import { useCreateTransaction } from "@/lib/react-query/dashboard/transactions/transactions";

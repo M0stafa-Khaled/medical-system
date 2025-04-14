@@ -1,4 +1,4 @@
-import { tableSkeletonVariants } from "@/animations/dashboardAnimations";
+import { tableSkeletonVariants } from "@/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TableBody, TableCell } from "@/components/ui/table";
 import { motion } from "framer-motion";

@@ -16,10 +16,7 @@ import { Loader2, Pen } from "lucide-react";
 import cookieServices from "@/utils/cookieServices";
 import Modal from "@/components/shared/Modal";
 import { CLINIC_FORM_INPUTS } from "@/constants";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { motion } from "framer-motion";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";

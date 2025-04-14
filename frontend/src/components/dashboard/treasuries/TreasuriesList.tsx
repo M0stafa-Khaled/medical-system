@@ -6,10 +6,7 @@ import TreasuriesHeader from "./TreasuriesHeader";
 import TreasuryCard from "./TreasuryCard";
 import CardSkeleton from "@/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 import { useSearchParams } from "react-router-dom";
 

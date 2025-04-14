@@ -2,10 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
-import {
-  containerVariants,
-  itemVariants,
-} from "@/animations/dashboardAnimations";
+import { containerVariants, itemVariants } from "@/animations";
 import cookieServices from "@/utils/cookieServices";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";

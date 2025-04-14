@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import handleResErr from "@/utils/handleResponseError";
 import { useState } from "react";
@@ -28,6 +28,7 @@ import Swal from "sweetalert2";
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { mutateAsync: loginUser, isPending } = useLogin();
 
@@ -53,6 +54,11 @@ const Login = () => {
           text: message,
         });
 
+      if (data.role === "employee" || data.role === "admin")
+        navigate("/dashboard/bookings");
+
+      if (data.role === "patient") navigate("/bookings");
+
       // * Login Success
       dispatch(
         login({
@@ -65,6 +71,7 @@ const Login = () => {
         })
       );
       dispatch(setPermissions(data.permissions));
+
       return Swal.fire({
         icon: "success",
         title: "تم تسجيل الدخول بنجاح",
