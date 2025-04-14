@@ -35,7 +35,7 @@ const PatientsList = ({ patients, meta }: IProps) => {
       >
         <TableCell
           colSpan={5}
-          className="text-sm text-center text-black dark:text-white py-5 font-medium"
+          className="text-sm text-center text-black dark:text-white py-5 font-medium text-nowrap"
         >
           لا يوجد مرضى
         </TableCell>
@@ -55,7 +55,7 @@ const PatientsList = ({ patients, meta }: IProps) => {
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
             {countSerial({ meta: meta!, index })}
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-nowrap">
             {truncateText(name, 20)}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
@@ -69,7 +69,7 @@ const PatientsList = ({ patients, meta }: IProps) => {
                 نشط
               </Badge>
             ) : (
-              <Badge className="bg-red-600/30 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">
+              <Badge className="bg-red-600/30 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full text-nowrap">
                 <div className="h-1.5 w-1.5 rounded-full bg-red-500 ml-2" />
                 غير نشط
               </Badge>

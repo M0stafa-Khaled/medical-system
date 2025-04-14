@@ -52,7 +52,7 @@ const EmployeesList = ({ employees, meta }: IProps) => {
           variants={tableRowVariants}
           className="dark:border-muted !bg-white/40 dark:!bg-dark/40 hover:!bg-gray-200 dark:hover:!bg-dark transition-all duration-300"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 px-4 font-medium w-20">
             {countSerial({ meta: meta!, index })}
           </TableCell>
           <TableCell className="flex justify-center items-center text-sm text-center text-black dark:text-white py-3 font-medium">
@@ -62,7 +62,7 @@ const EmployeesList = ({ employees, meta }: IProps) => {
               className="w-12 h-12 rounded-full object-cover"
             />
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-wrap">
+          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-nowrap">
             {truncateText(name, 15)}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">

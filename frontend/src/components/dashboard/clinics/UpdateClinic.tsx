@@ -106,7 +106,7 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
         onOpenChange={handleCloseModal}
         title="تعديل عيادة"
         description={{
-          text: "يمكنك تعديل العيادة المحددة هنا",
+          text: "يمكنك تعديل العيادة المحددة من هنا",
         }}
         showFooter={false}
       >
@@ -136,7 +136,7 @@ const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
                 disabled={isPending}
                 className="py-2.5 h-auto"
               >
-                حفظ
+                تعديل
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </AlertDialogFooter>
