@@ -9,7 +9,7 @@ import useDebounce from "@/hooks/useDebounce";
 import { useGetAllPatientBookings } from "@/lib/react-query/patient/patientBookings";
 import { toast } from "react-toastify";
 import DataTablePagination from "@/components/ui/DataTablePagination";
-import BookingCardSkeleton from "@/components/ui/BookingCardSkeleton";
+import PCardSkeleton from "@/components/ui/PCardSkeleton";
 import { IPatientBookingsFilter } from "@/interfaces/patient/patientBookings";
 
 const Bookings = () => {
@@ -71,12 +71,11 @@ const Bookings = () => {
   });
 
   useEffect(() => {
-    if (bookings?.message && !bookings.status) toast.error(bookings.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [bookings?.message, bookings?.status, isError]);
+  }, [bookings?.status, isError]);
 
   const shouldShowPagination =
     bookings?.data && bookings.data.meta.last_page > 1;
@@ -102,7 +101,7 @@ const Bookings = () => {
           isLoading={isRefetching}
         />
         {isLoading ? (
-          <BookingCardSkeleton />
+          <PCardSkeleton />
         ) : (
           <PatientBookingsList bookings={bookings?.data.items || []} />
         )}

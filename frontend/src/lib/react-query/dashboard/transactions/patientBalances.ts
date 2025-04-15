@@ -1,5 +1,5 @@
 import Query_Keys from "@/enums/queryKeys";
-import { ICreatePatientPayment } from "@/interfaces/dashboard/transactions/patientBalances";
+import { ICreatePatientPayment } from "@/interfaces/patientBalances";
 import {
   createPatientPayment,
   getPatientBalances,

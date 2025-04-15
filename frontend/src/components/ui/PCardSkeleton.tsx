@@ -2,7 +2,7 @@ import { containerVariants, itemVariants } from "@/animations";
 import { motion } from "framer-motion";
 import { Skeleton } from "./skeleton";
 
-const BookingCardSkeleton = () => {
+const PCardSkeleton = () => {
   return (
     <motion.div
       variants={containerVariants}
@@ -19,4 +19,4 @@ const BookingCardSkeleton = () => {
   );
 };
 
-export default BookingCardSkeleton;
+export default PCardSkeleton;

@@ -1,7 +1,7 @@
 import { TableCell } from "@/components/ui/table";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
-import { IBalance } from "@/interfaces/dashboard/transactions/patientBalances";
+import { IBalance } from "@/interfaces/patientBalances";
 import formatDateTime from "@/utils/formatDate";
 
 interface IProps {

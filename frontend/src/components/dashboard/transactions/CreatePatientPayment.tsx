@@ -141,7 +141,7 @@ const CreatePatientPayment = () => {
                 className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1"
               >
                 <InfoField
-                  label="إجمالي المبلغ"
+                  label="المبلغ الفعلي"
                   value={patientBalances?.data.total_amount_due as number}
                 />
                 <InfoField

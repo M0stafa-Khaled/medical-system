@@ -1,5 +1,5 @@
 import { IDoctor } from "../dashboard/doctors/doctor";
-import { IBalance } from "./dashboard/transactions/patientBalances";
+import { IBalance } from "./patientBalances";
 export interface ILink {
   name: string;
   path?: string;

@@ -35,11 +35,18 @@ const ProfileMenu = () => {
           </DropdownMenuItem>
 
           {role === "patient" && (
-            <DropdownMenuItem>
-              <Link to="/bookings" className="block w-full h-full py-2">
-                الحجوزات
-              </Link>
-            </DropdownMenuItem>
+            <>
+              <DropdownMenuItem>
+                <Link to="/bookings" className="block w-full h-full py-2">
+                  الحجوزات
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link to="/balances" className="block w-full h-full py-2">
+                  مدفوعاتي
+                </Link>
+              </DropdownMenuItem>
+            </>
           )}
 
           {(role === "admin" || role === "employee") && (

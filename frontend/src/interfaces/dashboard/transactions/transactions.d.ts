@@ -4,7 +4,7 @@ import { IDoctor } from "./doctors/doctor";
 import { IEmployee } from "./employee";
 import { IPatient } from "./patient";
 import { ITreasury } from "./treasury";
-import { IBalance } from "./patientBalances";
+import { IBalance } from "../../patientBalances";
 import { IDoctorAction } from "../doctors/doctorActions";
 
 export interface ITransaction {

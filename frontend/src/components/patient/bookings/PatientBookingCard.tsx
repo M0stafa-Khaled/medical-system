@@ -32,11 +32,7 @@ interface IProps {
 
 const PatientBookingCard = ({ booking }: IProps) => {
   return (
-    <Card
-      className={
-        "transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black/60"
-      }
-    >
+    <Card className="transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black/60">
       <CardContent className="flex flex-col gap-4">
         <CardHeader className="px-0 pb-0 flex-row items-center justify-between">
           <CardTitle>
@@ -44,42 +40,42 @@ const PatientBookingCard = ({ booking }: IProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="py-0 space-y-3 px-2 sm:px-3 lg:px-4 xl:px-2">
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <Hash className="h-5 w-5" />
-            <h2 className="md:text-lg">رقم الحجز:</h2>
+            <h2>رقم الحجز:</h2>
             <p className="bg-foreground p-2 w-10 border border-primary/20 h-10 flex justify-center items-center rounded-full text-lg">
               {booking.code}
             </p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <CheckCheck className="h-5 w-5" />
-            <h2 className="md:text-lg">حالة الكشف:</h2>
+            <h2>حالة الكشف:</h2>
             <BookingStatus status={booking.status} />
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <Building2 className="h-5 w-5" />
-            <h2 className="md:text-lg">العيادة:</h2>
+            <h2>العيادة:</h2>
             <p>{booking.clinic.name}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <Clock className="h-5 w-5" />
-            <h2 className="md:text-lg">موعد الدخول:</h2>
+            <h2>موعد الدخول:</h2>
             <p dir="ltr">{booking.start_at}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <ClipboardPlus className="h-5 w-5" />
-            <h2 className="md:text-lg">الخدمة:</h2>
-            <p>{booking.action.name}</p>
+            <h2>الخدمة:</h2>
+            <p>{booking.action?.name}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <Calendar className="h-5 w-5" />
-            <h2 className="md:text-lg">اليوم:</h2>
+            <h2>اليوم:</h2>
             <p>{convertDay(booking.working_day.day, "en")}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <FaUserDoctor className="h-5 w-5" />
-            <h2 className="md:text-lg">الطبيب:</h2>
-            <p>{booking.doctor.name}</p>
+            <h2>الطبيب:</h2>
+            <p>{booking?.doctor?.name}</p>
           </div>
         </CardContent>
         <Separator className="dark:bg-gray-700" />

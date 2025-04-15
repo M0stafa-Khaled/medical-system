@@ -2,7 +2,7 @@ import DataTable from "@/components/ui/DataTable";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import PatientBalancesList from "./PatientBalancesList";
 import PatientBalancesTableHeader from "./PatientBalancesTableHeader";
-import { IBalance } from "@/interfaces/dashboard/transactions/patientBalances";
+import { IBalance } from "@/interfaces/patientBalances";
 
 interface IProps {
   patientBalances: IBalance[];

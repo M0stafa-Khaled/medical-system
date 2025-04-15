@@ -2,7 +2,7 @@ import axiosInstanceAPI from "@/config/axios.config";
 import {
   ICreatePatientPayment,
   IPatientBalancesRes,
-} from "@/interfaces/dashboard/transactions/patientBalances";
+} from "@/interfaces/patientBalances";
 
 export const getPatientBalances = async ({
   token,

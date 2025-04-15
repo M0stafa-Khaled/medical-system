@@ -15,7 +15,7 @@ const NAV_LINKS = [
     path: "/bookings",
   },
   {
-    name: "المدفوعات السابقة",
+    name: "مدفوعاتي",
     path: "/balances",
   },
 ];

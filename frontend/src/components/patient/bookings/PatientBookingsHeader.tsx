@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import Query_Keys from "@/enums/queryKeys";
 import { format } from "date-fns";
 import { Eraser } from "lucide-react";
-import { FiPlus } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import PatientBookingsFilters from "./PatientBookingsFilters";
 import { ar } from "date-fns/locale";
 import { IPatientBookingsFilter } from "@/interfaces/patient/patientBookings";

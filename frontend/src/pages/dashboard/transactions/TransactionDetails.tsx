@@ -128,7 +128,7 @@ const TransactionDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  label="إجمالي المبلغ"
+                  label="المبلغ الفعلي"
                   value={balance?.total_amount_due as string}
                   icon={<PiggyBank className="h-5 w-5 text-red-500" />}
                 />

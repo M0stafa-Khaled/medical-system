@@ -45,7 +45,7 @@ const PatientBalances = ({ patientId }: IProps) => {
       <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
         <CardHeader className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
           <div className="flex items-center gap-2 font-semibold text-lg">
-            <h4 className="text-dark dark:text-white">الإجمالي:</h4>
+            <h4 className="text-dark dark:text-white">المبلغ الفعلي:</h4>
             <p>{total_amount_due}</p>
           </div>
           <div className="flex items-center gap-2 font-semibold text-lg">
