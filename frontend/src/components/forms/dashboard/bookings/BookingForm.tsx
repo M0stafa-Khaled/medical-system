@@ -26,12 +26,16 @@ import SubmitButton from "@/components/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import handleResErr from "@/utils/handleResponseError";
+import { AxiosError } from "axios";
 
 interface IProps {
   booking?: IBooking;
   action: "create" | "update";
   bookingSchema: ZodSchema;
 }
+
+type AxiosResErr = AxiosError<{ message: string }>;
+
 const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
@@ -51,24 +55,40 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   );
 
   // Get data from api
-  const { data: clinics } = useGetAllClinics({
+  const {
+    data: clinics,
+    failureReason: failureReasonClinic,
+    isError: isErrorClinics,
+  } = useGetAllClinics({
     token,
     filter: {
       status: "1",
     },
   });
 
-  const { data: doctors } = useGetAllDoctorsClinics({
+  const {
+    data: doctors,
+    failureReason: failureReasonDoctors,
+    isError: isErrorDoctors,
+  } = useGetAllDoctorsClinics({
     token,
     clinic_id: clinicId!,
   });
 
-  const { data: workingDays } = useGetAllWorkingDays({
+  const {
+    data: workingDays,
+    failureReason: failureReasonWorkingDay,
+    isError: isErrorWorkingDays,
+  } = useGetAllWorkingDays({
     doctorId: doctorId!,
     token,
   });
 
-  const { data: doctorActions } = useGetDoctorActions({
+  const {
+    data: doctorActions,
+    failureReason: failureReasonDoctorActions,
+    isError: isErrorActions,
+  } = useGetDoctorActions({
     doctorId: doctorId!,
     token,
   });
@@ -81,21 +101,37 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     booking_date: bookingDate,
   });
 
+  const clinicsFailure = failureReasonClinic as AxiosResErr;
+  const doctorsFailure = failureReasonDoctors as AxiosResErr;
+  const doctorActionsFailure = failureReasonDoctorActions as AxiosResErr;
+  const workingDaysFailure = failureReasonWorkingDay as AxiosResErr;
+
   // If req to get date return with Messages
   useEffect(() => {
-    if (clinics?.message) toast(clinics.message);
-    if (doctors?.message) toast(doctors.message);
-    if (doctorActions?.message) toast(doctorActions.message);
-    if (workingDays?.message) toast(workingDays.message);
-    if (availableTimes?.message) toast(availableTimes.message);
+    if (!clinics?.status && isErrorClinics)
+      toast.error(`العيادات | ${clinicsFailure?.response?.data.message}`);
+    if (!doctors?.status && isErrorDoctors)
+      toast.error(`الأطباء | ${doctorsFailure?.response?.data.message}`);
+    if (!workingDays?.status && isErrorWorkingDays)
+      toast.error(` ايام العمل| ${workingDaysFailure?.response?.data.message}`);
+    if (!doctorActions?.status && isErrorActions)
+      toast.error(
+        `الإجراءات | ${doctorActionsFailure?.response?.data.message}`
+      );
   }, [
-    availableTimes?.message,
-    doctorActions?.message,
-    doctors?.message,
-    workingDays?.message,
-    clinics?.message,
+    clinics,
+    doctors,
+    workingDays,
+    doctorActions,
+    clinicsFailure,
+    doctorsFailure,
+    doctorActionsFailure,
+    workingDaysFailure,
+    isErrorClinics,
+    isErrorDoctors,
+    isErrorWorkingDays,
+    isErrorActions,
   ]);
-
   // Create options from data to add it in select with label and value
   const doctorActionsOptions = doctorActions?.data?.map((action) => ({
     value: action.id.toString(),
@@ -119,7 +155,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     value: day.id.toString(),
   }));
 
-  const allowedDay = workingDays?.data.filter(
+  const allowedDay = workingDays?.data.find(
     (day) => day.id.toString() === workingDayId
   );
 
@@ -266,30 +302,18 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
 
   const handleResetFrom = () => {
     form.reset({
-      clinic_id: {
-        label: "",
-        value: "",
-      },
-      doctor_id: {
-        label: "",
-        value: "",
-      },
-      patient_id: {
-        label: "",
-        value: "",
-      },
-      doctor_action_id: { label: "", value: "" },
-      working_day_id: { label: "", value: "" },
+      clinic_id: "",
+      doctor_id: "",
+      patient_id: "",
+      doctor_action_id: "",
+      working_day_id: "",
       start_at: "",
       date: "",
-      status: {
-        label: "",
-        value: "",
-      },
+      status: "",
     });
     setClinicId("");
-    form.setValue("doctor_id", { label: "", value: "" });
-    form.setValue("working_day_id", { label: "", value: "" });
+    form.setValue("doctor_id", "");
+    form.setValue("working_day_id", "");
     form.setValue("start_at", "");
     setWorkingDayId("");
     setBookingDate("");
@@ -324,7 +348,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
                     status: BOOKING_STATUS_OPTIONS,
                   }}
                   availableTimes={availableTimes?.data || []}
-                  allowedDay={allowedDay ? allowedDay[0]?.day : ""}
+                  allowedDay={allowedDay ? allowedDay.day : ""}
                 />
               </motion.div>
             );

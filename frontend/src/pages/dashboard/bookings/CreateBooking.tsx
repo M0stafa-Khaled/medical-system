@@ -1,6 +1,6 @@
 import BookingForm from "@/components/forms/dashboard/bookings/BookingForm";
 import { Card, CardContent } from "@/components/ui/card";
-import { createBookingSchema } from "@/validations/bookingSchema";
+import { createBookingSchema } from "@/validations/dashboard/bookingSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 

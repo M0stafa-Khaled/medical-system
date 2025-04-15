@@ -43,7 +43,7 @@ const NavList = ({ links, sidebar }: IProps) => {
             {hasChildren ? (
               <motion.div
                 variants={navItemsVariants}
-                className={`select-none w-full px-2 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg ${
+                className={`select-none w-full px-2 cursor-pointer py-2.5 text-[15px] text-black dark:text-white transition-all duration-300 rounded-lg ${
                   sidebar ? "border border-muted" : ""
                 } flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
                 onClick={(e) => {
@@ -72,17 +72,16 @@ const NavList = ({ links, sidebar }: IProps) => {
                   to={link.path || "#"}
                   className={`w-full ${
                     isChildLink ? "mt-2" : ""
-                  } py-2.5 px-2 pl-4 text-black dark:text-white transition-all duration-300 rounded-lg ${
+                  } py-2.5 px-4 text-black dark:text-white transition-all duration-300 rounded-lg ${
                     sidebar ? "border border-muted" : ""
-                  } flex items-center justify-between gap-2 ${
+                  } flex items-center justify-between gap-2 text-[15px] ${
                     activeLink
-                      ? "bg-dark/20 dark:bg-dark"
-                      : "hover:bg-dark/10 dark:hover:bg-dark/50"
+                      ? "bg-background dark:bg-dark"
+                      : "hover:bg-background dark:hover:bg-dark/50"
                   }`}
                 >
                   <span className="flex-grow flex items-center gap-2">
                     {link.icon}
-
                     {link.name}
                   </span>
                 </NavLink>

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { LOGIN_FORM_INPUTS } from "@/constants";
 import { useLogin } from "@/lib/react-query/auth/auth";
-import { loginSchema } from "@/validations/authSchema";
+import { loginSchema } from "@/validations/auth/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
@@ -70,7 +70,8 @@ const Login = () => {
           },
         })
       );
-      dispatch(setPermissions(data.permissions));
+      if (data.role === "admin" || data.role === "employee")
+        dispatch(setPermissions(data.permissions));
 
       return Swal.fire({
         icon: "success",

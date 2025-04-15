@@ -14,7 +14,7 @@ export const useGetPatientBalances = ({
   patientId: string;
 }) =>
   useQuery({
-    queryKey: [Query_Keys.GET_ALL_PATIENT_BALANCES],
+    queryKey: [Query_Keys.GET_ALL_TRANSACTION_PATIENT_BALANCES],
     queryFn: () => getPatientBalances({ token, patientId }),
     enabled: !!patientId,
   });
@@ -26,7 +26,7 @@ export const useCreatePatientPayment = () => {
       createPatientPayment({ token, patientId, transaction }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ALL_PATIENT_BALANCES],
+        queryKey: [Query_Keys.GET_ALL_TRANSACTION_PATIENT_BALANCES],
       });
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_LAST_VISITS],

@@ -1,8 +1,9 @@
-import { RootLayout } from "@/layout";
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { PERMISSIONS } from "@/enums/permissions";
 import { lazy, Suspense } from "react";
 import LoadingSpinnerPage from "@/components/LoadingSpinnerPage";
+
+const RootLayout = lazy(() => import("@/layout/RootLayout"));
 const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 const DashboardLayout = lazy(() => import("@/layout/DashboardLayout"));
 

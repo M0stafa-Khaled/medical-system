@@ -56,7 +56,9 @@ const RootLayout = () => {
       }
 
       // Set Permissions in state
-      if (auth && permissions) dispatch(setPermissions(permissions));
+      const role = cookieServices.getUser()?.role;
+      if (auth && permissions && (role === "admin" || role === "employee"))
+        dispatch(setPermissions(permissions));
     })();
   }, [checkAuthUser, token, navigate, dispatch, location]);
 

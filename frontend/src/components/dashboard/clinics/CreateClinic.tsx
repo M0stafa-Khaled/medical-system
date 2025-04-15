@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
-import clinicSchema from "@/validations/clinicSchema";
+import clinicSchema from "@/validations/dashboard/clinicSchema";
 import { useCreateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";

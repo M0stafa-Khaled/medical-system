@@ -38,7 +38,7 @@ const DeletePatient = ({ name, id }: IProps) => {
 
   return (
     <>
-      <TooltipButton title="حذق">
+      <TooltipButton title="حذف">
         <Button
           size={"sm"}
           onClick={() => setIsOpen(true)}

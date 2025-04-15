@@ -2,7 +2,7 @@ import PatientForm from "@/components/forms/dashboard/patients/PatientForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
 import cookieServices from "@/utils/cookieServices";
-import { updatePatientSchema } from "@/validations/patientSchema";
+import { updatePatientSchema } from "@/validations/dashboard/patientSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";

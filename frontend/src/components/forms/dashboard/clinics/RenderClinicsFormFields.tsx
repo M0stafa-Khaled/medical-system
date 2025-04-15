@@ -5,7 +5,7 @@ import SwitchFormItem from "../../formItems/SwitchFormItem";
 import InputFormItem from "../../formItems/InputFormItem";
 
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import clinicSchema from "@/validations/clinicSchema";
+import clinicSchema from "@/validations/dashboard/clinicSchema";
 
 interface IProps {
   input: IFormInput;

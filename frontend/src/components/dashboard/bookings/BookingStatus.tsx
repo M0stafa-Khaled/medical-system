@@ -44,8 +44,8 @@ const BookingStatus = ({ status }: IProps) => {
         );
       case "no-show":
         return (
-          <Badge className="bg-primary/30 dark:bg-primary/20 hover:bg-primary/30 dark:hover:bg-primary/20 text-primary dark:text-gray-300 shadow-none rounded-full">
-            <div className="h-1.5 w-1.5 rounded-full bg-primary dark:bg-gray-300 ml-2" />
+          <Badge className="bg-primary/30 dark:bg-primary/20 hover:bg-primary/30 dark:hover:bg-primary/20 text-primary dark:text-white shadow-none rounded-full">
+            <div className="h-1.5 w-1.5 rounded-full bg-primary dark:bg-white ml-2" />
             لم يحضر
           </Badge>
         );

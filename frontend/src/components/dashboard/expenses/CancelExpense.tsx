@@ -18,7 +18,7 @@ import { useCancelExpense } from "@/lib/react-query/dashboard/expenses/expenses"
 import { MdDoNotDisturbAlt } from "react-icons/md";
 import TooltipButton from "@/components/ui/TooltipButton";
 import handleResErr from "@/utils/handleResponseError";
-import { cancelExpenseSchema } from "@/validations/expenseSchema";
+import { cancelExpenseSchema } from "@/validations/dashboard/expenseSchema";
 import RenderExpensesFormFields from "@/components/forms/dashboard/expenses/RenderExpensesFormFields";
 
 const CancelExpense = ({ id }: { id: number }) => {

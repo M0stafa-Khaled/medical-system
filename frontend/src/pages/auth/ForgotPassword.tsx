@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { motion } from "framer-motion";
-import { forgotPasswordSchema } from "@/validations/authSchema";
+import { forgotPasswordSchema } from "@/validations/auth/authSchema";
 import { useForgotPassword } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import Swal from "sweetalert2";

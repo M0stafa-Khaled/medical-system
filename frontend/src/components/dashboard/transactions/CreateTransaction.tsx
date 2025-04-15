@@ -15,7 +15,7 @@ import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { PAYMENT_METHODS, TRANSACTION_FORM_INPUTS } from "@/constants";
-import { createTransactionSchema } from "@/validations/transactionSchema";
+import { createTransactionSchema } from "@/validations/dashboard/transactionSchema";
 import { useCreateTransaction } from "@/lib/react-query/dashboard/transactions/transactions";
 import RenderTransactionFormFields from "@/components/forms/dashboard/transactions/RenderTransactionFormFields";
 import { TPaymentMethod } from "@/types";

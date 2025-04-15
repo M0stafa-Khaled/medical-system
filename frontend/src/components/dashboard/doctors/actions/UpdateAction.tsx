@@ -13,7 +13,7 @@ import { Loader2, Pen } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { DOCTOR_ACTION_INPUTS } from "@/constants";
-import doctorActionSchema from "@/validations/doctorActionSchema";
+import doctorActionSchema from "@/validations/dashboard/doctorActionSchema";
 import { useUpdateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import { IDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";

@@ -15,7 +15,7 @@ import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
-import { createTreasurySchema } from "@/validations/treasurySchema";
+import { createTreasurySchema } from "@/validations/dashboard/treasurySchema";
 import { useCreateTreasury } from "@/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
 import handleResErr from "@/utils/handleResponseError";

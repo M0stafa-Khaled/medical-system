@@ -14,7 +14,7 @@ import Modal from "@/components/shared/Modal";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
-import { transferTreasurySchema } from "@/validations/treasurySchema";
+import { transferTreasurySchema } from "@/validations/dashboard/treasurySchema";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { TRANSFER_TREASURIES_FORM_INPUTS } from "@/constants";
 import {

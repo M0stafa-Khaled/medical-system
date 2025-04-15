@@ -17,7 +17,7 @@ import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import handleResErr from "@/utils/handleResponseError";
 import { useCreateDosage } from "@/lib/react-query/dashboard/dosages";
-import dosageSchema from "@/validations/dosageSchema";
+import dosageSchema from "@/validations/dashboard/dosageSchema";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
 const CreateDosage = () => {

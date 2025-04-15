@@ -26,7 +26,7 @@ const BookingsHeader = ({ filters, setFilters, isLoading }: IProps) => {
       created_at: null,
       booking_date: null,
       status: "",
-      clinic_name: "",
+      clinic: "",
     });
   };
 

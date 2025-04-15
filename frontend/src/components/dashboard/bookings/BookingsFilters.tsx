@@ -48,13 +48,13 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
       />
       {/* Clinic */}
       <Select
-        value={filters.clinic_name}
-        onValueChange={(value) => handleFilterChange("clinic_name", value)}
+        value={filters.clinic}
+        onValueChange={(value) => handleFilterChange("clinic", value)}
         dir="rtl"
       >
         <SelectTrigger
           className={`border-black/20 dark:border-white/40 !h-12  ${
-            filters.clinic_name
+            filters.clinic
               ? "text-black dark:text-white"
               : "text-muted-foreground"
           }`}

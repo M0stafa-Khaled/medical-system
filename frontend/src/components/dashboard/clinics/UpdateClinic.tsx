@@ -9,7 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import clinicSchema from "@/validations/clinicSchema";
+import clinicSchema from "@/validations/dashboard/clinicSchema";
 import { useUpdateClinic } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
 import { Loader2, Pen } from "lucide-react";

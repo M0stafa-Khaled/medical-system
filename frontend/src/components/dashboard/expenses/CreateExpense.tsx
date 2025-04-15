@@ -16,7 +16,7 @@ import cookieServices from "@/utils/cookieServices";
 import { EXPENSE_FORM_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
-import { createExpenseSchema } from "@/validations/expenseSchema";
+import { createExpenseSchema } from "@/validations/dashboard/expenseSchema";
 import { useCreateExpense } from "@/lib/react-query/dashboard/expenses/expenses";
 import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import handleResErr from "@/utils/handleResponseError";

@@ -1,6 +1,6 @@
 import PatientForm from "@/components/forms/dashboard/patients/PatientForm";
 import { Card, CardContent } from "@/components/ui/card";
-import { createPatientSchema } from "@/validations/patientSchema";
+import { createPatientSchema } from "@/validations/dashboard/patientSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 

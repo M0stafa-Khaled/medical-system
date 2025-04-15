@@ -93,8 +93,8 @@ const BookingDetails = () => {
               variants={itemVariants}
               className="flex flex-col items-start sm:items-center sm:flex-row gap-4"
             >
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-6 w-6 text-primary" />
+              <CardTitle className="flex items-center gap-2 text-dark dark:text-white">
+                <Calendar className="h-6 w-6 " />
                 <span>تفاصيل الحجز:</span>
               </CardTitle>
               <div className="flex gap-2">

@@ -8,7 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import dosageSchema from "@/validations/dosageSchema";
+import dosageSchema from "@/validations/dashboard/dosageSchema";
 import { toast } from "react-toastify";
 import { Loader2, Pen } from "lucide-react";
 import cookieServices from "@/utils/cookieServices";

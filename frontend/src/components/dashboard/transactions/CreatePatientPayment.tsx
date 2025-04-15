@@ -21,7 +21,7 @@ import {
   useCreatePatientPayment,
   useGetPatientBalances,
 } from "@/lib/react-query/dashboard/transactions/patientBalances";
-import { createPatientPaymentSchema } from "@/validations/transactionSchema";
+import { createPatientPaymentSchema } from "@/validations/dashboard/transactionSchema";
 import InfoField from "../InfoField";
 
 const CreatePatientPayment = () => {

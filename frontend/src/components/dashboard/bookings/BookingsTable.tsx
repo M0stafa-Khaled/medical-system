@@ -26,7 +26,7 @@ const BookingsTable = () => {
       created_at: searchParams.get("created_at") || "",
       booking_date: searchParams.get("booking_date") || "",
       status: searchParams.get("status") || "",
-      clinic_name: searchParams.get("clinic_name") || "",
+      clinic: searchParams.get("clinic") || "",
     }),
     [searchParams]
   );
@@ -68,9 +68,9 @@ const BookingsTable = () => {
       ...(filters.status !== "all" &&
         filters.status !== "" && { status: filters.status }),
 
-      ...(filters.clinic_name !== "all" &&
-        filters.clinic_name !== "" && {
-          clinic_name: filters.clinic_name,
+      ...(filters.clinic !== "all" &&
+        filters.clinic !== "" && {
+          clinic_name: filters.clinic,
         }),
     },
   });

@@ -15,6 +15,7 @@ import {
 import { CalendarIcon } from "lucide-react";
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -33,6 +34,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
   const maxDate = new Date();
   maxDate.setDate(today.getDate() + 30);
 
+  console.log(allowedDay);
   return (
     <FormField
       control={form.control}
@@ -40,11 +42,9 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
       render={({ field }) => (
         <FormItem>
           <FormLabel htmlFor={input.name} className="text-nowrap">
-            {input.label}{" "}
-            <span className="text-xs text-muted-foreground text-wrap">
-              (لا يمكن ان يتجاوز موعد الحجز شهر من الان)
-            </span>
+            {input.label}
           </FormLabel>
+
           <FormControl>
             <Popover>
               <PopoverTrigger asChild>
@@ -80,39 +80,50 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                       : "";
                     field.onChange(formattedDated);
                   }}
-                  disabled={(date) => {
-                    date.setHours(0, 0, 0, 0); // ضبط الساعة للصفر لضمان مقارنة صحيحة
+                  disabled={
+                    allowedDay && allowedDay !== ""
+                      ? (date) => {
+                          date.setHours(0, 0, 0, 0);
 
-                    const dayName = date
-                      .toLocaleDateString("en-US", { weekday: "long" })
-                      .toLowerCase();
-                    const isNotAllowedDay = dayName !== allowedDay;
-                    const todayDate = new Date();
-                    todayDate.setHours(0, 0, 0, 0);
-                    const firstAvailableDay = new Date(todayDate);
-                    if (dayName !== allowedDay) {
-                      while (
-                        firstAvailableDay
-                          .toLocaleDateString("en-US", { weekday: "long" })
-                          .toLowerCase() !== allowedDay
-                      ) {
-                        firstAvailableDay.setDate(
-                          firstAvailableDay.getDate() + 1
-                        );
-                      }
-                    }
+                          const dayName = date
+                            .toLocaleDateString("en-US", { weekday: "long" })
+                            .toLowerCase();
+                          const isNotAllowedDay = dayName !== allowedDay;
+                          const todayDate = new Date();
+                          todayDate.setHours(0, 0, 0, 0);
+                          const firstAvailableDay = new Date(todayDate);
+                          if (dayName !== allowedDay) {
+                            while (
+                              firstAvailableDay
+                                .toLocaleDateString("en-US", {
+                                  weekday: "long",
+                                })
+                                .toLowerCase() !== allowedDay
+                            ) {
+                              firstAvailableDay.setDate(
+                                firstAvailableDay.getDate() + 1
+                              );
+                            }
+                          }
 
-                    const isBeforeToday = date < todayDate;
-                    const isAfterMaxDate = date > maxDate;
+                          const isBeforeToday = date < todayDate;
+                          const isAfterMaxDate = date > maxDate;
 
-                    return isNotAllowedDay || isBeforeToday || isAfterMaxDate;
-                  }}
+                          return (
+                            isNotAllowedDay || isBeforeToday || isAfterMaxDate
+                          );
+                        }
+                      : false
+                  }
                   defaultMonth={today}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
           </FormControl>
+          <FormDescription>
+            (لا يمكن ان يتجاوز موعد الحجز شهر من الان)
+          </FormDescription>
           <FormMessage />
         </FormItem>
       )}

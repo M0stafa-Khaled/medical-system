@@ -17,7 +17,7 @@ import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import { useCreateExpenseCategory } from "@/lib/react-query/dashboard/expenses/expensesCategories";
 import handleResErr from "@/utils/handleResponseError";
-import { expenseCategorySchema } from "@/validations/expenseSchema";
+import { expenseCategorySchema } from "@/validations/dashboard/expenseSchema";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
 const CreateExpenseCategory = () => {

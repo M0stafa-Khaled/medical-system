@@ -33,13 +33,15 @@ interface IProps {
 }
 
 const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
+  const token = cookieServices.getToken()!;
+  const currentEmployeeId = cookieServices.getUser()?.id;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { mutateAsync: checkAuthUser } = useCheckAuth();
   const [showPermissions, setShowPermissions] = useState(
     employee?.user?.role === "employee" || !employee
   );
-  const token = cookieServices.getToken()!;
 
   const { data: permissions } = useGetAllPermissions(token!);
   const { mutateAsync: createEmployee, isPending: isLoadingCreate } =
@@ -163,7 +165,8 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
           token,
         });
         if (!status) return toast.error(message);
-        checkAuth();
+
+        if (employee?.id === currentEmployeeId) checkAuth();
         toast.success("تم تحديث بيانات الموظف بنجاح");
       }
 

@@ -4,7 +4,7 @@ import { Form } from "@/components/ui/form";
 import { REGISTER_FORM_INPUTS } from "@/constants";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import { useRegister } from "@/lib/react-query/auth/auth";
-import { registerSchema } from "@/validations/authSchema";
+import { registerSchema } from "@/validations/auth/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";

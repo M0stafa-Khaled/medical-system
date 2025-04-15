@@ -38,7 +38,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
       variants={sidebarVariants}
       className={`container ${
         dashboard && "lg:hidden"
-      } pt-1 fixed w-full inset-x-0 top-0  z-50`}
+      } pt-1 fixed w-full inset-x-0 top-1  z-50`}
     >
       <div className="xl:container">
         <motion.nav

@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { motion } from "framer-motion";
-import { resetPasswordSchema } from "@/validations/authSchema";
+import { resetPasswordSchema } from "@/validations/auth/authSchema";
 import { useResetPassword } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { RESET_PASSWORD_FORM_INPUTS } from "@/constants";

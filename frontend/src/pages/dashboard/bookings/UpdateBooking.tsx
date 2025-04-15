@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import DataLoader from "@/components/ui/DataLoader";
 import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";
 import BookingForm from "@/components/forms/dashboard/bookings/BookingForm";
-import { updateBookingSchema } from "@/validations/bookingSchema";
+import { updateBookingSchema } from "@/validations/dashboard/bookingSchema";
 
 const UpdateBooking = () => {
   const navigate = useNavigate();

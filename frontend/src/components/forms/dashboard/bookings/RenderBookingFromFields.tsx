@@ -5,8 +5,8 @@ import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import SelectFormItem from "../../formItems/SelectFormItem";
 import InputFormItem from "../../formItems/InputFormItem";
 import PatientSelectItem from "../../formItems/PatientSelectItem";
-import BookingDateItem from "./BookingDateItem";
-import BookingAvailableTimeSelectItem from "./BookingAvailableTimeSelectItem";
+import BookingDateItem from "../../formItems/BookingDateItem";
+import BookingAvailableTimeSelectItem from "../../formItems/BookingAvailableTimeSelectItem";
 
 interface IOption {
   value: string;

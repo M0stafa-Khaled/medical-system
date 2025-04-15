@@ -45,7 +45,7 @@ const Modal = ({
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent
-        className="border-muted !z-[1000] rounded-lg max-w-lg"
+        className="border-muted !z-[1000] rounded-lg max-w-xl"
         {...rest}
       >
         <AlertDialogHeader>
