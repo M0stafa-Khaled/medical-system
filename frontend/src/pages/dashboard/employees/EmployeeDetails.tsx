@@ -57,13 +57,7 @@ const EmployeeDetails = () => {
       navigate("/dashboard/employees");
       return;
     }
-
-    if (employee?.message) {
-      toast.error(employee.message);
-      navigate("/dashboard/employees");
-      return;
-    }
-  }, [employee?.message, isError, navigate]);
+  }, [isError, navigate]);
 
   if (isLoading) return <DataLoader />;
 

@@ -57,13 +57,7 @@ const PatientDetails = () => {
       navigate("/dashboard/employees");
       return;
     }
-
-    if (patient?.message) {
-      toast.error(patient.message);
-      navigate("/dashboard/employees");
-      return;
-    }
-  }, [patient?.message, isError, navigate]);
+  }, [isError, navigate]);
 
   if (isLoading) return <DataLoader />;
 

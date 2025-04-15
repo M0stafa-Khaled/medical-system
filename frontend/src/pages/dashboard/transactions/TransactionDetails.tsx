@@ -32,7 +32,9 @@ import { PERMISSIONS } from "@/enums/permissions";
 const TransactionDetails = () => {
   const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
   const navigate = useNavigate();
+
   const { transactionId } = useParams();
+
   const token = cookieServices.getToken()!;
   const {
     data: transaction,
@@ -44,20 +46,12 @@ const TransactionDetails = () => {
   });
 
   useEffect(() => {
-    if (isNaN(Number(transactionId))) return navigate(-1);
-
     if (isError) {
       toast.error("فشل في تحميل بيانات التحصيل");
       navigate(-1);
       return;
     }
-
-    if (transaction?.message) {
-      toast.error(transaction.message);
-      navigate("/dashboard/transactions");
-      return;
-    }
-  }, [transaction?.message, isError, navigate, transactionId]);
+  }, [isError, navigate]);
 
   if (isLoading) return <DataLoader />;
 

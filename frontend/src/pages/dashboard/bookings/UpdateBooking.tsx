@@ -30,12 +30,7 @@ const UpdateBooking = () => {
       navigate("/dashboard/bookings");
       return;
     }
-    if (booking?.message) {
-      toast.error(booking.message);
-      navigate("/dashboard/bookings");
-      return;
-    }
-  }, [isError, navigate, bookingId, booking?.message]);
+  }, [isError, navigate, bookingId]);
 
   if (isLoading) return <DataLoader />;
 

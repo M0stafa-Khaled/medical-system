@@ -61,12 +61,7 @@ const DoctorDetails = () => {
       navigate("/dashboard/doctors");
       return;
     }
-    if (doctor?.message) {
-      toast.error(doctor.message);
-      navigate("/dashboard/doctors");
-      return;
-    }
-  }, [isError, navigate, doctor?.message]);
+  }, [isError, navigate]);
 
   if (isLoading) return <DataLoader />;
 

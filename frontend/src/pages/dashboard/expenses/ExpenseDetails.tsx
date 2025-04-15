@@ -43,13 +43,7 @@ const ExpenseDetails = () => {
       navigate(-1);
       return;
     }
-
-    if (expense?.message) {
-      toast.error(expense.message);
-      navigate("/dashboard/expenses");
-      return;
-    }
-  }, [expense?.message, isError, navigate, expenseId]);
+  }, [isError, navigate, expenseId]);
 
   if (isLoading) return <DataLoader />;
 
