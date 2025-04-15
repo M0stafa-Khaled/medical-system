@@ -28,6 +28,7 @@ import DeleteBooking from "@/components/dashboard/bookings/DeleteBooking";
 import UpdateBookingStatus from "@/components/dashboard/bookings/UpdateBookingStatus";
 import { IBooking } from "@/interfaces/dashboard/bookings";
 import { Button } from "@/components/ui/button";
+import { AxiosResErr } from "@/types";
 
 const BookingDetails = () => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
@@ -41,23 +42,23 @@ const BookingDetails = () => {
     data: booking,
     isLoading,
     isError,
+    failureReason,
   } = useGetBookingById({
     id: bookingId!,
     token,
   });
 
+  const bookingFailure = failureReason as AxiosResErr;
+
   useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات الحجز");
-      navigate("/dashboard/bookings");
+    if (isError || bookingFailure?.response?.data.message) {
+      toast.error(
+        bookingFailure.response?.data.message || "فشل في تحميل بيانات الحجز"
+      );
+      navigate(-1);
       return;
     }
-    if (booking?.message) {
-      toast.error(booking.message);
-      navigate("/dashboard/bookings");
-      return;
-    }
-  }, [isError, navigate, booking?.message]);
+  }, [isError, navigate, bookingFailure]);
 
   if (isLoading) return <DataLoader />;
 

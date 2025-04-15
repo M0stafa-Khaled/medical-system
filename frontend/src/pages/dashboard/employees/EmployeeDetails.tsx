@@ -34,6 +34,7 @@ import DataLoader from "@/components/ui/DataLoader";
 import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet-async";
 import TooltipButton from "@/components/ui/TooltipButton";
+import { AxiosResErr } from "@/types";
 
 const EmployeeDetails = () => {
   const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
@@ -46,18 +47,23 @@ const EmployeeDetails = () => {
     data: employee,
     isLoading,
     isError,
+    failureReason,
   } = useGetEmployeeById({
     id: employeeId!,
     token,
   });
 
+  const employeeFailure = failureReason as AxiosResErr;
+
   useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات الموظف");
-      navigate("/dashboard/employees");
+    if (isError || employeeFailure?.response?.data.message) {
+      toast.error(
+        employeeFailure.response?.data.message || "فشل في تحميل بيانات الموظف"
+      );
+      navigate(-1);
       return;
     }
-  }, [isError, navigate]);
+  }, [isError, navigate, employeeFailure]);
 
   if (isLoading) return <DataLoader />;
 

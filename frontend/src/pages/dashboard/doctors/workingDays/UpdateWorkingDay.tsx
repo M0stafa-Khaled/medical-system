@@ -2,18 +2,40 @@ import WorkingDayForm from "@/components/forms/dashboard/doctors/WorkingDayForm"
 import { Card, CardContent } from "@/components/ui/card";
 import DataLoader from "@/components/ui/DataLoader";
 import { useGetWorkingDayById } from "@/lib/react-query/dashboard/doctors/workingDays";
+import { AxiosResErr } from "@/types";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdateWorkingDay = () => {
+  const navigate = useNavigate();
   const { workingDayId } = useParams();
   const token = cookieServices.getToken()!;
-  const { data: day, isLoading } = useGetWorkingDayById({
+  const {
+    data: day,
+    isLoading,
+    isError,
+    failureReason,
+  } = useGetWorkingDayById({
     token,
     id: workingDayId!,
   });
+
+  const workingDayFailure = failureReason as AxiosResErr;
+
+  useEffect(() => {
+    if (isError || workingDayFailure?.response?.data.message) {
+      toast.error(
+        workingDayFailure.response?.data.message ||
+          "فشل في تحميل بيانات يوم العمل"
+      );
+      navigate(-1);
+      return;
+    }
+  }, [isError, navigate, workingDayFailure]);
 
   if (isLoading) return <DataLoader />;
   return (

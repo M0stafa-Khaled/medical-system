@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import DataLoader from "@/components/ui/DataLoader";
+import { AxiosResErr } from "@/types";
 
 const UpdateEmployee = () => {
   const navigate = useNavigate();
@@ -19,24 +20,23 @@ const UpdateEmployee = () => {
     data: employee,
     isLoading,
     isError,
+    failureReason,
   } = useGetEmployeeById({
     id: employeeId as string,
     token,
   });
 
-  useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات الموظف");
-      navigate("/dashboard/employees");
-      return;
-    }
+  const employeeFailure = failureReason as AxiosResErr;
 
-    if (!employee?.status && employee?.message) {
-      toast.error(employee.message);
-      navigate("/dashboard/employees");
+  useEffect(() => {
+    if (isError || employeeFailure?.response?.data.message) {
+      toast.error(
+        employeeFailure.response?.data.message || "فشل في تحميل بيانات الموظف"
+      );
+      navigate(-1);
       return;
     }
-  }, [isError, navigate, employeeId, employee]);
+  }, [isError, navigate, employeeFailure]);
 
   if (isLoading) return <DataLoader />;
 

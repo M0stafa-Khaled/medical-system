@@ -26,15 +26,13 @@ import SubmitButton from "@/components/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import handleResErr from "@/utils/handleResponseError";
-import { AxiosError } from "axios";
+import { AxiosResErr } from "@/types";
 
 interface IProps {
   booking?: IBooking;
   action: "create" | "update";
   bookingSchema: ZodSchema;
 }
-
-type AxiosResErr = AxiosError<{ message: string }>;
 
 const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   const navigate = useNavigate();

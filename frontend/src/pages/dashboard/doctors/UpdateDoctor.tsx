@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import DataLoader from "@/components/ui/DataLoader";
+import { AxiosResErr } from "@/types";
 const UpdateDoctor = () => {
   const navigate = useNavigate();
   const token = cookieServices.getToken();
@@ -18,23 +19,23 @@ const UpdateDoctor = () => {
     data: doctor,
     isLoading,
     isError,
+    failureReason,
   } = useGetDoctorById({
     id: doctorId!,
     token: token!,
   });
 
+  const doctorFailure = failureReason as AxiosResErr;
+
   useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات الطبيب");
-      navigate("/dashboard/doctors");
+    if (isError || doctorFailure?.response?.data.message) {
+      toast.error(
+        doctorFailure.response?.data.message || "فشل في تحميل بيانات الطبيب"
+      );
+      navigate(-1);
       return;
     }
-    if (!doctor?.status && doctor?.message) {
-      toast.error(doctor.message);
-      navigate("/dashboard/doctors");
-      return;
-    }
-  }, [isError, navigate, doctorId, doctor]);
+  }, [isError, navigate, doctorFailure]);
 
   if (isLoading) return <DataLoader />;
 

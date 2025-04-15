@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import DataLoader from "@/components/ui/DataLoader";
+import { AxiosResErr } from "@/types";
 
 const UpdatePatient = () => {
   const navigate = useNavigate();
@@ -19,24 +20,23 @@ const UpdatePatient = () => {
     data: patient,
     isLoading,
     isError,
+    failureReason,
   } = useGetPatientById({
     id: patientId as string,
     token: token as string,
   });
 
-  useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات المريض");
-      navigate("/dashboard/patients");
-      return;
-    }
+  const patientFailure = failureReason as AxiosResErr;
 
-    if (!patient?.status && patient?.message) {
-      toast.error(patient.message);
-      navigate("/dashboard/patients");
+  useEffect(() => {
+    if (isError || patientFailure?.response?.data.message) {
+      toast.error(
+        patientFailure.response?.data.message || "فشل في تحميل بيانات المريض"
+      );
+      navigate(-1);
       return;
     }
-  }, [isError, navigate, patientId, patient]);
+  }, [isError, navigate, patientFailure]);
 
   if (isLoading) return <DataLoader />;
 

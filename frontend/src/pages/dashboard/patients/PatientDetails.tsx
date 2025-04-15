@@ -31,6 +31,7 @@ import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PatientBalances from "@/components/dashboard/patients/patientBalances/PatientBalances";
+import { AxiosResErr } from "@/types";
 
 const PatientDetails = () => {
   const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);
@@ -46,18 +47,23 @@ const PatientDetails = () => {
     data: patient,
     isLoading,
     isError,
+    failureReason,
   } = useGetPatientById({
     id: patientId!,
     token,
   });
 
+  const patientFailure = failureReason as AxiosResErr;
+
   useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات الموظف");
-      navigate("/dashboard/employees");
+    if (isError || patientFailure?.response?.data.message) {
+      toast.error(
+        patientFailure.response?.data.message || "فشل في تحميل بيانات المريض"
+      );
+      navigate(-1);
       return;
     }
-  }, [isError, navigate]);
+  }, [isError, navigate, patientFailure]);
 
   if (isLoading) return <DataLoader />;
 

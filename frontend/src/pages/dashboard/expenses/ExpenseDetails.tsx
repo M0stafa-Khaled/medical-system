@@ -21,6 +21,7 @@ import { containerVariants, itemVariants } from "@/animations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { useGetExpenseById } from "@/lib/react-query/dashboard/expenses/expenses";
+import { AxiosResErr } from "@/types";
 
 const ExpenseDetails = () => {
   const navigate = useNavigate();
@@ -30,20 +31,23 @@ const ExpenseDetails = () => {
     data: expense,
     isLoading,
     isError,
+    failureReason,
   } = useGetExpenseById({
     token,
     id: expenseId!,
   });
 
-  useEffect(() => {
-    if (isNaN(Number(expenseId))) return navigate(-1);
+  const expenseFailure = failureReason as AxiosResErr;
 
-    if (isError) {
-      toast.error("فشل في تحميل بيانات المصروف");
+  useEffect(() => {
+    if (isError || expenseFailure?.response?.data.message) {
+      toast.error(
+        expenseFailure.response?.data.message || "فشل في تحميل بيانات المصروف"
+      );
       navigate(-1);
       return;
     }
-  }, [isError, navigate, expenseId]);
+  }, [isError, navigate, expenseFailure]);
 
   if (isLoading) return <DataLoader />;
 

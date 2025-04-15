@@ -9,6 +9,7 @@ import DataLoader from "@/components/ui/DataLoader";
 import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";
 import BookingForm from "@/components/forms/dashboard/bookings/BookingForm";
 import { updateBookingSchema } from "@/validations/dashboard/bookingSchema";
+import { AxiosResErr } from "@/types";
 
 const UpdateBooking = () => {
   const navigate = useNavigate();
@@ -19,18 +20,23 @@ const UpdateBooking = () => {
     data: booking,
     isLoading,
     isError,
+    failureReason,
   } = useGetBookingById({
     id: bookingId!,
     token,
   });
 
+  const bookingFailure = failureReason as AxiosResErr;
+
   useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات الحجز");
+    if (isError || bookingFailure?.response?.data.message) {
+      toast.error(
+        bookingFailure.response?.data.message || "فشل في تحميل بيانات الحجز"
+      );
       navigate("/dashboard/bookings");
       return;
     }
-  }, [isError, navigate, bookingId]);
+  }, [isError, navigate, bookingFailure]);
 
   if (isLoading) return <DataLoader />;
 

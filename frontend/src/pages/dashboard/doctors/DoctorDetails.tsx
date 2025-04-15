@@ -36,6 +36,7 @@ import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorkingDays from "@/components/dashboard/doctors/workingDays/WorkingDays";
 import TooltipButton from "@/components/ui/TooltipButton";
+import { AxiosResErr } from "@/types";
 
 const DoctorDetails = () => {
   const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
@@ -50,6 +51,7 @@ const DoctorDetails = () => {
     data: doctor,
     isLoading,
     isError,
+    failureReason,
   } = useGetDoctorById({
     id: doctorId!,
     token,
@@ -62,6 +64,18 @@ const DoctorDetails = () => {
       return;
     }
   }, [isError, navigate]);
+
+  const doctorsFailure = failureReason as AxiosResErr;
+
+  useEffect(() => {
+    if (isError || doctorsFailure?.response?.data.message) {
+      toast.error(
+        doctorsFailure.response?.data.message || "فشل في تحميل بيانات الطبيب"
+      );
+      navigate("/dashboard/doctors");
+      return;
+    }
+  }, [isError, navigate, doctorsFailure]);
 
   if (isLoading) return <DataLoader />;
 

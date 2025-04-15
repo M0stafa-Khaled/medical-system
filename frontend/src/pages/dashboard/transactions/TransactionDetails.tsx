@@ -28,6 +28,7 @@ import { useGetTransactionById } from "@/lib/react-query/dashboard/transactions/
 import RefundTransaction from "@/components/dashboard/transactions/RefundTransaction";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { AxiosResErr } from "@/types";
 
 const TransactionDetails = () => {
   const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
@@ -40,18 +41,24 @@ const TransactionDetails = () => {
     data: transaction,
     isLoading,
     isError,
+    failureReason,
   } = useGetTransactionById({
     token,
     id: transactionId!,
   });
 
+  const transactionFailure = failureReason as AxiosResErr;
+
   useEffect(() => {
-    if (isError) {
-      toast.error("فشل في تحميل بيانات التحصيل");
+    if (isError || transactionFailure?.response?.data.message) {
+      toast.error(
+        transactionFailure.response?.data.message ||
+          "فشل في تحميل بيانات التحصيل"
+      );
       navigate(-1);
       return;
     }
-  }, [isError, navigate]);
+  }, [isError, navigate, transactionFailure]);
 
   if (isLoading) return <DataLoader />;
 
