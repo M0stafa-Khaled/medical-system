@@ -680,3 +680,37 @@ export const PATIENT_PAYMENT_FORM_INPUTS: IFormInput[] = [
     placeholder: "رقم الإيصال",
   },
 ];
+
+// Patient Dashboard
+export const PATIENT_BOOKING_FORM_INPUTS: IFormInput[] = [
+  {
+    name: "clinic_id",
+    label: "العيادة",
+    type: "select",
+  },
+  {
+    name: "doctor_id",
+    label: "الطبيب",
+    type: "select",
+  },
+  {
+    name: "doctor_action_id",
+    label: "الخدمة",
+    type: "select",
+  },
+  {
+    name: "working_day_id",
+    label: "يوم الحجز",
+    type: "select",
+  },
+  {
+    name: "date",
+    label: "تاريخ الحجز",
+    type: "date",
+  },
+  {
+    name: "start_at",
+    label: "الأوقات المتاحة للحجز",
+    type: "select",
+  },
+];

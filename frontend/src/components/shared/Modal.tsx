@@ -26,6 +26,7 @@ interface IProps
   isLoading?: boolean;
   showFooter?: boolean;
   variant?: "default" | "destructive" | "ghost" | "outline" | "secondary";
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
 }
 
 const Modal = ({
@@ -40,12 +41,13 @@ const Modal = ({
   isLoading = false,
   showFooter = true,
   variant = "default",
+  maxWidth = "lg",
   ...rest
 }: IProps) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent
-        className="border-muted !z-[1000] rounded-lg max-w-xl"
+        className={`border-muted !z-[1000] rounded-lg max-w-${maxWidth} w-full`}
         {...rest}
       >
         <AlertDialogHeader>
@@ -53,7 +55,7 @@ const Modal = ({
             {title}
           </AlertDialogTitle>
           <AlertDialogDescription
-            className={`text-center max-w-sm mx-auto ${
+            className={`text-base text-center max-w-md mx-auto ${
               description.color ? description.color : ""
             }`}
           >

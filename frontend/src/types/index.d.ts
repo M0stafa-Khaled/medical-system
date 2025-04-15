@@ -1,3 +1,7 @@
+import { AxiosError } from "axios";
+
+type AxiosResErr = AxiosError<{ message: string }>;
+
 export type TRole = "admin" | "doctor" | "employee" | "patient";
 
 export type TBookingStatus =

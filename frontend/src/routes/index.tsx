@@ -9,8 +9,11 @@ import authRoutes from "./auth";
 import { lazy } from "react";
 import dashboardRoutes from "./dashboard";
 import { AppLayout, RootLayout } from "@/layout";
+import patientRoutes from "./patient";
 
 const Profile = lazy(() => import("@/pages/profile/Profile"));
+const Settings = lazy(() => import("@/pages/settings"));
+
 const routes = createRoutesFromElements(
   <>
     <Route
@@ -34,21 +37,26 @@ const routes = createRoutesFromElements(
           }
           id="profile"
         />
+        {/* Settings */}
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute requiredRole={["admin", "employee"]}>
+              <Settings />
+            </ProtectedRoute>
+          }
+          id="settings"
+        />
       </Route>
     </Route>
 
     {/* Errors */}
     <Route path="*" element={<NotFound />} id="not-found" />
-    <Route
-      path="/not-found"
-      element={<NotFound />}
-      id="not-round-unauthorized"
-    />
   </>
 );
 
 const router = createBrowserRouter(
-  [...routes, ...authRoutes, ...dashboardRoutes],
+  [...routes, ...authRoutes, ...dashboardRoutes, ...patientRoutes],
   {
     basename: "/",
     future: {
