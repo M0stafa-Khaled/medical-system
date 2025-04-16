@@ -41,7 +41,12 @@ const Profile = () => {
     }
   }, [userData, isError, navigate]);
 
-  if (isLoading) return <DataLoader />;
+  if (isLoading)
+    return (
+      <div className="container py-10">
+        <DataLoader />
+      </div>
+    );
 
   // Extract common properties from user data
   const {
