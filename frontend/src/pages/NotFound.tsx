@@ -7,7 +7,7 @@ const NotFound = () => {
     <main className="bg-[#FFF] dark:bg-background">
       <div className="container flex min-h-screen flex-col items-center justify-center gap-4">
         <div className="flex items-center justify-center max-w-sm">
-          <img src="404.webp" alt="not found" className="w-ful h-full" />
+          <img src="/404.webp" alt="not found" className="w-ful h-full" />
         </div>
         <div className="max-w-xl text-center space-y-4">
           <h1 className="text-2xl font-bold text-dark dark:text-white leading-relaxed">

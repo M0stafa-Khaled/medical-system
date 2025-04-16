@@ -12,7 +12,7 @@ import DataTablePagination from "@/components/ui/DataTablePagination";
 import PCardSkeleton from "@/components/ui/PCardSkeleton";
 import { IPatientBookingsFilter } from "@/interfaces/patient/patientBookings";
 
-const Bookings = () => {
+const PatientBookings = () => {
   const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
@@ -117,4 +117,4 @@ const Bookings = () => {
   );
 };
 
-export default Bookings;
+export default PatientBookings;
