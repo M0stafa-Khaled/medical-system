@@ -88,9 +88,11 @@ const BookingsList = ({ bookings }: IProps) => {
             canCreateTransaction) && (
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
-                {canCreateTransaction && booking.status === "pending" && (
-                  <CreateTransaction booking={booking} />
-                )}
+                {canCreateTransaction &&
+                  (booking.status === "pending" ||
+                    booking.status === "completed") && (
+                    <CreateTransaction booking={booking} />
+                  )}
                 {canViewBooking && (
                   <TooltipButton title="عرض">
                     <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">

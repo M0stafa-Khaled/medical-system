@@ -121,6 +121,7 @@ const CreatePatientPayment = () => {
           text: `إضافة دفعة من مريض`,
         }}
         showFooter={false}
+        maxWidth="xl"
       >
         {patientId ? (
           isLoading ? (

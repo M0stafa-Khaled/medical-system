@@ -24,7 +24,6 @@ import {
   useGetAllDoctorsClinics,
   useGetAvailableBookingsTime,
 } from "@/lib/react-query/main";
-import { useNavigate } from "react-router-dom";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import patientBookingSchema from "@/validations/patient/patientBookingSchema";
 import { useCreatePatientBooking } from "@/lib/react-query/patient/patientBookings";
@@ -34,7 +33,6 @@ import RenderPatientBookingFormFields from "@/components/forms/patient/RenderPat
 const CreatePatientBooking = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navigate = useNavigate();
   const token = cookieServices.getToken()!;
 
   // State
@@ -178,8 +176,6 @@ const CreatePatientBooking = () => {
       // * Create Success
       toast.success(message);
       handleResetFrom();
-
-      return navigate("/dashboard/bookings");
     } catch (error) {
       handleResErr(error);
     }

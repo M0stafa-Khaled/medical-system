@@ -17,11 +17,11 @@ import { Input } from "@/components/ui/input";
 interface IProps {
   input: IFormInput;
   form: UseFormReturn<any>;
-  handleFileChange: (
+  handleFileChange?: (
     e: ChangeEvent<HTMLInputElement>,
     fieldChange: (value: File) => void
   ) => void;
-  isOptionalField: (fieldName: string) => boolean;
+  isOptionalField?: (fieldName: string) => boolean;
   schema: z.ZodSchema;
 }
 
@@ -57,7 +57,9 @@ const RenderAuthFormFields = ({
                   type="file"
                   accept={input.accept}
                   {...field}
-                  onChange={(e) => handleFileChange(e, field.onChange)}
+                  onChange={(e) =>
+                    handleFileChange && handleFileChange(e, field.onChange)
+                  }
                   value={undefined}
                   className="cursor-pointer border-black/20 text-black placeholder:text-black/50 focus-visible:ring-[#bababa] h-auto py-1.5 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-black file:text-white file:cursor-pointer"
                 />
@@ -75,7 +77,7 @@ const RenderAuthFormFields = ({
           <FormItem>
             <FormLabel className="text-black" htmlFor={input.name}>
               {input.label}
-              {isOptionalField(input.name!) && (
+              {isOptionalField && isOptionalField(input.name!) && (
                 <span className="text-xs text-muted-foreground">
                   {" "}
                   (اختياري)
@@ -88,7 +90,7 @@ const RenderAuthFormFields = ({
                 placeholder={input.placeholder}
                 type={input.type}
                 {...field}
-                className="px-2 py-3 lg:py-3.5 focus-visible:ring-[#bababa] placeholder:h-14 h-auto border-black/20 text-black placeholder:text-black/50"
+                className="px-2 py-2.5 md:py-3.5 focus-visible:ring-[#bababa] placeholder:h-14 h-auto border-black/20 text-black placeholder:text-black/50 placeholder:text-sm"
               />
             </FormControl>
             <FormMessage />

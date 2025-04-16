@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useGetPatientTransactionsBalances } from "@/lib/react-query/patient/patientBalances";
 import cookieServices from "@/utils/cookieServices";
 import PCardSkeleton from "@/components/ui/PCardSkeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const PatientBalances = () => {
   const token = cookieServices.getToken()!;
@@ -35,16 +36,27 @@ const PatientBalances = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="xl:container mt-10"
       >
-        <PatientBalancesHeader
-          refund_amount={refund_amount!}
-          total_amount_due={total_amount_due!}
-          total_amount_paid={total_amount_paid!}
-          total_balance={total_balance!}
-        />
         {isLoading ? (
-          <PCardSkeleton />
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <Skeleton className="mx-auto h-48 w-full rounded-lg" />
+            </motion.div>
+            <PCardSkeleton />
+          </>
         ) : (
-          <PatientBalancesList balances={balances?.data.items || []} />
+          <>
+            <PatientBalancesHeader
+              refund_amount={refund_amount!}
+              total_amount_due={total_amount_due!}
+              total_amount_paid={total_amount_paid!}
+              total_balance={total_balance!}
+            />
+            <PatientBalancesList balances={balances?.data.items || []} />
+          </>
         )}
       </motion.section>
     </>

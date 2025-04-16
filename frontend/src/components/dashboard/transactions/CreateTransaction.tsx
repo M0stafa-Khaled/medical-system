@@ -134,6 +134,7 @@ const CreateTransaction = ({ booking }: IProps) => {
           color: "text-black dark:text-white",
         }}
         showFooter={false}
+        maxWidth="lg"
       >
         {canViewLastVisits && (
           <motion.div

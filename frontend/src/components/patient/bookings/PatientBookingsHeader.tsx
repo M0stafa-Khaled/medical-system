@@ -6,7 +6,8 @@ import { Eraser } from "lucide-react";
 import PatientBookingsFilters from "./PatientBookingsFilters";
 import { ar } from "date-fns/locale";
 import { IPatientBookingsFilter } from "@/interfaces/patient/patientBookings";
-import CreatePatientBooking from "./CreatePatientBooking";
+import { Link } from "react-router-dom";
+import { FiPlus } from "react-icons/fi";
 
 interface IProps {
   filters: IPatientBookingsFilter;
@@ -23,11 +24,20 @@ const PatientBookingsHeader = ({ filters, isLoading, setFilters }: IProps) => {
       clinic: "",
     });
   };
+
   return (
     <div className="space-y-4 mb-4">
       <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
         <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-4 ">
-          <CreatePatientBooking />
+          <Button className="h-auto py-0 px-0">
+            <Link
+              to={"/bookings/create"}
+              className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
+            >
+              إضافة حجز جديد
+              <FiPlus size={20} />
+            </Link>
+          </Button>
           <div className="text-lg font-semibold text-black dark:text-white">
             {format(new Date(), "EEEE, d MMMM yyyy", { locale: ar })}
           </div>

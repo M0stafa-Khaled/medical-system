@@ -32,7 +32,7 @@ interface IProps {
 
 const PatientBookingCard = ({ booking }: IProps) => {
   return (
-    <Card className="transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black/60">
+    <Card className="transition-all duration-300 hover:shadow-md cursor-pointer border-primary/10  hover:border-primary/40 dark:bg-black/60">
       <CardContent className="flex flex-col gap-4">
         <CardHeader className="px-0 pb-0 flex-row items-center justify-between">
           <CardTitle>

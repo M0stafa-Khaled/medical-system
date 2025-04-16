@@ -107,14 +107,14 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   // If req to get date return with Messages
   useEffect(() => {
     if (!clinics?.status && isErrorClinics)
-      toast.error(`العيادات | ${clinicsFailure?.response?.data.message}`);
+      toast.error(`العيادات | ${clinicsFailure?.response?.data?.message}`);
     if (!doctors?.status && isErrorDoctors)
-      toast.error(`الأطباء | ${doctorsFailure?.response?.data.message}`);
+      toast.error(`الأطباء | ${doctorsFailure?.response?.data?.message}`);
     if (!workingDays?.status && isErrorWorkingDays)
       toast.error(` ايام العمل| ${workingDaysFailure?.response?.data.message}`);
     if (!doctorActions?.status && isErrorActions)
       toast.error(
-        `الإجراءات | ${doctorActionsFailure?.response?.data.message}`
+        `الإجراءات | ${doctorActionsFailure?.response?.data?.message}`
       );
   }, [
     clinics,
@@ -200,8 +200,8 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
 
       doctor_id: booking?.doctor?.id.toString() || "",
       clinic_id: booking?.clinic?.id.toString() || "",
-      working_day_id: booking?.working_day.id.toString() || "",
-      doctor_action_id: booking?.action.id.toString() || "",
+      working_day_id: booking?.working_day?.id.toString() || "",
+      doctor_action_id: booking?.action?.id.toString() || "",
       start_at: booking?.start_at || "",
       date: booking?.booking_date || "",
       status: initialBookingStatus(),

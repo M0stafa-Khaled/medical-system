@@ -137,8 +137,8 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
     form.reset({
       doctor_id: booking?.doctor?.id.toString() || "",
       clinic_id: booking?.clinic?.id.toString() || "",
-      working_day_id: booking?.working_day.id.toString() || "",
-      doctor_action_id: booking?.action.id.toString() || "",
+      working_day_id: booking?.working_day?.id.toString() || "",
+      doctor_action_id: booking?.action?.id.toString() || "",
       start_at: booking?.start_at || "",
       date: booking?.booking_date || "",
     });

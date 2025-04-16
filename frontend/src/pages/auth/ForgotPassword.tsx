@@ -115,7 +115,7 @@ const ForgotPassword = () => {
                             placeholder="البريد الإلكتروني"
                             type="text"
                             {...field}
-                            className="px-2 py-3 focus-visible:ring-[#bababa] placeholder:h-14 h-auto border-black/20 text-black placeholder:text-black/50"
+                            className="px-2  py-2.5 md:py-3.5 focus-visible:ring-[#bababa] placeholder:h-14 h-auto border-black/20 text-black placeholder:text-black/50"
                           />
                         </FormControl>
                         <FormMessage />

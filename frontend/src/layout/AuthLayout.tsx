@@ -24,9 +24,9 @@ const AuthLayout = () => {
   return (
     <main className="auth-scroll-bar min-h-screen bg-[url(/login-bg.png)] bg-no-repeat bg-right bg-cover flex justify-center items-center">
       <div
-        className={`container ${
+        className={`px-2 sm:container ${
           !path.includes("register") ? "md:max-w-3xl lg:max-w-7xl" : ""
-        } w-full my-10`}
+        } w-full my-5 md:my-10`}
       >
         <motion.div className="bg-[#FFF] py-4 md:py-6 px-4 md:px-6 rounded-lg border border-sky-300 grid grid-cols-12 gap-6 shadow-xl">
           <motion.div

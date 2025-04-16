@@ -43,7 +43,7 @@ const PasswordFormItem = ({ field, input }: IProps) => {
             placeholder={input.placeholder}
             type={showPassword ? "text" : input.type}
             {...field}
-            className="pr-2 pl-9 py-3.5 focus-visible:ring-[#bababa] placeholder:h-14 h-auto border-black/20 text-black placeholder:text-black/50"
+            className="pr-2 pl-9 py-2.5 md:py-3.5 focus-visible:ring-[#bababa] placeholder:h-14 h-auto border-black/20 text-black placeholder:text-black/50 placeholder:text-sm"
           />
         </div>
       </FormControl>
