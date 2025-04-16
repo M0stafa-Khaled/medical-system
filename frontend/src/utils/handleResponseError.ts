@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const handleResErr = (error: any) => {
   if (error?.response?.data.errors) {
@@ -11,8 +12,10 @@ const handleResErr = (error: any) => {
     });
   }
   if (error?.response?.data.message && !error?.response?.data.errors) {
-    toast.error(error?.response?.data.message, {
-      autoClose: 5000,
+    Swal.fire({
+      icon: "error",
+      title: "خطأ",
+      text: error?.response?.data.message,
     });
   }
 };
