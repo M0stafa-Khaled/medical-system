@@ -207,19 +207,21 @@ const DashboardLayout = () => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex bg-foreground">
       <ScrollRestoration />
       <div className="fixed inset-y-0 right-0">
         <Sidebar links={NAV_LINKS} />
       </div>
-      <div className="container flex-1 flex flex-col overflow-hidden lg:mr-[275px]">
-        <Header links={NAV_LINKS} dashboard />
-        <main className="flex-1 mt-20 lg:mt-6 bg-background">
-          <PathIndicator routeNames={routeNames} />
-          <div className="my-3">
-            <Outlet />
-          </div>
-        </main>
+      <div className="bg-background min-h-screen flex-1 flex flex-col overflow-hidden lg:mr-[270px] border-r border-primary/30 dark:border-primary/20 lg:rounded-tr-[36px] lg:rounded-br-[36px]">
+        <div className="container">
+          <Header links={NAV_LINKS} dashboard />
+          <main className="flex-1 mt-20 lg:mt-6 bg-background">
+            <PathIndicator routeNames={routeNames} />
+            <div className="my-3">
+              <Outlet />
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   );

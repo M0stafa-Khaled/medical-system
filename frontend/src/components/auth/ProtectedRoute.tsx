@@ -5,6 +5,7 @@ import cookieServices from "@/utils/cookieServices";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import useHasPermission from "@/hooks/useHasPermission";
+import NotFound from "@/pages/NotFound";
 
 interface IProps {
   children: ReactNode;
@@ -32,12 +33,12 @@ const ProtectedRoute = ({
       ? requiredRole
       : [requiredRole];
     if (!role || !allowedRoles.includes(role)) {
-      return <Navigate to="/not-found" replace />;
+      return <NotFound />;
     }
   }
 
   if (requiredPermission && !hasPermission) {
-    return <Navigate to="/not-found" replace />;
+    return <NotFound />;
   }
 
   return children;

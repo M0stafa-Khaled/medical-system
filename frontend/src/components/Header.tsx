@@ -45,7 +45,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
           initial="hidden"
           animate="visible"
           variants={navItemsVariants}
-          className={`flex bg-[#fff] dark:bg-foreground flex-wrap items-center justify-between py-2.5 border border-gray-200 dark:border-muted rounded-xl`}
+          className={`flex bg-[#fff] dark:bg-foreground flex-wrap items-center justify-between py-2 border border-primary/20 dark:border-primary/30 rounded-xl`}
         >
           <div className="flex items-center justify-between w-full px-3">
             <div className={`hidden lg:flex gap-3 items-center w-full`}>
