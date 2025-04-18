@@ -78,7 +78,7 @@ const RenderPatientBookingFormFields = ({
         return (
           <BookingAvailableTimeSelectItem
             input={input}
-            form={form}
+           field={field}
             times={availableTimes}
           />
         );

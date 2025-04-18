@@ -71,7 +71,7 @@ const RenderTransactionFormFields = ({
         );
 
       case input.name === "patient_id":
-        return <PatientSelectItem form={form} input={input} />;
+        return <PatientSelectItem field={field} input={input} />;
 
       default:
         return <InputFormItem {...commonProps} />;
