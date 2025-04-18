@@ -51,7 +51,7 @@ const routes = createRoutesFromElements(
       </Route>
     </Route>
 
-    {/* Errors */}
+    {/* Not Found */}
     <Route path="*" element={<NotFound />} id="not-found" />
   </>
 );

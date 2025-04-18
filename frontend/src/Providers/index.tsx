@@ -3,11 +3,9 @@ import { store } from "@/store/store";
 import { RouterProvider } from "react-router-dom";
 import router from "@/routes";
 import { HelmetProvider } from "react-helmet-async";
-import { lazy } from "react";
 
-const QueryProvider = lazy(() => import("@/providers/QueryProvider"));
 import ThemeProvider from "@/providers/ThemeProvider";
-
+import QueryProvider from "@/providers/QueryProvider";
 const Providers = () => {
   return (
     <HelmetProvider>
