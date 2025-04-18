@@ -34,7 +34,6 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
   const maxDate = new Date();
   maxDate.setDate(today.getDate() + 30);
 
-  console.log(allowedDay);
   return (
     <FormField
       control={form.control}

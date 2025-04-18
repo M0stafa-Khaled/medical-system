@@ -15,3 +15,5 @@ export type TBookingStatus =
 export type TPaymentMethod = "cash" | "visa";
 
 export type TBalanceType = "inquiry" | "payment";
+
+export type TPrescriptableType = "scan" | "analysis" | "dosage";

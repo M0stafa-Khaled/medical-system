@@ -29,6 +29,8 @@ enum Query_Keys {
   GET_ALL_TRANSACTION_PATIENT_BALANCES = "patientTransactionBalances",
   GET_ALL_PATIENT_TRANSACTIONS_BALANCES = "patientTransactionsBalances",
   GET_ALL_DOSAGES = "dosages",
+  GET_ALL_PRESCRIPTIONS = "prescriptions",
+  GET_ONE_PRESCRIPTION = "prescription",
 
   // Patient
   GET_ALL_PATIENT_BOOKINGS = "patientBookings",

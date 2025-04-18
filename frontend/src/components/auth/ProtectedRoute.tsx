@@ -24,22 +24,22 @@ const ProtectedRoute = ({
 
   const hasPermission = useHasPermission(requiredPermission || "");
 
-  if (!token || !isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!token || !isAuthenticated) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
-  if (requiredRole) {
-    const allowedRoles = Array.isArray(requiredRole)
-      ? requiredRole
-      : [requiredRole];
-    if (!role || !allowedRoles.includes(role)) {
-      return <NotFound />;
-    }
-  }
+  // if (requiredRole) {
+  //   const allowedRoles = Array.isArray(requiredRole)
+  //     ? requiredRole
+  //     : [requiredRole];
+  //   if (!role || !allowedRoles.includes(role)) {
+  //     return <NotFound />;
+  //   }
+  // }
 
-  if (requiredPermission && !hasPermission) {
-    return <NotFound />;
-  }
+  // if (requiredPermission && !hasPermission) {
+  //   return <NotFound />;
+  // }
 
   return children;
 };

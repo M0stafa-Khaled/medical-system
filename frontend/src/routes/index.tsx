@@ -1,15 +1,16 @@
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import NotFound from "@/pages/NotFound";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import authRoutes from "./auth";
 import { lazy } from "react";
-import dashboardRoutes from "./dashboard";
 import { AppLayout, RootLayout } from "@/layout";
+import authRoutes from "./auth";
+import dashboardRoutes from "./dashboard";
 import patientRoutes from "./patient";
+
+import NotFound from "@/pages/NotFound";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 const Profile = lazy(() => import("@/pages/profile/Profile"));
 const Settings = lazy(() => import("@/pages/settings"));

@@ -96,4 +96,14 @@ export enum PERMISSIONS {
   // Company Information
   COMPANY_INFO = "معلومات-الشركة",
   UPDATE_COMPANY_INFO = "تحديث-معلومات-الشركة",
+
+  // Prescriptions
+  ADD_PRESCRIPTION = "اضافة-روشتة",
+  UPDATE_PRESCRIPTION = "تعديل-روشتة",
+  PRESCRIPTIONS = "الروشتات",
+  VIEW_PRESCRIPTION = "عرض-روشتة",
+  DELETE_PRESCRIPTION = "حذف-روشتة",
+
+  // Notifications
+  RECEIVE_NOTIFICATIONS = "استقبال-اشعارات",
 }

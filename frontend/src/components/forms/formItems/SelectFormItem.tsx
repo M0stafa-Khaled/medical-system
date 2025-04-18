@@ -15,7 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { ControllerRenderProps } from "react-hook-form";
 import {
   FormControl,
   FormItem,
@@ -27,7 +27,7 @@ import { useMemo, useState } from "react";
 import truncateText from "@/utils/truncateText";
 
 interface IProps {
-  field: ControllerRenderProps<FieldValues, string>;
+  field: ControllerRenderProps<any>;
   options: { label: string; value: string }[];
   input: IFormInput;
   isOptionalField?: (fieldName: string) => boolean;
@@ -39,7 +39,7 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
 
   const filteredOptions = useMemo(() => {
     if (!searchValue) return options;
-    return options.filter((option) =>
+    return options?.filter((option) =>
       option.label.toLowerCase().includes(searchValue.toLowerCase())
     );
   }, [options, searchValue]);
@@ -64,7 +64,7 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
             >
               {truncateText(
                 field.value
-                  ? options.find((option) => option.value === field.value)
+                  ? options?.find((option) => option.value === field.value)
                       ?.label || "اختر..."
                   : "اختر...",
                 50
@@ -88,7 +88,7 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
               <CommandList id={input.name}>
                 <CommandEmpty>لا يوجد</CommandEmpty>
                 <CommandGroup id={input.name}>
-                  {filteredOptions.map((option) => (
+                  {filteredOptions?.map((option) => (
                     <CommandItem
                       className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20 text-[13px]"
                       key={option.label}

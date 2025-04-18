@@ -46,62 +46,52 @@ const RenderBookingFormFields = ({
       case input.name === "doctor_id":
         return (
           <SelectFormItem
-            input={input}
-            field={field}
+            {...commonProps}
             options={options?.doctorsOptions || []}
           />
         );
       case input.name === "patient_id": {
-        return <PatientSelectItem form={form} input={input} />;
+        return <PatientSelectItem field={field} input={input} />;
       }
       case input.name === "working_day_id":
         return (
           <SelectFormItem
-            input={input}
-            field={field}
+            {...commonProps}
             options={options?.workingDaysOptions || []}
           />
         );
       case input.name === "clinic_id":
         return (
           <SelectFormItem
-            input={input}
-            field={field}
+            {...commonProps}
             options={options?.clinicsOptions || []}
           />
         );
       case input.name === "doctor_action_id":
         return (
           <SelectFormItem
-            input={input}
-            field={field}
+            {...commonProps}
             options={options?.doctorActionsOptions || []}
           />
         );
       case input.name === "start_at":
         return (
           <BookingAvailableTimeSelectItem
-            input={input}
-            form={form}
+            {...commonProps}
             times={availableTimes}
           />
         );
       case input.name === "date":
         return (
           <BookingDateItem
-            input={input}
-            field={field}
+            {...commonProps}
             form={form}
             allowedDay={allowedDay}
           />
         );
       case input.name === "status":
         return (
-          <SelectFormItem
-            field={field}
-            input={input}
-            options={options?.status || []}
-          />
+          <SelectFormItem {...commonProps} options={options?.status || []} />
         );
       default:
         return <InputFormItem {...commonProps} />;

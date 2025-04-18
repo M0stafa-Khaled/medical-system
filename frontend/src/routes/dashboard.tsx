@@ -95,6 +95,18 @@ const LastVisits = lazy(
 // Dosages
 const Dosages = lazy(() => import("@/pages/dashboard/dosages"));
 
+// Prescriptions
+const Prescriptions = lazy(() => import("@/pages/dashboard/prescription"));
+const CreatePrescription = lazy(
+  () => import("@/pages/dashboard/prescription/CreatePrescription")
+);
+const UpdatePrescription = lazy(
+  () => import("@/pages/dashboard/prescription/UpdatePrescription")
+);
+const PrescriptionDetails = lazy(
+  () => import("@/pages/dashboard/prescription/PrescriptionDetails")
+);
+
 const dashboardRoutes = createRoutesFromElements(
   <Route element={<RootLayout />} id="dashboard-root">
     {/* Dashboard */}
@@ -466,6 +478,55 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-dosages"
+      />
+
+      {/* Prescriptions */}
+
+      <Route
+        path="prescriptions"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.PRESCRIPTIONS}>
+              <Prescriptions />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-prescriptions"
+      />
+      <Route
+        path="prescriptions"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PRESCRIPTION}>
+              <PrescriptionDetails />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-prescription-details"
+      />
+      <Route
+        path="prescriptions/create"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PRESCRIPTION}>
+              <CreatePrescription />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-prescriptions-create"
+      />
+      <Route
+        path="prescriptions/:prescriptionId/update"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute
+              requiredPermission={PERMISSIONS.UPDATE_PRESCRIPTION}
+            >
+              <UpdatePrescription />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-prescriptions-update"
       />
     </Route>
   </Route>

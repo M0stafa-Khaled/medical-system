@@ -45,75 +45,73 @@ const PatientSelectItem = ({ form }: IProps) => {
     label: patient.name,
   }));
   return (
-    <>
-      <FormField
-        control={form.control}
-        name={"patient_id"}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel htmlFor="patient_id" className="text-nowrap">
-              المريض:
-            </FormLabel>
-            <FormControl>
-              <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    id="patient_id"
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className={`border-black/20 dark:border-white/40 !h-12 text-black dark:text-white w-full justify-between`}
-                  >
-                    {field.value?.value
-                      ? patientsOption?.find(
-                          (option) => option.value === field.value.value
-                        )?.label
-                      : "اختر..."}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[250px] p-0 z-[1000] border-black/20 dark:border-white/40">
-                  <Command className="text-black dark:text-white bg-foreground">
-                    <CommandInput
-                      placeholder="اختر او ابحث بالاسم او رقم الهاتف"
-                      value={searchTerm}
-                      onValueChange={setSearchTerm}
-                    />
-                    <CommandList>
-                      <CommandEmpty>لا يوجد</CommandEmpty>
-                      <CommandGroup>
-                        {patientsOption?.map((option) => (
-                          <CommandItem
-                            className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20"
-                            key={option.label}
-                            value={option.label}
-                            onSelect={() => {
-                              field.onChange(option);
-                              setOpen(false);
-                            }}
-                          >
-                            <Check
-                              className={cn(
-                                "mr-2 h-4 w-4",
-                                field.value === option.value
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              )}
-                            />
-                            {option.label}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    </>
+    <FormField
+      control={form.control}
+      name={"patient_id"}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel htmlFor="patient_id" className="text-nowrap">
+            المريض:
+          </FormLabel>
+          <FormControl>
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  id="patient_id"
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open}
+                  className={`border-black/20 dark:border-white/40 !h-12 text-black dark:text-white w-full justify-between`}
+                >
+                  {field.value?.value
+                    ? patientsOption?.find(
+                        (option) => option.value === field.value.value
+                      )?.label
+                    : "اختر..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[250px] p-0 z-[1000] border-black/20 dark:border-white/40">
+                <Command className="text-black dark:text-white bg-foreground">
+                  <CommandInput
+                    placeholder="اختر او ابحث بالاسم او رقم الهاتف"
+                    value={searchTerm}
+                    onValueChange={setSearchTerm}
+                  />
+                  <CommandList>
+                    <CommandEmpty>لا يوجد</CommandEmpty>
+                    <CommandGroup>
+                      {patientsOption?.map((option) => (
+                        <CommandItem
+                          className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20"
+                          key={option.label}
+                          value={option.label}
+                          onSelect={() => {
+                            field.onChange(option.value);
+                            setOpen(false);
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              field.value === option.value
+                                ? "opacity-100"
+                                : "opacity-0"
+                            )}
+                          />
+                          {option.label}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 };
 

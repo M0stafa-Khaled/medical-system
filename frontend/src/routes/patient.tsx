@@ -32,7 +32,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings"
           element={
-            <Suspense>
+            <Suspense fallback={<LoadingSpinnerPage />}>
               <PatientBookings />
             </Suspense>
           }
@@ -42,7 +42,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings/create"
           element={
-            <Suspense>
+            <Suspense fallback={<LoadingSpinnerPage />}>
               <CreatePatientBooking />
             </Suspense>
           }
@@ -51,7 +51,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings/:bookingId/update"
           element={
-            <Suspense>
+            <Suspense fallback={<LoadingSpinnerPage />}>
               <UpdatePatientBooking />
             </Suspense>
           }
@@ -62,7 +62,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/balances"
           element={
-            <Suspense>
+            <Suspense fallback={<LoadingSpinnerPage />}>
               <PatientBalances />
             </Suspense>
           }

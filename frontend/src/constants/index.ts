@@ -714,3 +714,38 @@ export const PATIENT_BOOKING_FORM_INPUTS: IFormInput[] = [
     type: "select",
   },
 ];
+
+export const PRESCRIPTIONS_INPUTS: IFormInput[] = [
+  {
+    name: "clinic_id",
+    label: "العيادة",
+    type: "select",
+  },
+  {
+    name: "doctor_id",
+    label: "الطبيب",
+    type: "select",
+  },
+  {
+    name: "patient_id",
+    label: "المريض",
+    type: "select",
+  },
+  {
+    name: "prescription_date",
+    label: "تاريخ الروشتة",
+    type: "prescription_date",
+  },
+  {
+    name: "note",
+    label: "ملاحظات",
+    type: "text",
+    placeholder: "ملاحظات",
+  },
+];
+
+export const PRESCRIPTIONS_TYPES = [
+  { label: "أشعة", value: "scan" },
+  { label: "دواء", value: "dosage" },
+  { label: "تحليل", value: "analysis" },
+];

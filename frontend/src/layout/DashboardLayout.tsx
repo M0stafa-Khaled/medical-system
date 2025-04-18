@@ -61,6 +61,7 @@ const DashboardLayout = () => {
     analytics: "التحاليل",
     scans: "الأشعات",
     dosages: "الجرعات",
+    prescriptions: "الروشتات",
   };
 
   const NAV_LINKS: ILink[] = [
@@ -199,9 +200,17 @@ const DashboardLayout = () => {
       path: "/dashboard/analytics",
       icon: <TbReportAnalytics size={18} />,
     },
+    // Scans
     {
       name: routeNames.scans,
       path: "/dashboard/scans",
+      icon: <UserRoundSearch size={18} />,
+    },
+
+    // Prescriptions
+    {
+      name: routeNames.prescriptions,
+      path: "/dashboard/prescriptions",
       icon: <UserRoundSearch size={18} />,
     },
   ];
@@ -212,7 +221,7 @@ const DashboardLayout = () => {
       <div className="fixed inset-y-0 right-0">
         <Sidebar links={NAV_LINKS} />
       </div>
-      <div className="bg-background min-h-screen flex-1 flex flex-col overflow-hidden lg:mr-[270px] border-r border-primary/30 dark:border-primary/20 lg:rounded-tr-[36px] lg:rounded-br-[36px]">
+      <div className="bg-background min-h-screen flex-1 flex flex-col overflow-hidden lg:mr-[270px] lg:border-r border-primary/30 lg:dark:border-primary/20 lg:rounded-tr-[36px] lg:rounded-br-[36px]">
         <div className="container">
           <Header links={NAV_LINKS} dashboard />
           <main className="flex-1 mt-20 lg:mt-6 bg-background">
