@@ -744,6 +744,30 @@ export const PRESCRIPTIONS_INPUTS: IFormInput[] = [
   },
 ];
 
+export const DOCTOR_PRESCRIPTIONS_INPUTS: IFormInput[] = [
+  {
+    name: "clinic_id",
+    label: "العيادة",
+    type: "select",
+  },
+  {
+    name: "patient_id",
+    label: "المريض",
+    type: "select",
+  },
+  {
+    name: "prescription_date",
+    label: "تاريخ الروشتة",
+    type: "prescription_date",
+  },
+  {
+    name: "note",
+    label: "ملاحظات",
+    type: "text",
+    placeholder: "ملاحظات",
+  },
+];
+
 export const PRESCRIPTIONS_TYPES = [
   { label: "أشعة", value: "scan" },
   { label: "دواء", value: "dosage" },

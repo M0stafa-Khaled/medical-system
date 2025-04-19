@@ -1,4 +1,4 @@
-import DosagesTable from "@/components/dashboard/dosages/DosagesTable";
+import DosagesTable from "@/components/dosages/DosagesTable";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 

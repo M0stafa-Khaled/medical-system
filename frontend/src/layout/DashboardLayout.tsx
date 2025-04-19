@@ -18,10 +18,10 @@ import {
 } from "lucide-react";
 import { GiMedicinePills } from "react-icons/gi";
 import { TbReportAnalytics, TbReportMedical } from "react-icons/tb";
-import { memo } from "react";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAttachMoney, MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router-dom";
+import ROUTES_NAME from "@/constants/routesName";
 
 const DashboardLayout = () => {
   // Codes
@@ -45,31 +45,9 @@ const DashboardLayout = () => {
   // Prescriptions
   const canViewPrescriptions = useHasPermission(PERMISSIONS.PRESCRIPTIONS);
 
-  const routeNames: Record<string, string> = {
-    dashboard: "الرئيسية",
-    clinics: "العيادات",
-    doctors: "الأطباء",
-    "working-days": "ايام العمل",
-    create: "إضافة",
-    update: "تعديل",
-    employees: "الموظفين",
-    patients: "المرضى",
-    drugs: "الأدوية",
-    treasuries: "الخزائن",
-    expenses: "المصروفات",
-    "expenses-categories": "تصنيفات المصروفات",
-    bookings: "الحجوزات",
-    transactions: "التحصيلات",
-    "last-visits": "أخر الزيارات",
-    analytics: "التحاليل",
-    scans: "الأشعات",
-    dosages: "الجرعات",
-    prescriptions: "الروشتات",
-  };
-
   const NAV_LINKS: ILink[] = [
     {
-      name: routeNames.dashboard,
+      name: ROUTES_NAME.dashboard,
       path: "/dashboard",
       icon: <HomeIcon size={18} />,
     },
@@ -84,7 +62,13 @@ const DashboardLayout = () => {
         ]
       : []),
     // Codes
-    ...(canViewClinics || canViewDoctors || canViewEmployees || canViewPatients
+    ...(canViewClinics ||
+    canViewDoctors ||
+    canViewEmployees ||
+    canViewPatients ||
+    canViewDosages ||
+    canViewTreasuries ||
+    canViewExpensesCategories
       ? [
           {
             name: "التكويدات",
@@ -94,7 +78,7 @@ const DashboardLayout = () => {
               ...(canViewClinics
                 ? [
                     {
-                      name: routeNames.clinics,
+                      name: ROUTES_NAME.clinics,
                       path: "/dashboard/clinics",
                       icon: <Building2 size={18} />,
                     },
@@ -103,7 +87,7 @@ const DashboardLayout = () => {
               ...(canViewDoctors
                 ? [
                     {
-                      name: routeNames.doctors,
+                      name: ROUTES_NAME.doctors,
                       path: "/dashboard/doctors",
                       icon: <FaUserDoctor size={18} />,
                     },
@@ -112,7 +96,7 @@ const DashboardLayout = () => {
               ...(canViewEmployees
                 ? [
                     {
-                      name: routeNames.employees,
+                      name: ROUTES_NAME.employees,
                       path: "/dashboard/employees",
                       icon: <WorkflowIcon />,
                     },
@@ -121,7 +105,7 @@ const DashboardLayout = () => {
               ...(canViewPatients
                 ? [
                     {
-                      name: routeNames.patients,
+                      name: ROUTES_NAME.patients,
                       path: "/dashboard/patients",
                       icon: <Users size={18} />,
                     },
@@ -131,7 +115,7 @@ const DashboardLayout = () => {
               ...(canViewDosages
                 ? [
                     {
-                      name: routeNames.dosages,
+                      name: ROUTES_NAME.dosages,
                       path: "/dashboard/dosages",
                       icon: <GiMedicinePills size={18} />,
                     },
@@ -140,7 +124,7 @@ const DashboardLayout = () => {
               ...(canViewTreasuries
                 ? [
                     {
-                      name: routeNames.treasuries,
+                      name: ROUTES_NAME.treasuries,
                       path: "/dashboard/treasuries",
                       icon: <Wallet size={18} />,
                     },
@@ -149,7 +133,7 @@ const DashboardLayout = () => {
               ...(canViewExpensesCategories
                 ? [
                     {
-                      name: routeNames["expenses-categories"],
+                      name: ROUTES_NAME["expenses-categories"],
                       path: "/dashboard/expenses-categories",
                       icon: <Workflow size={18} />,
                     },
@@ -161,7 +145,7 @@ const DashboardLayout = () => {
       : []),
 
     // Operations
-    ...(canViewExpenses
+    ...(canViewExpenses || canViewTransactions
       ? [
           {
             name: "الحسابات",
@@ -171,7 +155,7 @@ const DashboardLayout = () => {
               ...(canViewExpenses
                 ? [
                     {
-                      name: routeNames.expenses,
+                      name: ROUTES_NAME.expenses,
                       path: "/dashboard/expenses",
                       icon: <MdAttachMoney size={18} />,
                     },
@@ -180,7 +164,7 @@ const DashboardLayout = () => {
               ...(canViewTransactions
                 ? [
                     {
-                      name: routeNames.transactions,
+                      name: ROUTES_NAME.transactions,
                       path: "/dashboard/transactions",
                       icon: <BadgeDollarSign size={18} />,
                     },
@@ -194,8 +178,8 @@ const DashboardLayout = () => {
     ...(canViewPrescriptions
       ? [
           {
-            name: routeNames.prescriptions,
-            path: "/dashboard/prescriptions",
+            name: ROUTES_NAME.prescriptions,
+            path: "/doctor/prescriptions",
             icon: <TbReportMedical size={18} />,
           },
         ]
@@ -203,20 +187,20 @@ const DashboardLayout = () => {
 
     // Drugs
     {
-      name: routeNames.drugs,
-      path: "/dashboard/drugs",
+      name: ROUTES_NAME.drugs,
+      path: "/doctor/drugs",
       icon: <MdMedication size={18} />,
     },
     // Analytics
     {
-      name: routeNames.analytics,
-      path: "/dashboard/analytics",
+      name: ROUTES_NAME.analytics,
+      path: "/doctor/analytics",
       icon: <TbReportAnalytics size={18} />,
     },
     // Scans
     {
-      name: routeNames.scans,
-      path: "/dashboard/scans",
+      name: ROUTES_NAME.scans,
+      path: "/doctor/scans",
       icon: <UserRoundSearch size={18} />,
     },
   ];
@@ -231,7 +215,7 @@ const DashboardLayout = () => {
         <div className="container">
           <Header links={NAV_LINKS} dashboard />
           <main className="flex-1 mt-20 lg:mt-6 bg-background">
-            <PathIndicator routeNames={routeNames} />
+            <PathIndicator routeNames={ROUTES_NAME} />
             <div className="my-3">
               <Outlet />
             </div>
@@ -242,4 +226,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default memo(DashboardLayout);
+export default DashboardLayout;

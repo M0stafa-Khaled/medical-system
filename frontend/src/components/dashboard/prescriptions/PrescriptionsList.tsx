@@ -68,7 +68,7 @@ const PrescriptionsList = ({ prescriptions }: IProps) => {
               {date}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-              {truncateText(note, 20) || "لا يوجد"}
+              {truncateText(note!, 20) || "لا يوجد"}
             </TableCell>
 
             {(canUpdatePrescription ||

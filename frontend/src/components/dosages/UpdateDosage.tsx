@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 import { Form, FormField } from "@/components/ui/form";
 import {
   AlertDialogCancel,
@@ -7,42 +8,45 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { FiPlus } from "react-icons/fi";
-import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
-import Modal from "@/components/shared/Modal";
-import cookieServices from "@/utils/cookieServices";
-import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import handleResErr from "@/utils/handleResponseError";
-import { useCreateDosage } from "@/lib/react-query/dashboard/dosages";
 import dosageSchema from "@/validations/dashboard/dosageSchema";
+import { toast } from "react-toastify";
+import { Loader2, Pen } from "lucide-react";
+import cookieServices from "@/utils/cookieServices";
+import Modal from "@/components/shared/Modal";
+import { containerVariants, itemVariants } from "@/animations";
+import { motion } from "framer-motion";
+import TooltipButton from "@/components/ui/TooltipButton";
+import handleResErr from "@/utils/handleResponseError";
+import { useUpdateDosage } from "@/lib/react-query/dosages";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
-const CreateDosage = () => {
-  const token = cookieServices.getToken()!;
-  const [isOpen, setIsOpen] = useState(false);
-  const { mutateAsync: createClinic, isPending } = useCreateDosage();
+interface IProps {
+  id: number;
+  name: string;
+}
+const UpdateDosage = ({ id, name }: IProps) => {
+  const token = cookieServices.getToken() || "";
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { mutateAsync: updateClinic, isPending } = useUpdateDosage();
 
   const form = useForm<z.infer<typeof dosageSchema>>({
     resolver: zodResolver(dosageSchema),
     defaultValues: {
-      name: "",
+      name: name,
     },
   });
-
   const onSubmit = async ({ name }: z.infer<typeof dosageSchema>) => {
     try {
-      const { status, message } = await createClinic({
+      const { status, message } = await updateClinic({
+        id,
         name,
         token,
       });
 
-      // ! Create failed
+      // ! Update failed
       if (!status) return toast.error(message);
-
-      // * Create Success
+      // * Update Success
       return toast.success(message);
     } catch (error) {
       handleResErr(error);
@@ -56,32 +60,42 @@ const CreateDosage = () => {
     form.reset();
   };
 
+  useEffect(() => {
+    form.reset({
+      name: name,
+    });
+  }, [name, form]);
+
   return (
     <>
-      <Button
-        onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-auto py-3"
-      >
-        إضافة جرعة جديدة
-        <FiPlus size={20} />
-      </Button>
+      <TooltipButton title="تعديل">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-9 h-9"
+        >
+          <Pen size={20} />
+        </Button>
+      </TooltipButton>
 
+      {/* Update Modal */}
       <Modal
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="إضافة جرعة جديدة"
+        title="تعديل جرعة"
         description={{
-          text: "يمكنك اضافة جرعة جديدة من هنا",
+          text: "يمكنك تعديل الجرعة المحددة من هنا",
         }}
         showFooter={false}
       >
         <Form {...form}>
           <motion.form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-5 text-black dark:text-white"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-2 text-black dark:text-white"
           >
             <motion.div variants={itemVariants}>
               <FormField
@@ -102,10 +116,7 @@ const CreateDosage = () => {
             </motion.div>
 
             <AlertDialogFooter className="text-start !justify-start gap-2">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
-              >
+              <AlertDialogCancel className="text-black dark:text-white py-2.5 h-auto">
                 إلغاء
               </AlertDialogCancel>
               <Button
@@ -113,8 +124,8 @@ const CreateDosage = () => {
                 disabled={isPending}
                 className="py-2.5 h-auto"
               >
-                إضافة
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                حفظ
+                {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>
@@ -124,4 +135,4 @@ const CreateDosage = () => {
   );
 };
 
-export default CreateDosage;
+export default UpdateDosage;

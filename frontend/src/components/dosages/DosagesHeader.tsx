@@ -1,6 +1,6 @@
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import SearchInput from "../SearchInput";
+import SearchInput from "../ui/SearchInput";
 import CreateDosage from "./CreateDosage";
 
 const DosagesHeader = () => {

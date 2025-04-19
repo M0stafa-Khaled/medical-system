@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { PRESCRIPTIONS_INPUTS, PRESCRIPTIONS_TYPES } from "@/constants";
+import { DOCTOR_PRESCRIPTIONS_INPUTS, PRESCRIPTIONS_TYPES } from "@/constants";
 import { IPrescription } from "@/interfaces/dashboard/prescription";
 import handleResErr from "@/utils/handleResponseError";
 import prescriptionSchema from "@/validations/dashboard/prescriptionSchema";
@@ -21,31 +21,30 @@ import { TPrescriptableType } from "@/types";
 import { useNavigate, useParams } from "react-router-dom";
 import { Delete } from "lucide-react";
 import SubmitButton from "@/components/SubmitButton";
-import RenderPrescriptionFormFields from "./RenderPrescriptionFormFields";
+import RenderPrescriptionFormFields from "../../dashboard/prescription/RenderPrescriptionFormFields";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
 import { useGetAllDoctorsClinics } from "@/lib/react-query/main";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import {
-  useCreatePrescription,
-  useUpdatePrescription,
-} from "@/lib/react-query/dashboard/prescriptions";
 import Swal from "sweetalert2";
-
-import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import { useGetAllDosages } from "@/lib/react-query/dosages";
 import SelectFormItem from "../../formItems/SelectFormItem";
+import { useGetAllDosages } from "@/lib/react-query/dosages";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";
+import { motion } from "framer-motion";
+import { containerVariants, itemVariants } from "@/animations";
+import {
+  useCreateDoctorPrescription,
+  useUpdateDoctorPrescription,
+} from "@/lib/react-query/doctor/prescriptions";
 
 interface IProps {
   prescription?: IPrescription;
   action: "create" | "update";
 }
-const PrescriptionForm = ({ action, prescription }: IProps) => {
+const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
   const { bookingId } = useParams();
   const [clinicId, setClinicId] = useState(
     prescription?.clinic.id.toString() || ""
@@ -103,7 +102,6 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
           day: "2-digit",
         }),
       clinic_id: prescription?.clinic.id.toString() || "",
-      doctor_id: prescription?.doctor.id.toString() || "",
       patient_id: prescription?.patient.id.toString() || "",
     },
   });
@@ -114,18 +112,14 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
   });
 
   const { mutateAsync: createPrescription, isPending: isLoadingCreate } =
-    useCreatePrescription();
+    useCreateDoctorPrescription();
   const { mutateAsync: updatePrescription, isPending: isLoadingUpdate } =
-    useUpdatePrescription();
+    useUpdateDoctorPrescription();
 
-  console.log(form.formState.errors);
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
-    if (
-      !bookingId &&
-      (!data.clinic_id || !data.doctor_id || !data.patient_id)
-    ) {
+    console.log(data);
+    if (!bookingId && (!data.clinic_id || !data.patient_id)) {
       if (!data.clinic_id) toast.error("يرجي اختيار العيادة");
-      if (!data.doctor_id) toast.error("يرجي اختيار الطبيب");
       if (!data.patient_id) toast.error("يرجي اختيار المريض");
       return;
     }
@@ -175,7 +169,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
         });
       }
 
-      navigate("/dashboard/prescriptions");
+      navigate("/doctor/prescriptions");
       form.reset();
     } catch (error) {
       handleResErr(error);
@@ -208,7 +202,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
           className="grid grid-cols-1 md:grid-cols-2 gap-4"
           variants={containerVariants}
         >
-          {PRESCRIPTIONS_INPUTS.map((input) => {
+          {DOCTOR_PRESCRIPTIONS_INPUTS.map((input) => {
             if (
               bookingId &&
               (input.name === "patient_id" ||
@@ -404,4 +398,4 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
   );
 };
 
-export default PrescriptionForm;
+export default DoctorPrescriptionForm;

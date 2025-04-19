@@ -58,8 +58,7 @@ const LoginForm = () => {
           },
         })
       );
-      if (data.role === "admin" || data.role === "employee")
-        dispatch(setPermissions(data.permissions));
+      if (data.role !== "patient") dispatch(setPermissions(data.permissions));
 
       return Swal.fire({
         icon: "success",

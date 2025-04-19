@@ -1,7 +1,7 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import TooltipButton from "@/components/ui/TooltipButton";
-import { useDeleteDosage } from "@/lib/react-query/dashboard/dosages";
+import { useDeleteDoctorPrescription } from "@/lib/react-query/doctor/prescriptions";
 import cookieServices from "@/utils/cookieServices";
 import handleResErr from "@/utils/handleResponseError";
 import { Trash2 } from "lucide-react";
@@ -13,18 +13,18 @@ interface IProps {
   id: string;
 }
 
-const DeleteClinic = ({ name, id }: IProps) => {
+const DoctorDeletePrescription = ({ name, id }: IProps) => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { mutateAsync: deleteDosage, isPending } = useDeleteDosage();
+  const { mutateAsync: deletePrescription, isPending } =
+    useDeleteDoctorPrescription();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deleteDosage({ id, token });
+      const { status, message } = await deletePrescription({ id, token });
 
       // ! Delete failed
       if (!status) return toast.error(message);
-
       // * Delete Success
       return toast.success(message);
     } catch (error) {
@@ -50,9 +50,9 @@ const DeleteClinic = ({ name, id }: IProps) => {
       <Modal
         isOpen={isOpen}
         onOpenChange={() => setIsOpen(false)}
-        title="حذف جرعة"
+        title="حذف روشتة"
         description={{
-          text: `هل انت متاكد من حذف الجرعة ${name}؟`,
+          text: `هل انت متاكد من حذف روشتة المريض ${name}؟`,
           color: "text-red-700",
         }}
         onConfirm={handleDelete}
@@ -64,4 +64,4 @@ const DeleteClinic = ({ name, id }: IProps) => {
   );
 };
 
-export default DeleteClinic;
+export default DoctorDeletePrescription;

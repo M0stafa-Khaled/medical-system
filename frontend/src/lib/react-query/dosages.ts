@@ -6,7 +6,7 @@ import {
   deleteDosage,
   getAllDosages,
   updateDosage,
-} from "@/services/dashboard/dosages";
+} from "@/services/dosages";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetAllDosages = ({ token, search }: IGetWithParams) =>

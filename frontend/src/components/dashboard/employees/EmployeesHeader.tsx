@@ -1,5 +1,5 @@
 import { PERMISSIONS } from "@/enums/permissions";
-import SearchInput from "../SearchInput";
+import SearchInput from "../../ui/SearchInput";
 import { Button } from "@/components/ui/button";
 import useHasPermission from "@/hooks/useHasPermission";
 import { FiPlus } from "react-icons/fi";

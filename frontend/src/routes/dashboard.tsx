@@ -55,9 +55,9 @@ const UpdatePatient = lazy(
 );
 
 // Drugs
-const Drugs = lazy(() => import("@/pages/dashboard/drugs"));
-const Analytics = lazy(() => import("@/pages/dashboard/analytics"));
-const Scans = lazy(() => import("@/pages/dashboard/scans"));
+const Drugs = lazy(() => import("@/pages/drugs"));
+const Analytics = lazy(() => import("@/pages/analytics"));
+const Scans = lazy(() => import("@/pages/scans"));
 
 // Treasuries
 const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
@@ -93,7 +93,7 @@ const LastVisits = lazy(
 );
 
 // Dosages
-const Dosages = lazy(() => import("@/pages/dashboard/dosages"));
+const Dosages = lazy(() => import("@/pages/dosages"));
 
 // Prescriptions
 const Prescriptions = lazy(() => import("@/pages/dashboard/prescription"));

@@ -7,7 +7,7 @@ import cookieServices from "@/utils/cookieServices";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
 import WorkingDayCard from "./WorkingDayCard";
-import SearchInput from "../../SearchInput";
+import SearchInput from "../../../ui/SearchInput";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";

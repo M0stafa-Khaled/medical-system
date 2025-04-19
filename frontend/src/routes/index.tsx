@@ -11,6 +11,7 @@ import patientRoutes from "./patient";
 
 import NotFound from "@/pages/NotFound";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import doctorRoutes from "./doctor";
 
 const Profile = lazy(() => import("@/pages/profile/Profile"));
 const Settings = lazy(() => import("@/pages/settings"));
@@ -57,7 +58,13 @@ const routes = createRoutesFromElements(
 );
 
 const router = createBrowserRouter(
-  [...routes, ...authRoutes, ...dashboardRoutes, ...patientRoutes],
+  [
+    ...routes,
+    ...authRoutes,
+    ...dashboardRoutes,
+    ...patientRoutes,
+    ...doctorRoutes,
+  ],
   {
     basename: "/",
     future: {

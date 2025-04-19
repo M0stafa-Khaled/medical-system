@@ -61,7 +61,7 @@ const Sidebar = ({ links }: IProps) => {
           variants={navItemsVariants}
           className="text-lg text-center font-semibold text-dark dark:text-white"
         >
-          {truncateText(name!, 18)}
+          {truncateText(name!, 15)}
         </motion.h3>
 
         {/* Scrollable section - Links */}

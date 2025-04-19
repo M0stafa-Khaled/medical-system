@@ -1,5 +1,5 @@
 import { PERMISSIONS } from "@/enums/permissions";
-import SearchInput from "../SearchInput";
+import SearchInput from "../../ui/SearchInput";
 import useHasPermission from "@/hooks/useHasPermission";
 import CreateExpenseCategory from "./CreateExpenseCategory";
 import { memo } from "react";
