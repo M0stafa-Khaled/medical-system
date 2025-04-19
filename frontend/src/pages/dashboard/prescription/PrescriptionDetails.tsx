@@ -107,7 +107,7 @@ const PrescriptionDetails = () => {
 
           <CardContent>
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants} className="flex items-center">
@@ -130,29 +130,31 @@ const PrescriptionDetails = () => {
                 </Link>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Building2 className="h-5 w-5 text-purple-500" />}
-                  label="العيادة"
-                  value={clinic?.name as string}
-                />
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<FaNotesMedical className="h-5 w-5 text-purple-500" />}
-                  label="ملاحظات"
-                  value={note!}
-                />
-              </motion.div>
+              <InfoField
+                icon={<Building2 className="h-5 w-5 text-purple-500" />}
+                label="العيادة"
+                value={clinic?.name as string}
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Calendar className="h-5 w-5 text-yellow-500" />}
-                  label="تاريخ إصدار الروشتة"
-                  value={date!}
-                />
-              </motion.div>
+              <InfoField
+                icon={<Calendar className="h-5 w-5 text-yellow-500" />}
+                label="تاريخ إصدار الروشتة"
+                value={date!}
+              />
             </motion.div>
+            <motion.div variants={itemVariants} className="mt-4 space-y-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <FaNotesMedical className="h-5 w-5 text-purple-500" />
+                <h5 className="text-muted-foreground text-nowrap">ملاحظات:</h5>
+              </div>
+              <div className="mr-8">
+                <p
+                  className={`font-medium text-wrap text-dark dark:text-white`}
+                >
+                  {note || "لا يوجد"}
+                </p>
+              </div>
+            </motion.div>{" "}
           </CardContent>
         </Card>
         {/* Prescriptables */}

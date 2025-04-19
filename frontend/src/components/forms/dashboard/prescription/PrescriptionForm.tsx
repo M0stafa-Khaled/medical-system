@@ -37,6 +37,8 @@ import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";
+import { motion } from "framer-motion";
+import { containerVariants, itemVariants } from "@/animations";
 
 interface IProps {
   prescription?: IPrescription;
@@ -193,8 +195,17 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <motion.form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          variants={containerVariants}
+        >
           {PRESCRIPTIONS_INPUTS.map((input) => {
             if (
               bookingId &&
@@ -204,35 +215,45 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
             )
               return null;
             return (
-              <RenderPrescriptionFormFields
+              <motion.div
+                variants={itemVariants}
                 key={input.name}
-                form={form}
-                input={input}
-                schema={prescriptionSchema}
-                options={{
-                  clinics: clinicsOptions!,
-                  doctors: doctorsOptions!,
-                }}
-              />
+                className={`${input.name === "note" ? "col-span-2" : ""}`}
+              >
+                <RenderPrescriptionFormFields
+                  form={form}
+                  input={input}
+                  schema={prescriptionSchema}
+                  options={{
+                    clinics: clinicsOptions!,
+                    doctors: doctorsOptions!,
+                  }}
+                />
+              </motion.div>
             );
           })}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {fields.map((field, index) => {
+        </motion.div>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          variants={containerVariants}
+        >
+          {fields.map((field, idx) => {
             const type = form.watch(
-              `prescriptables.${index}.type` as "prescriptables"
+              `prescriptables.${idx}.type` as "prescriptables"
             ) as unknown as TPrescriptableType;
 
             return (
-              <div
+              <motion.div
                 key={`${field.id}-${type}`}
                 className="space-y-3 border border-primary/10 hover:border-primary/30 transition-all duration-500 ease-in-out p-4 rounded-lg"
+                custom={idx}
+                variants={itemVariants}
               >
                 <FormItem>
                   <FormControl>
                     <Controller
                       control={form.control}
-                      name={`prescriptables.${index}.type`}
+                      name={`prescriptables.${idx}.type`}
                       render={({ field }) => (
                         <SelectFormItem
                           field={field}
@@ -270,7 +291,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                   <FormControl>
                     <Controller
                       control={form.control}
-                      name={`prescriptables.${index}.${
+                      name={`prescriptables.${idx}.${
                         type === "dosage" ? "drug_name" : "name"
                       }`}
                       render={({ field }) =>
@@ -308,7 +329,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                   </FormControl>
                   <FormMessage>
                     {
-                      form.formState.errors.prescriptables?.[index]?.[
+                      form.formState.errors.prescriptables?.[idx]?.[
                         type === "dosage" ? "drug_name" : "name"
                       ]?.message
                     }
@@ -320,7 +341,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                     <FormControl>
                       <Controller
                         control={form.control}
-                        name={`prescriptables.${index}.name`}
+                        name={`prescriptables.${idx}.name`}
                         render={({ field }) => (
                           <SelectFormItem
                             field={field}
@@ -336,7 +357,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                     </FormControl>
                     <FormMessage>
                       {
-                        form.formState.errors.prescriptables?.[index]?.name
+                        form.formState.errors.prescriptables?.[idx]?.name
                           ?.message
                       }
                     </FormMessage>
@@ -346,16 +367,16 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                 <Button
                   type="button"
                   variant="destructive"
-                  onClick={() => remove(index)}
+                  onClick={() => remove(idx)}
                   className="w-full flex justify-center items-center gap-2"
                 >
                   حذف
                   <Delete size={18} />
                 </Button>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
         <FormMessage>
           {form.formState.errors.prescriptables?.message ||
             form.formState.errors.prescriptables?.root?.message}
@@ -376,7 +397,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
             updateText="تحديث الروشتة"
           />
         </div>
-      </form>
+      </motion.form>
     </FormProvider>
   );
 };

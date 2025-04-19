@@ -93,7 +93,7 @@ const PrescriptionsFilters = ({ filters, setFilters }: IProps) => {
             {filters.date ? (
               format(new Date(filters.date), "dd-MM-yyyy")
             ) : (
-              <span className="text-muted-foreground">تاريخ الإنشاء</span>
+              <span className="text-muted-foreground">تاريخ إصدار الروشتة</span>
             )}
           </Button>
         </PopoverTrigger>

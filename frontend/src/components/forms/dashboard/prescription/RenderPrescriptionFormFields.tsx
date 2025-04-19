@@ -2,10 +2,10 @@ import { FormField } from "@/components/ui/form";
 import { IFormInput } from "@/interfaces";
 import { z } from "zod";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import InputFormItem from "../../formItems/InputFormItem";
 import DateFormItem from "../../formItems/DateFormItem";
 import SelectFormItem from "../../formItems/SelectFormItem";
 import PatientSelectItem from "../../formItems/PatientSelectItem";
+import TextareaFormItem from "../../formItems/TextareaFormItem";
 
 interface IOption {
   value: string;
@@ -61,7 +61,7 @@ const RenderPrescriptionFormFields = ({
         );
 
       default:
-        return <InputFormItem {...commonProps} />;
+        return <TextareaFormItem {...commonProps} resize />;
     }
   };
 
