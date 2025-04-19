@@ -88,7 +88,6 @@ export const updatePrescription = async ({
     });
   });
   formData.append("_method", "put");
-  console.log(...formData);
   const { data } = await axiosInstanceAPI.post(
     `/prescriptions/${id}`,
     formData,

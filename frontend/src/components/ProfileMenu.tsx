@@ -29,7 +29,7 @@ const ProfileMenu = () => {
           <DropdownMenuLabel>حسابي</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-white/30 dark:bg-black/30" />
           <DropdownMenuItem>
-            <Link to="/profile" className="block w-full h-full py-2">
+            <Link to="/profile" className="block w-full h-full py-1">
               الملف الشخصي
             </Link>
           </DropdownMenuItem>
@@ -37,12 +37,12 @@ const ProfileMenu = () => {
           {role === "patient" && (
             <>
               <DropdownMenuItem>
-                <Link to="/bookings" className="block w-full h-full py-2">
+                <Link to="/bookings" className="block w-full h-full py-1">
                   الحجوزات
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link to="/balances" className="block w-full h-full py-2">
+                <Link to="/balances" className="block w-full h-full py-1">
                   مدفوعاتي
                 </Link>
               </DropdownMenuItem>
@@ -50,11 +50,18 @@ const ProfileMenu = () => {
           )}
 
           {(role === "admin" || role === "employee") && (
-            <DropdownMenuItem>
-              <Link to="/settings" className="block w-full h-full py-2">
-                الإعدادات
-              </Link>
-            </DropdownMenuItem>
+            <>
+              <DropdownMenuItem>
+                <Link to="/dashboard" className="block w-full h-full py-1">
+                  لوحة التحكم
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link to="/settings" className="block w-full h-full py-1">
+                  الإعدادات
+                </Link>
+              </DropdownMenuItem>
+            </>
           )}
         </DropdownMenuContent>
       </DropdownMenu>

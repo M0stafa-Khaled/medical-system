@@ -52,6 +52,7 @@ export interface ICreatePrescription {
     note?: string;
   };
 }
+
 export interface IUpdatePrescription extends ICreatePrescription {
   id: string;
 }

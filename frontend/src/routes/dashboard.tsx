@@ -494,7 +494,7 @@ const dashboardRoutes = createRoutesFromElements(
         id="dashboard-prescriptions"
       />
       <Route
-        path="prescriptions"
+        path="prescriptions/:prescriptionId"
         element={
           <Suspense fallback={<LoadingSpinnerPage />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PRESCRIPTION}>
@@ -514,6 +514,17 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-prescriptions-create"
+      />
+      <Route
+        path="bookings/:bookingId/prescriptions/create"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PRESCRIPTION}>
+              <CreatePrescription />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-bookings-prescriptions-create"
       />
       <Route
         path="prescriptions/:prescriptionId/update"

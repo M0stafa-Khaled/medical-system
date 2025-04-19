@@ -31,6 +31,7 @@ const DateFormItem = ({ input, field }: IProps) => {
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              id={input.name}
               variant={"outline"}
               className={
                 "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-muted"

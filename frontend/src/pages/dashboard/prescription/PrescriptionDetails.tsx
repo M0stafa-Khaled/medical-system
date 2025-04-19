@@ -1,5 +1,169 @@
+import { containerVariants, itemVariants } from "@/animations";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import DataLoader from "@/components/ui/DataLoader";
+import cookieServices from "@/utils/cookieServices";
+import { User2, UserCircle2, Building2, Calendar, Pen } from "lucide-react";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+import InfoField from "@/components/dashboard/InfoField";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
+import { Button } from "@/components/ui/button";
+import { AxiosResErr } from "@/types";
+import { useGetPrescriptionById } from "@/lib/react-query/dashboard/prescriptions";
+import DeletePrescription from "@/components/dashboard/prescriptions/DeletePrescription";
+import { FaNotesMedical } from "react-icons/fa6";
+import PrescriptablesList from "@/components/dashboard/prescriptions/prescriptables/PrescriptablesList";
+
 const PrescriptionDetails = () => {
-  return <div>PrescriptionDetails</div>;
+  const canUpdatePrescription = useHasPermission(
+    PERMISSIONS.UPDATE_PRESCRIPTION
+  );
+  const canDeletePrescription = useHasPermission(
+    PERMISSIONS.DELETE_PRESCRIPTION
+  );
+
+  const navigate = useNavigate();
+  const token = cookieServices.getToken()!;
+  const { prescriptionId } = useParams();
+
+  const {
+    data: prescription,
+    isLoading,
+    isError,
+    failureReason,
+  } = useGetPrescriptionById({
+    id: prescriptionId!,
+    token,
+  });
+
+  const prescriptionFailure = failureReason as AxiosResErr;
+
+  useEffect(() => {
+    if (isError || prescriptionFailure?.response?.data.message) {
+      toast.error(
+        prescriptionFailure.response?.data.message ||
+          "فشل في تحميل بيانات الروشتة"
+      );
+      navigate(-1);
+      return;
+    }
+  }, [isError, navigate, prescriptionFailure]);
+
+  if (isLoading) return <DataLoader />;
+
+  const { clinic, date, doctor, id, patient, note, prescriptables } =
+    prescription?.data || {};
+
+  return (
+    <>
+      <Helmet>
+        <title>
+          {import.meta.env.VITE_WEB_NAME} | {patient?.name || " "}
+        </title>
+      </Helmet>
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm">
+          <CardHeader className="py-4">
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-4"
+            >
+              <CardTitle className="flex items-center gap-2 text-dark dark:text-white">
+                <Calendar className="h-6 w-6 " />
+                <span>تفاصيل الروشتة:</span>
+              </CardTitle>
+              <div className="flex gap-2">
+                {canUpdatePrescription && (
+                  <motion.div variants={itemVariants}>
+                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
+                      <Link
+                        to={`/dashboard/prescriptions/${id}/update`}
+                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
+                      >
+                        <Pen size={20} />
+                      </Link>
+                    </Button>
+                  </motion.div>
+                )}
+                {canDeletePrescription && (
+                  <motion.div variants={itemVariants}>
+                    <DeletePrescription
+                      name={patient?.name as string}
+                      id={id?.toString() as string}
+                    />
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          </CardHeader>
+
+          <CardContent>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              variants={containerVariants}
+            >
+              <motion.div variants={itemVariants} className="flex items-center">
+                <Link to={`/dashboard/patients/${patient?.id}`}>
+                  <InfoField
+                    icon={<User2 className="h-5 w-5 text-primary" />}
+                    label="المريض"
+                    value={patient?.name as string}
+                  />
+                </Link>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="flex items-center">
+                <Link to={`/dashboard/doctors/${doctor?.id}`}>
+                  <InfoField
+                    icon={<UserCircle2 className="h-5 w-5 text-blue-500" />}
+                    label="الطبيب"
+                    value={doctor?.name as string}
+                  />
+                </Link>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Building2 className="h-5 w-5 text-purple-500" />}
+                  label="العيادة"
+                  value={clinic?.name as string}
+                />
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<FaNotesMedical className="h-5 w-5 text-purple-500" />}
+                  label="ملاحظات"
+                  value={note!}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={<Calendar className="h-5 w-5 text-yellow-500" />}
+                  label="تاريخ إصدار الروشتة"
+                  value={date!}
+                />
+              </motion.div>
+            </motion.div>
+          </CardContent>
+        </Card>
+        {/* Prescriptables */}
+        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm mt-3">
+          <CardContent className="py-3 px-3">
+            <PrescriptablesList prescriptables={prescriptables!} />
+          </CardContent>
+        </Card>
+      </motion.section>
+    </>
+  );
 };
 
 export default PrescriptionDetails;

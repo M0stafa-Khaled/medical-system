@@ -36,14 +36,14 @@ const ScansSelectFormItem = ({ field, input }: IProps) => {
     search,
   });
 
-  const scansOption =
+  const scansOptions =
     scans?.data.items?.map((scans) => ({
       value: scans.name,
       label: scans.name,
     })) ?? [];
 
-  const selectedOptions =
-    scansOption.find((option) => option.value === field.value) ??
+  const selectedOption =
+    scansOptions.find((option) => option.value === field.value) ??
     (field.value ? { value: field.value, label: field.value } : undefined);
 
   return (
@@ -57,7 +57,7 @@ const ScansSelectFormItem = ({ field, input }: IProps) => {
             aria-expanded={open}
             className="border-muted w-full !h-12 text-black dark:text-white justify-between overflow-hidden"
           >
-            {selectedOptions ? selectedOptions.label : "اختر..."}
+            {selectedOption ? selectedOption.label : "اختر..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -88,7 +88,7 @@ const ScansSelectFormItem = ({ field, input }: IProps) => {
                 </div>
               </CommandEmpty>
               <CommandGroup>
-                {scansOption.map((option) => (
+                {scansOptions.map((option) => (
                   <CommandItem
                     className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20"
                     key={option.value}

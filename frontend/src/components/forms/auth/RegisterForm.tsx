@@ -37,7 +37,6 @@ const RegisterForm = () => {
   });
 
   const onSubmit = async (user: z.infer<typeof registerSchema>) => {
-    console.log(user);
     try {
       const { data, message, status } = await register(user);
       if (!status)

@@ -17,7 +17,7 @@ import {
   WorkflowIcon,
 } from "lucide-react";
 import { GiMedicinePills } from "react-icons/gi";
-import { TbReportAnalytics } from "react-icons/tb";
+import { TbReportAnalytics, TbReportMedical } from "react-icons/tb";
 import { memo } from "react";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAttachMoney, MdMedication } from "react-icons/md";
@@ -41,6 +41,9 @@ const DashboardLayout = () => {
 
   // Dosages
   const canViewDosages = useHasPermission(PERMISSIONS.DOSAGES);
+
+  // Prescriptions
+  const canViewPrescriptions = useHasPermission(PERMISSIONS.PRESCRIPTIONS);
 
   const routeNames: Record<string, string> = {
     dashboard: "الرئيسية",
@@ -124,6 +127,16 @@ const DashboardLayout = () => {
                     },
                   ]
                 : []),
+              // Dosages
+              ...(canViewDosages
+                ? [
+                    {
+                      name: routeNames.dosages,
+                      path: "/dashboard/dosages",
+                      icon: <GiMedicinePills size={18} />,
+                    },
+                  ]
+                : []),
               ...(canViewTreasuries
                 ? [
                     {
@@ -139,16 +152,6 @@ const DashboardLayout = () => {
                       name: routeNames["expenses-categories"],
                       path: "/dashboard/expenses-categories",
                       icon: <Workflow size={18} />,
-                    },
-                  ]
-                : []),
-              // Dosages
-              ...(canViewDosages
-                ? [
-                    {
-                      name: routeNames.dosages,
-                      path: "/dashboard/dosages",
-                      icon: <GiMedicinePills size={18} />,
                     },
                   ]
                 : []),
@@ -187,6 +190,16 @@ const DashboardLayout = () => {
           },
         ]
       : []),
+    // Prescriptions
+    ...(canViewPrescriptions
+      ? [
+          {
+            name: routeNames.prescriptions,
+            path: "/dashboard/prescriptions",
+            icon: <TbReportMedical size={18} />,
+          },
+        ]
+      : []),
 
     // Drugs
     {
@@ -204,13 +217,6 @@ const DashboardLayout = () => {
     {
       name: routeNames.scans,
       path: "/dashboard/scans",
-      icon: <UserRoundSearch size={18} />,
-    },
-
-    // Prescriptions
-    {
-      name: routeNames.prescriptions,
-      path: "/dashboard/prescriptions",
       icon: <UserRoundSearch size={18} />,
     },
   ];

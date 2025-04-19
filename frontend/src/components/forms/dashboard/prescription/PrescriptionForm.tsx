@@ -86,7 +86,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
         drug_name: prescriptable.drug_name || "",
       })) || [
         {
-          type: "dosage",
+          type: "scan",
           name: "",
           drug_name: "",
         },
@@ -110,8 +110,6 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
     name: "prescriptables",
   });
 
-  console.log(form.formState.errors);
-  console.log(form.getValues());
 
   const { mutateAsync: createPrescription, isPending: isLoadingCreate } =
     useCreatePrescription();
@@ -119,7 +117,6 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
     useUpdatePrescription();
 
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
-    console.log(data);
     if (
       !bookingId &&
       (!data.clinic_id || !data.doctor_id || !data.patient_id)
@@ -226,15 +223,14 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
 
             return (
               <div
-                key={field.id}
-                className="space-y-3 border border-primary/10 hover:border-primary/30 transition-all duration-500 ease-in-out p-4 rounded-lg "
+                key={`${field.id}-${type}`}
+                className="space-y-3 border border-primary/10 hover:border-primary/30 transition-all duration-500 ease-in-out p-4 rounded-lg"
               >
                 <FormItem>
-                  <FormLabel>النوع</FormLabel>
                   <FormControl>
                     <Controller
                       control={form.control}
-                      name={`prescriptables.${index}.type` as "prescriptables"}
+                      name={`prescriptables.${index}.type`}
                       render={({ field }) => (
                         <SelectFormItem
                           field={field}
@@ -272,7 +268,9 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                   <FormControl>
                     <Controller
                       control={form.control}
-                      name={`prescriptables.${index}.name`}
+                      name={`prescriptables.${index}.${
+                        type === "dosage" ? "drug_name" : "name"
+                      }`}
                       render={({ field }) =>
                         type === "scan" ? (
                           <ScansSelectFormItem
@@ -287,7 +285,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                           <DrugsSelectFormItem
                             field={field}
                             input={{
-                              name: "name",
+                              name: "drug_name",
                               label: "اسم الدواء",
                               type: "select",
                             }}
@@ -308,8 +306,9 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                   </FormControl>
                   <FormMessage>
                     {
-                      form.formState.errors.prescriptables?.[index]?.name
-                        ?.message
+                      form.formState.errors.prescriptables?.[index]?.[
+                        type === "dosage" ? "drug_name" : "name"
+                      ]?.message
                     }
                   </FormMessage>
                 </FormItem>
@@ -319,13 +318,13 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                     <FormControl>
                       <Controller
                         control={form.control}
-                        name={`prescriptables.${index}.drug_name`}
+                        name={`prescriptables.${index}.name`}
                         render={({ field }) => (
                           <SelectFormItem
                             field={field}
                             options={dosagesOptions!}
                             input={{
-                              name: "drug_name",
+                              name: "name",
                               label: "اسم الجرعة",
                               type: "select",
                             }}
@@ -333,7 +332,12 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                         )}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage>
+                      {
+                        form.formState.errors.prescriptables?.[index]?.name
+                          ?.message
+                      }
+                    </FormMessage>
                   </FormItem>
                 )}
 
