@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Eye, Pen } from "lucide-react";
 import DeleteBooking from "./DeleteBooking";
+import { LiaNotesMedicalSolid } from "react-icons/lia";
 
 interface IProps {
   bookings: IBooking[];
@@ -24,7 +25,7 @@ const BookingsList = ({ bookings }: IProps) => {
   const canViewBooking = useHasPermission(PERMISSIONS.VIEW_BOOKING);
 
   const canCreateTransaction = useHasPermission(PERMISSIONS.ADD_TRANSACTION);
-
+  const canCreatePrescription = useHasPermission(PERMISSIONS.ADD_PRESCRIPTION);
   if (!bookings.length)
     return (
       <motion.tr
@@ -88,6 +89,19 @@ const BookingsList = ({ bookings }: IProps) => {
             canCreateTransaction) && (
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-2">
+                {canCreatePrescription && booking.status === "collected" && (
+                  <TooltipButton title="إصدار روشتة">
+                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
+                      <Link
+                        to={`/dashboard/bookings/${booking?.id}/prescriptions/create`}
+                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
+                      >
+                        <LiaNotesMedicalSolid size={20} />
+                      </Link>
+                    </Button>
+                  </TooltipButton>
+                )}
+
                 {canCreateTransaction &&
                   (booking.status === "pending" ||
                     booking.status === "completed") && (

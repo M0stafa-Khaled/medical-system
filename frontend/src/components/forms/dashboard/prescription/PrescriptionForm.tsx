@@ -110,7 +110,6 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
     name: "prescriptables",
   });
 
-
   const { mutateAsync: createPrescription, isPending: isLoadingCreate } =
     useCreatePrescription();
   const { mutateAsync: updatePrescription, isPending: isLoadingUpdate } =
@@ -152,7 +151,10 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
       if (action === "create") {
         const { message, status } = await createPrescription({
           token,
-          prescription: data,
+          prescription: {
+            ...data,
+            booking_id: bookingId,
+          },
         });
 
         if (!status)

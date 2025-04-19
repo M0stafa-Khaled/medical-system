@@ -29,7 +29,7 @@ const PrescriptableCard = ({
       {drug_name && (
         <div className="flex items-center gap-2">
           <h4 className="text-dark/80 dark:text-white/70 text-nowrap">
-            اسم الدواء:{" "}
+            اسم الدواء:
           </h4>
           <p className="md:text-lg text-wrap break-words">{drug_name}</p>
         </div>
