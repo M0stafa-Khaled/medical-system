@@ -12,7 +12,7 @@ import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
 import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
 import convertDay from "@/utils/convertDayLang";
 import {
-  useGetAllDoctorsClinics,
+  useGetAllClinicDoctors,
   useGetAvailableBookingsTime,
 } from "@/lib/react-query/main";
 import SubmitButton from "@/components/SubmitButton";
@@ -58,7 +58,7 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
     },
   });
 
-  const { data: doctors } = useGetAllDoctorsClinics({
+  const { data: doctors } = useGetAllClinicDoctors({
     token,
     clinic_id: clinicId!,
   });

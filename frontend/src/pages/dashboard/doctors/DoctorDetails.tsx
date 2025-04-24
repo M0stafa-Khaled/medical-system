@@ -150,7 +150,7 @@ const DoctorDetails = () => {
             </motion.div>
             <motion.div
               variants={containerVariants}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
               <motion.div
                 className="flex items-center gap-2 col-span-full"

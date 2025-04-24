@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { useGetAllDosages } from "@/lib/react-query/dosages";
+import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 

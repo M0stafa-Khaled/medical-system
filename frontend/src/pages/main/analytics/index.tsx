@@ -1,22 +1,22 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import ScansTable from "@/components/scans/ScansTable";
+import AnalyticsTable from "@/components/main/analytics/AnalyticsTable";
 
-const Scans = () => {
+const Analytics = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | الأشعات</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | التحاليل</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <ScansTable />
+        <AnalyticsTable />
       </motion.section>
     </>
   );
 };
 
-export default Scans;
+export default Analytics;

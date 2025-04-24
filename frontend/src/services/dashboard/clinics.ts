@@ -1,14 +1,11 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/interfaces";
-import {
-  ICreateClinic,
-  IResponseClinics,
-} from "@/interfaces/dashboard/clinics";
+import { ICreateClinic, IClinicsRes } from "@/interfaces/dashboard/clinics";
 
 export const getAllClinics = async ({
   token,
   filter,
-}: IGetWithParams): Promise<IResponseClinics> => {
+}: IGetWithParams): Promise<IClinicsRes> => {
   const { data } = await axiosInstanceAPI.get("/clinics", {
     params: { ...(filter && { filter }) },
 

@@ -22,14 +22,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Delete } from "lucide-react";
 import SubmitButton from "@/components/SubmitButton";
 import RenderPrescriptionFormFields from "../../dashboard/prescription/RenderPrescriptionFormFields";
-import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
-import { useGetAllDoctorsClinics } from "@/lib/react-query/main";
+import { useGetAllClinicDoctors } from "@/lib/react-query/main";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import SelectFormItem from "../../formItems/SelectFormItem";
-import { useGetAllDosages } from "@/lib/react-query/dosages";
+import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";
@@ -39,6 +38,7 @@ import {
   useCreateDoctorPrescription,
   useUpdateDoctorPrescription,
 } from "@/lib/react-query/doctor/prescriptions";
+import { useGetDoctorClinics } from "@/lib/react-query/doctor/doctorClinics";
 
 interface IProps {
   prescription?: IPrescription;
@@ -51,19 +51,14 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
   );
   const token = cookieServices.getToken()!;
   const navigate = useNavigate();
-  const { data: clinics } = useGetAllClinics({
-    token,
-    filter: {
-      status: "1",
-    },
-  });
+  const { data: clinics } = useGetDoctorClinics(token);
 
   const clinicsOptions = clinics?.data?.map((clinic) => ({
     label: clinic.name,
     value: clinic.id.toString(),
   }));
 
-  const { data: doctors } = useGetAllDoctorsClinics({
+  const { data: doctors } = useGetAllClinicDoctors({
     token,
     clinic_id: clinicId && !bookingId ? clinicId : "",
   });
@@ -117,7 +112,6 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
     useUpdateDoctorPrescription();
 
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
-    console.log(data);
     if (!bookingId && (!data.clinic_id || !data.patient_id)) {
       if (!data.clinic_id) toast.error("يرجي اختيار العيادة");
       if (!data.patient_id) toast.error("يرجي اختيار المريض");

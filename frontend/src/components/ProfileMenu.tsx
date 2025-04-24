@@ -11,10 +11,14 @@ import { FaUser } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import cookieServices from "@/utils/cookieServices";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const ProfileMenu = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const role = cookieServices.getUser()?.role;
+
+  const canViewCompany = useHasPermission(PERMISSIONS.COMPANY_INFO);
 
   if (isAuthenticated)
     return (
@@ -52,14 +56,6 @@ const ProfileMenu = () => {
           {role === "doctor" && (
             <>
               <DropdownMenuItem>
-                <Link
-                  to="/doctor/bookings"
-                  className="block w-full h-full py-1"
-                >
-                  الحجوزات
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
                 <Link to="/doctor" className="block w-full h-full py-1">
                   لوحة التحكم
                 </Link>
@@ -74,11 +70,16 @@ const ProfileMenu = () => {
                   لوحة التحكم
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link to="/settings" className="block w-full h-full py-1">
-                  الإعدادات
-                </Link>
-              </DropdownMenuItem>
+              {canViewCompany && (
+                <DropdownMenuItem>
+                  <Link
+                    to="/dashboard/settings"
+                    className="block w-full h-full py-1"
+                  >
+                    الإعدادات
+                  </Link>
+                </DropdownMenuItem>
+              )}
             </>
           )}
         </DropdownMenuContent>

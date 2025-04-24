@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import PathIndicator from "@/components/dashboard/PathIndicator";
 import Sidebar from "@/components/dashboard/Sidebar";
 
 import { ILink } from "@/interfaces";
@@ -9,13 +8,11 @@ import { TbReportAnalytics, TbReportMedical } from "react-icons/tb";
 import { MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import ROUTES_NAME from "@/constants/routesName";
-import { useGetUserProfile } from "@/lib/react-query/profile/profile";
-import cookieServices from "@/utils/cookieServices";
 
 const DoctorLayout = () => {
   const NAV_LINKS: ILink[] = [
     {
-      name: ROUTES_NAME.dashboard,
+      name: ROUTES_NAME.clinics,
       path: "/doctor",
       icon: <HomeIcon size={18} />,
     },
@@ -54,10 +51,6 @@ const DoctorLayout = () => {
     },
   ];
 
-  const token = cookieServices.getToken()!;
-  const { data: doctor } = useGetUserProfile(token);
-  console.log(doctor?.data);
-
   return (
     <div className="flex bg-foreground">
       <ScrollRestoration />
@@ -68,8 +61,7 @@ const DoctorLayout = () => {
         <div className="container">
           <Header links={NAV_LINKS} dashboard />
           <main className="flex-1 mt-20 lg:mt-6 bg-background">
-            <PathIndicator routeNames={ROUTES_NAME} />
-            <div className="my-5">
+            <div className="my-10">
               <Outlet />
             </div>
           </main>

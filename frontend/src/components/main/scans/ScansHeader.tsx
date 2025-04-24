@@ -1,4 +1,4 @@
-import SearchInput from "../ui/SearchInput";
+import SearchInput from "@/components/ui/SearchInput";
 
 const ScansHeader = () => {
   return (

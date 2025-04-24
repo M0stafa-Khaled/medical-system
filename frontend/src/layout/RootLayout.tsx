@@ -102,7 +102,7 @@ const RootLayout = () => {
   }, [user, queryClient, playNotificationSound]);
 
   const { data: notifications, isLoading } = useGetNotifications(
-    user?.role !== "doctor" ? user!.role : ""
+    user?.role !== "doctor" ? token : ""
   );
 
   const unreadNotifications = useMemo(() => {

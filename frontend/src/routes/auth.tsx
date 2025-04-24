@@ -1,4 +1,5 @@
 import { lazy } from "react";
+
 const AuthLayout = lazy(() => import("@/layout/AuthLayout"));
 const Login = lazy(() => import("@/pages/auth/Login"));
 const Register = lazy(() => import("@/pages/auth/Register"));

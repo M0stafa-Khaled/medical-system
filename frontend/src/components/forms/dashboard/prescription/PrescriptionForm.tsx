@@ -24,7 +24,7 @@ import SubmitButton from "@/components/SubmitButton";
 import RenderPrescriptionFormFields from "./RenderPrescriptionFormFields";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
-import { useGetAllDoctorsClinics } from "@/lib/react-query/main";
+import { useGetAllClinicDoctors } from "@/lib/react-query/main";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
@@ -35,7 +35,7 @@ import Swal from "sweetalert2";
 
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import { useGetAllDosages } from "@/lib/react-query/dosages";
+import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
 import SelectFormItem from "../../formItems/SelectFormItem";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
@@ -64,7 +64,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
     value: clinic.id.toString(),
   }));
 
-  const { data: doctors } = useGetAllDoctorsClinics({
+  const { data: doctors } = useGetAllClinicDoctors({
     token,
     clinic_id: clinicId && !bookingId ? clinicId : "",
   });
@@ -118,7 +118,6 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
   const { mutateAsync: updatePrescription, isPending: isLoadingUpdate } =
     useUpdatePrescription();
 
-  console.log(form.formState.errors);
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
     if (
       !bookingId &&

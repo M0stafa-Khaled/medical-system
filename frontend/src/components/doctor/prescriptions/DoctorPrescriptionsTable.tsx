@@ -83,7 +83,7 @@ const DoctorPrescriptionsTable = () => {
           prescriptions={prescriptions?.data?.items || []}
         />
       }
-      skeleton={<TableSkeleton columns={5} rows={6} actionButtons={4} />}
+      skeleton={<TableSkeleton columns={4} rows={6} actionButtons={4} />}
       pagination={
         prescriptions?.data && {
           meta: prescriptions.data?.meta,

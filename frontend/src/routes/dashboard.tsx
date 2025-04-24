@@ -55,9 +55,9 @@ const UpdatePatient = lazy(
 );
 
 // Drugs
-const Drugs = lazy(() => import("@/pages/drugs"));
-const Analytics = lazy(() => import("@/pages/analytics"));
-const Scans = lazy(() => import("@/pages/scans"));
+const Drugs = lazy(() => import("@/pages/main/drugs"));
+const Analytics = lazy(() => import("@/pages/main/analytics"));
+const Scans = lazy(() => import("@/pages/main/scans"));
 
 // Treasuries
 const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
@@ -93,7 +93,7 @@ const LastVisits = lazy(
 );
 
 // Dosages
-const Dosages = lazy(() => import("@/pages/dosages"));
+const Dosages = lazy(() => import("@/pages/main/dosages"));
 
 // Prescriptions
 const Prescriptions = lazy(() => import("@/pages/dashboard/prescription"));
@@ -106,6 +106,9 @@ const UpdatePrescription = lazy(
 const PrescriptionDetails = lazy(
   () => import("@/pages/dashboard/prescription/PrescriptionDetails")
 );
+
+// Company
+const Settings = lazy(() => import("@/pages/dashboard/settings"));
 
 const dashboardRoutes = createRoutesFromElements(
   <Route element={<RootLayout />} id="dashboard-root">
@@ -128,6 +131,17 @@ const dashboardRoutes = createRoutesFromElements(
           <h1 className="text-primary font-alexandria">الصفحة الرئيسية</h1>
         }
         id="dashboard-home"
+      />
+
+      {/* Company */}
+      <Route
+        path="settings"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <Settings />
+          </Suspense>
+        }
+        id="settings"
       />
 
       {/* Bookings */}

@@ -1,22 +1,22 @@
-import DrugsTable from "@/components/drugs/DrugsTable";
+import DosagesTable from "@/components/main/dosages/DosagesTable";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
-const Drugs = () => {
+const Dosages = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | الأدوية</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | الجرعات</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <DrugsTable />
+        <DosagesTable />
       </motion.section>
     </>
   );
 };
 
-export default Drugs;
+export default Dosages;

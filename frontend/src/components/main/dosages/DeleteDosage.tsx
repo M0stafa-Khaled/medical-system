@@ -1,7 +1,7 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import TooltipButton from "@/components/ui/TooltipButton";
-import { useDeleteDosage } from "@/lib/react-query/dosages";
+import { useDeleteDosage } from "@/lib/react-query/dashboard/dosages";
 import cookieServices from "@/utils/cookieServices";
 import handleResErr from "@/utils/handleResponseError";
 import { Trash2 } from "lucide-react";

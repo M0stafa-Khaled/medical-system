@@ -4,24 +4,27 @@ import {
   Route,
 } from "react-router-dom";
 import { lazy } from "react";
-import { AppLayout, RootLayout } from "@/layout";
 import authRoutes from "./auth";
 import dashboardRoutes from "./dashboard";
 import patientRoutes from "./patient";
 
 import NotFound from "@/pages/NotFound";
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
+// import Error from "@/pages/Error";
+
 import doctorRoutes from "./doctor";
 
+const AppLayout = lazy(() => import("@/layout/AppLayout"));
+const RootLayout = lazy(() => import("@/layout/RootLayout"));
+const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 const Profile = lazy(() => import("@/pages/profile/Profile"));
-const Settings = lazy(() => import("@/pages/settings"));
 
 const routes = createRoutesFromElements(
   <>
     <Route
       path="/"
       element={<RootLayout />}
-      id="main-root" // errorElement={<Error />}
+      id="main-root"
+      // errorElement={<Error />}
     >
       {/* Home */}
       <Route element={<AppLayout />} id="app-layout">
@@ -38,16 +41,6 @@ const routes = createRoutesFromElements(
             </ProtectedRoute>
           }
           id="profile"
-        />
-        {/* Settings */}
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute requiredRole={["admin", "employee"]}>
-              <Settings />
-            </ProtectedRoute>
-          }
-          id="settings"
         />
       </Route>
     </Route>

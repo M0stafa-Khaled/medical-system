@@ -28,7 +28,7 @@ export const useGetAllScans = ({ token, page, search }: IGetWithParams) =>
     queryFn: () => getAllScans({ token, page, search }),
   });
 
-export const useGetAllDoctorsClinics = ({
+export const useGetAllClinicDoctors = ({
   token,
   clinic_id,
 }: {
@@ -36,7 +36,7 @@ export const useGetAllDoctorsClinics = ({
   clinic_id: string;
 }) =>
   useQuery({
-    queryKey: [Query_Keys.GET_ALL_DOCTORS_CLINICS, clinic_id],
+    queryKey: [Query_Keys.GET_ALL_CLINIC_DOCTORS, clinic_id],
     enabled: !!clinic_id,
     queryFn: () => getAllClinicsDoctors({ token, clinic_id }),
   });

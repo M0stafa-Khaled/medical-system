@@ -85,7 +85,7 @@ const ForgotPassword = () => {
         className="flex flex-col items-center justify-center"
       >
         <div className="flex flex-col justify-center items-center gap-2 mb-6 max-w-md md:max-w-sm">
-          <img src="/logo.svg" alt="logo" className="w-20" />
+          <img src="/images/logo.svg" alt="logo" className="w-20" />
           <h1 className="font-semibold text-black text-xl text-center">
             لا تقلق، سنساعدك على استعادة حسابك!
           </h1>

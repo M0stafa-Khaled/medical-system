@@ -84,7 +84,7 @@ const Profile = () => {
       ? employeeData.image
       : user?.role === "doctor"
       ? doctorData.image
-      : "/avatar.svg";
+      : "/images/avatar.svg";
 
   return (
     <motion.section

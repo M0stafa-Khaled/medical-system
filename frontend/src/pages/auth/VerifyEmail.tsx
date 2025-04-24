@@ -156,7 +156,7 @@ const VerifyEmail = () => {
       <main className="container flex items-center justify-center min-h-screen">
         <Card className="border-muted bg-foreground shadow-none">
           <div className="flex justify-center items-center max-w-xs mx-auto">
-            <img src="/verify-email.svg" alt="verify email" className="w-56" />
+            <img src="/images/verify-email.svg" alt="verify email" className="w-56" />
           </div>
           <CardHeader className="text-center">
             <CardTitle className="leading-relaxed">

@@ -58,7 +58,7 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
             </TableCell>
             <TableCell className="flex justify-center items-center text-sm text-center text-black dark:text-white py-3 font-medium">
               <img
-                src={image || "/avatar.svg"}
+                src={image || "/images/avatar.svg"}
                 alt={name}
                 className="w-12 h-12 rounded-full object-cover"
               />

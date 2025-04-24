@@ -27,9 +27,9 @@ const ProfileHeader = ({ image, name, role, firstPhone }: IProps) => {
         whileInView={{ opacity: 1, x: 0 }}
         className="relative h-20"
       >
-        <div className="w-40 h-40 absolute -top-20 right-1/2 translate-x-1/2 md:translate-x-0 md:right-10 bg-white dark:bg-dark border-[5px] border-[#fff] dark:border-dark rounded-full overflow-hidden flex justify-center items-center">
+        <div className="w-40 h-40 absolute -top-20 right-1/2 translate-x-1/2 md:translate-x-0 md:right-10 bg-white border-[5px] border-[#fff] dark:border-dark rounded-full overflow-hidden flex justify-center items-center">
           <img
-            src={image || "/avatar.svg"}
+            src={image || "/images/avatar.svg"}
             alt="logo"
             className="object-cover"
           />

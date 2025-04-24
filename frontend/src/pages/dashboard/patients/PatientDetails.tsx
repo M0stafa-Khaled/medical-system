@@ -133,7 +133,7 @@ const PatientDetails = () => {
               <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
             </motion.div>
 
-            <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <motion.div variants={itemVariants}>
                 <InfoField
                   icon={
@@ -148,81 +148,64 @@ const PatientDetails = () => {
                 />
               </motion.div>
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Info className="text-blue-700" />}
-                  label="ملاحظات حالة الحساب"
-                  value={info_status!}
-                />
-              </motion.div>
+              <InfoField
+                icon={<Info className="text-blue-700" />}
+                label="ملاحظات حالة الحساب"
+                value={info_status!}
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Users className="text-blue-700" />}
-                  label="اسم احد الاقارب"
-                  value={another_name!}
-                />
-              </motion.div>
+              <InfoField
+                icon={<Users className="text-blue-700" />}
+                label="اسم احد الاقارب"
+                value={another_name!}
+                breakAll
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<BadgeInfo className="text-primary" />}
-                  label="ملاحظات"
-                  value={description!}
-                />
-              </motion.div>
+              <InfoField
+                icon={<BadgeInfo className="text-primary" />}
+                label="ملاحظات"
+                value={description!}
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<UserCircle2 className="text-primary" />}
-                  label="رقم الهوية"
-                  value={personal_id!}
-                />
-              </motion.div>
+              <InfoField
+                icon={<UserCircle2 className="text-primary" />}
+                label="رقم الهوية"
+                value={personal_id!}
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Phone className="text-green-600" />}
-                  label="رقم الهاتف الاول"
-                  value={first_phone!}
-                />
-              </motion.div>
+              <InfoField
+                icon={<Phone className="text-green-600" />}
+                label="رقم الهاتف الاول"
+                value={first_phone!}
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Phone className="text-purple-600" />}
-                  label="رقم الهاتف الثاني"
-                  value={second_phone ? second_phone : "لا يوجد"}
-                />
-              </motion.div>
+              <InfoField
+                icon={<Phone className="text-purple-600" />}
+                label="رقم الهاتف الثاني"
+                value={second_phone ? second_phone : "لا يوجد"}
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Mail className="text-orange-500" />}
-                  label="البريد الإلكتروني"
-                  value={user?.email as string}
-                  sm
-                  breakAll
-                />
-              </motion.div>
+              <InfoField
+                icon={<Mail className="text-orange-500" />}
+                label="البريد الإلكتروني"
+                value={user?.email as string}
+                sm
+                breakAll
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  label="الجنس"
-                  value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
-                  sm
-                  icon={<VenusAndMars className="text-primary" />}
-                />
-              </motion.div>
+              <InfoField
+                label="الجنس"
+                value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
+                sm
+                icon={<VenusAndMars className="text-primary" />}
+              />
 
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={<Calendar className="text-teal-500" />}
-                  label="تاريخ الإنشاء"
-                  value={formatDateTime(created_at!)}
-                  sm
-                />
-              </motion.div>
+              <InfoField
+                icon={<Calendar className="text-teal-500" />}
+                label="تاريخ الإنشاء"
+                value={formatDateTime(created_at!)}
+                sm
+              />
 
               <motion.div
                 variants={itemVariants}

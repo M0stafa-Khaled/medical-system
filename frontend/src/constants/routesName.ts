@@ -1,5 +1,6 @@
 const ROUTES_NAME: Record<string, string> = {
   dashboard: "الرئيسية",
+  settings: "الإعدادات",
   clinics: "العيادات",
   doctors: "الأطباء",
   "working-days": "ايام العمل",
@@ -18,7 +19,6 @@ const ROUTES_NAME: Record<string, string> = {
   scans: "الأشعات",
   dosages: "الجرعات",
   prescriptions: "الروشتات",
-  doctor: "طبيب",
 };
 
 export default ROUTES_NAME;

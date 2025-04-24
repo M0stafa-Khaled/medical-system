@@ -14,10 +14,10 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { CalendarIcon } from "lucide-react";
-import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
 import { format } from "date-fns";
 import { IPrescriptionsFilter } from "@/interfaces/dashboard/prescription";
+import { useGetDoctorClinics } from "@/lib/react-query/doctor/doctorClinics";
 
 interface IProps {
   filters: IPrescriptionsFilter;
@@ -25,7 +25,7 @@ interface IProps {
 }
 const DoctorPrescriptionsFilters = ({ filters, setFilters }: IProps) => {
   const token = cookieServices.getToken()!;
-  const { data: clinics } = useGetAllClinics({ token });
+  const { data: clinics } = useGetDoctorClinics(token);
 
   const handleFilterChange = (key: string, value: string | null) =>
     setFilters({ ...filters, [key]: value });

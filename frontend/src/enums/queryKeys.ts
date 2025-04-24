@@ -1,5 +1,9 @@
 enum Query_Keys {
   GET_USER_PROFILE = "user",
+
+  // Notifications
+  NOTIFICATIONS = "notifications",
+
   // Dashboard
   GET_ALL_CLINICS = "clinics",
   GET_ALL_DOCTORS = "doctors",
@@ -21,7 +25,7 @@ enum Query_Keys {
   GET_ALL_ONE_EXPENSES_CATEGORY = "expensesCategory",
   GET_ALL_BOOKINGS = "bookings",
   GET_ONE_BOOKING = "booking",
-  GET_ALL_DOCTORS_CLINICS = "doctorsClinics",
+  GET_ALL_CLINIC_DOCTORS = "clinicDoctors",
   GET_AVAILABLE_BOOKINGS_TIME = "availableBookingsTimes",
   GET_ALL_TRANSACTIONS = "transactions",
   GET_ONE_TRANSACTION = "transaction",
@@ -37,8 +41,9 @@ enum Query_Keys {
   GET_ONE_PATIENT_BOOKING = "patientBooking",
   GET_ALL_PATIENT_BALANCES = "patientBalances",
 
-  // Notifications
-  NOTIFICATIONS = "notifications",
+  // Doctor
+  DOCTOR_CLINICS = "doctorClinics",
+  DOCTOR_BOOKINGS = "doctorBookings",
 }
 
 export default Query_Keys;

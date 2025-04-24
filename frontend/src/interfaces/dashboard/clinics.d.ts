@@ -7,7 +7,7 @@ export interface IClinic {
   updated_at: string;
 }
 
-export interface IResponseClinics {
+export interface IClinicsRes {
   status: boolean;
   message: string | null;
   data: IClinic[];

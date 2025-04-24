@@ -67,7 +67,7 @@ const PrintExpenseReceipt = ({
             <div className="text-center space-y-3 w-1/3">
               <h2 className="text-lg font-bold text-center">
                 <img
-                  src="/logo.svg"
+                  src="/images/logo.svg"
                   alt="logo"
                   className="max-h-16 w-full mx-auto"
                 />

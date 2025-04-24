@@ -17,7 +17,7 @@ const Login = () => {
         className="w-full max-w-md"
       >
         <div className="flex flex-col justify-center items-center gap-2 mb-6">
-          <img src="/logo.svg" alt="logo" className="w-20" />
+          <img src="/images/logo.svg" alt="logo" className="w-20" />
           <h1 className="font-semibold text-black text-xl text-center">
             تسجيل الدخول
           </h1>

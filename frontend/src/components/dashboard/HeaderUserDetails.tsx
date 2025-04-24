@@ -15,7 +15,7 @@ const HeaderUserDetails = ({ image, name, role, actionButtons }: IProps) => {
           <ImageModal src={image} alt={name} className="!rounded-full" />
         ) : (
           <img
-            src={"/avatar.svg"}
+            src={"/images/avatar.svg"}
             alt={name}
             className="w-full h-full rounded-full object-contain border border-muted"
           />
@@ -23,7 +23,7 @@ const HeaderUserDetails = ({ image, name, role, actionButtons }: IProps) => {
       </div>
       <div className="space-y-1">
         <div>
-          <h3 className="flex items-center justify-center sm:justify-start gap-2 leading-relaxed">
+          <h3 className="text-center sm:text-start flex items-center justify-center sm:justify-start gap-2 leading-relaxed">
             {name}
           </h3>
           <p className="capitalize text-muted-foreground text-center text-xs leading-relaxed sm:text-start">

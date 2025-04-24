@@ -1,22 +1,22 @@
-import DosagesTable from "@/components/dosages/DosagesTable";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import ScansTable from "@/components/main/scans/ScansTable";
 
-const Dosages = () => {
+const Scans = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | الجرعات</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | الأشعات</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <DosagesTable />
+        <ScansTable />
       </motion.section>
     </>
   );
 };
 
-export default Dosages;
+export default Scans;

@@ -22,7 +22,7 @@ const AuthLayout = () => {
   }
 
   return (
-    <main className="auth-scroll-bar min-h-screen bg-[url(/login-bg.png)] bg-no-repeat bg-right bg-cover flex justify-center items-center">
+    <main className="auth-scroll-bar min-h-screen bg-[url(/images/login-bg.png)] bg-no-repeat bg-right bg-cover flex justify-center items-center">
       <div
         className={`px-2 sm:container ${
           !path.includes("register") ? "md:max-w-3xl lg:max-w-7xl" : ""
@@ -56,7 +56,7 @@ const AuthLayout = () => {
           >
             <div className="max-w-sm flex justify-center items-center">
               <img
-                src="/login.jpg"
+                src="/images/login.jpg"
                 alt="login"
                 className="w-[60%] md:w-[90%] mx-auto"
               />
