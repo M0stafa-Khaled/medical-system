@@ -39,5 +39,25 @@ export default defineConfig({
   },
   build: {
     sourcemap: false,
+    chunkSizeWarningLimit: 500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("react")) return "chunk-react";
+            if (id.includes("react-router-dom")) return "chunk-router";
+            if (id.includes("@reduxjs")) return "chunk-redux";
+            if (id.includes("@tanstack")) return "chunk-query";
+            if (id.includes("@radix-ui")) return "chunk-radix";
+            if (id.includes("framer-motion")) return "chunk-motion";
+            if (id.includes("zod")) return "chunk-zod";
+            if (id.includes("axios")) return "chunk-axios";
+            if (id.includes("sweetalert2")) return "chunk-alert";
+            if (id.includes("clsx") || id.includes("class-variance-authority"))
+              return "chunk-utils";
+          }
+        },
+      },
+    },
   },
 });

@@ -6,7 +6,7 @@ import {
 import useNetworkStatus from "@/hooks/useNetworkStatus";
 import { useCheckAuth } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import {
   Outlet,
@@ -16,24 +16,32 @@ import {
 } from "react-router-dom";
 import { toast } from "react-toastify";
 import echo from "@/lib/pusher/echo";
+import { useGetNotifications } from "@/lib/react-query/notifications/notifications";
+import { setNotifications } from "@/store/features/notifications/notificationSlice";
+import { useQueryClient } from "@tanstack/react-query";
+import Query_Keys from "@/enums/queryKeys";
+import useNotificationSound from "@/hooks/useNotificationSound";
 
 const RootLayout = () => {
   useNetworkStatus();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = cookieServices.getToken()!;
-  const { mutateAsync: checkAuthUser } = useCheckAuth();
   const location = useLocation();
+  const queryClient = useQueryClient();
+
+  const token = cookieServices.getToken()!;
+  const user = useMemo(() => cookieServices.getUser(), []);
+  const { mutateAsync: checkAuthUser } = useCheckAuth();
+  const { playNotificationSound } = useNotificationSound();
 
   useEffect(() => {
     (async () => {
       const { auth, email_verified, status, permissions } = await checkAuthUser(
         token
       );
-
       // ----- User is  unauthenticated ------ //
+      // If user is unauthenticated
       if (!auth) {
-        // If user is unauthenticated
         dispatch(logout());
         dispatch(clearPermissions());
         if (location.pathname !== "/") {
@@ -45,34 +53,71 @@ const RootLayout = () => {
 
       // ----- User is authenticated ----- //
       // Account is not verified
-      if (auth && !email_verified) {
+      if (!email_verified) {
         navigate("/verify-account");
         return toast.warn("يرجى تاكيد البريد الالكتروني");
       }
 
       // Account is not Active
-      if (auth && !status) {
+      if (!status) {
+        dispatch(logout());
+        dispatch(clearPermissions());
         return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
       }
 
       // Set Permissions in state
-      const role = cookieServices.getUser()?.role;
-      if (auth && permissions && role !== "patient")
+      if (permissions && user?.role !== "patient") {
         dispatch(setPermissions(permissions));
+      }
     })();
-  }, [checkAuthUser, token, navigate, dispatch, location]);
+  }, [checkAuthUser, token, user?.role, dispatch, location.pathname, navigate]);
 
-  const user = cookieServices.getUser();
+  // Notifications
+  const hasSubscribed = useRef(false);
+  const lastNotificationId = useRef<string | null>(null);
 
   useEffect(() => {
-    echo.private(`users.${user?.id}`).notification((data: any) => {
-      alert(data.message);
+    if (!user || hasSubscribed.current) return;
+
+    hasSubscribed.current = true;
+
+    const channel = echo.private(`users.${user.id}`);
+    channel.notification((data: any) => {
+      if (data?.id === lastNotificationId.current) return;
+      lastNotificationId.current = data?.id;
+
+      playNotificationSound();
+      toast.info("لديك إشعار جديد", {
+        autoClose: 6000,
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.NOTIFICATIONS],
+      });
     });
 
     return () => {
-      echo.leaveChannel("subscription-usage");
+      echo.leaveChannel(`users.${user.id}`);
+      hasSubscribed.current = false;
     };
-  }, [user]);
+  }, [user, queryClient, playNotificationSound]);
+
+  const { data: notifications, isLoading } = useGetNotifications(
+    user?.role !== "doctor" ? user!.role : ""
+  );
+
+  const unreadNotifications = useMemo(() => {
+    return notifications?.data.filter((n) => !n.last_view).length || 0;
+  }, [notifications]);
+
+  useEffect(() => {
+    dispatch(
+      setNotifications({
+        notifications: notifications?.data || [],
+        unreadNotifications,
+        isLoading,
+      })
+    );
+  }, [notifications, unreadNotifications, isLoading, dispatch]);
 
   return (
     <>

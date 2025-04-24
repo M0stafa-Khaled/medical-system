@@ -12,13 +12,14 @@ import { memo } from "react";
 import { ILink } from "@/interfaces";
 import cookieServices from "@/utils/cookieServices";
 import truncateText from "@/utils/truncateText";
+import NotificationsMenu from "../notifications/NotificationsMenu";
 
 interface IProps {
   links: ILink[];
 }
 
 const Sidebar = ({ links }: IProps) => {
-  const name = cookieServices.getUser()?.name;
+  const user = cookieServices.getUser();
   return (
     <motion.aside
       initial="hidden"
@@ -33,7 +34,7 @@ const Sidebar = ({ links }: IProps) => {
           className="flex justify-center items-center p-3"
         >
           <motion.img
-            src={"/logo.svg"}
+            src={"/images/logo.svg"}
             alt="logo"
             initial="hidden"
             animate="visible"
@@ -50,6 +51,12 @@ const Sidebar = ({ links }: IProps) => {
           <motion.div variants={navItemsVariants}>
             <LogoutButton />
           </motion.div>
+
+          {user?.role !== "doctor" && (
+            <motion.div variants={navItemsVariants}>
+              <NotificationsMenu />
+            </motion.div>
+          )}
           <motion.div variants={navItemsVariants}>
             <ProfileMenu />
           </motion.div>
@@ -57,12 +64,14 @@ const Sidebar = ({ links }: IProps) => {
             <ToggleMode />
           </motion.div>
         </motion.div>
-        <motion.h3
-          variants={navItemsVariants}
-          className="text-lg text-center font-semibold text-dark dark:text-white"
-        >
-          {truncateText(name!, 15)}
-        </motion.h3>
+        {(user?.role === "admin" || user?.role === "employee") && (
+          <motion.h3
+            variants={navItemsVariants}
+            className="text-lg text-center font-semibold text-dark dark:text-white"
+          >
+            {truncateText(user?.name || "", 15)}
+          </motion.h3>
+        )}
 
         {/* Scrollable section - Links */}
         <motion.nav

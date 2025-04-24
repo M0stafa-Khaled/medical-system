@@ -36,6 +36,9 @@ enum Query_Keys {
   GET_ALL_PATIENT_BOOKINGS = "patientBookings",
   GET_ONE_PATIENT_BOOKING = "patientBooking",
   GET_ALL_PATIENT_BALANCES = "patientBalances",
+
+  // Notifications
+  NOTIFICATIONS = "notifications",
 }
 
 export default Query_Keys;

@@ -16,6 +16,8 @@ import {
   navItemsVariants,
 } from "@/animations/navbarAnimations";
 import { ILink } from "@/interfaces";
+import NotificationsMenu from "./notifications/NotificationsMenu";
+import cookieServices from "@/utils/cookieServices";
 
 interface IProps {
   links: ILink[];
@@ -24,6 +26,7 @@ interface IProps {
 
 const Header = ({ links, dashboard = false }: IProps) => {
   const [openNav, setOpenNav] = useState(false);
+  const role = cookieServices.getUser()?.role;
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -92,6 +95,12 @@ const Header = ({ links, dashboard = false }: IProps) => {
                 <motion.div variants={navItemsVariants}>
                   <LogoutButton />
                 </motion.div>
+                {role !== "doctor" && (
+                  <motion.div variants={navItemsVariants}>
+                    <NotificationsMenu />
+                  </motion.div>
+                )}
+
                 <motion.div variants={navItemsVariants}>
                   <ProfileMenu />
                 </motion.div>
@@ -102,7 +111,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
               <motion.div variants={logoVariants} className="w-12">
                 <Link to={"/"}>
                   <motion.img
-                    src={"/logo.svg"}
+                    src={"/images/logo.svg"}
                     alt="logo"
                     variants={logoVariants}
                     initial="hidden"

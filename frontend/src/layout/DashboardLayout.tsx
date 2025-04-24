@@ -179,7 +179,7 @@ const DashboardLayout = () => {
       ? [
           {
             name: ROUTES_NAME.prescriptions,
-            path: "/doctor/prescriptions",
+            path: "/dashboard/prescriptions",
             icon: <TbReportMedical size={18} />,
           },
         ]
@@ -188,19 +188,19 @@ const DashboardLayout = () => {
     // Drugs
     {
       name: ROUTES_NAME.drugs,
-      path: "/doctor/drugs",
+      path: "/dashboard/drugs",
       icon: <MdMedication size={18} />,
     },
     // Analytics
     {
       name: ROUTES_NAME.analytics,
-      path: "/doctor/analytics",
+      path: "/dashboard/analytics",
       icon: <TbReportAnalytics size={18} />,
     },
     // Scans
     {
       name: ROUTES_NAME.scans,
-      path: "/doctor/scans",
+      path: "/dashboard/scans",
       icon: <UserRoundSearch size={18} />,
     },
   ];
