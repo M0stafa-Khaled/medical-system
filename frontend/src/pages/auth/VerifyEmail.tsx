@@ -101,7 +101,10 @@ const VerifyEmail = () => {
         title: "تم التأكيد",
         text: "تم تأكيد البريد الإلكتروني بنجاح",
       });
-      navigate("/");
+      if (role === "admin" || role === "employee")
+        return navigate("/dashboard");
+      if (role === "doctor") return navigate("/doctor");
+      if (role === "patient") return navigate("/bookings");
     } catch (error) {
       const errorObj = error as AxiosError<{
         message: { [key: string]: string[] };
@@ -153,10 +156,14 @@ const VerifyEmail = () => {
       <Helmet>
         <title>{import.meta.env.VITE_WEB_NAME} | تأكيد الحساب</title>
       </Helmet>
-      <main className="container flex items-center justify-center min-h-screen">
+      <main className="container flex items-center justify-center min-h-screen py-4">
         <Card className="border-muted bg-foreground shadow-none">
           <div className="flex justify-center items-center max-w-xs mx-auto">
-            <img src="/images/verify-email.svg" alt="verify email" className="w-56" />
+            <img
+              src="/images/verify-email.svg"
+              alt="verify email"
+              className="w-56"
+            />
           </div>
           <CardHeader className="text-center">
             <CardTitle className="leading-relaxed">

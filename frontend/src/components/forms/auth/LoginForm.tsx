@@ -42,11 +42,6 @@ const LoginForm = () => {
           text: message,
         });
 
-      if (data.role === "employee" || data.role === "admin")
-        navigate("/dashboard/bookings");
-
-      if (data.role === "patient") navigate("/bookings");
-
       // * Login Success
       dispatch(
         login({
@@ -58,6 +53,14 @@ const LoginForm = () => {
           },
         })
       );
+
+      if (data.role === "employee" || data.role === "admin")
+        navigate("/dashboard/bookings");
+
+      if (data.role === "patient") navigate("/bookings");
+
+      if (data.role === "doctor") navigate("/doctor");
+
       if (data.role !== "patient") dispatch(setPermissions(data.permissions));
 
       return Swal.fire({

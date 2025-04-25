@@ -44,14 +44,15 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("react")) return "chunk-react";
-            if (id.includes("react-router-dom")) return "chunk-router";
-            if (id.includes("@reduxjs")) return "chunk-redux";
-            if (id.includes("@tanstack")) return "chunk-query";
-            if (id.includes("@radix-ui")) return "chunk-radix";
-            if (id.includes("framer-motion")) return "chunk-motion";
-            if (id.includes("zod")) return "chunk-zod";
-            if (id.includes("axios")) return "chunk-axios";
+            if (id.includes("crypto-js")) return "chunk-cr";
+            if (id.includes("react")) return "chunk-rc";
+            if (id.includes("react-router-dom")) return "chunk-rt";
+            if (id.includes("@reduxjs")) return "chunk-rx";
+            if (id.includes("@tanstack")) return "chunk-qy";
+            if (id.includes("@radix-ui")) return "chunk-rs";
+            if (id.includes("framer-motion")) return "chunk-mt";
+            if (id.includes("zod")) return "chunk-z";
+            if (id.includes("axios")) return "chunk-ax";
             if (id.includes("sweetalert2")) return "chunk-alert";
             if (id.includes("clsx") || id.includes("class-variance-authority"))
               return "chunk-utils";

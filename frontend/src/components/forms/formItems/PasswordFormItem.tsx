@@ -27,7 +27,7 @@ const PasswordFormItem = ({ field, input }: IProps) => {
         <div className="relative">
           <button
             type="button"
-            className="text-black grid place-items-center absolute text-blue-gray-500 top-2/4 left-3 -translate-y-2/4 w-5 h-5"
+            className="text-black grid place-items-center absolute text-blue-gray-500 top-2/4 left-3 -translate-y-2/4 w-5 h-5 focus-visible:outline-none"
           >
             {showPassword ? (
               <Eye size={20} onClick={() => setShowPassword((prev) => !prev)} />

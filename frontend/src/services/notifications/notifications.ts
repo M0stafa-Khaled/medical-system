@@ -5,7 +5,6 @@ import { INotificationsRes } from "@/interfaces/notifications";
 export const getNotifications = async (
   token: string
 ): Promise<INotificationsRes> => {
-  console.log(token);
   const { data } = await axiosInstanceAPI.get("/notifications", {
     headers: { Authorization: `Bearer ${token}` },
   });

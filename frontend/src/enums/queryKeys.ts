@@ -1,5 +1,10 @@
 enum Query_Keys {
-  GET_USER_PROFILE = "user",
+  // Company
+  COMPANY_INFO = "company",
+  SUBSCRIPTION = "subscription",
+
+  // Profile
+  GET_USER_PROFILE = "profile",
 
   // Notifications
   NOTIFICATIONS = "notifications",
