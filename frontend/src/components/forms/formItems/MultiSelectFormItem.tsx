@@ -98,7 +98,7 @@ const MultiSelectFormItem = ({
           </PopoverTrigger>
           <PopoverContent
             id={input.name}
-            className="w-[300px] sm:w-[400px] md:w-[370px] xl:w-[420px] p-0 z-[1000] border-none border-black/20 dark:border-white/40"
+            className="w-[300px] sm:w-[400px] md:w-[370px] p-0 z-[1000] border-none border-black/20 dark:border-white/40"
           >
             <Command
               id={input.name}

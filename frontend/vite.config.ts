@@ -46,12 +46,15 @@ export default defineConfig({
           if (id.includes("node_modules")) {
             if (id.includes("crypto-js")) return "chunk-cr";
             if (id.includes("react")) return "chunk-rc";
+            if (id.includes("date-fns")) return "chunk-ds";
             if (id.includes("react-router-dom")) return "chunk-rt";
             if (id.includes("@reduxjs")) return "chunk-rx";
             if (id.includes("@tanstack")) return "chunk-qy";
+            if (id.includes("react-helmet-async")) return "chunk-hsy";
             if (id.includes("@radix-ui")) return "chunk-rs";
             if (id.includes("framer-motion")) return "chunk-mt";
             if (id.includes("zod")) return "chunk-z";
+            if (id.includes("laravel-echo")) return "chunk-lch";
             if (id.includes("axios")) return "chunk-ax";
             if (id.includes("sweetalert2")) return "chunk-alert";
             if (id.includes("clsx") || id.includes("class-variance-authority"))

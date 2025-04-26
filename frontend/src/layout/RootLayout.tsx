@@ -15,12 +15,16 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { toast } from "react-toastify";
-import echo from "@/lib/pusher/echo";
 import { useGetNotifications } from "@/lib/react-query/notifications/notifications";
 import { setNotifications } from "@/store/features/notifications/notificationSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "@/enums/queryKeys";
 import useNotificationSound from "@/hooks/useNotificationSound";
+import {
+  initializeEcho,
+  leaveEchoChannel,
+  getEchoInstance,
+} from "@/lib/pusher/echo";
 
 const RootLayout = () => {
   useNetworkStatus();
@@ -69,6 +73,8 @@ const RootLayout = () => {
       if (permissions && user?.role !== "patient") {
         dispatch(setPermissions(permissions));
       }
+      // Enable socket
+      if (user?.role !== "doctor") initializeEcho(token);
     })();
   }, [checkAuthUser, token, user?.role, dispatch, location.pathname, navigate]);
 
@@ -79,9 +85,14 @@ const RootLayout = () => {
   useEffect(() => {
     if (!user || hasSubscribed.current) return;
 
+    const echo = getEchoInstance();
+    if (!echo) return;
+
     hasSubscribed.current = true;
 
-    const channel = echo.private(`users.${user.id}`);
+    const channelName = `users.${user.id}`;
+    const channel = echo.private(channelName);
+
     channel.notification((data: any) => {
       if (data?.id === lastNotificationId.current) return;
       lastNotificationId.current = data?.id;
@@ -90,13 +101,14 @@ const RootLayout = () => {
       toast.info("لديك إشعار جديد", {
         autoClose: 6000,
       });
+
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.NOTIFICATIONS],
       });
     });
 
     return () => {
-      echo.leaveChannel(`users.${user.id}`);
+      leaveEchoChannel(channelName);
       hasSubscribed.current = false;
     };
   }, [user, queryClient, playNotificationSound]);

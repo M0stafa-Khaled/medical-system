@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { FiLogOut } from "react-icons/fi";
@@ -8,9 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { logout } from "@/store/features/auth/authSlice";
 import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
-import Modal from "./shared/Modal";
 import handleResErr from "@/utils/handleResponseError";
 import Swal from "sweetalert2";
+
+const Modal = lazy(() => import("@/components/shared/Modal"));
 
 const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
   const navigate = useNavigate();

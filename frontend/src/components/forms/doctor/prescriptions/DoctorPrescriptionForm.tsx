@@ -23,8 +23,6 @@ import { Delete } from "lucide-react";
 import SubmitButton from "@/components/SubmitButton";
 import RenderPrescriptionFormFields from "../../dashboard/prescription/RenderPrescriptionFormFields";
 import cookieServices from "@/utils/cookieServices";
-import { useGetAllClinicDoctors } from "@/lib/react-query/main";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import SelectFormItem from "../../formItems/SelectFormItem";
@@ -44,11 +42,10 @@ interface IProps {
   prescription?: IPrescription;
   action: "create" | "update";
 }
+
 const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
   const { bookingId } = useParams();
-  const [clinicId, setClinicId] = useState(
-    prescription?.clinic.id.toString() || ""
-  );
+
   const token = cookieServices.getToken()!;
   const navigate = useNavigate();
   const { data: clinics } = useGetDoctorClinics(token);
@@ -56,16 +53,6 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
   const clinicsOptions = clinics?.data?.map((clinic) => ({
     label: clinic.name,
     value: clinic.id.toString(),
-  }));
-
-  const { data: doctors } = useGetAllClinicDoctors({
-    token,
-    clinic_id: clinicId && !bookingId ? clinicId : "",
-  });
-
-  const doctorsOptions = doctors?.data?.map((doctor) => ({
-    label: doctor.name,
-    value: doctor.id.toString(),
   }));
 
   const { data: dosages } = useGetAllDosages({ token });
@@ -170,19 +157,6 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
     }
   };
 
-  useEffect(() => {
-    const subscription = form.watch((value, { name }) => {
-      if (name === "clinic_id") {
-        const clinicValue = value.clinic_id as string;
-        setClinicId(clinicValue);
-        // Reset values when change clinic
-        form.setValue("doctor_id", "");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [form]);
-
   return (
     <FormProvider {...form}>
       <motion.form
@@ -208,7 +182,7 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
               <motion.div
                 variants={itemVariants}
                 key={input.name}
-                className={`${input.name === "note" ? "col-span-2" : ""}`}
+                className={`${input.name === "note" ? "lg:col-span-2" : ""}`}
               >
                 <RenderPrescriptionFormFields
                   form={form}
@@ -216,7 +190,6 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
                   schema={prescriptionSchema}
                   options={{
                     clinics: clinicsOptions!,
-                    doctors: doctorsOptions!,
                   }}
                 />
               </motion.div>
@@ -271,7 +244,15 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
                 </FormItem>
 
                 <FormItem>
-                  <FormLabel>
+                  <FormLabel
+                    htmlFor={
+                      type === "scan"
+                        ? "scan"
+                        : type === "analysis"
+                        ? "analysis"
+                        : "dosage"
+                    }
+                  >
                     {type === "scan"
                       ? "اسم الإشعة"
                       : type === "analysis"

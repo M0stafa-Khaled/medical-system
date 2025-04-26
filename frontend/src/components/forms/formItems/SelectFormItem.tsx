@@ -74,7 +74,7 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
           </PopoverTrigger>
           <PopoverContent
             id={input.name}
-            className="w-[250px] md:w-[300px] p-0 z-[1000] border-black/20 dark:border-white/40"
+            className="w-[300px] sm:w-[400px] md:w-[370px] p-0 z-[1000] border-black/20 dark:border-white/40"
           >
             <Command
               id={input.name}

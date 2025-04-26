@@ -1,10 +1,13 @@
+import cookieServices from "@/utils/cookieServices";
 import { useEffect, useRef, useState } from "react";
 
 const useNotificationSound = () => {
+  const role = cookieServices.getUser()?.role;
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    if (role === "doctor") return;
     audioRef.current = new Audio("/sounds/notification.mp3");
     audioRef.current.load();
 
@@ -31,7 +34,7 @@ const useNotificationSound = () => {
       window.removeEventListener("scroll", activateSound);
       window.removeEventListener("keydown", activateSound);
     };
-  }, [enabled]);
+  }, [enabled, role]);
 
   const playNotificationSound = () => {
     if (enabled && audioRef.current) audioRef.current.play();

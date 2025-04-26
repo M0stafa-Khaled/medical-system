@@ -29,8 +29,9 @@ const NotificationsMenu = () => {
       handleResErr(error);
     }
   };
+  const role = cookieServices.getUser()?.role;
 
-  if (isAuthenticated)
+  if (isAuthenticated && role !== "doctor")
     return (
       <DropdownMenu>
         <DropdownMenuTrigger className="relative h-9 w-9 bg-primary flex justify-center items-center rounded-md shadow transition-all duration-100 hover:bg-primary/90">

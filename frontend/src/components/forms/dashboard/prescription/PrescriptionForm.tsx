@@ -219,7 +219,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
               <motion.div
                 variants={itemVariants}
                 key={input.name}
-                className={`${input.name === "note" ? "col-span-2" : ""}`}
+                className={`${input.name === "note" ? "lg:col-span-2" : ""}`}
               >
                 <RenderPrescriptionFormFields
                   form={form}

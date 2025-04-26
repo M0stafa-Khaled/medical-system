@@ -59,7 +59,7 @@ const SelectAndWriteFormItem = ({ options, input, field }: IProps) => {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[250px] md:w-[300px] p-0 z-[1000] border-black/20 dark:border-white/40">
+      <PopoverContent className="w-[300px] sm:w-[400px] md:w-[370px] p-0 z-[1000] border-black/20 dark:border-white/40">
         <Command className="text-black dark:text-white bg-foreground">
           <CommandInput
             placeholder="ابحث أو اكتب جديد"

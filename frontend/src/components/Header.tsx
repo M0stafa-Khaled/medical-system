@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 import { Link } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
-import ProfileMenu from "./ProfileMenu";
 
-import AuthButtons from "./dashboard/AuthButtons";
-import ToggleMode from "./ToggleMode";
-import LogoutButton from "./LogoutButton";
-import NavList from "./NavList";
 import {
   menuIconVariants,
   navVariants,
@@ -16,8 +11,17 @@ import {
   navItemsVariants,
 } from "@/animations/navbarAnimations";
 import { ILink } from "@/interfaces";
-import NotificationsMenu from "./notifications/NotificationsMenu";
 import cookieServices from "@/utils/cookieServices";
+import {} from "react";
+
+const NotificationsMenu = lazy(
+  () => import("./notifications/NotificationsMenu")
+);
+const ProfileMenu = lazy(() => import("./ProfileMenu"));
+const AuthButtons = lazy(() => import("./dashboard/AuthButtons"));
+const ToggleMode = lazy(() => import("./ToggleMode"));
+const LogoutButton = lazy(() => import("./LogoutButton"));
+const NavList = lazy(() => import("./NavList"));
 
 interface IProps {
   links: ILink[];
@@ -56,6 +60,8 @@ const Header = ({ links, dashboard = false }: IProps) => {
               <NavList links={links} />
             </div>
             <button
+              type="button"
+              name="menu-button"
               className="flex justify-center items-center lg:hidden"
               onClick={() => setOpenNav(!openNav)}
             >
