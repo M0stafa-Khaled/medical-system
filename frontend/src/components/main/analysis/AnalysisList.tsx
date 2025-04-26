@@ -10,7 +10,7 @@ interface IProps {
   meta?: IPaginationMeta;
 }
 
-const AnalyticsList = ({ analytics, meta }: IProps) => {
+const AnalysisList = ({ analytics, meta }: IProps) => {
   if (!analytics.length)
     return (
       <motion.tr
@@ -63,4 +63,4 @@ const AnalyticsList = ({ analytics, meta }: IProps) => {
   );
 };
 
-export default AnalyticsList;
+export default AnalysisList;

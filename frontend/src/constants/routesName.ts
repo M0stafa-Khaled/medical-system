@@ -13,7 +13,7 @@ const ROUTES_NAME: Record<string, string> = {
   expenses: "المصروفات",
   "expenses-categories": "تصنيفات المصروفات",
   bookings: "الحجوزات",
-  transactions: "التحصيلات",
+  transactions: "الإيرادات",
   "last-visits": "أخر الزيارات",
   analytics: "التحاليل",
   scans: "الأشعات",

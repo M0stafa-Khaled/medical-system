@@ -13,7 +13,6 @@ import {
 } from "@/lib/react-query/dashboard/doctors/doctors";
 import { useNavigate } from "react-router-dom";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
-import { useEffect } from "react";
 import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
@@ -44,37 +43,22 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
   const form = useForm<z.infer<typeof doctorSchema>>({
     resolver: zodResolver(doctorSchema),
     defaultValues: {
-      name: "",
-      personal_id: "",
-      first_phone: "",
-      second_phone: "",
-      email: "",
-      register_id: "",
-      gender: "male",
+      name: doctor?.name || "",
+      personal_id: doctor?.personal_id || "",
+      first_phone: doctor?.first_phone || "",
+      second_phone: doctor?.second_phone || "",
+      email: doctor?.user?.email || "",
       password: "",
-      commission: "0",
-      status: true,
+      register_id: doctor?.register_id || "",
+      gender: doctor?.gender?.toLowerCase() || "male",
+      commission:
+        doctor?.commission?.slice(0, doctor?.commission?.length - 1) || "",
+      status: Boolean(doctor?.status) || true,
+      clinics: doctor?.clinics?.map((clinic) => clinic?.id.toString()) || [],
       image: undefined,
       signature: undefined,
-      clinics: [],
     },
   });
-
-  useEffect(() => {
-    if (!doctor) return;
-    form.reset({
-      name: doctor?.name,
-      personal_id: doctor?.personal_id,
-      first_phone: doctor?.first_phone,
-      second_phone: doctor?.second_phone || "",
-      email: doctor?.user?.email,
-      register_id: doctor?.register_id,
-      gender: doctor?.gender?.toLowerCase(),
-      commission: doctor?.commission?.slice(0, doctor?.commission?.length - 1),
-      status: Boolean(doctor?.status),
-      clinics: doctor?.clinics?.map((clinic) => clinic?.id.toString()),
-    });
-  }, [form, doctor]);
 
   const { handleFileChange } = useUploadImgHandler(form);
 

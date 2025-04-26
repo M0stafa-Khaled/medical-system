@@ -1,7 +1,7 @@
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { memo } from "react";
 
-const AnalyticsTableHeader = () => {
+const AnalysisTableHeader = () => {
   return (
     <TableHeader>
       <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
@@ -14,4 +14,4 @@ const AnalyticsTableHeader = () => {
   );
 };
 
-export default memo(AnalyticsTableHeader);
+export default memo(AnalysisTableHeader);

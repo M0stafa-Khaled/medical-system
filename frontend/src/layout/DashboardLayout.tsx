@@ -14,7 +14,6 @@ import {
   Users,
   Wallet,
   Workflow,
-  WorkflowIcon,
 } from "lucide-react";
 import { GiMedicinePills } from "react-icons/gi";
 import { TbReportAnalytics, TbReportMedical } from "react-icons/tb";
@@ -22,8 +21,11 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { MdAttachMoney, MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import ROUTES_NAME from "@/constants/routesName";
+import { HiOutlineUsers } from "react-icons/hi2";
+import cookieServices from "@/utils/cookieServices";
 
 const DashboardLayout = () => {
+  const user = cookieServices.getUser()!;
   // Codes
   const canViewClinics = useHasPermission(PERMISSIONS.CLINICS);
   const canViewDoctors = useHasPermission(PERMISSIONS.DOCTORS);
@@ -46,11 +48,15 @@ const DashboardLayout = () => {
   const canViewPrescriptions = useHasPermission(PERMISSIONS.PRESCRIPTIONS);
 
   const NAV_LINKS: ILink[] = [
-    {
-      name: ROUTES_NAME.dashboard,
-      path: "/dashboard",
-      icon: <HomeIcon size={18} />,
-    },
+    ...(user.role === "admin"
+      ? [
+          {
+            name: ROUTES_NAME.dashboard,
+            path: "/dashboard",
+            icon: <HomeIcon size={18} />,
+          },
+        ]
+      : []),
     // Booking
     ...(canViewBookings
       ? [
@@ -98,7 +104,7 @@ const DashboardLayout = () => {
                     {
                       name: ROUTES_NAME.employees,
                       path: "/dashboard/employees",
-                      icon: <WorkflowIcon />,
+                      icon: <HiOutlineUsers size={18} />,
                     },
                   ]
                 : []),

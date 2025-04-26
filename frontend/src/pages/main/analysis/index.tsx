@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import AnalyticsTable from "@/components/main/analytics/AnalyticsTable";
+import AnalysisTable from "@/components/main/analysis/AnalysisTable";
 
-const Analytics = () => {
+const Analysis = () => {
   return (
     <>
       <Helmet>
@@ -13,10 +13,10 @@ const Analytics = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <AnalyticsTable />
+        <AnalysisTable />
       </motion.section>
     </>
   );
 };
 
-export default Analytics;
+export default Analysis;

@@ -627,6 +627,11 @@ export const PAYMENT_METHODS: {
 
 export const TRANSACTION_FORM_INPUTS: IFormInput[] = [
   {
+    name: "doctor_actions",
+    label: "الخدمة",
+    type: "select",
+  },
+  {
     name: "payment_method",
     label: "وسيلة الدفع",
     type: "select",
@@ -642,11 +647,6 @@ export const TRANSACTION_FORM_INPUTS: IFormInput[] = [
     label: "المبلغ",
     type: "number",
     placeholder: "المبلغ",
-  },
-  {
-    name: "doctor_actions",
-    label: "الخدمة",
-    type: "select",
   },
 ];
 

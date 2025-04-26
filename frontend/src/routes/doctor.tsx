@@ -8,7 +8,7 @@ const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 const DoctorClinics = lazy(() => import("@/pages/doctor/clinics"));
 const DoctorBookings = lazy(() => import("@/pages/doctor/bookings"));
 const Drugs = lazy(() => import("@/pages/main/drugs"));
-const Analytics = lazy(() => import("@/pages/main/analytics"));
+const Analysis = lazy(() => import("@/pages/main/analysis"));
 const Scans = lazy(() => import("@/pages/main/scans"));
 const Dosages = lazy(() => import("@/pages/main/dosages"));
 const DoctorPrescriptions = lazy(() => import("@/pages/doctor/prescriptions"));
@@ -138,7 +138,7 @@ const doctorRoutes = createRoutesFromElements(
           path="analytics"
           element={
             <Suspense fallback={<LoadingSpinnerPage />}>
-              <Analytics />
+              <Analysis />
             </Suspense>
           }
           id="doctor-analytics"

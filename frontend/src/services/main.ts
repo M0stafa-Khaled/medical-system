@@ -79,7 +79,7 @@ export const getAllPatientBalancesTransactions = async ({
   return data;
 };
 
-export const getAllAnalytics = async ({
+export const getAllAnalysis = async ({
   token,
   page,
   search,

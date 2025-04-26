@@ -21,7 +21,7 @@ enum Query_Keys {
   GET_ALL_DOCTOR_WORKING_DAYS = "doctorWorkingDays",
   GET_ONE_DOCTOR_WORKING_DAYS = "doctorWorkingDay",
   GET_ALL_DRUGS = "drugs",
-  GET_ALL_ANALYTICS = "analysis",
+  GET_ALL_ANALYSIS = "analysis",
   GET_ALL_SCANS = "scans",
   GET_ALL_TREASURIES = "treasuries",
   GET_ALL_EXPENSES = "expenses",
@@ -49,6 +49,22 @@ enum Query_Keys {
   // Doctor
   DOCTOR_CLINICS = "doctorClinics",
   DOCTOR_BOOKINGS = "doctorBookings",
+
+  // Widgets
+  ADMIN_WIDGETS = "adminWidgets",
+  DOCTOR_WIDGETS = "doctorWidgets",
+
+  // Charts
+  ACTIVE_USERS_CHART = "activeUsersChart",
+  REGISTRATION_CHART = "registrationChart",
+  BOOKINGS_CHART = "bookingsChart",
+  TREASURIES_CHART = "treasuriesChart",
+
+  EMPLOYEE_TREASURIES_CHART = "employeeTreasuriesChart",
+
+  DOCTOR_BOOKINGS_CHART = "doctorBookingsChart",
+  DOCTOR_PRESCRIPTIONS_CHART = "doctorPrescriptionsChart",
+  DOCTOR_TREASURIES_CHART = "doctorTreasuriesChart",
 }
 
 export default Query_Keys;

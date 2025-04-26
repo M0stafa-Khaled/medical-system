@@ -5,50 +5,50 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
-import { useGetAllAnalytics } from "@/lib/react-query/main";
-import AnalyticsHeader from "./AnalyticsHeader";
-import AnalyticsTableHeader from "./AnalyticsTableHeader";
-import AnalyticsList from "./AnalyticsList";
+import { useGetAllAnalysis } from "@/lib/react-query/main";
+import AnalysisHeader from "./AnalysisHeader";
+import AnalysisTableHeader from "./AnalyticsTableHeader";
+import AnalysisList from "./AnalysisList";
 
-const AnalyticsTable = () => {
+const AnalysisTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const search = useDebounce(searchParams.get("q"), 500)!;
 
   const {
-    data: analytics,
+    data: analysis,
     isLoading,
     isError,
-  } = useGetAllAnalytics({ page, token, search });
+  } = useGetAllAnalysis({ page, token, search });
 
   useEffect(() => {
-    if (analytics?.message && !analytics.status) toast.error(analytics.message);
+    if (analysis?.message && !analysis.status) toast.error(analysis.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [analytics?.message, analytics?.status, isError]);
+  }, [analysis?.message, analysis?.status, isError]);
 
   return (
     <DataTable
       isLoading={isLoading}
-      header={<AnalyticsHeader />}
-      tableHeader={<AnalyticsTableHeader />}
+      header={<AnalysisHeader />}
+      tableHeader={<AnalysisTableHeader />}
       list={
-        <AnalyticsList
-          analytics={analytics?.data?.items || []}
-          meta={analytics?.data && analytics.data?.meta}
+        <AnalysisList
+          analytics={analysis?.data?.items || []}
+          meta={analysis?.data && analysis.data?.meta}
         />
       }
       skeleton={<TableSkeleton columns={3} rows={6} showButtons={false} />}
       pagination={
-        analytics?.data && {
-          meta: analytics.data?.meta,
+        analysis?.data && {
+          meta: analysis.data?.meta,
         }
       }
     />
   );
 };
 
-export default AnalyticsTable;
+export default AnalysisTable;

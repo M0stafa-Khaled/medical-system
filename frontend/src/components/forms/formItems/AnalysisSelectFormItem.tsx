@@ -20,7 +20,7 @@ import useDebounce from "@/hooks/useDebounce";
 import cookieServices from "@/utils/cookieServices";
 import { IFormInput } from "@/interfaces";
 import { ControllerRenderProps } from "react-hook-form";
-import { useGetAllAnalytics } from "@/lib/react-query/main";
+import { useGetAllAnalysis } from "@/lib/react-query/main";
 
 interface IProps {
   field: ControllerRenderProps<any>;
@@ -31,7 +31,7 @@ const AnalysisSelectFormItem = ({ field, input }: IProps) => {
   const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
-  const { data: analytics } = useGetAllAnalytics({
+  const { data: analytics } = useGetAllAnalysis({
     token,
     search,
   });

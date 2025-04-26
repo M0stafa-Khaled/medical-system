@@ -27,7 +27,7 @@ const NotificationCard = ({ notification }: IProps) => {
       className={`p-3 border-b border-primary/10 ${
         notification.last_view
           ? "bg-[#fff] dark:bg-dark"
-          : "bg-[#eae8ec] dark:bg-dark/50"
+          : "bg-[#eae8ec] dark:bg-slate-900/90"
       }`}
     >
       <div className="space-y-2">

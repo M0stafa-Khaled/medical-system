@@ -16,7 +16,6 @@ export const useGetAllExpensesCategories = ({
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EXPENSES_CATEGORIES, search],
     queryFn: () => getAllExpenseCategories({ token, search }),
-    staleTime: 30 * 1000,
   });
 
 export const useGetAllExpensesCategoryById = ({

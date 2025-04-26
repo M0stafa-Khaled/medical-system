@@ -43,6 +43,8 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     employee?.user?.role === "employee" || !employee
   );
 
+  console.log(showPermissions);
+
   const { data: permissions } = useGetAllPermissions(token!);
   const { mutateAsync: createEmployee, isPending: isLoadingCreate } =
     useCreateEmployee();
@@ -63,20 +65,21 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   const form = useForm<z.infer<typeof employeeSchema>>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
-      name: "",
-      personal_id: "",
-      first_phone: "",
-      second_phone: "",
-      salary: "",
-      email: "",
-      job: "",
-      gender: "male",
+      name: employee?.name || "",
+      personal_id: employee?.personal_id || "",
+      first_phone: employee?.first_phone || "",
+      second_phone: employee?.second_phone || "",
+      salary: employee?.salary ? `${employee?.salary}` : "",
+      email: employee?.user?.email || "",
+      job: employee?.job || "",
+      gender: employee?.gender?.toLowerCase(),
       password: "",
-      status: true,
+      status: Boolean(employee?.status),
+      treasury_id: employee?.treasury?.id.toString() || "",
+      role: employee?.user?.role || "employee",
+      permissions: employee?.permissions?.map((p) => p.id.toString()) || [],
       image: undefined,
       personal_image: undefined,
-      role: "employee",
-      permissions: [],
     },
   });
 
@@ -107,27 +110,9 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
       if (name === "role") {
-        setShowPermissions(value.role?.value === "employee");
+        setShowPermissions(value.role === "employee");
       }
     });
-
-    if (!employee) return () => subscription.unsubscribe();
-    form.reset({
-      name: employee?.name || "",
-      personal_id: employee?.personal_id || "",
-      first_phone: employee?.first_phone || "",
-      second_phone: employee?.second_phone || "",
-      salary: employee?.salary ? `${employee?.salary}` : "",
-      email: employee?.user?.email || "",
-      job: employee?.job || "",
-      gender: employee?.gender?.toLowerCase(),
-      password: "",
-      status: Boolean(employee?.status),
-      treasury_id: employee?.treasury?.id.toString() || "",
-      role: employee?.user?.role || "employee",
-      permissions: employee?.permissions?.map((p) => p.id.toString()) || [],
-    });
-
     return () => subscription.unsubscribe();
   }, [form, employee, treasuries]);
 

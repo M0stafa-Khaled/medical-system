@@ -1,6 +1,6 @@
 import SearchInput from "@/components/ui/SearchInput";
 
-const AnalyticsHeader = () => {
+const AnalysisHeader = () => {
   return (
     <div className="my-4">
       <SearchInput placeholder="ابحث عن تحليل" />
@@ -8,4 +8,4 @@ const AnalyticsHeader = () => {
   );
 };
 
-export default AnalyticsHeader;
+export default AnalysisHeader;

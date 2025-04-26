@@ -37,17 +37,17 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   const form = useForm<z.infer<typeof patientSchema>>({
     resolver: zodResolver(patientSchema),
     defaultValues: {
-      name: "",
-      another_name: "",
-      personal_id: "",
-      first_phone: "",
-      second_phone: "",
-      email: "",
-      description: "",
-      info_status: "",
-      gender: "male",
       password: "",
-      status: true,
+      name: patient?.name || "",
+      another_name: patient?.another_name || "",
+      personal_id: patient?.personal_id || "",
+      first_phone: patient?.first_phone || "",
+      second_phone: patient?.second_phone || "",
+      email: patient?.user?.email || "",
+      description: patient?.description || "",
+      info_status: patient?.info_status || "",
+      gender: patient?.gender?.toLowerCase() || "male",
+      status: Boolean(patient?.status) || true,
       personal_image: undefined,
     },
   });
@@ -55,16 +55,16 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   useEffect(() => {
     if (!patient) return;
     form.reset({
-      name: patient?.name,
+      name: patient?.name || "",
       another_name: patient?.another_name || "",
-      personal_id: patient?.personal_id,
-      first_phone: patient?.first_phone,
+      personal_id: patient?.personal_id || "",
+      first_phone: patient?.first_phone || "",
       second_phone: patient?.second_phone || "",
-      email: patient?.user?.email,
+      email: patient?.user?.email || "",
       description: patient?.description || "",
       info_status: patient?.info_status || "",
-      gender: patient?.gender?.toLowerCase(),
-      status: Boolean(patient?.status),
+      gender: patient?.gender?.toLowerCase() || "male",
+      status: Boolean(patient?.status) || true,
     });
   }, [form, patient]);
 
