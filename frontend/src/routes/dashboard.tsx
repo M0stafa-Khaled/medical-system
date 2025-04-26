@@ -6,6 +6,7 @@ import LoadingSpinnerPage from "@/components/LoadingSpinnerPage";
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
 const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 const DashboardLayout = lazy(() => import("@/layout/DashboardLayout"));
+const Dashboard = lazy(() => import("@/pages/dashboard"));
 
 // Clinics
 const Clinics = lazy(() => import("@/pages/dashboard/clinics"));
@@ -56,7 +57,7 @@ const UpdatePatient = lazy(
 
 // Drugs
 const Drugs = lazy(() => import("@/pages/main/drugs"));
-const Analytics = lazy(() => import("@/pages/main/analytics"));
+const Analysis = lazy(() => import("@/pages/main/analysis"));
 const Scans = lazy(() => import("@/pages/main/scans"));
 
 // Treasuries
@@ -128,7 +129,11 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         index
         element={
-          <h1 className="text-primary font-alexandria">الصفحة الرئيسية</h1>
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredRole={"admin"}>
+              <Dashboard />
+            </ProtectedRoute>
+          </Suspense>
         }
         id="dashboard-home"
       />
@@ -379,7 +384,7 @@ const dashboardRoutes = createRoutesFromElements(
         path="analytics"
         element={
           <Suspense fallback={<LoadingSpinnerPage />}>
-            <Analytics />
+            <Analysis />
           </Suspense>
         }
         id="dashboard-analytics"
