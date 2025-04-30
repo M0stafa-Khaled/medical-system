@@ -10,7 +10,7 @@ export const doctorUpdateProfileSchema = z.object({
         message: "حجم الصورة يجب أن يكون أقل من 5MB",
       })
       .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
+        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png",
       }),
   ]),
   signature: z.union([
@@ -21,7 +21,7 @@ export const doctorUpdateProfileSchema = z.object({
         message: "حجم الصورة يجب أن يكون أقل من 5MB",
       })
       .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
+        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png",
       }),
   ]),
 });
@@ -46,7 +46,7 @@ export const patientUpdateProfileSchema = z.object({
         message: "حجم الصورة يجب أن يكون أقل من 5MB",
       })
       .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .webp",
+        message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png",
       }),
   ]),
 });

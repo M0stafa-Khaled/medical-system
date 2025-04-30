@@ -63,6 +63,6 @@ export const registerSchema = z.object({
       message: "حجم الصورة يجب أن يكون أقل من 5MB",
     })
     .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-      message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png or .svg",
+      message: "يجب أن يكون نوع الملف .jpg, .jpeg, .png",
     }),
 });
