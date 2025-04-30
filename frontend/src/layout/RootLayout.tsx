@@ -25,6 +25,8 @@ import {
   leaveEchoChannel,
   getEchoInstance,
 } from "@/lib/pusher/echo";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const RootLayout = () => {
   useNetworkStatus();
@@ -35,6 +37,9 @@ const RootLayout = () => {
 
   const token = cookieServices.getToken()!;
   const user = useMemo(() => cookieServices.getUser(), []);
+  const canReceiveNotifications = useHasPermission(
+    PERMISSIONS.RECEIVE_NOTIFICATIONS
+  );
   const { mutateAsync: checkAuthUser } = useCheckAuth();
   const { playNotificationSound } = useNotificationSound();
 
@@ -114,7 +119,7 @@ const RootLayout = () => {
   }, [user, queryClient, playNotificationSound]);
 
   const { data: notifications, isLoading } = useGetNotifications(
-    user?.role !== "doctor" ? token : ""
+    user?.role !== "doctor" && canReceiveNotifications ? token : ""
   );
 
   const unreadNotifications = useMemo(() => {

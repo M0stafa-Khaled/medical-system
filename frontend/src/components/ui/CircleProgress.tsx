@@ -55,7 +55,7 @@ const CircularProgress = ({
           strokeWidth={strokeWidth ?? circleStrokeWidth}
           strokeDasharray={circumference}
           strokeDashoffset="0"
-          className={cn("stroke-primary/25", className)}
+          className={cn("stroke-gray-200", className)}
         />
 
         {/* Progress */}
@@ -87,8 +87,7 @@ const CircularProgress = ({
 
 const CircleProgress = ({
   value,
-  color = "stroke-indigo-600/25",
-  placeholderColor = "stroke-indigo-600",
+  color = "stroke-indigo-600",
   size = 120,
 }: {
   value: number;
@@ -104,8 +103,8 @@ const CircleProgress = ({
       showLabel
       labelClassName="text-lg font-semibold"
       renderLabel={(progress) => `${progress}%`}
-      className={color}
-      progressClassName={placeholderColor}
+      className={cn(`${color}`, "opacity-25")}
+      progressClassName={color}
     />
   );
 };

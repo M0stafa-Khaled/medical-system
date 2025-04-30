@@ -20,8 +20,7 @@ const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
       className="my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
     >
       {features.map((feature, idx) => {
-        const color = `${colors[idx % colors.length]}/25`;
-        const placeholderColor = colors[idx % colors.length];
+        const color = colors[idx % colors.length];
         const percentage = Math.round(
           (feature.used / +feature.max_value) * 100
         );
@@ -31,12 +30,7 @@ const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
             className="flex flex-col items-center justify-center gap-1"
             key={feature.name}
           >
-            <CircleProgress
-              value={percentage}
-              color={color}
-              placeholderColor={placeholderColor}
-              size={150}
-            />
+            <CircleProgress value={percentage} color={color} size={150} />
             <div className="text-center space-y-1">
               <span>
                 {feature.used}/{feature.max_value}

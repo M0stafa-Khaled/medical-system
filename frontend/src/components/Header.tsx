@@ -13,6 +13,8 @@ import {
 import { ILink } from "@/interfaces";
 import cookieServices from "@/utils/cookieServices";
 import {} from "react";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 const NotificationsMenu = lazy(
   () => import("./notifications/NotificationsMenu")
@@ -31,6 +33,9 @@ interface IProps {
 const Header = ({ links, dashboard = false }: IProps) => {
   const [openNav, setOpenNav] = useState(false);
   const role = cookieServices.getUser()?.role;
+  const canReceiveNotifications = useHasPermission(
+    PERMISSIONS.RECEIVE_NOTIFICATIONS
+  );
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -100,7 +105,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
                 <motion.div variants={navItemsVariants}>
                   <LogoutButton />
                 </motion.div>
-                {role !== "doctor" && (
+                {role !== "doctor" && canReceiveNotifications && (
                   <motion.div variants={navItemsVariants}>
                     <NotificationsMenu />
                   </motion.div>

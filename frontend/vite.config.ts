@@ -11,7 +11,7 @@ export default defineConfig({
       includeAssets: ["favicon.svg", "robots.txt"],
       manifest: {
         name: "Clinics Medical System",
-        short_name: "Clinics Management",
+        short_name: "Clinics Medical System",
         description: "This clinics medical system from egprog",
         theme_color: "#2a2a2a",
         background_color: "#2a2a2a",

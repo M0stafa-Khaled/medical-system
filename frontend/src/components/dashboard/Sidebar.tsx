@@ -13,6 +13,8 @@ import { ILink } from "@/interfaces";
 import cookieServices from "@/utils/cookieServices";
 import truncateText from "@/utils/truncateText";
 import NotificationsMenu from "../notifications/NotificationsMenu";
+import useHasPermission from "@/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
 
 interface IProps {
   links: ILink[];
@@ -20,6 +22,9 @@ interface IProps {
 
 const Sidebar = ({ links }: IProps) => {
   const user = cookieServices.getUser();
+  const canReceiveNotifications = useHasPermission(
+    PERMISSIONS.RECEIVE_NOTIFICATIONS
+  );
   return (
     <motion.aside
       initial="hidden"
@@ -52,7 +57,7 @@ const Sidebar = ({ links }: IProps) => {
             <LogoutButton />
           </motion.div>
 
-          {user?.role !== "doctor" && (
+          {user?.role !== "doctor" && canReceiveNotifications && (
             <motion.div variants={navItemsVariants}>
               <NotificationsMenu />
             </motion.div>

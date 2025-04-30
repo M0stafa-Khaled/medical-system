@@ -12,10 +12,7 @@ const Providers = () => {
       <QueryProvider>
         <Provider store={store}>
           <ThemeProvider>
-            <RouterProvider
-              router={router}
-              future={{ v7_startTransition: true }}
-            />
+            <RouterProvider router={router} />
           </ThemeProvider>
         </Provider>
       </QueryProvider>
