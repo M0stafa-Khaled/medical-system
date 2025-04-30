@@ -1,7 +1,6 @@
 export interface ICompany {
   id: number;
   name: string;
-  slug: string;
   email: string;
   name_manager: string;
   phone_manager: string;

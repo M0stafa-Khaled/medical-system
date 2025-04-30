@@ -91,7 +91,7 @@ export enum PERMISSIONS {
   DELETE_DOSAGE = "حذف-جرعة",
 
   // Subscription
-  SUBSCRIPTION_FOLLOW_UP = "متابعة-الاشتراك",
+  SUBSCRIPTION = "متابعة-الاشتراك",
 
   // Company Information
   COMPANY_INFO = "معلومات-الشركة",
