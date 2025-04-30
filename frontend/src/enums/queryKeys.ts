@@ -40,6 +40,7 @@ enum Query_Keys {
   GET_ALL_DOSAGES = "dosages",
   GET_ALL_PRESCRIPTIONS = "prescriptions",
   GET_ONE_PRESCRIPTION = "prescription",
+  DOCTOR_TRANSACTIONS = "doctorTransactions",
 
   // Patient
   GET_ALL_PATIENT_BOOKINGS = "patientBookings",

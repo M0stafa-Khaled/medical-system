@@ -104,6 +104,10 @@ export enum PERMISSIONS {
   VIEW_PRESCRIPTION = "عرض-روشتة",
   DELETE_PRESCRIPTION = "حذف-روشتة",
 
+  // Doctor Transactions
+  DOCTOR_TRANSACTIONS = "تحصيلات-الطبيب",
+  ADD_DOCTOR_TRANSACTION = "اضافة-تحصيل-للطبيب",
+
   // Notifications
   RECEIVE_NOTIFICATIONS = "استقبال-اشعارات",
 }

@@ -25,7 +25,6 @@ import DeleteDoctor from "@/components/dashboard/doctors/DeleteDoctor";
 import ImageModal from "@/components/shared/ImageModal";
 import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
 import InfoField from "@/components/dashboard/InfoField";
-import Actions from "@/components/dashboard/doctors/actions/Actions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
@@ -33,16 +32,14 @@ import { containerVariants, itemVariants } from "@/animations";
 import DataLoader from "@/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import WorkingDays from "@/components/dashboard/doctors/workingDays/WorkingDays";
+
 import TooltipButton from "@/components/ui/TooltipButton";
 import { AxiosResErr } from "@/types";
+import DoctorTabs from "./DoctorTabs";
 
 const DoctorDetails = () => {
   const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
   const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
-  const canViewDoctorActions = useHasPermission(PERMISSIONS.DOCTOR_ACTIONS);
-  const canViewDoctorWorkingDays = useHasPermission(PERMISSIONS.WORKING_DAYS);
 
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
@@ -268,44 +265,8 @@ const DoctorDetails = () => {
             </motion.div>
           </CardContent>
         </Card>
-        <motion.div variants={itemVariants}>
-          {(canViewDoctorActions || canViewDoctorWorkingDays) && (
-            <Tabs
-              defaultValue={canViewDoctorActions ? "actions" : "working-days"}
-              dir="rtl"
-              className="text-black dark:text-white my-2"
-            >
-              <TabsList className="h-auto w-full gap-2">
-                {canViewDoctorActions && (
-                  <TabsTrigger
-                    value="actions"
-                    className="w-full py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
-                  >
-                    الإجراءات
-                  </TabsTrigger>
-                )}
-                {canViewDoctorWorkingDays && (
-                  <TabsTrigger
-                    value="working-days"
-                    className="w-full py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
-                  >
-                    ايام العمل
-                  </TabsTrigger>
-                )}
-              </TabsList>
-              {canViewDoctorActions && (
-                <TabsContent value="actions">
-                  <Actions doctorId={doctorId!} />
-                </TabsContent>
-              )}
-              {canViewDoctorWorkingDays && (
-                <TabsContent value="working-days">
-                  <WorkingDays doctorId={doctorId!} />
-                </TabsContent>
-              )}
-            </Tabs>
-          )}
-        </motion.div>
+        {/* Tabs */}
+        <DoctorTabs doctorId={id?.toString() || ""} />
       </motion.section>
     </>
   );

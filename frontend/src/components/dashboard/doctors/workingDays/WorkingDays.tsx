@@ -58,14 +58,10 @@ const WorkingDays = ({ doctorId }: IProps) => {
         <CardContent className="py-3 px-4">
           {canCreateWorkingDay && (
             <div className="mb-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
-              <Button
-                size={"sm"}
-                variant={"outline"}
-                className=" h-auto py-0 px-0 bg-primary md:bg-transparent md:text-primary text-primary-foreground hover:!bg-primary hover:!text-white !border-primary dark:hover:!text-black !rounded-lg font-semibold"
-              >
+              <Button className="flex items-center gap-2 h-auto py-0 px-0">
                 <Link
                   to={`/dashboard/doctors/${doctorId}/working-days/create`}
-                  className="flex justify-center items-center gap-2 w-full h-full py-4 px-4"
+                  className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
                 >
                   إضافة يوم عمل
                   <FiPlus size={20} />

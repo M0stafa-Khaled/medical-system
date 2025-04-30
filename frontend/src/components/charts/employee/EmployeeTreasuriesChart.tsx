@@ -55,7 +55,6 @@ const EmployeeTreasuriesChart = () => {
 
   const handleFilterChange = (key: string, value: string | null) =>
     setFilters({ ...filters, [key]: value });
-  console.log(analyticsData);
   return (
     <div className="space-y-5 bg-[#fff] dark:bg-dark py-6 px-3 md:p-6 rounded-xl shadow-md">
       <h2 className="text-dark dark:text-white font-bold text-center md:text-start md:text-xl">

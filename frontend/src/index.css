@@ -137,6 +137,10 @@
   width: 0px;
 }
 
+.table-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
 @layer base {
   * {
     @apply border-border;

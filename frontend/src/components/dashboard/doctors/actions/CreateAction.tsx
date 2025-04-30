@@ -63,7 +63,7 @@ const CreateAction = ({ doctorId }: { doctorId: string }) => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-auto py-3"
+        className="flex items-center gap-2 h-auto py-3 w-full md:w-fit"
       >
         إضافة إجراء
         <FiPlus size={20} />
