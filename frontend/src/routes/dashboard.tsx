@@ -130,9 +130,7 @@ const dashboardRoutes = createRoutesFromElements(
         index
         element={
           <Suspense fallback={<LoadingSpinnerPage />}>
-            <ProtectedRoute requiredRole={"admin"}>
-              <Dashboard />
-            </ProtectedRoute>
+            <Dashboard />
           </Suspense>
         }
         id="dashboard-home"

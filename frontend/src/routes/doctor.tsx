@@ -5,6 +5,7 @@ import LoadingSpinnerPage from "@/components/LoadingSpinnerPage";
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
 const DoctorLayout = lazy(() => import("@/layout/DoctorLayout"));
 const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
+const DoctorDashboard = lazy(() => import("@/pages/doctor"));
 const DoctorClinics = lazy(() => import("@/pages/doctor/clinics"));
 const DoctorBookings = lazy(() => import("@/pages/doctor/bookings"));
 const Drugs = lazy(() => import("@/pages/main/drugs"));
@@ -40,6 +41,15 @@ const doctorRoutes = createRoutesFromElements(
           index
           element={
             <Suspense fallback={<LoadingSpinnerPage />}>
+              <DoctorDashboard />
+            </Suspense>
+          }
+          id="doctor-dashboard"
+        />
+        <Route
+          path="bookings"
+          element={
+            <Suspense fallback={<LoadingSpinnerPage />}>
               <DoctorClinics />
             </Suspense>
           }
@@ -47,7 +57,7 @@ const doctorRoutes = createRoutesFromElements(
         />
 
         <Route
-          path=":name/bookings"
+          path="clinic/:clinicName/bookings"
           element={
             <Suspense fallback={<LoadingSpinnerPage />}>
               <DoctorBookings />

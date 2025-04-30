@@ -32,14 +32,10 @@ const ProtectedRoute = ({
     const allowedRoles = Array.isArray(requiredRole)
       ? requiredRole
       : [requiredRole];
-    if (!role || !allowedRoles.includes(role)) {
-      return <NotFound />;
-    }
+    if (!role || !allowedRoles.includes(role)) return <NotFound />;
   }
 
-  if (requiredPermission && !hasPermission) {
-    return <NotFound />;
-  }
+  if (requiredPermission && !hasPermission) return <NotFound />;
 
   return children;
 };

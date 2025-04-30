@@ -12,7 +12,7 @@ const ClinicCard = ({ clinic: { id, name, status } }: IProps) => {
     <div
       className="cursor-pointer rounded-lg border border-primary/30 bg-gradient-to-br from-card via-sky-50 to-white dark:border-primary/50 dark:from-foreground dark:via-background dark:to-muted p-6 shadow-md"
       onClick={() =>
-        navigate(`/doctor/${name}/bookings`, { state: { clinicId: id } })
+        navigate(`/doctor/clinic/${name}/bookings`, { state: { clinicId: id } })
       }
     >
       <div className="space-y-4">

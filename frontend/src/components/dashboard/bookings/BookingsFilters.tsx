@@ -193,6 +193,9 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
           <SelectItem value="pending" className="py-2.5 cursor-pointer">
             قيد الانتظار
           </SelectItem>
+          <SelectItem value="completed" className="py-2.5 cursor-pointer">
+            مكتمل
+          </SelectItem>
           <SelectItem value="collected" className="py-2.5 cursor-pointer">
             تم التحصيل
           </SelectItem>

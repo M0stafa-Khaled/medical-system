@@ -53,8 +53,7 @@ const LoginForm = () => {
           },
         })
       );
-      if (data.role === "admin") return navigate("/dashboard");
-      // if (data.role === "employee") navigate("/dashboard/bookings");
+      if (data.role === "admin" || data.role === "employee") return navigate("/dashboard");
       if (data.role === "patient") navigate("/bookings");
       if (data.role === "doctor") navigate("/doctor");
 

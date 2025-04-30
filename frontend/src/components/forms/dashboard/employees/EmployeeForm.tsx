@@ -21,7 +21,10 @@ import SubmitButton from "../../../SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import { useDispatch } from "react-redux";
-import { setPermissions } from "@/store/features/permissions/permissionsSlice";
+import {
+  clearPermissions,
+  setPermissions,
+} from "@/store/features/permissions/permissionsSlice";
 import { logout } from "@/store/features/auth/authSlice";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 import RenderEmployeeFormFields from "./RenderEmployeeFormFields";
@@ -42,8 +45,6 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   const [showPermissions, setShowPermissions] = useState(
     employee?.user?.role === "employee" || !employee
   );
-
-  console.log(showPermissions);
 
   const { data: permissions } = useGetAllPermissions(token!);
   const { mutateAsync: createEmployee, isPending: isLoadingCreate } =
@@ -87,24 +88,22 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     const { auth, email_verified, status, permissions } = await checkAuthUser(
       token
     );
-    if (!auth) {
+    if (!auth || !status) {
       dispatch(logout());
+      dispatch(clearPermissions());
       navigate("/login");
-      return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
-    }
-
-    // Set Permissions in state
-    dispatch(setPermissions(permissions));
-
-    if (!status) {
-      navigate("/not-active");
-      return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
+      if (!auth)
+        return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+      if (!status) return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
     }
 
     if (!email_verified) {
       navigate("/verify-account");
       return toast.warn("يرجى تاكيد البريد الالكتروني");
     }
+
+    // Set Permissions in state
+    dispatch(setPermissions(permissions));
   };
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import cookieServices from "@/utils/cookieServices";
-import AnalyticsChart from "./AnalyticsChart";
+import AnalyticsChart from "../AnalyticsChart";
 import { useGetTreasuriesChart } from "@/lib/react-query/charts/adminCharts";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import ChartDate from "./ChartDate";
+import ChartDate from "../ChartDate";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 import {
   Select,
@@ -24,7 +24,7 @@ const TreasuriesChart = () => {
 
   const { data: treasuries } = useGetAllTreasuries({ token });
 
-  const filters = useMemo(
+  const filters: ITreasuriesFilter = useMemo(
     () => ({
       treasury_start_at: searchParams.get("treasury_start_at") || "",
       treasury_end_at: searchParams.get("treasury_end_at") || "",
@@ -54,7 +54,7 @@ const TreasuriesChart = () => {
       }
     });
 
-    setSearchParams(params);
+    setSearchParams(params, { replace: true });
   };
 
   const handleFilterChange = (key: string, value: string | null) =>
@@ -65,7 +65,7 @@ const TreasuriesChart = () => {
       <h2 className="text-dark dark:text-white font-bold text-center md:text-start md:text-xl">
         إحصائيات الخزائن
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 lg:gap-x-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 lg:gap-x-10">
         <ChartDate
           value={filters.treasury_start_at}
           onChange={(date) => handleFilterChange("treasury_start_at", date)}
@@ -84,7 +84,7 @@ const TreasuriesChart = () => {
           dir="rtl"
         >
           <SelectTrigger
-            className={`border-black/20 dark:border-white/40 !h-12 bg-primary text-primary-foreground data-[placeholder]:text-primary-foreground`}
+            className={`border-black/20 dark:border-white/40 !h-11 bg-primary text-primary-foreground data-[placeholder]:text-primary-foreground`}
           >
             <SelectValue placeholder="الخزينة" className={`py-4 text-white`} />
           </SelectTrigger>
@@ -105,7 +105,11 @@ const TreasuriesChart = () => {
         </Select>
       </div>
       <AnalyticsChart
-        title="الخزائن"
+        title={
+          analyticsData?.data.treasury_name
+            ? `الخزينة: ${analyticsData.data.treasury_name} ، الإجمالي: ${analyticsData.data.total}`
+            : ""
+        }
         datasets={analyticsData?.data.datasets || []}
         labels={analyticsData?.data.labels || []}
         isLoading={isLoading}

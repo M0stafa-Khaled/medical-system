@@ -101,8 +101,8 @@ const VerifyEmail = () => {
         title: "تم التأكيد",
         text: "تم تأكيد البريد الإلكتروني بنجاح",
       });
-      if (role === "admin") return navigate("/dashboard");
-      if (role === "employee") return navigate("/dashboard/bookings");
+      if (role === "admin" || role === "employee")
+        return navigate("/dashboard");
       if (role === "doctor") return navigate("/doctor");
       if (role === "patient") return navigate("/bookings");
     } catch (error) {

@@ -1,31 +1,31 @@
 import cookieServices from "@/utils/cookieServices";
-import AnalyticsChart from "./AnalyticsChart";
-import { useGetBookingsChart } from "@/lib/react-query/charts/adminCharts";
+import AnalyticsChart from "../AnalyticsChart";
+import { useGetRegistrationChart } from "@/lib/react-query/charts/adminCharts";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import ChartDate from "./ChartDate";
+import ChartDate from "../ChartDate";
 
 interface IRegistrationFilter {
-  booking_start_at: string;
-  booking_end_at: string;
+  register_start_at: string;
+  register_end_at: string;
 }
-const BookingsChart = () => {
+const RegistrationChart = () => {
   const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const filters = useMemo(
+  const filters: IRegistrationFilter = useMemo(
     () => ({
-      booking_start_at: searchParams.get("booking_start_at") || "",
-      booking_end_at: searchParams.get("booking_end_at") || "",
+      register_start_at: searchParams.get("register_start_at") || "",
+      register_end_at: searchParams.get("register_end_at") || "",
     }),
     [searchParams]
   );
 
-  const { data: analyticsData, isLoading } = useGetBookingsChart({
+  const { data: analyticsData, isLoading } = useGetRegistrationChart({
     token,
     filter: {
-      ...(filters.booking_start_at && { start_at: filters.booking_start_at }),
-      ...(filters.booking_end_at && { end_at: filters.booking_end_at }),
+      ...(filters.register_start_at && { start_at: filters.register_start_at }),
+      ...(filters.register_end_at && { end_at: filters.register_end_at }),
     },
   });
 
@@ -41,7 +41,7 @@ const BookingsChart = () => {
       }
     });
 
-    setSearchParams(params);
+    setSearchParams(params, { replace: true });
   };
 
   const handleFilterChange = (key: string, value: string | null) =>
@@ -50,22 +50,22 @@ const BookingsChart = () => {
   return (
     <div className="space-y-5 bg-[#fff] dark:bg-dark py-6 px-3 md:p-6 rounded-xl shadow-md">
       <h2 className="text-dark dark:text-white font-bold text-center md:text-start md:text-xl">
-        إحصائيات الحجوزات
+        إحصائيات المستخدمين الجدد
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 lg:gap-x-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 lg:gap-x-10">
         <ChartDate
-          value={filters.booking_start_at}
-          onChange={(date) => handleFilterChange("booking_start_at", date)}
+          value={filters.register_start_at}
+          onChange={(date) => handleFilterChange("register_start_at", date)}
           placeholder="من"
         />
         <ChartDate
-          value={filters.booking_end_at}
-          onChange={(date) => handleFilterChange("booking_start_at", date)}
+          value={filters.register_end_at}
+          onChange={(date) => handleFilterChange("register_end_at", date)}
           placeholder="إلي"
         />
       </div>
       <AnalyticsChart
-        title="الحجوزات"
+        title="المستخدمين الجدد"
         datasets={analyticsData?.data.datasets || []}
         labels={analyticsData?.data.labels || []}
         isLoading={isLoading}
@@ -74,4 +74,4 @@ const BookingsChart = () => {
   );
 };
 
-export default BookingsChart;
+export default RegistrationChart;

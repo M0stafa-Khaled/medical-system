@@ -23,7 +23,7 @@ const DoctorBookings = () => {
     }
   }, [location.state, navigate]);
 
-  if (!clinicId) return null; // أو loading
+  if (!clinicId) return null;
 
   return (
     <>

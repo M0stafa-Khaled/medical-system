@@ -1,28 +1,28 @@
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import RegistrationChart from "./RegistrationChart";
-import BookingsChart from "./BookingsChart";
-import TreasuriesChart from "./TreasuriesChart";
+import DoctorBookingsCharts from "./DoctorBookingsCharts";
+import DoctorPrescriptionsCharts from "./DoctorPrescriptionsCharts";
+import DoctorTransactionsCharts from "./DoctorTransactionsCharts";
 
-const ChartsList = () => {
+const DoctorChartsList = () => {
   return (
     <motion.div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="my-10 space-y-6"
+      className="my-5 space-y-6"
     >
       <motion.div variants={itemVariants} className="col-span-2">
-        <RegistrationChart />
+        <DoctorBookingsCharts />
       </motion.div>
       <motion.div variants={itemVariants} className="col-span-2">
-        <BookingsChart />
+        <DoctorPrescriptionsCharts />
       </motion.div>
       <motion.div variants={itemVariants} className="col-span-2">
-        <TreasuriesChart />
+        <DoctorTransactionsCharts />
       </motion.div>
     </motion.div>
   );
 };
 
-export default ChartsList;
+export default DoctorChartsList;

@@ -13,3 +13,14 @@ export interface IChartRes {
   message: string | null;
   data: IChart;
 }
+
+export interface ITreasuriesChart extends IChart {
+  total: string;
+  treasury_name: string;
+}
+
+export interface ITreasuriesChartRes {
+  status: boolean;
+  message: string | null;
+  data: ITreasuriesChart;
+}

@@ -1,6 +1,6 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/interfaces";
-import { IChartRes } from "@/interfaces/charts/charts";
+import { IChartRes, ITreasuriesChartRes } from "@/interfaces/charts/charts";
 
 export const getActiveUsersChart = async ({
   token,
@@ -40,7 +40,7 @@ export const getBookingsChart = async ({
 export const getTreasuriesChart = async ({
   token,
   filter,
-}: IGetWithParams): Promise<IChartRes> => {
+}: IGetWithParams): Promise<ITreasuriesChartRes> => {
   const { data } = await axiosInstanceAPI.get("/charts/admin/treasuries", {
     params: { ...(filter && { filter }) },
     headers: { Authorization: `Bearer ${token}` },

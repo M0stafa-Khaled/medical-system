@@ -1,15 +1,20 @@
 import { lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import cookieServices from "@/utils/cookieServices";
 
 const WidgetsList = lazy(
-  () => import("@/components/dashboard/widgets/WidgetsList")
+  () => import("@/components/widgets/admin/WidgetsList")
 );
 const ChartsList = lazy(
-  () => import("@/components/dashboard/charts/ChartsList")
+  () => import("@/components/charts/admin/AdminChartsList")
+);
+const EmployeeChartsList = lazy(
+  () => import("@/components/charts/employee/EmployeeChartsList")
 );
 
 const Dashboard = () => {
+  const role = cookieServices.getUser()?.role;
   return (
     <>
       <Helmet>
@@ -20,8 +25,14 @@ const Dashboard = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <WidgetsList />
-        <ChartsList />
+        {role === "admin" ? (
+          <>
+            <WidgetsList />
+            <ChartsList />
+          </>
+        ) : (
+          <EmployeeChartsList />
+        )}
       </motion.section>
     </>
   );

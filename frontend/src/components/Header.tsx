@@ -17,7 +17,7 @@ import {} from "react";
 const NotificationsMenu = lazy(
   () => import("./notifications/NotificationsMenu")
 );
-const ProfileMenu = lazy(() => import("./ProfileMenu"));
+const ProfileMenu = lazy(() => import("./profile/ProfileMenu"));
 const AuthButtons = lazy(() => import("./dashboard/AuthButtons"));
 const ToggleMode = lazy(() => import("./ToggleMode"));
 const LogoutButton = lazy(() => import("./LogoutButton"));
@@ -37,7 +37,6 @@ const Header = ({ links, dashboard = false }: IProps) => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
-
   return (
     <motion.header
       initial="hidden"
@@ -143,7 +142,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
                   variants={navItemsVariants}
                   className="w-full mx-auto max-h-[80vh] overflow-y-scroll custom-scrollbar px-3 py-2"
                 >
-                  <NavList links={links} />
+                  <NavList links={links} setOpenNav={setOpenNav} />
                 </motion.div>
                 <AuthButtons />
               </motion.div>

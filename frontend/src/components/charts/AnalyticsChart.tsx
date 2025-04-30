@@ -10,6 +10,7 @@ import {
   Legend,
   BarElement,
   Filler,
+  ChartOptions,
 } from "chart.js";
 import { useTheme } from "next-themes";
 import { IChartDataset } from "@/interfaces/charts/charts";
@@ -73,6 +74,7 @@ const AnalyticsChart = ({ datasets, labels, title, isLoading }: IProps) => {
 
         return {
           ...dataset,
+          ...(title === "الإيرادات" && { label: "الإيرادات" }),
           borderColor: color,
           backgroundColor: gradient,
           borderWidth: 2,
@@ -85,7 +87,7 @@ const AnalyticsChart = ({ datasets, labels, title, isLoading }: IProps) => {
       }) || [],
   };
 
-  const options = {
+  const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -107,8 +109,9 @@ const AnalyticsChart = ({ datasets, labels, title, isLoading }: IProps) => {
           family: "Alexandria",
         },
       },
+
       legend: {
-        position: "top" as const,
+        position: "top",
         labels: {
           font: {
             family: "Alexandria",
@@ -123,17 +126,18 @@ const AnalyticsChart = ({ datasets, labels, title, isLoading }: IProps) => {
         font: {
           size: 16,
           family: "Alexandria",
+          weight: "normal",
         },
       },
     },
     interaction: {
-      mode: "nearest" as const,
+      mode: "nearest",
       intersect: false,
     },
     scales: {
       x: {
         grid: {
-          color: theme === "dark" ? "#ffffff12" : "#33333312",
+          color: theme === "dark" ? "#ffffff12" : "#3333332b",
         },
         ticks: {
           color: theme === "dark" ? "#fff" : "#333",
@@ -151,14 +155,14 @@ const AnalyticsChart = ({ datasets, labels, title, isLoading }: IProps) => {
           },
         },
         grid: {
-          color: theme === "dark" ? "#ffffff12" : "#33333312",
+          color: theme === "dark" ? "#ffffff12" : "#3333332b",
         },
       },
     },
   };
 
   return (
-    <div className="min-h-80 lg:h-[400px] p-5" dir="rtl">
+    <div className="min-h-80 lg:h-[450px] p-5" dir="rtl">
       {isLoading ? (
         <Skeleton className="min-h-64 lg:h-[350px] w-full" />
       ) : (

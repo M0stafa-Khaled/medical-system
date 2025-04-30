@@ -22,10 +22,8 @@ import { MdAttachMoney, MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import ROUTES_NAME from "@/constants/routesName";
 import { HiOutlineUsers } from "react-icons/hi2";
-import cookieServices from "@/utils/cookieServices";
 
 const DashboardLayout = () => {
-  const user = cookieServices.getUser()!;
   // Codes
   const canViewClinics = useHasPermission(PERMISSIONS.CLINICS);
   const canViewDoctors = useHasPermission(PERMISSIONS.DOCTORS);
@@ -48,15 +46,11 @@ const DashboardLayout = () => {
   const canViewPrescriptions = useHasPermission(PERMISSIONS.PRESCRIPTIONS);
 
   const NAV_LINKS: ILink[] = [
-    ...(user.role === "admin"
-      ? [
-          {
-            name: ROUTES_NAME.dashboard,
-            path: "/dashboard",
-            icon: <HomeIcon size={18} />,
-          },
-        ]
-      : []),
+    {
+      name: ROUTES_NAME.dashboard,
+      path: "/dashboard",
+      icon: <HomeIcon size={18} />,
+    },
     // Booking
     ...(canViewBookings
       ? [
@@ -213,7 +207,14 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex bg-foreground">
-      <ScrollRestoration />
+      <ScrollRestoration
+        getKey={(location) => {
+          if (location.pathname === "/dashboard") {
+            return location.pathname;
+          }
+          return location.key;
+        }}
+      />
       <div className="fixed inset-y-0 right-0">
         <Sidebar links={NAV_LINKS} />
       </div>

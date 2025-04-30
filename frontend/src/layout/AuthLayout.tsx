@@ -14,10 +14,12 @@ const AuthLayout = () => {
 
   if (isAuthenticated) {
     const role = cookieServices.getUser()?.role;
-    if (role === "admin") return <Navigate to="/dashboard" replace />;
-    if (role === "employee")
-      return <Navigate to="/dashboard/bookings" replace />;
+    // Admin & Employee
+    if (role === "admin" || role === "employee")
+      return <Navigate to="/dashboard" replace />;
+    // Doctor
     if (role === "doctor") return <Navigate to="/doctor" replace />;
+    // Patient
     return <Navigate to="/bookings" replace />;
   }
 

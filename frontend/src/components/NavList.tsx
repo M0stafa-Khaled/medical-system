@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,9 +8,10 @@ import { ILink } from "@/interfaces";
 interface IProps {
   links: ILink[];
   sidebar?: boolean;
+  setOpenNav?: Dispatch<SetStateAction<boolean>>;
 }
 
-const NavList = ({ links, sidebar }: IProps) => {
+const NavList = ({ links, sidebar, setOpenNav,  }: IProps) => {
   const [expandedLinks, setExpandedLinks] = useState<{
     [key: string]: boolean;
   }>({});
@@ -43,7 +44,7 @@ const NavList = ({ links, sidebar }: IProps) => {
             {hasChildren ? (
               <motion.div
                 variants={navItemsVariants}
-                className={`select-none w-full px-3 cursor-pointer py-2.5 text-[15px] text-black dark:text-white transition-all duration-300 rounded-lg ${
+                className={`select-none w-full px-3 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg ${
                   sidebar ? "border border-muted" : ""
                 } flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
                 onClick={(e) => {
@@ -67,14 +68,18 @@ const NavList = ({ links, sidebar }: IProps) => {
                 </motion.button>
               </motion.div>
             ) : (
-              <motion.div variants={navItemsVariants} className="w-full">
+              <motion.div
+                variants={navItemsVariants}
+                className="w-full"
+                onClick={() => setOpenNav && setOpenNav(false)}
+              >
                 <NavLink
                   to={link.path || "#"}
                   className={`w-full ${
                     isChildLink ? "mt-2" : ""
                   } py-2.5 px-3 text-black dark:text-white transition-all duration-300 rounded-lg ${
                     sidebar ? "border border-muted" : ""
-                  } flex items-center justify-between gap-2 text-[15px] ${
+                  } flex items-center justify-between gap-2 ${
                     activeLink
                       ? "bg-background dark:bg-dark"
                       : "hover:bg-background dark:hover:bg-dark/50"

@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useGetAdminWidgets } from "@/lib/react-query/widgets";
 import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
-import WidgetCard from "./WidgetCard";
+import WidgetCard from "../WidgetCard";
 import {
   BadgeDollarSign,
   Bookmark,

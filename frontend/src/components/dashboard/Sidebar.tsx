@@ -1,4 +1,4 @@
-import ProfileMenu from "../ProfileMenu";
+import ProfileMenu from "../profile/ProfileMenu";
 import ToggleMode from "../ToggleMode";
 import LogoutButton from "../LogoutButton";
 import NavList from "../NavList";
