@@ -22,7 +22,9 @@ const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
       {features.map((feature, idx) => {
         const color = `${colors[idx % colors.length]}/25`;
         const placeholderColor = colors[idx % colors.length];
-        const percentage = Math.round((1 / +feature.max_value) * 100);
+        const percentage = Math.round(
+          (feature.used / +feature.max_value) * 100
+        );
         return (
           <motion.div
             variants={itemVariants}
