@@ -37,6 +37,8 @@ export interface IGetWithParams {
   search?: string;
   filter?: Record<string, string>;
   sort?: string;
+  start_at?: string;
+  end_at?: string;
 }
 
 // Bookings

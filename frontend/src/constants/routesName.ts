@@ -19,6 +19,17 @@ const ROUTES_NAME: Record<string, string> = {
   scans: "الأشعات",
   dosages: "الجرعات",
   prescriptions: "الروشتات",
+  reports: "التقارير",
+  transfers: "التحويلات",
+  "patient-balances": "حسابات المرضى",
+  transactionsReports: "تقارير الإيرادات",
+  bookingsReports: "تقارير الحجوزات",
+  expensesReports: "تقارير المصروفات",
+  transfersReports: "تقارير التحويلات",
+  prescriptionsReports: "تقارير الروشتات",
+  treasuriesReports: "تقارير الخزائن",
+  patientsReports: "تقارير المرضى",
+  patientBalancesReports: "تقارير حسابات المرضى",
 };
 
 export default ROUTES_NAME;

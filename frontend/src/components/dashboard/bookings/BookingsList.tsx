@@ -58,16 +58,16 @@ const BookingsList = ({ bookings }: IProps) => {
             {booking?.code}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {truncateText(booking?.patient?.name, 20)}
+            {truncateText(booking?.patient?.name || "غير معروف", 20)}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
             {booking?.patient?.first_phone}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {booking?.clinic.name}
+            {booking?.clinic.name || "غير معروف"}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
-            {truncateText(booking?.doctor?.name, 15)}
+            {truncateText(booking?.doctor?.name || "غير معروف", 15)}
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">

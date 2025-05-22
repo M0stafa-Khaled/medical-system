@@ -1,12 +1,6 @@
 import { TableCell } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import RefundTransaction from "./RefundTransaction";
-import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
-import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
 import truncateText from "@/utils/truncateText";
 import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
 import formatDateTime from "@/utils/formatDate";
@@ -16,10 +10,7 @@ interface IProps {
   transactions: ITransaction[];
 }
 
-const TransactionsList = ({ transactions }: IProps) => {
-  const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
-  const canViewTransaction = useHasPermission(PERMISSIONS.VIEW_TRANSACTION);
-
+const TransactionsReportList = ({ transactions }: IProps) => {
   if (!transactions.length)
     return (
       <motion.tr
@@ -90,33 +81,11 @@ const TransactionsList = ({ transactions }: IProps) => {
             {formatDateTime(transaction?.created_at as string)}
           </TableCell>
 
-          {(canRefundTransaction || canViewTransaction) && (
-            <TableCell className="text-center">
-              <div className="flex justify-center items-center gap-2">
-                {canViewTransaction && (
-                  <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
-                    <Link
-                      to={`/dashboard/transactions/${transaction?.id}`}
-                      className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
-                    >
-                      <FiEye size={24} />
-                    </Link>
-                  </Button>
-                )}
-
-                {canRefundTransaction && transaction.status && (
-                  <RefundTransaction
-                    code={transaction?.code}
-                    id={transaction?.id}
-                  />
-                )}
-              </div>
-            </TableCell>
-          )}
+          <TableCell className="text-center"></TableCell>
         </motion.tr>
       ))}
     </>
   );
 };
 
-export default TransactionsList;
+export default TransactionsReportList;

@@ -17,9 +17,10 @@ const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
   return (
     <motion.div
       variants={containerVariants}
-      className="my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
+      className="my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
     >
       {features.map((feature, idx) => {
+        if (feature.name === "استقبال الاشعارات") return null;
         const color = colors[idx % colors.length];
         const percentage = Math.round(
           (feature.used / +feature.max_value) * 100

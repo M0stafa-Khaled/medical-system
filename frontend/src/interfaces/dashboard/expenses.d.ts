@@ -23,7 +23,7 @@ export interface IExpense {
   employee: IEmployee;
 }
 
-export interface IExpensesResponse {
+export interface IExpensesRes {
   status: boolean;
   message: string | null;
   data: {

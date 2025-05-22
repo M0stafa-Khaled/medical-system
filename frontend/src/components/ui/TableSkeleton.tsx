@@ -37,7 +37,7 @@ const TableSkeleton = ({
   columns,
   rows = 10,
   hasImage = false,
-  actionButtons = 2,
+  actionButtons = 1,
   showButtons = true,
 }: IProps) => {
   const renderRow = (idx: number) => (

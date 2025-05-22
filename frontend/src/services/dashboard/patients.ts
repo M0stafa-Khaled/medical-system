@@ -1,8 +1,8 @@
 import axiosInstanceAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
-  IResponsePatients,
-  IResponsePatient,
+  IPatientsRes,
+  IPatientRes,
   ICreatePatient,
 } from "@/interfaces/dashboard/patient";
 
@@ -10,7 +10,7 @@ export const getAllPatients = async ({
   token,
   page = 1,
   search,
-}: IGetWithParams): Promise<IResponsePatients> => {
+}: IGetWithParams): Promise<IPatientsRes> => {
   const { data } = await axiosInstanceAPI.get(`/patients`, {
     params: { ...(search ? { q: search, page } : { page }) },
     headers: {
@@ -26,7 +26,7 @@ export const getPatientById = async ({
 }: {
   id: string;
   token: string;
-}): Promise<IResponsePatient> => {
+}): Promise<IPatientRes> => {
   const { data } = await axiosInstanceAPI.get(`/patients/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

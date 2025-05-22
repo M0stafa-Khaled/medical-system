@@ -30,20 +30,57 @@ const DashboardLayout = () => {
   const canViewEmployees = useHasPermission(PERMISSIONS.EMPLOYEES);
   const canViewPatients = useHasPermission(PERMISSIONS.PATIENTS);
   const canViewTreasuries = useHasPermission(PERMISSIONS.TREASURIES);
-  // Operations
-  const canViewExpenses = useHasPermission(PERMISSIONS.EXPENSES);
+  const canViewDosages = useHasPermission(PERMISSIONS.DOSAGES);
   const canViewExpensesCategories = useHasPermission(
     PERMISSIONS.EXPENSE_CATEGORIES
   );
+  const canViewCodes =
+    canViewClinics ||
+    canViewDoctors ||
+    canViewEmployees ||
+    canViewPatients ||
+    canViewDosages ||
+    canViewTreasuries ||
+    canViewExpensesCategories;
+
+  // Operations
+  const canViewExpenses = useHasPermission(PERMISSIONS.EXPENSES);
   const canViewTransactions = useHasPermission(PERMISSIONS.TRANSACTIONS);
+
   // Bookings
   const canViewBookings = useHasPermission(PERMISSIONS.BOOKINGS);
 
-  // Dosages
-  const canViewDosages = useHasPermission(PERMISSIONS.DOSAGES);
-
   // Prescriptions
   const canViewPrescriptions = useHasPermission(PERMISSIONS.PRESCRIPTIONS);
+
+  // Reports
+  const canViewTransactionsReports = useHasPermission(
+    PERMISSIONS.TRANSACTIONS_REPORTS
+  );
+  const canViewBookingsReports = useHasPermission(PERMISSIONS.BOOKINGS_REPORTS);
+  const canViewExpensesReports = useHasPermission(PERMISSIONS.EXPENSES_REPORTS);
+  const canViewPrescriptionsReports = useHasPermission(
+    PERMISSIONS.PRESCRIPTIONS_REPORTS
+  );
+  const canViewTransfersReports = useHasPermission(
+    PERMISSIONS.TRANSFERS_REPORTS
+  );
+  const canViewTreasuriesReports = useHasPermission(
+    PERMISSIONS.TREASURIES_REPORTS
+  );
+  const canViewPatientsReports = useHasPermission(PERMISSIONS.PATIENTS_REPORTS);
+  const canViewPatientBalancesReports = useHasPermission(
+    PERMISSIONS.PATIENT_BALANCES_REPORTS
+  );
+  const canViewReports =
+    canViewTransactionsReports ||
+    canViewBookingsReports ||
+    canViewExpensesReports ||
+    canViewPrescriptionsReports ||
+    canViewTransfersReports ||
+    canViewTreasuriesReports ||
+    canViewPatientsReports ||
+    canViewPatientBalancesReports;
 
   const NAV_LINKS: ILink[] = [
     {
@@ -62,13 +99,7 @@ const DashboardLayout = () => {
         ]
       : []),
     // Codes
-    ...(canViewClinics ||
-    canViewDoctors ||
-    canViewEmployees ||
-    canViewPatients ||
-    canViewDosages ||
-    canViewTreasuries ||
-    canViewExpensesCategories
+    ...(canViewCodes
       ? [
           {
             name: "التكويدات",
@@ -167,6 +198,90 @@ const DashboardLayout = () => {
                       name: ROUTES_NAME.transactions,
                       path: "/dashboard/transactions",
                       icon: <BadgeDollarSign size={18} />,
+                    },
+                  ]
+                : []),
+            ],
+          },
+        ]
+      : []),
+    // Reports
+    ...(canViewReports
+      ? [
+          {
+            name: ROUTES_NAME.reports,
+            path: "",
+            icon: <TbReportAnalytics size={18} />,
+            children: [
+              ...(canViewTransactionsReports
+                ? [
+                    {
+                      name: ROUTES_NAME.transactionsReports,
+                      path: "/dashboard/reports/transactions",
+                      icon: <BadgeDollarSign size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewBookingsReports
+                ? [
+                    {
+                      name: ROUTES_NAME.bookingsReports,
+                      path: "/dashboard/reports/bookings",
+                      icon: <Bookmark size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewExpensesReports
+                ? [
+                    {
+                      name: ROUTES_NAME.expensesReports,
+                      path: "/dashboard/reports/expenses",
+                      icon: <MdAttachMoney size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewTransfersReports
+                ? [
+                    {
+                      name: ROUTES_NAME.transfersReports,
+                      path: "/dashboard/reports/transfers",
+                      icon: <GiMedicinePills size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewPrescriptionsReports
+                ? [
+                    {
+                      name: ROUTES_NAME.prescriptionsReports,
+                      path: "/dashboard/reports/prescriptions",
+                      icon: <TbReportMedical size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewTreasuriesReports
+                ? [
+                    {
+                      name: ROUTES_NAME.treasuriesReports,
+                      path: "/dashboard/reports/treasuries",
+                      icon: <Wallet size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewPatientsReports
+                ? [
+                    {
+                      name: ROUTES_NAME.patientsReports,
+                      path: "/dashboard/reports/patients",
+                      icon: <Users size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewPatientBalancesReports
+                ? [
+                    {
+                      name: ROUTES_NAME.patientBalancesReports,
+                      path: "/dashboard/reports/patient-balances",
+                      icon: <Users size={18} />,
                     },
                   ]
                 : []),

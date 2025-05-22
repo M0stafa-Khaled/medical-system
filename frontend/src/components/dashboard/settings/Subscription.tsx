@@ -23,6 +23,9 @@ const Subscription = () => {
       </Card>
     );
 
+  const notifications = subscription?.data.features_usages.find(
+    (feature) => feature.name === "استقبال الاشعارات"
+  );
   return (
     <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-sm my-2">
       <CardHeader>
@@ -50,6 +53,12 @@ const Subscription = () => {
               تاريخ انتهاء الاشتراك:{" "}
             </span>
             {formatDateTime(subscription?.data.ends_at as string)}
+          </p>
+          <p className="text-dark dark:text-white font-semibold">
+            <span className="font-medium text-dark/70 dark:text-white/70">
+              استقبال الإشعارات:{" "}
+            </span>
+            {notifications?.used}/{notifications?.max_value}
           </p>
         </motion.div>
         <FeaturesUsage features={subscription?.data.features_usages || []} />

@@ -36,7 +36,7 @@ export interface ICreatePatient {
   description?: string | null;
 }
 
-export interface IResponsePatients {
+export interface IPatientsRes {
   status: boolean;
   message: string | null;
   data: {
@@ -45,7 +45,7 @@ export interface IResponsePatients {
   };
 }
 
-export interface IResponsePatient {
+export interface IPatientRes {
   status: boolean;
   message: string;
   data: IPatient;

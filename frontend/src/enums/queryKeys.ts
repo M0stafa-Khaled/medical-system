@@ -66,6 +66,16 @@ enum Query_Keys {
   DOCTOR_BOOKINGS_CHART = "doctorBookingsChart",
   DOCTOR_PRESCRIPTIONS_CHART = "doctorPrescriptionsChart",
   DOCTOR_TREASURIES_CHART = "doctorTreasuriesChart",
+
+  // Reports
+  TRANSACTIONS_REPORT = "transactionsReport",
+  EXPENSES_REPORT = "expensesReport",
+  BOOKINGS_REPORT = "bookingsReport",
+  TRANSFERS_REPORT = "transfersReport",
+  TREASURIES_REPORT = "treasuriesReport",
+  PRESCRIPTIONS_REPORT = "prescriptionsReport",
+  PATIENTS_REPORT = "patientsReport",
+  PATIENT_BALANCES_REPORT = "patientBalancesReport",
 }
 
 export default Query_Keys;
