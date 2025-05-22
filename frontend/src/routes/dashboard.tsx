@@ -111,6 +111,32 @@ const PrescriptionDetails = lazy(
 // Company
 const Settings = lazy(() => import("@/pages/dashboard/settings"));
 
+// Reports
+const BookingsReports = lazy(
+  () => import("@/pages/dashboard/reports/bookingsReports")
+);
+const ExpensesReports = lazy(
+  () => import("@/pages/dashboard/reports/expensesReports")
+);
+const TransactionsReports = lazy(
+  () => import("@/pages/dashboard/reports/transactionsReports")
+);
+const PrescriptionsReports = lazy(
+  () => import("@/pages/dashboard/reports/prescriptionsReports")
+);
+const PatientsReports = lazy(
+  () => import("@/pages/dashboard/reports/patientsReports")
+);
+const PatientBalancesReports = lazy(
+  () => import("@/pages/dashboard/reports/patientBalancesReports")
+);
+const TransfersReports = lazy(
+  () => import("@/pages/dashboard/reports/transfersReports")
+);
+const TreasuriesReports = lazy(
+  () => import("@/pages/dashboard/reports/treasuriesReports")
+);
+
 const dashboardRoutes = createRoutesFromElements(
   <Route element={<RootLayout />} id="dashboard-root">
     {/* Dashboard */}
@@ -555,6 +581,102 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-prescriptions-update"
+      />
+
+      {/* Reports */}
+      <Route
+        path="reports/bookings"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS_REPORTS}>
+              <BookingsReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-bookings-reports"
+      />
+      <Route
+        path="reports/expenses"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES_REPORTS}>
+              <ExpensesReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-expenses-reports"
+      />
+      <Route
+        path="reports/patients"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS_REPORTS}>
+              <PatientsReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-patients-reports"
+      />
+      <Route
+        path="reports/patient-balances"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute
+              requiredPermission={PERMISSIONS.PATIENT_BALANCES_REPORTS}
+            >
+              <PatientBalancesReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-patient-balances-reports"
+      />
+      <Route
+        path="reports/prescriptions"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute
+              requiredPermission={PERMISSIONS.PRESCRIPTIONS_REPORTS}
+            >
+              <PrescriptionsReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-prescriptions-reports"
+      />
+      <Route
+        path="reports/transactions"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute
+              requiredPermission={PERMISSIONS.TRANSACTIONS_REPORTS}
+            >
+              <TransactionsReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-transactions-reports"
+      />
+      <Route
+        path="reports/transfers"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.TRANSFERS_REPORTS}>
+              <TransfersReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-transfers-reports"
+      />
+      <Route
+        path="reports/treasuries"
+        element={
+          <Suspense fallback={<LoadingSpinnerPage />}>
+            <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES_REPORTS}>
+              <TreasuriesReports />
+            </ProtectedRoute>
+          </Suspense>
+        }
+        id="dashboard-treasuries-reports"
       />
     </Route>
   </Route>

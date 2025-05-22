@@ -20,9 +20,11 @@ class CookieService {
       throw new Error("Invalid token: Cannot set empty token");
     }
 
+    const encryptedToken = encryptData(token);
+
     const expires = new Date();
     expires.setDate(expires.getDate() + expiresInDays);
-    this.cookies.set("_tn", token, {
+    this.cookies.set("_tn", encryptedToken, {
       expires,
       path: "/",
       secure: import.meta.env.VITE_ENV === "production",
@@ -32,7 +34,10 @@ class CookieService {
 
   getToken(): string | undefined {
     const token = this.cookies.get("_tn");
-    return token && token.trim() !== "" ? token : undefined;
+    if (!token) return undefined;
+    const decryptedToken: string = decryptData(token);
+
+    return token && token.trim() !== "" ? decryptedToken : undefined;
   }
 
   setUser({ id, name, role }: IUser, expiresInDays: number = 7) {

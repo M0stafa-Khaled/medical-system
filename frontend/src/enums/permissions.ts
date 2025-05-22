@@ -110,4 +110,14 @@ export enum PERMISSIONS {
 
   // Notifications
   RECEIVE_NOTIFICATIONS = "استقبال-اشعارات",
+
+  // Reports
+  TRANSACTIONS_REPORTS = "تقارير-التحصيلات",
+  BOOKINGS_REPORTS = "تقارير-الحجوزات",
+  EXPENSES_REPORTS = "تقارير-المصروفات",
+  PRESCRIPTIONS_REPORTS = "تقارير-الروشتات",
+  TRANSFERS_REPORTS = "تقارير-التحويلات",
+  TREASURIES_REPORTS = "تقارير-الخزائن",
+  PATIENTS_REPORTS = "تقارير-المرضي",
+  PATIENT_BALANCES_REPORTS = "تقارير-حساب-مريض",
 }

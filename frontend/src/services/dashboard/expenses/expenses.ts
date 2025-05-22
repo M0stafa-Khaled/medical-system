@@ -3,7 +3,7 @@ import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   ICreateExpense,
   IExpense,
-  IExpensesResponse,
+  IExpensesRes,
 } from "@/interfaces/dashboard/expenses";
 
 export const getAllExpenses = async ({
@@ -11,7 +11,7 @@ export const getAllExpenses = async ({
   page,
   filter,
   sort,
-}: IGetWithParams): Promise<IExpensesResponse> => {
+}: IGetWithParams): Promise<IExpensesRes> => {
   const { data } = await axiosInstanceAPI.get("/expenses", {
     params: { page, sort, ...(filter && { filter }) },
     headers: {
