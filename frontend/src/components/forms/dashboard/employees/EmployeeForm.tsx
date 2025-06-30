@@ -17,7 +17,7 @@ import {
   useCheckAuth,
   useGetAllPermissions,
 } from "@/lib/react-query/auth/auth";
-import SubmitButton from "../../../SubmitButton";
+import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import { useDispatch } from "react-redux";

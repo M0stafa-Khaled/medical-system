@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IBookingsRes } from "@/interfaces/dashboard/bookings";
 
 export const getDoctorBookings = async ({
@@ -8,7 +8,7 @@ export const getDoctorBookings = async ({
   token: string;
   clinicId: number;
 }): Promise<IBookingsRes> => {
-  const { data } = await axiosInstanceAPI.get(`/${clinicId}/bookings`, {
+  const { data } = await axiosAPI.get(`/${clinicId}/bookings`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;

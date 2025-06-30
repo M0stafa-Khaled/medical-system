@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg } from "@/interfaces";
 import { IDoctorTransactionsRes } from "@/interfaces/dashboard/doctors/doctorTransations";
 
@@ -9,7 +9,7 @@ export const getDoctorTransactions = async ({
   token: string;
   id: string;
 }): Promise<IDoctorTransactionsRes> => {
-  const { data } = await axiosInstanceAPI.get(`/${id}/transactions`, {
+  const { data } = await axiosAPI.get(`/${id}/transactions`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -24,7 +24,7 @@ export const createDoctorTransaction = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/${id}/transactions/add-expense`,
     {},
     {

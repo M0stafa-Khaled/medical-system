@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   IExpenseCategoriesRes,
@@ -9,7 +9,7 @@ export const getAllExpenseCategories = async ({
   token,
   search,
 }: IGetWithParams): Promise<IExpenseCategoriesRes> => {
-  const { data } = await axiosInstanceAPI.get("/expenses-categories", {
+  const { data } = await axiosAPI.get("/expenses-categories", {
     params: { ...(search && { q: search }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -25,7 +25,7 @@ export const getAllExpenseCategoryById = async ({
   id: string;
   token: string;
 }): Promise<{ status: boolean; data: IExpenseCategory }> => {
-  const { data } = await axiosInstanceAPI.get(`/expenses-categories/${id}`, {
+  const { data } = await axiosAPI.get(`/expenses-categories/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -40,7 +40,7 @@ export const createExpenseCategory = async ({
   token: string;
   name: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/expenses-categories",
     { name: name },
     {
@@ -61,7 +61,7 @@ export const updateExpenseCategory = async ({
   id: string;
   name: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/expenses-categories/${id}`,
     { name, _method: "put" },
     {
@@ -81,7 +81,7 @@ export const deleteExpenseCategory = async ({
   id: string;
   token: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/expenses-categories/${id}`, {
+  const { data } = await axiosAPI.delete(`/expenses-categories/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

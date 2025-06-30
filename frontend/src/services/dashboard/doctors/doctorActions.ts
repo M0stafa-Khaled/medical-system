@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg } from "@/interfaces";
 import {
   ICreateDoctorAction,
@@ -12,7 +12,7 @@ export const getDoctorActions = async ({
   doctorId: string;
   token: string;
 }): Promise<IResponseDoctorActions> => {
-  const { data } = await axiosInstanceAPI.get(`/${doctorId}/actions`, {
+  const { data } = await axiosAPI.get(`/${doctorId}/actions`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -24,7 +24,7 @@ export const createDoctorAction = async ({
   formData,
   token,
 }: ICreateDoctorAction): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post("actions", formData, {
+  const { data } = await axiosAPI.post("actions", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -37,7 +37,7 @@ export const updateDoctorAction = async ({
   token,
   id,
 }: ICreateDoctorAction): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/actions/${id}`,
     {
       ...formData,
@@ -59,7 +59,7 @@ export const deleteDoctorAction = async ({
   id: string;
   token: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/actions/${id}`, {
+  const { data } = await axiosAPI.delete(`/actions/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   ICreateExpense,
@@ -12,7 +12,7 @@ export const getAllExpenses = async ({
   filter,
   sort,
 }: IGetWithParams): Promise<IExpensesRes> => {
-  const { data } = await axiosInstanceAPI.get("/expenses", {
+  const { data } = await axiosAPI.get("/expenses", {
     params: { page, sort, ...(filter && { filter }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ export const getExpenseById = async ({
   token: string;
   id: string;
 }): Promise<{ data: IExpense; message: string; status: boolean }> => {
-  const { data } = await axiosInstanceAPI.get(`/expenses/${id}`, {
+  const { data } = await axiosAPI.get(`/expenses/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -43,7 +43,7 @@ export const createExpense = async ({
   token: string;
   dataForm: ICreateExpense;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post("/expenses", dataForm, {
+  const { data } = await axiosAPI.post("/expenses", dataForm, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -60,7 +60,7 @@ export const cancelExpense = async ({
   token: string;
   cancelled_info: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/expenses/${id}/cancel`,
     { cancelled_info },
     {
@@ -79,7 +79,7 @@ export const deleteExpense = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/expenses/${id}`, {
+  const { data } = await axiosAPI.delete(`/expenses/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

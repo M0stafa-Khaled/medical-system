@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
   IConvertTreasuries,
@@ -10,7 +10,7 @@ export const getAllTreasuries = async ({
   token,
   search,
 }: IGetWithParams): Promise<ITreasuriesRes> => {
-  const { data } = await axiosInstanceAPI.get("/treasuries", {
+  const { data } = await axiosAPI.get("/treasuries", {
     params: { ...(search && { q: search }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -24,7 +24,7 @@ export const createTreasury = async ({
   name,
   status,
 }: ICreateTreasury): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/treasuries",
     {
       name,
@@ -45,7 +45,7 @@ export const updateTreasury = async ({
   name,
   status,
 }: ICreateTreasury): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `treasuries/${id}`,
     {
       name,
@@ -67,7 +67,7 @@ export const transferTreasuries = async ({
   to_treasury,
   amount,
 }: IConvertTreasuries): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/convert-treasuries",
     {
       from_treasury,
@@ -90,7 +90,7 @@ export const deleteTreasury = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/treasuries/${id}`, {
+  const { data } = await axiosAPI.delete(`/treasuries/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

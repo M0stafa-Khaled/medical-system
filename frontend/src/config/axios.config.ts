@@ -3,14 +3,14 @@ import axios from "axios";
 import { store } from "../store/store";
 import { toast } from "react-toastify";
 
-const axiosInstanceAPI = axios.create({
+const axiosAPI = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}/api`,
   headers: {
     Accept: "application/json",
   },
 });
 
-axiosInstanceAPI.interceptors.response.use(
+axiosAPI.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error?.response?.status === 401) {
@@ -21,4 +21,4 @@ axiosInstanceAPI.interceptors.response.use(
   }
 );
 
-export default axiosInstanceAPI;
+export default axiosAPI;

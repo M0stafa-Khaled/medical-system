@@ -13,7 +13,7 @@ import {
   useUpdatePatient,
 } from "@/lib/react-query/dashboard/patients";
 import { useEffect } from "react";
-import SubmitButton from "../../../SubmitButton";
+import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import RenderPatientFormFields from "./RenderPatientFormFields";

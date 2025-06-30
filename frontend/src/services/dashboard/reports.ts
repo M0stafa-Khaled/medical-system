@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/interfaces";
 import { IBookingsRes } from "@/interfaces/dashboard/bookings";
 import { IExpensesRes } from "@/interfaces/dashboard/expenses";
@@ -19,7 +19,7 @@ export const getTransactionsReport = async ({
   start_at,
   end_at,
 }: IGetWithParams): Promise<ITransactionsRes> => {
-  const { data } = await axiosInstanceAPI.get("/reports/all-transactions", {
+  const { data } = await axiosAPI.get("/reports/all-transactions", {
     params: {
       page,
       sort,
@@ -40,7 +40,7 @@ export const getTransfersReport = async ({
   start_at,
   end_at,
 }: IGetWithParams): Promise<ITransfersRes> => {
-  const { data } = await axiosInstanceAPI.get("/reports/all-transfers", {
+  const { data } = await axiosAPI.get("/reports/all-transfers", {
     params: {
       page,
       sort,
@@ -59,7 +59,7 @@ export const getExpensesReport = async ({
   filter,
   sort = "-created_at",
 }: IGetWithParams): Promise<IExpensesRes> => {
-  const { data } = await axiosInstanceAPI.get("/reports/all-expenses", {
+  const { data } = await axiosAPI.get("/reports/all-expenses", {
     params: { page, sort, ...(filter && { filter }) },
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -76,7 +76,7 @@ export const getBookingsReport = async ({
 }: IGetWithParams): Promise<IBookingsRes> => {
   console.log(start_at, end_at);
 
-  const { data } = await axiosInstanceAPI.get("/reports/all-bookings", {
+  const { data } = await axiosAPI.get("/reports/all-bookings", {
     params: {
       page,
       sort,
@@ -97,7 +97,7 @@ export const getTreasuriesReport = async ({
   start_at,
   end_at,
 }: IGetWithParams): Promise<ITreasuriesReportRes> => {
-  const { data } = await axiosInstanceAPI.get("/reports/all-treasuries", {
+  const { data } = await axiosAPI.get("/reports/all-treasuries", {
     params: {
       page,
       sort,
@@ -118,7 +118,7 @@ export const getPrescriptionsReport = async ({
   start_at,
   end_at,
 }: IGetWithParams): Promise<IPrescriptionsRes> => {
-  const { data } = await axiosInstanceAPI.get("/reports/all-prescriptions", {
+  const { data } = await axiosAPI.get("/reports/all-prescriptions", {
     params: {
       page,
       sort,
@@ -139,7 +139,7 @@ export const getPatientsReport = async ({
   start_at,
   end_at,
 }: IGetWithParams): Promise<IPatientsRes> => {
-  const { data } = await axiosInstanceAPI.get("/reports/all-patients", {
+  const { data } = await axiosAPI.get("/reports/all-patients", {
     params: {
       page,
       sort,
@@ -156,17 +156,14 @@ export const getPatientBalancesReport = async (
   patientId: string,
   { token, filter, sort = "-created_at", start_at, end_at }: IGetWithParams
 ): Promise<IPatientBalancesRes> => {
-  const { data } = await axiosInstanceAPI.get(
-    `/reports/${patientId}/all-balances`,
-    {
-      params: {
-        sort,
-        ...(filter && { filter }),
-        ...(start_at && { start_at }),
-        ...(end_at && { end_at }),
-      },
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  const { data } = await axiosAPI.get(`/reports/${patientId}/all-balances`, {
+    params: {
+      sort,
+      ...(filter && { filter }),
+      ...(start_at && { start_at }),
+      ...(end_at && { end_at }),
+    },
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return data;
 };

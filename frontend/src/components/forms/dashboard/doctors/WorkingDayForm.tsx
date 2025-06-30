@@ -8,7 +8,7 @@ import { DAYS, DOCTOR_WORKING_DAY_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
-import SubmitButton from "../../../SubmitButton";
+import SubmitButton from "../../../shared/SubmitButton";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useCreateWorkingDay,

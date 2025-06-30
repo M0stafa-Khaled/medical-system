@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/interfaces";
 import {
   ICreateTransaction,
@@ -14,7 +14,7 @@ export const getAllTransactions = async ({
   filter,
   sort,
 }: IGetWithParams): Promise<ITransactionsRes> => {
-  const { data } = await axiosInstanceAPI.get("/transactions", {
+  const { data } = await axiosAPI.get("/transactions", {
     params: { page, sort, ...(filter && { filter }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ export const getTransactionById = async ({
   message: string;
   data: ITransaction;
 }> => {
-  const { data } = await axiosInstanceAPI.get(`/transactions/${id}`, {
+  const { data } = await axiosAPI.get(`/transactions/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -59,7 +59,7 @@ export const createTransaction = async ({
   dataForm.doctor_actions.map((action, idx) =>
     formData.append(`doctor_actions[${idx}]`, action)
   );
-  const { data } = await axiosInstanceAPI.post("/transactions", formData, {
+  const { data } = await axiosAPI.post("/transactions", formData, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -73,7 +73,7 @@ export const refundTransaction = async ({
   status: boolean;
   message: string;
 }> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/transactions/${id}/refund`,
     { refund_info },
     {
@@ -94,7 +94,7 @@ export const getPatientLastVisits = async ({
   doctorId: string;
   patientId: string;
 }): Promise<IPatientLastVisits> => {
-  const { data } = await axiosInstanceAPI.get(
+  const { data } = await axiosAPI.get(
     `/${patientId}/transactions/${doctorId}`,
     {
       headers: { Authorization: `Bearer ${token}` },

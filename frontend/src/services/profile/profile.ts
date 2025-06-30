@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg } from "@/interfaces";
 import {
   IChangePassword,
@@ -9,7 +9,7 @@ import {
 export const getUserProfile = async (
   token: string
 ): Promise<IResponseProfile> => {
-  const { data } = await axiosInstanceAPI.get("/me", {
+  const { data } = await axiosAPI.get("/me", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -28,7 +28,7 @@ export const updateProfile = async ({
     if (dataForm.image) formData.append("image", dataForm.image);
     if (dataForm.signature) formData.append("signature", dataForm.signature);
 
-    const { data } = await axiosInstanceAPI.post("/me", formData, {
+    const { data } = await axiosAPI.post("/me", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -48,7 +48,7 @@ export const updateProfile = async ({
     if (dataForm.another_name)
       formData.append("another_name", dataForm.another_name);
 
-    const { data } = await axiosInstanceAPI.post("/me", formData, {
+    const { data } = await axiosAPI.post("/me", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -67,7 +67,7 @@ export const changePassword = async ({
   password,
   password_confirmation,
 }: IChangePassword): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/password/update",
     {
       password,

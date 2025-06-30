@@ -1,6 +1,6 @@
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import LoadingSpinnerPage from "@/components/LoadingSpinnerPage";
+import SuspenseLoader from "@/components/shared/SuspenseLoader";
 
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
 const PatientLayout = lazy(() => import("@/layout/PatientLayout"));
@@ -20,7 +20,7 @@ const patientRoutes = createRoutesFromElements(
     <Route element={<RootLayout />} id="patient-root">
       <Route
         element={
-          <Suspense fallback={<LoadingSpinnerPage />}>
+          <Suspense fallback={<SuspenseLoader />}>
             <ProtectedRoute requiredRole="patient">
               <PatientLayout />
             </ProtectedRoute>
@@ -32,7 +32,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings"
           element={
-            <Suspense fallback={<LoadingSpinnerPage />}>
+            <Suspense fallback={<SuspenseLoader />}>
               <PatientBookings />
             </Suspense>
           }
@@ -42,7 +42,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings/create"
           element={
-            <Suspense fallback={<LoadingSpinnerPage />}>
+            <Suspense fallback={<SuspenseLoader />}>
               <CreatePatientBooking />
             </Suspense>
           }
@@ -51,7 +51,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings/:bookingId/update"
           element={
-            <Suspense fallback={<LoadingSpinnerPage />}>
+            <Suspense fallback={<SuspenseLoader />}>
               <UpdatePatientBooking />
             </Suspense>
           }
@@ -62,7 +62,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/balances"
           element={
-            <Suspense fallback={<LoadingSpinnerPage />}>
+            <Suspense fallback={<SuspenseLoader />}>
               <PatientBalances />
             </Suspense>
           }

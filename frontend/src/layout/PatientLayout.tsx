@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/components/shared/navbar/Header";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const NAV_LINKS = [

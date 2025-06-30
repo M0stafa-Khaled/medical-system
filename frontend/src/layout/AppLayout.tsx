@@ -1,6 +1,6 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import Header from "@/components/Header";
 import { ILink } from "@/interfaces";
+import Header from "@/components/shared/navbar/Header";
 
 const AppLayout = () => {
   const navLinks: ILink[] = [

@@ -1,4 +1,4 @@
-import RefetchDateButton from "@/components/RefetchDateButton";
+import RefetchDataButton from "@/components/shared/RefetchDataButton";
 import { Button } from "@/components/ui/button";
 import Query_Keys from "@/enums/queryKeys";
 import { format } from "date-fns";
@@ -44,7 +44,7 @@ const PatientBookingsHeader = ({ filters, isLoading, setFilters }: IProps) => {
         </div>
 
         <div className="flex gap-2">
-          <RefetchDateButton
+          <RefetchDataButton
             isLoading={isLoading}
             queryKey={Query_Keys.GET_ALL_PATIENT_BOOKINGS}
           />

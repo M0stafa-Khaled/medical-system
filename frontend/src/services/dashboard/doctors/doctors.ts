@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
   ICreateDoctor,
@@ -11,7 +11,7 @@ export const getAllDoctors = async ({
   page = 1,
   search,
 }: IGetWithParams): Promise<IResponseDoctors> => {
-  const { data } = await axiosInstanceAPI.get(`/doctors`, {
+  const { data } = await axiosAPI.get(`/doctors`, {
     params: { ...(search ? { q: search, page } : { page }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ export const getDoctorById = async ({
   id: string;
   token: string;
 }): Promise<IResponseDoctor> => {
-  const { data } = await axiosInstanceAPI.get(`doctors/${id}`, {
+  const { data } = await axiosAPI.get(`doctors/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -58,7 +58,7 @@ export const createDoctor = async ({
   formData.append("second_phone", dataForm?.second_phone || "");
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.signature) formData.append("signature", dataForm.signature);
-  const { data } = await axiosInstanceAPI.post("/doctors", formData, {
+  const { data } = await axiosAPI.post("/doctors", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -95,15 +95,11 @@ export const updateDoctor = async ({
 
   if (dataForm.image) formData.append("image", dataForm.image);
   if (dataForm.signature) formData.append("signature", dataForm.signature);
-  const { data } = await axiosInstanceAPI.post(
-    `/doctors/${dataForm.id}`,
-    formData,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const { data } = await axiosAPI.post(`/doctors/${dataForm.id}`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 };
 
@@ -114,7 +110,7 @@ export const deleteDoctor = async ({
   id: number;
   token: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/doctors/${id}`, {
+  const { data } = await axiosAPI.delete(`/doctors/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

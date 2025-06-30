@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
   IPatientsRes,
@@ -11,7 +11,7 @@ export const getAllPatients = async ({
   page = 1,
   search,
 }: IGetWithParams): Promise<IPatientsRes> => {
-  const { data } = await axiosInstanceAPI.get(`/patients`, {
+  const { data } = await axiosAPI.get(`/patients`, {
     params: { ...(search ? { q: search, page } : { page }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ export const getPatientById = async ({
   id: string;
   token: string;
 }): Promise<IPatientRes> => {
-  const { data } = await axiosInstanceAPI.get(`/patients/${id}`, {
+  const { data } = await axiosAPI.get(`/patients/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -60,7 +60,7 @@ export const createPatient = async ({
     formData.append("second_phone", dataForm?.second_phone);
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
-  const { data } = await axiosInstanceAPI.post(`/patients`, formData, {
+  const { data } = await axiosAPI.post(`/patients`, formData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -94,15 +94,11 @@ export const updatePatient = async ({
     formData.append("second_phone", dataForm?.second_phone);
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
-  const { data } = await axiosInstanceAPI.post(
-    `/patients/${dataForm.id}`,
-    formData,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const { data } = await axiosAPI.post(`/patients/${dataForm.id}`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 };
 
@@ -113,7 +109,7 @@ export const deletePatient = async ({
   id: number;
   token: string;
 }) => {
-  const { data } = await axiosInstanceAPI.delete(`/patients/${id}`, {
+  const { data } = await axiosAPI.delete(`/patients/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
