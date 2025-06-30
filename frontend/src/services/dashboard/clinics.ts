@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import { ICreateClinic, IClinicsRes } from "@/interfaces/dashboard/clinics";
 
@@ -6,7 +6,7 @@ export const getAllClinics = async ({
   token,
   filter,
 }: IGetWithParams): Promise<IClinicsRes> => {
-  const { data } = await axiosInstanceAPI.get("/clinics", {
+  const { data } = await axiosAPI.get("/clinics", {
     params: { ...(filter && { filter }) },
 
     headers: {
@@ -21,7 +21,7 @@ export const createClinic = async ({
   status,
   token,
 }: ICreateClinic): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/clinics",
     { name, status: status ? "1" : "0", virtual_number: 5 },
     {
@@ -40,7 +40,7 @@ export const deleteClinic = async ({
   id: number;
   token: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/clinics/${id}`, {
+  const { data } = await axiosAPI.delete(`/clinics/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -55,7 +55,7 @@ export const updateClinic = async ({
   token,
   virtual_number,
 }: ICreateClinic): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/clinics/${id}`,
     { name, status: status ? "1" : "0", virtual_number, _method: "put" },
     {

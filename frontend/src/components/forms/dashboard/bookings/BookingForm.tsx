@@ -22,7 +22,7 @@ import {
   useUpdateBooking,
 } from "@/lib/react-query/dashboard/bookings";
 import RenderBookingFormFields from "./RenderBookingFromFields";
-import SubmitButton from "@/components/SubmitButton";
+import SubmitButton from "@/components/shared/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import handleResErr from "@/utils/handleResponseError";

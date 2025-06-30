@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   ICreateDosage,
@@ -10,7 +10,7 @@ export const getAllDosages = async ({
   token,
   search,
 }: IGetWithParams): Promise<IDosagesRes> => {
-  const { data } = await axiosInstanceAPI.get("/dosages", {
+  const { data } = await axiosAPI.get("/dosages", {
     params: { ...(search && { q: search }) },
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -21,7 +21,7 @@ export const createDosage = async ({
   token,
   name,
 }: ICreateDosage): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/dosages",
     { name },
     { headers: { Authorization: `Bearer ${token}` } }
@@ -34,7 +34,7 @@ export const updateDosage = async ({
   name,
   id,
 }: IUpdateDosage): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `dosages/${id}`,
     { name, _method: "put" },
     { headers: { Authorization: `Bearer ${token}` } }
@@ -49,7 +49,7 @@ export const deleteDosage = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`dosages/${id}`, {
+  const { data } = await axiosAPI.delete(`dosages/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

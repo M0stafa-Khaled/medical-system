@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/interfaces";
 import {
   ICreateEmployee,
@@ -11,7 +11,7 @@ export const getAllEmployees = async ({
   page = 1,
   search = "",
 }: IGetWithParams): Promise<IEmployeesRes> => {
-  const { data } = await axiosInstanceAPI.get(`/employees`, {
+  const { data } = await axiosAPI.get(`/employees`, {
     params: { ...(search ? { q: search, page } : { page }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ export const getEmployeeById = async ({
   id: string;
   token: string;
 }): Promise<IEmployeeRes> => {
-  const { data } = await axiosInstanceAPI.get(`/employees/${id}`, {
+  const { data } = await axiosAPI.get(`/employees/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -42,7 +42,7 @@ export const deleteEmployee: ({
   id: number;
   token: string;
 }) => Promise<IStatusMsg> = async ({ id, token }) => {
-  const { data } = await axiosInstanceAPI.delete(`/employees/${id}`, {
+  const { data } = await axiosAPI.delete(`/employees/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -84,7 +84,7 @@ export const createEmployee: ({
     dataForm.permissions.map((permission, idx) =>
       formData.append(`permissions[${idx}]`, permission)
     );
-  const { data } = await axiosInstanceAPI.post("/employees", formData, {
+  const { data } = await axiosAPI.post("/employees", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -128,14 +128,10 @@ export const updateEmployee: ({
       formData.append(`permissions[${idx}]`, permission)
     );
   formData.append("_method", "put");
-  const { data } = await axiosInstanceAPI.post(
-    `/employees/${dataForm.id}`,
-    formData,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const { data } = await axiosAPI.post(`/employees/${dataForm.id}`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 };

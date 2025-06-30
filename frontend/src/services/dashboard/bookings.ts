@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   IBooking,
@@ -13,7 +13,7 @@ export const getAllBookings = async ({
   filter,
   sort,
 }: IGetWithParams): Promise<IBookingsRes> => {
-  const { data } = await axiosInstanceAPI.get(`/patients-bookings`, {
+  const { data } = await axiosAPI.get(`/patients-bookings`, {
     params: { page, sort, ...(filter && { filter }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -29,7 +29,7 @@ export const getBookingById = async ({
   token: string;
   id: string;
 }): Promise<{ status: boolean; message: string; data: IBooking }> => {
-  const { data } = await axiosInstanceAPI(`/patients-bookings/${id}`, {
+  const { data } = await axiosAPI(`/patients-bookings/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -42,7 +42,7 @@ export const createBooking = async ({
   formData,
   token,
 }: ICreateBooking): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post("/patients-bookings", formData, {
+  const { data } = await axiosAPI.post("/patients-bookings", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -55,7 +55,7 @@ export const updateBooking = async ({
   token,
   id,
 }: ICreateBooking): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/patients-bookings/${id}`,
     { ...formData, _method: "put" },
     {
@@ -72,7 +72,7 @@ export const updateBookingStatus = async ({
   status,
   id,
 }: IUpdateBookingStatus): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/patients-bookings/${id}/status`,
     {
       status,
@@ -93,7 +93,7 @@ export const deleteBooking = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/patients-bookings/${id}`, {
+  const { data } = await axiosAPI.delete(`/patients-bookings/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -3,10 +3,10 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 
 const DoctorWidgetsList = lazy(
-  () => import("@/components/widgets/doctor/DoctorWidgetsList")
+  () => import("@/components/doctor/widgets/DoctorWidgetsList")
 );
 const DoctorChartsList = lazy(
-  () => import("@/components/charts/doctor/DoctorChartsList")
+  () => import("@/components/doctor/charts/DoctorChartsList")
 );
 
 const DoctorDashboard = () => {

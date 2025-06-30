@@ -13,7 +13,7 @@ import {
 } from "@/lib/react-query/dashboard/doctors/doctors";
 import { useNavigate } from "react-router-dom";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
-import SubmitButton from "../../../SubmitButton";
+import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import RenderDoctorFormFields from "./RenderDoctorFormFields";

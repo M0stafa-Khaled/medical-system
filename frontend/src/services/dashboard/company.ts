@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg } from "@/interfaces";
 import {
   ICompanyRes,
@@ -7,7 +7,7 @@ import {
 } from "@/interfaces/dashboard/company";
 
 export const getCompanyInfo = async (token: string): Promise<ICompanyRes> => {
-  const { data } = await axiosInstanceAPI.get("/company/me", {
+  const { data } = await axiosAPI.get("/company/me", {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -26,7 +26,7 @@ export const updateCompanyInfo = async ({
   formData.append("phone_manager", company.phone_manager);
   if (company.logo) formData.append("logo", company.logo);
 
-  const { data } = await axiosInstanceAPI.post("/company/me", formData, {
+  const { data } = await axiosAPI.post("/company/me", formData, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -36,7 +36,7 @@ export const updateCompanyInfo = async ({
 export const getSubscription = async (
   token: string
 ): Promise<ISubscriptionRes> => {
-  const { data } = await axiosInstanceAPI.get("/subscription", {
+  const { data } = await axiosAPI.get("/subscription", {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;

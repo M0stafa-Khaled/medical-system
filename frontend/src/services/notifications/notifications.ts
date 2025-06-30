@@ -1,11 +1,11 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg } from "@/interfaces";
 import { INotificationsRes } from "@/interfaces/notifications";
 
 export const getNotifications = async (
   token: string
 ): Promise<INotificationsRes> => {
-  const { data } = await axiosInstanceAPI.get("/notifications", {
+  const { data } = await axiosAPI.get("/notifications", {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -18,7 +18,7 @@ export const readNotification = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/notifications/${id}/read`,
     {},
     { headers: { Authorization: `Bearer ${token}` } }
@@ -30,7 +30,7 @@ export const readNotification = async ({
 export const readAllNotifications = async (
   token: string
 ): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/notifications/read-all",
     {},
     { headers: { Authorization: `Bearer ${token}` } }

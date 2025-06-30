@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import {
   ICreatePatientPayment,
   IPatientBalancesRes,
@@ -11,14 +11,11 @@ export const getPatientBalances = async ({
   token: string;
   patientId: string;
 }): Promise<IPatientBalancesRes> => {
-  const { data } = await axiosInstanceAPI.get(
-    `/transactions/${patientId}/balances`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const { data } = await axiosAPI.get(`/transactions/${patientId}/balances`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 };
 
@@ -30,7 +27,7 @@ export const createPatientPayment = async ({
   status: boolean;
   message: string;
 }> => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/transactions/${patientId}/balances/payment`,
     transaction,
     {

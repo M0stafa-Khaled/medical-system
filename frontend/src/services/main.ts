@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import {
   IAvailableTimesRes,
   IDoctorClinicsRes,
@@ -15,7 +15,7 @@ export const getAllDrugs = async ({
   page = 1,
   search,
 }: IGetWithParams): Promise<IDrugsResponse> => {
-  const { data } = await axiosInstanceAPI.get("/drugs", {
+  const { data } = await axiosAPI.get("/drugs", {
     params: { ...(search ? { q: search, page } : { page }) },
 
     headers: {
@@ -33,7 +33,7 @@ export const getAllClinicsDoctors = async ({
   token: string;
   clinic_id: string;
 }): Promise<IDoctorClinicsRes> => {
-  const { data } = await axiosInstanceAPI.get(`/${clinic_id}/doctors`, {
+  const { data } = await axiosAPI.get(`/${clinic_id}/doctors`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -48,7 +48,7 @@ export const getAvailableBookingsTimes = async ({
   booking_date,
   token,
 }: IGetAvailableTimes): Promise<IAvailableTimesRes> => {
-  const { data } = await axiosInstanceAPI.get(
+  const { data } = await axiosAPI.get(
     `/bookings/${doctor_id}/avaliable-times/${working_day_id}/clinic/${clinic_id}`,
     {
       params: {
@@ -71,7 +71,7 @@ export const getAllPatientBalancesTransactions = async ({
   patientId: string;
   search: string;
 }): Promise<IPatientBalancesTransactionsRes> => {
-  const { data } = await axiosInstanceAPI.get(`/${patientId}/balances`, {
+  const { data } = await axiosAPI.get(`/${patientId}/balances`, {
     params: { ...(search ? { code: search } : {}) },
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -84,7 +84,7 @@ export const getAllAnalysis = async ({
   page,
   search,
 }: IGetWithParams): Promise<IAnalysisRes> => {
-  const { data } = await axiosInstanceAPI.get("/analysis", {
+  const { data } = await axiosAPI.get("/analysis", {
     params: { ...(search ? { q: search, page } : { page }) },
     headers: {
       Authorization: `Bearer ${token}`,
@@ -99,7 +99,7 @@ export const getAllScans = async ({
   page,
   search,
 }: IGetWithParams): Promise<IScansRes> => {
-  const { data } = await axiosInstanceAPI.get("/scans", {
+  const { data } = await axiosAPI.get("/scans", {
     params: { ...(search ? { q: search, page } : { page }) },
     headers: { Authorization: `Bearer ${token}` },
   });

@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/components/shared/navbar/Header";
 import PathIndicator from "@/components/dashboard/PathIndicator";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { PERMISSIONS } from "@/enums/permissions";

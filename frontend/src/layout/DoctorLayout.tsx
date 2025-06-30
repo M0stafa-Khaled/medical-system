@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/components/shared/navbar/Header";
 import Sidebar from "@/components/dashboard/Sidebar";
 
 import { ILink } from "@/interfaces";

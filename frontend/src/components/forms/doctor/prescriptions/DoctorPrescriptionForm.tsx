@@ -20,7 +20,7 @@ import prescriptionSchema from "@/validations/dashboard/prescriptionSchema";
 import { TPrescriptableType } from "@/types";
 import { useNavigate, useParams } from "react-router-dom";
 import { Delete } from "lucide-react";
-import SubmitButton from "@/components/SubmitButton";
+import SubmitButton from "@/components/shared/SubmitButton";
 import RenderPrescriptionFormFields from "../../dashboard/prescription/RenderPrescriptionFormFields";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";

@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import cookieServices from "@/utils/cookieServices";
 
 const WidgetsList = lazy(
-  () => import("@/components/widgets/admin/WidgetsList")
+  () => import("@/components/dashboard/widgets/WidgetsList")
 );
 const ChartsList = lazy(
-  () => import("@/components/charts/admin/AdminChartsList")
+  () => import("@/components/dashboard/charts/admin/AdminChartsList")
 );
 const EmployeeChartsList = lazy(
-  () => import("@/components/charts/employee/EmployeeChartsList")
+  () => import("@/components/dashboard/charts/employee/EmployeeChartsList")
 );
 
 const Dashboard = () => {

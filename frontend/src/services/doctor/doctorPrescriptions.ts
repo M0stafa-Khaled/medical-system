@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   ICreatePrescription,
@@ -13,7 +13,7 @@ export const getAllDoctorPrescriptions = async ({
   page,
   sort,
 }: IGetWithParams): Promise<IPrescriptionsRes> => {
-  const { data } = await axiosInstanceAPI.get("/patients-prescriptions", {
+  const { data } = await axiosAPI.get("/patients-prescriptions", {
     params: { page, ...(filter && { filter }), sort },
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -27,7 +27,7 @@ export const getDoctorPrescriptionById = async ({
   id: string;
   token: string;
 }): Promise<{ status: boolean; message: string; data: IPrescription }> => {
-  const { data } = await axiosInstanceAPI.get(`/patients-prescriptions/${id}`, {
+  const { data } = await axiosAPI.get(`/patients-prescriptions/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -55,13 +55,9 @@ export const createDoctorPrescription = async ({
     });
   });
 
-  const { data } = await axiosInstanceAPI.post(
-    "/patients-prescriptions",
-    formData,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  const { data } = await axiosAPI.post("/patients-prescriptions", formData, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return data;
 };
 
@@ -88,7 +84,7 @@ export const updateDoctorPrescription = async ({
     });
   });
   formData.append("_method", "put");
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     `/patients-prescriptions/${id}`,
     formData,
     {
@@ -105,11 +101,8 @@ export const deleteDoctorPrescription = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(
-    `/patients-prescriptions/${id}`,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  const { data } = await axiosAPI.delete(`/patients-prescriptions/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return data;
 };

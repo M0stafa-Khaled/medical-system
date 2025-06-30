@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IStatusMsg } from "@/interfaces";
 import {
   ILogin,
@@ -14,7 +14,7 @@ export const login: (user: ILogin) => Promise<ILoginRes> = async ({
   email,
   password,
 }) => {
-  const { data } = await axiosInstanceAPI.post("/auth", {
+  const { data } = await axiosAPI.post("/auth", {
     slug: import.meta.env.VITE_SLUG,
     email,
     password,
@@ -34,7 +34,7 @@ export const register = async (user: IRegister): Promise<IRegisterRes> => {
   if (user.second_phone) formData.append("second_phone", user.second_phone);
   if (user.another_name) formData.append("another_name", user.another_name);
 
-  const { data } = await axiosInstanceAPI.post("/register", formData, {
+  const { data } = await axiosAPI.post("/register", formData, {
     headers: {
       slug: import.meta.env.VITE_SLUG,
     },
@@ -43,7 +43,7 @@ export const register = async (user: IRegister): Promise<IRegisterRes> => {
 };
 
 export const logout: (token: string) => Promise<IStatusMsg> = async (token) => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/logout",
     {},
     {
@@ -58,7 +58,7 @@ export const logout: (token: string) => Promise<IStatusMsg> = async (token) => {
 export const checkAuth: (token: string) => Promise<ICheckAuth> = async (
   token
 ) => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/check-auth",
     {},
     {
@@ -73,7 +73,7 @@ export const checkAuth: (token: string) => Promise<ICheckAuth> = async (
 export const resendOtp: (token: string) => Promise<IStatusMsg> = async (
   token
 ) => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "/email/verification-notification",
     {},
     {
@@ -92,7 +92,7 @@ export const verifyEmail: ({
   token: string;
   otp: string;
 }) => Promise<IStatusMsg> = async ({ token, otp }) => {
-  const { data } = await axiosInstanceAPI.post(
+  const { data } = await axiosAPI.post(
     "email/verify",
     {
       code: otp,
@@ -107,10 +107,10 @@ export const verifyEmail: ({
 };
 
 export const forgotPassword = async (email: string): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post(
-    "/password/confirmation-notification",
-    { email, slug: import.meta.env.VITE_SLUG }
-  );
+  const { data } = await axiosAPI.post("/password/confirmation-notification", {
+    email,
+    slug: import.meta.env.VITE_SLUG,
+  });
   return data;
 };
 
@@ -119,7 +119,7 @@ export const resetPassword = async ({
   password,
   password_confirmation,
 }: IResetPassword): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.post("/password/reset", {
+  const { data } = await axiosAPI.post("/password/reset", {
     code,
     password,
     password_confirmation,
@@ -130,7 +130,7 @@ export const resetPassword = async ({
 export const getAllPermissions: (
   token: string
 ) => Promise<IPermissionsRes> = async (token) => {
-  const { data } = await axiosInstanceAPI.get("/permissions", {
+  const { data } = await axiosAPI.get("/permissions", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

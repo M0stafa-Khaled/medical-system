@@ -1,7 +1,6 @@
 import ProfileMenu from "../profile/ProfileMenu";
-import ToggleMode from "../ToggleMode";
-import LogoutButton from "../LogoutButton";
-import NavList from "../NavList";
+import LogoutButton from "../shared/LogoutButton";
+import NavList from "../shared/navbar/NavList";
 import { motion } from "framer-motion";
 import {
   logoVariants,
@@ -15,6 +14,7 @@ import truncateText from "@/utils/truncateText";
 import NotificationsMenu from "../notifications/NotificationsMenu";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import ToggleMode from "../shared/ToggleMode";
 
 interface IProps {
   links: ILink[];

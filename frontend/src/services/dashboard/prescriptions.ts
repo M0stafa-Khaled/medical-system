@@ -1,4 +1,4 @@
-import axiosInstanceAPI from "@/config/axios.config";
+import axiosAPI from "@/config/axios.config";
 import { IGetWithParams, IStatusMsg } from "@/interfaces";
 import {
   ICreatePrescription,
@@ -13,7 +13,7 @@ export const getAllPrescriptions = async ({
   page,
   sort,
 }: IGetWithParams): Promise<IPrescriptionsRes> => {
-  const { data } = await axiosInstanceAPI.get("/prescriptions", {
+  const { data } = await axiosAPI.get("/prescriptions", {
     params: { page, ...(filter && { filter }), sort },
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -27,7 +27,7 @@ export const getPrescriptionById = async ({
   id: string;
   token: string;
 }): Promise<{ status: boolean; message: string; data: IPrescription }> => {
-  const { data } = await axiosInstanceAPI.get(`/prescriptions/${id}`, {
+  const { data } = await axiosAPI.get(`/prescriptions/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -57,7 +57,7 @@ export const createPrescription = async ({
     });
   });
 
-  const { data } = await axiosInstanceAPI.post("/prescriptions", formData, {
+  const { data } = await axiosAPI.post("/prescriptions", formData, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -88,13 +88,9 @@ export const updatePrescription = async ({
     });
   });
   formData.append("_method", "put");
-  const { data } = await axiosInstanceAPI.post(
-    `/prescriptions/${id}`,
-    formData,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  const { data } = await axiosAPI.post(`/prescriptions/${id}`, formData, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return data;
 };
 
@@ -105,7 +101,7 @@ export const deletePrescription = async ({
   token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosInstanceAPI.delete(`/prescriptions/${id}`, {
+  const { data } = await axiosAPI.delete(`/prescriptions/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
