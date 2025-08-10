@@ -1,4 +1,4 @@
-import ImageModal from "../shared/ImageModal";
+import ImageModal from "./ImageModal";
 import { ReactNode } from "react";
 
 interface IProps {

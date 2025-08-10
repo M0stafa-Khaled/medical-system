@@ -1,6 +1,6 @@
 import Header from "@/components/shared/navbar/Header";
-import PathIndicator from "@/components/dashboard/PathIndicator";
-import Sidebar from "@/components/dashboard/Sidebar";
+import PathIndicator from "@/components/shared/PathIndicator";
+import Sidebar from "@/components/shared/Sidebar";
 import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/hooks/useHasPermission";
 import { ILink } from "@/interfaces";

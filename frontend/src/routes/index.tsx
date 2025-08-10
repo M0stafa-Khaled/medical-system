@@ -1,6 +1,7 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
 } from "react-router-dom";
 import { lazy } from "react";
@@ -28,7 +29,7 @@ const routes = createRoutesFromElements(
     >
       {/* Home */}
       <Route element={<AppLayout />} id="app-layout">
-        <Route index element={<>الصفحة الرئيسية</>} id="home" />
+        <Route index element={<Navigate to="/login" replace />} id="home" />
 
         {/* Profile */}
         <Route

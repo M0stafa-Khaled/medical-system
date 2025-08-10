@@ -1,4 +1,4 @@
-import InfoField from "@/components/dashboard/InfoField";
+import InfoField from "@/components/shared/InfoField";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import cookieServices from "@/utils/cookieServices";
 import formatDateTime from "@/utils/formatDate";

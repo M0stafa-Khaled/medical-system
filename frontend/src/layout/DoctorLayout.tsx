@@ -1,5 +1,5 @@
 import Header from "@/components/shared/navbar/Header";
-import Sidebar from "@/components/dashboard/Sidebar";
+import Sidebar from "@/components/shared/Sidebar";
 
 import { ILink } from "@/interfaces";
 import { BookMarkedIcon, HomeIcon, UserRoundSearch } from "lucide-react";

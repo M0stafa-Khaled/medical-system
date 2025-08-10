@@ -2,6 +2,9 @@ const defaultOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",
   month: "long",
   day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  hour12: true,
 };
 const formatDateTime = (
   data: string,

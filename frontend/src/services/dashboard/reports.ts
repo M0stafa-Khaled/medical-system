@@ -74,8 +74,6 @@ export const getBookingsReport = async ({
   start_at,
   end_at,
 }: IGetWithParams): Promise<IBookingsRes> => {
-  console.log(start_at, end_at);
-
   const { data } = await axiosAPI.get("/reports/all-bookings", {
     params: {
       page,

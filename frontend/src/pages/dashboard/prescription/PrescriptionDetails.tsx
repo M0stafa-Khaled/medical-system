@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import InfoField from "@/components/dashboard/InfoField";
+import InfoField from "@/components/shared/InfoField";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { Button } from "@/components/ui/button";

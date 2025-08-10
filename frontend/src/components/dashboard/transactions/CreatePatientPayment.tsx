@@ -22,7 +22,7 @@ import {
   useGetPatientBalances,
 } from "@/lib/react-query/dashboard/transactions/patientBalances";
 import { createPatientPaymentSchema } from "@/validations/dashboard/transactionSchema";
-import InfoField from "../InfoField";
+import InfoField from "../../shared/InfoField";
 
 const CreatePatientPayment = () => {
   const [isOpen, setIsOpen] = useState(false);
