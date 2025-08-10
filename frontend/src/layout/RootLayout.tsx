@@ -48,8 +48,8 @@ const RootLayout = () => {
       const { auth, email_verified, status, permissions } = await checkAuthUser(
         token
       );
-      // ----- User is  unauthenticated ------ //
-      // If user is unauthenticated
+
+      // user unauthenticated
       if (!auth) {
         dispatch(logout());
         dispatch(clearPermissions());
@@ -60,7 +60,7 @@ const RootLayout = () => {
         return;
       }
 
-      // ----- User is authenticated ----- //
+      // ----- User authenticated ----- //
       // Account is not verified
       if (!email_verified) {
         navigate("/verify-account");

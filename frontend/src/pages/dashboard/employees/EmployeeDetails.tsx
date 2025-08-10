@@ -23,8 +23,8 @@ import {
   Wallet,
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
-import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
-import InfoField from "@/components/dashboard/InfoField";
+import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
+import InfoField from "@/components/shared/InfoField";
 import DeleteEmployee from "@/components/dashboard/employees/DeleteEmployee";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";

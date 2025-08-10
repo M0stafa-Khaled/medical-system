@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Dot } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { linkVariants, navItemsVariants } from "@/animations/navbarAnimations";
 import { ILink } from "@/interfaces";
@@ -11,7 +11,7 @@ interface IProps {
   setOpenNav?: Dispatch<SetStateAction<boolean>>;
 }
 
-const NavList = ({ links, sidebar, setOpenNav,  }: IProps) => {
+const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
   const [expandedLinks, setExpandedLinks] = useState<{
     [key: string]: boolean;
   }>({});
@@ -44,7 +44,7 @@ const NavList = ({ links, sidebar, setOpenNav,  }: IProps) => {
             {hasChildren ? (
               <motion.div
                 variants={navItemsVariants}
-                className={`select-none w-full px-3 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg ${
+                className={`text-[15px] select-none w-full px-3 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg ${
                   sidebar ? "border border-muted" : ""
                 } flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
                 onClick={(e) => {
@@ -75,9 +75,9 @@ const NavList = ({ links, sidebar, setOpenNav,  }: IProps) => {
               >
                 <NavLink
                   to={link.path || "#"}
-                  className={`w-full ${
-                    isChildLink ? "mt-2" : ""
-                  } py-2.5 px-3 text-black dark:text-white transition-all duration-300 rounded-lg ${
+                  className={`${
+                    isChildLink ? "mt-2 pr-4" : ""
+                  } w-full text-[15px] py-2.5 px-2 text-black dark:text-white transition-all duration-300 rounded-lg ${
                     sidebar ? "border border-muted" : ""
                   } flex items-center justify-between gap-2 ${
                     activeLink
@@ -85,7 +85,8 @@ const NavList = ({ links, sidebar, setOpenNav,  }: IProps) => {
                       : "hover:bg-background dark:hover:bg-dark/50"
                   }`}
                 >
-                  <span className="flex-grow flex items-center gap-2">
+                  {isChildLink && <Dot />}
+                  <span className="flex-grow flex items-center gap-1">
                     {link.icon}
                     {link.name}
                   </span>

@@ -43,7 +43,7 @@ const BookingsReportTable = () => {
 
     setSearchParams(params);
   };
-  console.log(filters);
+
   const doctor = useDebounce(filters.doctor, 500);
   const patient = useDebounce(filters.patient, 500);
 

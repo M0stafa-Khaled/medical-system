@@ -121,6 +121,7 @@ const BookingsReportFilters = ({ filters, setFilters }: IProps) => {
           />
         </PopoverContent>
       </Popover>
+
       {/* End Date */}
       <Popover>
         <PopoverTrigger asChild>

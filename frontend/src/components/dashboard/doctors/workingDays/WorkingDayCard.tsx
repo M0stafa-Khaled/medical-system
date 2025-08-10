@@ -5,7 +5,7 @@ import { PERMISSIONS } from "@/enums/permissions";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
 import { Clock, Users, Hospital, Calendar, Pen } from "lucide-react";
 import convertDay, { convertDayFromEnToAr } from "@/utils/convertDayLang";
-import InfoField from "../../InfoField";
+import InfoField from "../../../shared/InfoField";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 

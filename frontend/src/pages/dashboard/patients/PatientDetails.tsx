@@ -19,9 +19,9 @@ import {
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
 import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
-import HeaderUserDetails from "@/components/dashboard/HeaderUserDetails";
+import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
 import DeletePatient from "@/components/dashboard/patients/DeletePatient";
-import InfoField from "@/components/dashboard/InfoField";
+import InfoField from "@/components/shared/InfoField";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { Calendar, BadgeCheck, BadgeX } from "lucide-react";

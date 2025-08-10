@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import InfoField from "@/components/dashboard/InfoField";
+import InfoField from "@/components/shared/InfoField";
 import { Button } from "@/components/ui/button";
 import { AxiosResErr } from "@/types";
 import DeletePrescription from "@/components/dashboard/prescriptions/DeletePrescription";

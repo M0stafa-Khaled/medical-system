@@ -25,7 +25,7 @@ import { IBooking } from "@/interfaces/dashboard/bookings";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import handleResErr from "@/utils/handleResponseError";
 import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/patientBalances";
-import InfoField from "../InfoField";
+import InfoField from "../../shared/InfoField";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 

@@ -24,6 +24,9 @@ export interface IEmployee {
     id: number;
     email: string;
     role: "admin" | "employee";
+    last_login_at: string | null;
+    last_logout_at: string | null;
+    active: boolean;
   };
   permissions: IPermission[];
 }
@@ -35,10 +38,8 @@ export interface ICreateEmployee {
   email: string;
   password: string;
   role: "admin" | "employee";
-
   treasury_id?: string;
   gender: "male" | "female";
-
   job: string;
   status: boolean;
   salary: string;
@@ -46,7 +47,7 @@ export interface ICreateEmployee {
   second_phone?: string | null;
   image?: File | undefined;
   personal_image?: File | undefined;
-  permissions: string[]
+  permissions: string[];
 }
 
 export interface IEmployeesRes {

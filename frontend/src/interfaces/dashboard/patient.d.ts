@@ -9,13 +9,16 @@ export interface IPatient {
   personal_id: string;
   personal_image: string | null;
   status: true;
+  info_status: string;
   gender: string;
   description: string;
-  info_status: string;
   created_at: string;
   user: {
     id: number;
     email: string;
+    last_login_at: string | null;
+    last_logout_at: string | null;
+    active: boolean;
     role: "patient";
   };
 }
