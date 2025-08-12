@@ -11,6 +11,7 @@ import truncateText from "@/utils/truncateText";
 import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   transactions: ITransaction[];
@@ -53,7 +54,7 @@ const TransactionsList = ({ transactions }: IProps) => {
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
-            {transaction.balance.amount_paid}
+            {numberToPrice(transaction.balance.amount_paid)}
           </TableCell>
 
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">

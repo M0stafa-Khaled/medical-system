@@ -29,6 +29,7 @@ import patientBookingSchema from "@/validations/patient/patientBookingSchema";
 import { useCreatePatientBooking } from "@/lib/react-query/patient/patientBookings";
 import cookieServices from "@/utils/cookieServices";
 import RenderPatientBookingFormFields from "@/components/forms/patient/RenderPatientBookingFormFields";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 const CreatePatientBooking = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +76,7 @@ const CreatePatientBooking = () => {
   // Create options from data to add it in select with label and value
   const doctorActionsOptions = doctorActions?.data?.map((action) => ({
     value: action.id.toString(),
-    label: `${action.name} - ${action.price} جنيه`,
+    label: `${action.name} - ${numberToPrice(action.price)}`,
   }));
 
   const doctorsOptions = doctors?.data?.map((doctor) => ({

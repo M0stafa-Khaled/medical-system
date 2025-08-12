@@ -6,6 +6,7 @@ import { tableRowVariants } from "@/animations";
 import { IExpense } from "@/interfaces/dashboard/expenses";
 import formatDateTime from "@/utils/formatDate";
 import truncateText from "@/utils/truncateText";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   expenses: IExpense[];
@@ -46,7 +47,7 @@ const ExpensesReportList = ({ expenses }: IProps) => {
             {expense?.category?.name}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
-            {expense?.price}
+            {numberToPrice(expense?.price)}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
             {expense?.treasury?.name}

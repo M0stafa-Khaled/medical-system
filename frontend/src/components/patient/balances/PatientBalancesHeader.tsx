@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { numberToPrice } from "@/utils/numberToPrice";
 import { motion } from "framer-motion";
 
 interface IProps {
@@ -27,19 +28,19 @@ const PatientBalancesHeader = ({
           <CardContent className="py-8 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
             <div className="text-dark dark:text-white flex items-center gap-2 font-semibold text-lg lg:text-xl">
               <h4>إجمالي المبلغ الفعلى:</h4>
-              <p>{total_amount_due}</p>
+              <p>{numberToPrice(total_amount_due)}</p>
             </div>
             <div className="text-dark dark:text-white flex items-center gap-2 font-semibold sm:text-lg lg:text-xl">
               <h4>إجمالي المبالغ المدفوعة:</h4>
-              <p>{total_amount_paid}</p>
+              <p>{numberToPrice(total_amount_paid)}</p>
             </div>
             <div className="text-dark dark:text-white flex items-center gap-2 font-semibold sm:text-lg lg:text-xl">
               <h4>إجمالي المبالغ المستحقة:</h4>
-              <p>{total_balance}</p>
+              <p>{numberToPrice(total_balance)}</p>
             </div>
             <div className="text-dark dark:text-white flex items-center gap-2 font-semibold sm:text-lg lg:text-xl">
               <h4>إجمالي المبالغ المستردة:</h4>
-              <p>{refund_amount}</p>
+              <p>{numberToPrice(refund_amount)}</p>
             </div>
           </CardContent>
         </Card>

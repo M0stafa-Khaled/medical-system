@@ -26,6 +26,7 @@ import {
   useUpdatePatientBooking,
 } from "@/lib/react-query/patient/patientBookings";
 import { IPatientBooking } from "@/interfaces/patient/patientBookings";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   booking?: IPatientBooking;
@@ -84,7 +85,7 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
   // Create options from data to add it in select with label and value
   const doctorActionsOptions = doctorActions?.data?.map((action) => ({
     value: action.id.toString(),
-    label: `${action.name} - ${action.price} جنيه`,
+    label: `${action.name} - ${numberToPrice(action.price)}`,
   }));
 
   const doctorsOptions = doctors?.data?.map((doctor) => ({

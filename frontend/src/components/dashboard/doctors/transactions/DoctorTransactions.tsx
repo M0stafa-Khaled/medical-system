@@ -8,6 +8,7 @@ import CreateDoctorExpense from "./CreateDoctorExpense";
 import DataTable from "@/components/ui/DataTable";
 import DoctorTransactionsTableHeader from "./DoctorTransactionsTableHeader";
 import DoctorTransactionsList from "./DoctorTransactionsList";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 const DoctorTransactions = ({ doctorId }: { doctorId: string }) => {
   const token = cookieServices.getToken()!;
@@ -54,7 +55,7 @@ const DoctorTransactions = ({ doctorId }: { doctorId: string }) => {
                   المبلع الإجمالي:
                 </h5>
                 <p className="font-medium text-wrap text-dark dark:text-white text-lg">
-                  {doctorTransactions?.data.total_amount || 0.0}
+                  {numberToPrice(doctorTransactions?.data.total_amount ?? "") || 0.0}
                 </p>
               </div>
             </motion.div>

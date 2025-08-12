@@ -28,6 +28,7 @@ import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/
 import InfoField from "../../shared/InfoField";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   booking: IBooking;
@@ -143,15 +144,21 @@ const CreateTransaction = ({ booking }: IProps) => {
           >
             <InfoField
               label="الإجمالي"
-              value={patientBalances?.data.total_amount_due as number}
+              value={numberToPrice(
+                patientBalances?.data.total_amount_due as number
+              )}
             />
             <InfoField
               label="إجمالي المدفوع"
-              value={patientBalances?.data.total_amount_paid as number}
+              value={numberToPrice(
+                patientBalances?.data.total_amount_paid as number
+              )}
             />
             <InfoField
               label="إجمالي المسترد"
-              value={patientBalances?.data.refund_amount as number}
+              value={numberToPrice(
+                patientBalances?.data.refund_amount as number
+              )}
             />
             <InfoField
               label="إجمالي الباقي"
