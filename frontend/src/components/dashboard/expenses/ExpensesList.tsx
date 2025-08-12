@@ -14,6 +14,7 @@ import CancelExpense from "./CancelExpense";
 import truncateText from "@/utils/truncateText";
 import PrintExpenseReceipt from "./PrintExpenseReceipt";
 import TooltipButton from "@/components/ui/TooltipButton";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   expenses: IExpense[];
@@ -60,7 +61,7 @@ const ExpensesList = ({ expenses }: IProps) => {
             {expense?.category?.name}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
-            {expense?.price}
+            {numberToPrice(expense?.price)}
           </TableCell>
           <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
             {expense?.treasury?.name}

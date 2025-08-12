@@ -29,6 +29,7 @@ import RefundTransaction from "@/components/dashboard/transactions/RefundTransac
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { AxiosResErr } from "@/types";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 const TransactionDetails = () => {
   const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);
@@ -121,7 +122,7 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants}>
                 <InfoField
                   label="المبلغ المدفوع"
-                  value={balance?.amount_paid as string}
+                  value={numberToPrice(balance?.amount_paid as string)}
                   icon={<DollarSign className="h-5 w-5 text-green-500" />}
                 />
               </motion.div>
@@ -129,7 +130,7 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants}>
                 <InfoField
                   label="المبلغ الفعلي"
-                  value={balance?.total_amount_due as string}
+                  value={numberToPrice(balance?.total_amount_due as string)}
                   icon={<PiggyBank className="h-5 w-5 text-red-500" />}
                 />
               </motion.div>
@@ -137,7 +138,7 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants}>
                 <InfoField
                   label="المبلغ المستحق"
-                  value={balance?.balance as string}
+                  value={numberToPrice(balance?.balance as string)}
                   icon={<PiggyBank className="h-5 w-5 text-red-500" />}
                 />
               </motion.div>
@@ -196,7 +197,7 @@ const TransactionDetails = () => {
                 <motion.div variants={itemVariants}>
                   <InfoField
                     label="المبلغ المسترد"
-                    value={balance?.refund_amount as string}
+                    value={numberToPrice(balance?.refund_amount as string)}
                     icon={<BadgeX className="text-red-500" />}
                   />
                 </motion.div>

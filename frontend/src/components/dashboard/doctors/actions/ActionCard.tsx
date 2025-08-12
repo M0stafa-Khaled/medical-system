@@ -4,6 +4,7 @@ import DeleteAction from "./DeleteAction";
 import UpdateAction from "./UpdateAction";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   action: IDoctorAction;
@@ -24,7 +25,7 @@ const ActionCard = ({ action, doctorId }: IProps) => {
         <CardContent className="p-4 pt-0">
           <p className="text-black/70 dark:text-white/70">
             السعر:{" "}
-            <span className="text-black dark:text-white">{action.price}</span>
+            <span className="text-black dark:text-white">{numberToPrice(action.price)}</span>
           </p>
         </CardContent>
       </div>

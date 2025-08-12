@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import PatientBalancesTable from "./PatientBalancesTable";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   patientId: string;
@@ -46,19 +47,19 @@ const PatientBalances = ({ patientId }: IProps) => {
         <CardHeader className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
           <div className="flex items-center gap-2 font-semibold text-lg">
             <h4 className="text-dark dark:text-white">المبلغ الفعلي:</h4>
-            <p>{total_amount_due}</p>
+            <p>{numberToPrice(total_amount_due!)}</p>
           </div>
           <div className="flex items-center gap-2 font-semibold text-lg">
             <h4 className="text-dark dark:text-white">إجمالي المدفوع:</h4>
-            <p>{total_amount_paid}</p>
+            <p>{numberToPrice(total_amount_paid!)}</p>
           </div>
           <div className="flex items-center gap-2 font-semibold text-lg">
             <h4 className="text-dark dark:text-white">إجمالي المستحق:</h4>
-            <p>{total_balance}</p>
+            <p>{numberToPrice(total_balance!)}</p>
           </div>
           <div className="flex items-center gap-2 font-semibold text-lg">
             <h4 className="text-dark dark:text-white">إجمالي المسترد:</h4>
-            <p>{refund_amount}</p>
+            <p>{numberToPrice(refund_amount!)}</p>
           </div>
         </CardHeader>
       </Card>

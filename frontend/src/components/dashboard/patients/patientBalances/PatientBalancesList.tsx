@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import { IBalance } from "@/interfaces/patientBalances";
 import formatDateTime from "@/utils/formatDate";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   patients: IBalance[];
@@ -54,16 +55,16 @@ const PatientBalancesList = ({ patients }: IProps) => {
               {transaction_code}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
-              {amount_paid}
+              {numberToPrice(amount_paid)}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
-              {total_amount_due}
+              {numberToPrice(total_amount_due)}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
-              {balance}
+              {numberToPrice(balance)}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
-              {refund_amount}
+              {numberToPrice(refund_amount)}
             </TableCell>
             <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
               {payment_method === "cash" ? "نقدي" : "بطاقة بنكية"}

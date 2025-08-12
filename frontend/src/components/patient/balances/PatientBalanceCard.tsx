@@ -8,6 +8,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { IBalance } from "@/interfaces/patientBalances";
 import formatDateTime from "@/utils/formatDate";
+import { numberToPrice } from "@/utils/numberToPrice";
 import { Calendar, CreditCard, Hash } from "lucide-react";
 import { FaMoneyCheck } from "react-icons/fa6";
 import { MdAttachMoney, MdMoneyOff } from "react-icons/md";
@@ -36,24 +37,24 @@ const PatientBalanceCard = ({ balance }: IProps) => {
           <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <MdAttachMoney className="h-5 w-5" />
             <h2>المبلغ المدفوع:</h2>
-            <p>{Number(balance.amount_paid)}</p>
+            <p>{numberToPrice(balance.amount_paid)}</p>
           </div>
           <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <TbReportMoney className="h-5 w-5" />
             <h2>المبلغ الفعلي:</h2>
-            <p>{Number(balance.total_amount_due)}</p>
+            <p>{numberToPrice(balance.total_amount_due)}</p>
           </div>
           <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
             <MdMoneyOff className="h-5 w-5" />
             <h2>المبلغ المستحق:</h2>
-            <p>{Number(balance.balance)}</p>
+            <p>{numberToPrice(balance.balance)}</p>
           </div>
 
           {Number(balance.refund_amount) ? (
             <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
               <MdAttachMoney className="h-5 w-5" />
               <h2>المبلغ المسترد:</h2>
-              <p>{Number(balance.refund_amount)}</p>
+              <p>{numberToPrice(balance.refund_amount)}</p>
             </div>
           ) : null}
 

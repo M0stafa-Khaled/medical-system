@@ -23,6 +23,7 @@ import {
 } from "@/lib/react-query/dashboard/transactions/patientBalances";
 import { createPatientPaymentSchema } from "@/validations/dashboard/transactionSchema";
 import InfoField from "../../shared/InfoField";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 const CreatePatientPayment = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -143,19 +144,27 @@ const CreatePatientPayment = () => {
               >
                 <InfoField
                   label="المبلغ الفعلي"
-                  value={patientBalances?.data.total_amount_due as number}
+                  value={numberToPrice(
+                    patientBalances?.data.total_amount_due as number
+                  )}
                 />
                 <InfoField
                   label="إجمالي المبلغ المدفوع"
-                  value={patientBalances?.data.total_amount_paid as number}
+                  value={numberToPrice(
+                    patientBalances?.data.total_amount_paid as number
+                  )}
                 />
                 <InfoField
                   label="إجمالي المبلغ المسترد"
-                  value={patientBalances?.data.refund_amount as number}
+                  value={numberToPrice(
+                    patientBalances?.data.refund_amount as number
+                  )}
                 />
                 <InfoField
                   label="إجمالي المبلغ المستحق"
-                  value={patientBalances?.data.total_balance as string}
+                  value={numberToPrice(
+                    patientBalances?.data.total_balance as string
+                  )}
                 />
               </motion.div>
             </motion.div>

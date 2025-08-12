@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import handleResErr from "@/utils/handleResponseError";
 import { AxiosResErr } from "@/types";
+import { numberToPrice } from "@/utils/numberToPrice";
 
 interface IProps {
   booking?: IBooking;
@@ -133,7 +134,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   // Create options from data to add it in select with label and value
   const doctorActionsOptions = doctorActions?.data?.map((action) => ({
     value: action.id.toString(),
-    label: `${action.name} - ${action.price} جنيه`,
+    label: `${action.name} - ${numberToPrice(action.price)}`,
   }));
 
   const doctorsOptions = doctors?.data?.map((doctor) => ({
