@@ -1,6 +1,7 @@
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import SuspenseLoader from "@/components/shared/SuspenseLoader";
+import Error from "@/pages/Error";
 
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
 const DoctorLayout = lazy(() => import("@/layout/DoctorLayout"));
@@ -25,7 +26,7 @@ const DoctorPrescriptionDetails = lazy(
 
 const doctorRoutes = createRoutesFromElements(
   <>
-    <Route element={<RootLayout />} id="doctor-root">
+    <Route element={<RootLayout />} id="doctor-root" errorElement={<Error />}>
       <Route
         path="/doctor"
         element={

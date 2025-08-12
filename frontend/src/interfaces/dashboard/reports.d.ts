@@ -19,9 +19,19 @@ export interface ITransfersRes {
 
 export interface ITreasuryReport {
   id: number;
-  type: string;
+  type: "transactions" | "expenses" | "transfers";
   created_at: string;
-  details: ITransfer;
+  details: {
+    id: number;
+    amount: string;
+    code?: strings;
+    status?: 1 | 0;
+    refund_info?: string | null;
+    contract_type?: "egyption";
+    card_number: string | null;
+    created_at: string;
+    employee: string;
+  };
 }
 
 export interface ITreasuriesReportRes {

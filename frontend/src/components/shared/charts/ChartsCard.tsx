@@ -132,7 +132,7 @@ const AnalyticsChart = ({ datasets, labels, isLoading }: IProps) => {
   return (
     <div className="h-80 max-w-5xl">
       {isLoading ? (
-        <Skeleton className="min-h-64 lg:h-[350px] w-full" />
+        <Skeleton className="min-h-64 lg:h-[320px] w-full" />
       ) : (
         <Line
           data={{ ...chartData, datasets: chartData.datasets ?? [] }}
