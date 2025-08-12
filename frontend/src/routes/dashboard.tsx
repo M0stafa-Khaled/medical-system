@@ -2,6 +2,7 @@ import { createRoutesFromElements, Route } from "react-router-dom";
 import { PERMISSIONS } from "@/enums/permissions";
 import { lazy, Suspense } from "react";
 import SuspenseLoader from "@/components/shared/SuspenseLoader";
+// import Error from "@/pages/Error";
 
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
 const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
@@ -138,7 +139,11 @@ const TreasuriesReports = lazy(
 );
 
 const dashboardRoutes = createRoutesFromElements(
-  <Route element={<RootLayout />} id="dashboard-root">
+  <Route
+    element={<RootLayout />}
+    id="dashboard-root"
+    // errorElement={<Error />}
+  >
     {/* Dashboard */}
     <Route
       path="/dashboard"

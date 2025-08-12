@@ -1,3 +1,4 @@
+import Error from "@/pages/Error";
 import { lazy } from "react";
 
 const AuthLayout = lazy(() => import("@/layout/AuthLayout"));
@@ -15,9 +16,10 @@ const authRoutes = createRoutesFromElements(
       path="/verify-account"
       element={<VerifyEmail />}
       id="verify-account"
+      errorElement={<Error />}
     />
 
-    <Route element={<AuthLayout />} id="auth-layout">
+    <Route element={<AuthLayout />} id="auth-layout" errorElement={<Error />}>
       <Route path="/login" element={<Login />} id="login" />
       <Route path="/register" element={<Register />} id="register" />
       <Route
