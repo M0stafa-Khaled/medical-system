@@ -5,7 +5,6 @@ import {
   ILoginRes,
   IRegister,
   IRegisterRes,
-  ICheckAuth,
   IResetPassword,
   IPermissionsRes,
 } from "@/interfaces/auth/auth";
@@ -45,21 +44,6 @@ export const register = async (user: IRegister): Promise<IRegisterRes> => {
 export const logout: (token: string) => Promise<IStatusMsg> = async (token) => {
   const { data } = await axiosAPI.post(
     "/logout",
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return data;
-};
-
-export const checkAuth: (token: string) => Promise<ICheckAuth> = async (
-  token
-) => {
-  const { data } = await axiosAPI.post(
-    "/check-auth",
     {},
     {
       headers: {

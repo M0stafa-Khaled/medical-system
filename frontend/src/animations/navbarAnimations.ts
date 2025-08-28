@@ -1,4 +1,6 @@
-export const linkVariants = {
+import { Variants } from "framer-motion";
+
+export const linkVariants:Variants = {
   hidden: { opacity: 0, height: 0 },
   visible: {
     opacity: 1,
@@ -18,7 +20,7 @@ export const linkVariants = {
   },
 };
 
-export const navVariants = {
+export const navVariants: Variants = {
   hidden: {
     opacity: 0,
     height: 0,
@@ -37,7 +39,7 @@ export const navVariants = {
   },
 };
 
-export const menuIconVariants = {
+export const menuIconVariants:Variants = {
   hidden: {
     rotate: 45,
     opacity: 0,
@@ -51,7 +53,7 @@ export const menuIconVariants = {
   },
 };
 
-export const sidebarVariants = {
+export const sidebarVariants:Variants = {
   hidden: { opacity: 0, x: -50 },
   visible: {
     opacity: 1,
@@ -64,7 +66,7 @@ export const sidebarVariants = {
   },
 };
 
-export const logoVariants = {
+export const logoVariants:Variants = {
   hidden: { scale: 0.8, opacity: 0 },
   visible: {
     scale: 1,
@@ -77,7 +79,7 @@ export const logoVariants = {
   },
 };
 
-export const navItemsVariants = {
+export const navItemsVariants:Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,

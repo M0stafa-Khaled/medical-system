@@ -1,6 +1,8 @@
+import { TPrescriptableType } from "@/types";
 import { IPaginationMeta } from "..";
 import { IClinic } from "./clinics";
 import { IDoctor } from "./doctors/doctor";
+import { IPatient } from "./patient";
 
 interface IPrescriptable {
   type: TPrescriptableType;

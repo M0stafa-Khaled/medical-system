@@ -10,7 +10,7 @@ export interface IPatient {
   personal_image: string | null;
   status: true;
   info_status: string;
-  gender: string;
+  gender: "Male" | "Female";
   description: string;
   created_at: string;
   user: {

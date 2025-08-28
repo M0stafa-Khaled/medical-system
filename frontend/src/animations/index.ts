@@ -1,4 +1,6 @@
-export const tableRowVariants = {
+import { Variants } from "framer-motion";
+
+export const tableRowVariants: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.8,
@@ -18,7 +20,7 @@ export const tableRowVariants = {
   }),
 };
 
-export const containerVariants = {
+export const containerVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -30,7 +32,7 @@ export const containerVariants = {
   },
 };
 
-export const itemVariants = {
+export const itemVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
@@ -42,7 +44,7 @@ export const itemVariants = {
   },
 };
 
-export const tableSkeletonVariants = {
+export const tableSkeletonVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
     opacity: 1,

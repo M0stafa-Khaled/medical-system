@@ -1,7 +1,6 @@
 import Query_Keys from "@/enums/queryKeys";
 import { ILogin, IRegister, IResetPassword } from "@/interfaces/auth/auth";
 import {
-  checkAuth,
   forgotPassword,
   getAllPermissions,
   login,
@@ -34,12 +33,6 @@ export const useRegister = () => {
 export const useLogout = () => {
   return useMutation({
     mutationFn: (token: string) => logout(token),
-  });
-};
-
-export const useCheckAuth = () => {
-  return useMutation({
-    mutationFn: (token: string) => checkAuth(token),
   });
 };
 

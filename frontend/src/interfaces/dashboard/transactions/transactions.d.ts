@@ -1,11 +1,11 @@
 import { TPaymentMethod } from "@/types";
 import { IPaginationMeta } from "..";
-import { IDoctor } from "./doctors/doctor";
+import { IDoctor } from "../doctors/doctor";
 import { IEmployee } from "./employee";
-import { IPatient } from "./patient";
 import { ITreasury } from "./treasury";
 import { IBalance } from "../../patientBalances";
 import { IDoctorAction } from "../doctors/doctorActions";
+import { IPatient } from "../patient";
 
 export interface ITransaction {
   id: number;
@@ -19,7 +19,10 @@ export interface ITransaction {
   treasury: ITreasury;
   balance: IBalance;
   actions: IDoctorAction[];
-  doctor: IDoctor;
+  doctor: {
+    commission_status: boolean;
+    item: IDoctor;
+  };
   patient: IPatient;
 }
 

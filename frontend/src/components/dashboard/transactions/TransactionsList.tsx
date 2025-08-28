@@ -12,6 +12,7 @@ import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
 import formatDateTime from "@/utils/formatDate";
 import { Badge } from "@/components/ui/badge";
 import { numberToPrice } from "@/utils/numberToPrice";
+import PrintTransactionReceipt from "./PrintTransactionReceipt";
 
 interface IProps {
   transactions: ITransaction[];
@@ -103,6 +104,9 @@ const TransactionsList = ({ transactions }: IProps) => {
                       <FiEye size={24} />
                     </Link>
                   </Button>
+                )}
+                {canViewTransaction && (
+                  <PrintTransactionReceipt transaction={transaction} />
                 )}
 
                 {canRefundTransaction && transaction.status && (

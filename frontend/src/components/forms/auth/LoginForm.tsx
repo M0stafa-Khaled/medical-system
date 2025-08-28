@@ -46,11 +46,7 @@ const LoginForm = () => {
       dispatch(
         login({
           token: data.token,
-          user: {
-            role: data.role,
-            id: data.id,
-            name: data.name,
-          },
+          user: data,
         })
       );
 
