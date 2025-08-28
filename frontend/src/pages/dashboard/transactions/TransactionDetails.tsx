@@ -215,12 +215,12 @@ const TransactionDetails = () => {
 
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link
-                  to={`/dashboard/doctors/${doctor?.id}`}
+                  to={`/dashboard/doctors/${doctor?.item?.id}`}
                   className="block hover:text-primary transition-colors duration-200"
                 >
                   <InfoField
                     label="الطبيب"
-                    value={doctor?.name || ""}
+                    value={doctor?.item.name || ""}
                     icon={<Stethoscope className="h-5 w-5 text-indigo-500" />}
                   />
                 </Link>

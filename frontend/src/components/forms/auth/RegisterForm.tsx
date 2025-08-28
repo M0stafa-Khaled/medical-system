@@ -54,11 +54,7 @@ const RegisterForm = () => {
       dispatch(
         login({
           token: data.token,
-          user: {
-            id: data.id,
-            name: data.name,
-            role: data.role,
-          },
+          user: data,
         })
       );
       dispatch(setPermissions(data.permissions));

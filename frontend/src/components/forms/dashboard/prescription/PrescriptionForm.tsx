@@ -265,12 +265,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                                 : type === "analysis"
                                 ? "analysis"
                                 : "dosage",
-                            label:
-                              type === "scan"
-                                ? "اسم الإشعة"
-                                : type === "analysis"
-                                ? "اسم التحليل"
-                                : "اسم الجرعة",
+                            label: "نوع الروشتة",
                             type: "select",
                           }}
                           options={PRESCRIPTIONS_TYPES}
