@@ -1,12 +1,19 @@
-import { checkAuth, logout } from "@/store/features/auth/authSlice";
+import { logout } from "@/store/features/auth/authSlice";
 import {
   clearPermissions,
   setPermissions,
 } from "@/store/features/permissions/permissionsSlice";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
+import { useCheckAuth } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { memo, useEffect, useMemo, useRef } from "react";
-import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  Outlet,
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGetNotifications } from "@/lib/react-query/notifications/notifications";
 import { setNotifications } from "@/store/features/notifications/notificationSlice";
@@ -20,12 +27,12 @@ import {
 } from "@/lib/pusher/echo";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { useAppDispatch } from "@/store/store";
 
 const RootLayout = () => {
   useNetworkStatus();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
 
   const token = cookieServices.getToken()!;
@@ -33,43 +40,48 @@ const RootLayout = () => {
   const canReceiveNotifications = useHasPermission(
     PERMISSIONS.RECEIVE_NOTIFICATIONS
   );
+  const { mutateAsync: checkAuthUser } = useCheckAuth();
   const { playNotificationSound } = useNotificationSound();
 
   useEffect(() => {
-    const runCheck = async () => {
-      const action = await dispatch(checkAuth());
+    (async () => {
+      const { auth, email_verified, status, permissions } = await checkAuthUser(
+        token
+      );
 
-      if (checkAuth.fulfilled.match(action)) {
-        const { email_verified, status, permissions } = action.payload;
-
-        // ---- User authenticated ----
-        if (!email_verified) {
-          navigate("/verify-account");
-          return toast.warn("يرجى تاكيد البريد الالكتروني");
-        }
-
-        if (!status) {
-          dispatch(logout());
-          dispatch(clearPermissions());
-          return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
-        }
-
-        if (permissions && user?.role !== "patient") {
-          dispatch(setPermissions(permissions));
-        }
-
-        if (user?.role !== "doctor") {
-          initializeEcho(token);
-        }
-      } else {
-        // rejected (Unauthorized)
+      // user unauthenticated
+      if (!auth) {
         dispatch(logout());
         dispatch(clearPermissions());
+        if (location.pathname !== "/") {
+          navigate("/login");
+          toast.warn("يرجي تسجيل الدخول");
+        }
+        return;
       }
-    };
 
-    runCheck();
-  }, [dispatch, navigate, user?.role, token]);
+      // ----- User authenticated ----- //
+      // Account is not verified
+      if (!email_verified) {
+        navigate("/verify-account");
+        return toast.warn("يرجى تاكيد البريد الالكتروني");
+      }
+
+      // Account is not Active
+      if (!status) {
+        dispatch(logout());
+        dispatch(clearPermissions());
+        return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
+      }
+
+      // Set Permissions in state
+      if (permissions && user?.role !== "patient") {
+        dispatch(setPermissions(permissions));
+      }
+      // Enable socket
+      if (user?.role !== "doctor") initializeEcho(token);
+    })();
+  }, [checkAuthUser, token, user?.role, dispatch, location.pathname, navigate]);
 
   // Notifications
   const hasSubscribed = useRef(false);

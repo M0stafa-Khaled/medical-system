@@ -13,19 +13,22 @@ import {
   useUpdateEmployee,
 } from "@/lib/react-query/dashboard/employees";
 import { useEffect, useState } from "react";
-import { useGetAllPermissions } from "@/lib/react-query/auth/auth";
+import {
+  useCheckAuth,
+  useGetAllPermissions,
+} from "@/lib/react-query/auth/auth";
 import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
+import { useDispatch } from "react-redux";
 import {
   clearPermissions,
   setPermissions,
 } from "@/store/features/permissions/permissionsSlice";
-import { checkAuth, logout } from "@/store/features/auth/authSlice";
+import { logout } from "@/store/features/auth/authSlice";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 import RenderEmployeeFormFields from "./RenderEmployeeFormFields";
 import handleResErr from "@/utils/handleResponseError";
-import { useAppDispatch } from "@/store/store";
 interface IProps {
   employee?: IEmployee;
   action: "create" | "update";
@@ -36,8 +39,9 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   const token = cookieServices.getToken()!;
   const currentEmployeeId = cookieServices.getUser()?.id;
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { mutateAsync: checkAuthUser } = useCheckAuth();
   const [showPermissions, setShowPermissions] = useState(
     employee?.user?.role === "employee" || !employee
   );
@@ -80,29 +84,26 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     },
   });
 
-  const checkAuthAction = async () => {
-    const action = await dispatch(checkAuth());
-    if (checkAuth.fulfilled.match(action)) {
-      const { email_verified, status, permissions, auth } = action.payload;
-
-      if (!auth || !status) {
-        dispatch(logout());
-        dispatch(clearPermissions());
-        navigate("/login");
-        if (!auth)
-          return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
-        if (!status)
-          return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
-      }
-
-      if (!email_verified) {
-        navigate("/verify-account");
-        return toast.warn("يرجى تاكيد البريد الالكتروني");
-      }
-
-      // Set Permissions in state
-      dispatch(setPermissions(permissions));
+  const checkAuth = async () => {
+    const { auth, email_verified, status, permissions } = await checkAuthUser(
+      token
+    );
+    if (!auth || !status) {
+      dispatch(logout());
+      dispatch(clearPermissions());
+      navigate("/login");
+      if (!auth)
+        return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
+      if (!status) return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
     }
+
+    if (!email_verified) {
+      navigate("/verify-account");
+      return toast.warn("يرجى تاكيد البريد الالكتروني");
+    }
+
+    // Set Permissions in state
+    dispatch(setPermissions(permissions));
   };
 
   useEffect(() => {
@@ -149,7 +150,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
         });
         if (!status) return toast.error(message);
 
-        if (employee?.id === currentEmployeeId) checkAuthAction();
+        if (employee?.id === currentEmployeeId) checkAuth();
         toast.success("تم تحديث بيانات الموظف بنجاح");
       }
 
