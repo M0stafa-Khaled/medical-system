@@ -1,4 +1,4 @@
-import { checkAuth, logout } from "@/store/features/auth/authSlice";
+import { logout } from "@/store/features/auth/authSlice";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,11 +20,16 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
-import { useResendOtp, useVerifyEmail } from "@/lib/react-query/auth/auth";
+import {
+  useCheckAuth,
+  useResendOtp,
+  useVerifyEmail,
+} from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as z from "zod";
@@ -32,7 +37,6 @@ import { clearPermissions } from "@/store/features/permissions/permissionsSlice"
 import { Helmet } from "react-helmet-async";
 import { AxiosError } from "axios";
 import Swal from "sweetalert2";
-import { useAppDispatch } from "@/store/store";
 
 const formSchema = z.object({
   otp: z
@@ -45,10 +49,11 @@ type FormValues = z.infer<typeof formSchema>;
 
 const VerifyEmail = () => {
   useNetworkStatus();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
   const role = cookieServices.getUser()?.role;
+  const { mutateAsync: checkAuth } = useCheckAuth();
 
   const { mutateAsync: resendOtp, isPending: isLoadingResendOtp } =
     useResendOtp();
@@ -57,24 +62,20 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     (async () => {
-      const action = await dispatch(checkAuth());
+      const { auth, email_verified } = await checkAuth(token);
 
-      if (checkAuth.fulfilled.match(action)) {
-        const { email_verified, auth } = action.payload;
-
-        if (!auth) {
-          dispatch(logout());
-          dispatch(clearPermissions());
-          navigate("/login");
-          return;
-        }
-        if (email_verified && (role === "admin" || role === "employee"))
-          navigate("/dashboard");
-        if (email_verified && role === "patient") navigate("/bookings");
-        if (email_verified && role === "doctor") navigate("/doctor");
+      if (!auth) {
+        dispatch(logout());
+        dispatch(clearPermissions());
+        navigate("/login");
+        return;
       }
+      if (email_verified && (role === "admin" || role === "employee"))
+        navigate("/dashboard");
+      if (email_verified && role === "patient") navigate("/bookings");
+      if (email_verified && role === "doctor") navigate("/doctor");
     })();
-  }, [navigate, dispatch, role, token]);
+  }, [navigate, dispatch, role, checkAuth, token]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

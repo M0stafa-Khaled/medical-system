@@ -5,7 +5,6 @@ let echoInstance: Echo<any> | null = null;
 
 export const initializeEcho = (token: string) => {
   if (echoInstance) return echoInstance;
-  if (!token) return null;
 
   window.Pusher = Pusher;
 
