@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
 
-const SuspenseLoader = () => {
+const PageLoader = () => {
   const { theme } = useTheme();
   return (
     <motion.div
@@ -36,4 +36,4 @@ const SuspenseLoader = () => {
   );
 };
 
-export default SuspenseLoader;
+export default PageLoader;

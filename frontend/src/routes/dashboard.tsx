@@ -1,7 +1,7 @@
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { PERMISSIONS } from "@/enums/permissions";
 import { lazy, Suspense } from "react";
-import SuspenseLoader from "@/components/shared/SuspenseLoader";
+import PageLoader from "@/components/shared/PageLoader";
 // import Error from "@/pages/Error";
 
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
@@ -148,7 +148,7 @@ const dashboardRoutes = createRoutesFromElements(
     <Route
       path="/dashboard"
       element={
-        <Suspense fallback={<SuspenseLoader />}>
+        <Suspense fallback={<PageLoader />}>
           <ProtectedRoute requiredRole={["admin", "employee"]}>
             <DashboardLayout />
           </ProtectedRoute>
@@ -160,7 +160,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         index
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <Dashboard />
           </Suspense>
         }
@@ -171,7 +171,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="settings"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <Settings />
           </Suspense>
         }
@@ -182,7 +182,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="bookings"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
               <DashboardBookings />
             </ProtectedRoute>
@@ -193,7 +193,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="bookings/:bookingId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
               <DashboardBookingDetails />
             </ProtectedRoute>
@@ -204,7 +204,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="bookings/create"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
               <DashboardCreateBooking />
             </ProtectedRoute>
@@ -215,7 +215,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="bookings/:bookingId/update"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
               <DashboardUpdateBooking />
             </ProtectedRoute>
@@ -228,7 +228,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="clinics"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.CLINICS}>
               <Clinics />
             </ProtectedRoute>
@@ -241,7 +241,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.DOCTORS}>
               <Doctors />
             </ProtectedRoute>
@@ -252,7 +252,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors/:doctorId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_DOCTOR}>
               <DoctorDetails />
             </ProtectedRoute>
@@ -263,7 +263,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors/create"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
               <CreateDoctor />
             </ProtectedRoute>
@@ -274,7 +274,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors/:doctorId/update"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
               <UpdateDoctor />
             </ProtectedRoute>
@@ -287,7 +287,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors/:doctorId/working-days/create"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_WORKING_DAY}>
               <CreateWorkingDay />
             </ProtectedRoute>
@@ -298,7 +298,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="doctors/:doctorId/working-days/:workingDayId/update"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_WORKING_DAY}>
               <UpdateWorkingDay />
             </ProtectedRoute>
@@ -311,7 +311,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="employees"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.EMPLOYEES}>
               <Employees />
             </ProtectedRoute>
@@ -322,7 +322,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="employees/:employeeId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EMPLOYEE}>
               <EmployeeDetails />
             </ProtectedRoute>
@@ -333,7 +333,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="employees/create"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_EMPLOYEE}>
               <CreateEmployee />
             </ProtectedRoute>
@@ -344,7 +344,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="employees/:employeeId/update"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_EMPLOYEE}>
               <UpdateEmployee />
             </ProtectedRoute>
@@ -357,7 +357,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="patients"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS}>
               <Patients />
             </ProtectedRoute>
@@ -368,7 +368,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="patients/:patientId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PATIENT}>
               <PatientDetails />
             </ProtectedRoute>
@@ -379,7 +379,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="patients/create"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
               <CreatePatient />
             </ProtectedRoute>
@@ -390,7 +390,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="patients/:patientId/update"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
               <UpdatePatient />
             </ProtectedRoute>
@@ -403,7 +403,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="drugs"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <Drugs />
           </Suspense>
         }
@@ -412,7 +412,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="analytics"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <Analysis />
           </Suspense>
         }
@@ -421,7 +421,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="scans"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <Scans />
           </Suspense>
         }
@@ -432,7 +432,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="expenses"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES}>
               <Expenses />
             </ProtectedRoute>
@@ -443,7 +443,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="expenses/:expenseId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EXPENSE}>
               <ExpenseDetails />
             </ProtectedRoute>
@@ -456,7 +456,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="expenses-categories"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_CATEGORIES}>
               <ExpensesCategories />
             </ProtectedRoute>
@@ -469,7 +469,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="transactions"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.TRANSACTIONS}>
               <Transactions />
             </ProtectedRoute>
@@ -480,7 +480,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="transactions/:transactionId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_TRANSACTION}>
               <TransactionDetails />
             </ProtectedRoute>
@@ -491,7 +491,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="last-visits/:patientId/transactions/:doctorId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute
               requiredPermission={PERMISSIONS.LAST_PATIENT_TRANSACTIONS}
             >
@@ -506,7 +506,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="treasuries"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
               <Treasuries />
             </ProtectedRoute>
@@ -519,7 +519,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="dosages"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.DOSAGES}>
               <Dosages />
             </ProtectedRoute>
@@ -533,7 +533,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="prescriptions"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.PRESCRIPTIONS}>
               <Prescriptions />
             </ProtectedRoute>
@@ -544,7 +544,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="prescriptions/:prescriptionId"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PRESCRIPTION}>
               <PrescriptionDetails />
             </ProtectedRoute>
@@ -555,7 +555,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="prescriptions/create"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PRESCRIPTION}>
               <CreatePrescription />
             </ProtectedRoute>
@@ -566,7 +566,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="bookings/:bookingId/prescriptions/create"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PRESCRIPTION}>
               <CreatePrescription />
             </ProtectedRoute>
@@ -577,7 +577,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="prescriptions/:prescriptionId/update"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute
               requiredPermission={PERMISSIONS.UPDATE_PRESCRIPTION}
             >
@@ -592,7 +592,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/bookings"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS_REPORTS}>
               <BookingsReports />
             </ProtectedRoute>
@@ -603,7 +603,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/expenses"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES_REPORTS}>
               <ExpensesReports />
             </ProtectedRoute>
@@ -614,7 +614,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/patients"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS_REPORTS}>
               <PatientsReports />
             </ProtectedRoute>
@@ -625,7 +625,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/patient-balances"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute
               requiredPermission={PERMISSIONS.PATIENT_BALANCES_REPORTS}
             >
@@ -638,7 +638,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/prescriptions"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute
               requiredPermission={PERMISSIONS.PRESCRIPTIONS_REPORTS}
             >
@@ -651,7 +651,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/transactions"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute
               requiredPermission={PERMISSIONS.TRANSACTIONS_REPORTS}
             >
@@ -664,7 +664,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/transfers"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.TRANSFERS_REPORTS}>
               <TransfersReports />
             </ProtectedRoute>
@@ -675,7 +675,7 @@ const dashboardRoutes = createRoutesFromElements(
       <Route
         path="reports/treasuries"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES_REPORTS}>
               <TreasuriesReports />
             </ProtectedRoute>

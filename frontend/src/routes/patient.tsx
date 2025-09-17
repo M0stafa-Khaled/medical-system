@@ -1,6 +1,6 @@
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import SuspenseLoader from "@/components/shared/SuspenseLoader";
+import PageLoader from "@/components/shared/PageLoader";
 import Error from "@/pages/Error";
 
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
@@ -21,7 +21,7 @@ const patientRoutes = createRoutesFromElements(
     <Route element={<RootLayout />} id="patient-root" errorElement={<Error />}>
       <Route
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredRole="patient">
               <PatientLayout />
             </ProtectedRoute>
@@ -33,7 +33,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <PatientBookings />
             </Suspense>
           }
@@ -43,7 +43,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings/create"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <CreatePatientBooking />
             </Suspense>
           }
@@ -52,7 +52,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/bookings/:bookingId/update"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <UpdatePatientBooking />
             </Suspense>
           }
@@ -63,7 +63,7 @@ const patientRoutes = createRoutesFromElements(
         <Route
           path="/balances"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <PatientBalances />
             </Suspense>
           }
