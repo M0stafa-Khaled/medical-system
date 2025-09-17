@@ -1,15 +1,43 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CookieService from "../../../utils/cookieServices";
 import { TRole } from "../../../types";
+import axiosAPI from "@/config/axios.config";
+import { ICheckAuth, IPermission } from "@/interfaces/auth/auth";
 
 interface IAuthState {
   isAuthenticated: boolean;
+  isLoading: boolean;
+  emailVerified: boolean;
+  accountStatus: boolean;
+  permissions: IPermission[] | null;
 }
 
 const initialState: IAuthState = {
   isAuthenticated: !!CookieService.getToken(),
+  isLoading: false,
+  emailVerified: false,
+  accountStatus: false,
+  permissions: null,
 };
 
+export const checkAuth = createAsyncThunk<ICheckAuth, void>(
+  "auth/checkAuth",
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = CookieService.getToken();
+      if (!token) throw new Error("No token");
+
+      const res = await axiosAPI.post<ICheckAuth>(
+        "/check-auth",
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return res.data;
+    } catch (_err) {
+      return rejectWithValue("Unauthorized");
+    }
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -40,6 +68,30 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       CookieService.clearAllCookies();
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(checkAuth.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        checkAuth.fulfilled,
+        (state, action: PayloadAction<ICheckAuth>) => {
+          state.isAuthenticated = action.payload.auth;
+          state.emailVerified = action.payload.email_verified;
+          state.accountStatus = action.payload.status;
+          state.permissions = action.payload.permissions;
+          state.isLoading = false;
+        }
+      )
+      .addCase(checkAuth.rejected, (state) => {
+        state.isAuthenticated = false;
+        state.isLoading = false;
+        state.accountStatus = false;
+        state.emailVerified = false;
+        state.permissions = null;
+        CookieService.clearAllCookies();
+      });
   },
 });
 

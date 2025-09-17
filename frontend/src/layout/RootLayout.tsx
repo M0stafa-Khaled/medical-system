@@ -1,13 +1,11 @@
-import { logout } from "@/store/features/auth/authSlice";
+import { checkAuth, logout } from "@/store/features/auth/authSlice";
 import {
   clearPermissions,
   setPermissions,
 } from "@/store/features/permissions/permissionsSlice";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
-import { useCheckAuth } from "@/lib/react-query/auth/auth";
 import cookieServices from "@/utils/cookieServices";
 import { memo, useEffect, useMemo, useRef } from "react";
-import { useDispatch } from "react-redux";
 import {
   Outlet,
   ScrollRestoration,
@@ -27,10 +25,12 @@ import {
 } from "@/lib/pusher/echo";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import PageLoader from "@/components/shared/PageLoader";
 
 const RootLayout = () => {
   useNetworkStatus();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const queryClient = useQueryClient();
@@ -40,48 +40,51 @@ const RootLayout = () => {
   const canReceiveNotifications = useHasPermission(
     PERMISSIONS.RECEIVE_NOTIFICATIONS
   );
-  const { mutateAsync: checkAuthUser } = useCheckAuth();
   const { playNotificationSound } = useNotificationSound();
+
+  const { isLoading: authLoading } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     (async () => {
-      const { auth, email_verified, status, permissions } = await checkAuthUser(
-        token
-      );
+      const action = await dispatch(checkAuth());
+      if (checkAuth.fulfilled.match(action)) {
+        const { auth, email_verified, status, permissions } = action.payload;
 
-      // user unauthenticated
-      if (!auth) {
-        dispatch(logout());
-        dispatch(clearPermissions());
-        if (location.pathname !== "/") {
-          navigate("/login");
-          toast.warn("يرجي تسجيل الدخول");
+        // user unauthenticated
+        if (!auth) {
+          dispatch(logout());
+          dispatch(clearPermissions());
+          if (location.pathname !== "/") {
+            navigate("/login");
+            toast.warn("يرجي تسجيل الدخول");
+          }
+          return;
         }
-        return;
-      }
 
-      // ----- User authenticated ----- //
-      // Account is not verified
-      if (!email_verified) {
-        navigate("/verify-account");
-        return toast.warn("يرجى تاكيد البريد الالكتروني");
-      }
+        // ----- User authenticated ----- //
+        // Account is not verified
+        if (!email_verified) {
+          navigate("/verify-account");
+          return toast.warn("يرجى تاكيد البريد الالكتروني");
+        }
 
-      // Account is not Active
-      if (!status) {
-        dispatch(logout());
-        dispatch(clearPermissions());
-        return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
-      }
+        // Account is not Active
+        if (!status) {
+          dispatch(logout());
+          dispatch(clearPermissions());
+          return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
+        }
 
-      // Set Permissions in state
-      if (permissions && user?.role !== "patient") {
-        dispatch(setPermissions(permissions));
+        // Set Permissions in state
+        if (permissions && user?.role !== "patient") {
+          dispatch(setPermissions(permissions));
+        }
+        // Enable socket
+        if (user?.role !== "doctor") initializeEcho(token);
       }
-      // Enable socket
-      if (user?.role !== "doctor") initializeEcho(token);
     })();
-  }, [checkAuthUser, token, user?.role, dispatch, location.pathname, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   // Notifications
   const hasSubscribed = useRef(false);
@@ -135,6 +138,8 @@ const RootLayout = () => {
       })
     );
   }, [notifications, unreadNotifications, isLoading, dispatch]);
+
+  if (authLoading) return <PageLoader />;
 
   return (
     <>

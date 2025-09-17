@@ -1,6 +1,6 @@
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import SuspenseLoader from "@/components/shared/SuspenseLoader";
+import PageLoader from "@/components/shared/PageLoader";
 import Error from "@/pages/Error";
 
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
@@ -30,7 +30,7 @@ const doctorRoutes = createRoutesFromElements(
       <Route
         path="/doctor"
         element={
-          <Suspense fallback={<SuspenseLoader />}>
+          <Suspense fallback={<PageLoader />}>
             <ProtectedRoute requiredRole="doctor">
               <DoctorLayout />
             </ProtectedRoute>
@@ -41,7 +41,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           index
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorDashboard />
             </Suspense>
           }
@@ -50,7 +50,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="bookings"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorClinics />
             </Suspense>
           }
@@ -60,7 +60,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="clinic/:clinicName/bookings"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorBookings />
             </Suspense>
           }
@@ -72,7 +72,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="prescriptions"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorPrescriptions />
             </Suspense>
           }
@@ -81,7 +81,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="prescriptions/:prescriptionId"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorPrescriptionDetails />
             </Suspense>
           }
@@ -90,7 +90,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="prescriptions/create"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorCreatePrescription />
             </Suspense>
           }
@@ -99,7 +99,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="bookings/:bookingId/prescriptions/create"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorCreatePrescription />
             </Suspense>
           }
@@ -108,7 +108,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="prescriptions/:prescriptionId/update"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <DoctorUpdatePrescription />
             </Suspense>
           }
@@ -118,7 +118,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="dosages"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <Dosages />
             </Suspense>
           }
@@ -128,7 +128,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="drugs"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <Drugs />
             </Suspense>
           }
@@ -138,7 +138,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="scans"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <Scans />
             </Suspense>
           }
@@ -148,7 +148,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="analytics"
           element={
-            <Suspense fallback={<SuspenseLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <Analysis />
             </Suspense>
           }
