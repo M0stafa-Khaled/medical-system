@@ -1,0 +1,142 @@
+import { memo, useEffect, useState } from "react";
+import { Form } from "@/components/ui/form";
+import {
+  AlertDialogCancel,
+  AlertDialogFooter,
+} from "@/components/ui/alert-dialog";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { toast } from "react-toastify";
+import { Loader2, Pen } from "lucide-react";
+import Modal from "@/components/shared/Modal";
+import cookieServices from "@/utils/cookieServices";
+import { motion } from "framer-motion";
+import { itemVariants, containerVariants } from "@/animations";
+import { createTreasurySchema } from "@/validations/dashboard/treasurySchema";
+import { ITreasury } from "@/interfaces/dashboard/treasury";
+import { useUpdateTreasury } from "@/lib/react-query/dashboard/treasuries";
+import { TREASURY_FORM_INPUTS } from "@/constants";
+import TooltipButton from "@/components/ui/TooltipButton";
+import handleResErr from "@/utils/handleResponseError";
+import RenderTreasuryFormFields from "@/components/forms/dashboard/treasuries/RenderTreasuryFormFields";
+
+interface IProps {
+  treasury: ITreasury;
+}
+
+const UpdateTreasury = ({ treasury }: IProps) => {
+  const token = cookieServices.getToken()!;
+  const [isOpen, setIsOpen] = useState(false);
+  const { mutateAsync: updateTreasury, isPending } = useUpdateTreasury();
+
+  const form = useForm<z.infer<typeof createTreasurySchema>>({
+    resolver: zodResolver(createTreasurySchema),
+    defaultValues: {
+      name: treasury.name,
+      status: treasury.status,
+    },
+  });
+
+  const onSubmit = async ({
+    name,
+    status,
+  }: z.infer<typeof createTreasurySchema>) => {
+    try {
+      const { status: serverStatus, message } = await updateTreasury({
+        id: `${treasury.id}`,
+        token,
+        status,
+        name,
+      });
+
+      // ! Update failed
+      if (!serverStatus) return toast.error(message);
+
+      // * Update Success
+      return toast.success(message || "تم تحديث بيانات الخزينة بنجاح");
+    } catch (error) {
+      handleResErr(error);
+    } finally {
+      handleCloseModal();
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    form.reset({
+      name: treasury.name,
+    });
+  };
+  useEffect(() => {
+    form.reset({
+      name: treasury.name,
+      status: treasury.status,
+    });
+  }, [form, treasury]);
+
+  return (
+    <>
+      <TooltipButton title="تعديل">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          className="bg-primary  bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm py-1 px-1 w-8 h-8"
+        >
+          <Pen size={20} />
+        </Button>
+      </TooltipButton>
+
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={handleCloseModal}
+        title="تعديل تصنيف"
+        description={{
+          text: "يمكنك تعديل التصنيف المحدد هنا",
+        }}
+        showFooter={false}
+      >
+        <Form {...form}>
+          <motion.form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 text-black dark:text-white"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            {TREASURY_FORM_INPUTS.map((input, idx) => (
+              <motion.div key={input.name} custom={idx} variants={itemVariants}>
+                <RenderTreasuryFormFields
+                  input={input}
+                  form={form}
+                  schema={createTreasurySchema}
+                />
+              </motion.div>
+            ))}
+
+            <AlertDialogFooter className="text-start justify-start! gap-2">
+              <AlertDialogCancel
+                onClick={handleCloseModal}
+                className="text-black dark:text-white py-2.5 h-auto"
+              >
+                إلغاء
+              </AlertDialogCancel>
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="py-2.5 h-auto"
+              >
+                تعديل
+                {isPending && <Loader2 className="animate-spin ml-2" />}
+              </Button>
+            </AlertDialogFooter>
+          </motion.form>
+        </Form>
+      </Modal>
+    </>
+  );
+};
+
+export default memo(UpdateTreasury);
