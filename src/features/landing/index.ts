@@ -1,0 +1,10 @@
+export { Navbar } from "./components/Navbar";
+export { Hero } from "./components/Hero";
+export { SystemOverview } from "./components/SystemOverview";
+export { DoctorsPreview } from "./components/DoctorsPreview";
+export { SpecializedClinics } from "./components/SpecializedClinics";
+export { HowItWorks } from "./components/HowItWorks";
+export { Features } from "./components/Features";
+export { Testimonials } from "./components/Testimonials";
+export { FAQ } from "./components/FAQ";
+export { CTA } from "./components/CTA";

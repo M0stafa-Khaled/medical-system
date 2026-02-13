@@ -45,5 +45,40 @@ export default defineConfig({
   },
   build: {
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (
+              id.includes("node_modules/react/") ||
+              id.includes("node_modules/react-dom/") ||
+              id.includes("node_modules/react-router")
+            ) {
+              return "react";
+            }
+            if (
+              id.includes("node_modules/@radix-ui") ||
+              id.includes("node_modules/class-variance-authority") ||
+              id.includes("node_modules/clsx") ||
+              id.includes("node_modules/tailwind-merge")
+            ) {
+              return "ui";
+            }
+            if (id.includes("node_modules/framer-motion")) {
+              return "framer";
+            }
+            if (id.includes("node_modules/lucide-react")) {
+              return "lucide";
+            }
+            if (id.includes("node_modules/react-redux")) {
+              return "react-redux";
+            }
+            if (id.includes("node_modules/zod")) {
+              return "zod";
+            }
+          }
+        },
+      },
+    },
   },
 });

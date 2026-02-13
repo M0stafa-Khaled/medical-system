@@ -1,7 +1,6 @@
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { useDeleteEmployee } from "@/lib/react-query/dashboard/employees";
-import cookieServices from "@/utils/cookieServices";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -16,13 +15,12 @@ interface IProps {
 
 const DeleteEmployee = ({ name, id }: IProps) => {
   const navigate = useNavigate();
-  const token = cookieServices.getToken() || "";
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
   const { mutateAsync: deleteEmployee, isPending } = useDeleteEmployee();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deleteEmployee({ id, token });
+      const { status, message } = await deleteEmployee({ id });
 
       // ! Delete failed
       if (!status) return toast.error(message);

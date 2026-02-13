@@ -1,4 +1,26 @@
 User-agent: *
+Allow: /
 Disallow: /dashboard
 Disallow: /doctor
+Crawl-delay: 0
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+Sitemap: https://demo.3yadty.com/sitemap.xml
+Host: https://demo.3yadty.com

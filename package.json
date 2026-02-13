@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://3yadty.com",
+  "homepage": "https://demo.3yadty.com",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

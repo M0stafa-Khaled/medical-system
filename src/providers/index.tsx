@@ -6,13 +6,17 @@ import { HelmetProvider } from "react-helmet-async";
 
 import ThemeProvider from "@/providers/ThemeProvider";
 import QueryProvider from "@/providers/QueryProvider";
+import { LazyMotion, domAnimation } from "framer-motion";
+
 const Providers = () => {
   return (
     <HelmetProvider>
       <QueryProvider>
         <Provider store={store}>
           <ThemeProvider>
-            <RouterProvider router={router} />
+            <LazyMotion features={domAnimation}>
+              <RouterProvider router={router} />
+            </LazyMotion>
           </ThemeProvider>
         </Provider>
       </QueryProvider>
