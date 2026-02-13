@@ -5,7 +5,7 @@ import {
   PaginationItem,
   PaginationLink,
 } from "@/components/ui/pagination";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./button";
 
@@ -87,8 +87,8 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
                 isActive={currentPage === page}
                 className={
                   currentPage === page
-                    ? "text-secondary cursor-pointer bg-primary hover:bg-primary/90 border-muted opacity-100 min-w-10 w-fit px-1 hover:text-secondary"
-                    : "text-primary cursor-pointer border-muted bg-muted/20 hover:bg-muted/80 opacity-80 min-w-10 w-fit px-1"
+                    ? "text-secondary bg-primary hover:bg-primary/90 border-muted hover:text-secondary w-fit min-w-10 cursor-pointer px-1 opacity-100"
+                    : "text-primary border-muted bg-muted/20 hover:bg-muted/80 w-fit min-w-10 cursor-pointer px-1 opacity-80"
                 }
               >
                 {page}

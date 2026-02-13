@@ -6,7 +6,7 @@ import { BookMarkedIcon, HomeIcon, UserRoundSearch } from "lucide-react";
 import { GiMedicinePills } from "react-icons/gi";
 import { TbReportAnalytics, TbReportMedical } from "react-icons/tb";
 import { MdMedication } from "react-icons/md";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router";
 import ROUTES_NAME from "@/constants/routesName";
 
 const DoctorLayout = () => {
@@ -57,15 +57,15 @@ const DoctorLayout = () => {
   ];
 
   return (
-    <div className="flex bg-foreground">
+    <div className="bg-foreground flex">
       <ScrollRestoration />
       <div className="fixed inset-y-0 right-0">
         <Sidebar links={NAV_LINKS} />
       </div>
-      <div className="bg-background min-h-screen flex-1 flex flex-col overflow-hidden lg:mr-[270px] lg:border-r border-primary/30 lg:dark:border-primary/20 lg:rounded-tr-[36px] lg:rounded-br-[36px]">
+      <div className="bg-background border-border flex min-h-screen flex-1 flex-col overflow-hidden lg:mr-67.5 lg:rounded-tr-[36px] lg:rounded-br-[36px] lg:border-r">
         <div className="container">
           <Header links={NAV_LINKS} dashboard />
-          <main className="flex-1 mt-20 lg:mt-6 bg-background">
+          <main className="bg-background mt-20 flex-1 lg:mt-6">
             <div className="my-10">
               <Outlet />
             </div>

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router";
 import { ChevronDown, ChevronRight, Dot } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { linkVariants, navItemsVariants } from "@/animations/navbarAnimations";
@@ -44,15 +44,15 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
             {hasChildren ? (
               <motion.div
                 variants={navItemsVariants}
-                className={`text-[15px] select-none w-full px-3 cursor-pointer py-2.5 text-black dark:text-white transition-all duration-300 rounded-lg ${
-                  sidebar ? "border border-muted" : ""
-                } flex items-center justify-between gap-2 hover:bg-dark/10 dark:hover:bg-dark/50`}
+                className={`w-full cursor-pointer rounded-lg px-3 py-2.5 text-[15px] text-black transition-all duration-300 select-none dark:text-white ${
+                  sidebar ? "border-muted border" : ""
+                } hover:bg-dark/10 dark:hover:bg-dark/50 flex items-center justify-between gap-2`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleLinkExpansion(link.name);
                 }}
               >
-                <span className="grow flex items-center gap-2">
+                <span className="flex grow items-center gap-2">
                   {link.icon}
                   {link.name}
                 </span>
@@ -77,8 +77,8 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                   to={link.path || "#"}
                   className={`${
                     isChildLink ? "mt-2 pr-4" : ""
-                  } w-full text-[15px] py-2.5 px-2 text-black dark:text-white transition-all duration-300 rounded-lg ${
-                    sidebar ? "border border-muted" : ""
+                  } w-full rounded-lg px-2 py-2.5 text-[15px] text-black transition-all duration-300 dark:text-white ${
+                    sidebar ? "border-muted border" : ""
                   } flex items-center justify-between gap-2 ${
                     activeLink
                       ? "bg-background dark:bg-dark"
@@ -86,7 +86,7 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                   }`}
                 >
                   {isChildLink && <Dot />}
-                  <span className="grow flex items-center gap-1">
+                  <span className="flex grow items-center gap-1">
                     {link.icon}
                     {link.name}
                   </span>
@@ -114,7 +114,7 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
 
   return (
     <motion.ul
-      className={`w-full h-full flex flex-col gap-2 justify-start max-h-full overflow-y-auto custom-scrollbar ${
+      className={`custom-scrollbar flex h-full max-h-full w-full flex-col justify-start gap-2 overflow-y-auto ${
         sidebar ? "pb-3" : "lg:flex-row"
       }`}
       initial={{ opacity: 0 }}

@@ -6,7 +6,7 @@ import DrugsTableHeader from "./DrugsTableHeader";
 import DrugsList from "./DrugsList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetALlDrugs } from "@/lib/react-query/main";
 

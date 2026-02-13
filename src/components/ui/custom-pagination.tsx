@@ -16,7 +16,7 @@ export const CustomPaginationPrevious = ({
     <button
       className={cn(
         buttonVariants({ variant: "outline" }),
-        "gap-1 pl-2.5",
+        "gap-1 ps-2.5",
         className
       )}
       disabled={disabled}
@@ -37,7 +37,7 @@ export const CustomPaginationNext = ({
     <button
       className={cn(
         buttonVariants({ variant: "outline" }),
-        "gap-1 pr-2.5",
+        "gap-1 pe-2.5",
         className
       )}
       disabled={disabled}

@@ -14,7 +14,7 @@ import {
   Hash,
 } from "lucide-react";
 import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
@@ -75,11 +75,11 @@ const ExpenseDetails = () => {
         initial="hidden"
         animate="visible"
       >
-        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs hover:shadow-md transition-shadow duration-300">
-          <CardHeader className="py-4 mb-4">
+        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs transition-shadow duration-300 hover:shadow-md">
+          <CardHeader className="mb-4 py-4">
             <motion.div variants={itemVariants}>
               <CardTitle className="flex items-center gap-2">
-                <Receipt className="h-6 w-6 text-primary" />
+                <Receipt className="text-primary h-6 w-6" />
                 <span>تفاصيل المصروف:</span>
               </CardTitle>
             </motion.div>
@@ -87,7 +87,7 @@ const ExpenseDetails = () => {
 
           <CardContent>
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-4 md:grid-cols-2"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants}>
@@ -102,7 +102,7 @@ const ExpenseDetails = () => {
                 <InfoField
                   label="اسم المصروف"
                   value={name!}
-                  icon={<Tag className="h-5 w-5 text-primary" />}
+                  icon={<Tag className="text-primary h-5 w-5" />}
                 />
               </motion.div>
 
@@ -149,7 +149,7 @@ const ExpenseDetails = () => {
               <motion.div variants={itemVariants}>
                 <Link
                   to={`/dashboard/employees/${employee?.id}`}
-                  className="block hover:text-primary transition-colors duration-200"
+                  className="hover:text-primary block transition-colors duration-200"
                 >
                   <InfoField
                     label="الموظف"

@@ -1,4 +1,4 @@
-import { createRoutesFromElements, Route } from "react-router-dom";
+import { createRoutesFromElements, Route } from "react-router";
 import { PERMISSIONS } from "@/enums/permissions";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/components/shared/PageLoader";
@@ -57,9 +57,9 @@ const UpdatePatient = lazy(
 );
 
 // Drugs
-const Drugs = lazy(() => import("@/pages/main/drugs"));
-const Analysis = lazy(() => import("@/pages/main/analysis"));
-const Scans = lazy(() => import("@/pages/main/scans"));
+const Drugs = lazy(() => import("@/pages/shared/drugs"));
+const Analysis = lazy(() => import("@/pages/shared/analysis"));
+const Scans = lazy(() => import("@/pages/shared/scans"));
 
 // Treasuries
 const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
@@ -95,7 +95,7 @@ const LastVisits = lazy(
 );
 
 // Dosages
-const Dosages = lazy(() => import("@/pages/main/dosages"));
+const Dosages = lazy(() => import("@/pages/shared/dosages"));
 
 // Prescriptions
 const Prescriptions = lazy(() => import("@/pages/dashboard/prescription"));

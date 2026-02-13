@@ -1,7 +1,7 @@
 import cookieServices from "@/utils/cookieServices";
 import AnalyticsChart from "../../shared/charts/ChartsCard";
 import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import ChartDate from "../../shared/charts/ChartDate";
 import {
   Select,
@@ -58,11 +58,11 @@ const DoctorBookingsCharts = () => {
     setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="space-y-5 bg-[#fff] dark:bg-dark py-6 px-3 md:p-6 rounded-xl shadow-md">
-      <h2 className="text-dark dark:text-white font-semibold text-center md:text-start md:text-lg">
+    <div className="dark:bg-dark space-y-5 rounded-xl bg-[#fff] px-3 py-6 shadow-md md:p-6">
+      <h2 className="text-dark text-center font-semibold md:text-start md:text-lg dark:text-white">
         إحصائيات الحجوزات
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 lg:gap-x-10">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-10">
         <ChartDate
           value={filters.booking_start_at}
           onChange={(date) => handleFilterChange("booking_start_at", date)}
@@ -81,23 +81,23 @@ const DoctorBookingsCharts = () => {
           dir="rtl"
         >
           <SelectTrigger
-            className={`border-black/20 dark:border-white/40 h-11! bg-primary text-primary-foreground data-placeholder:text-primary-foreground`}
+            className={`bg-primary text-primary-foreground data-placeholder:text-primary-foreground h-11! border-black/20 dark:border-white/40`}
           >
             <SelectValue
               placeholder="الحالة"
-              className={`py-4 text-muted-foreground`}
+              className={`text-muted-foreground py-4`}
             />
           </SelectTrigger>
           <SelectContent className="text-primary dark:text-primary-foreground bg-primary-foreground dark:bg-primary border-black/20 dark:border-white/40">
-            <SelectItem value="all" className="py-2.5 cursor-pointer">
+            <SelectItem value="all" className="cursor-pointer py-2.5">
               الكل
             </SelectItem>
 
-            <SelectItem value="collected" className="py-2.5 cursor-pointer">
+            <SelectItem value="collected" className="cursor-pointer py-2.5">
               تم التحصيل
             </SelectItem>
 
-            <SelectItem value="completed" className="py-2.5 cursor-pointer">
+            <SelectItem value="completed" className="cursor-pointer py-2.5">
               مكتمل
             </SelectItem>
           </SelectContent>

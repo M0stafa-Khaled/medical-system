@@ -3,7 +3,7 @@ import TransfersFilters from "./TransfersReportFilters";
 import { Eraser } from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { ITransfersReportFilter } from "@/interfaces/dashboard/reports";
 
 interface IProps {
@@ -35,17 +35,17 @@ const TransfersReportHeader = ({ filters }: IProps) => {
   };
 
   return (
-    <div className="space-y-4 mb-4">
-      <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
+    <div className="mb-4 space-y-4">
+      <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <h4 className="text-lg font-semibold text-black dark:text-white">
           {format(new Date(), "EEEE, d MMMM yyyy", { locale: ar })}
         </h4>
 
         <Button
           onClick={handleClearFilters}
-          className="w-full md:w-fit flex items-center gap-2 h-auto py-3"
+          className="flex h-auto w-full items-center gap-2 py-3 md:w-fit"
         >
-          <Eraser className="w-4 h-4" />
+          <Eraser className="h-4 w-4" />
           مسح الفلاتر
         </Button>
       </div>

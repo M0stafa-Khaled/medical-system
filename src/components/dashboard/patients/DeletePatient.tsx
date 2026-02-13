@@ -6,7 +6,7 @@ import cookieServices from "@/utils/cookieServices";
 import handleResErr from "@/utils/handleResponseError";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 interface IProps {
@@ -43,7 +43,7 @@ const DeletePatient = ({ name, id }: IProps) => {
           size={"sm"}
           onClick={() => setIsOpen(true)}
           variant={"destructive"}
-          className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+          className="h-9 w-9 gap-2 px-1 py-1 text-sm text-white"
         >
           <Trash2 size={20} />
         </Button>

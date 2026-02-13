@@ -1,5 +1,5 @@
-import ProfileMenu from "../profile/ProfileMenu";
-import LogoutButton from "./LogoutButton";
+import { ProfileMenu } from "@/features/profile";
+import { LogoutButton } from "@/features/auth";
 import NavList from "./navbar/NavList";
 import { motion } from "framer-motion";
 import {
@@ -7,14 +7,13 @@ import {
   navItemsVariants,
   sidebarVariants,
 } from "@/animations/navbarAnimations";
-import { memo } from "react";
 import { ILink } from "@/interfaces";
 import cookieServices from "@/utils/cookieServices";
 import truncateText from "@/utils/truncateText";
 import NotificationsMenu from "../notifications/NotificationsMenu";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import ToggleMode from "./ToggleMode";
+import ToggleTheme from "./ToggleTheme";
 
 interface IProps {
   links: ILink[];
@@ -23,20 +22,20 @@ interface IProps {
 const Sidebar = ({ links }: IProps) => {
   const user = cookieServices.getUser();
   const canReceiveNotifications = useHasPermission(
-    PERMISSIONS.RECEIVE_NOTIFICATIONS,
+    PERMISSIONS.RECEIVE_NOTIFICATIONS
   );
   return (
     <motion.aside
       initial="hidden"
       animate="visible"
       variants={sidebarVariants}
-      className="hidden lg:block h-full bg-foreground fixed inset-y-0 right-0"
+      className="fixed inset-y-0 right-0 hidden h-full lg:block"
     >
-      <div className="min-w-67.5 max-w-87.5 h-screen px-4 flex flex-col gap-y-3">
+      <div className="flex h-screen max-w-87.5 min-w-67.5 flex-col gap-y-3 px-4">
         {/* Fixed section - Logo */}
         <motion.div
           variants={logoVariants}
-          className="flex justify-center items-center p-3"
+          className="flex items-center justify-center p-3"
         >
           <motion.img
             src={"/images/logo.svg"}
@@ -44,14 +43,14 @@ const Sidebar = ({ links }: IProps) => {
             initial="hidden"
             animate="visible"
             variants={logoVariants}
-            className="max-w-10 w-full flex justify-center items-center"
+            className="flex w-full max-w-10 items-center justify-center"
           />
         </motion.div>
 
         {/* Profile Menu & Toggle Mode */}
         <motion.div
           variants={navItemsVariants}
-          className="flex justify-center items-center gap-4"
+          className="flex items-center justify-center gap-4"
         >
           <motion.div variants={navItemsVariants}>
             <LogoutButton />
@@ -66,13 +65,13 @@ const Sidebar = ({ links }: IProps) => {
             <ProfileMenu />
           </motion.div>
           <motion.div variants={navItemsVariants}>
-            <ToggleMode />
+            <ToggleTheme />
           </motion.div>
         </motion.div>
         {(user?.role === "admin" || user?.role === "employee") && (
           <motion.h3
             variants={navItemsVariants}
-            className="text-lg text-center font-semibold text-dark dark:text-white"
+            className="text-dark text-center text-lg font-semibold dark:text-white"
           >
             {truncateText(user?.name || "", 15)}
           </motion.h3>
@@ -90,4 +89,4 @@ const Sidebar = ({ links }: IProps) => {
   );
 };
 
-export default memo(Sidebar);
+export default Sidebar;

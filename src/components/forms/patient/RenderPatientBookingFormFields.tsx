@@ -14,7 +14,7 @@ interface IOption {
 
 interface IProps {
   input: IFormInput;
-  form: UseFormReturn;
+  form: UseFormReturn<any>;
   isOptionalField?: (fieldName: string) => boolean;
   schema: z.ZodSchema;
   options?: {
@@ -78,7 +78,7 @@ const RenderPatientBookingFormFields = ({
         return (
           <BookingAvailableTimeSelectItem
             input={input}
-           field={field}
+            field={field}
             times={availableTimes}
           />
         );

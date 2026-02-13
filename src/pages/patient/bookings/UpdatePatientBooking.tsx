@@ -8,7 +8,7 @@ import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 const UpdatePatientBooking = () => {
@@ -49,12 +49,12 @@ const UpdatePatientBooking = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="xl:container mt-10"
+        className="mt-10 xl:container"
       >
         <div className="lg:container">
-          <Card className="dark:bg-foreground border-gray-300 dark:border-muted shadow-none">
+          <Card className="dark:bg-foreground dark:border-muted border-gray-300 shadow-none">
             <div className="space-y-1.5 p-6">
-              <h1 className="font-semibold leading-relaxed">
+              <h1 className="leading-relaxed font-semibold">
                 تحديث بيانات الحجز
               </h1>
             </div>

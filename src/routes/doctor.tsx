@@ -1,4 +1,4 @@
-import { createRoutesFromElements, Route } from "react-router-dom";
+import { createRoutesFromElements, Route } from "react-router";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/components/shared/PageLoader";
 import Error from "@/pages/Error";
@@ -9,10 +9,10 @@ const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 const DoctorDashboard = lazy(() => import("@/pages/doctor"));
 const DoctorClinics = lazy(() => import("@/pages/doctor/clinics"));
 const DoctorBookings = lazy(() => import("@/pages/doctor/bookings"));
-const Drugs = lazy(() => import("@/pages/main/drugs"));
-const Analysis = lazy(() => import("@/pages/main/analysis"));
-const Scans = lazy(() => import("@/pages/main/scans"));
-const Dosages = lazy(() => import("@/pages/main/dosages"));
+const Drugs = lazy(() => import("@/pages/shared/drugs"));
+const Analysis = lazy(() => import("@/pages/shared/analysis"));
+const Scans = lazy(() => import("@/pages/shared/scans"));
+const Dosages = lazy(() => import("@/pages/shared/dosages"));
 const DoctorPrescriptions = lazy(() => import("@/pages/doctor/prescriptions"));
 const DoctorCreatePrescription = lazy(
   () => import("@/pages/doctor/prescriptions/DoctorCreatePrescription")

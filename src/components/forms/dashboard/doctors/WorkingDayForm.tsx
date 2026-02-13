@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
 import SubmitButton from "../../../shared/SubmitButton";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import {
   useCreateWorkingDay,
   useUpdateWorkingDay,
@@ -125,7 +125,7 @@ const WorkingDayForm = ({ action, day }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 dark:text-white"
+          className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2 dark:text-white"
           variants={containerVariants}
         >
           {DOCTOR_WORKING_DAY_INPUTS.map((input, idx) => (

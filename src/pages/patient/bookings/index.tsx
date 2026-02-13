@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import PatientBookingsHeader from "@/components/patient/bookings/PatientBookingsHeader";
 import PatientBookingsList from "@/components/patient/bookings/PatientBookingsList";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import cookieServices from "@/utils/cookieServices";
 import { useEffect, useMemo } from "react";
 import useDebounce from "@/hooks/useDebounce";
@@ -93,7 +93,7 @@ const PatientBookings = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="xl:container mt-10"
+        className="mt-10 xl:container"
       >
         <PatientBookingsHeader
           filters={filters}

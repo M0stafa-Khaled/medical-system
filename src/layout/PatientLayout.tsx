@@ -1,5 +1,5 @@
 import Header from "@/components/shared/navbar/Header";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router";
 
 const NAV_LINKS = [
   {
@@ -26,7 +26,7 @@ const PatientLayout = () => {
       <ScrollRestoration />
       <div className="bg-background">
         <Header links={NAV_LINKS} />
-        <main className="pt-16 pb-10 container">
+        <main className="container pt-16 pb-10">
           <Outlet />
         </main>
       </div>

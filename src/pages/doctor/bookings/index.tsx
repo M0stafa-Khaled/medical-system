@@ -1,27 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import DoctorBookingsTable from "@/components/doctor/bookings/DoctorBookingsTable";
 
 const DoctorBookings = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
-  const [clinicId, setClinicId] = useState<number | null>(null);
-  const initialized = useRef(false);
-
-  useEffect(() => {
-    if (!initialized.current) {
-      const id = location.state?.clinicId;
-      if (!id) {
-        navigate("/doctor");
-        return;
-      }
-      setClinicId(id);
-      initialized.current = true;
-    }
-  }, [location.state, navigate]);
+  const clinicId = location.state?.clinicId;
 
   if (!clinicId) return null;
 

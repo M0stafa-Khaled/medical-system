@@ -23,17 +23,17 @@ const SubmitButton = ({
   <Button
     type="submit"
     disabled={isLoadingCreate || isLoadingUpdate}
-    className="py-6 w-full md:w-fit"
+    className="h-10 w-full md:w-fit"
   >
     {action === "create"
       ? isLoadingCreate
         ? loadingCreateText
         : createText
       : isLoadingUpdate
-      ? loadingUpdateText
-      : updateText}
+        ? loadingUpdateText
+        : updateText}
     {(isLoadingCreate || isLoadingUpdate) && (
-      <Loader2 className="animate-spin ml-2" />
+      <Loader2 className="ml-2 animate-spin" />
     )}
   </Button>
 );

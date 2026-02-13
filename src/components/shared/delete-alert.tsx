@@ -1,0 +1,97 @@
+import { Button } from "@/components/ui/button";
+import { useState, useTransition } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import TooltipButton from "@/components/ui/TooltipButton";
+import handleResErr from "@/utils/handleResponseError";
+import { Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
+interface IProps {
+  name: string;
+  id: number;
+  deleteAction: (id: number) => Promise<{ status: boolean; message: string }>;
+  navigatePath?: string;
+}
+
+const DeleteAlert = ({ name, id, deleteAction, navigatePath }: IProps) => {
+  const navigate = useNavigate();
+  const [isPending, startTransition] = useTransition();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleDelete = async () => {
+    try {
+      startTransition(async () => {
+        const { status, message } = await deleteAction(id);
+
+        // ! Delete failed
+        if (!status) throw message;
+        // * Delete Success
+        if (navigatePath) navigate(navigatePath);
+        toast.success(message || "تم الحذف بنجاح");
+      });
+    } catch (error) {
+      handleResErr(error);
+    } finally {
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+      <AlertDialogTrigger asChild>
+        <TooltipButton title="حذف">
+          <Button
+            size={"icon"}
+            onClick={() => setIsOpen(true)}
+            variant={"outline"}
+            className="btn-destructive rounded-full"
+          >
+            <Trash2 size={20} />
+          </Button>
+        </TooltipButton>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="rounded-xl">
+        <AlertDialogHeader className="gap-4">
+          <AlertDialogTitle className="text-center text-black dark:text-white">
+            حذف
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            هل انت متأكد من حذف{" "}
+            <span className="font-medium text-black dark:text-white">
+              {name}
+            </span>
+            ؟ هذا الاجراء لا يمكن التراجع عنه!
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel
+            disabled={isPending}
+            className="bg-slate-100! text-slate-900! hover:bg-slate-200/70! hover:text-slate-900!"
+          >
+            إلغاء
+          </AlertDialogCancel>
+          <AlertDialogAction
+            className="bg-red-500/15! text-red-500! hover:bg-red-500/10! hover:text-red-800!"
+            onClick={handleDelete}
+            disabled={isPending}
+          >
+            حذف
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
+
+export default DeleteAlert;

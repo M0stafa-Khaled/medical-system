@@ -1,5 +1,5 @@
 import cookieServices from "@/utils/cookieServices";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -117,10 +117,10 @@ const DoctorDetails = () => {
                     {canUpdateDoctor && (
                       <motion.div variants={itemVariants}>
                         <TooltipButton title="تعديل">
-                          <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                          <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700">
                             <Link
                               to={`/dashboard/doctors/${id}/update`}
-                              className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                              className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1"
                             >
                               <Pen size={20} />
                             </Link>
@@ -139,7 +139,7 @@ const DoctorDetails = () => {
             </motion.div>
           </CardHeader>
           <motion.div className="px-4" variants={itemVariants}>
-            <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
+            <Separator className="bg-muted mx-auto w-2/6 sm:mx-0" />
           </motion.div>
           <CardContent className="py-4">
             <motion.div variants={itemVariants}>
@@ -147,15 +147,15 @@ const DoctorDetails = () => {
             </motion.div>
             <motion.div
               variants={containerVariants}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-4 md:grid-cols-2"
             >
               <motion.div
-                className="flex items-center gap-2 col-span-full"
+                className="col-span-full flex items-center gap-2"
                 variants={itemVariants}
               >
                 <Building2 className="text-blue-700" />
-                <h3 className="text-sm text-muted-foreground">العيادات:</h3>
-                <div className="flex items-center flex-wrap gap-2">
+                <h3 className="text-muted-foreground text-sm">العيادات:</h3>
+                <div className="flex flex-wrap items-center gap-2">
                   {clinics?.map((clinic) => (
                     <motion.div key={clinic.id} variants={itemVariants}>
                       <Badge>{clinic.name}</Badge>
@@ -250,7 +250,7 @@ const DoctorDetails = () => {
                 className="flex items-center gap-2"
               >
                 <FileImage className="text-cyan-500" />
-                <h5 className="text-sm text-muted-foreground">التوقيع:</h5>
+                <h5 className="text-muted-foreground text-sm">التوقيع:</h5>
                 {signature ? (
                   <ImageModal
                     src={signature}
@@ -259,7 +259,7 @@ const DoctorDetails = () => {
                     trigger={<Button size="sm">عرض الصورة</Button>}
                   />
                 ) : (
-                  <p className="text-sm text-muted-foreground">لا يوجد</p>
+                  <p className="text-muted-foreground text-sm">لا يوجد</p>
                 )}
               </motion.div>
             </motion.div>

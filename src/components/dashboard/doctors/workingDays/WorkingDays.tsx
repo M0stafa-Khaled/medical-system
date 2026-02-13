@@ -10,7 +10,7 @@ import WorkingDayCard from "./WorkingDayCard";
 import SearchInput from "../../../ui/SearchInput";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router";
 import CardSkeleton from "@/components/ui/CardSkeleton";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -51,17 +51,17 @@ const WorkingDays = ({ doctorId }: IProps) => {
       animate="visible"
       variants={containerVariants}
     >
-      <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs my-2">
+      <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted my-2 shadow-xs">
         <CardHeader className="pb-2">
           <CardTitle>ايام العمل:</CardTitle>
         </CardHeader>
-        <CardContent className="py-3 px-4">
+        <CardContent className="px-4 py-3">
           {canCreateWorkingDay && (
-            <div className="mb-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
-              <Button className="flex items-center gap-2 h-auto py-0 px-0">
+            <div className="mb-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+              <Button className="flex h-auto items-center gap-2 px-0 py-0">
                 <Link
                   to={`/dashboard/doctors/${doctorId}/working-days/create`}
-                  className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
+                  className="flex h-full w-full items-center justify-center gap-2 px-4 py-3"
                 >
                   إضافة يوم عمل
                   <FiPlus size={20} />
@@ -78,13 +78,13 @@ const WorkingDays = ({ doctorId }: IProps) => {
             {isLoading ? (
               <CardSkeleton mdLength={1} lgLength={2} count={3} />
             ) : !days?.data?.length ? (
-              <p className="text-center text-muted-foreground py-3">
+              <p className="text-muted-foreground py-3 text-center">
                 لا يوجد ايأم عمل
               </p>
             ) : (
               <motion.div
                 variants={containerVariants}
-                className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 gap-4 my-4"
+                className="my-4 grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-2"
               >
                 {days?.data?.map((day, idx) => (
                   <motion.div variants={itemVariants} custom={idx} key={day.id}>

@@ -62,8 +62,7 @@ export const useUpdateEmployee = () => {
 export const useDeleteEmployee = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, token }: { id: number; token: string }) =>
-      deleteEmployee({ id, token }),
+    mutationFn: ({ id }: { id: number }) => deleteEmployee({ id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EMPLOYEES],

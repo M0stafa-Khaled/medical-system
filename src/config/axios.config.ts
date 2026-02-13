@@ -2,12 +2,19 @@ import { logout } from "@/store/features/auth/authSlice";
 import axios from "axios";
 import { store } from "../store/store";
 import { toast } from "react-toastify";
+import cookieServices from "@/utils/cookieServices";
 
 const axiosAPI = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}/api`,
   headers: {
     Accept: "application/json",
   },
+});
+
+axiosAPI.interceptors.request.use((config) => {
+  const token = cookieServices.getToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
 });
 
 axiosAPI.interceptors.response.use(

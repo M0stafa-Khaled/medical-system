@@ -3,7 +3,7 @@ import { Eraser } from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { FiPlus } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { IPrescriptionsFilter } from "@/interfaces/dashboard/prescription";
 import DoctorPrescriptionsFilters from "./DoctorPrescriptionsFilters";
 
@@ -23,13 +23,13 @@ const DoctorPrescriptionsHeader = ({ filters, setFilters }: IProps) => {
   };
 
   return (
-    <div className="space-y-4 mb-4">
-      <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
-        <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-4 ">
-          <Button className="h-auto py-0 px-0">
+    <div className="mb-4 space-y-4">
+      <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+        <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-center">
+          <Button className="h-auto px-0 py-0">
             <Link
               to={"/doctor/prescriptions/create"}
-              className="flex justify-center items-center gap-2 w-full h-full py-3 px-4"
+              className="flex h-full w-full items-center justify-center gap-2 px-4 py-3"
             >
               إضافة روشتة جديدة
               <FiPlus size={20} />
@@ -42,9 +42,9 @@ const DoctorPrescriptionsHeader = ({ filters, setFilters }: IProps) => {
 
         <Button
           onClick={handleClearFilters}
-          className="flex items-center gap-2 h-auto py-3"
+          className="flex h-auto items-center gap-2 py-3"
         >
-          <Eraser className="w-4 h-4" />
+          <Eraser className="h-4 w-4" />
           مسح الفلاتر
         </Button>
       </div>

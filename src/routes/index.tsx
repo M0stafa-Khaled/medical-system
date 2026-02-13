@@ -1,37 +1,38 @@
+// src/router.ts    ← note: .ts, not .tsx
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Navigate,
   Route,
-} from "react-router-dom";
+} from "react-router-dom"; // ← make sure you're using react-router-dom
 import { lazy } from "react";
+
 import authRoutes from "./auth";
 import dashboardRoutes from "./dashboard";
 import patientRoutes from "./patient";
+import doctorRoutes from "./doctor";
 
 import NotFound from "@/pages/NotFound";
-// import Error from "@/pages/Error";
-
-import doctorRoutes from "./doctor";
+// import Error from "@/pages/Error";   // uncomment if you want to use it later
 
 const AppLayout = lazy(() => import("@/layout/AppLayout"));
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
 const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
-const Profile = lazy(() => import("@/pages/profile/Profile"));
+const Profile = lazy(() => import("@/pages/profile"));
 
-const routes = createRoutesFromElements(
+const rootRoutes = createRoutesFromElements(
   <>
     <Route
       path="/"
       element={<RootLayout />}
       id="main-root"
-      // errorElement={<Error />}
+      // errorElement={<Error />}     // ← you can enable this later
     >
-      {/* Home */}
+      {/* Home + Protected pages wrapped in AppLayout */}
       <Route element={<AppLayout />} id="app-layout">
         <Route index element={<Navigate to="/login" replace />} id="home" />
 
-        {/* Profile */}
+        {/* Profile – accessible to multiple roles */}
         <Route
           path="/profile"
           element={
@@ -46,14 +47,14 @@ const routes = createRoutesFromElements(
       </Route>
     </Route>
 
-    {/* Not Found */}
+    {/* 404 – should be last */}
     <Route path="*" element={<NotFound />} id="not-found" />
   </>
 );
 
-const router = createBrowserRouter(
+export const router = createBrowserRouter(
   [
-    ...routes,
+    ...rootRoutes,
     ...authRoutes,
     ...dashboardRoutes,
     ...patientRoutes,
@@ -63,5 +64,3 @@ const router = createBrowserRouter(
     basename: "/",
   }
 );
-
-export default router;

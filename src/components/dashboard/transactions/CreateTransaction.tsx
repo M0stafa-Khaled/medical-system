@@ -20,7 +20,7 @@ import { useCreateTransaction } from "@/lib/react-query/dashboard/transactions/t
 import RenderTransactionFormFields from "@/components/forms/dashboard/transactions/RenderTransactionFormFields";
 import { TPaymentMethod } from "@/types";
 import TooltipButton from "@/components/ui/TooltipButton";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { IBooking } from "@/interfaces/dashboard/bookings";
 import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
 import handleResErr from "@/utils/handleResponseError";
@@ -120,7 +120,7 @@ const CreateTransaction = ({ booking }: IProps) => {
       <TooltipButton title="تحصيل">
         <Button
           onClick={() => setIsOpen(true)}
-          className="gap-2 text-sm  py-1 px-1 w-9 h-9"
+          className="h-9 w-9 gap-2 px-1 py-1 text-sm"
         >
           <Wallet size={20} />
         </Button>
@@ -140,7 +140,7 @@ const CreateTransaction = ({ booking }: IProps) => {
         {canViewLastVisits && (
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1"
+            className="grid grid-cols-1 gap-x-2 gap-y-1 md:grid-cols-2"
           >
             <InfoField
               label="الإجمالي"
@@ -174,11 +174,11 @@ const CreateTransaction = ({ booking }: IProps) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-2 text-black dark:text-white"
           >
-            <Button className="h-auto w-full py-0 px-0 gap-2 text-sm ">
+            <Button className="h-auto w-full gap-2 px-0 py-0 text-sm">
               <Link
                 to={`/dashboard/last-visits/${booking.patient.id}/transactions/${booking.doctor.id}`}
                 target="_blank"
-                className="flex justify-center items-center gap-2 py-3 px-1 w-full"
+                className="flex w-full items-center justify-center gap-2 px-1 py-3"
               >
                 أخر زيارات المريض لدي الطبيب
               </Link>
@@ -186,7 +186,7 @@ const CreateTransaction = ({ booking }: IProps) => {
 
             <motion.div
               variants={containerVariants}
-              className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2"
+              className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2"
             >
               {TRANSACTION_FORM_INPUTS.map((input, idx) =>
                 input.name === "visa_code" && !showVisa ? null : (
@@ -215,20 +215,20 @@ const CreateTransaction = ({ booking }: IProps) => {
               )}
             </motion.div>
 
-            <AlertDialogFooter className="text-start justify-start! gap-2">
+            <AlertDialogFooter className="justify-start! gap-2 text-start">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
+                className="h-auto py-2.5 text-black dark:text-white"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-2.5 h-auto"
+                className="h-auto py-2.5"
               >
                 تحصيل
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>

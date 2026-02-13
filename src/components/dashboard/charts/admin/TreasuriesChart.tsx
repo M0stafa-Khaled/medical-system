@@ -2,7 +2,7 @@ import cookieServices from "@/utils/cookieServices";
 import AnalyticsChart from "../../../shared/charts/ChartsCard";
 import { useGetTreasuriesChart } from "@/lib/react-query/dashboard/charts/adminCharts";
 import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import ChartDate from "../../../shared/charts/ChartDate";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
 import {
@@ -61,11 +61,11 @@ const TreasuriesChart = () => {
     setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="space-y-5 bg-[#fff] dark:bg-dark py-6 px-3 md:p-6 rounded-xl shadow-md">
-      <h2 className="text-dark dark:text-white font-semibold text-center md:text-start md:text-lg">
+    <div className="dark:bg-dark space-y-5 rounded-xl bg-white px-3 py-6 shadow-md md:p-6">
+      <h2 className="text-dark text-center font-semibold md:text-start md:text-lg dark:text-white">
         إحصائيات الخزائن
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 lg:gap-x-10">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-10">
         <ChartDate
           value={filters.treasury_start_at}
           onChange={(date) => handleFilterChange("treasury_start_at", date)}
@@ -84,19 +84,19 @@ const TreasuriesChart = () => {
           dir="rtl"
         >
           <SelectTrigger
-            className={`border-black/20 dark:border-white/40 h-11! bg-primary text-primary-foreground data-placeholder:text-primary-foreground`}
+            className={`bg-primary text-primary-foreground data-placeholder:text-primary-foreground h-11! border-black/20 dark:border-white/40`}
           >
             <SelectValue placeholder="الخزينة" className={`py-4 text-white`} />
           </SelectTrigger>
           <SelectContent className="text-primary dark:text-primary-foreground bg-primary-foreground dark:bg-primary border-black/20 dark:border-white/40">
-            <SelectItem value="all" className="py-2.5 cursor-pointer">
+            <SelectItem value="all" className="cursor-pointer py-2.5">
               الكل
             </SelectItem>
             {treasuries?.data.map((treasury) => (
               <SelectItem
                 key={treasury.id}
                 value={treasury.name}
-                className="py-2.5 cursor-pointer"
+                className="cursor-pointer py-2.5"
               >
                 {treasury.name}
               </SelectItem>

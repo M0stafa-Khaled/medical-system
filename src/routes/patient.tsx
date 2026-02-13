@@ -1,4 +1,4 @@
-import { createRoutesFromElements, Route } from "react-router-dom";
+import { createRoutesFromElements, Route } from "react-router";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/components/shared/PageLoader";
 import Error from "@/pages/Error";

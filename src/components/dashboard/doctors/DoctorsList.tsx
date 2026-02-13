@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { TableCell } from "@/components/ui/table";
 import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import DeleteDoctor from "./DeleteDoctor";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
@@ -30,11 +30,11 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
         initial="hidden"
         animate="visible"
         variants={tableRowVariants}
-        className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+        className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
       >
         <TableCell
           colSpan={7}
-          className="text-sm text-center text-black dark:text-white py-5 font-medium"
+          className="py-5 text-center text-sm font-medium text-black dark:text-white"
         >
           لا يوجد اطباء
         </TableCell>
@@ -51,37 +51,37 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
             animate="visible"
             custom={index}
             variants={tableRowVariants}
-            className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+            className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
           >
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
+            <TableCell className="w-20 py-3 text-center text-sm font-medium text-black dark:text-white">
               {countSerial({ meta: meta!, index })}
             </TableCell>
-            <TableCell className="flex justify-center items-center text-sm text-center text-black dark:text-white py-3 font-medium">
+            <TableCell className="flex items-center justify-center py-3 text-center text-sm font-medium text-black dark:text-white">
               <img
                 src={image || "/images/avatar.svg"}
                 alt={name}
-                className="w-12 h-12 rounded-full object-cover"
+                className="h-12 w-12 rounded-full object-cover"
               />
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44 text-nowrap">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
               {truncateText(name, 15)}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {clinics.map(({ name }) => name).join(", ")}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+            <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
               {first_phone}
             </TableCell>
 
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+            <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
               {status ? (
-                <Badge className="bg-emerald-600/30 dark:bg-emerald-600/20 hover:bg-emerald-600/10 text-emerald-800 dark:text-emerald-500 shadow-none rounded-full">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-800 dark:bg-emerald-500 ml-2" />
+                <Badge className="rounded-full bg-emerald-600/30 text-emerald-800 shadow-none hover:bg-emerald-600/10 dark:bg-emerald-600/20 dark:text-emerald-500">
+                  <div className="ml-2 h-1.5 w-1.5 rounded-full bg-emerald-800 dark:bg-emerald-500" />
                   نشط
                 </Badge>
               ) : (
-                <Badge className="bg-red-600/30 dark:bg-red-600/20 hover:bg-red-600/10 text-red-500 shadow-none rounded-full">
-                  <div className="h-1.5 w-1.5 rounded-full bg-red-500 ml-2" />
+                <Badge className="rounded-full bg-red-600/30 text-red-500 shadow-none hover:bg-red-600/10 dark:bg-red-600/20">
+                  <div className="ml-2 h-1.5 w-1.5 rounded-full bg-red-500" />
                   غير نشط
                 </Badge>
               )}
@@ -89,13 +89,13 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
 
             {(canDeleteDoctor || canUpdateDoctor || canViewDoctor) && (
               <TableCell className="text-center">
-                <div className="flex justify-center items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   {canViewDoctor && (
                     <TooltipButton title="عرض">
-                      <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
+                      <Button className="bg-primary h-auto gap-2 px-0 py-0 text-sm text-white dark:text-black">
                         <Link
                           to={`/dashboard/doctors/${id}`}
-                          className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
+                          className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1"
                         >
                           <FiEye size={24} />
                         </Link>
@@ -104,10 +104,10 @@ const DoctorsList = ({ doctors, meta }: IProps) => {
                   )}
                   {canUpdateDoctor && (
                     <TooltipButton title="تعديل">
-                      <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                      <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700">
                         <Link
                           to={`/dashboard/doctors/${id}/update`}
-                          className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                          className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1"
                         >
                           <Pen size={20} />
                         </Link>

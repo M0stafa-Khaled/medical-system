@@ -1,5 +1,5 @@
 import cookieServices from "@/utils/cookieServices";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -105,10 +105,10 @@ const PatientDetails = () => {
                   <>
                     {canUpdatePatient && (
                       <motion.div variants={itemVariants}>
-                        <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+                        <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700">
                           <Link
                             to={`/dashboard/patients/${id}/update`}
-                            className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                            className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1"
                           >
                             <Pen size={20} />
                           </Link>
@@ -126,14 +126,14 @@ const PatientDetails = () => {
             </motion.div>
           </CardHeader>
           <motion.div variants={itemVariants} className="px-4">
-            <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
+            <Separator className="bg-muted mx-auto w-2/6 sm:mx-0" />
           </motion.div>
           <CardContent className="py-4">
             <motion.div variants={itemVariants}>
               <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
             </motion.div>
 
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <motion.div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <motion.div variants={itemVariants}>
                 <InfoField
                   icon={
@@ -212,7 +212,7 @@ const PatientDetails = () => {
                 className="flex items-center gap-2 select-none"
               >
                 <FileImage className="text-cyan-500" />
-                <h5 className="text-sm text-muted-foreground">صورة الهوية :</h5>
+                <h5 className="text-muted-foreground text-sm">صورة الهوية :</h5>
                 {personal_image ? (
                   <ImageModal
                     src={personal_image}
@@ -233,13 +233,13 @@ const PatientDetails = () => {
             <Tabs
               defaultValue={"balances"}
               dir="rtl"
-              className="text-black dark:text-white my-2"
+              className="my-2 text-black dark:text-white"
             >
               <TabsList className="h-auto w-full gap-2">
                 {canViewPatientBalances && (
                   <TabsTrigger
                     value="balances"
-                    className="w-full py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
+                    className="dark:text-muted-foreground w-full py-2.5 text-base font-medium text-slate-700 data-[state=active]:text-black dark:data-[state=active]:text-white"
                   >
                     مدفوعات المريض
                   </TabsTrigger>

@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 interface IProps {
   placeholder: string;
@@ -10,7 +10,7 @@ const SearchInput = ({ placeholder }: IProps) => {
   return (
     <Input
       placeholder={placeholder}
-      className="w-full md:max-w-md py-2.5 md:py-3 placeholder:h-14 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground placeholder:text-sm"
+      className="placeholder:text-muted-foreground h-auto w-full border-black/20 py-2.5 text-black placeholder:h-14 placeholder:text-sm md:max-w-md md:py-3 dark:border-white/40 dark:text-white"
       onChange={(e) => {
         const value = e.target.value;
         if (value) setSearchParams({ q: value });

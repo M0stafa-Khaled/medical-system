@@ -7,7 +7,7 @@ import cookieServices from "@/utils/cookieServices";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 const UpdateWorkingDay = () => {
@@ -48,9 +48,9 @@ const UpdateWorkingDay = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <Card className="dark:bg-foreground border-gray-300 dark:border-muted shadow-none">
+        <Card className="dark:bg-foreground dark:border-muted border-gray-300 shadow-none">
           <div className="flex flex-col space-y-1.5 p-6">
-            <h1 className="font-semibold leading-relaxed">
+            <h1 className="leading-relaxed font-semibold">
               تحديث بيانات يوم عمل
             </h1>
           </div>

@@ -6,7 +6,7 @@ import useHasPermission from "@/hooks/useHasPermission";
 import truncateText from "@/utils/truncateText";
 import TooltipButton from "@/components/ui/TooltipButton";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Eye, Pen } from "lucide-react";
 import DeletePrescription from "./DeletePrescription";
 import { IPrescription } from "@/interfaces/dashboard/prescription";
@@ -30,11 +30,11 @@ const PrescriptionsList = ({ prescriptions }: IProps) => {
         initial="hidden"
         animate="visible"
         variants={tableRowVariants}
-        className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+        className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
       >
         <TableCell
           colSpan={6}
-          className="text-sm text-center text-black dark:text-white py-5 font-medium"
+          className="py-5 text-center text-sm font-medium text-black dark:text-white"
         >
           لا يوجد روشتات
         </TableCell>
@@ -50,24 +50,24 @@ const PrescriptionsList = ({ prescriptions }: IProps) => {
           animate="visible"
           custom={index}
           variants={tableRowVariants}
-          className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+          className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
             {truncateText(pres.patient?.name, 20)}
           </TableCell>
 
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
             {truncateText(pres.doctor?.name, 15)}
           </TableCell>
 
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
             {pres.clinic.name}
           </TableCell>
 
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
             {pres.date}
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium text-nowrap">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
             {truncateText(pres.note!, 20) || "لا يوجد"}
           </TableCell>
 
@@ -75,13 +75,13 @@ const PrescriptionsList = ({ prescriptions }: IProps) => {
             canDeletePrescription ||
             canViewPrescription) && (
             <TableCell className="text-center">
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 {canViewPrescription && (
                   <TooltipButton title="عرض">
-                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm ">
+                    <Button className="bg-primary h-auto gap-2 px-0 py-0 text-sm text-white dark:text-black">
                       <Link
                         to={`/dashboard/prescriptions/${pres.id}`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9"
+                        className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1"
                       >
                         <Eye size={20} />
                       </Link>
@@ -94,10 +94,10 @@ const PrescriptionsList = ({ prescriptions }: IProps) => {
 
                 {canUpdatePrescription && (
                   <TooltipButton title="تعديل">
-                    <Button className="h-auto py-0 px-0 bg-primary gap-2 text-sm bg-blue-600 hover:bg-blue-700">
+                    <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm hover:bg-blue-700">
                       <Link
                         to={`/dashboard/prescriptions/${pres.id}/update`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
+                        className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1 text-white"
                       >
                         <Pen size={20} />
                       </Link>

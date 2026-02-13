@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
 import { Form } from "@/components/ui/form";
@@ -7,7 +7,7 @@ import { IEmployee } from "@/interfaces/dashboard/employee";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import {
   useCreateEmployee,
   useUpdateEmployee,
@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import {
   useCheckAuth,
   useGetAllPermissions,
-} from "@/lib/react-query/auth/auth";
+} from "@/features/auth/queriesAndMutations";
 import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
@@ -85,9 +85,7 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   });
 
   const checkAuth = async () => {
-    const { auth, email_verified, status, permissions } = await checkAuthUser(
-      token
-    );
+    const { auth, email_verified, status, permissions } = await checkAuthUser();
     if (!auth || !status) {
       dispatch(logout());
       dispatch(clearPermissions());
@@ -105,15 +103,15 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     // Set Permissions in state
     dispatch(setPermissions(permissions));
   };
+  const role = useWatch({
+    control: form.control,
+    name: "role",
+    defaultValue: employee?.user?.role || "employee",
+  });
 
   useEffect(() => {
-    const subscription = form.watch((value, { name }) => {
-      if (name === "role") {
-        setShowPermissions(value.role === "employee");
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [form, employee, treasuries]);
+    setShowPermissions(role === "employee");
+  }, [role]);
 
   const { handleFileChange } = useUploadImgHandler(form);
 
@@ -166,13 +164,13 @@ const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       <motion.form
         key={employee?.id || "create"}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 dark:text-white"
+        className="space-y-6"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5"
+          className="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2"
           variants={containerVariants}
         >
           {EMPLOYEE_FORM_INPUTS.map((input, index) =>

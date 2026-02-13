@@ -5,7 +5,7 @@ import cookieServices from "@/utils/cookieServices";
 import { updateEmployeeSchema } from "@/validations/dashboard/employeeSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import DataLoader from "@/components/ui/DataLoader";
@@ -52,9 +52,9 @@ const UpdateEmployee = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <Card className="mt-10 dark:bg-foreground border-muted">
+        <Card className="border-muted mt-5">
           <div className="flex flex-col space-y-1.5 p-6">
-            <h1 className="font-semibold leading-none tracking-tight">
+            <h1 className="leading-none font-semibold tracking-tight">
               تحديث بيانات الموظف
             </h1>
           </div>

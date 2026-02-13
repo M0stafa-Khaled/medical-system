@@ -7,7 +7,7 @@ import PatientsList from "./PatientsList";
 import PatientsTableHeader from "./PatientsTableHeader";
 import { useGetAllPatients } from "@/lib/react-query/dashboard/patients";
 import PatientsHeader from "./PatientsHeader";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import useDebounce from "@/hooks/useDebounce";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";

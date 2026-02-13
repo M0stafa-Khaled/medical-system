@@ -4,7 +4,6 @@ import notificationsSlice from "./features/notifications/notificationSlice";
 import authSlice from "./features/auth/authSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 

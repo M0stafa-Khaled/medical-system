@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 interface IProps {
   title: string;
@@ -13,11 +13,11 @@ const WidgetCard = ({ icon, title, value, path }: IProps) => {
 
   return (
     <div
-      className="cursor-pointer rounded-xl border bg-card dark:bg-black text-card-foreground shadow-sm dark:border-primary/20"
+      className="bg-card text-card-foreground dark:border-border/20 cursor-pointer rounded-xl border shadow-sm"
       onClick={() => navigate(path)}
     >
-      <div className="p-6 flex flex-row items-center justify-between gap-4 space-y-0 pb-2">
-        <div className="tracking-tight text-sm font-medium">{title}</div>
+      <div className="flex flex-row items-center justify-between gap-4 space-y-0 p-6 pb-2">
+        <div className="text-sm font-medium tracking-tight">{title}</div>
         {icon}
       </div>
       <div className="p-6 pt-0">

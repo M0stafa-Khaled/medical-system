@@ -4,7 +4,7 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useGetPatientLastVisits } from "@/lib/react-query/dashboard/transactions/transactions";
 import LastVisitsTableHeader from "./LastVisitsTableHeader";
 import LastVisitsList from "./LastVisitsList";
@@ -43,7 +43,9 @@ const LastVisitsTable = () => {
   return (
     <DataTable
       isLoading={isLoading}
-      header={<LastVisitsHeader name={transactions?.data[0]?.patient.name || ""} />}
+      header={
+        <LastVisitsHeader name={transactions?.data[0]?.patient.name || ""} />
+      }
       tableHeader={<LastVisitsTableHeader />}
       list={<LastVisitsList transactions={transactions?.data || []} />}
       skeleton={
