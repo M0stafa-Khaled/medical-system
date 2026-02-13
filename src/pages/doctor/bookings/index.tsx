@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router";
-import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
 import DoctorBookingsTable from "@/components/doctor/bookings/DoctorBookingsTable";
 
 const DoctorBookings = () => {

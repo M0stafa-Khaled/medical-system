@@ -1,89 +1,162 @@
+import { lazy } from "react";
+
+// Landing Page
+export const Landing = lazy(() => import("./landing"));
+
 // Auth Pages
-export { default as Login } from "./auth/Login";
-export { default as Register } from "./auth/Register";
-export { default as ForgotPassword } from "./auth/ForgotPassword";
-export { default as ResetPassword } from "./auth/ResetPassword";
-export { default as VerifyAccount } from "./auth/VerifyAccount";
+export const Login = lazy(() => import("./auth/Login"));
+export const Register = lazy(() => import("./auth/Register"));
+export const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
+export const ResetPassword = lazy(() => import("./auth/ResetPassword"));
+export const VerifyAccount = lazy(() => import("./auth/VerifyAccount"));
 
 // Profile Pages
-export { default as Profile } from "./profile";
+export const Profile = lazy(() => import("./profile"));
 
 // Dashboard Pages
-export { default as Dashboard } from "./dashboard";
+export const Dashboard = lazy(() => import("./dashboard"));
 // ---- Bookings
-export { default as Bookings } from "./dashboard/bookings";
-export { default as BookingDetails } from "./dashboard/bookings/BookingDetails";
-export { default as UpdateBooking } from "./dashboard/bookings/UpdateBooking";
-export { default as CreateBooking } from "./dashboard/bookings/CreateBooking";
+export const Bookings = lazy(() => import("./dashboard/bookings"));
+export const BookingDetails = lazy(
+  () => import("./dashboard/bookings/BookingDetails")
+);
+export const UpdateBooking = lazy(
+  () => import("./dashboard/bookings/UpdateBooking")
+);
+export const CreateBooking = lazy(
+  () => import("./dashboard/bookings/CreateBooking")
+);
 // ---- Clinics
-export { default as Clinics } from "./dashboard/clinics";
+export const Clinics = lazy(() => import("./dashboard/clinics"));
 // ---- Doctors
-export { default as Doctors } from "./dashboard/doctors";
-export { default as DoctorDetails } from "./dashboard/doctors/DoctorDetails";
-export { default as CreateDoctor } from "./dashboard/doctors/CreateDoctor";
-export { default as UpdateDoctor } from "./dashboard/doctors/UpdateDoctor";
-export { default as DoctorTabs } from "./dashboard/doctors/DoctorTabs";
-export { default as CreateWorkingDay } from "./dashboard/doctors/workingDays/CreateWorkingDay";
-export { default as UpdateWorkingDay } from "./dashboard/doctors/workingDays/UpdateWorkingDay";
+export const Doctors = lazy(() => import("./dashboard/doctors"));
+export const DoctorDetails = lazy(
+  () => import("./dashboard/doctors/DoctorDetails")
+);
+export const CreateDoctor = lazy(
+  () => import("./dashboard/doctors/CreateDoctor")
+);
+export const UpdateDoctor = lazy(
+  () => import("./dashboard/doctors/UpdateDoctor")
+);
+export const DoctorTabs = lazy(() => import("./dashboard/doctors/DoctorTabs"));
+export const CreateWorkingDay = lazy(
+  () => import("./dashboard/doctors/workingDays/CreateWorkingDay")
+);
+export const UpdateWorkingDay = lazy(
+  () => import("./dashboard/doctors/workingDays/UpdateWorkingDay")
+);
 // ---- Employees
-export { default as Employees } from "./dashboard/employees";
-export { default as EmployeeDetails } from "./dashboard/employees/EmployeeDetails";
-export { default as CreateEmployee } from "./dashboard/employees/CreateEmployee";
-export { default as UpdateEmployee } from "./dashboard/employees/UpdateEmployee";
+export const Employees = lazy(() => import("./dashboard/employees"));
+export const EmployeeDetails = lazy(
+  () => import("./dashboard/employees/EmployeeDetails")
+);
+export const CreateEmployee = lazy(
+  () => import("./dashboard/employees/CreateEmployee")
+);
+export const UpdateEmployee = lazy(
+  () => import("./dashboard/employees/UpdateEmployee")
+);
 // ---- Expenses
-export { default as Expenses } from "./dashboard/expenses";
-export { default as ExpenseDetails } from "./dashboard/expenses/ExpenseDetails";
-export { default as ExpensesCategories } from "./dashboard/expensesCategories";
+export const Expenses = lazy(() => import("./dashboard/expenses"));
+export const ExpenseDetails = lazy(
+  () => import("./dashboard/expenses/ExpenseDetails")
+);
+export const ExpensesCategories = lazy(
+  () => import("./dashboard/expensesCategories")
+);
 // ---- Patients
-export { default as Patients } from "./dashboard/patients";
-export { default as PatientDetails } from "./dashboard/patients/PatientDetails";
-export { default as CreatePatient } from "./dashboard/patients/CreatePatient";
-export { default as UpdatePatient } from "./dashboard/patients/UpdatePatient";
+export const Patients = lazy(() => import("./dashboard/patients"));
+export const PatientDetails = lazy(
+  () => import("./dashboard/patients/PatientDetails")
+);
+export const CreatePatient = lazy(
+  () => import("./dashboard/patients/CreatePatient")
+);
+export const UpdatePatient = lazy(
+  () => import("./dashboard/patients/UpdatePatient")
+);
 // ---- Prescriptions
-export { default as Prescriptions } from "./dashboard/prescription";
-export { default as PrescriptionDetails } from "./dashboard/prescription/PrescriptionDetails";
-export { default as CreatePrescription } from "./dashboard/prescription/CreatePrescription";
-export { default as UpdatePrescription } from "./dashboard/prescription/UpdatePrescription";
+export const Prescriptions = lazy(() => import("./dashboard/prescription"));
+export const PrescriptionDetails = lazy(
+  () => import("./dashboard/prescription/PrescriptionDetails")
+);
+export const CreatePrescription = lazy(
+  () => import("./dashboard/prescription/CreatePrescription")
+);
+export const UpdatePrescription = lazy(
+  () => import("./dashboard/prescription/UpdatePrescription")
+);
 // ---- Reports
-export { default as BookingsReports } from "./dashboard/reports/bookingsReports";
-export { default as ExpensesReports } from "./dashboard/reports/expensesReports";
-export { default as PatientBalancesReports } from "./dashboard/reports/patientBalancesReports";
-export { default as PatientsReports } from "./dashboard/reports/patientsReports";
-export { default as PrescriptionsReports } from "./dashboard/reports/prescriptionsReports";
-export { default as TransactionsReports } from "./dashboard/reports/transactionsReports";
-export { default as TransfersReports } from "./dashboard/reports/transfersReports";
-export { default as TreasuriesReports } from "./dashboard/reports/treasuriesReports";
+export const BookingsReports = lazy(
+  () => import("./dashboard/reports/bookingsReports")
+);
+export const ExpensesReports = lazy(
+  () => import("./dashboard/reports/expensesReports")
+);
+export const PatientBalancesReports = lazy(
+  () => import("./dashboard/reports/patientBalancesReports")
+);
+export const PatientsReports = lazy(
+  () => import("./dashboard/reports/patientsReports")
+);
+export const PrescriptionsReports = lazy(
+  () => import("./dashboard/reports/prescriptionsReports")
+);
+export const TransactionsReports = lazy(
+  () => import("./dashboard/reports/transactionsReports")
+);
+export const TransfersReports = lazy(
+  () => import("./dashboard/reports/transfersReports")
+);
+export const TreasuriesReports = lazy(
+  () => import("./dashboard/reports/treasuriesReports")
+);
 // ---- Settings
-export { default as Settings } from "./dashboard/settings";
+export const Settings = lazy(() => import("./dashboard/settings"));
 // ---- Transactions
-export { default as Transactions } from "./dashboard/transactions";
-export { default as LastVisits } from "./dashboard/transactions/LastVisits";
-export { default as TransactionDetails } from "./dashboard/transactions/TransactionDetails";
+export const Transactions = lazy(() => import("./dashboard/transactions"));
+export const LastVisits = lazy(
+  () => import("./dashboard/transactions/LastVisits")
+);
+export const TransactionDetails = lazy(
+  () => import("./dashboard/transactions/TransactionDetails")
+);
 // ---- Treasuries
-export { default as Treasuries } from "./dashboard/treasuries";
+export const Treasuries = lazy(() => import("./dashboard/treasuries"));
 
 // Doctor
-export { default as DoctorDashboard } from "./doctor";
-export { default as DoctorBookings } from "./doctor/bookings";
-export { default as DoctorClinics } from "./doctor/clinics";
-export { default as DoctorPrescriptions } from "./doctor/prescriptions";
-export { default as DoctorPrescriptionDetails } from "./doctor/prescriptions/DoctorPrescriptionDetails";
-export { default as DoctorCreatePrescription } from "./doctor/prescriptions/DoctorCreatePrescription";
-export { default as DoctorUpdatePrescription } from "./doctor/prescriptions/DoctorUpdatePrescription";
+export const DoctorDashboard = lazy(() => import("./doctor"));
+export const DoctorBookings = lazy(() => import("./doctor/bookings"));
+export const DoctorClinics = lazy(() => import("./doctor/clinics"));
+export const DoctorPrescriptions = lazy(() => import("./doctor/prescriptions"));
+export const DoctorPrescriptionDetails = lazy(
+  () => import("./doctor/prescriptions/DoctorPrescriptionDetails")
+);
+export const DoctorCreatePrescription = lazy(
+  () => import("./doctor/prescriptions/DoctorCreatePrescription")
+);
+export const DoctorUpdatePrescription = lazy(
+  () => import("./doctor/prescriptions/DoctorUpdatePrescription")
+);
 
 // Patient
-export { default as PatientBookings } from "./patient/bookings";
-export { default as CreatePatientBooking } from "./patient/bookings/CreatePatientBooking";
-export { default as UpdatePatientBooking } from "./patient/bookings/UpdatePatientBooking";
+export const PatientBookings = lazy(() => import("./patient/bookings"));
+export const CreatePatientBooking = lazy(
+  () => import("./patient/bookings/CreatePatientBooking")
+);
+export const UpdatePatientBooking = lazy(
+  () => import("./patient/bookings/UpdatePatientBooking")
+);
 
-export { default as PatientBalances } from "./patient/balances";
+export const PatientBalances = lazy(() => import("./patient/balances"));
 
 // Shared
-export { default as Dosages } from "./shared/dosages";
-export { default as Drugs } from "./shared/drugs";
-export { default as Scans } from "./shared/scans";
-export { default as Analysis } from "./shared/analysis";
+export const Dosages = lazy(() => import("./shared/dosages"));
+export const Drugs = lazy(() => import("./shared/drugs"));
+export const Scans = lazy(() => import("./shared/scans"));
+export const Analysis = lazy(() => import("./shared/analysis"));
 
 // Errors & NotFound
-export { default as Error } from "./Error";
-export { default as NotFound } from "./NotFound";
+export const Error = lazy(() => import("./Error"));
+export const NotFound = lazy(() => import("./NotFound"));

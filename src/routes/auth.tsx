@@ -1,12 +1,8 @@
 import { AuthLayout } from "@/features/auth";
-import {
-  Error,
-  ForgotPassword,
-  Login,
-  Register,
-  ResetPassword,
-  VerifyAccount,
-} from "@/pages";
+import { ForgotPassword, Login, Register, ResetPassword, VerifyAccount } from "@/pages";
+
+
+import Error from "@/pages/Error";
 
 import { createRoutesFromElements, Route } from "react-router";
 

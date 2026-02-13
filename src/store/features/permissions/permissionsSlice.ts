@@ -1,4 +1,4 @@
-import { IPermission } from "@/interfaces/auth/auth";
+import { IPermission } from "@/features/auth/types";
 import { decryptData, encryptData } from "@/utils/encryptData";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 

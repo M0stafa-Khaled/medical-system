@@ -53,22 +53,22 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
   const clinicId = useWatch({
     control: form.control,
     name: "clinic_id",
-  }) as string | undefined;
+  });
 
   const doctorId = useWatch({
     control: form.control,
     name: "doctor_id",
-  }) as string | undefined;
+  });
 
   const workingDayId = useWatch({
     control: form.control,
     name: "working_day_id",
-  }) as string | undefined;
+  });
 
   const date = useWatch({
     control: form.control,
     name: "date",
-  }) as string | undefined;
+  });
 
   // Fetch data using watched values
   const { data: clinics } = useGetAllClinics({
@@ -78,25 +78,25 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
 
   const { data: doctors } = useGetAllClinicDoctors({
     token,
-    clinic_id: clinicId || undefined,
+    clinic_id: clinicId,
   });
 
   const { data: workingDays } = useGetAllWorkingDays({
-    doctorId: doctorId || undefined,
+    doctorId: doctorId,
     token,
   });
 
   const { data: doctorActions } = useGetDoctorActions({
-    doctorId: doctorId || undefined,
+    doctorId: doctorId,
     token,
   });
 
   const { data: availableTimes } = useGetAvailableBookingsTime({
     token,
-    doctor_id: doctorId || undefined,
-    working_day_id: workingDayId || undefined,
-    clinic_id: clinicId || undefined,
-    booking_date: date || undefined,
+    doctor_id: doctorId,
+    working_day_id: workingDayId,
+    clinic_id: clinicId,
+    booking_date: date,
   });
 
   // Prepare options

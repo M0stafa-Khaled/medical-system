@@ -24,7 +24,7 @@
 }
 
 @theme inline {
-  --font-alexandria: Alexandria, sans-serif;
+  --font-sans: "Noto Kufi Arabic", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -189,7 +189,7 @@
   }
 
   body {
-    @apply font-alexandria bg-background text-foreground antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 }
 
