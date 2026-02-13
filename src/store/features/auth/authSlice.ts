@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CookieService from "../../../utils/cookieServices";
 import { TRole } from "../../../types";
 import axiosAPI from "@/config/axios.config";
-import { ICheckAuth, IPermission } from "@/interfaces/auth/auth";
+import { ICheckAuth, IPermission } from "@/features/auth/types";
 
 interface IAuthState {
   isAuthenticated: boolean;

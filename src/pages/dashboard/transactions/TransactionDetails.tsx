@@ -18,7 +18,7 @@ import {
   Stethoscope,
 } from "lucide-react";
 import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
@@ -87,14 +87,14 @@ const TransactionDetails = () => {
         initial="hidden"
         animate="visible"
       >
-        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs hover:shadow-md transition-shadow duration-300">
-          <CardHeader className="py-4 mb-4">
+        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs transition-shadow duration-300 hover:shadow-md">
+          <CardHeader className="mb-4 py-4">
             <motion.div
               variants={itemVariants}
               className="flex items-center gap-4"
             >
               <CardTitle className="flex items-center gap-2">
-                <Receipt className="h-6 w-6 text-primary" />
+                <Receipt className="text-primary h-6 w-6" />
                 <span>تفاصيل التحصيل:</span>
               </CardTitle>
 
@@ -108,7 +108,7 @@ const TransactionDetails = () => {
 
           <CardContent>
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-4 md:grid-cols-2"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants}>
@@ -216,7 +216,7 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link
                   to={`/dashboard/doctors/${doctor?.item?.id}`}
-                  className="block hover:text-primary transition-colors duration-200"
+                  className="hover:text-primary block transition-colors duration-200"
                 >
                   <InfoField
                     label="الطبيب"
@@ -229,7 +229,7 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link
                   to={`/dashboard/patients/${patient?.id}`}
-                  className="block hover:text-primary transition-colors duration-200"
+                  className="hover:text-primary block transition-colors duration-200"
                 >
                   <InfoField
                     label="المريض"
@@ -242,7 +242,7 @@ const TransactionDetails = () => {
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link
                   to={`/dashboard/employees/${employee?.id}`}
-                  className="block hover:text-primary transition-colors duration-200"
+                  className="hover:text-primary block transition-colors duration-200"
                 >
                   <InfoField
                     label="الموظف"

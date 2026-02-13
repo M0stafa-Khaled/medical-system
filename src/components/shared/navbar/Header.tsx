@@ -1,5 +1,5 @@
-import { useEffect, useState, lazy } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -15,15 +15,11 @@ import cookieServices from "@/utils/cookieServices";
 import {} from "react";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-
-const NotificationsMenu = lazy(
-  () => import("../../notifications/NotificationsMenu"),
-);
-const ProfileMenu = lazy(() => import("../../profile/ProfileMenu"));
-const AuthButtons = lazy(() => import("../../dashboard/AuthButtons"));
-const ToggleMode = lazy(() => import("../ToggleMode"));
-const LogoutButton = lazy(() => import("../LogoutButton"));
-const NavList = lazy(() => import("./NavList"));
+import { AuthButtons, LogoutButton } from "@/features/auth";
+import NavList from "./NavList";
+import NotificationsMenu from "@/components/notifications/NotificationsMenu";
+import { ProfileMenu } from "@/features/profile";
+import ToggleTheme from "../ToggleTheme";
 
 interface IProps {
   links: ILink[];
@@ -34,12 +30,12 @@ const Header = ({ links, dashboard = false }: IProps) => {
   const [openNav, setOpenNav] = useState(false);
   const role = cookieServices.getUser()?.role;
   const canReceiveNotifications = useHasPermission(
-    PERMISSIONS.RECEIVE_NOTIFICATIONS,
+    PERMISSIONS.RECEIVE_NOTIFICATIONS
   );
   useEffect(() => {
     window.addEventListener(
       "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
+      () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
   return (
@@ -47,26 +43,26 @@ const Header = ({ links, dashboard = false }: IProps) => {
       initial="hidden"
       animate="visible"
       variants={sidebarVariants}
-      className={`container ${
+      className={`z-50 container ${
         dashboard && "lg:hidden"
-      } pt-1 fixed w-full inset-x-0 top-1  z-50`}
+      } fixed inset-x-0 top-1 w-full pt-1`}
     >
-      <div className="xl:container">
+      <div className="">
         <motion.nav
           initial="hidden"
           animate="visible"
           variants={navItemsVariants}
-          className={`flex bg-[#fff] dark:bg-foreground flex-wrap items-center justify-between py-2 border border-primary/20 dark:border-primary/30 rounded-xl`}
+          className={`bg-background border-border flex flex-wrap items-center justify-between rounded-xl border py-2`}
         >
-          <div className="flex items-center justify-between w-full px-3">
-            <div className={`hidden lg:flex gap-3 items-center w-full`}>
+          <div className="flex w-full items-center justify-between px-3">
+            <div className={`hidden w-full items-center gap-3 lg:flex`}>
               <AuthButtons />
               <NavList links={links} />
             </div>
             <button
               type="button"
               name="menu-button"
-              className="flex justify-center items-center lg:hidden"
+              className="flex items-center justify-center lg:hidden"
               onClick={() => setOpenNav(!openNav)}
             >
               <AnimatePresence mode="wait">
@@ -78,7 +74,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
                     exit="hidden"
                     variants={menuIconVariants}
                   >
-                    <IoClose size={36} className="text-black dark:text-white" />
+                    <IoClose size={36} />
                   </motion.span>
                 ) : (
                   <motion.span
@@ -88,7 +84,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
                     exit="hidden"
                     variants={menuIconVariants}
                   >
-                    <IoMenu size={36} className="text-black dark:text-white" />
+                    <IoMenu size={36} />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -96,11 +92,11 @@ const Header = ({ links, dashboard = false }: IProps) => {
             {/* Toggle Mode */}
             <motion.div
               variants={navItemsVariants}
-              className="flex justify-center items-center gap-3 p-1"
+              className="flex items-center justify-center gap-3 p-1"
             >
               <motion.div
                 variants={navItemsVariants}
-                className="flex justify-center items-center gap-2"
+                className="flex items-center justify-center gap-2"
               >
                 <motion.div variants={navItemsVariants}>
                   <LogoutButton />
@@ -115,10 +111,10 @@ const Header = ({ links, dashboard = false }: IProps) => {
                   <ProfileMenu />
                 </motion.div>
                 <motion.div variants={navItemsVariants}>
-                  <ToggleMode />
+                  <ToggleTheme />
                 </motion.div>
               </motion.div>
-              <motion.div variants={logoVariants} className="w-12">
+              <motion.div variants={logoVariants} className="w-8">
                 <Link to={"/"}>
                   <motion.img
                     src={"/images/logo.svg"}
@@ -126,7 +122,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
                     variants={logoVariants}
                     initial="hidden"
                     animate="visible"
-                    className="w-full h-full cursor-pointer"
+                    className="h-full w-full cursor-pointer"
                   />
                 </Link>
               </motion.div>
@@ -145,7 +141,7 @@ const Header = ({ links, dashboard = false }: IProps) => {
               >
                 <motion.div
                   variants={navItemsVariants}
-                  className="w-full mx-auto max-h-[80vh] overflow-y-scroll custom-scrollbar px-3 py-2"
+                  className="custom-scrollbar mx-auto max-h-[80vh] w-full overflow-y-scroll px-3 py-2"
                 >
                   <NavList links={links} setOpenNav={setOpenNav} />
                 </motion.div>

@@ -11,7 +11,7 @@ import {
   useCreateDoctor,
   useUpdateDoctor,
 } from "@/lib/react-query/dashboard/doctors/doctors";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
@@ -109,7 +109,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 dark:text-white"
+          className="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2 dark:text-white"
           variants={containerVariants}
         >
           {DOCTOR_FORM_INPUTS.map((input, index) => (

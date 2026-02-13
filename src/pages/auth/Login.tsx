@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { motion } from "framer-motion";
-import LoginForm from "@/components/forms/auth/LoginForm";
+import { LoginForm } from "@/features/auth";
 
 const Login = () => {
   return (
@@ -16,19 +16,19 @@ const Login = () => {
         transition={{ delay: 0.1, duration: 0.3 }}
         className="w-full max-w-md"
       >
-        <div className="flex flex-col justify-center items-center gap-2 mb-6">
+        <div className="mb-6 flex flex-col items-center justify-center gap-2">
           <img src="/images/logo.svg" alt="logo" className="w-16" />
-          <h1 className="font-semibold text-black text-xl text-center">
+          <h1 className="text-center text-xl font-semibold text-black">
             تسجيل الدخول
           </h1>
-          <p className="text-sm font-medium text-black/70 text-center">
+          <p className="text-center text-sm font-medium text-black/70">
             مرحبا بعودتك، يرجى تسجيل الدخول للمتابعة
           </p>
         </div>
         <LoginForm />
         <p className="mt-2 text-sm text-black">
           ليس لديك حساب؟{" "}
-          <Link to={"/register"} className="underline text-[#000]">
+          <Link to={"/register"} className="text-black underline">
             تسجيل حساب جديد
           </Link>
         </p>

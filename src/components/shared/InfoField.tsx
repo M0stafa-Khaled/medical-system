@@ -16,7 +16,7 @@ const InfoField = ({ label, value, sm, icon, breakAll }: IProps) => {
       <div className="flex items-center gap-2">
         <h5 className="text-muted-foreground text-nowrap">{label}:</h5>
         <p
-          className={`font-medium text-wrap text-dark dark:text-white ${
+          className={`text-dark font-medium text-wrap dark:text-white ${
             sm && "text-sm"
           } ${breakAll && "break-all"}`}
         >

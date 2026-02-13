@@ -1,6 +1,9 @@
-import { useGetEmployeeById } from "@/lib/react-query/dashboard/employees";
+import {
+  useDeleteEmployee,
+  useGetEmployeeById,
+} from "@/lib/react-query/dashboard/employees";
 import cookieServices from "@/utils/cookieServices";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,7 +28,6 @@ import {
 import ImageModal from "@/components/shared/ImageModal";
 import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
 import InfoField from "@/components/shared/InfoField";
-import DeleteEmployee from "@/components/dashboard/employees/DeleteEmployee";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
@@ -35,6 +37,7 @@ import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet-async";
 import TooltipButton from "@/components/ui/TooltipButton";
 import { AxiosResErr } from "@/types";
+import DeleteAlert from "@/components/shared/delete-alert";
 
 const EmployeeDetails = () => {
   const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
@@ -52,6 +55,7 @@ const EmployeeDetails = () => {
     id: employeeId!,
     token,
   });
+  const { mutateAsync: deleteEmployee } = useDeleteEmployee();
 
   const employeeFailure = failureReason as AxiosResErr;
 
@@ -98,7 +102,7 @@ const EmployeeDetails = () => {
         initial="hidden"
         animate="visible"
       >
-        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs">
+        <Card className="border-muted shadow-xs">
           <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
               <HeaderUserDetails
@@ -110,11 +114,8 @@ const EmployeeDetails = () => {
                     {canUpdateEmployee && (
                       <motion.div variants={itemVariants}>
                         <TooltipButton title="تعديل">
-                          <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
-                            <Link
-                              to={`/dashboard/employees/${id}/update`}
-                              className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
-                            >
+                          <Button className="btn-edit" size={"icon"} asChild>
+                            <Link to={`/dashboard/employees/${id}/update`}>
                               <Pen size={20} />
                             </Link>
                           </Button>
@@ -123,7 +124,12 @@ const EmployeeDetails = () => {
                     )}
                     {canDeleteEmployee && (
                       <motion.div variants={itemVariants}>
-                        <DeleteEmployee id={id!} name={name!} />
+                        <DeleteAlert
+                          deleteAction={() => deleteEmployee({ id: id! })}
+                          id={id!}
+                          name={name!}
+                          navigatePath="/dashboard/employees"
+                        />
                       </motion.div>
                     )}
                   </>
@@ -132,7 +138,7 @@ const EmployeeDetails = () => {
             </motion.div>
           </CardHeader>
           <motion.div className="px-4" variants={itemVariants}>
-            <Separator className="w-2/6 bg-muted mx-auto sm:mx-0" />
+            <Separator className="bg-muted mx-auto w-2/6 sm:mx-0" />
           </motion.div>
 
           <CardContent className="py-4">
@@ -141,7 +147,7 @@ const EmployeeDetails = () => {
             </motion.div>
 
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-4 md:grid-cols-2"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants}>
@@ -150,9 +156,9 @@ const EmployeeDetails = () => {
                   value={status ? "نشط" : "غير نشط"}
                   icon={
                     status ? (
-                      <BadgeCheck className="text-green-500" />
+                      <BadgeCheck className="text-green-500" size={20} />
                     ) : (
-                      <BadgeX className="text-red-500" />
+                      <BadgeX className="text-red-500" size={20} />
                     )
                   }
                 />
@@ -162,7 +168,9 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="الراتب"
                   value={salary!}
-                  icon={<CircleDollarSign className="text-blue-500" />}
+                  icon={
+                    <CircleDollarSign className="text-blue-500" size={20} />
+                  }
                 />
               </motion.div>
 
@@ -170,7 +178,7 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="الوظيفة"
                   value={job!}
-                  icon={<Briefcase className="text-purple-500" />}
+                  icon={<Briefcase className="text-purple-500" size={20} />}
                 />
               </motion.div>
 
@@ -178,7 +186,9 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="الخزينة"
                   value={treasury?.name ?? "لا يوجد"}
-                  icon={<Wallet className="h-5 w-5 text-yellow-500" />}
+                  icon={
+                    <Wallet className="h-5 w-5 text-yellow-500" size={20} />
+                  }
                 />
               </motion.div>
 
@@ -186,7 +196,7 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="رقم الهوية"
                   value={personal_id!}
-                  icon={<UserCircle2 className="text-primary" />}
+                  icon={<UserCircle2 className="text-primary" size={20} />}
                 />
               </motion.div>
 
@@ -194,7 +204,7 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="رقم الهاتف الاول"
                   value={first_phone!}
-                  icon={<Phone className="text-green-600" />}
+                  icon={<Phone className="text-green-600" size={20} />}
                 />
               </motion.div>
 
@@ -202,7 +212,7 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="رقم الهاتف الثاني"
                   value={second_phone ? second_phone : "لا يوجد"}
-                  icon={<Phone className="text-purple-600" />}
+                  icon={<Phone className="text-purple-600" size={20} />}
                 />
               </motion.div>
 
@@ -210,7 +220,7 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="البريد الإلكتروني"
                   value={user?.email as string}
-                  icon={<Mail className="text-orange-500" />}
+                  icon={<Mail className="text-orange-500" size={20} />}
                   sm
                   breakAll
                 />
@@ -220,7 +230,7 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="الجنس"
                   value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
-                  icon={<VenusAndMars className="text-primary" />}
+                  icon={<VenusAndMars className="text-primary" size={20} />}
                   sm
                 />
               </motion.div>
@@ -229,7 +239,7 @@ const EmployeeDetails = () => {
                 <InfoField
                   label="تاريخ الإنشاء"
                   value={formatDateTime(created_at!)}
-                  icon={<Calendar className="text-teal-500" />}
+                  icon={<Calendar className="text-teal-500" size={20} />}
                   sm
                 />
               </motion.div>
@@ -238,8 +248,8 @@ const EmployeeDetails = () => {
                 className="flex items-center gap-2 select-none"
                 variants={itemVariants}
               >
-                <h5 className="text-sm text-muted-foreground flex items-center gap-2">
-                  <FileImage className="text-cyan-500" />
+                <h5 className="text-muted-foreground flex items-center gap-2 text-sm">
+                  <FileImage className="text-cyan-500" size={20} />
                   صورة الهوية :
                 </h5>
                 {personal_image ? (
@@ -255,12 +265,12 @@ const EmployeeDetails = () => {
               </motion.div>
               {user?.role === "employee" && (
                 <motion.div
-                  className="flex gap-2 col-span-full"
+                  className="col-span-full flex gap-2"
                   variants={itemVariants}
                 >
-                  <ShieldUser className="text-blue-700 shrink-0" />
-                  <h3 className="text-sm text-muted-foreground">الصلاحيات:</h3>
-                  <div className="flex items-center flex-wrap gap-2">
+                  <ShieldUser className="shrink-0 text-blue-700" size={20} />
+                  <h3 className="text-muted-foreground text-sm">الصلاحيات:</h3>
+                  <div className="flex flex-wrap items-center gap-2">
                     {permissions?.map((permission) => (
                       <motion.div key={permission.id} variants={itemVariants}>
                         <Badge>{permission.name}</Badge>

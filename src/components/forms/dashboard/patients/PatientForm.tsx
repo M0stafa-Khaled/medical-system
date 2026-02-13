@@ -7,7 +7,7 @@ import { IPatient } from "@/interfaces/dashboard/patient";
 import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import {
   useCreatePatient,
   useUpdatePatient,
@@ -123,7 +123,7 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 dark:text-white"
+          className="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2 dark:text-white"
           variants={containerVariants}
         >
           {PATIENT_FORM_INPUTS.map((input, index) => (

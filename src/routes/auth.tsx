@@ -1,20 +1,20 @@
-import Error from "@/pages/Error";
-import { lazy } from "react";
+import { AuthLayout } from "@/features/auth";
+import {
+  Error,
+  ForgotPassword,
+  Login,
+  Register,
+  ResetPassword,
+  VerifyAccount,
+} from "@/pages";
 
-const AuthLayout = lazy(() => import("@/layout/AuthLayout"));
-const Login = lazy(() => import("@/pages/auth/Login"));
-const Register = lazy(() => import("@/pages/auth/Register"));
-const VerifyEmail = lazy(() => import("@/pages/auth/VerifyEmail"));
-const ForgotPassword = lazy(() => import("@/pages/auth/ForgotPassword"));
-const ResetPassword = lazy(() => import("@/pages/auth/ResetPassword"));
-
-import { createRoutesFromElements, Route } from "react-router-dom";
+import { createRoutesFromElements, Route } from "react-router";
 
 const authRoutes = createRoutesFromElements(
   <>
     <Route
       path="/verify-account"
-      element={<VerifyEmail />}
+      element={<VerifyAccount />}
       id="verify-account"
       errorElement={<Error />}
     />

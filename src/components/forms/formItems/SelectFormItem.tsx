@@ -49,7 +49,7 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
       <FormLabel htmlFor={input.name} className="text-nowrap">
         {input.label}
         {isOptionalField && isOptionalField(input.name) && (
-          <span className="text-xs text-muted-foreground"> (اختياري)</span>
+          <span className="text-muted-foreground text-xs"> (اختياري)</span>
         )}
       </FormLabel>
       <FormControl>
@@ -60,7 +60,7 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className={`border-muted w-full h-12! text-black dark:text-white justify-between overflow-hidden`}
+              className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted h-12! w-full justify-between overflow-hidden text-black hover:text-black dark:text-white dark:hover:text-white`}
             >
               {truncateText(
                 field.value
@@ -74,12 +74,9 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
           </PopoverTrigger>
           <PopoverContent
             id={input.name}
-            className="w-[300px] sm:w-[400px] md:w-[370px] p-0 z-1000 border-black/20 dark:border-white/40"
+            className="z-1000 w-75 p-0 sm:w-100 md:w-92.5"
           >
-            <Command
-              id={input.name}
-              className="text-black dark:text-white bg-foreground"
-            >
+            <Command id={input.name} className="bg-background">
               <CommandInput
                 placeholder="اختر او ابحث بالاسم"
                 value={searchValue}
@@ -90,7 +87,7 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
                 <CommandGroup id={input.name}>
                   {filteredOptions?.map((option) => (
                     <CommandItem
-                      className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20 text-[13px]"
+                      className="cursor-pointer py-2.5 text-[13px]"
                       key={option.label}
                       id={input.name}
                       {...field}

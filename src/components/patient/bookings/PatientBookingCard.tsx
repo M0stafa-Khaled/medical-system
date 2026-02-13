@@ -23,7 +23,7 @@ import {
   Pen,
 } from "lucide-react";
 import { FaUserDoctor } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import DeletePatientBooking from "./DeletePatientBooking";
 
 interface IProps {
@@ -32,55 +32,55 @@ interface IProps {
 
 const PatientBookingCard = ({ booking }: IProps) => {
   return (
-    <Card className="transition-all duration-300 hover:shadow-md cursor-pointer border-primary/10  hover:border-primary/40 dark:bg-black/60 h-full">
+    <Card className="border-primary/10 hover:border-primary/40 h-full cursor-pointer transition-all duration-300 hover:shadow-md dark:bg-black/60">
       <CardContent className="flex flex-col gap-4">
-        <CardHeader className="px-0 pb-0 flex-row items-center justify-between">
+        <CardHeader className="flex-row items-center justify-between px-0 pb-0">
           <CardTitle>
             <Bookmark size={24} />
           </CardTitle>
         </CardHeader>
-        <CardContent className="py-0 space-y-3 px-2 sm:px-3 lg:px-4 xl:px-2">
-          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
+        <CardContent className="space-y-3 px-2 py-0 sm:px-3 lg:px-4 xl:px-2">
+          <div className="flex items-center gap-2 text-black md:text-lg dark:text-white">
             <Hash className="h-5 w-5" />
             <h2>رقم الحجز:</h2>
-            <p className="bg-foreground p-2 w-10 border border-primary/20 h-10 flex justify-center items-center rounded-full text-lg">
+            <p className="bg-foreground border-primary/20 flex h-10 w-10 items-center justify-center rounded-full border p-2 text-lg">
               {booking.code}
             </p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
+          <div className="flex items-center gap-2 text-black md:text-lg dark:text-white">
             <CheckCheck className="h-5 w-5" />
             <h2>حالة الكشف:</h2>
             <BookingStatus status={booking.status} />
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
+          <div className="flex items-center gap-2 text-black md:text-lg dark:text-white">
             <Building2 className="h-5 w-5" />
             <h2>العيادة:</h2>
             <p>{booking.clinic.name}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
+          <div className="flex items-center gap-2 text-black md:text-lg dark:text-white">
             <Clock className="h-5 w-5" />
             <h2>موعد الدخول:</h2>
             <p dir="ltr">{booking.start_at}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
+          <div className="flex items-center gap-2 text-black md:text-lg dark:text-white">
             <ClipboardPlus className="h-5 w-5" />
             <h2>الخدمة:</h2>
             <p>{booking.action?.name}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
+          <div className="flex items-center gap-2 text-black md:text-lg dark:text-white">
             <Calendar className="h-5 w-5" />
             <h2>اليوم:</h2>
             <p>{convertDay(booking.working_day.day, "en")}</p>
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white md:text-lg">
+          <div className="flex items-center gap-2 text-black md:text-lg dark:text-white">
             <FaUserDoctor className="h-5 w-5" />
             <h2>الطبيب:</h2>
             <p>{booking?.doctor?.name}</p>
           </div>
         </CardContent>
         <Separator className="dark:bg-gray-700" />
-        <CardFooter className="pb-1 px-0 flex-col items-start gap-4">
-          <div className="flex flex-col gap-3 items-start">
+        <CardFooter className="flex-col items-start gap-4 px-0 pb-1">
+          <div className="flex flex-col items-start gap-3">
             <div className="flex items-center gap-2 text-black dark:text-white">
               <Calendar className="h-5 w-5" />
               <h2 className="text-sm">تاريخ الحجز:</h2>
@@ -95,13 +95,13 @@ const PatientBookingCard = ({ booking }: IProps) => {
           {booking.status !== "cancelled" &&
             booking.status !== "ended" &&
             booking.status !== "collected" && (
-              <div className="w-full flex items-center justify-between gap-4">
+              <div className="flex w-full items-center justify-between gap-4">
                 <DeletePatientBooking id={booking.id.toString()} />
                 <TooltipButton title="حذف">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white gap-2 w-1/2 h-auto py-0 px-0">
+                  <Button className="h-auto w-1/2 gap-2 bg-blue-600 px-0 py-0 text-white hover:bg-blue-700">
                     <Link
                       to={`/bookings/${booking?.id}/update`}
-                      className="flex justify-center items-center gap-2 py-3 px-3 w-full text-white"
+                      className="flex w-full items-center justify-center gap-2 px-3 py-3 text-white"
                     >
                       <Pen size={20} />
                       تعديل الحجز

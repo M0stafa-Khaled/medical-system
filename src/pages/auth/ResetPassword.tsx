@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import ResetPasswordForm from "@/components/forms/auth/ResetPasswordForm";
+import { ResetPasswordForm } from "@/features/auth";
 
 const ResetPassword = () => {
   return (
@@ -16,12 +16,12 @@ const ResetPassword = () => {
         transition={{ delay: 0.1, duration: 0.3 }}
         className="flex flex-col items-center justify-center"
       >
-        <div className="flex flex-col justify-center items-center gap-2 mb-6 max-w-md md:max-w-sm">
+        <div className="mb-6 flex max-w-md flex-col items-center justify-center gap-2 md:max-w-sm">
           <img src="/images/logo.svg" alt="logo" className="w-20" />
-          <h1 className="font-semibold text-black text-xl text-center">
+          <h1 className="text-center text-xl font-semibold text-black">
             إعادة تعيين كلمة المرو
           </h1>
-          <p className="text-sm text-black/70 text-center leading-relaxed">
+          <p className="text-center text-sm leading-relaxed text-black/70">
             فضلاً، أدخل رمز التحقق الذي أرسلناه إلى بريدك الإلكتروني، واختر كلمة
             مرور جديدة لحسابك.
           </p>

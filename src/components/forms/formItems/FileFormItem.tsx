@@ -29,7 +29,7 @@ const FileFormItem = ({
       <FormLabel htmlFor={input.name}>
         {input.label}
         {isOptionalField(input.name) && (
-          <span className="text-xs text-muted-foreground"> (اختياري)</span>
+          <span className="text-muted-foreground text-xs"> (اختياري)</span>
         )}
       </FormLabel>
       <FormControl>
@@ -41,7 +41,7 @@ const FileFormItem = ({
             {...field}
             onChange={(e) => handleFileChange(e, field.onChange)}
             value={undefined}
-            className="cursor-pointer border-muted h-auto py-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 file:cursor-pointer"
+            className="border-muted file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 h-auto cursor-pointer py-3 file:mr-4 file:cursor-pointer file:rounded-full file:border-0 file:px-4 file:py-2 file:text-sm file:font-semibold"
           />
         </div>
       </FormControl>

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "@/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,6 @@ import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import { motion } from "framer-motion";
 import handleResErr from "@/utils/handleResponseError";
-import { useEffect } from "react";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
@@ -36,74 +35,6 @@ const CreatePatientBooking = () => {
 
   const token = cookieServices.getToken()!;
 
-  // State
-  const [clinicId, setClinicId] = useState<string>("");
-  const [doctorId, setDoctorId] = useState<string>("");
-  const [workingDayId, setWorkingDayId] = useState<string>("");
-  const [bookingDate, setBookingDate] = useState<string>("");
-
-  // Get data from api
-  const { data: clinics } = useGetAllClinics({
-    token,
-    filter: {
-      status: "1",
-    },
-  });
-
-  const { data: doctors } = useGetAllClinicDoctors({
-    token,
-    clinic_id: clinicId!,
-  });
-
-  const { data: workingDays } = useGetAllWorkingDays({
-    doctorId: doctorId!,
-    token,
-  });
-
-  const { data: doctorActions } = useGetDoctorActions({
-    doctorId: doctorId!,
-    token,
-  });
-
-  const { data: availableTimes } = useGetAvailableBookingsTime({
-    token,
-    doctor_id: doctorId,
-    working_day_id: workingDayId,
-    clinic_id: clinicId,
-    booking_date: bookingDate,
-  });
-
-  // Create options from data to add it in select with label and value
-  const doctorActionsOptions = doctorActions?.data?.map((action) => ({
-    value: action.id.toString(),
-    label: `${action.name} - ${numberToPrice(action.price)}`,
-  }));
-
-  const doctorsOptions = doctors?.data?.map((doctor) => ({
-    value: doctor.id.toString(),
-    label: doctor.name,
-  }));
-
-  const clinicsOptions = clinics?.data?.map((clinic) => ({
-    label: clinic.name,
-    value: clinic.id.toString(),
-  }));
-
-  const workingDaysOptions = workingDays?.data?.map((day) => ({
-    label: `${convertDay(day.day, "en")} بداية من ${day.start_at} الي ${
-      day.end_at
-    }`,
-    value: day.id.toString(),
-  }));
-
-  const allowedDay = workingDays?.data.find(
-    (day) => day.id.toString() === workingDayId
-  );
-
-  // Create booking
-  const { mutateAsync: createPatientBooking, isPending } =
-    useCreatePatientBooking();
-
   const form = useForm<z.infer<typeof patientBookingSchema>>({
     resolver: zodResolver(patientBookingSchema),
     defaultValues: {
@@ -116,51 +47,107 @@ const CreatePatientBooking = () => {
     },
   });
 
+  // Watch the fields that drive cascading logic
+  const clinicId = useWatch({ control: form.control, name: "clinic_id" });
+  const doctorId = useWatch({ control: form.control, name: "doctor_id" });
+  const workingDayId = useWatch({
+    control: form.control,
+    name: "working_day_id",
+  });
+  const date = useWatch({ control: form.control, name: "date" });
+
+  // Fetch dependent data using watched values
+  const { data: clinics } = useGetAllClinics({
+    token,
+    filter: { status: "1" },
+  });
+
+  const { data: doctors } = useGetAllClinicDoctors({
+    token,
+    clinic_id: clinicId,
+  });
+
+  const { data: workingDays } = useGetAllWorkingDays({
+    doctorId: doctorId,
+    token,
+  });
+
+  const { data: doctorActions } = useGetDoctorActions({
+    doctorId: doctorId,
+    token,
+  });
+
+  const { data: availableTimes } = useGetAvailableBookingsTime({
+    token,
+    doctor_id: doctorId,
+    working_day_id: workingDayId,
+    clinic_id: clinicId,
+    booking_date: date,
+  });
+
+  // Prepare options (safe fallback to empty array)
+  const clinicsOptions =
+    clinics?.data?.map((clinic) => ({
+      label: clinic.name,
+      value: clinic.id.toString(),
+    })) ?? [];
+
+  const doctorsOptions =
+    doctors?.data?.map((doctor) => ({
+      value: doctor.id.toString(),
+      label: doctor.name,
+    })) ?? [];
+
+  const workingDaysOptions =
+    workingDays?.data?.map((day) => ({
+      label: `${convertDay(day.day, "en")} بداية من ${day.start_at} الي ${day.end_at}`,
+      value: day.id.toString(),
+    })) ?? [];
+
+  const doctorActionsOptions =
+    doctorActions?.data?.map((action) => ({
+      value: action.id.toString(),
+      label: `${action.name} - ${numberToPrice(action.price)}`,
+    })) ?? [];
+
+  const allowedDay =
+    workingDays?.data?.find((day) => day.id.toString() === workingDayId)?.day ??
+    "";
+
+  // Cascading reset logic — reactive to watched values
   useEffect(() => {
-    const subscription = form.watch((value, { name }) => {
-      if (name === "clinic_id") {
-        const clinicValue = value.clinic_id as string;
-        setClinicId(clinicValue);
-        // Reset values when change clinic
-        form.setValue("doctor_id", "");
-        form.setValue("working_day_id", "");
-        form.setValue("doctor_action_id", "");
-        form.setValue("date", "");
-        form.setValue("start_at", "");
-        setDoctorId("");
-        setWorkingDayId("");
-      }
+    if (!clinicId) return;
+    form.setValue("doctor_id", "");
+    form.setValue("working_day_id", "");
+    form.setValue("doctor_action_id", "");
+    form.setValue("date", "");
+    form.setValue("start_at", "");
+  }, [clinicId, form]);
 
-      if (name === "doctor_id") {
-        const doctorValue = value.doctor_id as string;
-        form.setValue("working_day_id", "");
-        form.setValue("doctor_action_id", "");
-        form.setValue("date", "");
-        form.setValue("start_at", "");
-        setWorkingDayId("");
-        setDoctorId(doctorValue);
-      }
+  useEffect(() => {
+    if (!doctorId) return;
+    form.setValue("working_day_id", "");
+    form.setValue("doctor_action_id", "");
+    form.setValue("date", "");
+    form.setValue("start_at", "");
+  }, [doctorId, form]);
 
-      if (name === "working_day_id") {
-        const workingDayValue = value.working_day_id as string;
-        form.setValue("date", "");
-        form.setValue("start_at", "");
-        setWorkingDayId(workingDayValue);
-      }
+  useEffect(() => {
+    if (!workingDayId) return;
+    form.setValue("date", "");
+    form.setValue("start_at", "");
+  }, [workingDayId, form]);
 
-      if (name === "date") {
-        form.setValue("start_at", "");
-        const dateValue = value.date;
-        setBookingDate(dateValue!);
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [form]);
+  useEffect(() => {
+    if (!date) return;
+    form.setValue("start_at", "");
+  }, [date, form]);
+
+  const { mutateAsync: createPatientBooking, isPending } =
+    useCreatePatientBooking();
 
   const onSubmit = async (data: z.infer<typeof patientBookingSchema>) => {
     try {
-      // Create Booking
-
       const { status, message } = await createPatientBooking({
         booking: {
           clinic_id: data.clinic_id,
@@ -172,43 +159,27 @@ const CreatePatientBooking = () => {
         },
         token,
       });
-      // ! Create failed
+
       if (!status) return toast.error(message);
-      // * Create Success
+
       toast.success(message);
-      handleResetFrom();
+      form.reset();
+      setIsOpen(false);
     } catch (error) {
       handleResErr(error);
     }
   };
 
-  const handleResetFrom = () => {
-    form.reset({
-      clinic_id: "",
-      doctor_id: "",
-      doctor_action_id: "",
-      working_day_id: "",
-      start_at: "",
-      date: "",
-    });
-    setClinicId("");
-    form.setValue("doctor_id", "");
-    form.setValue("working_day_id", "");
-    form.setValue("start_at", "");
-    setWorkingDayId("");
-    setBookingDate("");
-    setDoctorId("");
-  };
-
   const handleCloseModal = () => {
     setIsOpen(false);
-    handleResetFrom();
+    form.reset();
   };
+
   return (
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-auto py-3"
+        className="flex h-auto items-center gap-2 py-3"
       >
         إضافة حجز جديد
         <FiPlus size={20} />
@@ -218,9 +189,7 @@ const CreatePatientBooking = () => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="إضافة حجز جديد"
-        description={{
-          text: "يمكنك اضافة حجز جديد من هنا",
-        }}
+        description={{ text: "يمكنك اضافة حجز جديد من هنا" }}
         showFooter={false}
       >
         <Form {...form}>
@@ -232,48 +201,46 @@ const CreatePatientBooking = () => {
             className="space-y-6 text-black dark:text-white"
           >
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 md:gap-y-5 dark:text-white"
+              className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2 md:gap-y-5 dark:text-white"
               variants={containerVariants}
             >
-              {PATIENT_BOOKING_FORM_INPUTS.map((input, idx) => {
-                return (
-                  <motion.div
-                    key={input.name}
-                    custom={idx}
-                    variants={itemVariants}
-                  >
-                    <RenderPatientBookingFormFields
-                      input={input}
-                      form={form as unknown as UseFormReturn}
-                      schema={patientBookingSchema}
-                      options={{
-                        clinicsOptions: clinicsOptions!,
-                        workingDaysOptions: workingDaysOptions!,
-                        doctorsOptions: doctorsOptions!,
-                        doctorActionsOptions: doctorActionsOptions!,
-                      }}
-                      availableTimes={availableTimes?.data || []}
-                      allowedDay={allowedDay ? allowedDay.day : ""}
-                    />
-                  </motion.div>
-                );
-              })}
+              {PATIENT_BOOKING_FORM_INPUTS.map((input, idx) => (
+                <motion.div
+                  key={input.name}
+                  custom={idx}
+                  variants={itemVariants}
+                >
+                  <RenderPatientBookingFormFields
+                    input={input}
+                    form={form}
+                    schema={patientBookingSchema}
+                    options={{
+                      clinicsOptions,
+                      workingDaysOptions,
+                      doctorsOptions,
+                      doctorActionsOptions,
+                    }}
+                    availableTimes={availableTimes?.data || []}
+                    allowedDay={allowedDay}
+                  />
+                </motion.div>
+              ))}
             </motion.div>
 
-            <AlertDialogFooter className="text-start justify-start! gap-2">
+            <AlertDialogFooter className="justify-start gap-2 text-start">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
+                className="h-auto py-2.5 text-black dark:text-white"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-2.5 h-auto"
+                className="h-auto py-2.5"
               >
                 إضافة حجز
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>

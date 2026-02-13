@@ -8,7 +8,7 @@ import CardSkeleton from "@/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 const CategoriesList = () => {
   const token = cookieServices.getToken()!;
@@ -44,13 +44,13 @@ const CategoriesList = () => {
       {isLoading ? (
         <CardSkeleton />
       ) : !categories?.data?.length ? (
-        <p className="text-center text-muted-foreground py-3">
+        <p className="text-muted-foreground py-3 text-center">
           لا يوجد تصنيفات
         </p>
       ) : (
         <motion.div
           variants={containerVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
           {categories?.data?.map((category, idx) => (
             <motion.div key={category.id} variants={itemVariants} custom={idx}>

@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import useHasPermission from "@/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import useDebounce from "@/hooks/useDebounce";
 
 const DosagesTable = () => {

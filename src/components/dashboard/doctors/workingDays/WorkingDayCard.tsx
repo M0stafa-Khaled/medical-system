@@ -7,7 +7,7 @@ import { Clock, Users, Hospital, Calendar, Pen } from "lucide-react";
 import convertDay, { convertDayFromEnToAr } from "@/utils/convertDayLang";
 import InfoField from "../../../shared/InfoField";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 interface IProps {
   day: IWorkingDay;
@@ -21,48 +21,48 @@ const WorkingDayCard = ({
   const canUpdateAction = useHasPermission(PERMISSIONS.UPDATE_ACTION_DOCTOR);
 
   return (
-    <Card className="border-muted bg-background dark:bg-dark hover:shadow-lg transition-shadow duration-300">
+    <Card className="border-muted bg-background dark:bg-dark transition-shadow duration-300 hover:shadow-lg">
       <div>
         <CardHeader className="p-4">
-          <CardTitle className="text-lg text-black dark:text-white wrap-break-word break-all flex flex-row justify-between items-center gap-2">
-            <h2 className="flex justify-center items-center gap-2">
-              <Calendar className="w-5 h-5" />
+          <CardTitle className="flex flex-row items-center justify-between gap-2 text-lg wrap-break-word break-all text-black dark:text-white">
+            <h2 className="flex items-center justify-center gap-2">
+              <Calendar className="h-5 w-5" />
               {convertDayFromEnToAr(day)}
             </h2>
-            <h3 className="flex justify-center items-center gap-2 font-medium">
-              <Hospital className="w-4 h-4" />
+            <h3 className="flex items-center justify-center gap-2 font-medium">
+              <Hospital className="h-4 w-4" />
               <span>{clinic.name}</span>
             </h3>
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-4 pt-0 space-y-3">
+        <CardContent className="space-y-3 p-4 pt-0">
           <InfoField
             label="وقت العمل"
             value={`من ${start_at} إلى ${end_at}`}
-            icon={<Clock className="w-4 h-4 shrink-0" />}
+            icon={<Clock className="h-4 w-4 shrink-0" />}
           />
           <InfoField
             label="مدة الكشف"
             value={`${deuration} دقيقة`}
-            icon={<Calendar className="w-4 h-4" />}
+            icon={<Calendar className="h-4 w-4" />}
           />
           <InfoField
             label="الحد الأقصى"
             value={`${max_visitors} أشخاص`}
-            icon={<Users className="w-4 h-4" />}
+            icon={<Users className="h-4 w-4" />}
           />
         </CardContent>
       </div>
       {(canDeleteAction || canUpdateAction) && (
-        <div className="flex px-4 gap-2 mb-3">
+        <div className="mb-3 flex gap-2 px-4">
           {canDeleteAction && (
             <DeleteWorkingDay id={id} name={convertDay(day, "en")} />
           )}
           {canUpdateAction && (
-            <Button className="h-auto py-0 px-0 bg-blue-600 hover:bg-blue-700 text-white gap-2 text-sm">
+            <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700">
               <Link
                 to={`/dashboard/doctors/${doctorId}/working-days/${id}/update`}
-                className="flex justify-center items-center gap-2 py-1 px-1 w-9 h-9"
+                className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1"
               >
                 <Pen size={20} />
               </Link>

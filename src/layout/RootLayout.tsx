@@ -11,7 +11,7 @@ import {
   ScrollRestoration,
   useLocation,
   useNavigate,
-} from "react-router-dom";
+} from "react-router";
 import { toast } from "react-toastify";
 import { useGetNotifications } from "@/lib/react-query/notifications/notifications";
 import { setNotifications } from "@/store/features/notifications/notificationSlice";

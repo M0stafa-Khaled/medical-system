@@ -1,7 +1,7 @@
 import cookieServices from "@/utils/cookieServices";
 import AnalyticsChart from "../../../shared/charts/ChartsCard";
 import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import ChartDate from "../../../shared/charts/ChartDate";
 
 import { useGetEmployeeTreasuriesChart } from "@/lib/react-query/dashboard/charts/employeeCharts";
@@ -56,16 +56,16 @@ const EmployeeTreasuriesChart = () => {
   const handleFilterChange = (key: string, value: string | null) =>
     setFilters({ ...filters, [key]: value });
   return (
-    <div className="space-y-5 bg-[#fff] dark:bg-dark py-6 px-3 md:p-6 rounded-xl shadow-md">
-      <h2 className="text-dark dark:text-white font-semibold text-center md:text-start md:text-=lg">
+    <div className="dark:bg-dark space-y-5 rounded-xl bg-white px-3 py-6 shadow-md md:p-6">
+      <h2 className="text-dark md:text-=lg text-center font-semibold md:text-start dark:text-white">
         إحصائيات الخزينة
       </h2>
       {isLoading ? (
-        <div className="flex items-center justify-center w-full h-48">
+        <div className="flex h-48 w-full items-center justify-center">
           <DataLoader />
         </div>
       ) : !analyticsData?.status ? (
-        <div className="flex items-center justify-center w-full h-48">
+        <div className="flex h-48 w-full items-center justify-center">
           <p className="text-center text-lg text-gray-500 dark:text-gray-400">
             {analyticsFailure?.response?.data.message ||
               "لا توجد بيانات متاحة في الوقت الحالي"}
@@ -73,7 +73,7 @@ const EmployeeTreasuriesChart = () => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 lg:gap-x-10">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:gap-x-10">
             <ChartDate
               value={filters.treasury_start_at}
               onChange={(date) => handleFilterChange("treasury_start_at", date)}

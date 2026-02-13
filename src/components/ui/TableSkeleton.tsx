@@ -47,9 +47,7 @@ const TableSkeleton = ({
       animate="visible"
       custom={idx}
       variants={tableSkeletonVariants}
-      className={`dark:border-muted bg-white/20 dark:bg-dark/40 dark:hover:bg-dark transition-all duration-300 ${
-        !hasImage ? "h-14" : ""
-      }`}
+      className={`${!hasImage ? "h-14" : ""}`}
     >
       <SkeletonCell />
       {hasImage && <SkeletonImageCell />}

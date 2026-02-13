@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 
 interface Searchable {
   name: string;
@@ -6,21 +6,18 @@ interface Searchable {
 
 export const useSearch = <T extends Searchable>(items: T[] = []) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredItems, setFilteredItems] = useState<T[]>(items);
 
-  const memoizedItems = useMemo(() => items, [items]);
+  const filteredItems = useMemo(() => {
+    if (!searchTerm.trim()) {
+      return items;
+    }
 
-  useEffect(() => {
-    if (!items.length) return;
+    const lowerSearch = searchTerm.trim().toLowerCase();
 
-    if (!searchTerm) return setFilteredItems(items);
-
-    const results = memoizedItems.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+    return items.filter((item) =>
+      item.name.toLowerCase().includes(lowerSearch)
     );
-
-    setFilteredItems(results);
-  }, [searchTerm, memoizedItems, items]);
+  }, [items, searchTerm]);
 
   return { filteredItems, searchTerm, setSearchTerm };
 };

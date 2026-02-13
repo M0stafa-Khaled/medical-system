@@ -46,11 +46,12 @@ const MultiSelectFormItem = ({
   const [searchValue, setSearchValue] = useState<string>("");
 
   const filteredOptions = useMemo<IOption[]>(() => {
-    if (!searchValue) return options;
-    return options.filter((option) =>
-      option.label.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    return options.filter((option) => {
+      return option.label.toLowerCase().includes(searchValue);
+    });
   }, [options, searchValue]);
+
+  console.log("search: ", searchValue, ": ", filteredOptions);
 
   const handleSelect = (value: string) => {
     const currentValues: string[] = Array.isArray(field.value)
@@ -68,7 +69,7 @@ const MultiSelectFormItem = ({
       <FormLabel htmlFor={input.name} className="text-nowrap">
         {input.label}
         {isOptionalField && isOptionalField(input.name) && (
-          <span className="text-xs text-muted-foreground"> (اختياري)</span>
+          <span className="text-muted-foreground text-xs"> (اختياري)</span>
         )}
       </FormLabel>
       <FormControl>
@@ -79,7 +80,7 @@ const MultiSelectFormItem = ({
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="relative border-muted text-black dark:text-white w-full min-h-12! h-auto! overflow-hidden flex justify-start items-center flex-wrap gap-1 pl-8! capitalize"
+              className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted relative flex h-auto min-h-11! w-full flex-wrap items-center justify-start gap-1 overflow-hidden pl-8! text-black hover:text-black dark:text-white dark:hover:text-white`}
             >
               {field.value &&
               Array.isArray(field.value) &&
@@ -87,36 +88,38 @@ const MultiSelectFormItem = ({
                 ? field.value.map((item, idx: number) => (
                     <span
                       key={idx}
-                      className="text-sm text-black dark:text-white px-2 py-1 rounded-full bg-blue-400/20"
+                      className="rounded-full bg-blue-400/20 px-2 py-1 text-sm text-black dark:text-white"
                     >
-                      {options.find((option) => option.value === item)?.label}
+                      {options
+                        .find((option) => option.value === item)
+                        ?.label.split("-")
+                        .join(" ")}
                     </span>
                   ))
                 : `اختر ${input.label}...`}
-              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50 absolute top-1/2 -translate-y-1/2 left-3" />
+              <ChevronsUpDown className="absolute top-1/2 left-3 ml-2 h-4 w-4 shrink-0 -translate-y-1/2 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent
             id={input.name}
-            className="w-[300px] sm:w-[400px] md:w-[370px] p-0 z-1000 border-none border-black/20 dark:border-white/40"
+            className="z-1000 w-75 p-0 sm:w-100 md:w-92.5"
           >
-            <Command
-              id={input.name}
-              className="text-black dark:text-white bg-foreground border border-black/20 dark:border-white/40"
-            >
+            <Command id={input.name} className="bg-background">
               <CommandInput
                 placeholder="ابحث ..."
                 value={searchValue}
                 onValueChange={setSearchValue}
               />
               <CommandList id={input.name}>
-                <CommandEmpty>لا يوجد</CommandEmpty>
+                {filteredOptions.length === 0 && (
+                  <CommandEmpty id={input.name}>لا يوجد نتائج</CommandEmpty>
+                )}
                 <CommandGroup id={input.name}>
                   {filteredOptions.map((option) => (
                     <CommandItem
                       key={option.value}
-                      className="py-2.5 cursor-pointer text-sm text-black dark:text-white hover:bg-blue-200/20 text-[13px]"
-                      value={option.value}
+                      className="cursor-pointer py-2.5 text-sm text-[13px] text-black hover:bg-blue-200/20 dark:text-white"
+                      value={option.label}
                       onSelect={() => handleSelect(option.value)}
                     >
                       <Check
@@ -127,7 +130,7 @@ const MultiSelectFormItem = ({
                             : "opacity-0"
                         )}
                       />
-                      {option.label}
+                      {option.label.split("-").join(" ")}
                     </CommandItem>
                   ))}
                 </CommandGroup>

@@ -16,11 +16,11 @@ interface IProps {
 
 const InputFormItem = ({ input, field, isOptionalField }: IProps) => {
   return (
-    <FormItem>
+    <FormItem className="flex w-full flex-col">
       <FormLabel htmlFor={input.name}>
         {input.label}
         {isOptionalField && isOptionalField(input.name) && (
-          <span className="text-xs text-muted-foreground"> (اختياري)</span>
+          <span className="text-muted-foreground text-xs"> (اختياري)</span>
         )}
       </FormLabel>
       <FormControl>
@@ -33,7 +33,7 @@ const InputFormItem = ({ input, field, isOptionalField }: IProps) => {
           min={0}
           onChange={(e) => field.onChange(e.target.value)}
           value={field.value as string | undefined}
-          className="border-muted py-3 placeholder:h-14 h-auto text-black dark:text-white placeholder:text-muted-foreground placeholder:text-sm"
+          className="border-muted placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm"
         />
       </FormControl>
       <FormMessage />

@@ -1,0 +1,195 @@
+import { DoctorClinics } from "@/features/profile";
+import { EmployeePermissions } from "@/features/profile";
+import { ProfileInfoField } from "@/features/profile";
+import DataLoader from "@/components/ui/DataLoader";
+import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
+import { IEmployee } from "@/interfaces/dashboard/employee";
+import { IPatient } from "@/interfaces/dashboard/patient";
+import { format } from "date-fns";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+import { containerVariants, itemVariants } from "@/animations";
+import ImageModal from "@/components/shared/ImageModal";
+import { Button } from "@/components/ui/button";
+import { ProfileHeader } from "@/features/profile";
+import { TRole } from "@/types";
+import { useGetUserProfile } from "@/features/profile/queriesAndMutations";
+
+const Profile = () => {
+  const navigate = useNavigate();
+  const { data: userData, isLoading, isError } = useGetUserProfile();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("فشل في تحميل بيانات الملف الشخصى");
+      navigate("/dashboard/employees");
+      return;
+    }
+
+    if (!userData?.status && userData?.message) {
+      toast.error(userData?.message);
+      navigate("/dashboard/employees");
+      return;
+    }
+  }, [userData, isError, navigate]);
+
+  if (isLoading)
+    return (
+      <div className="container py-10">
+        <DataLoader />
+      </div>
+    );
+
+  const {
+    name,
+    first_phone,
+    second_phone,
+    personal_id,
+    gender,
+    created_at,
+    user,
+  } = userData?.data || {};
+
+  let patientData: Partial<IPatient> = {};
+  let doctorData: Partial<IDoctor> = {};
+  let employeeData: Partial<IEmployee> = {};
+
+  if (user?.role === "patient") {
+    const { another_name } = (userData?.data as IPatient) || {};
+
+    patientData = {
+      another_name,
+    };
+  } else if (user?.role === "doctor") {
+    const { commission, signature, register_id, clinics, image } =
+      (userData?.data as IDoctor) || {};
+    doctorData = { commission, signature, register_id, clinics, image };
+  } else {
+    const { job, salary, permissions, treasury, image } =
+      (userData?.data as IEmployee) || {};
+    employeeData = { job, salary, permissions, treasury, image };
+  }
+
+  const image =
+    user?.role === "admin" || user?.role === "employee"
+      ? employeeData.image
+      : user?.role === "doctor"
+        ? doctorData.image
+        : "/images/avatar.svg";
+
+  return (
+    <motion.section
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="dark:bg-background min-h-screen bg-[#e8f2fc] pt-20 pb-10 text-white"
+    >
+      <div className="container max-w-7xl space-y-4 text-black dark:text-white">
+        {/* Header */}
+        <ProfileHeader
+          name={name!}
+          role={user?.role as TRole}
+          firstPhone={first_phone!}
+          image={image!}
+        />
+        {/* information */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.3 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="dark:bg-dark overflow-hidden rounded-2xl bg-white p-4 shadow-md"
+        >
+          <motion.div
+            variants={containerVariants}
+            className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2"
+          >
+            {/* Patient Info */}
+            {user?.role === "patient" && (
+              <ProfileInfoField
+                label="اسم احد الاقارب"
+                value={patientData.another_name!}
+              />
+            )}
+
+            {/* Global Info */}
+
+            <ProfileInfoField label="رقم الهاتف الثاني" value={second_phone!} />
+            <ProfileInfoField
+              label="البريد الإلكتروني"
+              value={user?.email as string}
+              sm
+            />
+            <ProfileInfoField label="رقم الهوية" value={personal_id!} />
+            <ProfileInfoField
+              label="الجنس"
+              value={
+                gender === "Male" ? "ذكر" : gender === "Female" ? "انثى" : ""
+              }
+            />
+
+            {/* Employee Info */}
+            {(user?.role === "admin" || user?.role === "employee") && (
+              <>
+                <ProfileInfoField label="الوظيفة" value={employeeData.job!} />
+                <ProfileInfoField label="الراتب" value={employeeData.salary!} />
+                <ProfileInfoField
+                  label="الخزينة"
+                  value={employeeData.treasury?.name as string}
+                />
+              </>
+            )}
+
+            {/* Doctor Info */}
+            {user?.role === "doctor" && (
+              <>
+                <ProfileInfoField
+                  label="رقم القيد"
+                  value={doctorData.register_id!}
+                />
+                <ProfileInfoField
+                  label="العمولة"
+                  value={doctorData.commission!}
+                />
+                <motion.div
+                  variants={itemVariants}
+                  className="flex flex-col items-center justify-center gap-2 md:flex-row md:justify-start"
+                >
+                  <h5 className="text-muted-foreground font-medium text-nowrap">
+                    التوقيع:
+                  </h5>
+                  {doctorData.signature ? (
+                    <ImageModal
+                      src={doctorData.signature}
+                      alt="Signature"
+                      showThumbnail={false}
+                      trigger={<Button>عرض الصورة</Button>}
+                    />
+                  ) : (
+                    <p className="text-lg font-medium text-wrap">لا يوجد</p>
+                  )}
+                </motion.div>
+              </>
+            )}
+
+            <ProfileInfoField
+              label="تاريخ التسجيل"
+              value={format(created_at!, "dd / MM / yyyy")}
+            />
+          </motion.div>
+        </motion.div>
+        {/* Employee Permissions */}
+        {user?.role === "employee" && (
+          <EmployeePermissions permissions={employeeData.permissions || []} />
+        )}
+        {/* Doctor Clinics */}
+        {user?.role === "doctor" && (
+          <DoctorClinics clinics={doctorData?.clinics || []} />
+        )}
+      </div>
+    </motion.section>
+  );
+};
+
+export default Profile;

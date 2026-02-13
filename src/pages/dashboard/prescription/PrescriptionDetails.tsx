@@ -5,7 +5,7 @@ import cookieServices from "@/utils/cookieServices";
 import { User2, UserCircle2, Building2, Calendar, Pen } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import InfoField from "@/components/shared/InfoField";
@@ -16,7 +16,7 @@ import { AxiosResErr } from "@/types";
 import { useGetPrescriptionById } from "@/lib/react-query/dashboard/prescriptions";
 import DeletePrescription from "@/components/dashboard/prescriptions/DeletePrescription";
 import { FaNotesMedical } from "react-icons/fa6";
-import PrescriptablesList from "@/components/dashboard/prescriptions/prescriptables/PrescriptablesList";
+import PrescriptablesList from "@/components/dashboard/prescriptions/prescriptables/PrescriptibleList";
 
 const PrescriptionDetails = () => {
   const canUpdatePrescription = useHasPermission(
@@ -76,17 +76,17 @@ const PrescriptionDetails = () => {
               variants={itemVariants}
               className="flex items-center gap-4"
             >
-              <CardTitle className="flex items-center gap-2 text-dark dark:text-white">
-                <Calendar className="h-6 w-6 " />
+              <CardTitle className="text-dark flex items-center gap-2 dark:text-white">
+                <Calendar className="h-6 w-6" />
                 <span>تفاصيل الروشتة:</span>
               </CardTitle>
               <div className="flex gap-2">
                 {canUpdatePrescription && (
                   <motion.div variants={itemVariants}>
-                    <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
+                    <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700 dark:text-black">
                       <Link
                         to={`/dashboard/prescriptions/${id}/update`}
-                        className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
+                        className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1 text-white"
                       >
                         <Pen size={20} />
                       </Link>
@@ -107,13 +107,13 @@ const PrescriptionDetails = () => {
 
           <CardContent>
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-4 md:grid-cols-2"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link to={`/dashboard/patients/${patient?.id}`}>
                   <InfoField
-                    icon={<User2 className="h-5 w-5 text-primary" />}
+                    icon={<User2 className="text-primary h-5 w-5" />}
                     label="المريض"
                     value={patient?.name as string}
                   />
@@ -143,13 +143,13 @@ const PrescriptionDetails = () => {
               />
             </motion.div>
             <motion.div variants={itemVariants} className="mt-4 space-y-2">
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex shrink-0 items-center gap-2">
                 <FaNotesMedical className="h-5 w-5 text-purple-500" />
                 <h5 className="text-muted-foreground text-nowrap">ملاحظات:</h5>
               </div>
               <div className="mr-8">
                 <p
-                  className={`font-medium text-wrap text-dark dark:text-white`}
+                  className={`text-dark font-medium text-wrap dark:text-white`}
                 >
                   {note || "لا يوجد"}
                 </p>
@@ -158,8 +158,8 @@ const PrescriptionDetails = () => {
           </CardContent>
         </Card>
         {/* Prescriptables */}
-        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs mt-3">
-          <CardContent className="py-3 px-3">
+        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted mt-3 shadow-xs">
+          <CardContent className="px-3 py-3">
             <PrescriptablesList prescriptables={prescriptables!} />
           </CardContent>
         </Card>

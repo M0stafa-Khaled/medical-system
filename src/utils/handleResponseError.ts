@@ -7,7 +7,7 @@ const handleResErr = (error: any) => {
       error?.response?.data.errors[key].forEach((error: string) =>
         toast.error(error, {
           autoClose: 5000,
-        })
+        }),
       );
     });
   }

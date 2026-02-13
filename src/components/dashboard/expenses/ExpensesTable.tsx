@@ -3,7 +3,7 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import useDebounce from "@/hooks/useDebounce";
 import ExpensesTableHeader from "./ExpensesTableHeader";
 import ExpensesList from "./ExpensesList";

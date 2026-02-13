@@ -37,16 +37,10 @@ export const getEmployeeById = async ({
 
 export const deleteEmployee: ({
   id,
-  token,
 }: {
   id: number;
-  token: string;
-}) => Promise<IStatusMsg> = async ({ id, token }) => {
-  const { data } = await axiosAPI.delete(`/employees/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+}) => Promise<IStatusMsg> = async ({ id }) => {
+  const { data } = await axiosAPI.delete(`/employees/${id}`);
   return data;
 };
 

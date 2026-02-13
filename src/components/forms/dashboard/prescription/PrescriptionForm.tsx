@@ -18,21 +18,20 @@ import { IPrescription } from "@/interfaces/dashboard/prescription";
 import handleResErr from "@/utils/handleResponseError";
 import prescriptionSchema from "@/validations/dashboard/prescriptionSchema";
 import { TPrescriptableType } from "@/types";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { Delete } from "lucide-react";
 import SubmitButton from "@/components/shared/SubmitButton";
 import RenderPrescriptionFormFields from "./RenderPrescriptionFormFields";
 import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import cookieServices from "@/utils/cookieServices";
 import { useGetAllClinicDoctors } from "@/lib/react-query/main";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import {
   useCreatePrescription,
   useUpdatePrescription,
 } from "@/lib/react-query/dashboard/prescriptions";
 import Swal from "sweetalert2";
-
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
@@ -40,45 +39,17 @@ import SelectFormItem from "../../formItems/SelectFormItem";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";
+import { useWatch } from "react-hook-form";
 
 interface IProps {
   prescription?: IPrescription;
   action: "create" | "update";
 }
+
 const PrescriptionForm = ({ action, prescription }: IProps) => {
   const { bookingId } = useParams();
-  const [clinicId, setClinicId] = useState(
-    prescription?.clinic.id.toString() || ""
-  );
   const token = cookieServices.getToken()!;
   const navigate = useNavigate();
-  const { data: clinics } = useGetAllClinics({
-    token,
-    filter: {
-      status: "1",
-    },
-  });
-
-  const clinicsOptions = clinics?.data?.map((clinic) => ({
-    label: clinic.name,
-    value: clinic.id.toString(),
-  }));
-
-  const { data: doctors } = useGetAllClinicDoctors({
-    token,
-    clinic_id: clinicId && !bookingId ? clinicId : "",
-  });
-
-  const doctorsOptions = doctors?.data?.map((doctor) => ({
-    label: doctor.name,
-    value: doctor.id.toString(),
-  }));
-
-  const { data: dosages } = useGetAllDosages({ token });
-  const dosagesOptions = dosages?.data?.map((dosage) => ({
-    label: dosage.name,
-    value: dosage.name,
-  }));
 
   const form = useForm<z.infer<typeof prescriptionSchema>>({
     resolver: zodResolver(prescriptionSchema),
@@ -108,15 +79,65 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  // Watch clinic_id directly
+  const clinicId = useWatch({
     control: form.control,
-    name: "prescriptables",
+    name: "clinic_id",
   });
+
+  const { data: clinics } = useGetAllClinics({
+    token,
+    filter: {
+      status: "1",
+    },
+  });
+
+  const clinicsOptions =
+    clinics?.data?.map((clinic) => ({
+      label: clinic.name,
+      value: clinic.id.toString(),
+    })) ?? [];
+
+  // Use watched clinicId directly (skip query if empty or in booking mode)
+  const { data: doctors } = useGetAllClinicDoctors({
+    token,
+    clinic_id: clinicId && !bookingId ? clinicId : "",
+  });
+
+  const doctorsOptions =
+    doctors?.data?.map((doctor) => ({
+      label: doctor.name,
+      value: doctor.id.toString(),
+    })) ?? [];
+
+  const { data: dosages } = useGetAllDosages({ token });
+  const dosagesOptions =
+    dosages?.data?.map((dosage) => ({
+      label: dosage.name,
+      value: dosage.name,
+    })) ?? [];
 
   const { mutateAsync: createPrescription, isPending: isLoadingCreate } =
     useCreatePrescription();
   const { mutateAsync: updatePrescription, isPending: isLoadingUpdate } =
     useUpdatePrescription();
+
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "prescriptables",
+  });
+
+  const prescriptableTypes = useWatch({
+    control: form.control,
+    name: fields.map((_, i) => `prescriptables.${i}.type` as const),
+  }) as (TPrescriptableType | undefined)[];
+
+  // Reset doctor_id when clinic changes
+  useEffect(() => {
+    if (clinicId) {
+      form.setValue("doctor_id", "");
+    }
+  }, [clinicId, form]);
 
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
     if (
@@ -137,12 +158,13 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
           id: prescription?.id.toString() || "",
         });
 
-        if (!status)
+        if (!status) {
           return Swal.fire({
             icon: "error",
             title: "فشل",
             text: message,
           });
+        }
 
         Swal.fire({
           icon: "success",
@@ -160,12 +182,13 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
           },
         });
 
-        if (!status)
+        if (!status) {
           return Swal.fire({
             icon: "error",
             title: "فشل",
             text: message,
           });
+        }
 
         Swal.fire({
           icon: "success",
@@ -181,19 +204,6 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
     }
   };
 
-  useEffect(() => {
-    const subscription = form.watch((value, { name }) => {
-      if (name === "clinic_id") {
-        const clinicValue = value.clinic_id as string;
-        setClinicId(clinicValue);
-        // Reset values when change clinic
-        form.setValue("doctor_id", "");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [form]);
-
   return (
     <FormProvider {...form}>
       <motion.form
@@ -204,7 +214,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
           variants={containerVariants}
         >
           {PRESCRIPTIONS_INPUTS.map((input) => {
@@ -215,6 +225,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                 input.name === "clinic_id")
             )
               return null;
+
             return (
               <motion.div
                 variants={itemVariants}
@@ -226,27 +237,26 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                   input={input}
                   schema={prescriptionSchema}
                   options={{
-                    clinics: clinicsOptions!,
-                    doctors: doctorsOptions!,
+                    clinics: clinicsOptions,
+                    doctors: doctorsOptions,
                   }}
                 />
               </motion.div>
             );
           })}
         </motion.div>
+
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
           variants={containerVariants}
         >
           {fields.map((field, idx) => {
-            const type = form.watch(
-              `prescriptables.${idx}.type` as "prescriptables"
-            ) as unknown as TPrescriptableType;
+            const type = prescriptableTypes[idx] ?? "dosage";
 
             return (
               <motion.div
                 key={`${field.id}-${type}`}
-                className="space-y-3 border border-primary/10 hover:border-primary/30 transition-all duration-500 ease-in-out p-4 rounded-lg"
+                className="border-primary/10 hover:border-primary/30 space-y-3 rounded-lg border p-4 transition-all duration-500 ease-in-out"
                 custom={idx}
                 variants={itemVariants}
               >
@@ -263,8 +273,8 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                               type === "scan"
                                 ? "scan"
                                 : type === "analysis"
-                                ? "analysis"
-                                : "dosage",
+                                  ? "analysis"
+                                  : "dosage",
                             label: "نوع الروشتة",
                             type: "select",
                           }}
@@ -281,8 +291,8 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                     {type === "scan"
                       ? "اسم الإشعة"
                       : type === "analysis"
-                      ? "اسم التحليل"
-                      : "اسم الدواء"}
+                        ? "اسم التحليل"
+                        : "اسم الدواء"}
                   </FormLabel>
                   <FormControl>
                     <Controller
@@ -341,7 +351,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                         render={({ field }) => (
                           <SelectFormItem
                             field={field}
-                            options={dosagesOptions!}
+                            options={dosagesOptions}
                             input={{
                               name: "name",
                               label: "اسم الجرعة",
@@ -364,7 +374,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
                   type="button"
                   variant="destructive"
                   onClick={() => remove(idx)}
-                  className="w-full flex justify-center items-center gap-2"
+                  className="flex w-full items-center justify-center gap-2"
                 >
                   حذف
                   <Delete size={18} />
@@ -373,18 +383,21 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
             );
           })}
         </motion.div>
+
         <FormMessage>
           {form.formState.errors.prescriptables?.message ||
             form.formState.errors.prescriptables?.root?.message}
         </FormMessage>
-        <div className="flex flex-col md:flex-row gap-4">
+
+        <div className="flex flex-col gap-4 md:flex-row">
           <Button
             type="button"
             onClick={() => append({ type: "dosage", name: "", drug_name: "" })}
-            className="py-6 w-full md:w-fit text-white bg-blue-600 hover:bg-blue-700"
+            className="w-full bg-blue-600 py-6 text-white hover:bg-blue-700 md:w-fit"
           >
             إضافة عنصر جديد
           </Button>
+
           <SubmitButton
             action={action}
             isLoadingCreate={isLoadingCreate}

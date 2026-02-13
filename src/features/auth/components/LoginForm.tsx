@@ -1,0 +1,108 @@
+import { login } from "@/store/features/auth/authSlice";
+import { setPermissions } from "@/store/features/permissions/permissionsSlice";
+import { Form } from "@/components/ui/form";
+import { LOGIN_FORM_INPUTS } from "@/constants";
+import { useLogin } from "@/features/auth/queriesAndMutations";
+import { loginSchema } from "../schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { z } from "zod";
+import { Loader2 } from "lucide-react";
+import { Link, useNavigate } from "react-router";
+import { Button } from "@/components/ui/button";
+import handleResErr from "@/utils/handleResponseError";
+import Swal from "sweetalert2";
+import { RenderAuthFormFields } from "./RenderAuthFormFields";
+
+export const LoginForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { mutateAsync: loginUser, isPending } = useLogin();
+
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "eslame.elgohary2@gmail.com",
+      password: "eslame@345",
+    },
+  });
+  const onSubmit = async ({ email, password }: z.infer<typeof loginSchema>) => {
+    try {
+      const { status, message, data } = await loginUser({
+        email,
+        password,
+      });
+
+      // ! Login failed
+      if (!status)
+        return Swal.fire({
+          icon: "error",
+          title: "خطأ",
+          text: message,
+        });
+
+      // * Login Success
+      dispatch(
+        login({
+          token: data.token,
+          user: data,
+        })
+      );
+
+      window.location.reload();
+      if (data.role === "admin" || data.role === "employee")
+        return navigate("/dashboard");
+      if (data.role === "patient") navigate("/bookings");
+      if (data.role === "doctor") navigate("/doctor");
+
+      // Permissions
+      if (data.role !== "patient") dispatch(setPermissions(data.permissions));
+
+      return Swal.fire({
+        icon: "success",
+        title: "تم تسجيل الدخول بنجاح",
+        text: "يمكنك الآن المتابعة",
+      });
+    } catch (error) {
+      handleResErr(error);
+    }
+  };
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full max-w-md space-y-3 lg:max-w-full"
+      >
+        <div>
+          <div className="space-y-4">
+            {LOGIN_FORM_INPUTS.map((input) => (
+              <div className="w-full" key={input.name}>
+                <RenderAuthFormFields
+                  form={form}
+                  input={input}
+                  schema={loginSchema}
+                />
+              </div>
+            ))}
+          </div>
+          <p className="mt-1 mr-2">
+            <Link
+              to={"/forgot-password"}
+              className="text-sm text-black underline"
+            >
+              هل نسيت كلمة المرور؟
+            </Link>
+          </p>
+        </div>
+        <Button
+          disabled={isPending}
+          className="flex h-auto w-full items-center justify-center gap-4 bg-[#16a0cf] px-4 py-3.5 text-white hover:bg-[#16a0cf]/90"
+        >
+          تسجيل الدخول
+          {isPending && <Loader2 className="animate-spin" />}
+        </Button>
+      </form>
+    </Form>
+  );
+};

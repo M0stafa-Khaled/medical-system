@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import InfoField from "@/components/shared/InfoField";
@@ -92,10 +92,10 @@ const BookingDetails = () => {
           <CardHeader className="py-4">
             <motion.div
               variants={itemVariants}
-              className="flex flex-col items-start sm:items-center sm:flex-row gap-4"
+              className="flex flex-col items-start gap-4 sm:flex-row sm:items-center"
             >
-              <CardTitle className="flex items-center gap-2 text-dark dark:text-white">
-                <Calendar className="h-6 w-6 " />
+              <CardTitle className="text-dark flex items-center gap-2 dark:text-white">
+                <Calendar className="h-6 w-6" />
                 <span>تفاصيل الحجز:</span>
               </CardTitle>
               <div className="flex gap-2">
@@ -103,10 +103,10 @@ const BookingDetails = () => {
                   status !== "collected" &&
                   status !== "completed" && (
                     <motion.div variants={itemVariants}>
-                      <Button className="h-auto py-0 px-0 bg-primary text-white dark:text-black gap-2 text-sm bg-blue-600 hover:bg-blue-700">
+                      <Button className="bg-primary h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700 dark:text-black">
                         <Link
                           to={`/dashboard/bookings/${booking?.data.id}/update`}
-                          className="flex justify-center items-center gap-2 py-1 px-1 h-9 w-9 text-white"
+                          className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1 text-white"
                         >
                           <Pen size={20} />
                         </Link>
@@ -127,13 +127,13 @@ const BookingDetails = () => {
 
           <CardContent>
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-4 md:grid-cols-2"
               variants={containerVariants}
             >
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link to={`/dashboard/patients/${patient?.id}`}>
                   <InfoField
-                    icon={<User2 className="h-5 w-5 text-primary" />}
+                    icon={<User2 className="text-primary h-5 w-5" />}
                     label="المريض"
                     value={patient?.name as string}
                   />
@@ -223,7 +223,7 @@ const BookingDetails = () => {
                     <CheckCheck className="h-5 w-5 text-green-500" />
                   </div>
                   <div className="flex items-center gap-2">
-                    <h5 className="text-sm text-muted-foreground text-nowrap">
+                    <h5 className="text-muted-foreground text-sm text-nowrap">
                       الحالة:
                     </h5>
                     <UpdateBookingStatus booking={booking?.data as IBooking} />

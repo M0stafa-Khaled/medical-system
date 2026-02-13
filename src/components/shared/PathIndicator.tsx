@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -37,7 +37,7 @@ const PathIndicator = ({ routeNames }: IProps) => {
             const routeTo = `/${cumulativePaths[index]}`;
             return (
               <Fragment key={`${name}-${index}`}>
-                <BreadcrumbItem className="text-black dark:text-white! text-sm!">
+                <BreadcrumbItem className="text-sm! text-black dark:text-white!">
                   {isLast ? (
                     <BreadcrumbPage className="text-black! dark:text-white!">
                       {arabicName}

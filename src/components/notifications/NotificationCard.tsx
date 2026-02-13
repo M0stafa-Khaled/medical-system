@@ -3,7 +3,7 @@ import { useReadNotification } from "@/lib/react-query/notifications/notificatio
 import cookieServices from "@/utils/cookieServices";
 import { getTimeAgo } from "@/utils/getTimeAgo";
 import handleResErr from "@/utils/handleResponseError";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 interface IProps {
   notification: INotification;
@@ -24,9 +24,9 @@ const NotificationCard = ({ notification }: IProps) => {
 
   return (
     <div
-      className={`p-3 border-b border-primary/10 ${
+      className={`border-primary/10 border-b p-3 ${
         notification.last_view
-          ? "bg-[#fff] dark:bg-dark"
+          ? "dark:bg-dark bg-white"
           : "bg-[#eae8ec] dark:bg-slate-900/90"
       }`}
     >
@@ -38,57 +38,57 @@ const NotificationCard = ({ notification }: IProps) => {
               alt={notification.data.sender.name}
               width={40}
               height={40}
-              className="object-cover rounded-full"
+              className="rounded-full object-cover"
             />
             {!notification.last_view && (
-              <span className="absolute bottom-0 right-0 w-3 h-3 bg-blue-500 rounded-full border-2 border-white" />
+              <span className="absolute right-0 bottom-0 h-3 w-3 rounded-full border-2 border-white bg-blue-500" />
             )}
           </div>
-          <h3 className="font-semibold text-wrap text-sm dark:text-white">
+          <h3 className="text-sm font-semibold text-wrap dark:text-white">
             {notification.data.sender.name}
           </h3>
         </div>
-        <div className="pr-4 space-y-3">
+        <div className="space-y-3 pr-4">
           {/* Patient */}
           {role === "admin" || role === "employee" ? (
             notification.data.patient?.id ? (
               <Link
                 to={`/dashboard/patients/${notification.data.patient.id}`}
-                className="text-sm text-muted-foreground dark:text-gray-400 font-medium leading-relaxed"
+                className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400"
               >
                 {notification.data.message}
               </Link>
             ) : notification.data.booking?.id ? (
               <Link
                 to={`/dashboard/bookings/${notification.data.booking.id}`}
-                className="text-sm text-muted-foreground dark:text-gray-400 font-medium leading-relaxed"
+                className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400"
               >
                 {notification.data.message}
               </Link>
             ) : (
-              <p className="text-sm text-muted-foreground dark:text-gray-400 font-medium leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400">
                 {notification.data.message}
               </p>
             )
           ) : (
-            <p className="text-sm text-muted-foreground dark:text-gray-400 font-medium leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400">
               {notification.data.message}
             </p>
           )}
           <div className="flex justify-between gap-2">
             {notification.last_view ? (
-              <p className="text-xs text-muted-foreground dark:text-gray-400 text-left">
+              <p className="text-muted-foreground text-left text-xs dark:text-gray-400">
                 تم قراءة الإشعار {getTimeAgo(notification.last_view)}
               </p>
             ) : (
               <button
-                className="text-sm underline text-dark/90 dark:text-white/90"
+                className="text-dark/90 text-sm underline dark:text-white/90"
                 onClick={() => handleReadNotification(notification.id)}
               >
                 تمييز كمقروء
               </button>
             )}
-            <p className="text-xs text-muted-foreground dark:text-gray-400 text-left">
+            <p className="text-muted-foreground text-left text-xs dark:text-gray-400">
               {getTimeAgo(notification.created_at)}
             </p>
           </div>

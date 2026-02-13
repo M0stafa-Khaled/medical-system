@@ -6,7 +6,7 @@ import ScansTableHeader from "./ScansTableHeader";
 import ScansList from "./ScansList";
 import TableSkeleton from "@/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllScans } from "@/lib/react-query/main";
 

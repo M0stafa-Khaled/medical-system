@@ -1,7 +1,7 @@
 import cookieServices from "@/utils/cookieServices";
 import AnalyticsChart from "../../shared/charts/ChartsCard";
 import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import ChartDate from "../../shared/charts/ChartDate";
 import { useGetDoctorPrescriptionsChart } from "@/lib/react-query/doctor/doctorCharts";
 
@@ -52,11 +52,11 @@ const DoctorPrescriptionsCharts = () => {
     setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="space-y-5 bg-[#fff] dark:bg-dark py-6 px-3 md:p-6 rounded-xl shadow-md">
-      <h2 className="text-dark dark:text-white font-semibold text-center md:text-start md:text-lg">
+    <div className="dark:bg-dark space-y-5 rounded-xl bg-[#fff] px-3 py-6 shadow-md md:p-6">
+      <h2 className="text-dark text-center font-semibold md:text-start md:text-lg dark:text-white">
         إحصائيات الروشتات
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 lg:gap-x-10">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:gap-x-10">
         <ChartDate
           value={filters.prescription_start_at}
           onChange={(date) => handleFilterChange("prescription_start_at", date)}

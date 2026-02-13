@@ -3,6 +3,7 @@ import {
   useFieldArray,
   Controller,
   FormProvider,
+  useWatch,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -18,7 +19,7 @@ import { IPrescription } from "@/interfaces/dashboard/prescription";
 import handleResErr from "@/utils/handleResponseError";
 import prescriptionSchema from "@/validations/dashboard/prescriptionSchema";
 import { TPrescriptableType } from "@/types";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { Delete } from "lucide-react";
 import SubmitButton from "@/components/shared/SubmitButton";
 import RenderPrescriptionFormFields from "../../dashboard/prescription/RenderPrescriptionFormFields";
@@ -92,6 +93,11 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
     control: form.control,
     name: "prescriptables",
   });
+
+  const prescriptableTypes = useWatch({
+    control: form.control,
+    name: fields.map((_, i) => `prescriptables.${i}.type` as const),
+  }) as (TPrescriptableType | undefined)[];
 
   const { mutateAsync: createPrescription, isPending: isLoadingCreate } =
     useCreateDoctorPrescription();
@@ -167,7 +173,7 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
           variants={containerVariants}
         >
           {DOCTOR_PRESCRIPTIONS_INPUTS.map((input) => {
@@ -197,18 +203,16 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
           })}
         </motion.div>
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
           variants={containerVariants}
         >
           {fields.map((field, idx) => {
-            const type = form.watch(
-              `prescriptables.${idx}.type` as "prescriptables"
-            ) as unknown as TPrescriptableType;
+            const type = prescriptableTypes[idx] ?? "dosage";
 
             return (
               <motion.div
                 key={`${field.id}-${type}`}
-                className="space-y-3 border border-primary/10 hover:border-primary/30 transition-all duration-500 ease-in-out p-4 rounded-lg"
+                className="border-primary/10 hover:border-primary/30 space-y-3 rounded-lg border p-4 transition-all duration-500 ease-in-out"
                 custom={idx}
                 variants={itemVariants}
               >
@@ -225,14 +229,14 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
                               type === "scan"
                                 ? "scan"
                                 : type === "analysis"
-                                ? "analysis"
-                                : "dosage",
+                                  ? "analysis"
+                                  : "dosage",
                             label:
                               type === "scan"
                                 ? "اسم الإشعة"
                                 : type === "analysis"
-                                ? "اسم التحليل"
-                                : "اسم الجرعة",
+                                  ? "اسم التحليل"
+                                  : "اسم الجرعة",
                             type: "select",
                           }}
                           options={PRESCRIPTIONS_TYPES}
@@ -249,15 +253,15 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
                       type === "scan"
                         ? "scan"
                         : type === "analysis"
-                        ? "analysis"
-                        : "dosage"
+                          ? "analysis"
+                          : "dosage"
                     }
                   >
                     {type === "scan"
                       ? "اسم الإشعة"
                       : type === "analysis"
-                      ? "اسم التحليل"
-                      : "اسم الدواء"}
+                        ? "اسم التحليل"
+                        : "اسم الدواء"}
                   </FormLabel>
                   <FormControl>
                     <Controller
@@ -339,7 +343,7 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
                   type="button"
                   variant="destructive"
                   onClick={() => remove(idx)}
-                  className="w-full flex justify-center items-center gap-2"
+                  className="flex w-full items-center justify-center gap-2"
                 >
                   حذف
                   <Delete size={18} />
@@ -352,11 +356,11 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
           {form.formState.errors.prescriptables?.message ||
             form.formState.errors.prescriptables?.root?.message}
         </FormMessage>
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           <Button
             type="button"
             onClick={() => append({ type: "dosage", name: "", drug_name: "" })}
-            className="py-6 w-full md:w-fit text-white bg-blue-600 hover:bg-blue-700"
+            className="w-full bg-blue-600 py-6 text-white hover:bg-blue-700 md:w-fit"
           >
             إضافة عنصر جديد
           </Button>

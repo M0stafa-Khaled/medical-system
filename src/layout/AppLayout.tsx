@@ -1,4 +1,4 @@
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router";
 import { ILink } from "@/interfaces";
 import Header from "@/components/shared/navbar/Header";
 

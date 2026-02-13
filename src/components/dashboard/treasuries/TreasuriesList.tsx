@@ -8,7 +8,7 @@ import CardSkeleton from "@/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 const TreasuriesList = () => {
   const token = cookieServices.getToken()!;
@@ -44,11 +44,11 @@ const TreasuriesList = () => {
       {isLoading ? (
         <CardSkeleton />
       ) : !treasuries?.data?.length ? (
-        <p className="text-center text-muted-foreground py-3">لا يوجد خزائن</p>
+        <p className="text-muted-foreground py-3 text-center">لا يوجد خزائن</p>
       ) : (
         <motion.div
           variants={containerVariants}
-          className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-4"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
         >
           {treasuries?.data?.map((treasury, idx) => (
             <motion.div key={treasury.id} variants={itemVariants} custom={idx}>

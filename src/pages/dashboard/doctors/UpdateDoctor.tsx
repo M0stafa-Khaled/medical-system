@@ -4,7 +4,7 @@ import cookieServices from "@/utils/cookieServices";
 import { updateDoctorSchema } from "@/validations/dashboard/doctorSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
@@ -52,9 +52,9 @@ const UpdateDoctor = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="mt-6"
       >
-        <Card className="mt-10 dark:bg-foreground border-muted">
+        <Card className="dark:bg-foreground border-muted mt-10">
           <div className="flex flex-col space-y-1.5 p-6">
-            <h1 className="font-semibold leading-none tracking-tight">
+            <h1 className="leading-none font-semibold tracking-tight">
               تحديث بيانات طبيب
             </h1>
           </div>

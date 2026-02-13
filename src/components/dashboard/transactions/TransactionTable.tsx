@@ -6,7 +6,7 @@ import TableSkeleton from "@/components/ui/TableSkeleton";
 import cookieServices from "@/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import useDebounce from "@/hooks/useDebounce";
 import { useGetAllTransactions } from "@/lib/react-query/dashboard/transactions/transactions";
 import { ITransactionsFilter } from "@/interfaces/dashboard/transactions/transactions";
