@@ -1,16 +1,16 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import BookingsTableHeader from "./BookingsTableHeader";
 import BookingsHeader from "./BookingsHeader";
 import BookingsList from "./BookingsList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetAllBookings } from "@/lib/react-query/dashboard/bookings";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetAllBookings } from "@/shared/lib/react-query/dashboard/bookings";
 import { IBookingsFilter } from "@/interfaces/dashboard/bookings";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
 const BookingsTable = () => {

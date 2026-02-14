@@ -1,7 +1,7 @@
 import PrescriptionForm from "@/components/forms/dashboard/prescription/PrescriptionForm";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/shared/components/ui/card";
 
 const CreatePrescription = () => {
   return (
@@ -14,9 +14,9 @@ const CreatePrescription = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <Card className="dark:bg-foreground border-gray-300 dark:border-muted shadow-none">
+        <Card className="dark:bg-foreground dark:border-muted border-gray-300 shadow-none">
           <div className="flex flex-col space-y-1.5 p-6">
-            <h1 className="font-semibold leading-relaxed">إضافة روشتة جديدة</h1>
+            <h1 className="leading-relaxed font-semibold">إضافة روشتة جديدة</h1>
           </div>
           <CardContent>
             <PrescriptionForm action={"create"} />

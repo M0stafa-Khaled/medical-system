@@ -1,10 +1,10 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import DoctorBookingsHeader from "./DoctorBookingsHeader";
 import DoctorBookingsTableHeader from "./DoctorBookingsTableHeader";
 import DoctorBookingsList from "./DoctorBookingsList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import { useGetDoctorBookings } from "@/lib/react-query/doctor/doctorBookings";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import { useGetDoctorBookings } from "@/shared/lib/react-query/doctor/doctorBookings";
+import cookieServices from "@/shared/utils/cookieServices";
 
 const DoctorBookingsTable = ({ clinicId }: { clinicId: number }) => {
   const token = cookieServices.getToken()!;

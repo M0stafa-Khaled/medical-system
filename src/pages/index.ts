@@ -1,20 +1,5 @@
 import { lazy } from "react";
 
-// Landing Page
-export const Landing = lazy(() => import("./landing"));
-
-// Auth Pages
-export const Login = lazy(() => import("./auth/Login"));
-export const Register = lazy(() => import("./auth/Register"));
-export const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
-export const ResetPassword = lazy(() => import("./auth/ResetPassword"));
-export const VerifyAccount = lazy(() => import("./auth/VerifyAccount"));
-
-// Profile Pages
-export const Profile = lazy(() => import("./profile"));
-
-// Dashboard Pages
-export const Dashboard = lazy(() => import("./dashboard"));
 // ---- Bookings
 export const Bookings = lazy(() => import("./dashboard/bookings"));
 export const BookingDetails = lazy(
@@ -26,8 +11,6 @@ export const UpdateBooking = lazy(
 export const CreateBooking = lazy(
   () => import("./dashboard/bookings/CreateBooking")
 );
-// ---- Clinics
-export const Clinics = lazy(() => import("./dashboard/clinics"));
 // ---- Doctors
 export const Doctors = lazy(() => import("./dashboard/doctors"));
 export const DoctorDetails = lazy(
@@ -47,15 +30,17 @@ export const UpdateWorkingDay = lazy(
   () => import("./dashboard/doctors/workingDays/UpdateWorkingDay")
 );
 // ---- Employees
-export const Employees = lazy(() => import("./dashboard/employees"));
+export const Employees = lazy(
+  () => import("../features/dashboard/employees/pages/Employees")
+);
 export const EmployeeDetails = lazy(
-  () => import("./dashboard/employees/EmployeeDetails")
+  () => import("../features/dashboard/employees/pages/EmployeeDetails")
 );
 export const CreateEmployee = lazy(
-  () => import("./dashboard/employees/CreateEmployee")
+  () => import("../features/dashboard/employees/pages/CreateEmployee")
 );
 export const UpdateEmployee = lazy(
-  () => import("./dashboard/employees/UpdateEmployee")
+  () => import("../features/dashboard/employees/pages/UpdateEmployee")
 );
 // ---- Expenses
 export const Expenses = lazy(() => import("./dashboard/expenses"));

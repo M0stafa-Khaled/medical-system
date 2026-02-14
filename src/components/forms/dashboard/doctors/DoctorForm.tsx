@@ -1,23 +1,23 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import { DOCTOR_FORM_INPUTS } from "@/constants";
 import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
-import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
-import cookieServices from "@/utils/cookieServices";
+import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import {
   useCreateDoctor,
   useUpdateDoctor,
-} from "@/lib/react-query/dashboard/doctors/doctors";
+} from "@/shared/lib/react-query/dashboard/doctors/doctors";
 import { useNavigate } from "react-router";
-import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
-import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import RenderDoctorFormFields from "./RenderDoctorFormFields";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
+import { useGetAllClinics } from "@/features/dashboard/clinics";
+import SubmitButton from "@/components/shared/SubmitButton";
 
 interface IProps {
   doctor?: IDoctor;
@@ -31,7 +31,7 @@ const DoctorForm = ({ doctor, action, doctorSchema }: IProps) => {
 
   const { mutateAsync: CreateDoctor, isPending: isLoadingCreate } =
     useCreateDoctor();
-  const { data: clinicsData } = useGetAllClinics({ token });
+  const { data: clinicsData } = useGetAllClinics({});
   const { mutateAsync: updateDoctor, isPending: isLoadingUpdate } =
     useUpdateDoctor();
 

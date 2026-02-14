@@ -6,40 +6,40 @@ import {
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import {
   FormControl,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/components/ui/form";
 import { PRESCRIPTIONS_INPUTS, PRESCRIPTIONS_TYPES } from "@/constants";
 import { IPrescription } from "@/interfaces/dashboard/prescription";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 import prescriptionSchema from "@/validations/dashboard/prescriptionSchema";
-import { TPrescriptableType } from "@/types";
+import { TPrescriptableType } from "@/shared/types";
 import { useNavigate, useParams } from "react-router";
 import { Delete } from "lucide-react";
 import SubmitButton from "@/components/shared/SubmitButton";
 import RenderPrescriptionFormFields from "./RenderPrescriptionFormFields";
-import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
-import cookieServices from "@/utils/cookieServices";
-import { useGetAllClinicDoctors } from "@/lib/react-query/main";
+import cookieServices from "@/shared/utils/cookieServices";
+import { useGetAllClinicDoctors } from "@/shared/lib/react-query/main";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import {
   useCreatePrescription,
   useUpdatePrescription,
-} from "@/lib/react-query/dashboard/prescriptions";
+} from "@/shared/lib/react-query/dashboard/prescriptions";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
+import { useGetAllDosages } from "@/shared/lib/react-query/dashboard/dosages";
 import SelectFormItem from "../../formItems/SelectFormItem";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";
 import { useWatch } from "react-hook-form";
+import { useGetAllClinics } from "@/features/dashboard/clinics";
 
 interface IProps {
   prescription?: IPrescription;

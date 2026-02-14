@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import Modal from "@/components/shared/Modal";
-import cookieServices from "@/utils/cookieServices";
+import { Modal } from "@/components/shared/Modal";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
-import { useCancelExpense } from "@/lib/react-query/dashboard/expenses/expenses";
+import { useCancelExpense } from "@/shared/lib/react-query/dashboard/expenses/expenses";
 import { MdDoNotDisturbAlt } from "react-icons/md";
-import TooltipButton from "@/components/ui/TooltipButton";
-import handleResErr from "@/utils/handleResponseError";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { cancelExpenseSchema } from "@/validations/dashboard/expenseSchema";
 import RenderExpensesFormFields from "@/components/forms/dashboard/expenses/RenderExpensesFormFields";
 
@@ -67,7 +67,7 @@ const CancelExpense = ({ id }: { id: number }) => {
         <Button
           size={"sm"}
           onClick={() => setIsOpen(true)}
-          className="bg-gray-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600 text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+          className="h-9 w-9 gap-2 bg-gray-600 px-1 py-1 text-sm text-white hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600"
         >
           <MdDoNotDisturbAlt size={24} />
         </Button>
@@ -104,21 +104,21 @@ const CancelExpense = ({ id }: { id: number }) => {
               />
             </motion.div>
 
-            <AlertDialogFooter className="text-start justify-start! gap-2">
+            <AlertDialogFooter className="justify-start! gap-2 text-start">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
+                className="h-auto py-2.5 text-black dark:text-white"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-2.5 h-auto"
+                className="h-auto py-2.5"
                 variant={"destructive"}
               >
                 تأكيد
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>

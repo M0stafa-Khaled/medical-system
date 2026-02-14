@@ -1,17 +1,17 @@
-import { TableCell } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+import { TableCell } from "@/shared/components/ui/table";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import RefundTransaction from "./RefundTransaction";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
-import truncateText from "@/utils/truncateText";
+import useHasPermission from "@/shared/hooks/useHasPermission";
+import truncateText from "@/shared/utils/truncateText";
 import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
-import formatDateTime from "@/utils/formatDate";
-import { Badge } from "@/components/ui/badge";
-import { numberToPrice } from "@/utils/numberToPrice";
+import formatDateTime from "@/shared/utils/formatDate";
+import { Badge } from "@/shared/components/ui/badge";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 import PrintTransactionReceipt from "./PrintTransactionReceipt";
 
 interface IProps {

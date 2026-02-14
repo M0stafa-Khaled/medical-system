@@ -1,9 +1,9 @@
-import Modal from "@/components/shared/Modal";
-import { Button } from "@/components/ui/button";
-import TooltipButton from "@/components/ui/TooltipButton";
-import { useDeletePatient } from "@/lib/react-query/dashboard/patients";
-import cookieServices from "@/utils/cookieServices";
-import handleResErr from "@/utils/handleResponseError";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/shared/components/ui/button";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { useDeletePatient } from "@/shared/lib/react-query/dashboard/patients";
+import cookieServices from "@/shared/utils/cookieServices";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";

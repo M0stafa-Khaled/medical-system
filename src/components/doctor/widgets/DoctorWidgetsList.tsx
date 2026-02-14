@@ -1,5 +1,5 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import cookieServices from "@/utils/cookieServices";
+import { Skeleton } from "@/shared/components/ui/skeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import WidgetCard from "../../shared/widgets/WidgetCard";
 import {
@@ -11,9 +11,9 @@ import {
 } from "lucide-react";
 import { containerVariants, itemVariants } from "@/animations";
 import { Fragment } from "react/jsx-runtime";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/shared/components/ui/separator";
 import DoctorWorkingDayCard from "./DoctorWorkingDayCard";
-import { useGetDoctorWidgets } from "@/lib/react-query/doctor/doctorWidgets";
+import { useGetDoctorWidgets } from "@/shared/lib/react-query/doctor/doctorWidgets";
 
 const DoctorWidgetsList = () => {
   const token = cookieServices.getToken()!;
@@ -48,7 +48,7 @@ const DoctorWidgetsList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 xl:flex-row ">
+    <div className="flex flex-col gap-4 xl:flex-row">
       {isLoading ? (
         <Skeleton className="h-60 w-full xl:w-[50%] 2xl:w-[40%]" />
       ) : (
@@ -57,13 +57,13 @@ const DoctorWidgetsList = () => {
             variants={itemVariants}
             key="working_days"
             custom={0}
-            className="cursor-pointer rounded-xl border bg-card dark:bg-black text-card-foreground shadow-sm dark:border-primary/20 space-y-2"
+            className="bg-card text-card-foreground dark:border-primary/20 cursor-pointer space-y-2 rounded-xl border shadow-sm dark:bg-black"
           >
-            <div className="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <div className="tracking-tight font-medium text-lg">
+            <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
+              <div className="text-lg font-medium tracking-tight">
                 ايام العمل
               </div>
-              <Calendar className="w-5 h-5" />
+              <Calendar className="h-5 w-5" />
             </div>
             <div className="p-6 pt-0">
               {widgets &&
@@ -72,7 +72,7 @@ const DoctorWidgetsList = () => {
                   <Fragment key={day.id}>
                     <DoctorWorkingDayCard day={day} />
                     {widgets.data.working_days.length - 1 === day.id && (
-                      <Separator className="my-2 bg-primary/20" />
+                      <Separator className="bg-primary/20 my-2" />
                     )}
                   </Fragment>
                 ))}
@@ -81,7 +81,7 @@ const DoctorWidgetsList = () => {
         </div>
       )}
       <motion.div
-        className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 content-start"
+        className="grid content-start gap-4 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3"
         variants={containerVariants}
         initial="hidden"
         animate="visible"

@@ -1,34 +1,34 @@
 import { useEffect, useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2, Wallet } from "lucide-react";
-import Modal from "@/components/shared/Modal";
-import cookieServices from "@/utils/cookieServices";
+import { Modal } from "@/components/shared/Modal";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { PAYMENT_METHODS, TRANSACTION_FORM_INPUTS } from "@/constants";
 import { createTransactionSchema } from "@/validations/dashboard/transactionSchema";
-import { useCreateTransaction } from "@/lib/react-query/dashboard/transactions/transactions";
+import { useCreateTransaction } from "@/shared/lib/react-query/dashboard/transactions/transactions";
 import RenderTransactionFormFields from "@/components/forms/dashboard/transactions/RenderTransactionFormFields";
-import { TPaymentMethod } from "@/types";
-import TooltipButton from "@/components/ui/TooltipButton";
+import { TPaymentMethod } from "@/shared/types";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Link } from "react-router";
 import { IBooking } from "@/interfaces/dashboard/bookings";
-import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
-import handleResErr from "@/utils/handleResponseError";
-import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/patientBalances";
+import { useGetDoctorActions } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
+import { handleResErr } from "@/shared/utils/handleResError";
+import { useGetPatientBalances } from "@/shared/lib/react-query/dashboard/transactions/patientBalances";
 import InfoField from "../../shared/InfoField";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   booking: IBooking;

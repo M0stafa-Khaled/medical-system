@@ -1,8 +1,4 @@
-export { LoginForm } from "./components/LoginForm";
-export { RegisterForm } from "./components/RegisterForm";
-export { LogoutButton } from "./components/LogoutButton";
+export { authRoutes } from "./routes";
+export { ProtectedRoute } from "./components/ProtectedRoute";
 export { AuthButtons } from "./components/AuthButtons";
-export { ForgotPasswordForm } from "./components/ForgotPasswordForm";
-export { ResetPasswordForm } from "./components/ResetPasswordForm";
-export { VerifyAccountForm } from "./components/VerifyAccountForm";
-export { default as AuthLayout } from "./components/AuthLayout";
+export { LogoutButton } from "./components/LogoutButton";

@@ -1,14 +1,14 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import TransactionsTableHeader from "./TransactionsTableHeader";
 import TransactionsReportHeader from "./TransactionsReportHeader";
 import TransactionsReportList from "./TransactionsReportList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetTransactionsReport } from "@/lib/react-query/dashboard/reports";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetTransactionsReport } from "@/shared/lib/react-query/dashboard/reports";
 import { ITransactionsReportFilter } from "@/interfaces/dashboard/reports";
 
 const TransactionReportTable = () => {

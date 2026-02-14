@@ -1,15 +1,15 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import LastVisitsHeader from "./LastVisitsHeader";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { useGetPatientLastVisits } from "@/lib/react-query/dashboard/transactions/transactions";
+import { useGetPatientLastVisits } from "@/shared/lib/react-query/dashboard/transactions/transactions";
 import LastVisitsTableHeader from "./LastVisitsTableHeader";
 import LastVisitsList from "./LastVisitsList";
-import DataLoader from "@/components/ui/DataLoader";
-import useHasPermission from "@/hooks/useHasPermission";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
 const LastVisitsTable = () => {

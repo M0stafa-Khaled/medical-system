@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IStatusMsg, IGetWithParams } from "@/interfaces";
+import { IStatusMsg, IGetWithParams } from "@/shared/types";
 import {
   ICreateDoctor,
   IResponseDoctor,

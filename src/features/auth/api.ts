@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IStatusMsg } from "@/interfaces";
+import { IStatusMsg } from "@/shared/types";
 import {
   ILogin,
   ILoginRes,
@@ -10,10 +10,7 @@ import {
   IPermissionsRes,
 } from "./types";
 
-export const login: (user: ILogin) => Promise<ILoginRes> = async ({
-  email,
-  password,
-}) =>
+export const login = async ({ email, password }: ILogin): Promise<ILoginRes> =>
   (
     await axiosAPI.post("/auth", {
       slug: import.meta.env.VITE_SLUG,
@@ -51,11 +48,11 @@ export const checkAuth = async (): Promise<ICheckAuth> =>
 export const resendOtp = async (): Promise<IStatusMsg> =>
   (await axiosAPI.post("/email/verification-notification")).data;
 
-export const verifyAccount: ({
+export const verifyAccount = async ({
   otp,
 }: {
   otp: string;
-}) => Promise<IStatusMsg> = async ({ otp }) =>
+}): Promise<IStatusMsg> =>
   (
     await axiosAPI.post("/email/verify", {
       code: otp,
@@ -83,7 +80,5 @@ export const resetPassword = async ({
     })
   ).data;
 
-export const getAllPermissions: (
-  token: string
-) => Promise<IPermissionsRes> = async () =>
+export const getAllPermissions = async (): Promise<IPermissionsRes> =>
   (await axiosAPI.get("/permissions")).data;

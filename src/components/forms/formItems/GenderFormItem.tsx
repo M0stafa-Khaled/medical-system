@@ -1,4 +1,4 @@
-import { IFormInput } from "@/interfaces";
+import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 import { GENDER } from "@/constants";
@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/components/ui/form";
 
 interface IProps {
   field: ControllerRenderProps<FieldValues, string>;

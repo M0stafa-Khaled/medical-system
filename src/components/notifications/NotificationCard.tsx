@@ -1,8 +1,8 @@
 import { INotification } from "@/interfaces/notifications";
-import { useReadNotification } from "@/lib/react-query/notifications/notifications";
-import cookieServices from "@/utils/cookieServices";
-import { getTimeAgo } from "@/utils/getTimeAgo";
-import handleResErr from "@/utils/handleResponseError";
+import { useReadNotification } from "@/shared/lib/react-query/notifications/notifications";
+import cookieServices from "@/shared/utils/cookieServices";
+import { getTimeAgo } from "@/shared/utils/getTimeAgo";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { Link } from "react-router";
 
 interface IProps {

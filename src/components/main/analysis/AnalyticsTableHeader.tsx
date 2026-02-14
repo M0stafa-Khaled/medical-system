@@ -1,11 +1,11 @@
-import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import { memo } from "react";
 
 const AnalysisTableHeader = () => {
   return (
     <TableHeader>
-      <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
-        <TableHead className="py-4 text-center w-20">#</TableHead>
+      <TableRow className="dark:bg-dark/70 dark:border-muted dark:hover:bg-dark/70 bg-white/80 hover:bg-white/80">
+        <TableHead className="w-20 py-4 text-center">#</TableHead>
         <TableHead className="py-4 text-center">اسم التحليل</TableHead>
         <TableHead className="py-4 text-center">الاسم بالعربي</TableHead>
         <TableHead className="py-4 text-center">الإختصار</TableHead>

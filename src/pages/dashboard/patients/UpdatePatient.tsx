@@ -1,15 +1,15 @@
 import PatientForm from "@/components/forms/dashboard/patients/PatientForm";
-import { Card, CardContent } from "@/components/ui/card";
-import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
-import cookieServices from "@/utils/cookieServices";
+import { Card, CardContent } from "@/shared/components/ui/card";
+import { useGetPatientById } from "@/shared/lib/react-query/dashboard/patients";
+import cookieServices from "@/shared/utils/cookieServices";
 import { updatePatientSchema } from "@/validations/dashboard/patientSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import DataLoader from "@/components/ui/DataLoader";
-import { AxiosResErr } from "@/types";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import { AxiosResErr } from "@/shared/types";
 
 const UpdatePatient = () => {
   const navigate = useNavigate();

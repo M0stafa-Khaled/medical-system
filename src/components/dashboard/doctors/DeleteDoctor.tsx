@@ -1,12 +1,12 @@
-import Modal from "@/components/shared/Modal";
-import { Button } from "@/components/ui/button";
-import { useDeleteDoctor } from "@/lib/react-query/dashboard/doctors/doctors";
-import cookieServices from "@/utils/cookieServices";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/shared/components/ui/button";
+import { useDeleteDoctor } from "@/shared/lib/react-query/dashboard/doctors/doctors";
+import cookieServices from "@/shared/utils/cookieServices";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import TooltipButton from "@/components/ui/TooltipButton";
-import handleResErr from "@/utils/handleResponseError";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { Trash2 } from "lucide-react";
 interface IProps {
   name: string;

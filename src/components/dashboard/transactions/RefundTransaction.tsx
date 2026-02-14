@@ -1,7 +1,7 @@
-import Modal from "@/components/shared/Modal";
-import { Button } from "@/components/ui/button";
-import { useRefundTransaction } from "@/lib/react-query/dashboard/transactions/transactions";
-import cookieServices from "@/utils/cookieServices";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/shared/components/ui/button";
+import { useRefundTransaction } from "@/shared/lib/react-query/dashboard/transactions/transactions";
+import cookieServices from "@/shared/utils/cookieServices";
 import { Loader2, RefreshCcwDot } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,12 +11,12 @@ import { containerVariants } from "@/animations";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, FormField } from "@/components/ui/form";
+import { Form, FormField } from "@/shared/components/ui/form";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 
 interface IProps {
   code: string;
@@ -75,7 +75,7 @@ const RefundTransaction = ({ code, id }: IProps) => {
         size={"sm"}
         onClick={() => setIsOpen(true)}
         variant={"destructive"}
-        className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+        className="h-9 w-9 gap-2 px-1 py-1 text-sm text-white"
       >
         <RefreshCcwDot size={24} />
       </Button>
@@ -116,10 +116,10 @@ const RefundTransaction = ({ code, id }: IProps) => {
               )}
             />
 
-            <AlertDialogFooter className="text-start justify-start! gap-2">
+            <AlertDialogFooter className="justify-start! gap-2 text-start">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
+                className="h-auto py-2.5 text-black dark:text-white"
               >
                 إلغاء
               </AlertDialogCancel>
@@ -127,10 +127,10 @@ const RefundTransaction = ({ code, id }: IProps) => {
                 type="submit"
                 disabled={isPending}
                 variant={"destructive"}
-                className="py-2.5 h-auto"
+                className="h-auto py-2.5"
               >
                 استرداد
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>

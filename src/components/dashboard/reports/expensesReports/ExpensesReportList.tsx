@@ -1,12 +1,12 @@
-import { Badge } from "@/components/ui/badge";
-import { TableCell } from "@/components/ui/table";
+import { Badge } from "@/shared/components/ui/badge";
+import { TableCell } from "@/shared/components/ui/table";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import { IExpense } from "@/interfaces/dashboard/expenses";
-import formatDateTime from "@/utils/formatDate";
-import truncateText from "@/utils/truncateText";
-import { numberToPrice } from "@/utils/numberToPrice";
+import formatDateTime from "@/shared/utils/formatDate";
+import truncateText from "@/shared/utils/truncateText";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   expenses: IExpense[];

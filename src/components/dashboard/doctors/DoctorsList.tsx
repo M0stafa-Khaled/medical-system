@@ -1,18 +1,18 @@
-import { Badge } from "@/components/ui/badge";
-import { TableCell } from "@/components/ui/table";
+import { Badge } from "@/shared/components/ui/badge";
+import { TableCell } from "@/shared/components/ui/table";
 import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import DeleteDoctor from "./DeleteDoctor";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
-import { IPaginationMeta } from "@/interfaces";
-import countSerial from "@/utils/countSerial";
-import truncateText from "@/utils/truncateText";
-import TooltipButton from "@/components/ui/TooltipButton";
+import useHasPermission from "@/shared/hooks/useHasPermission";
+import { IPaginationMeta } from "@/shared/types";
+import countSerial from "@/shared/utils/countSerial";
+import truncateText from "@/shared/utils/truncateText";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Pen } from "lucide-react";
 
 interface IProps {

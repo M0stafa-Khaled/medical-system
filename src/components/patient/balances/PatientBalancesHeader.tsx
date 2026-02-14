@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { Card, CardContent } from "@/shared/components/ui/card";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { motion } from "framer-motion";
 
 interface IProps {
@@ -21,24 +21,24 @@ const PatientBalancesHeader = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <h1 className="font-semibold text-dark dark:text-white text-2xl">
+        <h1 className="text-dark text-2xl font-semibold dark:text-white">
           مدفوعاتى :
         </h1>
-        <Card className="mt-6 transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black/60">
-          <CardContent className="py-8 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
-            <div className="text-dark dark:text-white flex items-center gap-2 font-semibold text-lg lg:text-xl">
+        <Card className="border-muted/40 hover:border-primary/40 mt-6 cursor-pointer transition-all duration-300 hover:shadow-md dark:bg-black/60">
+          <CardContent className="grid grid-cols-1 gap-x-4 gap-y-6 py-8 md:grid-cols-2">
+            <div className="text-dark flex items-center gap-2 text-lg font-semibold lg:text-xl dark:text-white">
               <h4>إجمالي المبلغ الفعلى:</h4>
               <p>{numberToPrice(total_amount_due)}</p>
             </div>
-            <div className="text-dark dark:text-white flex items-center gap-2 font-semibold sm:text-lg lg:text-xl">
+            <div className="text-dark flex items-center gap-2 font-semibold sm:text-lg lg:text-xl dark:text-white">
               <h4>إجمالي المبالغ المدفوعة:</h4>
               <p>{numberToPrice(total_amount_paid)}</p>
             </div>
-            <div className="text-dark dark:text-white flex items-center gap-2 font-semibold sm:text-lg lg:text-xl">
+            <div className="text-dark flex items-center gap-2 font-semibold sm:text-lg lg:text-xl dark:text-white">
               <h4>إجمالي المبالغ المستحقة:</h4>
               <p>{numberToPrice(total_balance)}</p>
             </div>
-            <div className="text-dark dark:text-white flex items-center gap-2 font-semibold sm:text-lg lg:text-xl">
+            <div className="text-dark flex items-center gap-2 font-semibold sm:text-lg lg:text-xl dark:text-white">
               <h4>إجمالي المبالغ المستردة:</h4>
               <p>{numberToPrice(refund_amount)}</p>
             </div>

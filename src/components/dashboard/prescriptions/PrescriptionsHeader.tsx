@@ -1,6 +1,6 @@
 import { PERMISSIONS } from "@/enums/permissions";
-import { Button } from "@/components/ui/button";
-import useHasPermission from "@/hooks/useHasPermission";
+import { Button } from "@/shared/components/ui/button";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { Eraser } from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";

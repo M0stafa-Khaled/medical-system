@@ -1,7 +1,12 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/components/ui/tabs";
 import WorkingDays from "@/components/dashboard/doctors/workingDays/WorkingDays";
 import Actions from "@/components/dashboard/doctors/actions/Actions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
 import { itemVariants } from "@/animations";
@@ -22,13 +27,13 @@ const DoctorTabs = ({ doctorId }: { doctorId: string }) => {
           <Tabs
             defaultValue={canViewDoctorActions ? "actions" : "working-days"}
             dir="rtl"
-            className="text-black dark:text-white my-2"
+            className="my-2 text-black dark:text-white"
           >
             <TabsList className="h-auto w-full gap-2">
               {canViewDoctorTransactions && (
                 <TabsTrigger
                   value="transactions"
-                  className="w-full py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
+                  className="dark:text-muted-foreground w-full py-2.5 text-base font-medium text-slate-700 data-[state=active]:text-black dark:data-[state=active]:text-white"
                 >
                   إيرادات الطيبب
                 </TabsTrigger>
@@ -36,7 +41,7 @@ const DoctorTabs = ({ doctorId }: { doctorId: string }) => {
               {canViewDoctorActions && (
                 <TabsTrigger
                   value="actions"
-                  className="w-full py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
+                  className="dark:text-muted-foreground w-full py-2.5 text-base font-medium text-slate-700 data-[state=active]:text-black dark:data-[state=active]:text-white"
                 >
                   الإجراءات
                 </TabsTrigger>
@@ -44,7 +49,7 @@ const DoctorTabs = ({ doctorId }: { doctorId: string }) => {
               {canViewDoctorWorkingDays && (
                 <TabsTrigger
                   value="working-days"
-                  className="w-full py-2.5 font-medium text-base text-slate-700 dark:text-muted-foreground data-[state=active]:text-black dark:data-[state=active]:text-white"
+                  className="dark:text-muted-foreground w-full py-2.5 text-base font-medium text-slate-700 data-[state=active]:text-black dark:data-[state=active]:text-white"
                 >
                   ايام العمل
                 </TabsTrigger>

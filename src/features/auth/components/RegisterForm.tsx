@@ -1,18 +1,18 @@
 import { RenderAuthFormFields } from "@/features/auth/components/RenderAuthFormFields";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
+import { Button } from "@/shared/components/ui/button";
+import { Form } from "@/shared/components/ui/form";
 import { REGISTER_FORM_INPUTS } from "@/constants";
-import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
+import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
 import { useRegister } from "@/features/auth/queriesAndMutations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { z } from "zod";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { useDispatch } from "react-redux";
-import { login } from "@/store/features/auth/authSlice";
-import { setPermissions } from "@/store/features/permissions/permissionsSlice";
+import { login } from "@/app/store/features/auth/authSlice";
+import { setPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import Swal from "sweetalert2";
 import { registerSchema } from "../schema";
 
@@ -24,11 +24,9 @@ export const RegisterForm = () => {
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      another_name: "",
       first_phone: "",
       name: "",
       personal_id: "",
-      second_phone: "",
       email: "",
       gender: "male",
       password: "",
@@ -76,7 +74,7 @@ export const RegisterForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto w-full max-w-md space-y-3 lg:max-w-full"
       >
-        <div className="grid grid-cols-1 gap-x-6 gap-y-2 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
           {REGISTER_FORM_INPUTS.map((input) => (
             <div className="w-full" key={input.name}>
               <RenderAuthFormFields
@@ -89,14 +87,11 @@ export const RegisterForm = () => {
             </div>
           ))}
         </div>
-        <Button
-          disabled={isPending}
-          className="flex h-auto w-full items-center justify-center gap-4 bg-[#16a0cf] px-4 py-4 text-white hover:bg-[#16a0cf]/90"
-        >
+        <Button disabled={isPending} size="lg" className="w-full text-white">
           إنشاء حساب {isPending && <Loader2 className="animate-spin" />}
         </Button>
       </form>
-      <p className="text-dark mt-2 text-center text-sm">
+      <p className="mt-2 text-sm text-black">
         لديك حساب بالفعل؟{" "}
         <Link to={"/login"} className="text-black underline">
           تسجيل الدخول

@@ -1,10 +1,15 @@
 import { IDoctorAction } from "@/interfaces/dashboard/doctors/doctorActions";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
 import DeleteAction from "./DeleteAction";
 import UpdateAction from "./UpdateAction";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   action: IDoctorAction;
@@ -15,22 +20,24 @@ const ActionCard = ({ action, doctorId }: IProps) => {
   const canUpdateAction = useHasPermission(PERMISSIONS.UPDATE_ACTION_DOCTOR);
 
   return (
-    <Card className="border-muted bg-background dark:bg-dark flex justify-between items-center">
+    <Card className="border-muted bg-background dark:bg-dark flex items-center justify-between">
       <div>
         <CardHeader className="p-4">
-          <CardTitle className="text-lg text-black dark:text-white wrap-break-word break-all">
+          <CardTitle className="text-lg wrap-break-word break-all text-black dark:text-white">
             {action.name}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 pt-0">
           <p className="text-black/70 dark:text-white/70">
             السعر:{" "}
-            <span className="text-black dark:text-white">{numberToPrice(action.price)}</span>
+            <span className="text-black dark:text-white">
+              {numberToPrice(action.price)}
+            </span>
           </p>
         </CardContent>
       </div>
       {(canDeleteAction || canUpdateAction) && (
-        <div className="flex flex-col px-4 gap-2">
+        <div className="flex flex-col gap-2 px-4">
           {canDeleteAction && (
             <DeleteAction id={action.id} name={action.name} />
           )}

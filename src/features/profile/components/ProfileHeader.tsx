@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { type TRole } from "@/types";
+import { type TRole } from "@/shared/types";
 import { ChangePassword } from "./ChangePassword";
 import { UpdateDoctorProfile } from "./UpdateDoctorProfile";
 import { UpdatePatientProfile } from "./UpdatePatientProfile";

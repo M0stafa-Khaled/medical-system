@@ -1,10 +1,10 @@
-import { TBookingStatus } from "@/types";
+import { TBookingStatus } from "@/shared/types";
 import { IClinic } from "../dashboard/clinics";
 import { IDoctor } from "../dashboard/doctors/doctor";
 import { IDoctorAction } from "../dashboard/doctors/doctorActions";
 import { IWorkingDay } from "../dashboard/doctors/workingDays";
 import { IPatient } from "../dashboard/patient";
-import { IPaginationMeta } from "..";
+import { IPaginationMeta } from "../../shared/types";
 
 export interface IPatientBooking {
   id: number;

@@ -55,10 +55,10 @@ export const useVerifyAccount = () => {
   });
 };
 
-export const useGetAllPermissions = (token: string) => {
+export const useGetAllPermissions = () => {
   return useQuery({
     queryKey: ["permissions"],
-    queryFn: () => getAllPermissions(token),
+    queryFn: () => getAllPermissions(),
   });
 };
 

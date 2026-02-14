@@ -4,10 +4,10 @@ import PatientBalancesHeader from "@/components/patient/balances/PatientBalances
 import PatientBalancesList from "@/components/patient/balances/PatientBalancesList";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { useGetPatientTransactionsBalances } from "@/lib/react-query/patient/patientBalances";
-import cookieServices from "@/utils/cookieServices";
-import PCardSkeleton from "@/components/ui/PCardSkeleton";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useGetPatientTransactionsBalances } from "@/shared/lib/react-query/patient/patientBalances";
+import cookieServices from "@/shared/utils/cookieServices";
+import PCardSkeleton from "@/shared/components/ui/PCardSkeleton";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 
 const PatientBalances = () => {
   const token = cookieServices.getToken()!;
@@ -34,7 +34,7 @@ const PatientBalances = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="xl:container mt-10"
+        className="mt-10 xl:container"
       >
         {isLoading ? (
           <>

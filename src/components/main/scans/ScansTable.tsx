@@ -1,14 +1,14 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import ScansHeader from "./ScansHeader";
 import { useEffect } from "react";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import ScansTableHeader from "./ScansTableHeader";
 import ScansList from "./ScansList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetAllScans } from "@/lib/react-query/main";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetAllScans } from "@/shared/lib/react-query/main";
 
 const ScansTable = () => {
   const token = cookieServices.getToken()!;

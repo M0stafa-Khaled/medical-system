@@ -2,15 +2,13 @@ import { createRoutesFromElements, Route } from "react-router";
 import { PERMISSIONS } from "@/enums/permissions";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/components/shared/PageLoader";
+import { ProtectedRoute } from "@/features/auth";
+import DashboardLayout from "@/features/dashboard/layout";
 // import Error from "@/pages/Error";
 
-const RootLayout = lazy(() => import("@/layout/RootLayout"));
-const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
-const DashboardLayout = lazy(() => import("@/layout/DashboardLayout"));
-const Dashboard = lazy(() => import("@/pages/dashboard"));
+const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
 
 // Clinics
-const Clinics = lazy(() => import("@/pages/dashboard/clinics"));
 
 // Doctors
 const Doctors = lazy(() => import("@/pages/dashboard/doctors"));
@@ -30,18 +28,6 @@ const CreateWorkingDay = lazy(
 );
 const UpdateWorkingDay = lazy(
   () => import("@/pages/dashboard/doctors/workingDays/UpdateWorkingDay")
-);
-
-// Employees
-const Employees = lazy(() => import("@/pages/dashboard/employees"));
-const EmployeeDetails = lazy(
-  () => import("@/pages/dashboard/employees/EmployeeDetails")
-);
-const CreateEmployee = lazy(
-  () => import("@/pages/dashboard/employees/CreateEmployee")
-);
-const UpdateEmployee = lazy(
-  () => import("@/pages/dashboard/employees/UpdateEmployee")
 );
 
 // Patients
@@ -156,17 +142,6 @@ const dashboardRoutes = createRoutesFromElements(
       }
       id="dashboard-layout"
     >
-      {/* Home */}
-      <Route
-        index
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <Dashboard />
-          </Suspense>
-        }
-        id="dashboard-home"
-      />
-
       {/* Company */}
       <Route
         path="settings"
@@ -222,19 +197,6 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-update-booking"
-      />
-
-      {/* Clinics */}
-      <Route
-        path="clinics"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.CLINICS}>
-              <Clinics />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-clinics"
       />
 
       {/* Doctors */}
@@ -305,52 +267,6 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-update-working-day"
-      />
-
-      {/* Employees */}
-      <Route
-        path="employees"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.EMPLOYEES}>
-              <Employees />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-employees"
-      />
-      <Route
-        path="employees/:employeeId"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EMPLOYEE}>
-              <EmployeeDetails />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-employee-details"
-      />
-      <Route
-        path="employees/create"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_EMPLOYEE}>
-              <CreateEmployee />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-create-employee"
-      />
-      <Route
-        path="employees/:employeeId/update"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_EMPLOYEE}>
-              <UpdateEmployee />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-update-employee"
       />
 
       {/* Patients */}

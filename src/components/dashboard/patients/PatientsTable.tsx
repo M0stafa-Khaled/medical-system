@@ -1,15 +1,15 @@
-import DataTable from "@/components/ui/DataTable";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import DataTable from "@/shared/components/ui/DataTable";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import PatientsList from "./PatientsList";
 import PatientsTableHeader from "./PatientsTableHeader";
-import { useGetAllPatients } from "@/lib/react-query/dashboard/patients";
+import { useGetAllPatients } from "@/shared/lib/react-query/dashboard/patients";
 import PatientsHeader from "./PatientsHeader";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import useHasPermission from "@/hooks/useHasPermission";
+import useDebounce from "@/shared/hooks/useDebounce";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
 const PatientsTable = () => {

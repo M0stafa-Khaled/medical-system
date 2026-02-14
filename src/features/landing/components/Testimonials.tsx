@@ -1,6 +1,10 @@
 import { m } from "framer-motion";
 import { fadeInUp, staggerContainer, scaleIn } from "../animations";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/shared/components/ui/avatar";
 import { Quote } from "lucide-react";
 import { testimonials } from "../data";
 

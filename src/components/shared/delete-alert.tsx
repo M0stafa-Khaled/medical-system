@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { useState, useTransition } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import TooltipButton from "@/components/ui/TooltipButton";
-import handleResErr from "@/utils/handleResponseError";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { Trash2 } from "lucide-react";
 import {
   AlertDialog,
@@ -15,7 +15,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 
 interface IProps {
   name: string;
@@ -24,27 +24,32 @@ interface IProps {
   navigatePath?: string;
 }
 
-const DeleteAlert = ({ name, id, deleteAction, navigatePath }: IProps) => {
+export const DeleteAlert = ({
+  name,
+  id,
+  deleteAction,
+  navigatePath,
+}: IProps) => {
   const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleDelete = async () => {
-    try {
-      startTransition(async () => {
+    startTransition(async () => {
+      try {
         const { status, message } = await deleteAction(id);
 
-        // ! Delete failed
-        if (!status) throw message;
         // * Delete Success
-        if (navigatePath) navigate(navigatePath);
-        toast.success(message || "تم الحذف بنجاح");
-      });
-    } catch (error) {
-      handleResErr(error);
-    } finally {
-      setIsOpen(false);
-    }
+        if (status) {
+          if (navigatePath) navigate(navigatePath);
+          toast.success(message || "تم الحذف بنجاح");
+        } else throw new Error(message); // ! Delete failed
+      } catch (error) {
+        handleResErr(error);
+      } finally {
+        setIsOpen(false);
+      }
+    });
   };
 
   return (
@@ -93,5 +98,3 @@ const DeleteAlert = ({ name, id, deleteAction, navigatePath }: IProps) => {
     </AlertDialog>
   );
 };
-
-export default DeleteAlert;

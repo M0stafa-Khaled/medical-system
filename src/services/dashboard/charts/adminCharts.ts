@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IGetWithParams } from "@/interfaces";
+import { IGetWithParams } from "@/shared/types";
 import { IChartRes, ITreasuriesChartRes } from "@/interfaces/charts/charts";
 
 export const getActiveUsersChart = async ({

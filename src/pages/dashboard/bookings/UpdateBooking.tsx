@@ -1,15 +1,15 @@
-import { Card, CardContent } from "@/components/ui/card";
-import cookieServices from "@/utils/cookieServices";
+import { Card, CardContent } from "@/shared/components/ui/card";
+import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import DataLoader from "@/components/ui/DataLoader";
-import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import { useGetBookingById } from "@/shared/lib/react-query/dashboard/bookings";
 import BookingForm from "@/components/forms/dashboard/bookings/BookingForm";
 import { updateBookingSchema } from "@/validations/dashboard/bookingSchema";
-import { AxiosResErr } from "@/types";
+import { AxiosResErr } from "@/shared/types";
 
 const UpdateBooking = () => {
   const navigate = useNavigate();

@@ -3,10 +3,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { IFormInput } from "@/interfaces";
+} from "@/shared/components/ui/form";
+import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/shared/components/ui/textarea";
 
 interface IProps {
   field: ControllerRenderProps<any>;
@@ -26,7 +26,7 @@ const TextareaFormItem = ({
       <FormLabel htmlFor={input.name}>
         {input.label}
         {isOptionalField && isOptionalField(input.name) && (
-          <span className="text-xs text-muted-foreground"> (اختياري)</span>
+          <span className="text-muted-foreground text-xs"> (اختياري)</span>
         )}
       </FormLabel>
       <FormControl>
@@ -37,7 +37,7 @@ const TextareaFormItem = ({
           {...field}
           onChange={(e) => field.onChange(e.target.value)}
           value={field.value as string | undefined}
-          className={`border-muted py-3 placeholder:h-14 h-auto text-black dark:text-white placeholder:text-muted-foreground placeholder:text-sm max-w-full ${
+          className={`border-muted placeholder:text-muted-foreground h-auto max-w-full py-3 text-black placeholder:h-14 placeholder:text-sm dark:text-white ${
             resize ? "resize" : "resize-none"
           }`}
           rows={4}

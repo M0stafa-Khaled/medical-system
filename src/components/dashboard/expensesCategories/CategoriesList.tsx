@@ -1,13 +1,13 @@
-import useDebounce from "@/hooks/useDebounce";
-import cookieServices from "@/utils/cookieServices";
+import useDebounce from "@/shared/hooks/useDebounce";
+import cookieServices from "@/shared/utils/cookieServices";
 import { memo, useEffect } from "react";
 import { toast } from "react-toastify";
 import CategoriesHeader from "./CategoriesHeader";
 import CategoryCard from "./CategoryCard";
-import CardSkeleton from "@/components/ui/CardSkeleton";
+import CardSkeleton from "@/shared/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import { useGetAllExpensesCategories } from "@/lib/react-query/dashboard/expenses/expensesCategories";
+import { useGetAllExpensesCategories } from "@/shared/lib/react-query/dashboard/expenses/expensesCategories";
 import { useSearchParams } from "react-router";
 
 const CategoriesList = () => {

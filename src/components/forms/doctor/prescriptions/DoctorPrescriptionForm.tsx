@@ -7,27 +7,27 @@ import {
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import {
   FormControl,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/components/ui/form";
 import { DOCTOR_PRESCRIPTIONS_INPUTS, PRESCRIPTIONS_TYPES } from "@/constants";
 import { IPrescription } from "@/interfaces/dashboard/prescription";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 import prescriptionSchema from "@/validations/dashboard/prescriptionSchema";
-import { TPrescriptableType } from "@/types";
+import { TPrescriptableType } from "@/shared/types";
 import { useNavigate, useParams } from "react-router";
 import { Delete } from "lucide-react";
 import SubmitButton from "@/components/shared/SubmitButton";
 import RenderPrescriptionFormFields from "../../dashboard/prescription/RenderPrescriptionFormFields";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import SelectFormItem from "../../formItems/SelectFormItem";
-import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
+import { useGetAllDosages } from "@/shared/lib/react-query/dashboard/dosages";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";
@@ -36,8 +36,8 @@ import { containerVariants, itemVariants } from "@/animations";
 import {
   useCreateDoctorPrescription,
   useUpdateDoctorPrescription,
-} from "@/lib/react-query/doctor/prescriptions";
-import { useGetDoctorClinics } from "@/lib/react-query/doctor/doctorClinics";
+} from "@/shared/lib/react-query/doctor/prescriptions";
+import { useGetDoctorClinics } from "@/shared/lib/react-query/doctor/doctorClinics";
 
 interface IProps {
   prescription?: IPrescription;

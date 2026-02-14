@@ -5,7 +5,7 @@ import {
   IGetAvailableTimes,
   IGetWithParams,
   IPatientBalancesTransactionsRes,
-} from "@/interfaces";
+} from "@/shared/types";
 import { IAnalysisRes } from "@/interfaces/dashboard/analysis";
 import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
 import { IScansRes } from "@/interfaces/dashboard/scans";

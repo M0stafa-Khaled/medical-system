@@ -1,12 +1,12 @@
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import AnalyticsChart from "../../../shared/charts/ChartsCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import ChartDate from "../../../shared/charts/ChartDate";
 
-import { useGetEmployeeTreasuriesChart } from "@/lib/react-query/dashboard/charts/employeeCharts";
-import { AxiosResErr } from "@/types";
-import DataLoader from "@/components/ui/DataLoader";
+import { useGetEmployeeTreasuriesChart } from "@/shared/lib/react-query/dashboard/charts/employeeCharts";
+import { AxiosResErr } from "@/shared/types";
+import DataLoader from "@/shared/components/ui/DataLoader";
 
 interface ITreasuriesFilter {
   treasury_start_at: string;

@@ -1,16 +1,26 @@
-import { lazy, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Button } from "../../../components/ui/button";
-import { FiLogOut } from "react-icons/fi";
+import { Button } from "../../../shared/components/ui/button";
 import { useLogout } from "@/features/auth/queriesAndMutations";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { logout } from "@/store/features/auth/authSlice";
-import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
-import handleResErr from "@/utils/handleResponseError";
+import { RootState } from "@/app/store";
+import { logout } from "@/app/store/features/auth/authSlice";
+import { clearPermissions } from "@/app/store/features/permissions/permissionsSlice";
+import { handleResErr } from "@/shared/utils/handleResError";
 import Swal from "sweetalert2";
-
-const Modal = lazy(() => import("@/components/shared/Modal"));
+import { LogOut } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/shared/components/ui/alert-dialog";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 
 export const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
   const navigate = useNavigate();
@@ -20,7 +30,7 @@ export const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
 
   const { mutateAsync: logoutUser, isPending } = useLogout();
 
-  const logoutFromDashboard = async () => {
+  const handleLogout = async () => {
     try {
       const { message, status } = await logoutUser();
       // ! Logout failed
@@ -51,35 +61,55 @@ export const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
   return (
     <>
       {isAuthenticated && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          variant={"destructive"}
-          className={`${
-            icon
-              ? "btn-destructive h-9 w-9 rounded-full px-0 py-0 font-bold"
-              : "flex h-auto w-full items-center justify-center gap-2 py-3"
-          }`}
-        >
-          <FiLogOut size={20} />
-          {icon ? null : "تسجيل الخروج"}
-        </Button>
+        <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+          <AlertDialogTrigger asChild>
+            <TooltipButton title="حذف">
+              <Button
+                size={"icon"}
+                onClick={() => setIsOpen(true)}
+                variant={"outline"}
+                className={`${
+                  icon
+                    ? "btn-destructive h-9 w-9 rounded-full px-0 py-0 font-bold"
+                    : "flex h-auto w-full items-center justify-center gap-2 py-3"
+                }`}
+              >
+                <LogOut size={20} />
+                {icon ? null : "تسجيل الخروج"}
+              </Button>
+            </TooltipButton>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="rounded-xl">
+            <AlertDialogHeader className="gap-4">
+              <AlertDialogTitle className="text-center text-black dark:text-white">
+                تسجيل الخروج
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                هل انت متأكد من{" "}
+                <span className="font-medium text-black dark:text-white">
+                  تسجيل الخروج
+                </span>
+                ؟
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel
+                disabled={isPending}
+                className="bg-slate-100! text-slate-900! hover:bg-slate-200/70! hover:text-slate-900!"
+              >
+                إلغاء
+              </AlertDialogCancel>
+              <AlertDialogAction
+                className="bg-red-500/15! text-red-500! hover:bg-red-500/10! hover:text-red-800!"
+                onClick={handleLogout}
+                disabled={isPending}
+              >
+                تسجيل الخروج
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       )}
-
-      {/* Confirm Logout Modal */}
-      <Modal
-        description={{
-          text: "هل انت متأكد من تسجيل الخروج؟",
-          color: "text-red-700",
-        }}
-        isOpen={isOpen}
-        onCancel={() => setIsOpen(false)}
-        onConfirm={logoutFromDashboard}
-        confirmText="تسجيل الخروج"
-        isLoading={isPending}
-        title="تسجيل الخروج"
-        onOpenChange={() => setIsOpen(!isOpen)}
-        variant="destructive"
-      />
     </>
   );
 };

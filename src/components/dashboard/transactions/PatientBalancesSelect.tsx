@@ -5,13 +5,13 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/shared/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+} from "@/shared/components/ui/popover";
+import { cn } from "@/shared/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import {
@@ -20,13 +20,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/components/ui/form";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import useDebounce from "@/hooks/useDebounce";
-import cookieServices from "@/utils/cookieServices";
-import { IFormInput } from "@/interfaces";
-import { useGetAllPatientTransactionsBalances } from "@/lib/react-query/main";
+import { Button } from "@/shared/components/ui/button";
+import useDebounce from "@/shared/hooks/useDebounce";
+import cookieServices from "@/shared/utils/cookieServices";
+import { IFormInput } from "@/shared/types";
+import { useGetAllPatientTransactionsBalances } from "@/shared/lib/react-query/main";
 
 interface IProps {
   form: any;
@@ -47,7 +47,7 @@ const PatientBalancesSelect = ({ form, input, patientId }: IProps) => {
       token,
       search,
     });
-    
+
   useEffect(() => {
     const subscription = form.watch(
       (value: any, { name }: { name: string }) => {
@@ -85,7 +85,7 @@ const PatientBalancesSelect = ({ form, input, patientId }: IProps) => {
                   variant="outline"
                   role="combobox"
                   aria-expanded={open}
-                  className={`border-muted w-full h-12! text-black dark:text-white justify-between overflow-hidden`}
+                  className={`border-muted h-12! w-full justify-between overflow-hidden text-black dark:text-white`}
                 >
                   {field.value
                     ? patientsOption?.find(
@@ -95,8 +95,8 @@ const PatientBalancesSelect = ({ form, input, patientId }: IProps) => {
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-[250px] p-0 z-1000 border-black/20 dark:border-white/40">
-                <Command className="text-black dark:text-white bg-foreground">
+              <PopoverContent className="z-1000 w-[250px] border-black/20 p-0 dark:border-white/40">
+                <Command className="bg-foreground text-black dark:text-white">
                   <CommandInput
                     placeholder="اختر او ابحث برقم الإيصال"
                     value={searchTerm}
@@ -107,7 +107,7 @@ const PatientBalancesSelect = ({ form, input, patientId }: IProps) => {
                     <CommandGroup>
                       {patientsOption?.map((option) => (
                         <CommandItem
-                          className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20"
+                          className="cursor-pointer py-2.5 text-black hover:bg-blue-200/20 dark:text-white"
                           key={option.label}
                           value={option.label}
                           onSelect={() => {

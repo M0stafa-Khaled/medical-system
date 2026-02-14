@@ -1,9 +1,9 @@
-import Modal from "@/components/shared/Modal";
-import { Button } from "@/components/ui/button";
-import TooltipButton from "@/components/ui/TooltipButton";
-import { useDeleteDosage } from "@/lib/react-query/dashboard/dosages";
-import cookieServices from "@/utils/cookieServices";
-import handleResErr from "@/utils/handleResponseError";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/shared/components/ui/button";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { useDeleteDosage } from "@/shared/lib/react-query/dashboard/dosages";
+import cookieServices from "@/shared/utils/cookieServices";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -41,7 +41,7 @@ const DeleteClinic = ({ name, id }: IProps) => {
           size={"sm"}
           onClick={() => setIsOpen(true)}
           variant={"destructive"}
-          className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+          className="h-9 w-9 gap-2 px-1 py-1 text-sm text-white"
         >
           <Trash2 size={20} />
         </Button>

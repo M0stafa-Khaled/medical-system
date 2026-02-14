@@ -1,4 +1,4 @@
-import { TRole } from "@/types";
+import { TRole } from "@/shared/types";
 
 export interface ILogin {
   email: string;

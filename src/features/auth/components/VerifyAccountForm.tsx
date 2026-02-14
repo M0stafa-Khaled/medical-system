@@ -1,14 +1,14 @@
-import { logout } from "@/store/features/auth/authSlice";
+import { logout } from "@/app/store/features/auth/authSlice";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
+} from "@/shared/components/ui/input-otp";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as z from "zod";
-import { clearPermissions } from "@/store/features/permissions/permissionsSlice";
+import { clearPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import Swal from "sweetalert2";
 import { useResendOtp, useVerifyAccount } from "../queriesAndMutations";
 import { AxiosError } from "axios";
@@ -18,11 +18,11 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/store/store";
+} from "@/shared/components/ui/form";
+import { Button } from "@/shared/components/ui/button";
+import { useAppDispatch } from "@/app/store";
 import { useNavigate } from "react-router";
-import cookieService from "@/utils/cookieServices";
+import cookieService from "@/shared/utils/cookieServices";
 
 const formSchema = z.object({
   otp: z

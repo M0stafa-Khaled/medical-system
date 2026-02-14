@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/components/ui/form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -13,12 +13,12 @@ import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { useForgotPassword } from "@/features/auth/queriesAndMutations";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import Swal from "sweetalert2";
 import { forgotPasswordSchema } from "../schema";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/shared/components/ui/input";
 
 export const ForgotPasswordForm = () => {
   const navigate = useNavigate();
@@ -80,15 +80,16 @@ export const ForgotPasswordForm = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-black">
+                    <FormLabel className="text-black" htmlFor={"email"}>
                       البريد الإلكتروني
                     </FormLabel>
                     <FormControl>
                       <Input
+                        id="email"
                         placeholder="البريد الإلكتروني"
                         type="text"
                         {...field}
-                        className="h-auto border-black/20 px-2 py-2.5 text-black placeholder:h-14 placeholder:text-black/50 focus-visible:ring-[#bababa] md:py-3.5"
+                        className="border-muted-foreground h-auto py-3 text-black placeholder:h-14 placeholder:text-sm placeholder:text-black/50 dark:bg-transparent"
                       />
                     </FormControl>
                     <FormMessage />
@@ -98,10 +99,7 @@ export const ForgotPasswordForm = () => {
             </div>
           </div>
         </div>
-        <Button
-          disabled={isPending}
-          className="flex h-auto w-full items-center justify-center gap-4 bg-[#16a0cf] px-4 py-3.5 text-white hover:bg-[#16a0cf]/90"
-        >
+        <Button disabled={isPending} size={"lg"} className="w-full text-white">
           إرسال رمز إعادة التعيين
           {isPending && <Loader2 className="animate-spin" />}
         </Button>

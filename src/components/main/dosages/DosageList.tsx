@@ -1,9 +1,9 @@
-import { TableCell } from "@/components/ui/table";
+import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
 import UpdateDosage from "./UpdateDosage";
 import DeleteClinic from "./DeleteDosage";
 import { tableRowVariants } from "@/animations";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { IDosage } from "@/interfaces/dashboard/dosages";
 
@@ -21,11 +21,11 @@ const DosagesList = ({ dosages }: IProps) => {
         initial="hidden"
         animate="visible"
         variants={tableRowVariants}
-        className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+        className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
       >
         <TableCell
           colSpan={3}
-          className="text-sm text-center text-black dark:text-white py-5 font-medium"
+          className="py-5 text-center text-sm font-medium text-black dark:text-white"
         >
           لا يوجد جرعات
         </TableCell>
@@ -42,18 +42,18 @@ const DosagesList = ({ dosages }: IProps) => {
           animate="visible"
           custom={index}
           variants={tableRowVariants}
-          className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+          className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
+          <TableCell className="w-20 py-3 text-center text-sm font-medium text-black dark:text-white">
             {index + 1}
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-5 font-medium">
+          <TableCell className="py-5 text-center text-sm font-medium text-black dark:text-white">
             {name}
           </TableCell>
 
           {(canUpdateDosage || canDeleteDosage) && (
             <TableCell className="text-center">
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 {canUpdateDosage && <UpdateDosage name={name} id={id} />}
                 {canDeleteDosage && (
                   <DeleteClinic name={name} id={id.toString()} />

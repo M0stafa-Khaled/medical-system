@@ -1,11 +1,16 @@
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import formatDateTime from "@/utils/formatDate";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import { Button } from "@/shared/components/ui/button";
+import { Separator } from "@/shared/components/ui/separator";
+import formatDateTime from "@/shared/utils/formatDate";
 import {
   BadgeInfo,
   FileImage,
@@ -18,20 +23,25 @@ import {
   VenusAndMars,
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
-import { useGetPatientById } from "@/lib/react-query/dashboard/patients";
+import { useGetPatientById } from "@/shared/lib/react-query/dashboard/patients";
 import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
 import DeletePatient from "@/components/dashboard/patients/DeletePatient";
 import InfoField from "@/components/shared/InfoField";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { Calendar, BadgeCheck, BadgeX } from "lucide-react";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import DataLoader from "@/components/ui/DataLoader";
+import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/components/ui/tabs";
 import PatientBalances from "@/components/dashboard/patients/patientBalances/PatientBalances";
-import { AxiosResErr } from "@/types";
+import { AxiosResErr } from "@/shared/types";
 
 const PatientDetails = () => {
   const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);

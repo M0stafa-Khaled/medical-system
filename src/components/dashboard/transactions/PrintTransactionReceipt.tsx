@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import TooltipButton from "@/components/ui/TooltipButton";
+import { Button } from "@/shared/components/ui/button";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
-import { convertToEgyptianPounds } from "@/utils/convertPriceNumberToWords";
-import formatDateTime from "@/utils/formatDate";
+import { convertToEgyptianPounds } from "@/shared/utils/convertPriceNumberToWords";
+import formatDateTime from "@/shared/utils/formatDate";
 import { useRef } from "react";
 import { FaPrint } from "react-icons/fa6";
 import { useReactToPrint } from "react-to-print";
@@ -39,7 +39,7 @@ const PrintTransactionReceipt = ({ transaction }: IProps) => {
       <TooltipButton title="طباعة">
         <Button
           onClick={reactToPrintFn}
-          className="text-sm text-white bg-blue-600 hover:bg-blue-700 h-9 w-9"
+          className="h-9 w-9 bg-blue-600 text-sm text-white hover:bg-blue-700"
         >
           <FaPrint size={24} />
         </Button>
@@ -50,20 +50,20 @@ const PrintTransactionReceipt = ({ transaction }: IProps) => {
         className="hidden p-3 print:block print:text-black"
         ref={contentRef}
       >
-        <div className="relative p-4 mx-auto overflow-hidden bg-white border-2 border-gray-500 rounded-lg max-w-lg shadow-xl">
+        <div className="relative mx-auto max-w-lg overflow-hidden rounded-lg border-2 border-gray-500 bg-white p-4 shadow-xl">
           {/* Cancelled watermark */}
           {!transaction.status && (
-            <h1 className="text-red-700 text-center absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full transform -rotate-27 scale-150 font-bold border-y border-black p-4 opacity-70 text-4xl">
+            <h1 className="absolute top-1/2 left-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 scale-150 -rotate-27 transform border-y border-black p-4 text-center text-4xl font-bold text-red-700 opacity-70">
               ملغي
             </h1>
           )}
 
           {/* Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-dashed border-gray-400">
+          <div className="flex items-center justify-between border-b border-dashed border-gray-400 pb-4">
             <div className="flex items-center space-x-2 space-x-reverse">
-              <div className="p-2 border border-gray-400 rounded-full">
+              <div className="rounded-full border border-gray-400 p-2">
                 {/* Logo SVG - Replace with your logo */}
-                <img src="/images/logo.svg" alt="" className="w-12 h-12" />
+                <img src="/images/logo.svg" alt="" className="h-12 w-12" />
               </div>
               <div>
                 <h2 className="text-lg font-bold">DR. WALID MEHREM</h2>
@@ -86,78 +86,78 @@ const PrintTransactionReceipt = ({ transaction }: IProps) => {
           </div>
 
           {/* Transaction Info */}
-          <div className="py-4 border-b border-dashed border-gray-400 grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 border-b border-dashed border-gray-400 py-4">
             <div className="flex flex-col space-y-2">
               <div className="flex items-center">
-                <span className="text-gray-600 w-24">العيادة:</span>
-                <span className="font-bold flex-1">نساء وتوليد</span>
+                <span className="w-24 text-gray-600">العيادة:</span>
+                <span className="flex-1 font-bold">نساء وتوليد</span>
               </div>
               <div className="flex items-center">
-                <span className="text-gray-600 w-24">اسم المريض:</span>
-                <span className="font-bold flex-1">
+                <span className="w-24 text-gray-600">اسم المريض:</span>
+                <span className="flex-1 font-bold">
                   {transaction.patient.name}
                 </span>
               </div>
               <div className="flex items-center">
-                <span className="text-gray-600 w-24">جهة التعاقد:</span>
-                <span className="font-bold flex-1">مصريين</span>
+                <span className="w-24 text-gray-600">جهة التعاقد:</span>
+                <span className="flex-1 font-bold">مصريين</span>
               </div>
             </div>
             <div className="flex flex-col space-y-2">
               <div className="flex items-center">
-                <span className="text-gray-600 w-32">الطبيب المعالج:</span>
-                <span className="font-bold flex-1">
+                <span className="w-32 text-gray-600">الطبيب المعالج:</span>
+                <span className="flex-1 font-bold">
                   {transaction.doctor.item.name}
                 </span>
               </div>
               <div className="flex items-center">
-                <span className="text-gray-600 w-32">نوع المريض:</span>
-                <span className="font-bold flex-1">
+                <span className="w-32 text-gray-600">نوع المريض:</span>
+                <span className="flex-1 font-bold">
                   {transaction.patient.gender === "Male" ? "ذكر" : "أنثى"}
                 </span>
               </div>
               <div className="flex items-center">
-                <span className="text-gray-600 w-32">رقم الكارنية:</span>
-                <span className="font-bold flex-1">...</span>
+                <span className="w-32 text-gray-600">رقم الكارنية:</span>
+                <span className="flex-1 font-bold">...</span>
               </div>
             </div>
           </div>
 
           {/* Bill Content */}
-          <div className="py-4 border-b border-dashed border-gray-400">
+          <div className="border-b border-dashed border-gray-400 py-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="flex items-center">
-                <span className="text-gray-600 w-24">الكود: </span>
-                <span className="font-bold flex-1">{transaction.code}</span>
+                <span className="w-24 text-gray-600">الكود: </span>
+                <span className="flex-1 font-bold">{transaction.code}</span>
               </div>
               <div className="flex items-center">
-                <span className="text-gray-600 w-24">الخدمة: </span>
-                <span className="font-bold flex-1">
+                <span className="w-24 text-gray-600">الخدمة: </span>
+                <span className="flex-1 font-bold">
                   {transaction.actions.map((a) => a.name).join(", ")}
                 </span>
               </div>
             </div>
-            <div className="flex items-center mt-2">
-              <span className="text-gray-600 w-24">قيمة الخدمة:</span>
-              <span className="font-bold flex-1">{totalAmount}</span>
+            <div className="mt-2 flex items-center">
+              <span className="w-24 text-gray-600">قيمة الخدمة:</span>
+              <span className="flex-1 font-bold">{totalAmount}</span>
             </div>
           </div>
 
           {/* Totals */}
-          <div className="py-4 border-b border-dashed border-gray-400">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-gray-600 font-bold">تحمل المريض:</span>
-              <span className="font-bold text-lg">
+          <div className="border-b border-dashed border-gray-400 py-4">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="font-bold text-gray-600">تحمل المريض:</span>
+              <span className="text-lg font-bold">
                 {transaction.balance.amount_paid}
               </span>
             </div>
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-gray-600 font-bold">تحمل الجهة:</span>
-              <span className="font-bold text-lg">0</span>
+            <div className="mb-2 flex items-center justify-between">
+              <span className="font-bold text-gray-600">تحمل الجهة:</span>
+              <span className="text-lg font-bold">0</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600 font-bold">الإجمالي:</span>
-              <span className="font-bold text-lg">{totalAmount}</span>
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-gray-600">الإجمالي:</span>
+              <span className="text-lg font-bold">{totalAmount}</span>
             </div>
             <p className="mt-4 text-sm">
               المبلغ وقدره:{" "}
@@ -168,21 +168,21 @@ const PrintTransactionReceipt = ({ transaction }: IProps) => {
           </div>
 
           {/* Footer */}
-          <div className="py-4 grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 py-4">
             <div className="flex flex-col space-y-2">
               <div className="flex items-center">
-                <span className="text-gray-600 w-32">الخزينة:</span>
-                <span className="font-bold flex-1">
+                <span className="w-32 text-gray-600">الخزينة:</span>
+                <span className="flex-1 font-bold">
                   {transaction.treasury.name}
                 </span>
               </div>
               <div className="flex items-center">
-                <span className="text-gray-600 w-32">طريقة الدفع:</span>
-                <span className="font-bold flex-1">نقدي</span>
+                <span className="w-32 text-gray-600">طريقة الدفع:</span>
+                <span className="flex-1 font-bold">نقدي</span>
               </div>
               <div className="flex items-center">
-                <span className="text-gray-600 w-32">مدخل البيانات:</span>
-                <span className="font-bold flex-1">
+                <span className="w-32 text-gray-600">مدخل البيانات:</span>
+                <span className="flex-1 font-bold">
                   {transaction.employee.name}
                 </span>
               </div>
@@ -191,16 +191,16 @@ const PrintTransactionReceipt = ({ transaction }: IProps) => {
               <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${transaction.code}`}
                 alt="QR Code"
-                className="w-24 h-24 mb-2"
+                className="mb-2 h-24 w-24"
               />
-              <p className="text-gray-600 text-sm font-bold">
+              <p className="text-sm font-bold text-gray-600">
                 {transaction.code}
               </p>
             </div>
           </div>
 
           {/* Contact Info */}
-          <p className="text-center text-xs text-gray-600 mt-4 border-t border-dashed border-gray-400 pt-2">
+          <p className="mt-4 border-t border-dashed border-gray-400 pt-2 text-center text-xs text-gray-600">
             ا ش - مكور - بجوار مسجد السلام - الهرم - الجيزة
             <br />
             01501868008 - 01098570008 - 01113356459

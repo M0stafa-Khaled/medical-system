@@ -1,11 +1,11 @@
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import CreateExpense from "./CreateExpense";
 import { useSearchParams } from "react-router";
 import { IExpensesFilter } from "@/interfaces/dashboard/expenses";
 import ExpensesFilters from "./ExpensesFilters";
 import { format } from "date-fns";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Eraser } from "lucide-react";
 import { ar } from "date-fns/locale";
 

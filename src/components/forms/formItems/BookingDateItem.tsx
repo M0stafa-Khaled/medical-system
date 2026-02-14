@@ -1,17 +1,17 @@
-import { IFormInput } from "@/interfaces";
+import { IFormInput } from "@/shared/types";
 import {
   ControllerRenderProps,
   FieldValues,
   UseFormReturn,
 } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/shared/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/shared/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import {
   FormControl,
@@ -20,7 +20,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/components/ui/form";
 
 interface IProps {
   field: ControllerRenderProps<FieldValues, string>;
@@ -51,7 +51,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                   variant="outline"
                   data-empty={!field.value}
                   className={
-                    "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-muted"
+                    "hover:bg-foreground dark:hover:bg-foreground border-muted h-auto w-full justify-start py-3 text-right font-normal text-black hover:text-black dark:text-white dark:hover:text-white"
                   }
                 >
                   <CalendarIcon className="ml-2 h-4 w-4" />
@@ -99,7 +99,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                                 .toLowerCase() !== allowedDay
                             ) {
                               firstAvailableDay.setDate(
-                                firstAvailableDay.getDate() + 1,
+                                firstAvailableDay.getDate() + 1
                               );
                             }
                           }

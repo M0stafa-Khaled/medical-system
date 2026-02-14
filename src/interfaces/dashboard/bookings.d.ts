@@ -1,5 +1,5 @@
-import { TBookingStatus } from "@/types";
-import { IPaginationMeta } from "..";
+import { TBookingStatus } from "@/shared/types";
+import { IPaginationMeta } from "../../shared/types";
 import { IDoctor } from "./doctors/doctor";
 import { IPatient } from "./patient";
 import { IEmployee } from "./employee";

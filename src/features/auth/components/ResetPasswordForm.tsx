@@ -1,16 +1,16 @@
 import { RenderAuthFormFields } from "./RenderAuthFormFields";
 import { useEffect } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { useResetPassword } from "@/features/auth/queriesAndMutations";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { RESET_PASSWORD_FORM_INPUTS } from "@/constants";
 import Swal from "sweetalert2";
 import { resetPasswordSchema } from "../schema";
@@ -78,6 +78,8 @@ export const ResetPasswordForm = () => {
         });
     }
   };
+
+  console.log(form.formState.errors);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-3">
@@ -94,7 +96,9 @@ export const ResetPasswordForm = () => {
         </div>
         <Button
           disabled={isPending}
-          className="flex h-auto w-full items-center justify-center gap-4 bg-[#16a0cf] px-4 py-3.5 text-white hover:bg-[#16a0cf]/90"
+          size={"lg"}
+          type="submit"
+          className="w-full text-white"
         >
           إعادة تعيين كلمة المرور
           {isPending && <Loader2 className="animate-spin" />}

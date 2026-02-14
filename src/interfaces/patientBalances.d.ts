@@ -1,4 +1,4 @@
-import { TBalanceType, TPaymentMethod } from "@/types";
+import { TBalanceType, TPaymentMethod } from "@/shared/types";
 
 export interface IBalance {
   id: number;

@@ -1,8 +1,8 @@
 import { IoIosMoon, IoIosSunny } from "react-icons/io";
-import { Button } from "../ui/button";
+import { Button } from "../../shared/components/ui/button";
 import { useTheme } from "next-themes";
-import TooltipButton from "../ui/TooltipButton";
-import { cn } from "@/lib/utils";
+import { TooltipButton } from "../../shared/components/ui/TooltipButton";
+import { cn } from "@/shared/lib/utils";
 
 const ToggleTheme = ({ className }: { className?: string }) => {
   const { theme, setTheme } = useTheme();

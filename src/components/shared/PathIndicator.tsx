@@ -5,7 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/shared/components/ui/breadcrumb";
 import { Fragment } from "react/jsx-runtime";
 
 interface IProps {

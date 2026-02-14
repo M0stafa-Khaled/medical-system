@@ -1,23 +1,23 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import { PATIENT_FORM_INPUTS } from "@/constants";
 import { IPatient } from "@/interfaces/dashboard/patient";
-import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
-import cookieServices from "@/utils/cookieServices";
+import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import {
   useCreatePatient,
   useUpdatePatient,
-} from "@/lib/react-query/dashboard/patients";
+} from "@/shared/lib/react-query/dashboard/patients";
 import { useEffect } from "react";
 import SubmitButton from "../../../shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import RenderPatientFormFields from "./RenderPatientFormFields";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 
 interface IProps {
   patient?: IPatient;

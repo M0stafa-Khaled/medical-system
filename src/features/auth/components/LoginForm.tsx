@@ -1,6 +1,6 @@
-import { login } from "@/store/features/auth/authSlice";
-import { setPermissions } from "@/store/features/permissions/permissionsSlice";
-import { Form } from "@/components/ui/form";
+import { login } from "@/app/store/features/auth/authSlice";
+import { setPermissions } from "@/app/store/features/permissions/permissionsSlice";
+import { Form } from "@/shared/components/ui/form";
 import { LOGIN_FORM_INPUTS } from "@/constants";
 import { useLogin } from "@/features/auth/queriesAndMutations";
 import { loginSchema } from "../schema";
@@ -10,8 +10,8 @@ import { useDispatch } from "react-redux";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
-import { Button } from "@/components/ui/button";
-import handleResErr from "@/utils/handleResponseError";
+import { Button } from "@/shared/components/ui/button";
+import { handleResErr } from "@/shared/utils/handleResError";
 import Swal from "sweetalert2";
 import { RenderAuthFormFields } from "./RenderAuthFormFields";
 
@@ -75,7 +75,7 @@ export const LoginForm = () => {
         className="w-full max-w-md space-y-3 lg:max-w-full"
       >
         <div>
-          <div className="space-y-4">
+          <div className="space-y-2">
             {LOGIN_FORM_INPUTS.map((input) => (
               <div className="w-full" key={input.name}>
                 <RenderAuthFormFields
@@ -86,18 +86,18 @@ export const LoginForm = () => {
               </div>
             ))}
           </div>
-          <p className="mt-1 mr-2">
-            <Link
-              to={"/forgot-password"}
-              className="text-sm text-black underline"
-            >
-              هل نسيت كلمة المرور؟
-            </Link>
-          </p>
+          <Link
+            to={"/forgot-password"}
+            className="mt-1 mr-2 text-sm text-black underline"
+          >
+            هل نسيت كلمة المرور؟
+          </Link>
         </div>
         <Button
           disabled={isPending}
-          className="flex h-auto w-full items-center justify-center gap-4 bg-[#16a0cf] px-4 py-3.5 text-white hover:bg-[#16a0cf]/90"
+          type="submit"
+          className="w-full text-white"
+          size={"lg"}
         >
           تسجيل الدخول
           {isPending && <Loader2 className="animate-spin" />}

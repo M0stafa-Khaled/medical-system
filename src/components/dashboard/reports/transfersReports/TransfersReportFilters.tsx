@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/shared/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
+} from "@/shared/components/ui/popover";
+import { Input } from "@/shared/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import { ITransfersReportFilter } from "@/interfaces/dashboard/reports";
 
@@ -21,10 +21,10 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
   ) => setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 my-4">
+    <div className="my-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
       <Input
         placeholder="ابحث باسم الموظف"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
         type="search"
         value={filters.employee}
         onChange={(e) => handleFilterChange("employee", e.target.value)}
@@ -32,7 +32,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
 
       <Input
         placeholder="اسم الخزينة المحول منها"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
         type="search"
         value={filters.from_treasury}
         onChange={(e) => handleFilterChange("from_treasury", e.target.value)}
@@ -40,7 +40,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
 
       <Input
         placeholder="اسم الخزينة المحول إليها"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
         type="search"
         value={filters.to_treasury}
         onChange={(e) => handleFilterChange("to_treasury", e.target.value)}
@@ -52,7 +52,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
           <Button
             variant={"outline"}
             className={
-              "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-black/20 dark:border-white/40"
+              "hover:bg-foreground dark:hover:bg-foreground h-auto w-full justify-start border-black/20 py-3 text-right font-normal text-black hover:text-black dark:border-white/40 dark:text-white dark:hover:text-white"
             }
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
@@ -64,7 +64,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-full p-0 px-3 border-black/20 dark:border-white/40 bg-foreground"
+          className="bg-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
           align="start"
         >
           <Calendar
@@ -93,7 +93,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
           <Button
             variant={"outline"}
             className={
-              "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-black/20 dark:border-white/40"
+              "hover:bg-foreground dark:hover:bg-foreground h-auto w-full justify-start border-black/20 py-3 text-right font-normal text-black hover:text-black dark:border-white/40 dark:text-white dark:hover:text-white"
             }
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
@@ -105,7 +105,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-full p-0 px-3 border-black/20 dark:border-white/40 bg-foreground"
+          className="bg-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
           align="start"
         >
           <Calendar

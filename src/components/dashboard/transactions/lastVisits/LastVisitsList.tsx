@@ -1,16 +1,16 @@
-import { TableCell } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+import { TableCell } from "@/shared/components/ui/table";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
-import formatDateTime from "@/utils/formatDate";
-import { Badge } from "@/components/ui/badge";
+import formatDateTime from "@/shared/utils/formatDate";
+import { Badge } from "@/shared/components/ui/badge";
 import RefundTransaction from "../RefundTransaction";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   transactions: ITransaction[];

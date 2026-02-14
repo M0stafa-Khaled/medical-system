@@ -1,15 +1,15 @@
 import DoctorForm from "@/components/forms/dashboard/doctors/DoctorForm";
-import { Card, CardContent } from "@/components/ui/card";
-import cookieServices from "@/utils/cookieServices";
+import { Card, CardContent } from "@/shared/components/ui/card";
+import cookieServices from "@/shared/utils/cookieServices";
 import { updateDoctorSchema } from "@/validations/dashboard/doctorSchema";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
-import DataLoader from "@/components/ui/DataLoader";
-import { AxiosResErr } from "@/types";
+import { useGetDoctorById } from "@/shared/lib/react-query/dashboard/doctors/doctors";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import { AxiosResErr } from "@/shared/types";
 const UpdateDoctor = () => {
   const navigate = useNavigate();
   const token = cookieServices.getToken();

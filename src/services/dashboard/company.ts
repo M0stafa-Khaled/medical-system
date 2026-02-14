@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IStatusMsg } from "@/interfaces";
+import { IStatusMsg } from "@/shared/types";
 import {
   ICompanyRes,
   ISubscriptionRes,

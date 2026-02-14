@@ -1,6 +1,6 @@
-import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { memo } from "react";
 
 const LastVisitsTableHeader = () => {
@@ -9,7 +9,7 @@ const LastVisitsTableHeader = () => {
 
   return (
     <TableHeader>
-      <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
+      <TableRow className="dark:bg-dark/70 dark:border-muted dark:hover:bg-dark/70 bg-white/80 hover:bg-white/80">
         <TableHead className="py-4 pr-4 text-center text-nowrap">
           رقم الإيصال
         </TableHead>

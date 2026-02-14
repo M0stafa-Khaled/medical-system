@@ -1,16 +1,16 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import TransactionsTableHeader from "./TransactionsTableHeader";
 import TransactionsHeader from "./TransactionsHeader";
 import TransactionsList from "./TransactionsList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetAllTransactions } from "@/lib/react-query/dashboard/transactions/transactions";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetAllTransactions } from "@/shared/lib/react-query/dashboard/transactions/transactions";
 import { ITransactionsFilter } from "@/interfaces/dashboard/transactions/transactions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
 const TransactionTable = () => {

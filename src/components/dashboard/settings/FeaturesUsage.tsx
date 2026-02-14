@@ -1,5 +1,5 @@
 import { containerVariants, itemVariants } from "@/animations";
-import CircleProgress from "@/components/ui/CircleProgress";
+import CircleProgress from "@/shared/components/ui/CircleProgress";
 import { IFeature } from "@/interfaces/dashboard/company";
 import { motion } from "framer-motion";
 
@@ -17,7 +17,7 @@ const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
   return (
     <motion.div
       variants={containerVariants}
-      className="my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
+      className="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
     >
       {features.map((feature, idx) => {
         if (feature.name === "استقبال الاشعارات") return null;
@@ -32,7 +32,7 @@ const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
             key={feature.name}
           >
             <CircleProgress value={percentage} color={color} size={150} />
-            <div className="text-center space-y-1">
+            <div className="space-y-1 text-center">
               <span>
                 {feature.used}/{feature.max_value}
               </span>

@@ -1,7 +1,12 @@
 import { containerVariants, itemVariants } from "@/animations";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DataLoader from "@/components/ui/DataLoader";
-import cookieServices from "@/utils/cookieServices";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import cookieServices from "@/shared/utils/cookieServices";
 import { User2, UserCircle2, Building2, Calendar, Pen } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
@@ -9,11 +14,11 @@ import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import InfoField from "@/components/shared/InfoField";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { Button } from "@/components/ui/button";
-import { AxiosResErr } from "@/types";
-import { useGetPrescriptionById } from "@/lib/react-query/dashboard/prescriptions";
+import { Button } from "@/shared/components/ui/button";
+import { AxiosResErr } from "@/shared/types";
+import { useGetPrescriptionById } from "@/shared/lib/react-query/dashboard/prescriptions";
 import DeletePrescription from "@/components/dashboard/prescriptions/DeletePrescription";
 import { FaNotesMedical } from "react-icons/fa6";
 import PrescriptablesList from "@/components/dashboard/prescriptions/prescriptables/PrescriptibleList";

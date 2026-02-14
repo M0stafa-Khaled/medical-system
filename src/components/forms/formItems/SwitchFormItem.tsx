@@ -1,7 +1,7 @@
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { FormControl, FormItem, FormLabel } from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
-import { IFormInput } from "@/interfaces";
+import { FormControl, FormItem, FormLabel } from "@/shared/components/ui/form";
+import { Switch } from "@/shared/components/ui/switch";
+import { IFormInput } from "@/shared/types";
 
 interface IProps {
   field: ControllerRenderProps<FieldValues, string>;

@@ -1,6 +1,6 @@
 import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/shared/lib/utils";
+import { Button } from "@/shared/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -8,20 +8,20 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/shared/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/shared/components/ui/popover";
 import { ControllerRenderProps } from "react-hook-form";
 import {
   FormControl,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { IFormInput } from "@/interfaces";
+} from "@/shared/components/ui/form";
+import { IFormInput } from "@/shared/types";
 import { useMemo, useState } from "react";
 
 interface IOption {

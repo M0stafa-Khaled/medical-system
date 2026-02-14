@@ -6,8 +6,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+} from "@/shared/components/ui/alert-dialog";
+import { Button } from "@/shared/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 interface IProps extends React.ComponentPropsWithoutRef<
@@ -36,7 +36,7 @@ interface IProps extends React.ComponentPropsWithoutRef<
   maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
 }
 
-const Modal = ({
+export const Modal = ({
   isOpen,
   onOpenChange,
   title,
@@ -58,11 +58,11 @@ const Modal = ({
         {...rest}
       >
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-black dark:text-white text-center">
+          <AlertDialogTitle className="text-center text-black dark:text-white">
             {title}
           </AlertDialogTitle>
           <AlertDialogDescription
-            className={`text-base text-center max-w-md mx-auto ${
+            className={`mx-auto max-w-md text-center text-base ${
               description.color ? description.color : ""
             }`}
           >
@@ -73,10 +73,10 @@ const Modal = ({
         {children}
 
         {showFooter && (
-          <AlertDialogFooter className="text-start justify-start! gap-2">
+          <AlertDialogFooter className="justify-start! gap-2 text-start">
             <AlertDialogCancel
               onClick={onCancel}
-              className="text-black dark:text-white py-2.5 h-auto"
+              className="h-auto py-2.5 text-black dark:text-white"
             >
               إلغاء
             </AlertDialogCancel>
@@ -85,10 +85,10 @@ const Modal = ({
                 onClick={onConfirm}
                 disabled={isLoading}
                 variant={variant}
-                className="py-2.5 h-auto"
+                className="h-auto py-2.5"
               >
                 {confirmText}
-                {isLoading && <Loader2 className="animate-spin ml-2" />}
+                {isLoading && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             )}
           </AlertDialogFooter>
@@ -97,5 +97,3 @@ const Modal = ({
     </AlertDialog>
   );
 };
-
-export default Modal;

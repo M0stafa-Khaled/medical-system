@@ -1,13 +1,13 @@
-import useDebounce from "@/hooks/useDebounce";
-import cookieServices from "@/utils/cookieServices";
+import useDebounce from "@/shared/hooks/useDebounce";
+import cookieServices from "@/shared/utils/cookieServices";
 import { memo, useEffect } from "react";
 import { toast } from "react-toastify";
 import TreasuriesHeader from "./TreasuriesHeader";
 import TreasuryCard from "./TreasuryCard";
-import CardSkeleton from "@/components/ui/CardSkeleton";
+import CardSkeleton from "@/shared/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
+import { useGetAllTreasuries } from "@/shared/lib/react-query/dashboard/treasuries";
 import { useSearchParams } from "react-router";
 
 const TreasuriesList = () => {

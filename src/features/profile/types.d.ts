@@ -1,7 +1,7 @@
 import { type IDoctor } from "../dashboard/doctors/doctor";
 import { type IPatient } from "../dashboard/patient";
 import { type IEmployee } from "../dashboard/employee";
-import { type TRole } from "@/types";
+import { type TRole } from "@/shared/types";
 
 export interface IResponseProfile {
   data: IDoctor | IPatient | IEmployee;

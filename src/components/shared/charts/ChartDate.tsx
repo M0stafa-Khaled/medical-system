@@ -1,11 +1,11 @@
 // components/shared/DatePickerPopover.tsx
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/shared/components/ui/button";
+import { Calendar } from "@/shared/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/shared/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 
@@ -19,7 +19,7 @@ const ChartDate = ({ value, onChange, placeholder }: IProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="w-full justify-start text-right font-normal py-3 h-auto border-black/20 dark:border-white/40">
+        <Button className="h-auto w-full justify-start border-black/20 py-3 text-right font-normal dark:border-white/40">
           <CalendarIcon className="ml-2 h-4 w-4" />
           {value ? (
             format(new Date(value), "dd-MM-yyyy")
@@ -29,7 +29,7 @@ const ChartDate = ({ value, onChange, placeholder }: IProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-full p-0 px-3 border-black/20 dark:border-white/40 dark:bg-primary dark:text-primary-foreground"
+        className="dark:bg-primary dark:text-primary-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
         align="start"
       >
         <Calendar

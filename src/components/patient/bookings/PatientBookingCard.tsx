@@ -1,17 +1,17 @@
 import BookingStatus from "@/components/dashboard/bookings/BookingStatus";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import TooltipButton from "@/components/ui/TooltipButton";
+} from "@/shared/components/ui/card";
+import { Separator } from "@/shared/components/ui/separator";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { IPatientBooking } from "@/interfaces/patient/patientBookings";
-import convertDay from "@/utils/convertDayLang";
-import formatDateTime from "@/utils/formatDate";
+import convertDay from "@/shared/utils/convertDayLang";
+import formatDateTime from "@/shared/utils/formatDate";
 import {
   Bookmark,
   Building2,

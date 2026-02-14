@@ -1,11 +1,11 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import { useEffect } from "react";
-import cookieServices from "@/utils/cookieServices";
-import TableSkeleton from "@/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetAllAnalysis } from "@/lib/react-query/main";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetAllAnalysis } from "@/shared/lib/react-query/main";
 import AnalysisHeader from "./AnalysisHeader";
 import AnalysisTableHeader from "./AnalyticsTableHeader";
 import AnalysisList from "./AnalysisList";

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Activity, Menu, X } from "lucide-react";
 import { m, AnimatePresence } from "framer-motion";
 import { Link, NavLink } from "react-router";

@@ -1,10 +1,10 @@
 import { Link } from "react-router";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { RootState } from "@/app/store";
 import { motion } from "framer-motion";
 import { navItemsVariants } from "@/animations/navbarAnimations";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 
 export const AuthButtons = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);

@@ -1,9 +1,9 @@
 import WorkingDayForm from "@/components/forms/dashboard/doctors/WorkingDayForm";
-import { Card, CardContent } from "@/components/ui/card";
-import DataLoader from "@/components/ui/DataLoader";
-import { useGetWorkingDayById } from "@/lib/react-query/dashboard/doctors/workingDays";
-import { AxiosResErr } from "@/types";
-import cookieServices from "@/utils/cookieServices";
+import { Card, CardContent } from "@/shared/components/ui/card";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import { useGetWorkingDayById } from "@/shared/lib/react-query/dashboard/doctors/workingDays";
+import { AxiosResErr } from "@/shared/types";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";

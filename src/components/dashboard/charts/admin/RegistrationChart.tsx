@@ -1,6 +1,6 @@
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import AnalyticsChart from "../../../shared/charts/ChartsCard";
-import { useGetRegistrationChart } from "@/lib/react-query/dashboard/charts/adminCharts";
+import { useGetRegistrationChart } from "@/shared/lib/react-query/dashboard/charts/adminCharts";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import ChartDate from "../../../shared/charts/ChartDate";
