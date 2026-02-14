@@ -1,12 +1,19 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
 import DeleteWorkingDay from "./DeleteWorkingDay";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
 import { Clock, Users, Hospital, Calendar, Pen } from "lucide-react";
-import convertDay, { convertDayFromEnToAr } from "@/utils/convertDayLang";
+import convertDay, {
+  convertDayFromEnToAr,
+} from "@/shared/utils/convertDayLang";
 import InfoField from "../../../shared/InfoField";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 
 interface IProps {

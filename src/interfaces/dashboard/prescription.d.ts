@@ -1,5 +1,5 @@
-import { TPrescriptableType } from "@/types";
-import { IPaginationMeta } from "..";
+import { TPrescriptableType } from "@/shared/types";
+import { IPaginationMeta } from "../../shared/types";
 import { IClinic } from "./clinics";
 import { IDoctor } from "./doctors/doctor";
 import { IPatient } from "./patient";

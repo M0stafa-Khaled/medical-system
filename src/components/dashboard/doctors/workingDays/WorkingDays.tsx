@@ -1,17 +1,22 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import useHasPermission from "@/hooks/useHasPermission";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import cookieServices from "@/utils/cookieServices";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
+import cookieServices from "@/shared/utils/cookieServices";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetAllWorkingDays } from "@/shared/lib/react-query/dashboard/doctors/workingDays";
 import WorkingDayCard from "./WorkingDayCard";
-import SearchInput from "../../../ui/SearchInput";
-import { Button } from "@/components/ui/button";
+import SearchInput from "../../../../shared/components/ui/SearchInput";
+import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router";
-import CardSkeleton from "@/components/ui/CardSkeleton";
+import CardSkeleton from "@/shared/components/ui/CardSkeleton";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 

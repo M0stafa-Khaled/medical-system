@@ -1,7 +1,12 @@
 import { containerVariants, itemVariants } from "@/animations";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DataLoader from "@/components/ui/DataLoader";
-import cookieServices from "@/utils/cookieServices";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import cookieServices from "@/shared/utils/cookieServices";
 import { User2, Building2, Calendar, Pen } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
@@ -9,12 +14,12 @@ import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import InfoField from "@/components/shared/InfoField";
-import { Button } from "@/components/ui/button";
-import { AxiosResErr } from "@/types";
+import { Button } from "@/shared/components/ui/button";
+import { AxiosResErr } from "@/shared/types";
 import DeletePrescription from "@/components/dashboard/prescriptions/DeletePrescription";
 import { FaNotesMedical } from "react-icons/fa6";
 import PrescriptibleList from "@/components/dashboard/prescriptions/prescriptables/PrescriptibleList";
-import { useGetDoctorPrescriptionById } from "@/lib/react-query/doctor/prescriptions";
+import { useGetDoctorPrescriptionById } from "@/shared/lib/react-query/doctor/prescriptions";
 
 const DoctorPrescriptionDetails = () => {
   const navigate = useNavigate();

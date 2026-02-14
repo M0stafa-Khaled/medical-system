@@ -1,8 +1,8 @@
-import Modal from "@/components/shared/Modal";
-import { Button } from "@/components/ui/button";
-import { useCreateDoctorTransaction } from "@/lib/react-query/dashboard/doctors/doctorTransactions";
-import cookieServices from "@/utils/cookieServices";
-import handleResErr from "@/utils/handleResponseError";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/shared/components/ui/button";
+import { useCreateDoctorTransaction } from "@/shared/lib/react-query/dashboard/doctors/doctorTransactions";
+import cookieServices from "@/shared/utils/cookieServices";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
@@ -38,7 +38,7 @@ const CreateDoctorExpense = ({ id }: { id: string }) => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-auto py-3 w-full md:w-fit"
+        className="flex h-auto w-full items-center gap-2 py-3 md:w-fit"
       >
         إضافة مصروف للطبيب
         <FiPlus size={20} />

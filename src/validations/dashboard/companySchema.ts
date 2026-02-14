@@ -1,4 +1,4 @@
-import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/utils/file";
+import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/shared/utils/file";
 import { z } from "zod";
 
 export const companySchema = z.object({

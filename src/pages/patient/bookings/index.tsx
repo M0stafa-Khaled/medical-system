@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import PatientBookingsHeader from "@/components/patient/bookings/PatientBookingsHeader";
 import PatientBookingsList from "@/components/patient/bookings/PatientBookingsList";
 import { useSearchParams } from "react-router";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect, useMemo } from "react";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetAllPatientBookings } from "@/lib/react-query/patient/patientBookings";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetAllPatientBookings } from "@/shared/lib/react-query/patient/patientBookings";
 import { toast } from "react-toastify";
-import DataTablePagination from "@/components/ui/DataTablePagination";
-import PCardSkeleton from "@/components/ui/PCardSkeleton";
+import DataTablePagination from "@/shared/components/ui/DataTablePagination";
+import PCardSkeleton from "@/shared/components/ui/PCardSkeleton";
 import { IPatientBookingsFilter } from "@/interfaces/patient/patientBookings";
 
 const PatientBookings = () => {

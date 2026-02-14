@@ -1,13 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/shared/components/ui/card";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router";
-import cookieServices from "@/utils/cookieServices";
-import { AxiosResErr } from "@/types";
+import cookieServices from "@/shared/utils/cookieServices";
+import { AxiosResErr } from "@/shared/types";
 import { toast } from "react-toastify";
-import DataLoader from "@/components/ui/DataLoader";
+import DataLoader from "@/shared/components/ui/DataLoader";
 import { useEffect } from "react";
-import { useGetDoctorPrescriptionById } from "@/lib/react-query/doctor/prescriptions";
+import { useGetDoctorPrescriptionById } from "@/shared/lib/react-query/doctor/prescriptions";
 import DoctorPrescriptionForm from "@/components/forms/doctor/prescriptions/DoctorPrescriptionForm";
 
 const DoctorUpdatePrescription = () => {

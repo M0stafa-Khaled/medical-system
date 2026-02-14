@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/shared/components/ui/card";
 import DeleteTreasuryButton from "./DeleteTreasury";
 import UpdateTreasury from "./UpdateTreasury";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { ITreasury } from "@/interfaces/dashboard/treasury";
 import { motion } from "framer-motion";
@@ -24,15 +24,15 @@ const TreasuryCard = ({ treasury }: IProps) => {
     >
       <Card
         className={
-          "transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black"
+          "border-muted/40 hover:border-primary/40 cursor-pointer transition-all duration-300 hover:shadow-md dark:bg-black"
         }
       >
-        <CardContent className="p-4 flex flex-col gap-4">
+        <CardContent className="flex flex-col gap-4 p-4">
           <div className="flex items-center justify-between">
             <div className="flex flex-col justify-center gap-2">
               <div className="flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-primary" />
-                <h3 className="font-semibold text-lg">{treasury.name}</h3>
+                <Wallet className="text-primary h-5 w-5" />
+                <h3 className="text-lg font-semibold">{treasury.name}</h3>
               </div>
               <div className="flex items-center gap-2">
                 <Power
@@ -41,7 +41,7 @@ const TreasuryCard = ({ treasury }: IProps) => {
                     treasury.status ? "text-green-500" : "text-red-500"
                   }
                 />
-                <span className="font-medium text-sm">
+                <span className="text-sm font-medium">
                   {treasury.status ? "نشط" : "غير نشط"}
                 </span>
               </div>
@@ -56,10 +56,7 @@ const TreasuryCard = ({ treasury }: IProps) => {
 
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2">
-              <CircleDollarSign
-                size={20}
-                className="text-green-500 shrink-0"
-              />
+              <CircleDollarSign size={20} className="shrink-0 text-green-500" />
               <span>الإجمالي: {treasury.total}</span>
             </div>
           </div>

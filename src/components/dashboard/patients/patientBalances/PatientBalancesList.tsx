@@ -1,9 +1,9 @@
-import { TableCell } from "@/components/ui/table";
+import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import { IBalance } from "@/interfaces/patientBalances";
-import formatDateTime from "@/utils/formatDate";
-import { numberToPrice } from "@/utils/numberToPrice";
+import formatDateTime from "@/shared/utils/formatDate";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   patients: IBalance[];
@@ -16,11 +16,11 @@ const PatientBalancesList = ({ patients }: IProps) => {
         initial="hidden"
         animate="visible"
         variants={tableRowVariants}
-        className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+        className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
       >
         <TableCell
           colSpan={8}
-          className="text-sm text-center text-black dark:text-white py-5 font-medium"
+          className="py-5 text-center text-sm font-medium text-black dark:text-white"
         >
           لا يوجد مرضى
         </TableCell>
@@ -49,30 +49,30 @@ const PatientBalancesList = ({ patients }: IProps) => {
             animate="visible"
             custom={index}
             variants={tableRowVariants}
-            className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+            className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
           >
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 px-4 font-medium max-w-44 text-wrap">
+            <TableCell className="max-w-44 px-4 py-3 text-center text-sm font-medium text-wrap text-black dark:text-white">
               {transaction_code}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {numberToPrice(amount_paid)}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {numberToPrice(total_amount_due)}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {numberToPrice(balance)}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {numberToPrice(refund_amount)}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {payment_method === "cash" ? "نقدي" : "بطاقة بنكية"}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {payment_method === "visa" ? visa_code : "نقدي"}
             </TableCell>
-            <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium max-w-44">
+            <TableCell className="max-w-44 py-3 text-center text-sm font-medium text-black dark:text-white">
               {formatDateTime(created_at)}
             </TableCell>
           </motion.tr>

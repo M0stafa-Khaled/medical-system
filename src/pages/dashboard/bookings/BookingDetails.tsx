@@ -1,8 +1,13 @@
 import { containerVariants, itemVariants } from "@/animations";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DataLoader from "@/components/ui/DataLoader";
-import { useGetBookingById } from "@/lib/react-query/dashboard/bookings";
-import cookieServices from "@/utils/cookieServices";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import { useGetBookingById } from "@/shared/lib/react-query/dashboard/bookings";
+import cookieServices from "@/shared/utils/cookieServices";
 import {
   User2,
   UserCircle2,
@@ -20,15 +25,15 @@ import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import InfoField from "@/components/shared/InfoField";
-import convertDay from "@/utils/convertDayLang";
-import formatDateTime from "@/utils/formatDate";
-import useHasPermission from "@/hooks/useHasPermission";
+import convertDay from "@/shared/utils/convertDayLang";
+import formatDateTime from "@/shared/utils/formatDate";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import DeleteBooking from "@/components/dashboard/bookings/DeleteBooking";
 import UpdateBookingStatus from "@/components/dashboard/bookings/UpdateBookingStatus";
 import { IBooking } from "@/interfaces/dashboard/bookings";
-import { Button } from "@/components/ui/button";
-import { AxiosResErr } from "@/types";
+import { Button } from "@/shared/components/ui/button";
+import { AxiosResErr } from "@/shared/types";
 
 const BookingDetails = () => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
@@ -103,7 +108,7 @@ const BookingDetails = () => {
                   status !== "collected" &&
                   status !== "completed" && (
                     <motion.div variants={itemVariants}>
-                      <Button className="bg-primary h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700 dark:text-black">
+                      <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700 dark:text-black">
                         <Link
                           to={`/dashboard/bookings/${booking?.data.id}/update`}
                           className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1 text-white"

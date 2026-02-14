@@ -10,10 +10,10 @@ import {
   logoVariants,
   navItemsVariants,
 } from "@/animations/navbarAnimations";
-import { ILink } from "@/interfaces";
-import cookieServices from "@/utils/cookieServices";
+import { ILink } from "@/shared/types";
+import cookieServices from "@/shared/utils/cookieServices";
 import {} from "react";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { AuthButtons, LogoutButton } from "@/features/auth";
 import NavList from "./NavList";

@@ -1,4 +1,4 @@
-import { RootState } from "@/store/store";
+import { RootState } from "@/app/store";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,12 +6,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/shared/components/ui/dropdown-menu";
 import { FaUser } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import cookieServices from "@/utils/cookieServices";
-import useHasPermission from "@/hooks/useHasPermission";
+import cookieServices from "@/shared/utils/cookieServices";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
 export const ProfileMenu = () => {

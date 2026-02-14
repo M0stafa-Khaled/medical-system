@@ -1,8 +1,13 @@
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import { Button } from "@/shared/components/ui/button";
 import {
   BadgeCheck,
   BadgeX,
@@ -18,23 +23,23 @@ import {
   Pen,
 } from "lucide-react";
 import { useEffect } from "react";
-import { Separator } from "@/components/ui/separator";
-import formatDateTime from "@/utils/formatDate";
-import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/shared/components/ui/separator";
+import formatDateTime from "@/shared/utils/formatDate";
+import { Badge } from "@/shared/components/ui/badge";
 import DeleteDoctor from "@/components/dashboard/doctors/DeleteDoctor";
 import ImageModal from "@/components/shared/ImageModal";
 import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
 import InfoField from "@/components/shared/InfoField";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import DataLoader from "@/components/ui/DataLoader";
+import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
-import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
+import { useGetDoctorById } from "@/shared/lib/react-query/dashboard/doctors/doctors";
 
-import TooltipButton from "@/components/ui/TooltipButton";
-import { AxiosResErr } from "@/types";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { AxiosResErr } from "@/shared/types";
 import DoctorTabs from "./DoctorTabs";
 
 const DoctorDetails = () => {

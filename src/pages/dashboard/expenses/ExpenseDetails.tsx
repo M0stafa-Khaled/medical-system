@@ -1,7 +1,12 @@
 import InfoField from "@/components/shared/InfoField";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import cookieServices from "@/utils/cookieServices";
-import formatDateTime from "@/utils/formatDate";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import cookieServices from "@/shared/utils/cookieServices";
+import formatDateTime from "@/shared/utils/formatDate";
 import {
   DollarSign,
   Tag,
@@ -18,10 +23,10 @@ import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import DataLoader from "@/components/ui/DataLoader";
+import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
-import { useGetExpenseById } from "@/lib/react-query/dashboard/expenses/expenses";
-import { AxiosResErr } from "@/types";
+import { useGetExpenseById } from "@/shared/lib/react-query/dashboard/expenses/expenses";
+import { AxiosResErr } from "@/shared/types";
 
 const ExpenseDetails = () => {
   const navigate = useNavigate();

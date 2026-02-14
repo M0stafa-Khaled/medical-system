@@ -1,32 +1,32 @@
 import { useEffect } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
 import { toast } from "react-toastify";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
-import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
-import convertDay from "@/utils/convertDayLang";
+import { useGetAllWorkingDays } from "@/shared/lib/react-query/dashboard/doctors/workingDays";
+import convertDay from "@/shared/utils/convertDayLang";
 import {
   useGetAllClinicDoctors,
   useGetAvailableBookingsTime,
-} from "@/lib/react-query/main";
+} from "@/shared/lib/react-query/main";
 import SubmitButton from "@/components/shared/SubmitButton";
 import { useNavigate } from "react-router";
-import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
-import handleResErr from "@/utils/handleResponseError";
+import { useGetDoctorActions } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
+import { handleResErr } from "@/shared/utils/handleResError";
 import patientBookingSchema from "@/validations/patient/patientBookingSchema";
 import RenderPatientBookingFormFields from "./RenderPatientBookingFormFields";
 import {
   useCreatePatientBooking,
   useUpdatePatientBooking,
-} from "@/lib/react-query/patient/patientBookings";
+} from "@/shared/lib/react-query/patient/patientBookings";
 import { IPatientBooking } from "@/interfaces/patient/patientBookings";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
+import { useGetAllClinics } from "@/features/dashboard/clinics";
 
 interface IProps {
   booking?: IPatientBooking;
@@ -72,7 +72,6 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
 
   // Fetch data using watched values
   const { data: clinics } = useGetAllClinics({
-    token,
     filter: { status: "1" },
   });
 

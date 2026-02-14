@@ -4,15 +4,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { IFormInput } from "@/interfaces";
+} from "@/shared/components/ui/form";
+import { IFormInput } from "@/shared/types";
 import { z } from "zod";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { GENDER } from "@/constants";
 import SelectFormItem from "../../../components/forms/formItems/SelectFormItem";
-import PasswordFormItem from "../../../components/forms/formItems/PasswordFormItem";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/shared/components/ui/input";
+import { Eye, EyeOff } from "lucide-react";
 
 interface IProps {
   input: IFormInput;
@@ -33,6 +33,7 @@ export const RenderAuthFormFields = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   schema,
 }: IProps) => {
+  const [showPassword, setShowPassword] = useState(false);
   const renderField = ({ field }: { field: ControllerRenderProps }) => {
     const commonProps = {
       field,
@@ -61,7 +62,7 @@ export const RenderAuthFormFields = ({
                     handleFileChange && handleFileChange(e, field.onChange)
                   }
                   value={undefined}
-                  className="h-auto cursor-pointer border-black/20 py-1.5 text-black file:cursor-pointer file:rounded-full file:border-0 file:bg-black file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white placeholder:text-black/50 focus-visible:ring-[#bababa]"
+                  className="file:bg-primary border-muted-foreground h-auto cursor-pointer text-black file:cursor-pointer file:rounded-full file:border-0 file:px-4 file:text-sm file:font-semibold file:text-white placeholder:h-14 placeholder:text-sm placeholder:text-black/50 dark:bg-transparent"
                 />
               </div>
             </FormControl>
@@ -70,19 +71,48 @@ export const RenderAuthFormFields = ({
         );
 
       case input.type === "password":
-        return <PasswordFormItem input={input} field={field} />;
+        return (
+          <FormItem>
+            <FormLabel className="text-black" htmlFor={input.name}>
+              {input.label}
+            </FormLabel>
+            <FormControl>
+              <div className="relative">
+                <button
+                  type="button"
+                  className="text-blue-gray-500 absolute top-2/4 left-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-black"
+                  name={showPassword ? "اخفاء كلمة المرور" : "عرض كلمة المرور"}
+                >
+                  {showPassword ? (
+                    <Eye
+                      size={20}
+                      onClick={() => setShowPassword((prev) => !prev)}
+                    />
+                  ) : (
+                    <EyeOff
+                      size={20}
+                      onClick={() => setShowPassword((prev) => !prev)}
+                    />
+                  )}
+                </button>
+                <Input
+                  id={input.name}
+                  placeholder={input.placeholder}
+                  type={showPassword ? "text" : input.type}
+                  {...field}
+                  className="border-muted-foreground h-auto py-3 pr-2 pl-9 text-black placeholder:h-14 placeholder:text-sm placeholder:text-black/50 md:py-3.5 dark:bg-transparent"
+                />
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        );
 
       default:
         return (
           <FormItem>
             <FormLabel className="text-black" htmlFor={input.name}>
               {input.label}
-              {isOptionalField && isOptionalField(input.name!) && (
-                <span className="text-muted-foreground text-xs">
-                  {" "}
-                  (اختياري)
-                </span>
-              )}
             </FormLabel>
             <FormControl>
               <Input
@@ -90,7 +120,7 @@ export const RenderAuthFormFields = ({
                 placeholder={input.placeholder}
                 type={input.type}
                 {...field}
-                className="h-auto border-black/20 px-2 py-2.5 text-black placeholder:h-14 placeholder:text-sm placeholder:text-black/50 focus-visible:ring-[#bababa] md:py-3.5"
+                className="border-muted-foreground h-auto py-3 text-black placeholder:h-14 placeholder:text-sm placeholder:text-black/50 dark:bg-transparent"
               />
             </FormControl>
             <FormMessage />

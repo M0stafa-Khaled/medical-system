@@ -1,6 +1,6 @@
-import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { Dispatch, memo, SetStateAction } from "react";
 import { ArrowUpDown } from "lucide-react";
 
@@ -14,18 +14,18 @@ const TransactionsTableHeader = ({ setSort }: IProps) => {
 
   return (
     <TableHeader>
-      <TableRow className="bg-white/80 dark:bg-dark/70 dark:border-muted hover:bg-white/80 dark:hover:bg-dark/70">
+      <TableRow className="dark:bg-dark/70 dark:border-muted dark:hover:bg-dark/70 bg-white/80 hover:bg-white/80">
         <TableHead className="py-4 pr-4 text-center text-nowrap">
           رقم الإيصال
         </TableHead>
         <TableHead className="py-4 text-center text-nowrap">المبلغ</TableHead>
         <TableHead className="py-4 text-center">الخزينة</TableHead>
-        <TableHead className="py-4 text-center w-28">الخدمة</TableHead>
+        <TableHead className="w-28 py-4 text-center">الخدمة</TableHead>
         <TableHead className="py-4 text-center">الموظف</TableHead>
         <TableHead className="py-4 text-center">المريض</TableHead>
         <TableHead className="py-4 text-center">الحالة</TableHead>
         <TableHead
-          className="py-4 hover:bg-dark/10 dark:hover:bg-white/10 transition-colors duration-200 text-center text-nowrap cursor-pointer"
+          className="hover:bg-dark/10 cursor-pointer py-4 text-center text-nowrap transition-colors duration-200 dark:hover:bg-white/10"
           onClick={() => setSort((prev) => !prev)}
         >
           <div className="flex items-center justify-center gap-2">

@@ -1,6 +1,6 @@
-import { IClinic } from "@/interfaces/dashboard/clinics";
-import { Badge } from "../../../components/ui/badge";
+import { Badge } from "@/shared/components/ui/badge";
 import { itemVariants } from "@/animations";
+import { IClinic } from "@/features/dashboard/clinics/types";
 import { motion } from "framer-motion";
 
 interface IProps {

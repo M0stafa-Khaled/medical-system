@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2, Plus } from "lucide-react";
-import Modal from "@/components/shared/Modal";
-import cookieServices from "@/utils/cookieServices";
+import { Modal } from "@/components/shared/Modal";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_PAYMENT_FORM_INPUTS, PAYMENT_METHODS } from "@/constants";
 import RenderTransactionFormFields from "@/components/forms/dashboard/transactions/RenderTransactionFormFields";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 import {
   useCreatePatientPayment,
   useGetPatientBalances,
-} from "@/lib/react-query/dashboard/transactions/patientBalances";
+} from "@/shared/lib/react-query/dashboard/transactions/patientBalances";
 import { createPatientPaymentSchema } from "@/validations/dashboard/transactionSchema";
 import InfoField from "../../shared/InfoField";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 const CreatePatientPayment = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -109,7 +109,7 @@ const CreatePatientPayment = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-auto py-3"
+        className="flex h-auto items-center gap-2 py-3"
       >
         إضافة دفعة من مريض
         <Plus size={20} />
@@ -127,7 +127,7 @@ const CreatePatientPayment = () => {
         {patientId ? (
           isLoading ? (
             <Loader2
-              className="animate-spin mx-auto text-dark dark:text-white"
+              className="text-dark mx-auto animate-spin dark:text-white"
               size={20}
             />
           ) : (
@@ -140,7 +140,7 @@ const CreatePatientPayment = () => {
               </motion.h4>
               <motion.div
                 variants={containerVariants}
-                className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-1"
+                className="grid grid-cols-1 gap-x-2 gap-y-1 md:grid-cols-2"
               >
                 <InfoField
                   label="المبلغ الفعلي"
@@ -180,7 +180,7 @@ const CreatePatientPayment = () => {
           >
             <motion.div
               variants={containerVariants}
-              className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2"
+              className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2"
             >
               {PATIENT_PAYMENT_FORM_INPUTS.map((input, idx) =>
                 input.name === "visa_code" && !showVisa ? null : (
@@ -209,20 +209,20 @@ const CreatePatientPayment = () => {
               )}
             </motion.div>
 
-            <AlertDialogFooter className="text-start justify-start! gap-2">
+            <AlertDialogFooter className="justify-start! gap-2 text-start">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
+                className="h-auto py-2.5 text-black dark:text-white"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-2.5 h-auto"
+                className="h-auto py-2.5"
               >
                 تحصيل
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>

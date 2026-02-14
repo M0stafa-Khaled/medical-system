@@ -1,34 +1,34 @@
 import { useEffect, useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import Modal from "@/components/shared/Modal";
+import { Modal } from "@/components/shared/Modal";
 import { motion } from "framer-motion";
-import handleResErr from "@/utils/handleResponseError";
-import { useGetAllClinics } from "@/lib/react-query/dashboard/clinics";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
-import { useGetAllWorkingDays } from "@/lib/react-query/dashboard/doctors/workingDays";
-import convertDay from "@/utils/convertDayLang";
+import { useGetAllWorkingDays } from "@/shared/lib/react-query/dashboard/doctors/workingDays";
+import convertDay from "@/shared/utils/convertDayLang";
 import {
   useGetAllClinicDoctors,
   useGetAvailableBookingsTime,
-} from "@/lib/react-query/main";
-import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
+} from "@/shared/lib/react-query/main";
+import { useGetDoctorActions } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
 import patientBookingSchema from "@/validations/patient/patientBookingSchema";
-import { useCreatePatientBooking } from "@/lib/react-query/patient/patientBookings";
-import cookieServices from "@/utils/cookieServices";
+import { useCreatePatientBooking } from "@/shared/lib/react-query/patient/patientBookings";
+import cookieServices from "@/shared/utils/cookieServices";
 import RenderPatientBookingFormFields from "@/components/forms/patient/RenderPatientBookingFormFields";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
+import { useGetAllClinics } from "@/features/dashboard/clinics";
 
 const CreatePatientBooking = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +58,6 @@ const CreatePatientBooking = () => {
 
   // Fetch dependent data using watched values
   const { data: clinics } = useGetAllClinics({
-    token,
     filter: { status: "1" },
   });
 

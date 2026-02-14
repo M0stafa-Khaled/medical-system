@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { patientUpdateProfileSchema } from "@/validations/dashboard/profileSchema";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import Modal from "@/components/shared/Modal";
+import { Modal } from "@/components/shared/Modal";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { UPDATE_PROFILE_PATIENT_INPUTS } from "@/constants";
-import { useUploadImgHandler } from "@/hooks/useUploadImgHandler";
+import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
 import RenderPatientFormFields from "../../../components/forms/dashboard/patients/RenderPatientFormFields";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { useUpdateProfile } from "../queriesAndMutations";
 
 export const UpdatePatientProfile = () => {

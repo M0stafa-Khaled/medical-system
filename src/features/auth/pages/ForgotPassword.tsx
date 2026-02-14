@@ -1,0 +1,35 @@
+import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
+import { ForgotPasswordForm } from "../components/ForgotPasswordForm";
+
+const ForgotPassword = () => {
+  return (
+    <>
+      <Helmet>
+        <title>{import.meta.env.VITE_WEB_NAME} | هل نسيت كلمة المرور</title>
+      </Helmet>
+
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1, duration: 0.3 }}
+        className="flex flex-col items-center justify-center"
+      >
+        <div className="mb-6 flex max-w-md flex-col items-center justify-center gap-2 md:max-w-sm">
+          <img src="/images/logo.svg" alt="logo" className="w-20" />
+          <h1 className="text-center text-xl font-semibold text-black">
+            لا تقلق، سنساعدك على استعادة حسابك!
+          </h1>
+          <p className="text-center text-sm leading-relaxed text-black/70">
+            يرجى إدخال بريدك الإلكتروني المرتبط بحسابك، وسنقوم بإرسال رمز تحقق
+            يمكنك استخدامه لإعادة تعيين كلمة المرور الخاصة بك.
+          </p>
+        </div>
+        <ForgotPasswordForm />
+      </motion.div>
+    </>
+  );
+};
+
+export default ForgotPassword;

@@ -1,11 +1,11 @@
-import Modal from "@/components/shared/Modal";
-import { Button } from "@/components/ui/button";
-import { useDeleteWorkingDay } from "@/lib/react-query/dashboard/doctors/workingDays";
-import cookieServices from "@/utils/cookieServices";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/shared/components/ui/button";
+import { useDeleteWorkingDay } from "@/shared/lib/react-query/dashboard/doctors/workingDays";
+import cookieServices from "@/shared/utils/cookieServices";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import TooltipButton from "@/components/ui/TooltipButton";
-import handleResErr from "@/utils/handleResponseError";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { Trash2 } from "lucide-react";
 
 interface IProps {
@@ -41,7 +41,7 @@ const DeleteWorkingDay = ({ name, id }: IProps) => {
           size={"sm"}
           onClick={() => setIsOpen(true)}
           variant={"destructive"}
-          className="text-white gap-2 text-sm  py-1 px-1 w-9 h-9"
+          className="h-9 w-9 gap-2 px-1 py-1 text-sm text-white"
         >
           <Trash2 size={20} />
         </Button>

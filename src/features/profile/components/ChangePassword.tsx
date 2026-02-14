@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { Form, FormField } from "@/components/ui/form";
+import { Form, FormField } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { ControllerRenderProps, FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { changePasswordSchema } from "@/validations/dashboard/profileSchema";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import Modal from "@/components/shared/Modal";
+import { Modal } from "@/components/shared/Modal";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { CHANGE_PASSWORD_INPUTS } from "@/constants";
 import InputFormItem from "../../../components/forms/formItems/InputFormItem";
 import { useChangePassword } from "../queriesAndMutations";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 
 export const ChangePassword = () => {
   const [isOpen, setIsOpen] = useState(false);

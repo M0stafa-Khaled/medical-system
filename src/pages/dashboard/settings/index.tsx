@@ -2,7 +2,7 @@ import { containerVariants } from "@/animations";
 import CompanyInfo from "@/components/dashboard/settings/CompanyInfo";
 import Subscription from "@/components/dashboard/settings/Subscription";
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import NotFound from "@/pages/NotFound";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";

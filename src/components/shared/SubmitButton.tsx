@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 interface SubmitButtonProps {

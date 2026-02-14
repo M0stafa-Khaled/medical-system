@@ -5,26 +5,26 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/shared/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+} from "@/shared/components/ui/popover";
+import { cn } from "@/shared/lib/utils";
 import { Check } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { BOOKING_STATUS_OPTIONS } from "@/constants";
 import BookingStatus from "./BookingStatus";
-import { TBookingStatus } from "@/types";
+import { TBookingStatus } from "@/shared/types";
 import { toast } from "react-toastify";
-import { useUpdateBookingStatus } from "@/lib/react-query/dashboard/bookings";
-import cookieServices from "@/utils/cookieServices";
+import { useUpdateBookingStatus } from "@/shared/lib/react-query/dashboard/bookings";
+import cookieServices from "@/shared/utils/cookieServices";
 import { IBooking } from "@/interfaces/dashboard/bookings";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 
 interface IProps {
   booking: IBooking;
@@ -70,14 +70,14 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
               id="patient_id"
               role="combobox"
               aria-expanded={open}
-              className="p-0 bg-transparent border-0 hover:bg-transparent m-0 shadow-none"
+              className="m-0 border-0 bg-transparent p-0 shadow-none hover:bg-transparent"
             >
               <BookingStatus status={booking?.status} />
             </Button>
           </PopoverTrigger>
 
-          <PopoverContent className="w-[250px] p-0 z-1000 border-black/20 dark:border-white/40">
-            <Command className="text-black dark:text-white bg-foreground">
+          <PopoverContent className="z-1000 w-62.5 border-black/20 p-0 dark:border-white/40">
+            <Command className="bg-foreground text-black dark:text-white">
               <CommandInput
                 placeholder="اختر او ابحث"
                 value={searchValue}
@@ -88,7 +88,7 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
                 <CommandGroup>
                   {BOOKING_STATUS_OPTIONS?.map((option) => (
                     <CommandItem
-                      className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20"
+                      className="cursor-pointer py-2.5 text-black hover:bg-blue-200/20 dark:text-white"
                       key={option.label}
                       value={option.value}
                       onSelect={handleStatusChange}

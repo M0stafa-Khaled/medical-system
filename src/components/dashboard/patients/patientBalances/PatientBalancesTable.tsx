@@ -1,5 +1,5 @@
-import DataTable from "@/components/ui/DataTable";
-import TableSkeleton from "@/components/ui/TableSkeleton";
+import DataTable from "@/shared/components/ui/DataTable";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import PatientBalancesList from "./PatientBalancesList";
 import PatientBalancesTableHeader from "./PatientBalancesTableHeader";
 import { IBalance } from "@/interfaces/patientBalances";

@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/components/ui/select";
 import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/shared/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
+} from "@/shared/components/ui/popover";
+import { Input } from "@/shared/components/ui/input";
 import { CalendarIcon } from "lucide-react";
-import cookieServices from "@/utils/cookieServices";
-import { useGetAllTreasuries } from "@/lib/react-query/dashboard/treasuries";
+import cookieServices from "@/shared/utils/cookieServices";
+import { useGetAllTreasuries } from "@/shared/lib/react-query/dashboard/treasuries";
 import { ITransactionsReportFilter } from "@/interfaces/dashboard/reports";
 
 interface IProps {
@@ -31,10 +31,10 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
     setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 my-4">
+    <div className="my-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
       <Input
         placeholder="ابحث باسم الطبيب"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
         type="search"
         value={filters.doctor}
         onChange={(e) => handleFilterChange("doctor", e.target.value)}
@@ -42,7 +42,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
 
       <Input
         placeholder="ابحث باسم الخدمة"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
         type="search"
         value={filters.action}
         onChange={(e) => handleFilterChange("action", e.target.value)}
@@ -50,7 +50,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
 
       <Input
         placeholder="ابحث باسم الموظف"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
         type="search"
         value={filters.employee}
         onChange={(e) => handleFilterChange("employee", e.target.value)}
@@ -58,7 +58,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
 
       <Input
         placeholder="ابحث باسم المريض او رقم الهاتف الأول"
-        className="placeholder:h-14 py-3 h-auto border-black/20 text-black dark:text-white dark:border-white/40 placeholder:text-muted-foreground"
+        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
         type="search"
         value={filters.patient}
         onChange={(e) => handleFilterChange("patient", e.target.value)}
@@ -71,7 +71,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
         dir="rtl"
       >
         <SelectTrigger
-          className={`border-black/20 dark:border-white/40 h-12!  ${
+          className={`h-12! border-black/20 dark:border-white/40 ${
             filters.treasury
               ? "text-black dark:text-white"
               : "text-muted-foreground"
@@ -79,18 +79,18 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
         >
           <SelectValue
             placeholder="الخزينة"
-            className={`py-4 text-muted-foreground`}
+            className={`text-muted-foreground py-4`}
           />
         </SelectTrigger>
-        <SelectContent className="text-black dark:text-white bg-foreground border-black/20 dark:border-white/40">
-          <SelectItem value="all" className="py-2.5 cursor-pointer">
+        <SelectContent className="bg-foreground border-black/20 text-black dark:border-white/40 dark:text-white">
+          <SelectItem value="all" className="cursor-pointer py-2.5">
             الكل
           </SelectItem>
           {treasuries?.data.map((treasury) => (
             <SelectItem
               key={treasury.id}
               value={treasury.name}
-              className="py-2.5 cursor-pointer"
+              className="cursor-pointer py-2.5"
             >
               {treasury.name}
             </SelectItem>
@@ -105,7 +105,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
         dir="rtl"
       >
         <SelectTrigger
-          className={`border-black/20 dark:border-white/40 h-12!  ${
+          className={`h-12! border-black/20 dark:border-white/40 ${
             filters.status
               ? "text-black dark:text-white"
               : "text-muted-foreground"
@@ -113,17 +113,17 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
         >
           <SelectValue
             placeholder="الحالة"
-            className={`py-4 text-muted-foreground`}
+            className={`text-muted-foreground py-4`}
           />
         </SelectTrigger>
-        <SelectContent className="text-black dark:text-white bg-foreground border-black/20 dark:border-white/40">
-          <SelectItem value="all" className="py-2.5 cursor-pointer">
+        <SelectContent className="bg-foreground border-black/20 text-black dark:border-white/40 dark:text-white">
+          <SelectItem value="all" className="cursor-pointer py-2.5">
             الكل
           </SelectItem>
-          <SelectItem value="1" className="py-2.5 cursor-pointer">
+          <SelectItem value="1" className="cursor-pointer py-2.5">
             محصل
           </SelectItem>
-          <SelectItem value="0" className="py-2.5 cursor-pointer">
+          <SelectItem value="0" className="cursor-pointer py-2.5">
             مسترد
           </SelectItem>
         </SelectContent>
@@ -136,7 +136,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
         dir="rtl"
       >
         <SelectTrigger
-          className={`border-black/20 dark:border-white/40 h-12!  ${
+          className={`h-12! border-black/20 dark:border-white/40 ${
             filters.payment_method
               ? "text-black dark:text-white"
               : "text-muted-foreground"
@@ -144,17 +144,17 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
         >
           <SelectValue
             placeholder="وسيل الدفع"
-            className={`py-4 text-muted-foreground`}
+            className={`text-muted-foreground py-4`}
           />
         </SelectTrigger>
-        <SelectContent className="text-black dark:text-white bg-foreground border-black/20 dark:border-white/40">
-          <SelectItem value="all" className="py-2.5 cursor-pointer">
+        <SelectContent className="bg-foreground border-black/20 text-black dark:border-white/40 dark:text-white">
+          <SelectItem value="all" className="cursor-pointer py-2.5">
             الكل
           </SelectItem>
-          <SelectItem value="cash" className="py-2.5 cursor-pointer">
+          <SelectItem value="cash" className="cursor-pointer py-2.5">
             نقدى
           </SelectItem>
-          <SelectItem value="visa" className="py-2.5 cursor-pointer">
+          <SelectItem value="visa" className="cursor-pointer py-2.5">
             بطاقة بنكية
           </SelectItem>
         </SelectContent>
@@ -166,7 +166,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
           <Button
             variant={"outline"}
             className={
-              "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-black/20 dark:border-white/40"
+              "hover:bg-foreground dark:hover:bg-foreground h-auto w-full justify-start border-black/20 py-3 text-right font-normal text-black hover:text-black dark:border-white/40 dark:text-white dark:hover:text-white"
             }
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
@@ -178,7 +178,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-full p-0 px-3 border-black/20 dark:border-white/40 bg-foreground"
+          className="bg-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
           align="start"
         >
           <Calendar
@@ -207,7 +207,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
           <Button
             variant={"outline"}
             className={
-              "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-black/20 dark:border-white/40"
+              "hover:bg-foreground dark:hover:bg-foreground h-auto w-full justify-start border-black/20 py-3 text-right font-normal text-black hover:text-black dark:border-white/40 dark:text-white dark:hover:text-white"
             }
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
@@ -219,7 +219,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-full p-0 px-3 border-black/20 dark:border-white/40 bg-foreground"
+          className="bg-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
           align="start"
         >
           <Calendar

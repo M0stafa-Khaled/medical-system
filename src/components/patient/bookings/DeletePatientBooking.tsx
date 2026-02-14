@@ -1,9 +1,9 @@
-import Modal from "@/components/shared/Modal";
-import { Button } from "@/components/ui/button";
-import TooltipButton from "@/components/ui/TooltipButton";
-import { useDeletePatientBooking } from "@/lib/react-query/patient/patientBookings";
-import cookieServices from "@/utils/cookieServices";
-import handleResErr from "@/utils/handleResponseError";
+import { Modal } from "@/components/shared/Modal";
+import { Button } from "@/shared/components/ui/button";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { useDeletePatientBooking } from "@/shared/lib/react-query/patient/patientBookings";
+import cookieServices from "@/shared/utils/cookieServices";
+import { handleResErr } from "@/shared/utils/handleResError";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -38,7 +38,7 @@ const DeletePatientBooking = ({ id }: IProps) => {
         <Button
           onClick={() => setIsOpen(true)}
           variant={"destructive"}
-          className="text-white gap-2 w-1/2 h-auto py-3"
+          className="h-auto w-1/2 gap-2 py-3 text-white"
         >
           <Trash2 size={24} />
           إلغاء الحجز

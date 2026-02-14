@@ -1,17 +1,17 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import PrescriptionsTableHeader from "./PrescriptionsTableHeader";
 import PrescriptionsHeader from "./PrescriptionsHeader";
 import PrescriptionsList from "./PrescriptionsList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import useHasPermission from "@/hooks/useHasPermission";
+import useDebounce from "@/shared/hooks/useDebounce";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { IPrescriptionsFilter } from "@/interfaces/dashboard/prescription";
-import { useGetAllPrescriptions } from "@/lib/react-query/dashboard/prescriptions";
+import { useGetAllPrescriptions } from "@/shared/lib/react-query/dashboard/prescriptions";
 
 const PrescriptionsTable = () => {
   const token = cookieServices.getToken()!;

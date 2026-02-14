@@ -1,9 +1,9 @@
-import { TableCell } from "@/components/ui/table";
+import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
-import formatDateTime from "@/utils/formatDate";
+import formatDateTime from "@/shared/utils/formatDate";
 import { ITransfer } from "@/interfaces/dashboard/reports";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   transfers: ITransfer[];
@@ -16,11 +16,11 @@ const TransfersReportList = ({ transfers }: IProps) => {
         initial="hidden"
         animate="visible"
         variants={tableRowVariants}
-        className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+        className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
       >
         <TableCell
           colSpan={4}
-          className="text-sm text-center text-black dark:text-white py-5 font-medium"
+          className="py-5 text-center text-sm font-medium text-black dark:text-white"
         >
           لا يوجد تحويلات
         </TableCell>
@@ -36,21 +36,21 @@ const TransfersReportList = ({ transfers }: IProps) => {
           animate="visible"
           custom={index}
           variants={tableRowVariants}
-          className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300 *:whitespace-nowrap"
+          className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 *:whitespace-nowrap hover:bg-gray-200!"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
             {transfer?.from_treasury.name}
           </TableCell>
 
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
             {transfer.to_treasury.name}
           </TableCell>
 
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
             {numberToPrice(transfer.amount)}
           </TableCell>
 
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium">
+          <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
             {formatDateTime(transfer?.created_at as string)}
           </TableCell>
         </motion.tr>

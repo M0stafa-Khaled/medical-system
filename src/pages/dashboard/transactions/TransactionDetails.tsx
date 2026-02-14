@@ -1,7 +1,12 @@
 import InfoField from "@/components/shared/InfoField";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import cookieServices from "@/utils/cookieServices";
-import formatDateTime from "@/utils/formatDate";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import cookieServices from "@/shared/utils/cookieServices";
+import formatDateTime from "@/shared/utils/formatDate";
 import {
   DollarSign,
   User2,
@@ -22,14 +27,14 @@ import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import DataLoader from "@/components/ui/DataLoader";
+import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
-import { useGetTransactionById } from "@/lib/react-query/dashboard/transactions/transactions";
+import { useGetTransactionById } from "@/shared/lib/react-query/dashboard/transactions/transactions";
 import RefundTransaction from "@/components/dashboard/transactions/RefundTransaction";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { AxiosResErr } from "@/types";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { AxiosResErr } from "@/shared/types";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 const TransactionDetails = () => {
   const canRefundTransaction = useHasPermission(PERMISSIONS.REFUND_TRANSACTION);

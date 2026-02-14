@@ -1,10 +1,10 @@
 import PatientBookingForm from "@/components/forms/patient/PatientBookingForm";
-import { Card, CardContent } from "@/components/ui/card";
-import DataLoader from "@/components/ui/DataLoader";
+import { Card, CardContent } from "@/shared/components/ui/card";
+import DataLoader from "@/shared/components/ui/DataLoader";
 import { IPatientBooking } from "@/interfaces/patient/patientBookings";
-import { useGetPatientBookingById } from "@/lib/react-query/patient/patientBookings";
-import { AxiosResErr } from "@/types";
-import cookieServices from "@/utils/cookieServices";
+import { useGetPatientBookingById } from "@/shared/lib/react-query/patient/patientBookings";
+import { AxiosResErr } from "@/shared/types";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";

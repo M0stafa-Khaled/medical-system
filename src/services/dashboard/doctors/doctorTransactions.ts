@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IStatusMsg } from "@/interfaces";
+import { IStatusMsg } from "@/shared/types";
 import { IDoctorTransactionsRes } from "@/interfaces/dashboard/doctors/doctorTransations";
 
 export const getDoctorTransactions = async ({

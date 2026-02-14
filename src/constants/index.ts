@@ -1,5 +1,5 @@
-import { IFormInput } from "@/interfaces";
-import { TBookingStatus, TPaymentMethod } from "@/types";
+import { IFormInput } from "@/shared/types";
+import { TBookingStatus, TPaymentMethod } from "@/shared/types";
 
 export const LOGIN_FORM_INPUTS: IFormInput[] = [
   {
@@ -36,12 +36,6 @@ export const REGISTER_FORM_INPUTS: IFormInput[] = [
     type: "password",
   },
   {
-    name: "another_name",
-    label: "اسم احد الاقارب",
-    placeholder: "ادخل اسم احد الاقارب",
-    type: "text",
-  },
-  {
     name: "personal_id",
     label: "رقم الهوية",
     placeholder: "ادخل رقم الهوية",
@@ -51,12 +45,6 @@ export const REGISTER_FORM_INPUTS: IFormInput[] = [
     name: "first_phone",
     label: "رقم الهاتف الأول",
     placeholder: "ادخل رقم الهاتف",
-    type: "text",
-  },
-  {
-    name: "second_phone",
-    label: "رقم الهاتف الثاني",
-    placeholder: "ادخل رقم الهاتف الثاني",
     type: "text",
   },
   {

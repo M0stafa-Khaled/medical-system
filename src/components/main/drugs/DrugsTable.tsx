@@ -1,14 +1,14 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import DrugsHeader from "./DrugsHeader";
 import { useEffect } from "react";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import DrugsTableHeader from "./DrugsTableHeader";
 import DrugsList from "./DrugsList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import { useGetALlDrugs } from "@/lib/react-query/main";
+import useDebounce from "@/shared/hooks/useDebounce";
+import { useGetALlDrugs } from "@/shared/lib/react-query/main";
 
 const DrugsTable = () => {
   const token = cookieServices.getToken()!;

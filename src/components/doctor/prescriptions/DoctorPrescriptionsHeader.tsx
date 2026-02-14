@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Eraser } from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";

@@ -1,9 +1,9 @@
-import { TableCell } from "@/components/ui/table";
+import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
-import truncateText from "@/utils/truncateText";
-import TooltipButton from "@/components/ui/TooltipButton";
-import { Button } from "@/components/ui/button";
+import truncateText from "@/shared/utils/truncateText";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import { Eye, Pen } from "lucide-react";
 import DoctorDeletePrescription from "./DeleteDoctorPrescription";

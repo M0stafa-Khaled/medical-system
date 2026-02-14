@@ -7,11 +7,11 @@ import {
   navItemsVariants,
   sidebarVariants,
 } from "@/animations/navbarAnimations";
-import { ILink } from "@/interfaces";
-import cookieServices from "@/utils/cookieServices";
-import truncateText from "@/utils/truncateText";
+import { ILink } from "@/shared/types";
+import cookieServices from "@/shared/utils/cookieServices";
+import truncateText from "@/shared/utils/truncateText";
 import NotificationsMenu from "../notifications/NotificationsMenu";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import ToggleTheme from "./ToggleTheme";
 

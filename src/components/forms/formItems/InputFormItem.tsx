@@ -3,9 +3,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "../../ui/input";
-import { IFormInput } from "@/interfaces";
+} from "@/shared/components/ui/form";
+import { Input } from "@/shared/components/ui/input";
+import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
 
 interface IProps {

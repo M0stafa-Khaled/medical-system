@@ -1,6 +1,10 @@
 import { m } from "framer-motion";
 import { fadeInUp, staggerContainer, scaleIn, fadeIn } from "../animations";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/shared/components/ui/avatar";
 import { ArrowLeft, Star } from "lucide-react";
 import { doctors } from "../data";
 import { Link } from "react-router";

@@ -1,13 +1,13 @@
 import { containerVariants } from "@/animations";
-import { Card, CardHeader } from "@/components/ui/card";
-import DataLoader from "@/components/ui/DataLoader";
-import { useGetPatientBalances } from "@/lib/react-query/dashboard/transactions/patientBalances";
-import cookieServices from "@/utils/cookieServices";
+import { Card, CardHeader } from "@/shared/components/ui/card";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import { useGetPatientBalances } from "@/shared/lib/react-query/dashboard/transactions/patientBalances";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import PatientBalancesTable from "./PatientBalancesTable";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   patientId: string;
@@ -44,26 +44,26 @@ const PatientBalances = ({ patientId }: IProps) => {
       variants={containerVariants}
     >
       <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs">
-        <CardHeader className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
-          <div className="flex items-center gap-2 font-semibold text-lg">
+        <CardHeader className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
+          <div className="flex items-center gap-2 text-lg font-semibold">
             <h4 className="text-dark dark:text-white">المبلغ الفعلي:</h4>
             <p>{numberToPrice(total_amount_due!)}</p>
           </div>
-          <div className="flex items-center gap-2 font-semibold text-lg">
+          <div className="flex items-center gap-2 text-lg font-semibold">
             <h4 className="text-dark dark:text-white">إجمالي المدفوع:</h4>
             <p>{numberToPrice(total_amount_paid!)}</p>
           </div>
-          <div className="flex items-center gap-2 font-semibold text-lg">
+          <div className="flex items-center gap-2 text-lg font-semibold">
             <h4 className="text-dark dark:text-white">إجمالي المستحق:</h4>
             <p>{numberToPrice(total_balance!)}</p>
           </div>
-          <div className="flex items-center gap-2 font-semibold text-lg">
+          <div className="flex items-center gap-2 text-lg font-semibold">
             <h4 className="text-dark dark:text-white">إجمالي المسترد:</h4>
             <p>{numberToPrice(refund_amount!)}</p>
           </div>
         </CardHeader>
       </Card>
-      <div className="rounded-md mt-2">
+      <div className="mt-2 rounded-md">
         <PatientBalancesTable
           patientBalances={patientBalances?.data.items || []}
         />

@@ -1,8 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/shared/components/ui/card";
 import { IExpenseCategory } from "@/interfaces/dashboard/expenses";
 import DeleteExpenseCategory from "./DeleteExpenseCategory";
 import UpdateExpenseCategory from "./UpdateExpenseCategory";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { motion } from "framer-motion";
 import { Workflow } from "lucide-react";
@@ -28,14 +28,14 @@ const CategoryCard = ({ category }: IProps) => {
     >
       <Card
         className={
-          "transition-all duration-300 hover:shadow-md cursor-pointer border-muted/40 hover:border-primary/40 dark:bg-black"
+          "border-muted/40 hover:border-primary/40 cursor-pointer transition-all duration-300 hover:shadow-md dark:bg-black"
         }
       >
-        <CardContent className="py-6 px-4 flex flex-col gap-4">
+        <CardContent className="flex flex-col gap-4 px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Workflow className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold text-lg">{category.name}</h3>
+              <Workflow className="text-primary h-5 w-5" />
+              <h3 className="text-lg font-semibold">{category.name}</h3>
             </div>
             <div className="flex items-center gap-2">
               {canUpdateCategory && (

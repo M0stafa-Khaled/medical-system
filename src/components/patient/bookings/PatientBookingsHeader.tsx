@@ -1,5 +1,5 @@
 import RefetchDataButton from "@/components/shared/RefetchDataButton";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import Query_Keys from "@/enums/queryKeys";
 import { format } from "date-fns";
 import { Eraser } from "lucide-react";

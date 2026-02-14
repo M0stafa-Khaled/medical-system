@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/components/ui/tabs";
 import { features } from "../data";
 
 export const Features = () => {

@@ -5,22 +5,22 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/shared/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+} from "@/shared/components/ui/popover";
+import { cn } from "@/shared/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { FormMessage } from "@/components/ui/form";
+import { FormMessage } from "@/shared/components/ui/form";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import useDebounce from "@/hooks/useDebounce";
-import cookieServices from "@/utils/cookieServices";
-import { IFormInput } from "@/interfaces";
+import { Button } from "@/shared/components/ui/button";
+import useDebounce from "@/shared/hooks/useDebounce";
+import cookieServices from "@/shared/utils/cookieServices";
+import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
-import { useGetAllScans } from "@/lib/react-query/main";
+import { useGetAllScans } from "@/shared/lib/react-query/main";
 
 interface IProps {
   field: ControllerRenderProps<any>;
@@ -55,14 +55,14 @@ const ScansSelectFormItem = ({ field, input }: IProps) => {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="border-muted w-full h-12! text-black dark:text-white justify-between overflow-hidden"
+            className="border-muted h-12! w-full justify-between overflow-hidden text-black dark:text-white"
           >
             {selectedOption ? selectedOption.label : "اختر..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[300px] sm:w-[400px] md:w-[370px] p-0 z-1000 border-black/20 dark:border-white/40">
-          <Command className="text-black dark:text-white bg-foreground">
+        <PopoverContent className="z-1000 w-[300px] border-black/20 p-0 sm:w-[400px] md:w-[370px] dark:border-white/40">
+          <Command className="bg-foreground text-black dark:text-white">
             <CommandInput
               placeholder="اختر أو اكتب اسم جديد"
               value={searchTerm}
@@ -82,7 +82,7 @@ const ScansSelectFormItem = ({ field, input }: IProps) => {
                     field.onChange(searchTerm);
                     setOpen(false);
                   }}
-                  className="py-2.5 px-2 cursor-pointer hover:bg-muted text-[13px]"
+                  className="hover:bg-muted cursor-pointer px-2 py-2.5 text-[13px]"
                 >
                   إضافة: <span className="font-semibold">{searchTerm}</span>
                 </div>
@@ -90,7 +90,7 @@ const ScansSelectFormItem = ({ field, input }: IProps) => {
               <CommandGroup>
                 {scansOptions.map((option) => (
                   <CommandItem
-                    className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20"
+                    className="cursor-pointer py-2.5 text-black hover:bg-blue-200/20 dark:text-white"
                     key={option.value}
                     value={option.label}
                     onSelect={() => {

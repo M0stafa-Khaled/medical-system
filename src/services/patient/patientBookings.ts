@@ -3,7 +3,7 @@ import {
   IUpdatePatientBooking,
 } from "../../interfaces/patient/patientBookings";
 import axiosAPI from "@/config/axios.config";
-import { IGetWithParams, IStatusMsg } from "@/interfaces";
+import { IGetWithParams, IStatusMsg } from "@/shared/types";
 import {
   IPatientBooking,
   IPatientBookingsRes,

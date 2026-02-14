@@ -3,10 +3,18 @@ import { lazy, Suspense } from "react";
 import PageLoader from "./components/shared/PageLoader";
 import { registerSW } from "virtual:pwa-register";
 import "./index.css";
-import { DirectionProvider } from "@/components/ui/direction";
+import { DirectionProvider } from "@/shared/components/ui/direction";
+import { store } from "@/app/store";
+import { logout } from "@/app/store/features/auth/authSlice";
+import { registerLogoutHandler } from "@/config/axios.config";
+
 const App = lazy(() => import("./App"));
 registerSW({
   immediate: true,
+});
+
+registerLogoutHandler(() => {
+  store.dispatch(logout());
 });
 
 createRoot(document.getElementById("root")!).render(
@@ -14,5 +22,5 @@ createRoot(document.getElementById("root")!).render(
     <DirectionProvider dir="rtl">
       <App />
     </DirectionProvider>
-  </Suspense>,
+  </Suspense>
 );

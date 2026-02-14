@@ -1,6 +1,6 @@
 import { PERMISSIONS } from "@/enums/permissions";
-import SearchInput from "../../ui/SearchInput";
-import useHasPermission from "@/hooks/useHasPermission";
+import SearchInput from "../../../shared/components/ui/SearchInput";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import CreateTreasury from "./CreateTreasury";
 import TransferBetweenTreasuriesButton from "./TransferBetweenTreasuries";
 import { memo } from "react";
@@ -12,8 +12,8 @@ const TreasuriesHeader = () => {
   );
 
   return (
-    <div className="my-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
-      <div className="flex flex-col md:flex-row md:items-center gap-4">
+    <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center">
         {canCreateTreasury && <CreateTreasury />}
         {canTransferTreasury && <TransferBetweenTreasuriesButton />}
       </div>

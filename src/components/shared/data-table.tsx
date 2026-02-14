@@ -9,10 +9,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import type { IPaginationMeta } from "@/interfaces";
-import { cn } from "@/lib/utils";
-import DataTablePagination from "../ui/DataTablePagination";
+} from "@/shared/components/ui/table";
+import type { IPaginationMeta } from "@/shared/types";
+import { cn } from "@/shared/lib/utils";
+import DataTablePagination from "../../shared/components/ui/DataTablePagination";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 
@@ -45,17 +45,17 @@ export const DataTable = <T extends object>({
 
   return (
     <>
-      <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden max-w-full">
+      <div className="border-border bg-card max-w-full overflow-hidden rounded-xl border shadow-sm">
         <Table className="w-full">
           {/* Table Header */}
           <TableHeader>
-            <TableRow className="bg-muted/40 border-b border-border">
+            <TableRow className="bg-muted/40 border-border border-b">
               {columns.map((col) => (
                 <TableHead
                   key={String(col.key)}
                   className={cn(
                     col.className,
-                    "text-center py-4 text-sm font-medium text-muted-foreground text-nowrap",
+                    "text-muted-foreground py-4 text-center text-sm font-medium text-nowrap"
                   )}
                 >
                   {col.header}
@@ -76,14 +76,14 @@ export const DataTable = <T extends object>({
                     animate="visible"
                     custom={rIdx}
                     variants={tableRowVariants}
-                    className="border-b border-border/60 odd:bg-muted/20 hover:bg-muted/50 transition-colors"
+                    className="border-border/60 odd:bg-muted/20 hover:bg-muted/50 border-b transition-colors"
                   >
                     {columns.map((col, cIdx) => (
                       <TableCell
                         key={String(col.key) + cIdx}
                         className={cn(
                           col.className,
-                          "py-4 text-sm text-foreground text-center text-nowrap",
+                          "text-foreground py-4 text-center text-sm text-nowrap"
                         )}
                       >
                         {col.cell
@@ -98,7 +98,7 @@ export const DataTable = <T extends object>({
               ) : (
                 <TableRow>
                   <TableCell
-                    className="text-center py-6 h-20 text-muted-foreground"
+                    className="text-muted-foreground h-20 py-6 text-center"
                     colSpan={columns.length}
                   >
                     {emptyMessage}
@@ -109,13 +109,13 @@ export const DataTable = <T extends object>({
           )}
 
           <TableFooter>
-            <TableRow className="bg-muted/40 border-t border-border">
+            <TableRow className="bg-muted/40 border-border border-t">
               {columns.map((col) => (
                 <TableCell
                   key={String(col.key)}
                   className={cn(
                     col.className,
-                    "text-center py-4 text-sm font-medium text-muted-foreground text-nowrap",
+                    "text-muted-foreground py-4 text-center text-sm font-medium text-nowrap"
                   )}
                 >
                   {col.header}

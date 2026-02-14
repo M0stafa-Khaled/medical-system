@@ -1,20 +1,20 @@
-import { IFormInput } from "@/interfaces";
+import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/shared/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/shared/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import {
   FormControl,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/components/ui/form";
 
 interface IProps {
   field: ControllerRenderProps<any>;
@@ -34,7 +34,7 @@ const DateFormItem = ({ input, field }: IProps) => {
               id={input.name}
               variant={"outline"}
               className={
-                "w-full justify-start text-right font-normal text-black dark:text-white py-3 h-auto hover:bg-foreground hover:text-black dark:hover:text-white dark:hover:bg-foreground border-muted"
+                "hover:bg-foreground dark:hover:bg-foreground border-muted h-auto w-full justify-start py-3 text-right font-normal text-black hover:text-black dark:text-white dark:hover:text-white"
               }
             >
               <CalendarIcon className="ml-2 h-4 w-4" />
@@ -46,7 +46,7 @@ const DateFormItem = ({ input, field }: IProps) => {
             </Button>
           </PopoverTrigger>
           <PopoverContent
-            className="w-full p-0 px-3 border-muted bg-foreground"
+            className="border-muted bg-foreground w-full p-0 px-3"
             align="start"
           >
             <Calendar

@@ -1,4 +1,4 @@
-import { IPaginationMeta } from "..";
+import { IPaginationMeta } from "../../shared/types";
 
 export interface IScan {
   id: number;

@@ -1,24 +1,24 @@
 import { useState } from "react";
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
   AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import Modal from "@/components/shared/Modal";
-import cookieServices from "@/utils/cookieServices";
+import { Modal } from "@/components/shared/Modal";
+import cookieServices from "@/shared/utils/cookieServices";
 import { DOCTOR_ACTION_INPUTS } from "@/constants";
 import doctorActionSchema from "@/validations/dashboard/doctorActionSchema";
-import { useCreateDoctorAction } from "@/lib/react-query/dashboard/doctors/doctorActions";
+import { useCreateDoctorAction } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import handleResErr from "@/utils/handleResponseError";
+import { handleResErr } from "@/shared/utils/handleResError";
 import RenderDoctorFormFields from "@/components/forms/dashboard/doctors/RenderDoctorFormFields";
 
 const CreateAction = ({ doctorId }: { doctorId: string }) => {
@@ -63,7 +63,7 @@ const CreateAction = ({ doctorId }: { doctorId: string }) => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-auto py-3 w-full md:w-fit"
+        className="flex h-auto w-full items-center gap-2 py-3 md:w-fit"
       >
         إضافة إجراء
         <FiPlus size={20} />
@@ -95,20 +95,20 @@ const CreateAction = ({ doctorId }: { doctorId: string }) => {
                 />
               </motion.div>
             ))}
-            <AlertDialogFooter className="text-start justify-start! gap-2">
+            <AlertDialogFooter className="justify-start! gap-2 text-start">
               <AlertDialogCancel
                 onClick={handleCloseModal}
-                className="text-black dark:text-white py-2.5 h-auto"
+                className="h-auto py-2.5 text-black dark:text-white"
               >
                 إلغاء
               </AlertDialogCancel>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="py-2.5 h-auto"
+                className="h-auto py-2.5"
               >
                 إضافة
-                {isPending && <Loader2 className="animate-spin ml-2" />}
+                {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             </AlertDialogFooter>
           </motion.form>

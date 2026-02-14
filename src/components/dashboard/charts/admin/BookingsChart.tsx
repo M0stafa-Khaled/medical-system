@@ -1,6 +1,6 @@
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import AnalyticsChart from "../../../shared/charts/ChartsCard";
-import { useGetBookingsChart } from "@/lib/react-query/dashboard/charts/adminCharts";
+import { useGetBookingsChart } from "@/shared/lib/react-query/dashboard/charts/adminCharts";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import ChartDate from "../../../shared/charts/ChartDate";
@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/components/ui/select";
 
 interface IBookingsFilter {
   booking_start_at: string;

@@ -1,9 +1,9 @@
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import AnalyticsChart from "../../shared/charts/ChartsCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import ChartDate from "../../shared/charts/ChartDate";
-import { useGetDoctorPrescriptionsChart } from "@/lib/react-query/doctor/doctorCharts";
+import { useGetDoctorPrescriptionsChart } from "@/shared/lib/react-query/doctor/doctorCharts";
 
 interface ITransactionsFilter {
   prescription_start_at: string;

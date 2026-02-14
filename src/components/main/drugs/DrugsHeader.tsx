@@ -1,4 +1,4 @@
-import SearchInput from "@/components/ui/SearchInput";
+import SearchInput from "@/shared/components/ui/SearchInput";
 
 const DrugsHeader = () => {
   return (

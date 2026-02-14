@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { type IStatusMsg } from "@/interfaces";
+import { type IStatusMsg } from "@/shared/types";
 import { IChangePassword, IResponseProfile, IUpdateProfile } from "./types";
 
 export const getUserProfile = async (): Promise<IResponseProfile> =>

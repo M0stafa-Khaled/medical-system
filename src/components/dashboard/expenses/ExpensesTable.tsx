@@ -1,16 +1,16 @@
-import DataTable from "@/components/ui/DataTable";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import DataTable from "@/shared/components/ui/DataTable";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
+import useDebounce from "@/shared/hooks/useDebounce";
 import ExpensesTableHeader from "./ExpensesTableHeader";
 import ExpensesList from "./ExpensesList";
 import ExpensesHeader from "./ExpensesHeader";
-import { useGetAllExpenses } from "@/lib/react-query/dashboard/expenses/expenses";
+import { useGetAllExpenses } from "@/shared/lib/react-query/dashboard/expenses/expenses";
 import { IExpensesFilter } from "@/interfaces/dashboard/expenses";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
 const ExpensesTable = () => {

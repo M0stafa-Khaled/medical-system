@@ -1,16 +1,16 @@
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import ClinicsTableHeader from "./DosageTableHeader";
 import DosagesHeader from "./DosagesHeader";
 import DosagesList from "./DosageList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import { useGetAllDosages } from "@/lib/react-query/dashboard/dosages";
+import { useGetAllDosages } from "@/shared/lib/react-query/dashboard/dosages";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
+import useDebounce from "@/shared/hooks/useDebounce";
 
 const DosagesTable = () => {
   const token = cookieServices.getToken()!;

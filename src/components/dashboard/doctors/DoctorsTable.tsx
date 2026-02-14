@@ -1,15 +1,15 @@
-import { useGetAllDoctors } from "@/lib/react-query/dashboard/doctors/doctors";
-import DataTable from "@/components/ui/DataTable";
+import { useGetAllDoctors } from "@/shared/lib/react-query/dashboard/doctors/doctors";
+import DataTable from "@/shared/components/ui/DataTable";
 import DoctorsTableHeader from "./DoctorsTableHeader";
 import DoctorsHeader from "./DoctorsHeader";
 import DoctorsList from "./DoctorsList";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
-import useHasPermission from "@/hooks/useHasPermission";
+import useDebounce from "@/shared/hooks/useDebounce";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 
 const DoctorsTable = () => {

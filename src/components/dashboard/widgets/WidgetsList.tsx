@@ -1,5 +1,5 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import cookieServices from "@/utils/cookieServices";
+import { Skeleton } from "@/shared/components/ui/skeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import WidgetCard from "../../shared/widgets/WidgetCard";
 import {
@@ -14,7 +14,7 @@ import { FaMoneyBillTransfer, FaUserDoctor } from "react-icons/fa6";
 import { TbReportMedical } from "react-icons/tb";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { containerVariants, itemVariants } from "@/animations";
-import { useGetAdminWidgets } from "@/lib/react-query/dashboard/widgets";
+import { useGetAdminWidgets } from "@/shared/lib/react-query/dashboard/widgets";
 
 const WidgetsList = () => {
   const token = cookieServices.getToken()!;

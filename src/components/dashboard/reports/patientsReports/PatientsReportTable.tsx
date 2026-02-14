@@ -1,14 +1,14 @@
-import DataTable from "@/components/ui/DataTable";
-import TableSkeleton from "@/components/ui/TableSkeleton";
-import cookieServices from "@/utils/cookieServices";
+import DataTable from "@/shared/components/ui/DataTable";
+import TableSkeleton from "@/shared/components/ui/TableSkeleton";
+import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router";
-import useDebounce from "@/hooks/useDebounce";
+import useDebounce from "@/shared/hooks/useDebounce";
 import PatientsReportTableHeader from "./PatientsReportTableHeader";
 import PatientsReportList from "./PatientsReportList";
 import PatientsReportHeader from "./PatientsReportHeader";
-import { useGetPatientsReport } from "@/lib/react-query/dashboard/reports";
+import { useGetPatientsReport } from "@/shared/lib/react-query/dashboard/reports";
 import { IPatientsReportFilter } from "@/interfaces/dashboard/reports";
 
 const PatientsReportTable = () => {

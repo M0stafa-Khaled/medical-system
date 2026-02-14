@@ -1,9 +1,9 @@
-import { Form } from "@/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import { DAYS, DOCTOR_WORKING_DAY_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
@@ -13,12 +13,12 @@ import { useNavigate, useParams } from "react-router";
 import {
   useCreateWorkingDay,
   useUpdateWorkingDay,
-} from "@/lib/react-query/dashboard/doctors/workingDays";
-import { formatTime, reverseFormatTime } from "@/utils/formatTime";
+} from "@/shared/lib/react-query/dashboard/doctors/workingDays";
+import { formatTime, reverseFormatTime } from "@/shared/utils/formatTime";
 import doctorWorkingDaySchema from "@/validations/dashboard/doctorWorkingDaySchema";
 import { useEffect } from "react";
-import { useGetDoctorById } from "@/lib/react-query/dashboard/doctors/doctors";
-import handleResErr from "@/utils/handleResponseError";
+import { useGetDoctorById } from "@/shared/lib/react-query/dashboard/doctors/doctors";
+import { handleResErr } from "@/shared/utils/handleResError";
 import RenderDoctorFormFields from "./RenderDoctorFormFields";
 
 interface IProps {

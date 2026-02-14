@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MAX_FILE_SIZE, ACCEPTED_IMAGE_TYPES } from "@/utils/file";
+import { MAX_FILE_SIZE, ACCEPTED_IMAGE_TYPES } from "@/shared/utils/file";
 
 export const createDoctorSchema = z.object({
   name: z

@@ -1,14 +1,19 @@
 import { containerVariants, itemVariants } from "@/animations";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
 import { motion } from "framer-motion";
 import { DollarSign, Percent } from "lucide-react";
-import { useGetDoctorTransactions } from "@/lib/react-query/dashboard/doctors/doctorTransactions";
-import cookieServices from "@/utils/cookieServices";
+import { useGetDoctorTransactions } from "@/shared/lib/react-query/dashboard/doctors/doctorTransactions";
+import cookieServices from "@/shared/utils/cookieServices";
 import CreateDoctorExpense from "./CreateDoctorExpense";
-import DataTable from "@/components/ui/DataTable";
+import DataTable from "@/shared/components/ui/DataTable";
 import DoctorTransactionsTableHeader from "./DoctorTransactionsTableHeader";
 import DoctorTransactionsList from "./DoctorTransactionsList";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 const DoctorTransactions = ({ doctorId }: { doctorId: string }) => {
   const token = cookieServices.getToken()!;
@@ -22,11 +27,11 @@ const DoctorTransactions = ({ doctorId }: { doctorId: string }) => {
       animate="visible"
       variants={containerVariants}
     >
-      <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs my-2">
+      <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted my-2 shadow-xs">
         <CardHeader className="pb-2">
           <CardTitle>إيرادات الطبيب:</CardTitle>
         </CardHeader>
-        <CardContent className="py-3 px-4">
+        <CardContent className="px-4 py-3">
           <div className="flex flex-col gap-4">
             <motion.div variants={itemVariants}>
               <CreateDoctorExpense id={doctorId} />
@@ -35,12 +40,12 @@ const DoctorTransactions = ({ doctorId }: { doctorId: string }) => {
               variants={itemVariants}
               className="flex items-center gap-4"
             >
-              <Percent className="text-orange-500 shrink-0" />
+              <Percent className="shrink-0 text-orange-500" />
               <div className="flex items-center gap-2">
-                <h5 className="text-muted-foreground text-nowrap text-lg">
+                <h5 className="text-muted-foreground text-lg text-nowrap">
                   العمولة:
                 </h5>
-                <p className="font-medium text-wrap text-dark dark:text-white text-lg">
+                <p className="text-dark text-lg font-medium text-wrap dark:text-white">
                   {doctorTransactions?.data.commission || "لا يوجد"}
                 </p>
               </div>
@@ -49,18 +54,19 @@ const DoctorTransactions = ({ doctorId }: { doctorId: string }) => {
               variants={itemVariants}
               className="flex items-center gap-4"
             >
-              <DollarSign className="text-blue-600 shrink-0" />
+              <DollarSign className="shrink-0 text-blue-600" />
               <div className="flex items-center gap-2">
-                <h5 className="text-muted-foreground text-nowrap text-lg">
+                <h5 className="text-muted-foreground text-lg text-nowrap">
                   المبلع الإجمالي:
                 </h5>
-                <p className="font-medium text-wrap text-dark dark:text-white text-lg">
-                  {numberToPrice(doctorTransactions?.data.total_amount ?? "") || 0.0}
+                <p className="text-dark text-lg font-medium text-wrap dark:text-white">
+                  {numberToPrice(doctorTransactions?.data.total_amount ?? "") ||
+                    0.0}
                 </p>
               </div>
             </motion.div>
           </div>
-          <div className="mt-4 table-scrollbar">
+          <div className="table-scrollbar mt-4">
             <DataTable
               isLoading={isLoading}
               tableHeader={<DoctorTransactionsTableHeader />}

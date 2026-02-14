@@ -1,11 +1,11 @@
 import { useState, useMemo } from "react";
 import { ControllerRenderProps } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@/components/ui/popover";
+} from "@/shared/components/ui/popover";
 import {
   Command,
   CommandEmpty,
@@ -13,10 +13,10 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/shared/components/ui/command";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { IFormInput } from "@/interfaces";
+import { cn } from "@/shared/lib/utils";
+import { IFormInput } from "@/shared/types";
 
 interface IOption {
   value: string;
@@ -50,7 +50,7 @@ const SelectAndWriteFormItem = ({ options, input, field }: IProps) => {
         <Button
           variant="outline"
           role="combobox"
-          className="border-muted w-full h-12! text-black dark:text-white justify-between overflow-hidden"
+          className="border-muted h-12! w-full justify-between overflow-hidden text-black dark:text-white"
         >
           {field.value
             ? options.find((option) => option.value === field.value)?.label ||
@@ -59,8 +59,8 @@ const SelectAndWriteFormItem = ({ options, input, field }: IProps) => {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] sm:w-[400px] md:w-[370px] p-0 z-1000 border-black/20 dark:border-white/40">
-        <Command className="text-black dark:text-white bg-foreground">
+      <PopoverContent className="z-1000 w-[300px] border-black/20 p-0 sm:w-[400px] md:w-[370px] dark:border-white/40">
+        <Command className="bg-foreground text-black dark:text-white">
           <CommandInput
             placeholder="ابحث أو اكتب جديد"
             value={searchValue}
@@ -81,7 +81,7 @@ const SelectAndWriteFormItem = ({ options, input, field }: IProps) => {
                     field.onChange(searchValue);
                     setOpen(false);
                   }}
-                  className="py-2.5 px-2 cursor-pointer hover:bg-muted text-[13px]"
+                  className="hover:bg-muted cursor-pointer px-2 py-2.5 text-[13px]"
                 >
                   إضافة: <span className="font-semibold">{searchValue}</span>
                 </div>
@@ -99,7 +99,7 @@ const SelectAndWriteFormItem = ({ options, input, field }: IProps) => {
                     setOpen(false);
                     setSearchValue("");
                   }}
-                  className="py-2.5 cursor-pointer text-black dark:text-white hover:bg-blue-200/20 text-[13px]"
+                  className="cursor-pointer py-2.5 text-[13px] text-black hover:bg-blue-200/20 dark:text-white"
                 >
                   <Check
                     className={cn(

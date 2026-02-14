@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router";
 import ExpensesReportFilters from "./ExpensesReportFilters";
 import { format } from "date-fns";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Eraser } from "lucide-react";
 import { ar } from "date-fns/locale";
 import { IExpensesReportFilter } from "@/interfaces/dashboard/reports";

@@ -1,8 +1,8 @@
 import { tableRowVariants } from "@/animations";
-import { TableCell } from "@/components/ui/table";
-import { IPaginationMeta } from "@/interfaces";
+import { TableCell } from "@/shared/components/ui/table";
+import { IPaginationMeta } from "@/shared/types";
 import { IAnalysis } from "@/interfaces/dashboard/analysis";
-import countSerial from "@/utils/countSerial";
+import countSerial from "@/shared/utils/countSerial";
 import { motion } from "framer-motion";
 
 interface IProps {
@@ -17,11 +17,11 @@ const AnalysisList = ({ analytics, meta }: IProps) => {
         initial="hidden"
         animate="visible"
         variants={tableRowVariants}
-        className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+        className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
       >
         <TableCell
           colSpan={4}
-          className="text-sm text-center text-black dark:text-white py-5 font-medium"
+          className="py-5 text-center text-sm font-medium text-black dark:text-white"
         >
           لا يوجد تحاليل
         </TableCell>
@@ -37,23 +37,23 @@ const AnalysisList = ({ analytics, meta }: IProps) => {
           animate="visible"
           custom={index}
           variants={tableRowVariants}
-          className="dark:border-muted bg-white/40! dark:bg-dark/40! hover:bg-gray-200! dark:hover:bg-dark! transition-all duration-300"
+          className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
         >
-          <TableCell className="text-sm text-center text-black dark:text-white py-3 font-medium w-20">
+          <TableCell className="w-20 py-3 text-center text-sm font-medium text-black dark:text-white">
             {countSerial({ meta: meta!, index })}
           </TableCell>
           <TableCell
             dir="ltr"
-            className="text-sm text-center text-black dark:text-white py-5 font-medium text-nowrap"
+            className="py-5 text-center text-sm font-medium text-nowrap text-black dark:text-white"
           >
             {name}
           </TableCell>
-          <TableCell className="text-sm text-center text-black dark:text-white py-5 font-medium text-nowrap">
+          <TableCell className="py-5 text-center text-sm font-medium text-nowrap text-black dark:text-white">
             {arabic_name}
           </TableCell>
           <TableCell
             dir="ltr"
-            className="text-sm text-center text-black dark:text-white py-5 font-medium text-nowrap"
+            className="py-5 text-center text-sm font-medium text-nowrap text-black dark:text-white"
           >
             {abbreviation}
           </TableCell>

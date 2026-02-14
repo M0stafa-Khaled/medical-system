@@ -1,4 +1,4 @@
-import { TPaymentMethod } from "@/types";
+import { TPaymentMethod } from "@/shared/types";
 import { IPaginationMeta } from "..";
 import { IDoctor } from "../doctors/doctor";
 import { IEmployee } from "./employee";

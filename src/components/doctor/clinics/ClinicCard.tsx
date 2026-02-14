@@ -1,5 +1,5 @@
-import { Badge } from "@/components/ui/badge";
-import { IClinic } from "@/interfaces/dashboard/clinics";
+import { type IClinic } from "@/features/dashboard/clinics/types";
+import { Badge } from "@/shared/components/ui/badge";
 import { useNavigate } from "react-router";
 
 interface IProps {

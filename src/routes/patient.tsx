@@ -2,10 +2,12 @@ import { createRoutesFromElements, Route } from "react-router";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/components/shared/PageLoader";
 import Error from "@/pages/Error";
+import { ProtectedRoute } from "@/features/auth";
 
-const RootLayout = lazy(() => import("@/layout/RootLayout"));
-const PatientLayout = lazy(() => import("@/layout/PatientLayout"));
-const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
+const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
+const PatientLayout = lazy(
+  () => import("@/shared/components/layouts/PatientLayout")
+);
 
 const PatientBookings = lazy(() => import("@/pages/patient/bookings"));
 const CreatePatientBooking = lazy(

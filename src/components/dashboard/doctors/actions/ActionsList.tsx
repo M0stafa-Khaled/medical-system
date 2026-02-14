@@ -1,7 +1,7 @@
-import { useGetDoctorActions } from "@/lib/react-query/dashboard/doctors/doctorActions";
-import cookieServices from "@/utils/cookieServices";
+import { useGetDoctorActions } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
+import cookieServices from "@/shared/utils/cookieServices";
 import ActionCard from "./ActionCard";
-import ActionSkeleton from "@/components/ui/ActionSkeleton";
+import ActionSkeleton from "@/shared/components/ui/ActionSkeleton";
 import { containerVariants, itemVariants } from "@/animations";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
@@ -30,13 +30,13 @@ const ActionsList = ({ doctorId }: IProps) => {
   return (
     <>
       {!actions?.data?.length ? (
-        <p className="text-center text-muted-foreground py-3">
+        <p className="text-muted-foreground py-3 text-center">
           لا يوجد إجراءات
         </p>
       ) : (
         <motion.div
           variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4"
+          className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
         >
           {actions?.data?.map((action, idx) => (
             <motion.div variants={itemVariants} custom={idx} key={action.id}>

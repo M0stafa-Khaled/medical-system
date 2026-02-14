@@ -1,5 +1,5 @@
-import { FormField } from "@/components/ui/form";
-import { IFormInput } from "@/interfaces";
+import { FormField } from "@/shared/components/ui/form";
+import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ChangeEvent } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";

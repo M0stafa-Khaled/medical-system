@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router";
 import { ChevronDown, ChevronRight, Dot } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { linkVariants, navItemsVariants } from "@/animations/navbarAnimations";
-import { ILink } from "@/interfaces";
+import { ILink } from "@/shared/types";
 
 interface IProps {
   links: ILink[];

@@ -1,20 +1,20 @@
-import { Badge } from "@/components/ui/badge";
-import { TableCell } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/shared/components/ui/badge";
+import { TableCell } from "@/shared/components/ui/table";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import { FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import { PERMISSIONS } from "@/enums/permissions";
-import useHasPermission from "@/hooks/useHasPermission";
+import useHasPermission from "@/shared/hooks/useHasPermission";
 import { IExpense } from "@/interfaces/dashboard/expenses";
-import formatDateTime from "@/utils/formatDate";
+import formatDateTime from "@/shared/utils/formatDate";
 import DeleteExpense from "./DeleteExpense";
 import CancelExpense from "./CancelExpense";
-import truncateText from "@/utils/truncateText";
+import truncateText from "@/shared/utils/truncateText";
 import PrintExpenseReceipt from "./PrintExpenseReceipt";
-import TooltipButton from "@/components/ui/TooltipButton";
-import { numberToPrice } from "@/utils/numberToPrice";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 interface IProps {
   expenses: IExpense[];

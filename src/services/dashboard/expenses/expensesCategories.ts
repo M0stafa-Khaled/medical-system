@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IGetWithParams, IStatusMsg } from "@/interfaces";
+import { IGetWithParams, IStatusMsg } from "@/shared/types";
 import {
   IExpenseCategoriesRes,
   IExpenseCategory,

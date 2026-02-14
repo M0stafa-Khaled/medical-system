@@ -1,4 +1,4 @@
-import cookieServices from "@/utils/cookieServices";
+import cookieServices from "@/shared/utils/cookieServices";
 import AnalyticsChart from "../../shared/charts/ChartsCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
@@ -9,8 +9,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useGetDoctorBookingsChart } from "@/lib/react-query/doctor/doctorCharts";
+} from "@/shared/components/ui/select";
+import { useGetDoctorBookingsChart } from "@/shared/lib/react-query/doctor/doctorCharts";
 
 interface IBookingsFilter {
   booking_start_at: string;
