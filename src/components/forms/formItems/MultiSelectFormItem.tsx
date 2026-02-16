@@ -51,8 +51,6 @@ const MultiSelectFormItem = ({
     });
   }, [options, searchValue]);
 
-  console.log("search: ", searchValue, ": ", filteredOptions);
-
   const handleSelect = (value: string) => {
     const currentValues: string[] = Array.isArray(field.value)
       ? field.value

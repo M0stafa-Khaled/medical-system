@@ -16,19 +16,19 @@ import { motion } from "framer-motion";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
-import { useGetAllWorkingDays } from "@/shared/lib/react-query/dashboard/doctors/workingDays";
 import convertDay from "@/shared/utils/convertDayLang";
 import {
   useGetAllClinicDoctors,
   useGetAvailableBookingsTime,
 } from "@/shared/lib/react-query/main";
-import { useGetDoctorActions } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
 import patientBookingSchema from "@/validations/patient/patientBookingSchema";
 import { useCreatePatientBooking } from "@/shared/lib/react-query/patient/patientBookings";
 import cookieServices from "@/shared/utils/cookieServices";
 import RenderPatientBookingFormFields from "@/components/forms/patient/RenderPatientBookingFormFields";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
+import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
+import { useGetDoctorActions } from "@/features/dashboard/doctors";
 
 const CreatePatientBooking = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,12 +68,10 @@ const CreatePatientBooking = () => {
 
   const { data: workingDays } = useGetAllWorkingDays({
     doctorId: doctorId,
-    token,
   });
 
   const { data: doctorActions } = useGetDoctorActions({
     doctorId: doctorId,
-    token,
   });
 
   const { data: availableTimes } = useGetAvailableBookingsTime({

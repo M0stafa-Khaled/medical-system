@@ -1,5 +1,4 @@
 import DataLoader from "@/shared/components/ui/DataLoader";
-import { IDoctor } from "@/interfaces/dashboard/doctors/doctor";
 import { IPatient } from "@/interfaces/dashboard/patient";
 import { format } from "date-fns";
 import { useEffect } from "react";
@@ -16,6 +15,7 @@ import { ProfileHeader } from "../components/ProfileHeader";
 import { ProfileInfoField } from "../components/ProfileInfoField";
 import { EmployeePermissions } from "../components/EmployeePermissions";
 import { DoctorClinics } from "../components/DoctorClinics";
+import { IDoctor } from "@/features/dashboard/doctors/types";
 
 const Profile = () => {
   const navigate = useNavigate();

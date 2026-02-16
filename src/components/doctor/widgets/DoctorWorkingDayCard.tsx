@@ -1,12 +1,12 @@
 import InfoField from "@/components/shared/InfoField";
-import { IWorkingDay } from "@/interfaces/dashboard/doctors/workingDays";
+import { IWorkingDay } from "@/features/dashboard/doctors/working-days/types";
 import { convertDayFromEnToAr } from "@/shared/utils/convertDayLang";
 import { Calendar, Clock, Hospital, Users } from "lucide-react";
 
 interface IProps {
   day: IWorkingDay;
 }
-const DoctorWorkingDayCard = ({
+export const DoctorWorkingDayCard = ({
   day: { day, clinic, start_at, end_at, deuration, max_visitors },
 }: IProps) => {
   return (
@@ -41,5 +41,3 @@ const DoctorWorkingDayCard = ({
     </div>
   );
 };
-
-export default DoctorWorkingDayCard;

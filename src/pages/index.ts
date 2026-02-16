@@ -12,22 +12,25 @@ export const CreateBooking = lazy(
   () => import("./dashboard/bookings/CreateBooking")
 );
 // ---- Doctors
-export const Doctors = lazy(() => import("./dashboard/doctors"));
+export const Doctors = lazy(
+  () => import("../features/dashboard/doctors/pages/Doctors")
+);
 export const DoctorDetails = lazy(
-  () => import("./dashboard/doctors/DoctorDetails")
+  () => import("../features/dashboard/doctors/pages/DoctorDetails")
 );
 export const CreateDoctor = lazy(
-  () => import("./dashboard/doctors/CreateDoctor")
+  () => import("../features/dashboard/doctors/pages/CreateDoctor")
 );
 export const UpdateDoctor = lazy(
-  () => import("./dashboard/doctors/UpdateDoctor")
+  () => import("../features/dashboard/doctors/pages/UpdateDoctor")
 );
-export const DoctorTabs = lazy(() => import("./dashboard/doctors/DoctorTabs"));
 export const CreateWorkingDay = lazy(
-  () => import("./dashboard/doctors/workingDays/CreateWorkingDay")
+  () =>
+    import("../features/dashboard/doctors/working-days/pages/CreateWorkingDay")
 );
 export const UpdateWorkingDay = lazy(
-  () => import("./dashboard/doctors/workingDays/UpdateWorkingDay")
+  () =>
+    import("../features/dashboard/doctors/working-days/pages/UpdateWorkingDay")
 );
 // ---- Employees
 export const Employees = lazy(
