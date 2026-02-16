@@ -58,7 +58,6 @@ export const useClinicsColumns = (): ColumnDef<IClinic>[] => {
                 {canDeleteClinic && (
                   <DeleteAlert
                     deleteAction={() => deleteClinic({ id: row.id })}
-                    id={row.id}
                     name={row.name}
                   />
                 )}

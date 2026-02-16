@@ -29,7 +29,7 @@ export interface DataTableProps<T> {
   emptyMessage?: string;
   meta?: IPaginationMeta;
   isLoading?: boolean;
-  skeleton: ReactNode;
+  skeleton?: ReactNode;
 }
 
 export const DataTable = <T extends object>({
@@ -65,7 +65,7 @@ export const DataTable = <T extends object>({
           </TableHeader>
 
           {isLoading ? (
-            skeleton
+            skeleton || null
           ) : (
             <TableBody>
               {data && data.length > 0 ? (

@@ -8,7 +8,6 @@ import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
-import { useGetAllWorkingDays } from "@/shared/lib/react-query/dashboard/doctors/workingDays";
 import convertDay from "@/shared/utils/convertDayLang";
 import {
   useGetAllClinicDoctors,
@@ -16,7 +15,6 @@ import {
 } from "@/shared/lib/react-query/main";
 import SubmitButton from "@/components/shared/SubmitButton";
 import { useNavigate } from "react-router";
-import { useGetDoctorActions } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
 import { handleResErr } from "@/shared/utils/handleResError";
 import patientBookingSchema from "@/validations/patient/patientBookingSchema";
 import RenderPatientBookingFormFields from "./RenderPatientBookingFormFields";
@@ -27,6 +25,8 @@ import {
 import { IPatientBooking } from "@/interfaces/patient/patientBookings";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
+import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
+import { useGetDoctorActions } from "@/features/dashboard/doctors";
 
 interface IProps {
   booking?: IPatientBooking;
@@ -82,12 +82,10 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
 
   const { data: workingDays } = useGetAllWorkingDays({
     doctorId: doctorId,
-    token,
   });
 
   const { data: doctorActions } = useGetDoctorActions({
     doctorId: doctorId,
-    token,
   });
 
   const { data: availableTimes } = useGetAvailableBookingsTime({

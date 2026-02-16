@@ -79,7 +79,6 @@ export const ResetPasswordForm = () => {
     }
   };
 
-  console.log(form.formState.errors);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-3">

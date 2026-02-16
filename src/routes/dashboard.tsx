@@ -10,26 +10,6 @@ const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
 
 // Clinics
 
-// Doctors
-const Doctors = lazy(() => import("@/pages/dashboard/doctors"));
-const DoctorDetails = lazy(
-  () => import("@/pages/dashboard/doctors/DoctorDetails")
-);
-const CreateDoctor = lazy(
-  () => import("@/pages/dashboard/doctors/CreateDoctor")
-);
-const UpdateDoctor = lazy(
-  () => import("@/pages/dashboard/doctors/UpdateDoctor")
-);
-
-// Working Days
-const CreateWorkingDay = lazy(
-  () => import("@/pages/dashboard/doctors/workingDays/CreateWorkingDay")
-);
-const UpdateWorkingDay = lazy(
-  () => import("@/pages/dashboard/doctors/workingDays/UpdateWorkingDay")
-);
-
 // Patients
 const Patients = lazy(() => import("@/pages/dashboard/patients"));
 const PatientDetails = lazy(
@@ -197,76 +177,6 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-update-booking"
-      />
-
-      {/* Doctors */}
-      <Route
-        path="doctors"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.DOCTORS}>
-              <Doctors />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-doctors"
-      />
-      <Route
-        path="doctors/:doctorId"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_DOCTOR}>
-              <DoctorDetails />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-doctor-details"
-      />
-      <Route
-        path="doctors/create"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
-              <CreateDoctor />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-create-doctor"
-      />
-      <Route
-        path="doctors/:doctorId/update"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
-              <UpdateDoctor />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-update-doctor"
-      />
-
-      {/* Doctor Working Days */}
-      <Route
-        path="doctors/:doctorId/working-days/create"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_WORKING_DAY}>
-              <CreateWorkingDay />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-create-working-day"
-      />
-      <Route
-        path="doctors/:doctorId/working-days/:workingDayId/update"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_WORKING_DAY}>
-              <UpdateWorkingDay />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-update-working-day"
       />
 
       {/* Patients */}

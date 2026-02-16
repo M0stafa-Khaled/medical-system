@@ -16,19 +16,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/shared/components/ui/alert-dialog";
+import { cn } from "@/shared/lib/utils";
 
 interface IProps {
   name: string;
-  id: number;
-  deleteAction: (id: number) => Promise<{ status: boolean; message: string }>;
+  deleteAction: () => Promise<{ status: boolean; message: string }>;
   navigatePath?: string;
+  className?: string;
 }
 
 export const DeleteAlert = ({
   name,
-  id,
   deleteAction,
   navigatePath,
+  className,
 }: IProps) => {
   const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
@@ -37,7 +38,7 @@ export const DeleteAlert = ({
   const handleDelete = async () => {
     startTransition(async () => {
       try {
-        const { status, message } = await deleteAction(id);
+        const { status, message } = await deleteAction();
 
         // * Delete Success
         if (status) {
@@ -60,7 +61,7 @@ export const DeleteAlert = ({
             size={"icon"}
             onClick={() => setIsOpen(true)}
             variant={"outline"}
-            className="btn-destructive rounded-full"
+            className={cn("btn-destructive rounded-full", className)}
           >
             <Trash2 size={20} />
           </Button>

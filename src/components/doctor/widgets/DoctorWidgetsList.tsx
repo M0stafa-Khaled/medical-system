@@ -12,7 +12,7 @@ import {
 import { containerVariants, itemVariants } from "@/animations";
 import { Fragment } from "react/jsx-runtime";
 import { Separator } from "@/shared/components/ui/separator";
-import DoctorWorkingDayCard from "./DoctorWorkingDayCard";
+import { DoctorWorkingDayCard } from "./DoctorWorkingDayCard";
 import { useGetDoctorWidgets } from "@/shared/lib/react-query/doctor/doctorWidgets";
 
 const DoctorWidgetsList = () => {

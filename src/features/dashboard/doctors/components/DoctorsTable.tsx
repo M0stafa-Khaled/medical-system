@@ -2,56 +2,54 @@ import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import { useGetAllEmployees } from "../queriesAndMutations";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { PERMISSIONS } from "@/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
+import { PERMISSIONS } from "@/enums/permissions";
+import { useGetAllDoctors } from "../queriesAndMutations";
 import { DataTable } from "@/components/shared/data-table";
-import { useEmployeesColumns } from "./EmployeesColumns";
+import { useDoctorsColumns } from "./DoctorColumns";
 
-export const EmployeesTable = () => {
+export const DoctorsTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-
   const search = useDebounce(searchParams.get("q"), 500)!;
-
   const {
-    data: employees,
+    data: doctors,
     isLoading,
     isError,
-  } = useGetAllEmployees({ token, page, search });
+  } = useGetAllDoctors({ token, page, search });
 
   useEffect(() => {
-    if (employees?.message && !employees.status) toast.error(employees.message);
+    if (doctors?.message && !doctors.status) toast.error(doctors.message);
     if (isError) {
       toast.error("حدث خطأ اثناء تحميل البيانات");
       return;
     }
-  }, [employees?.message, employees?.status, isError]);
+  }, [doctors?.message, isError, doctors?.status]);
 
-  const canUpdateEmployee = useHasPermission(PERMISSIONS.UPDATE_EMPLOYEE);
-  const canDeleteEmployee = useHasPermission(PERMISSIONS.DELETE_EMPLOYEE);
-  const canViewEmployee = useHasPermission(PERMISSIONS.VIEW_EMPLOYEE);
-  const columns = useEmployeesColumns({ meta: employees?.data.meta });
+  const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
+  const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
+  const canViewDoctor = useHasPermission(PERMISSIONS.VIEW_DOCTOR);
+
+  const columns = useDoctorsColumns({ meta: doctors?.data.meta });
+
   return (
     <DataTable
+      data={doctors?.data.items || []}
       columns={columns}
-      data={employees?.data.items || []}
       isLoading={isLoading}
       skeleton={
         <TableSkeleton
-          columns={
-            canViewEmployee || canDeleteEmployee || canUpdateEmployee ? 5 : 4
-          }
+          columns={canViewDoctor || canDeleteDoctor || canUpdateDoctor ? 5 : 4}
           rows={6}
           hasImage
           actionButtons={3}
         />
       }
-      emptyMessage="لا يوجد موظفين"
-      meta={employees?.data.meta}
+      emptyMessage="لا يوجد اطباء"
+      meta={doctors?.data.meta}
     />
   );
 };

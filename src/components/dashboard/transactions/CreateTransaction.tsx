@@ -22,13 +22,13 @@ import { TPaymentMethod } from "@/shared/types";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Link } from "react-router";
 import { IBooking } from "@/interfaces/dashboard/bookings";
-import { useGetDoctorActions } from "@/shared/lib/react-query/dashboard/doctors/doctorActions";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useGetPatientBalances } from "@/shared/lib/react-query/dashboard/transactions/patientBalances";
 import InfoField from "../../shared/InfoField";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
+import { useGetDoctorActions } from "@/features/dashboard/doctors";
 
 interface IProps {
   booking: IBooking;
@@ -43,7 +43,6 @@ const CreateTransaction = ({ booking }: IProps) => {
 
   const { data: doctorActions } = useGetDoctorActions({
     doctorId: isOpen ? booking.doctor.id.toString() : "",
-    token,
   });
 
   const { data: patientBalances } = useGetPatientBalances({
