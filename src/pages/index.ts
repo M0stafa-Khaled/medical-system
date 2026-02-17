@@ -46,12 +46,15 @@ export const UpdateEmployee = lazy(
   () => import("../features/dashboard/employees/pages/UpdateEmployee")
 );
 // ---- Expenses
-export const Expenses = lazy(() => import("./dashboard/expenses"));
+export const Expenses = lazy(
+  () => import("../features/dashboard/expenses/pages/Expenses")
+);
 export const ExpenseDetails = lazy(
-  () => import("./dashboard/expenses/ExpenseDetails")
+  () => import("../features/dashboard/expenses/pages/ExpenseDetails")
 );
 export const ExpensesCategories = lazy(
-  () => import("./dashboard/expensesCategories")
+  () =>
+    import("../features/dashboard/expenses-categories/pages/ExpensesCategories")
 );
 // ---- Patients
 export const Patients = lazy(() => import("./dashboard/patients"));

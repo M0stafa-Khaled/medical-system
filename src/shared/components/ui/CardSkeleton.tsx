@@ -7,7 +7,7 @@ interface IProps {
   lgLength?: number;
   count?: number;
 }
-const CardSkeleton = ({
+export const CardSkeleton = ({
   length = 1,
   mdLength = 2,
   lgLength = 3,
@@ -18,7 +18,7 @@ const CardSkeleton = ({
       key={"skeleton"}
       custom={"skeleton"}
       variants={containerVariants}
-      className={`grid grid-cols-${length} md:grid-cols-${mdLength} lg:grid-cols-${lgLength} gap-4 animate-pulse`}
+      className={`grid grid-cols-${length} md:grid-cols-${mdLength} lg:grid-cols-${lgLength} animate-pulse gap-4`}
     >
       {Array.from({ length: count }, (_, idx) => (
         <motion.div
@@ -27,11 +27,9 @@ const CardSkeleton = ({
           custom={idx}
           className="h-auto"
         >
-          <Skeleton className={`h-28 bg-muted rounded-lg`} />
+          <Skeleton className={`bg-muted h-28 rounded-lg`} />
         </motion.div>
       ))}
     </motion.div>
   );
 };
-
-export default CardSkeleton;

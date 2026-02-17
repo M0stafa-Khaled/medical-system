@@ -1,25 +1,24 @@
-import { ClinicsTable } from "../components/ClinicsTable";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { ClinicsHeader } from "../components/ClinicsHeader";
+import { ExpensesHeader } from "../components/ExpensesHeader";
+import { ExpensesTable } from "../components/ExpensesTable";
 
-const Clinics = () => {
+const Expenses = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | العيادات</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | المصروفات</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <ClinicsHeader />
-
-        <ClinicsTable />
+        <ExpensesHeader />
+        <ExpensesTable />
       </motion.section>
     </>
   );
 };
 
-export default Clinics;
+export default Expenses;

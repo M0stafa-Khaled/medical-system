@@ -10,7 +10,7 @@ const SearchInput = ({ placeholder }: IProps) => {
   return (
     <Input
       placeholder={placeholder}
-      className="placeholder:text-muted-foreground h-auto w-full border-black/20 py-2.5 text-black placeholder:h-14 placeholder:text-sm md:max-w-md md:py-3 dark:border-white/40 dark:text-white"
+      className="border-muted placeholder:text-muted-foreground h-auto py-2.5 placeholder:h-14 placeholder:text-sm md:max-w-md md:py-3"
       onChange={(e) => {
         const value = e.target.value;
         if (value) setSearchParams({ q: value });

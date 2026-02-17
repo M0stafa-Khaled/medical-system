@@ -3,7 +3,7 @@ import { TableCell } from "@/shared/components/ui/table";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
-import { IExpense } from "@/interfaces/dashboard/expenses";
+import { IExpense } from "@/features/dashboard/expenses/types";
 import formatDateTime from "@/shared/utils/formatDate";
 import truncateText from "@/shared/utils/truncateText";
 import { numberToPrice } from "@/shared/utils/numberToPrice";

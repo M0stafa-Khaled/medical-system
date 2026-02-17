@@ -45,7 +45,7 @@ export const DataTable = <T extends object>({
 
   return (
     <>
-      <div className="border-border bg-card max-w-full overflow-hidden rounded-xl border shadow-sm">
+      <div className="border-border bg-card max-w-full overflow-hidden rounded-md border shadow-sm">
         <Table className="w-full">
           {/* Table Header */}
           <TableHeader>

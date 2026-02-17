@@ -13,7 +13,7 @@ import { WorkingDayCard } from "./WorkingDayCard";
 import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router";
-import CardSkeleton from "@/shared/components/ui/CardSkeleton";
+import { CardSkeleton } from "@/shared/components/ui/CardSkeleton";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import SearchInput from "@/shared/components/ui/SearchInput";

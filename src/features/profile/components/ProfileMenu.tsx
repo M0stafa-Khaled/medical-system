@@ -13,6 +13,7 @@ import { Link } from "react-router";
 import cookieServices from "@/shared/utils/cookieServices";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { buttonVariants } from "@/shared/components/ui/button";
 
 export const ProfileMenu = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -23,12 +24,18 @@ export const ProfileMenu = () => {
   if (isAuthenticated)
     return (
       <DropdownMenu>
-        <DropdownMenuTrigger className="bg-primary hover:bg-primary/90 flex h-9 w-9 items-center justify-center rounded-md shadow-sm transition-all duration-100">
-          <FaUser size={16} />
+        <DropdownMenuTrigger
+          className={buttonVariants({
+            size: "icon",
+            variant: "outline",
+            className: "btn-primary rounded-full!",
+          })}
+        >
+          <FaUser />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
+        <DropdownMenuContent className="bg-card w-56">
           <DropdownMenuLabel>حسابي</DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-white/30 dark:bg-black/30" />
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link to="/profile" className="block h-full w-full py-1">
               الملف الشخصي

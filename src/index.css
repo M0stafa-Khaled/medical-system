@@ -194,7 +194,7 @@
 }
 
 @utility btn-edit {
-  @apply border border-[oklch(0.82_0.02_240)/30]! bg-[oklch(0.82_0.02_240)]/30! text-[oklch(0.22_0.02_240)]! transition-colors! hover:bg-[oklch(0.82_0.02_240)]! hover:text-[oklch(0.22_0.02_240)]! dark:bg-[oklch(0.82_0.02_240)]/20! dark:text-[oklch(0.95_0.01_240)]! dark:hover:bg-[oklch(0.82_0.02_240)]/30!;
+  @apply border border-gray-500/60! bg-[oklch(0.82_0.02_240)]/30! text-[oklch(0.22_0.02_240)]! transition-colors! hover:bg-[oklch(0.82_0.02_240)]! hover:text-[oklch(0.22_0.02_240)]! dark:bg-[oklch(0.82_0.02_240)]/20! dark:text-[oklch(0.95_0.01_240)]! dark:hover:bg-[oklch(0.82_0.02_240)]/30!;
 }
 
 @utility btn-destructive {

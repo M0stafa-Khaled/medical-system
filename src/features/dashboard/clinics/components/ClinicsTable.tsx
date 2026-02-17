@@ -7,7 +7,6 @@ import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { DataTable } from "@/components/shared/data-table";
 import { useClinicsColumns } from "@/features/dashboard/clinics/components/ClinicsColumns";
-import { ClinicsHeader } from "./ClinicsHeader";
 
 export const ClinicsTable = () => {
   const token = cookieServices.getToken()!;
@@ -26,19 +25,16 @@ export const ClinicsTable = () => {
   const columns = useClinicsColumns();
 
   return (
-    <>
-      <ClinicsHeader />
-      <DataTable
-        data={clinics?.data || []}
-        columns={columns}
-        isLoading={isLoading}
-        skeleton={
-          <TableSkeleton
-            columns={canDeleteClinic || canUpdateClinic ? 3 : 2}
-            rows={8}
-          />
-        }
-      />
-    </>
+    <DataTable
+      data={clinics?.data || []}
+      columns={columns}
+      isLoading={isLoading}
+      skeleton={
+        <TableSkeleton
+          columns={canDeleteClinic || canUpdateClinic ? 3 : 2}
+          rows={8}
+        />
+      }
+    />
   );
 };
