@@ -1,4 +1,4 @@
-import { IPaginationMeta } from "../../shared/types";
+import { IPaginationMeta } from "@/shared/types";
 
 export interface IPatient {
   id: number;

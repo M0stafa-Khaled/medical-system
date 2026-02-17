@@ -3,7 +3,7 @@ import { IClinic } from "../dashboard/clinics";
 import { IDoctor } from "../dashboard/doctors/doctor";
 import { IDoctorAction } from "../dashboard/doctors/doctorActions";
 import { IWorkingDay } from "../dashboard/doctors/workingDays";
-import { IPatient } from "../dashboard/patient";
+import { IPatient } from "../../features/dashboard/patients/types";
 import { IPaginationMeta } from "../../shared/types";
 
 export interface IPatientBooking {

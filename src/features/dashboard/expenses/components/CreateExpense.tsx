@@ -12,7 +12,6 @@ import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import { Modal } from "@/components/shared/Modal";
-import cookieServices from "@/shared/utils/cookieServices";
 import { EXPENSE_FORM_INPUTS } from "@/constants";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
@@ -23,9 +22,8 @@ import { createExpenseSchema } from "../schema";
 import RenderExpensesFormFields from "./RenderExpensesFormFields";
 
 export const CreateExpense = () => {
-  const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
-  const { data: expensesCategories } = useGetAllExpensesCategories({ token });
+  const { data: expensesCategories } = useGetAllExpensesCategories({});
   const { mutateAsync: createExpense, isPending } = useCreateExpense();
 
   const expensesCategoriesOptions = expensesCategories?.data?.map(

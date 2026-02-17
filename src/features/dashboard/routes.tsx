@@ -6,6 +6,7 @@ import { employeesRoutes } from "./employees";
 import { doctorsRoutes } from "./doctors/routes";
 import { expensesRoutes } from "./expenses";
 import { expensesCategoriesRoutes } from "./expenses-categories";
+import { patientsRoutes } from "./patients";
 
 export const dashboardRoutes = [
   {
@@ -21,8 +22,9 @@ export const dashboardRoutes = [
         element: <Dashboard />,
       },
       ...clinicsRoutes,
-      ...employeesRoutes,
       ...doctorsRoutes,
+      ...employeesRoutes,
+      ...patientsRoutes,
       ...expensesRoutes,
       ...expensesCategoriesRoutes,
     ],

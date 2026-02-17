@@ -3,7 +3,7 @@ import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import formatDateTime from "@/shared/utils/formatDate";
-import { IPatient } from "@/interfaces/dashboard/patient";
+import { IPatient } from "@/features/dashboard/patients/types";
 
 interface IProps {
   patients: IPatient[];

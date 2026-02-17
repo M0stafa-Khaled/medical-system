@@ -1,5 +1,5 @@
 import DataLoader from "@/shared/components/ui/DataLoader";
-import { IPatient } from "@/interfaces/dashboard/patient";
+import { IPatient } from "@/features/dashboard/patients/types";
 import { format } from "date-fns";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";

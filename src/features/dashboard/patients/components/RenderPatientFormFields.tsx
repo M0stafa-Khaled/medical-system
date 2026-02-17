@@ -4,10 +4,10 @@ import { z } from "zod";
 import { ChangeEvent } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { GENDER } from "@/constants";
-import SwitchFormItem from "../../formItems/SwitchFormItem";
-import SelectFormItem from "../../formItems/SelectFormItem";
-import FileFormItem from "../../formItems/FileFormItem";
-import InputFormItem from "../../formItems/InputFormItem";
+import SwitchFormItem from "@/components/forms/formItems/SwitchFormItem";
+import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
+import FileFormItem from "@/components/forms/formItems/FileFormItem";
+import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
 interface IProps {
   input: IFormInput;
@@ -20,7 +20,7 @@ interface IProps {
   schema: z.ZodSchema;
 }
 
-const RenderPatientFormFields = ({
+export const RenderPatientFormFields = ({
   input,
   form,
   handleFileChange,
@@ -65,5 +65,3 @@ const RenderPatientFormFields = ({
     />
   );
 };
-
-export default RenderPatientFormFields;

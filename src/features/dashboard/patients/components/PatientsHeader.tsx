@@ -1,20 +1,17 @@
 import { PERMISSIONS } from "@/enums/permissions";
-import SearchInput from "../../../shared/components/ui/SearchInput";
+import SearchInput from "../../../../shared/components/ui/SearchInput";
 import { Button } from "@/shared/components/ui/button";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router";
 
-const PatientsHeader = () => {
+export const PatientsHeader = () => {
   const canCreatePatient = useHasPermission(PERMISSIONS.ADD_PATIENT);
   return (
     <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
       {canCreatePatient && (
-        <Button className="h-auto px-0 py-0">
-          <Link
-            to="/dashboard/patients/create"
-            className="flex h-full w-full items-center justify-center gap-2 px-4 py-3"
-          >
+        <Button size={"lg"} className="dark:btn-primary" asChild>
+          <Link to="/dashboard/patients/create">
             إضافة مريض جديد
             <FiPlus size={20} />
           </Link>
@@ -24,5 +21,3 @@ const PatientsHeader = () => {
     </div>
   );
 };
-
-export default PatientsHeader;

@@ -1,6 +1,7 @@
-import PatientsTable from "@/components/dashboard/patients/PatientsTable";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { PatientsTable } from "../components/PatientsTable";
+import { PatientsHeader } from "../components/PatientsHeader";
 
 const Patients = () => {
   return (
@@ -13,6 +14,7 @@ const Patients = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
+        <PatientsHeader />
         <PatientsTable />
       </motion.section>
     </>
