@@ -8,25 +8,22 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import dosageSchema from "@/validations/dashboard/dosageSchema";
+import { dosageSchema } from "../schema";
 import { toast } from "react-toastify";
 import { Loader2, Pen } from "lucide-react";
-import cookieServices from "@/shared/utils/cookieServices";
 import { Modal } from "@/components/shared/Modal";
 import { containerVariants, itemVariants } from "@/animations";
 import { motion } from "framer-motion";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
-import { useUpdateDosage } from "@/shared/lib/react-query/dashboard/dosages";
+import { useUpdateDosage } from "../queriesAndMutations";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
 interface IProps {
   id: number;
   name: string;
 }
-const UpdateDosage = ({ id, name }: IProps) => {
-  const token = cookieServices.getToken() || "";
-
+export const UpdateDosage = ({ id, name }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: updateClinic, isPending } = useUpdateDosage();
 
@@ -41,7 +38,6 @@ const UpdateDosage = ({ id, name }: IProps) => {
       const { status, message } = await updateClinic({
         id,
         name,
-        token,
       });
 
       // ! Update failed
@@ -73,7 +69,8 @@ const UpdateDosage = ({ id, name }: IProps) => {
           onClick={() => {
             setIsOpen(true);
           }}
-          className="h-9 w-9 gap-2 bg-blue-600 px-1 py-1 text-sm text-white hover:bg-blue-700"
+          size={"icon"}
+          className="btn-edit rounded-full"
         >
           <Pen size={20} />
         </Button>
@@ -92,7 +89,7 @@ const UpdateDosage = ({ id, name }: IProps) => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-5 text-black dark:text-white"
+            className="space-y-5"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -116,14 +113,8 @@ const UpdateDosage = ({ id, name }: IProps) => {
             </motion.div>
 
             <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel className="h-auto py-2.5 text-black dark:text-white">
-                إلغاء
-              </AlertDialogCancel>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <AlertDialogCancel>إلغاء</AlertDialogCancel>
+              <Button type="submit" disabled={isPending}>
                 حفظ
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>
@@ -134,5 +125,3 @@ const UpdateDosage = ({ id, name }: IProps) => {
     </>
   );
 };
-
-export default UpdateDosage;

@@ -1,25 +1,19 @@
 import Query_Keys from "@/enums/queryKeys";
 import { IGetWithParams } from "@/shared/types";
-import { ICreateDosage, IUpdateDosage } from "@/interfaces/dashboard/dosages";
-import {
-  createDosage,
-  deleteDosage,
-  getAllDosages,
-  updateDosage,
-} from "@/services/dosages";
+import { ICreateDosage, IUpdateDosage } from "./types";
+import { createDosage, deleteDosage, getAllDosages, updateDosage } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useGetAllDosages = ({ token, search }: IGetWithParams) =>
+export const useGetAllDosages = ({ search }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_DOSAGES, search],
-    queryFn: () => getAllDosages({ token, search }),
+    queryFn: () => getAllDosages({ search }),
   });
 
 export const useCreateDosage = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, name }: ICreateDosage) =>
-      createDosage({ token, name }),
+    mutationFn: ({ name }: ICreateDosage) => createDosage({ name }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOSAGES],
@@ -31,8 +25,7 @@ export const useCreateDosage = () => {
 export const useUpdateDosage = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, name, id }: IUpdateDosage) =>
-      updateDosage({ token, name, id }),
+    mutationFn: ({ name, id }: IUpdateDosage) => updateDosage({ name, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOSAGES],
@@ -44,8 +37,7 @@ export const useUpdateDosage = () => {
 export const useDeleteDosage = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, id }: { token: string; id: string }) =>
-      deleteDosage({ token, id }),
+    mutationFn: ({ id }: { id: string }) => deleteDosage({ id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOSAGES],

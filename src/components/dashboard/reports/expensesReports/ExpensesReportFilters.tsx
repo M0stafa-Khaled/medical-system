@@ -16,7 +16,7 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import cookieServices from "@/shared/utils/cookieServices";
-import { useGetAllTreasuries } from "@/shared/lib/react-query/dashboard/treasuries";
+import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { useCallback } from "react";
 import { IExpensesReportFilter } from "@/interfaces/dashboard/reports";
 

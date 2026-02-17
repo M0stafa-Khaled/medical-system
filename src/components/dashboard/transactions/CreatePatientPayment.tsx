@@ -11,25 +11,23 @@ import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2, Plus } from "lucide-react";
 import { Modal } from "@/components/shared/Modal";
-import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { PATIENT_PAYMENT_FORM_INPUTS, PAYMENT_METHODS } from "@/constants";
 import RenderTransactionFormFields from "@/components/forms/dashboard/transactions/RenderTransactionFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
-import {
-  useCreatePatientPayment,
-  useGetPatientBalances,
-} from "@/shared/lib/react-query/dashboard/transactions/patientBalances";
 import { createPatientPaymentSchema } from "@/validations/dashboard/transactionSchema";
 import InfoField from "../../shared/InfoField";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
+import {
+  useCreatePatientPayment,
+  useGetPatientBalances,
+} from "@/features/dashboard/patients/balances";
 
 const CreatePatientPayment = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showVisa, setShowVisa] = useState(false);
   const [patientId, setPatientId] = useState<string | undefined>("");
-  const token = cookieServices.getToken()!;
 
   const { mutateAsync: createPatientPayment, isPending } =
     useCreatePatientPayment();
@@ -47,7 +45,6 @@ const CreatePatientPayment = () => {
 
   const { data: patientBalances, isLoading } = useGetPatientBalances({
     patientId: isOpen && patientId ? patientId?.toString() : "",
-    token,
   });
 
   useEffect(() => {
@@ -73,7 +70,6 @@ const CreatePatientPayment = () => {
     }
     try {
       const { message, status } = await createPatientPayment({
-        token,
         patientId: patientId!,
         transaction: {
           transaction_code: transaction_code,

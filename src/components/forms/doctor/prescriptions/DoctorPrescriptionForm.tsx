@@ -27,7 +27,7 @@ import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import SelectFormItem from "../../formItems/SelectFormItem";
-import { useGetAllDosages } from "@/shared/lib/react-query/dashboard/dosages";
+import { useGetAllDosages } from "@/features/dosages/queriesAndMutations";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";

@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
@@ -8,29 +8,32 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
-import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2, Pen } from "lucide-react";
 import { Modal } from "@/components/shared/Modal";
-import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
-import { createTreasurySchema } from "@/validations/dashboard/treasurySchema";
-import { useCreateTreasury } from "@/shared/lib/react-query/dashboard/treasuries";
 import { TREASURY_FORM_INPUTS } from "@/constants";
+import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
-import RenderTreasuryFormFields from "@/components/forms/dashboard/treasuries/RenderTreasuryFormFields";
+import { ITreasury } from "../types";
+import { useUpdateTreasury } from "../queriesAndMutations";
+import { createTreasurySchema } from "../schema";
+import { RenderTreasuryFormFields } from "./RenderTreasuryFormFields";
 
-const CreateTreasury = () => {
-  const token = cookieServices.getToken()!;
+interface IProps {
+  treasury: ITreasury;
+}
+
+export const UpdateTreasury = ({ treasury }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { mutateAsync: createTreasury, isPending } = useCreateTreasury();
+  const { mutateAsync: updateTreasury, isPending } = useUpdateTreasury();
 
   const form = useForm<z.infer<typeof createTreasurySchema>>({
     resolver: zodResolver(createTreasurySchema),
     defaultValues: {
-      name: "",
-      status: true,
+      name: treasury.name,
+      status: treasury.status,
     },
   });
 
@@ -39,17 +42,17 @@ const CreateTreasury = () => {
     status,
   }: z.infer<typeof createTreasurySchema>) => {
     try {
-      const { status: serverStatus, message } = await createTreasury({
-        name,
+      const { status: serverStatus, message } = await updateTreasury({
+        id: `${treasury.id}`,
         status,
-        token,
+        name,
       });
 
-      // ! Create failed
+      // ! Update failed
       if (!serverStatus) return toast.error(message);
 
-      // * Create Success
-      return toast.success(message || "تم إضافة خزينة بنجاح");
+      // * Update Success
+      return toast.success(message || "تم تحديث بيانات الخزينة بنجاح");
     } catch (error) {
       handleResErr(error);
     } finally {
@@ -59,24 +62,38 @@ const CreateTreasury = () => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    form.reset();
+    form.reset({
+      name: treasury.name,
+    });
   };
+  useEffect(() => {
+    form.reset({
+      name: treasury.name,
+      status: treasury.status,
+    });
+  }, [form, treasury]);
 
   return (
     <>
-      <Button
-        onClick={() => setIsOpen(true)}
-        className="flex h-auto items-center gap-2 py-3"
-      >
-        إضافة خزينة
-        <FiPlus size={20} />
-      </Button>
+      <TooltipButton title="تعديل">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          size={"icon"}
+          className="btn-edit rounded-full"
+        >
+          <Pen />
+        </Button>
+      </TooltipButton>
 
       <Modal
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
-        title="إضافة خزينة جديدة"
-        description={{ text: "يمكنك اضافة خزينة جديدة من هنا" }}
+        title="تعديل تصنيف"
+        description={{
+          text: "يمكنك تعديل التصنيف المحدد هنا",
+        }}
         showFooter={false}
       >
         <Form {...form}>
@@ -98,18 +115,11 @@ const CreateTreasury = () => {
             ))}
 
             <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
+              <AlertDialogCancel onClick={handleCloseModal}>
                 إلغاء
               </AlertDialogCancel>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
-                إضافة
+              <Button type="submit" disabled={isPending}>
+                تعديل
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
             </AlertDialogFooter>
@@ -119,5 +129,3 @@ const CreateTreasury = () => {
     </>
   );
 };
-
-export default memo(CreateTreasury);

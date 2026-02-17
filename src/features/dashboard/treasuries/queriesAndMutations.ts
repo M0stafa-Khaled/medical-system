@@ -4,26 +4,23 @@ import {
   deleteTreasury,
   getAllTreasuries,
   updateTreasury,
-} from "@/services/dashboard/treasuries";
+} from "./api";
 import { IGetWithParams } from "@/shared/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "@/enums/queryKeys";
-import {
-  IConvertTreasuries,
-  ICreateTreasury,
-} from "@/interfaces/dashboard/treasury";
+import { IConvertTreasuries, ICreateTreasury, IUpdateTreasury } from "./types";
 
-export const useGetAllTreasuries = ({ token, search }: IGetWithParams) =>
+export const useGetAllTreasuries = ({ search }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_TREASURIES, search],
-    queryFn: () => getAllTreasuries({ token, search }),
+    queryFn: () => getAllTreasuries({ search }),
   });
 
 export const useCreateTreasury = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ name, status, token }: ICreateTreasury) =>
-      createTreasury({ name, status, token }),
+    mutationFn: ({ name, status }: ICreateTreasury) =>
+      createTreasury({ name, status }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_TREASURIES],
@@ -35,8 +32,7 @@ export const useCreateTreasury = () => {
 export const useUpdateTreasury = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, name, status, token }: ICreateTreasury) =>
-      updateTreasury({ id, name, status, token }),
+    mutationFn: (treasury: IUpdateTreasury) => updateTreasury(treasury),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_TREASURIES],
@@ -48,13 +44,8 @@ export const useUpdateTreasury = () => {
 export const useTransferTreasuries = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      from_treasury,
-      to_treasury,
-      amount,
-      token,
-    }: IConvertTreasuries) =>
-      transferTreasuries({ token, from_treasury, amount, to_treasury }),
+    mutationFn: ({ from_treasury, to_treasury, amount }: IConvertTreasuries) =>
+      transferTreasuries({ from_treasury, amount, to_treasury }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_TREASURIES],
@@ -66,8 +57,7 @@ export const useTransferTreasuries = () => {
 export const useDeleteTreasury = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, token }: { token: string; id: string }) =>
-      deleteTreasury({ token, id }),
+    mutationFn: ({ id }: { id: string }) => deleteTreasury({ id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_TREASURIES],

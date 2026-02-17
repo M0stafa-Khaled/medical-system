@@ -1,3 +1,4 @@
+import { IBalance } from "@/interfaces/dashboard/transactions/transactions";
 import {
   Card,
   CardContent,
@@ -6,7 +7,6 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { Separator } from "@/shared/components/ui/separator";
-import { IBalance } from "@/interfaces/patientBalances";
 import formatDateTime from "@/shared/utils/formatDate";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { Calendar, CreditCard, Hash } from "lucide-react";

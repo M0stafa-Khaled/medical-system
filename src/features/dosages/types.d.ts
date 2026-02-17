@@ -11,7 +11,6 @@ export interface IDosagesRes {
 
 export interface ICreateDosage {
   name: string;
-  token: strings;
 }
 
 export interface IUpdateDosage extends ICreateDosage {

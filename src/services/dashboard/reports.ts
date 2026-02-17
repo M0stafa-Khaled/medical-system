@@ -9,7 +9,7 @@ import {
   ITreasuriesReportRes,
 } from "@/interfaces/dashboard/reports";
 import { ITransactionsRes } from "@/interfaces/dashboard/transactions/transactions";
-import { IPatientBalancesRes } from "@/interfaces/patientBalances";
+import { IPatientBalancesRes } from "@/features/dashboard/patients/balances/types";
 
 export const getTransactionsReport = async ({
   token,

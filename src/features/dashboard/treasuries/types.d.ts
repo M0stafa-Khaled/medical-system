@@ -12,15 +12,16 @@ export interface ITreasuriesRes {
 }
 
 export interface IConvertTreasuries {
-  token: string;
   from_treasury: string;
   to_treasury: string;
   amount: number;
 }
 
 export interface ICreateTreasury {
-  id?: string;
-  token: string;
   name: string;
   status: boolean;
+}
+
+export interface IUpdateTreasury extends ICreateTreasury {
+  id: string;
 }

@@ -4,7 +4,7 @@ import { useGetTreasuriesChart } from "@/shared/lib/react-query/dashboard/charts
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import ChartDate from "../../../shared/charts/ChartDate";
-import { useGetAllTreasuries } from "@/shared/lib/react-query/dashboard/treasuries";
+import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import {
   Select,
   SelectContent,

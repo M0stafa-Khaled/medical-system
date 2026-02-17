@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import cookieServices from "@/shared/utils/cookieServices";
 import formatDateTime from "@/shared/utils/formatDate";
 import {
   DollarSign,
@@ -31,14 +30,12 @@ import { AxiosResErr } from "@/shared/types";
 const ExpenseDetails = () => {
   const navigate = useNavigate();
   const { expenseId } = useParams();
-  const token = cookieServices.getToken()!;
   const {
     data: expense,
     isLoading,
     isError,
     failureReason,
   } = useGetExpenseById({
-    token,
     id: expenseId!,
   });
 

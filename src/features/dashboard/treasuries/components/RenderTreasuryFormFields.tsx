@@ -2,9 +2,10 @@ import { FormField } from "@/shared/components/ui/form";
 import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import SwitchFormItem from "../../formItems/SwitchFormItem";
-import SelectFormItem from "../../formItems/SelectFormItem";
-import InputFormItem from "../../formItems/InputFormItem";
+import SwitchFormItem from "@/components/forms/formItems/SwitchFormItem";
+import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
+
 interface IOption {
   value: string;
   label: string;
@@ -19,7 +20,7 @@ interface IProps {
   };
 }
 
-const RenderTreasuryFormFields = ({
+export const RenderTreasuryFormFields = ({
   input,
   form,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -56,5 +57,3 @@ const RenderTreasuryFormFields = ({
     />
   );
 };
-
-export default RenderTreasuryFormFields;
