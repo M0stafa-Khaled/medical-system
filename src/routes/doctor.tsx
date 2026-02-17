@@ -15,7 +15,6 @@ const DoctorBookings = lazy(() => import("@/pages/doctor/bookings"));
 const Drugs = lazy(() => import("@/pages/shared/drugs"));
 const Analysis = lazy(() => import("@/pages/shared/analysis"));
 const Scans = lazy(() => import("@/pages/shared/scans"));
-const Dosages = lazy(() => import("@/pages/shared/dosages"));
 const DoctorPrescriptions = lazy(() => import("@/pages/doctor/prescriptions"));
 const DoctorCreatePrescription = lazy(
   () => import("@/pages/doctor/prescriptions/DoctorCreatePrescription")
@@ -121,9 +120,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="dosages"
           element={
-            <Suspense fallback={<PageLoader />}>
-              <Dosages />
-            </Suspense>
+            <Suspense fallback={<PageLoader />}>{/* <Dosages /> */}</Suspense>
           }
           id="doctor-dosages"
         />

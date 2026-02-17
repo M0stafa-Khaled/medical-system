@@ -25,7 +25,7 @@ export const ActionCard = ({ action, doctorId }: IProps) => {
     <Card className="border-muted flex items-center justify-between">
       <div>
         <CardHeader className="p-4">
-          <CardTitle className="text-lg wrap-break-word break-all text-black dark:text-white">
+          <CardTitle className="text-lg wrap-break-word break-all">
             {action.name}
           </CardTitle>
         </CardHeader>

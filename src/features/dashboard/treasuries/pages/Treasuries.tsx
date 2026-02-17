@@ -1,6 +1,7 @@
-import TreasuriesList from "@/components/dashboard/treasuries/TreasuriesList";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { TreasuriesList } from "../components/TreasuriesList";
+import { TreasuriesHeader } from "../components/TreasuriesHeader";
 
 const Treasuries = () => {
   return (
@@ -12,7 +13,9 @@ const Treasuries = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
+        className="space-y-6"
       >
+        <TreasuriesHeader />
         <TreasuriesList />
       </motion.section>
     </>

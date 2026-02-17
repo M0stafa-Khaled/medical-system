@@ -22,7 +22,7 @@ import {
   setPermissions,
 } from "@/app/store/features/permissions/permissionsSlice";
 import { logout } from "@/app/store/features/auth/authSlice";
-import { useGetAllTreasuries } from "@/shared/lib/react-query/dashboard/treasuries";
+import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { RenderEmployeeFormFields } from "./RenderEmployeeFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { type IEmployee } from "../types";

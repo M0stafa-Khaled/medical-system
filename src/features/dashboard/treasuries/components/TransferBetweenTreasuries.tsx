@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { Form } from "@/shared/components/ui/form";
 import {
   AlertDialogCancel,
@@ -14,17 +14,17 @@ import { Modal } from "@/components/shared/Modal";
 import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
-import { transferTreasurySchema } from "@/validations/dashboard/treasurySchema";
+import { transferTreasurySchema } from "../schema";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { TRANSFER_TREASURIES_FORM_INPUTS } from "@/constants";
 import {
   useGetAllTreasuries,
   useTransferTreasuries,
-} from "@/shared/lib/react-query/dashboard/treasuries";
-import RenderTreasuryFormFields from "@/components/forms/dashboard/treasuries/RenderTreasuryFormFields";
+} from "../queriesAndMutations";
+import { RenderTreasuryFormFields } from "./RenderTreasuryFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 
-const TransferBetweenTreasuriesButton = () => {
+export const TransferBetweenTreasuries = () => {
   const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
   const { data: treasuries } = useGetAllTreasuries({ token });
@@ -50,7 +50,6 @@ const TransferBetweenTreasuriesButton = () => {
   }: z.infer<typeof transferTreasurySchema>) => {
     try {
       const { status, message } = await transferTreasury({
-        token,
         from_treasury,
         to_treasury,
         amount: amount,
@@ -135,5 +134,3 @@ const TransferBetweenTreasuriesButton = () => {
     </>
   );
 };
-
-export default memo(TransferBetweenTreasuriesButton);

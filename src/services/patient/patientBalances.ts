@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IPatientBalancesRes } from "@/interfaces/patientBalances";
+import { IPatientBalancesRes } from "@/features/dashboard/patients/balances/types";
 
 export const getPatientTransactionsBalances = async (
   token: string

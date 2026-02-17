@@ -13,15 +13,6 @@ const Drugs = lazy(() => import("@/pages/shared/drugs"));
 const Analysis = lazy(() => import("@/pages/shared/analysis"));
 const Scans = lazy(() => import("@/pages/shared/scans"));
 
-// Treasuries
-const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
-
-// Expenses
-const ExpensesCategories = lazy(
-  () =>
-    import("@/features/dashboard/expenses-categories/pages/ExpensesCategories")
-);
-
 // Transactions
 const Transactions = lazy(() => import("@/pages/dashboard/transactions"));
 const TransactionDetails = lazy(
@@ -30,9 +21,6 @@ const TransactionDetails = lazy(
 const LastVisits = lazy(
   () => import("@/pages/dashboard/transactions/LastVisits")
 );
-
-// Dosages
-const Dosages = lazy(() => import("@/pages/shared/dosages"));
 
 // Prescriptions
 const Prescriptions = lazy(() => import("@/pages/dashboard/prescription"));
@@ -133,19 +121,6 @@ const dashboardRoutes = createRoutesFromElements(
         id="dashboard-scans"
       />
 
-      {/* Expenses Categories */}
-      <Route
-        path="expenses-categories"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_CATEGORIES}>
-              <ExpensesCategories />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-expenses-categories"
-      />
-
       {/* Transactions */}
       <Route
         path="transactions"
@@ -181,32 +156,6 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-last-visits"
-      />
-
-      {/* Treasuries */}
-      <Route
-        path="treasuries"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
-              <Treasuries />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-treasuries"
-      />
-
-      {/* Dosages */}
-      <Route
-        path="dosages"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.DOSAGES}>
-              <Dosages />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-dosages"
       />
 
       {/* Prescriptions */}

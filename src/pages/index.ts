@@ -1,76 +1,5 @@
 import { lazy } from "react";
 
-// ---- Bookings
-export const Bookings = lazy(
-  () => import("../features/dashboard/bookings/pages/Bookings")
-);
-export const BookingDetails = lazy(
-  () => import("../features/dashboard/bookings/pages/BookingDetails")
-);
-export const UpdateBooking = lazy(
-  () => import("../features/dashboard/bookings/pages/UpdateBooking")
-);
-export const CreateBooking = lazy(
-  () => import("../features/dashboard/bookings/pages/CreateBooking")
-);
-// ---- Doctors
-export const Doctors = lazy(
-  () => import("../features/dashboard/doctors/pages/Doctors")
-);
-export const DoctorDetails = lazy(
-  () => import("../features/dashboard/doctors/pages/DoctorDetails")
-);
-export const CreateDoctor = lazy(
-  () => import("../features/dashboard/doctors/pages/CreateDoctor")
-);
-export const UpdateDoctor = lazy(
-  () => import("../features/dashboard/doctors/pages/UpdateDoctor")
-);
-export const CreateWorkingDay = lazy(
-  () =>
-    import("../features/dashboard/doctors/working-days/pages/CreateWorkingDay")
-);
-export const UpdateWorkingDay = lazy(
-  () =>
-    import("../features/dashboard/doctors/working-days/pages/UpdateWorkingDay")
-);
-// ---- Employees
-export const Employees = lazy(
-  () => import("../features/dashboard/employees/pages/Employees")
-);
-export const EmployeeDetails = lazy(
-  () => import("../features/dashboard/employees/pages/EmployeeDetails")
-);
-export const CreateEmployee = lazy(
-  () => import("../features/dashboard/employees/pages/CreateEmployee")
-);
-export const UpdateEmployee = lazy(
-  () => import("../features/dashboard/employees/pages/UpdateEmployee")
-);
-// ---- Expenses
-export const Expenses = lazy(
-  () => import("../features/dashboard/expenses/pages/Expenses")
-);
-export const ExpenseDetails = lazy(
-  () => import("../features/dashboard/expenses/pages/ExpenseDetails")
-);
-export const ExpensesCategories = lazy(
-  () =>
-    import("../features/dashboard/expenses-categories/pages/ExpensesCategories")
-);
-// ---- Patients
-export const Patients = lazy(
-  () => import("../features/dashboard/patients/pages/Patients")
-);
-export const PatientDetails = lazy(
-  () => import("../features/dashboard/patients/pages/PatientDetails")
-);
-export const CreatePatient = lazy(
-  () => import("../features/dashboard/patients/pages/CreatePatient")
-);
-export const UpdatePatient = lazy(
-  () => import("../features/dashboard/patients/pages/UpdatePatient")
-);
 // ---- Prescriptions
 export const Prescriptions = lazy(() => import("./dashboard/prescription"));
 export const PrescriptionDetails = lazy(
@@ -117,8 +46,6 @@ export const LastVisits = lazy(
 export const TransactionDetails = lazy(
   () => import("./dashboard/transactions/TransactionDetails")
 );
-// ---- Treasuries
-export const Treasuries = lazy(() => import("./dashboard/treasuries"));
 
 // Doctor
 export const DoctorDashboard = lazy(() => import("./doctor"));
@@ -147,7 +74,6 @@ export const UpdatePatientBooking = lazy(
 export const PatientBalances = lazy(() => import("./patient/balances"));
 
 // Shared
-export const Dosages = lazy(() => import("./shared/dosages"));
 export const Drugs = lazy(() => import("./shared/drugs"));
 export const Scans = lazy(() => import("./shared/scans"));
 export const Analysis = lazy(() => import("./shared/analysis"));

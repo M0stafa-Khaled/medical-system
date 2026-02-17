@@ -1,16 +1,15 @@
 import useDebounce from "@/shared/hooks/useDebounce";
 import cookieServices from "@/shared/utils/cookieServices";
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
-import TreasuriesHeader from "./TreasuriesHeader";
-import TreasuryCard from "./TreasuryCard";
+import { TreasuryCard } from "./TreasuryCard";
 import { CardSkeleton } from "@/shared/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import { useGetAllTreasuries } from "@/shared/lib/react-query/dashboard/treasuries";
+import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { useSearchParams } from "react-router";
 
-const TreasuriesList = () => {
+export const TreasuriesList = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const search = useDebounce(searchParams.get("q"), 500)!;
@@ -33,14 +32,7 @@ const TreasuriesList = () => {
   }, [treasuries?.message, isError, treasuries?.status]);
 
   return (
-    <motion.div
-      className="space-y-6"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <TreasuriesHeader />
-
+    <motion.div initial="hidden" animate="visible" variants={containerVariants}>
       {isLoading ? (
         <CardSkeleton />
       ) : !treasuries?.data?.length ? (
@@ -60,5 +52,3 @@ const TreasuriesList = () => {
     </motion.div>
   );
 };
-
-export default memo(TreasuriesList);

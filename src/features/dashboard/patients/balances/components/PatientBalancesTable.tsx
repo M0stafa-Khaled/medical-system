@@ -1,7 +1,7 @@
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
-import { IBalance } from "@/interfaces/patientBalances";
 import { DataTable } from "@/components/shared/data-table";
 import { usePatientBalancesColumns } from "./PatientBalancesColumns";
+import { IBalance } from "@/interfaces/dashboard/transactions/transactions";
 
 interface IProps {
   patientBalances: IBalance[];

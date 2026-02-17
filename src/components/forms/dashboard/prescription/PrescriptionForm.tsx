@@ -33,7 +33,7 @@ import {
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import { useGetAllDosages } from "@/shared/lib/react-query/dashboard/dosages";
+import { useGetAllDosages } from "@/features/dosages/queriesAndMutations";
 import SelectFormItem from "../../formItems/SelectFormItem";
 import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";

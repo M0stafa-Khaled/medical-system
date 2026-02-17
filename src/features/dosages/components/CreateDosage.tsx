@@ -12,16 +12,14 @@ import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import { Modal } from "@/components/shared/Modal";
-import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { handleResErr } from "@/shared/utils/handleResError";
-import { useCreateDosage } from "@/shared/lib/react-query/dashboard/dosages";
-import dosageSchema from "@/validations/dashboard/dosageSchema";
+import { useCreateDosage } from "@/features/dosages/queriesAndMutations";
+import { dosageSchema } from "../schema";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
-const CreateDosage = () => {
-  const token = cookieServices.getToken()!;
+export const CreateDosage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: createClinic, isPending } = useCreateDosage();
 
@@ -36,7 +34,6 @@ const CreateDosage = () => {
     try {
       const { status, message } = await createClinic({
         name,
-        token,
       });
 
       // ! Create failed
@@ -60,7 +57,8 @@ const CreateDosage = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="flex h-auto items-center gap-2 py-3"
+        className="dark:btn-primary"
+        size={"lg"}
       >
         إضافة جرعة جديدة
         <FiPlus size={20} />
@@ -81,7 +79,7 @@ const CreateDosage = () => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-2 text-black dark:text-white"
+            className="space-y-5"
           >
             <motion.div variants={itemVariants}>
               <FormField
@@ -102,17 +100,10 @@ const CreateDosage = () => {
             </motion.div>
 
             <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
+              <AlertDialogCancel onClick={handleCloseModal}>
                 إلغاء
               </AlertDialogCancel>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 إضافة
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
@@ -123,5 +114,3 @@ const CreateDosage = () => {
     </>
   );
 };
-
-export default CreateDosage;

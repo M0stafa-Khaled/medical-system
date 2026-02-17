@@ -1,7 +1,7 @@
 import { containerVariants, itemVariants } from "@/animations";
-import { IBalance } from "@/interfaces/patientBalances";
 import { motion } from "framer-motion";
 import PatientBalanceCard from "./PatientBalanceCard";
+import { IBalance } from "@/interfaces/dashboard/transactions/transactions";
 interface IProps {
   balances: IBalance[];
 }
@@ -9,7 +9,7 @@ const PatientBalancesList = ({ balances }: IProps) => {
   return (
     <>
       {!balances?.length ? (
-        <h2 className="text-xl text-muted-foreground text-center font-medium my-8">
+        <h2 className="text-muted-foreground my-8 text-center text-xl font-medium">
           لا يوجد مدفوعات سابقة
         </h2>
       ) : (
@@ -17,7 +17,7 @@ const PatientBalancesList = ({ balances }: IProps) => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-6 mt-8"
+          className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3"
         >
           {balances.map((balance, idx) => (
             <motion.div variants={itemVariants} key={balance.id} custom={idx}>

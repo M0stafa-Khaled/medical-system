@@ -1,6 +1,6 @@
 import { type IPaginationMeta } from "@/shared/types";
 import { type IEmployee } from "../employees/types";
-import { type ITreasury } from "@/interfaces/dashboard/treasury";
+import { type ITreasury } from "@/features/dashboard/treasuries/types";
 import { type IExpenseCategory } from "../expenses-categories/types";
 
 export interface ICreateExpense {
