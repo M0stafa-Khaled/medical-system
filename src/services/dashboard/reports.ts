@@ -1,6 +1,6 @@
 import axiosAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/shared/types";
-import { IBookingsRes } from "@/interfaces/dashboard/bookings";
+import { IBookingsRes } from "@/features/dashboard/bookings/types";
 import { IExpensesRes } from "@/features/dashboard/expenses/types";
 import { IPatientsRes } from "@/features/dashboard/patients/types";
 import { IPrescriptionsRes } from "@/interfaces/dashboard/prescription";

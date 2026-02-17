@@ -8,22 +8,6 @@ import DashboardLayout from "@/features/dashboard/layout";
 
 const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
 
-// Clinics
-
-// Patients
-const Patients = lazy(
-  () => import("@/features/dashboard/patients/pages/Patients")
-);
-const PatientDetails = lazy(
-  () => import("@/features/dashboard/patients/pages/PatientDetails")
-);
-const CreatePatient = lazy(
-  () => import("@/features/dashboard/patients/pages/CreatePatient")
-);
-const UpdatePatient = lazy(
-  () => import("@/features/dashboard/patients/pages/UpdatePatient")
-);
-
 // Drugs
 const Drugs = lazy(() => import("@/pages/shared/drugs"));
 const Analysis = lazy(() => import("@/pages/shared/analysis"));
@@ -36,18 +20,6 @@ const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
 const ExpensesCategories = lazy(
   () =>
     import("@/features/dashboard/expenses-categories/pages/ExpensesCategories")
-);
-
-// Bookings
-const DashboardBookings = lazy(() => import("@/pages/dashboard/bookings"));
-const DashboardBookingDetails = lazy(
-  () => import("@/pages/dashboard/bookings/BookingDetails")
-);
-const DashboardCreateBooking = lazy(
-  () => import("@/pages/dashboard/bookings/CreateBooking")
-);
-const DashboardUpdateBooking = lazy(
-  () => import("@/pages/dashboard/bookings/UpdateBooking")
 );
 
 // Transactions
@@ -130,98 +102,6 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="settings"
-      />
-
-      {/* Bookings */}
-      <Route
-        path="bookings"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-              <DashboardBookings />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-bookings"
-      />
-      <Route
-        path="bookings/:bookingId"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
-              <DashboardBookingDetails />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-booking-details"
-      />
-      <Route
-        path="bookings/create"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-              <DashboardCreateBooking />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-create-booking"
-      />
-      <Route
-        path="bookings/:bookingId/update"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-              <DashboardUpdateBooking />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-update-booking"
-      />
-
-      {/* Patients */}
-      <Route
-        path="patients"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS}>
-              <Patients />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-patients"
-      />
-      <Route
-        path="patients/:patientId"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PATIENT}>
-              <PatientDetails />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-patient-details"
-      />
-      <Route
-        path="patients/create"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
-              <CreatePatient />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-create-patient"
-      />
-      <Route
-        path="patients/:patientId/update"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
-              <UpdatePatient />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-update-patient"
       />
 
       {/* Drugs */}

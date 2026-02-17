@@ -19,9 +19,8 @@ import { BOOKING_STATUS_OPTIONS } from "@/constants";
 import BookingStatus from "./BookingStatus";
 import { TBookingStatus } from "@/shared/types";
 import { toast } from "react-toastify";
-import { useUpdateBookingStatus } from "@/shared/lib/react-query/dashboard/bookings";
-import cookieServices from "@/shared/utils/cookieServices";
-import { IBooking } from "@/interfaces/dashboard/bookings";
+import { useUpdateBookingStatus } from "@/features/dashboard/bookings/queriesAndMutations";
+import { IBooking } from "@/features/dashboard/bookings/types";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { handleResErr } from "@/shared/utils/handleResError";
@@ -30,11 +29,10 @@ interface IProps {
   booking: IBooking;
 }
 
-const UpdateBookingStatus = ({ booking }: IProps) => {
+export const UpdateBookingStatus = ({ booking }: IProps) => {
   const canUpdateBookingStatus = useHasPermission(
     PERMISSIONS.UPDATE_BOOKING_STATUS
   );
-  const token = cookieServices.getToken()!;
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const { mutateAsync: updateBookingStatus } = useUpdateBookingStatus();
@@ -46,7 +44,6 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
       const { status, message } = await updateBookingStatus({
         id: booking.id,
         status: bookingStatus,
-        token,
       });
       // ! Create failed
       if (!status) return toast.error(message);
@@ -76,8 +73,8 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
             </Button>
           </PopoverTrigger>
 
-          <PopoverContent className="z-1000 w-62.5 border-black/20 p-0 dark:border-white/40">
-            <Command className="bg-foreground text-black dark:text-white">
+          <PopoverContent className="bg-card z-1000 w-62.5 p-0">
+            <Command>
               <CommandInput
                 placeholder="اختر او ابحث"
                 value={searchValue}
@@ -88,7 +85,7 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
                 <CommandGroup>
                   {BOOKING_STATUS_OPTIONS?.map((option) => (
                     <CommandItem
-                      className="cursor-pointer py-2.5 text-black hover:bg-blue-200/20 dark:text-white"
+                      className="cursor-pointer py-2.5"
                       key={option.label}
                       value={option.value}
                       onSelect={handleStatusChange}
@@ -115,5 +112,3 @@ const UpdateBookingStatus = ({ booking }: IProps) => {
     </>
   );
 };
-
-export default UpdateBookingStatus;

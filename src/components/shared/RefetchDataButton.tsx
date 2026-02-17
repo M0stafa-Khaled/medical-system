@@ -19,11 +19,7 @@ const RefetchDataButton = ({ isLoading, queryKey, ...rest }: IProps) => {
 
   return (
     <TooltipButton title="تحديث">
-      <Button
-        {...rest}
-        onClick={handelRefetchDate}
-        className="flex h-auto items-center gap-2 py-3"
-      >
+      <Button {...rest} onClick={handelRefetchDate} className="h-auto">
         <RefreshCcw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
       </Button>
     </TooltipButton>

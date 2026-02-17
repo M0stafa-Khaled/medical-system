@@ -3,7 +3,6 @@ import { IPaginationMeta } from "..";
 import { IDoctor } from "../doctors/doctor";
 import { IEmployee } from "./employee";
 import { ITreasury } from "./treasury";
-import { IBalance } from "../../patientBalances";
 import { IDoctorAction } from "../doctors/doctorActions";
 import { IPatient } from "../../../features/dashboard/patients/types";
 
@@ -69,4 +68,17 @@ export interface IPatientLastVisits {
   status: boolean;
   message: string | null;
   data: ITransaction[];
+}
+
+export interface IBalance {
+  id: number;
+  payment_method: TPaymentMethod;
+  amount_paid: string;
+  total_amount_due: string;
+  balance: string;
+  transaction_code: string;
+  refund_amount: string;
+  created_at: string;
+  type: TBalanceType;
+  visa_code: string;
 }

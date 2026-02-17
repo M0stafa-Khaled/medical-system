@@ -40,7 +40,7 @@ import {
 import { AxiosResErr } from "@/shared/types";
 import { useDeletePatient, useGetPatientById } from "../queriesAndMutations";
 import { DeleteAlert } from "@/components/shared/delete-alert";
-import { PatientBalances } from "../components/balances/PatientBalances";
+import { PatientBalances } from "../balances/components/PatientBalances";
 
 const PatientDetails = () => {
   const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);

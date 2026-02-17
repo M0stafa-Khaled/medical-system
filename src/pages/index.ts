@@ -1,15 +1,17 @@
 import { lazy } from "react";
 
 // ---- Bookings
-export const Bookings = lazy(() => import("./dashboard/bookings"));
+export const Bookings = lazy(
+  () => import("../features/dashboard/bookings/pages/Bookings")
+);
 export const BookingDetails = lazy(
-  () => import("./dashboard/bookings/BookingDetails")
+  () => import("../features/dashboard/bookings/pages/BookingDetails")
 );
 export const UpdateBooking = lazy(
-  () => import("./dashboard/bookings/UpdateBooking")
+  () => import("../features/dashboard/bookings/pages/UpdateBooking")
 );
 export const CreateBooking = lazy(
-  () => import("./dashboard/bookings/CreateBooking")
+  () => import("../features/dashboard/bookings/pages/CreateBooking")
 );
 // ---- Doctors
 export const Doctors = lazy(

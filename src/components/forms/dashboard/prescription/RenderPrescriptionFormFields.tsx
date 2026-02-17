@@ -3,7 +3,7 @@ import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import DateFormItem from "../../formItems/DateFormItem";
-import PatientSelectItem from "../../formItems/PatientSelectItem";
+import { PatientSelectItem } from "../../formItems/PatientSelectItem";
 import SelectFormItem from "../../formItems/SelectFormItem";
 import TextareaFormItem from "../../formItems/TextareaFormItem";
 

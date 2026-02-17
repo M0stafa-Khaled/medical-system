@@ -23,7 +23,8 @@ const SubmitButton = ({
   <Button
     type="submit"
     disabled={isLoadingCreate || isLoadingUpdate}
-    className="h-10 w-full md:w-fit"
+    className="w-full md:w-fit"
+    size={"lg"}
   >
     {action === "create"
       ? isLoadingCreate

@@ -1,5 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IBookingsRes } from "@/interfaces/dashboard/bookings";
+import { IBookingsRes } from "@/features/dashboard/bookings/types";
 
 export const getDoctorBookings = async ({
   token,

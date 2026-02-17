@@ -1,41 +1,26 @@
 import axiosAPI from "@/config/axios.config";
 import { IStatusMsg, IGetWithParams } from "@/shared/types";
-import {
-  IPatientsRes,
-  IPatientRes,
-  ICreatePatient,
-} from "@/features/dashboard/patients/types";
+import { IPatientsRes, IPatientRes, ICreatePatient } from "./types";
 
 export const getAllPatients = async ({
   page = 1,
   search,
-}: IGetWithParams): Promise<IPatientsRes> => {
-  const { data } = await axiosAPI.get(`/patients`, {
-    params: { ...(search ? { q: search, page } : { page }) },
-  });
-  return data;
-};
+}: IGetWithParams): Promise<IPatientsRes> =>
+  (
+    await axiosAPI.get(`/patients`, {
+      params: { ...(search ? { q: search, page } : { page }) },
+    })
+  ).data;
 
 export const getPatientById = async ({
   id,
-  token,
 }: {
   id: string;
-  token: string;
-}): Promise<IPatientRes> => {
-  const { data } = await axiosAPI.get(`/patients/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return data;
-};
+}): Promise<IPatientRes> => (await axiosAPI.get(`/patients/${id}`)).data;
 
 export const createPatient = async ({
-  token,
   dataForm,
 }: {
-  token: string;
   dataForm: ICreatePatient;
 }): Promise<IStatusMsg> => {
   const formData = new FormData();
@@ -56,19 +41,13 @@ export const createPatient = async ({
     formData.append("second_phone", dataForm?.second_phone);
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
-  const { data } = await axiosAPI.post(`/patients`, formData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const { data } = await axiosAPI.post(`/patients`, formData);
   return data;
 };
 
 export const updatePatient = async ({
-  token,
   dataForm,
 }: {
-  token: string;
   dataForm: ICreatePatient;
 }): Promise<IStatusMsg> => {
   const formData = new FormData();
@@ -90,11 +69,7 @@ export const updatePatient = async ({
     formData.append("second_phone", dataForm?.second_phone);
   if (dataForm.personal_image)
     formData.append("personal_image", dataForm.personal_image);
-  const { data } = await axiosAPI.post(`/patients/${dataForm.id}`, formData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const { data } = await axiosAPI.post(`/patients/${dataForm.id}`, formData);
   return data;
 };
 

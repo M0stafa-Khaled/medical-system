@@ -1,17 +1,4 @@
-import { TBalanceType, TPaymentMethod } from "@/shared/types";
-
-export interface IBalance {
-  id: number;
-  payment_method: TPaymentMethod;
-  amount_paid: string;
-  total_amount_due: string;
-  balance: string;
-  transaction_code: string;
-  refund_amount: string;
-  created_at: string;
-  type: TBalanceType;
-  visa_code: string;
-}
+import { IBalance } from "@/interfaces/dashboard/transactions/transactions";
 
 export interface IPatientBalancesRes {
   status: boolean;
@@ -26,7 +13,6 @@ export interface IPatientBalancesRes {
 }
 
 export interface ICreatePatientPayment {
-  token: string;
   patientId: string;
   transaction: {
     amount: number;

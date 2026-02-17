@@ -6,8 +6,10 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import DataLoader from "@/shared/components/ui/DataLoader";
-import { useGetBookingById } from "@/shared/lib/react-query/dashboard/bookings";
-import cookieServices from "@/shared/utils/cookieServices";
+import {
+  useDeleteBooking,
+  useGetBookingById,
+} from "@/features/dashboard/bookings/queriesAndMutations";
 import {
   User2,
   UserCircle2,
@@ -29,18 +31,19 @@ import convertDay from "@/shared/utils/convertDayLang";
 import formatDateTime from "@/shared/utils/formatDate";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
-import DeleteBooking from "@/components/dashboard/bookings/DeleteBooking";
-import UpdateBookingStatus from "@/components/dashboard/bookings/UpdateBookingStatus";
-import { IBooking } from "@/interfaces/dashboard/bookings";
+import { UpdateBookingStatus } from "../components/UpdateBookingStatus";
+import { IBooking } from "@/features/dashboard/bookings/types";
 import { Button } from "@/shared/components/ui/button";
 import { AxiosResErr } from "@/shared/types";
+import { DeleteAlert } from "@/components/shared/delete-alert";
+import { LiaNotesMedicalSolid } from "react-icons/lia";
 
 const BookingDetails = () => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
   const canDeleteBooking = useHasPermission(PERMISSIONS.DELETE_BOOKING);
+  const canCreatePrescription = useHasPermission(PERMISSIONS.ADD_PRESCRIPTION);
 
   const navigate = useNavigate();
-  const token = cookieServices.getToken()!;
   const { bookingId } = useParams();
 
   const {
@@ -50,7 +53,6 @@ const BookingDetails = () => {
     failureReason,
   } = useGetBookingById({
     id: bookingId!,
-    token,
   });
 
   const bookingFailure = failureReason as AxiosResErr;
@@ -64,6 +66,8 @@ const BookingDetails = () => {
       return;
     }
   }, [isError, navigate, bookingFailure]);
+
+  const { mutateAsync: deleteBooking } = useDeleteBooking();
 
   if (isLoading) return <DataLoader />;
 
@@ -93,13 +97,13 @@ const BookingDetails = () => {
         animate="visible"
         variants={containerVariants}
       >
-        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs">
+        <Card className="border-muted">
           <CardHeader className="py-4">
             <motion.div
               variants={itemVariants}
               className="flex flex-col items-start gap-4 sm:flex-row sm:items-center"
             >
-              <CardTitle className="text-dark flex items-center gap-2 dark:text-white">
+              <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-6 w-6" />
                 <span>تفاصيل الحجز:</span>
               </CardTitle>
@@ -108,10 +112,13 @@ const BookingDetails = () => {
                   status !== "collected" &&
                   status !== "completed" && (
                     <motion.div variants={itemVariants}>
-                      <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700 dark:text-black">
+                      <Button
+                        size={"icon"}
+                        className="btn-edit rounded-full"
+                        asChild
+                      >
                         <Link
                           to={`/dashboard/bookings/${booking?.data.id}/update`}
-                          className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1 text-white"
                         >
                           <Pen size={20} />
                         </Link>
@@ -120,11 +127,24 @@ const BookingDetails = () => {
                   )}
                 {canDeleteBooking && status !== "cancelled" && (
                   <motion.div variants={itemVariants}>
-                    <DeleteBooking
-                      name={patient?.name as string}
-                      id={id?.toString() as string}
+                    <DeleteAlert
+                      name={`حجز المريض ${patient?.name} رقم ${code}`}
+                      deleteAction={() =>
+                        deleteBooking({ id: id?.toString() || "" })
+                      }
                     />
                   </motion.div>
+                )}
+                {canCreatePrescription && status === "collected" && (
+                  <Button
+                    className="btn-primary rounded-full"
+                    size={"icon"}
+                    asChild
+                  >
+                    <Link to={`/dashboard/bookings/${id}/prescriptions/create`}>
+                      <LiaNotesMedicalSolid size={20} />
+                    </Link>
+                  </Button>
                 )}
               </div>
             </motion.div>
@@ -138,7 +158,7 @@ const BookingDetails = () => {
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link to={`/dashboard/patients/${patient?.id}`}>
                   <InfoField
-                    icon={<User2 className="text-primary h-5 w-5" />}
+                    icon={<User2 className="text-primary" size={20} />}
                     label="المريض"
                     value={patient?.name as string}
                   />
@@ -146,7 +166,7 @@ const BookingDetails = () => {
               </motion.div>
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Phone className="text-green-600" />}
+                  icon={<Phone className="text-green-600" size={20} />}
                   label="رقم الهاتف الاول"
                   value={patient?.first_phone as string}
                 />
@@ -154,7 +174,7 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Phone className="text-purple-600" />}
+                  icon={<Phone className="text-purple-600" size={20} />}
                   label="رقم الهاتف الثاني"
                   value={
                     patient?.second_phone ? patient.second_phone : "لا يوجد"
@@ -165,7 +185,12 @@ const BookingDetails = () => {
               <motion.div variants={itemVariants} className="flex items-center">
                 <Link to={`/dashboard/doctors/${doctor?.id}`}>
                   <InfoField
-                    icon={<UserCircle2 className="h-5 w-5 text-blue-500" />}
+                    icon={
+                      <UserCircle2
+                        className="h-5 w-5 text-blue-500"
+                        size={20}
+                      />
+                    }
                     label="الطبيب"
                     value={doctor?.name || ""}
                   />
@@ -174,7 +199,12 @@ const BookingDetails = () => {
               <motion.div variants={itemVariants}>
                 <Link to={`/dashboard/employees/${employee?.id}`}>
                   <InfoField
-                    icon={<UserCircle2 className="h-5 w-5 text-blue-500" />}
+                    icon={
+                      <UserCircle2
+                        className="h-5 w-5 text-blue-500"
+                        size={20}
+                      />
+                    }
                     label="الموظف"
                     value={employee?.name || ""}
                   />
@@ -183,7 +213,9 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Building2 className="h-5 w-5 text-purple-500" />}
+                  icon={
+                    <Building2 className="h-5 w-5 text-purple-500" size={20} />
+                  }
                   label="العيادة"
                   value={clinic?.name as string}
                 />
@@ -191,7 +223,9 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Calendar className="h-5 w-5 text-orange-500" />}
+                  icon={
+                    <Calendar className="h-5 w-5 text-orange-500" size={20} />
+                  }
                   label="تاريخ الحجز"
                   value={formatDateTime(booking_date!)}
                   sm
@@ -200,7 +234,7 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Clock className="h-5 w-5 text-teal-500" />}
+                  icon={<Clock className="h-5 w-5 text-teal-500" size={20} />}
                   label="موعد الدخول"
                   value={start_at!}
                 />
@@ -208,7 +242,9 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Calendar className="h-5 w-5 text-indigo-500" />}
+                  icon={
+                    <Calendar className="h-5 w-5 text-indigo-500" size={20} />
+                  }
                   label="اليوم"
                   value={convertDay(day!, "en")}
                 />
@@ -216,7 +252,7 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Tag className="h-5 w-5 text-cyan-500" />}
+                  icon={<Tag className="h-5 w-5 text-cyan-500" size={20} />}
                   label="رقم الحجز"
                   value={code!}
                 />
@@ -225,7 +261,7 @@ const BookingDetails = () => {
               <motion.div variants={itemVariants}>
                 <div className="flex items-center gap-4">
                   <div className="shrink-0">
-                    <CheckCheck className="h-5 w-5 text-green-500" />
+                    <CheckCheck className="h-5 w-5 text-green-500" size={20} />
                   </div>
                   <div className="flex items-center gap-2">
                     <h5 className="text-muted-foreground text-sm text-nowrap">
@@ -238,7 +274,9 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Calendar className="h-5 w-5 text-yellow-500" />}
+                  icon={
+                    <Calendar className="h-5 w-5 text-yellow-500" size={20} />
+                  }
                   label="تاريخ الإنشاء"
                   value={formatDateTime(created_at!)}
                   sm

@@ -1,7 +1,3 @@
-import {
-  ICreateBooking,
-  IUpdateBookingStatus,
-} from "../../../../interfaces/dashboard/bookings";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "@/enums/queryKeys";
 import {
@@ -11,38 +7,27 @@ import {
   getBookingById,
   updateBooking,
   updateBookingStatus,
-} from "@/services/dashboard/bookings";
+} from "./api";
 import { IGetWithParams } from "@/shared/types";
+import { ICreateBooking, IUpdateBookingStatus } from "./types";
 
-export const useGetAllBookings = ({
-  token,
-  page = 1,
-  filter,
-  sort,
-}: IGetWithParams) =>
+export const useGetAllBookings = ({ page = 1, filter, sort }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_BOOKINGS, filter, page, sort],
-    queryFn: () => getAllBookings({ token, page, filter, sort }),
+    queryFn: () => getAllBookings({ page, filter, sort }),
   });
 
-export const useGetBookingById = ({
-  token,
-  id,
-}: {
-  token: string;
-  id: string;
-}) =>
+export const useGetBookingById = ({ id }: { id: string }) =>
   useQuery({
     queryKey: [Query_Keys.GET_ONE_BOOKING, id],
-    queryFn: () => getBookingById({ id, token }),
+    queryFn: () => getBookingById({ id }),
     enabled: !!id,
   });
 
 export const useCreateBooking = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, formData }: ICreateBooking) =>
-      createBooking({ formData, token }),
+    mutationFn: (formData: ICreateBooking) => createBooking(formData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ONE_BOOKING],
@@ -63,8 +48,9 @@ export const useCreateBooking = () => {
 export const useUpdateBooking = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, formData, id }: ICreateBooking) =>
-      updateBooking({ formData, token, id }),
+    mutationFn: ({ formData, id }: { id: number; formData: ICreateBooking }) =>
+      updateBooking(id, formData),
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ONE_BOOKING],
@@ -84,8 +70,8 @@ export const useUpdateBooking = () => {
 export const useUpdateBookingStatus = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, status, id }: IUpdateBookingStatus) =>
-      updateBookingStatus({ status, token, id }),
+    mutationFn: ({ status, id }: IUpdateBookingStatus) =>
+      updateBookingStatus({ status, id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ONE_BOOKING],
@@ -106,8 +92,7 @@ export const useUpdateBookingStatus = () => {
 export const useDeleteBooking = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, id }: { token: string; id: string }) =>
-      deleteBooking({ token, id }),
+    mutationFn: ({ id }: { id: string }) => deleteBooking({ id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ONE_BOOKING],

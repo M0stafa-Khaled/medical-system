@@ -1,29 +1,20 @@
 import Query_Keys from "@/enums/queryKeys";
-import { ICreatePatientPayment } from "@/interfaces/patientBalances";
-import {
-  createPatientPayment,
-  getPatientBalances,
-} from "@/services/dashboard/transactions/patientBalances";
+import { createPatientPayment, getPatientBalances } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { ICreatePatientPayment } from "./types";
 
-export const useGetPatientBalances = ({
-  patientId,
-  token,
-}: {
-  token: string;
-  patientId: string;
-}) =>
+export const useGetPatientBalances = ({ patientId }: { patientId: string }) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_TRANSACTION_PATIENT_BALANCES],
-    queryFn: () => getPatientBalances({ token, patientId }),
+    queryFn: () => getPatientBalances({ patientId }),
     enabled: !!patientId,
   });
 
 export const useCreatePatientPayment = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, patientId, transaction }: ICreatePatientPayment) =>
-      createPatientPayment({ token, patientId, transaction }),
+    mutationFn: ({ patientId, transaction }: ICreatePatientPayment) =>
+      createPatientPayment({ patientId, transaction }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_TRANSACTION_PATIENT_BALANCES],
