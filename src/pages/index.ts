@@ -75,7 +75,7 @@ export const PatientBalances = lazy(() => import("./patient/balances"));
 
 // Shared
 export const Drugs = lazy(() => import("./shared/drugs"));
-export const Scans = lazy(() => import("./shared/scans"));
+export const Scans = lazy(() => import("../features/scans/pages/Scans"));
 export const Analysis = lazy(() => import("./shared/analysis"));
 
 // Errors & NotFound

@@ -68,7 +68,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                   selected={field.value ? new Date(field.value) : undefined}
                   onSelect={(date) => {
                     const formattedDated = date
-                      ? new Date(date).toLocaleDateString("en-CA", {
+                      ? new Date(date).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "2-digit",
                           day: "2-digit",

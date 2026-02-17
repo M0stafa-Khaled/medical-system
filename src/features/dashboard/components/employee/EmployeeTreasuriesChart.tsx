@@ -1,19 +1,18 @@
 import cookieServices from "@/shared/utils/cookieServices";
-import AnalyticsChart from "../../../shared/charts/ChartsCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
-import ChartDate from "../../../shared/charts/ChartDate";
-
-import { useGetEmployeeTreasuriesChart } from "@/shared/lib/react-query/dashboard/charts/employeeCharts";
+import { useGetEmployeeTreasuriesChart } from "@/features/dashboard/queries";
 import { AxiosResErr } from "@/shared/types";
 import DataLoader from "@/shared/components/ui/DataLoader";
+import ChartDate from "@/components/shared/charts/ChartDate";
+import AnalyticsChart from "@/components/shared/charts/ChartsCard";
 
 interface ITreasuriesFilter {
   treasury_start_at: string;
   treasury_end_at: string;
 }
 
-const EmployeeTreasuriesChart = () => {
+export const EmployeeTreasuriesChart = () => {
   const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -95,5 +94,3 @@ const EmployeeTreasuriesChart = () => {
     </div>
   );
 };
-
-export default EmployeeTreasuriesChart;

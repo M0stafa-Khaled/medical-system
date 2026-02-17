@@ -1,15 +1,15 @@
 import cookieServices from "@/shared/utils/cookieServices";
-import AnalyticsChart from "../../../shared/charts/ChartsCard";
-import { useGetRegistrationChart } from "@/shared/lib/react-query/dashboard/charts/adminCharts";
+import AnalyticsChart from "../../../../components/shared/charts/ChartsCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
-import ChartDate from "../../../shared/charts/ChartDate";
+import ChartDate from "../../../../components/shared/charts/ChartDate";
+import { useGetRegistrationChart } from "@/features/dashboard/queries";
 
 interface IRegistrationFilter {
   register_start_at: string;
   register_end_at: string;
 }
-const RegistrationChart = () => {
+export const RegistrationChart = () => {
   const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -48,8 +48,8 @@ const RegistrationChart = () => {
     setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="dark:bg-dark space-y-5 rounded-xl bg-white px-3 py-6 shadow-md md:p-6">
-      <h2 className="text-dark text-center font-semibold md:text-start md:text-lg dark:text-white">
+    <div className="bg-card space-y-5 rounded-xl px-3 py-6 shadow-md md:p-6">
+      <h2 className="text-center font-semibold md:text-start md:text-lg">
         إحصائيات المستخدمين الجدد
       </h2>
       <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:gap-x-10">
@@ -72,5 +72,3 @@ const RegistrationChart = () => {
     </div>
   );
 };
-
-export default RegistrationChart;

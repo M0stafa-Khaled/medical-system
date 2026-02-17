@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import RegistrationChart from "./RegistrationChart";
-import BookingsChart from "./BookingsChart";
-import TreasuriesChart from "./TreasuriesChart";
+import { RegistrationChart } from "./RegistrationChart";
+import { BookingsChart } from "./BookingsChart";
+import { TreasuriesChart } from "./TreasuriesChart";
 
 const AdminChartsList = () => {
   return (

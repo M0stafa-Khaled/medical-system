@@ -88,3 +88,21 @@ export interface IPatientBalancesTransactionsRes {
   message: null | string;
   data: IBalance[];
 }
+
+export interface IChartDataset {
+  label: string;
+  data: number[];
+  borderColor?: string;
+  backgroundColor?: string;
+}
+
+export interface IChart {
+  datasets: IChartDataset[];
+  labels: string[];
+}
+
+export interface IChartRes<T = IChart> {
+  status: boolean;
+  message: string | null;
+  data: T;
+}

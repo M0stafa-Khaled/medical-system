@@ -1,6 +1,7 @@
+import SearchInput from "@/shared/components/ui/SearchInput";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import ScansTable from "@/components/main/scans/ScansTable";
+import { ScansTable } from "../components/ScansTable";
 
 const Scans = () => {
   return (
@@ -13,6 +14,9 @@ const Scans = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
+        <div className="my-4">
+          <SearchInput placeholder="ابحث عن أشعة" />
+        </div>
         <ScansTable />
       </motion.section>
     </>

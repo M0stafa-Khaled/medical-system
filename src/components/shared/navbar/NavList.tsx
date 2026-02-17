@@ -46,7 +46,7 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                 variants={navItemsVariants}
                 className={`w-full cursor-pointer rounded-lg px-3 py-2.5 text-[15px] text-black transition-all duration-300 select-none dark:text-white ${
                   sidebar ? "border-muted border" : ""
-                } hover:bg-dark/10 dark:hover:bg-dark/50 flex items-center justify-between gap-2`}
+                } bg-card flex items-center justify-between gap-2`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleLinkExpansion(link.name);
@@ -77,12 +77,12 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                   to={link.path || "#"}
                   className={`${
                     isChildLink ? "mt-2 pr-4" : ""
-                  } w-full rounded-lg px-2 py-2.5 text-[15px] text-black transition-all duration-300 dark:text-white ${
+                  } bg-card w-full rounded-lg px-2 py-2.5 text-[15px] text-black transition-all duration-300 dark:text-white ${
                     sidebar ? "border-muted border" : ""
                   } flex items-center justify-between gap-2 ${
                     activeLink
-                      ? "bg-background dark:bg-dark"
-                      : "hover:bg-background dark:hover:bg-dark/50"
+                      ? "bg-primary dark:bg-primary text-white dark:text-white"
+                      : ""
                   }`}
                 >
                   {isChildLink && <Dot />}

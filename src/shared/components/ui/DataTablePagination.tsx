@@ -76,7 +76,7 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
           if (page === "...") {
             return (
               <PaginationItem key={`ellipsis-${index}`}>
-                <PaginationEllipsis className="text-dark dark:text-white" />
+                <PaginationEllipsis className="text-foreground" />
               </PaginationItem>
             );
           }
@@ -87,8 +87,8 @@ const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
                 isActive={currentPage === page}
                 className={
                   currentPage === page
-                    ? "text-secondary bg-primary hover:bg-primary/90 border-muted hover:text-secondary w-fit min-w-10 cursor-pointer px-1 opacity-100"
-                    : "text-primary border-muted bg-muted/20 hover:bg-muted/80 w-fit min-w-10 cursor-pointer px-1 opacity-80"
+                    ? "text-foreground bg-primary hover:bg-primary/90 border-muted w-fit min-w-10 cursor-pointer px-1 opacity-100"
+                    : "text-foreground dark:bg-accent/50 w-fit min-w-10 cursor-pointer px-1 opacity-80"
                 }
               >
                 {page}

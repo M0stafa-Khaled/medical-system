@@ -27,7 +27,7 @@ export const BookingsHeader = ({ isLoading }: IProps) => {
       <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-center">
           {canCreateBooking && (
-            <Button asChild size={"lg"} className="btn-primary">
+            <Button asChild size={"lg"} className="dark:btn-primary">
               <Link to={"/dashboard/bookings/create"}>
                 إضافة حجز جديد
                 <FiPlus size={20} />

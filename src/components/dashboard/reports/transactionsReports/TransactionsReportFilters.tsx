@@ -189,7 +189,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
               handleFilterChange(
                 "start_at",
                 date
-                  ? new Date(date).toLocaleDateString("en-CA", {
+                  ? new Date(date).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
@@ -230,7 +230,7 @@ const TransactionsFilters = ({ filters, setFilters }: IProps) => {
               handleFilterChange(
                 "end_at",
                 date
-                  ? new Date(date).toLocaleDateString("en-CA", {
+                  ? new Date(date).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",

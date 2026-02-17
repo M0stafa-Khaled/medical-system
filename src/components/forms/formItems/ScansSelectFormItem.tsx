@@ -17,10 +17,9 @@ import { FormMessage } from "@/shared/components/ui/form";
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import useDebounce from "@/shared/hooks/useDebounce";
-import cookieServices from "@/shared/utils/cookieServices";
 import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
-import { useGetAllScans } from "@/shared/lib/react-query/main";
+import { useGetAllScans } from "@/features/scans";
 
 interface IProps {
   field: ControllerRenderProps<any>;
@@ -28,11 +27,9 @@ interface IProps {
 }
 const ScansSelectFormItem = ({ field, input }: IProps) => {
   const [open, setOpen] = useState(false);
-  const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
   const { data: scans } = useGetAllScans({
-    token,
     search,
   });
 
@@ -61,7 +58,7 @@ const ScansSelectFormItem = ({ field, input }: IProps) => {
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="z-1000 w-[300px] border-black/20 p-0 sm:w-[400px] md:w-[370px] dark:border-white/40">
+        <PopoverContent className="z-1000 w-75 border-black/20 p-0 sm:w-100 md:w-92.5 dark:border-white/40">
           <Command className="bg-foreground text-black dark:text-white">
             <CommandInput
               placeholder="اختر أو اكتب اسم جديد"
