@@ -5,7 +5,7 @@ import { IEmployee } from "./employee";
 import { ITreasury } from "./treasury";
 import { IBalance } from "../../patientBalances";
 import { IDoctorAction } from "../doctors/doctorActions";
-import { IPatient } from "../patient";
+import { IPatient } from "../../../features/dashboard/patients/types";
 
 export interface ITransaction {
   id: number;

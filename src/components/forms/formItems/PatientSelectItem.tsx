@@ -22,7 +22,7 @@ import {
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { useGetAllPatients } from "@/shared/lib/react-query/dashboard/patients";
+import { useGetAllPatients } from "@/features/dashboard/patients/queriesAndMutations";
 import cookieServices from "@/shared/utils/cookieServices";
 import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";

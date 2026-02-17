@@ -2,7 +2,7 @@ import { TPrescriptableType } from "@/shared/types";
 import { IPaginationMeta } from "../../shared/types";
 import { IClinic } from "./clinics";
 import { IDoctor } from "./doctors/doctor";
-import { IPatient } from "./patient";
+import { IPatient } from "../../features/dashboard/patients/types";
 
 interface IPrescriptable {
   type: TPrescriptableType;

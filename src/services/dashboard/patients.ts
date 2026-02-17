@@ -4,18 +4,14 @@ import {
   IPatientsRes,
   IPatientRes,
   ICreatePatient,
-} from "@/interfaces/dashboard/patient";
+} from "@/features/dashboard/patients/types";
 
 export const getAllPatients = async ({
-  token,
   page = 1,
   search,
 }: IGetWithParams): Promise<IPatientsRes> => {
   const { data } = await axiosAPI.get(`/patients`, {
     params: { ...(search ? { q: search, page } : { page }) },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   });
   return data;
 };
@@ -102,17 +98,5 @@ export const updatePatient = async ({
   return data;
 };
 
-export const deletePatient = async ({
-  id,
-  token,
-}: {
-  id: number;
-  token: string;
-}) => {
-  const { data } = await axiosAPI.delete(`/patients/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return data;
-};
+export const deletePatient = async ({ id }: { id: number }) =>
+  (await axiosAPI.delete(`/patients/${id}`)).data;

@@ -57,15 +57,17 @@ export const ExpensesCategories = lazy(
     import("../features/dashboard/expenses-categories/pages/ExpensesCategories")
 );
 // ---- Patients
-export const Patients = lazy(() => import("./dashboard/patients"));
+export const Patients = lazy(
+  () => import("../features/dashboard/patients/pages/Patients")
+);
 export const PatientDetails = lazy(
-  () => import("./dashboard/patients/PatientDetails")
+  () => import("../features/dashboard/patients/pages/PatientDetails")
 );
 export const CreatePatient = lazy(
-  () => import("./dashboard/patients/CreatePatient")
+  () => import("../features/dashboard/patients/pages/CreatePatient")
 );
 export const UpdatePatient = lazy(
-  () => import("./dashboard/patients/UpdatePatient")
+  () => import("../features/dashboard/patients/pages/UpdatePatient")
 );
 // ---- Prescriptions
 export const Prescriptions = lazy(() => import("./dashboard/prescription"));

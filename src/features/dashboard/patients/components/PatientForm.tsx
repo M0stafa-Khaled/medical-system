@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
 import { Form } from "@/shared/components/ui/form";
 import { PATIENT_FORM_INPUTS } from "@/constants";
-import { IPatient } from "@/interfaces/dashboard/patient";
+import { IPatient } from "@/features/dashboard/patients/types";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
 import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
@@ -11,12 +11,12 @@ import { useNavigate } from "react-router";
 import {
   useCreatePatient,
   useUpdatePatient,
-} from "@/shared/lib/react-query/dashboard/patients";
+} from "@/features/dashboard/patients/queriesAndMutations";
 import { useEffect } from "react";
-import SubmitButton from "../../../shared/SubmitButton";
+import SubmitButton from "../../../../components/shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
-import RenderPatientFormFields from "./RenderPatientFormFields";
+import { RenderPatientFormFields } from "./RenderPatientFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 
 interface IProps {
@@ -25,7 +25,7 @@ interface IProps {
   patientSchema: ZodSchema;
 }
 
-const PatientForm = ({ patient, action, patientSchema }: IProps) => {
+export const PatientForm = ({ patient, action, patientSchema }: IProps) => {
   const token = cookieServices.getToken() || "";
   const navigate = useNavigate();
 
@@ -151,5 +151,3 @@ const PatientForm = ({ patient, action, patientSchema }: IProps) => {
     </Form>
   );
 };
-
-export default PatientForm;

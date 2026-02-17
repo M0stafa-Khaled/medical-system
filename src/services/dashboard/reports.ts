@@ -2,7 +2,7 @@ import axiosAPI from "@/config/axios.config";
 import { IGetWithParams } from "@/shared/types";
 import { IBookingsRes } from "@/interfaces/dashboard/bookings";
 import { IExpensesRes } from "@/features/dashboard/expenses/types";
-import { IPatientsRes } from "@/interfaces/dashboard/patient";
+import { IPatientsRes } from "@/features/dashboard/patients/types";
 import { IPrescriptionsRes } from "@/interfaces/dashboard/prescription";
 import {
   ITransfersRes,

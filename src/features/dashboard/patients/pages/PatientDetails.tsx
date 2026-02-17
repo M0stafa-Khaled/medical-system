@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
@@ -23,9 +22,7 @@ import {
   VenusAndMars,
 } from "lucide-react";
 import ImageModal from "@/components/shared/ImageModal";
-import { useGetPatientById } from "@/shared/lib/react-query/dashboard/patients";
 import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
-import DeletePatient from "@/components/dashboard/patients/DeletePatient";
 import InfoField from "@/components/shared/InfoField";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
@@ -40,8 +37,10 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/shared/components/ui/tabs";
-import PatientBalances from "@/components/dashboard/patients/patientBalances/PatientBalances";
 import { AxiosResErr } from "@/shared/types";
+import { useDeletePatient, useGetPatientById } from "../queriesAndMutations";
+import { DeleteAlert } from "@/components/shared/delete-alert";
+import { PatientBalances } from "../components/balances/PatientBalances";
 
 const PatientDetails = () => {
   const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);
@@ -50,7 +49,6 @@ const PatientDetails = () => {
   const canViewPatientBalances = useHasPermission(PERMISSIONS.PATIENT_BALANCES);
 
   const navigate = useNavigate();
-  const token = cookieServices.getToken()!;
   const { patientId } = useParams();
 
   const {
@@ -60,7 +58,6 @@ const PatientDetails = () => {
     failureReason,
   } = useGetPatientById({
     id: patientId!,
-    token,
   });
 
   const patientFailure = failureReason as AxiosResErr;
@@ -74,6 +71,8 @@ const PatientDetails = () => {
       return;
     }
   }, [isError, navigate, patientFailure]);
+
+  const { mutateAsync: deletePatient } = useDeletePatient();
 
   if (isLoading) return <DataLoader />;
 
@@ -105,7 +104,7 @@ const PatientDetails = () => {
         initial="hidden"
         animate="visible"
       >
-        <Card className="bg-foreground/50 dark:bg-foreground border-muted dark:border-muted shadow-xs">
+        <Card className="border-muted mt-5">
           <CardHeader className="py-4">
             <motion.div variants={itemVariants}>
               <HeaderUserDetails
@@ -115,19 +114,19 @@ const PatientDetails = () => {
                   <>
                     {canUpdatePatient && (
                       <motion.div variants={itemVariants}>
-                        <Button className="h-auto gap-2 bg-blue-600 px-0 py-0 text-sm text-white hover:bg-blue-700">
-                          <Link
-                            to={`/dashboard/patients/${id}/update`}
-                            className="flex h-9 w-9 items-center justify-center gap-2 px-1 py-1"
-                          >
-                            <Pen size={20} />
+                        <Button className="btn-edit rounded-full" size={"icon"}>
+                          <Link to={`/dashboard/patients/${id}/update`}>
+                            <Pen />
                           </Link>
                         </Button>
                       </motion.div>
                     )}
                     {canDeletePatient && (
                       <motion.div variants={itemVariants}>
-                        <DeletePatient id={id!} name={name!} />
+                        <DeleteAlert
+                          name={name!}
+                          deleteAction={() => deletePatient({ id: id! })}
+                        />
                       </motion.div>
                     )}
                   </>
@@ -148,9 +147,9 @@ const PatientDetails = () => {
                 <InfoField
                   icon={
                     status ? (
-                      <BadgeCheck className="text-green-500" />
+                      <BadgeCheck className="text-green-500" size={20} />
                     ) : (
-                      <BadgeX className="text-red-500" />
+                      <BadgeX className="text-red-500" size={20} />
                     )
                   }
                   label="حالة الحساب"
@@ -159,44 +158,44 @@ const PatientDetails = () => {
               </motion.div>
 
               <InfoField
-                icon={<Info className="text-blue-700" />}
+                icon={<Info className="text-blue-700" size={20} />}
                 label="ملاحظات حالة الحساب"
                 value={info_status!}
               />
 
               <InfoField
-                icon={<Users className="text-blue-700" />}
+                icon={<Users className="text-blue-700" size={20} />}
                 label="اسم احد الاقارب"
                 value={another_name!}
                 breakAll
               />
 
               <InfoField
-                icon={<BadgeInfo className="text-primary" />}
+                icon={<BadgeInfo className="text-primary" size={20} />}
                 label="ملاحظات"
                 value={description!}
               />
 
               <InfoField
-                icon={<UserCircle2 className="text-primary" />}
+                icon={<UserCircle2 className="text-primary" size={20} />}
                 label="رقم الهوية"
                 value={personal_id!}
               />
 
               <InfoField
-                icon={<Phone className="text-green-600" />}
+                icon={<Phone className="text-green-600" size={20} />}
                 label="رقم الهاتف الاول"
                 value={first_phone!}
               />
 
               <InfoField
-                icon={<Phone className="text-purple-600" />}
+                icon={<Phone className="text-purple-600" size={20} />}
                 label="رقم الهاتف الثاني"
                 value={second_phone ? second_phone : "لا يوجد"}
               />
 
               <InfoField
-                icon={<Mail className="text-orange-500" />}
+                icon={<Mail className="text-orange-500" size={20} />}
                 label="البريد الإلكتروني"
                 value={user?.email as string}
                 sm
@@ -207,11 +206,11 @@ const PatientDetails = () => {
                 label="الجنس"
                 value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
                 sm
-                icon={<VenusAndMars className="text-primary" />}
+                icon={<VenusAndMars className="text-primary" size={20} />}
               />
 
               <InfoField
-                icon={<Calendar className="text-teal-500" />}
+                icon={<Calendar className="text-teal-500" size={20} />}
                 label="تاريخ الإنشاء"
                 value={formatDateTime(created_at!)}
                 sm
@@ -221,7 +220,7 @@ const PatientDetails = () => {
                 variants={itemVariants}
                 className="flex items-center gap-2 select-none"
               >
-                <FileImage className="text-cyan-500" />
+                <FileImage className="text-cyan-500" size={20} />
                 <h5 className="text-muted-foreground text-sm">صورة الهوية :</h5>
                 {personal_image ? (
                   <ImageModal

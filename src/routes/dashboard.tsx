@@ -11,15 +11,17 @@ const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
 // Clinics
 
 // Patients
-const Patients = lazy(() => import("@/pages/dashboard/patients"));
+const Patients = lazy(
+  () => import("@/features/dashboard/patients/pages/Patients")
+);
 const PatientDetails = lazy(
-  () => import("@/pages/dashboard/patients/PatientDetails")
+  () => import("@/features/dashboard/patients/pages/PatientDetails")
 );
 const CreatePatient = lazy(
-  () => import("@/pages/dashboard/patients/CreatePatient")
+  () => import("@/features/dashboard/patients/pages/CreatePatient")
 );
 const UpdatePatient = lazy(
-  () => import("@/pages/dashboard/patients/UpdatePatient")
+  () => import("@/features/dashboard/patients/pages/UpdatePatient")
 );
 
 // Drugs

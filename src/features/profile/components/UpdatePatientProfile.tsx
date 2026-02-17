@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { UPDATE_PROFILE_PATIENT_INPUTS } from "@/constants";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
-import RenderPatientFormFields from "../../../components/forms/dashboard/patients/RenderPatientFormFields";
+import { RenderPatientFormFields } from "../../dashboard/patients/components/RenderPatientFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useUpdateProfile } from "../queriesAndMutations";
 

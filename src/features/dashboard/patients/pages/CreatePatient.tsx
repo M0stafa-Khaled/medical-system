@@ -1,8 +1,8 @@
-import PatientForm from "@/components/forms/dashboard/patients/PatientForm";
 import { Card, CardContent } from "@/shared/components/ui/card";
-import { createPatientSchema } from "@/validations/dashboard/patientSchema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { PatientForm } from "../components/PatientForm";
+import { createPatientSchema } from "../schema";
 
 const CreatePatient = () => {
   return (
@@ -15,7 +15,7 @@ const CreatePatient = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <Card className="dark:bg-foreground dark:border-muted border-gray-300 shadow-none">
+        <Card className="border-muted mt-5">
           <div className="flex flex-col space-y-1.5 p-6">
             <h1 className="leading-relaxed font-semibold">إضافة مريض جديد</h1>
           </div>

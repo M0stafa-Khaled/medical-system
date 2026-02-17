@@ -1,7 +1,7 @@
 import { TBookingStatus } from "@/shared/types";
 import { IPaginationMeta } from "../../shared/types";
 import { IDoctor } from "./doctors/doctor";
-import { IPatient } from "./patient";
+import { IPatient } from "../../features/dashboard/patients/types";
 import { IEmployee } from "./employee";
 import { IWorkingDay } from "./doctors/workingDays";
 import { IDoctorAction } from "./doctors/doctorActions";

@@ -1,19 +1,15 @@
-import DataTable from "@/shared/components/ui/DataTable";
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
-import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import PatientsList from "./PatientsList";
-import PatientsTableHeader from "./PatientsTableHeader";
-import { useGetAllPatients } from "@/shared/lib/react-query/dashboard/patients";
-import PatientsHeader from "./PatientsHeader";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
+import { DataTable } from "@/components/shared/data-table";
+import { usePatientsColumns } from "./PatientsColumns";
+import { useGetAllPatients } from "../queriesAndMutations";
 
-const PatientsTable = () => {
-  const token = cookieServices.getToken()!;
+export const PatientsTable = () => {
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const search = useDebounce(searchParams.get("q"), 500)!;
@@ -21,7 +17,7 @@ const PatientsTable = () => {
     data: patients,
     isLoading,
     isError,
-  } = useGetAllPatients({ token, page, search });
+  } = useGetAllPatients({ page, search });
 
   useEffect(() => {
     if (patients?.message && !patients.status) toast.error(patients.message);
@@ -35,17 +31,13 @@ const PatientsTable = () => {
   const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
   const canViewPatient = useHasPermission(PERMISSIONS.VIEW_PATIENT);
 
+  const columns = usePatientsColumns({ meta: patients?.data.meta });
   return (
     <DataTable
+      data={patients?.data.items || []}
+      columns={columns}
       isLoading={isLoading}
-      header={<PatientsHeader />}
-      tableHeader={<PatientsTableHeader />}
-      list={
-        <PatientsList
-          meta={patients?.data && patients.data?.meta}
-          patients={patients?.data?.items || []}
-        />
-      }
+      emptyMessage="لا يوجد مرضى"
       skeleton={
         <TableSkeleton
           columns={
@@ -55,13 +47,7 @@ const PatientsTable = () => {
           actionButtons={3}
         />
       }
-      pagination={
-        patients?.data && {
-          meta: patients.data?.meta,
-        }
-      }
+      meta={patients?.data?.meta}
     />
   );
 };
-
-export default PatientsTable;
