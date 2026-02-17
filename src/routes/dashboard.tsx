@@ -29,14 +29,11 @@ const Scans = lazy(() => import("@/pages/shared/scans"));
 
 // Treasuries
 const Treasuries = lazy(() => import("@/pages/dashboard/treasuries"));
-const Expenses = lazy(() => import("@/pages/dashboard/expenses"));
 
 // Expenses
 const ExpensesCategories = lazy(
-  () => import("@/pages/dashboard/expensesCategories")
-);
-const ExpenseDetails = lazy(
-  () => import("@/pages/dashboard/expenses/ExpenseDetails")
+  () =>
+    import("@/features/dashboard/expenses-categories/pages/ExpensesCategories")
 );
 
 // Bookings
@@ -252,30 +249,6 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-scans"
-      />
-
-      {/* Expenses */}
-      <Route
-        path="expenses"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES}>
-              <Expenses />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-expenses"
-      />
-      <Route
-        path="expenses/:expenseId"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EXPENSE}>
-              <ExpenseDetails />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-expense-details"
       />
 
       {/* Expenses Categories */}

@@ -4,7 +4,7 @@ import { memo, useEffect } from "react";
 import { toast } from "react-toastify";
 import TreasuriesHeader from "./TreasuriesHeader";
 import TreasuryCard from "./TreasuryCard";
-import CardSkeleton from "@/shared/components/ui/CardSkeleton";
+import { CardSkeleton } from "@/shared/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
 import { useGetAllTreasuries } from "@/shared/lib/react-query/dashboard/treasuries";

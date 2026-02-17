@@ -17,9 +17,9 @@ const ToggleTheme = ({ className }: { className?: string }) => {
         aria-label="تغيير الثيم"
       >
         {theme === "dark" ? (
-          <IoIosSunny size={24} className="h-10 w-10 text-amber-400" />
+          <IoIosSunny size={24} className="text-amber-400" />
         ) : (
-          <IoIosMoon size={24} className="h-10 w-10" />
+          <IoIosMoon size={24} />
         )}
       </Button>
     </TooltipButton>
