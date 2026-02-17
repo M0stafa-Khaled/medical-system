@@ -50,9 +50,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                 <Button
                   variant="outline"
                   data-empty={!field.value}
-                  className={
-                    "hover:bg-foreground dark:hover:bg-foreground border-muted h-auto w-full justify-start py-3 text-right font-normal text-black hover:text-black dark:text-white dark:hover:text-white"
-                  }
+                  className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted h-12! w-full justify-start text-black hover:text-black dark:text-white dark:hover:text-white`}
                 >
                   <CalendarIcon className="ml-2 h-4 w-4" />
                   {field.value ? (

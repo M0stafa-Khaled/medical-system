@@ -2,11 +2,11 @@ import { FormField } from "@/shared/components/ui/form";
 import { IFormInput } from "@/shared/types";
 import { z, type ZodSchema } from "zod/v3";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import SelectFormItem from "../../formItems/SelectFormItem";
-import InputFormItem from "../../formItems/InputFormItem";
-import PatientSelectItem from "../../formItems/PatientSelectItem";
-import BookingDateItem from "../../formItems/BookingDateItem";
-import BookingAvailableTimeSelectItem from "../../formItems/BookingAvailableTimeSelectItem";
+import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
+import { PatientSelectItem } from "@/components/forms/formItems/PatientSelectItem";
+import BookingAvailableTimeSelectItem from "@/components/forms/formItems/BookingAvailableTimeSelectItem";
+import BookingDateItem from "@/components/forms/formItems/BookingDateItem";
+import InputFormItem from "@/components/forms/formItems/InputFormItem";
 
 interface IOption {
   value: string;
@@ -25,7 +25,7 @@ interface IProps {
   allowedDay: string;
 }
 
-const RenderBookingFormFields = ({
+export const RenderBookingFormFields = ({
   input,
   form,
   isOptionalField,
@@ -107,5 +107,3 @@ const RenderBookingFormFields = ({
     />
   );
 };
-
-export default RenderBookingFormFields;

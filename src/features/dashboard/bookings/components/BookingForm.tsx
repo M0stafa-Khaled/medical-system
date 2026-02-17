@@ -1,4 +1,4 @@
-import { IBooking } from "@/interfaces/dashboard/bookings";
+import { IBooking } from "@/features/dashboard/bookings/types";
 import { ZodSchema } from "zod";
 import { useEffect } from "react";
 import { Form } from "@/shared/components/ui/form";
@@ -18,8 +18,7 @@ import {
 import {
   useCreateBooking,
   useUpdateBooking,
-} from "@/shared/lib/react-query/dashboard/bookings";
-import RenderBookingFormFields from "./RenderBookingFromFields";
+} from "@/features/dashboard/bookings/queriesAndMutations";
 import SubmitButton from "@/components/shared/SubmitButton";
 import { useNavigate } from "react-router";
 import { handleResErr } from "@/shared/utils/handleResError";
@@ -28,6 +27,7 @@ import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
 import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
 import { useGetDoctorActions } from "@/features/dashboard/doctors";
+import { RenderBookingFormFields } from "./RenderBookingFromFields";
 
 interface IProps {
   booking?: IBooking;
@@ -35,7 +35,7 @@ interface IProps {
   bookingSchema: ZodSchema;
 }
 
-const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
+export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   const navigate = useNavigate();
   const token = cookieServices.getToken()!;
 
@@ -219,7 +219,7 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     try {
       if (action === "update") {
         const { status, message } = await updateBooking({
-          id: booking?.id,
+          id: booking?.id || 0,
           formData: {
             clinic_id: data.clinic_id,
             doctor_id: data.doctor_id,
@@ -230,23 +230,19 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
             start_at: data.start_at,
             status: data.status,
           },
-          token,
         });
 
         if (!status) return toast.error(message);
         toast.success(message);
       } else {
         const { status, message } = await createBooking({
-          formData: {
-            clinic_id: data.clinic_id,
-            doctor_id: data.doctor_id,
-            patient_id: data.patient_id,
-            working_day_id: data.working_day_id,
-            doctor_action_id: data.doctor_action_id,
-            date: data.date,
-            start_at: data.start_at,
-          },
-          token,
+          clinic_id: data.clinic_id,
+          doctor_id: data.doctor_id,
+          patient_id: data.patient_id,
+          working_day_id: data.working_day_id,
+          doctor_action_id: data.doctor_action_id,
+          date: data.date,
+          start_at: data.start_at,
         });
 
         if (!status) return toast.error(message);
@@ -310,5 +306,3 @@ const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     </Form>
   );
 };
-
-export default BookingForm;

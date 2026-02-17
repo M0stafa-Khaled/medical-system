@@ -1,8 +1,7 @@
 import { containerVariants } from "@/animations";
 import { Card, CardHeader } from "@/shared/components/ui/card";
 import DataLoader from "@/shared/components/ui/DataLoader";
-import { useGetPatientBalances } from "@/shared/lib/react-query/dashboard/transactions/patientBalances";
-import cookieServices from "@/shared/utils/cookieServices";
+import { useGetPatientBalances } from "../queriesAndMutations";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -13,15 +12,12 @@ interface IProps {
   patientId: string;
 }
 export const PatientBalances = ({ patientId }: IProps) => {
-  const token = cookieServices.getToken()!;
-
   const {
     data: patientBalances,
     isLoading,
     isError,
   } = useGetPatientBalances({
     patientId,
-    token,
   });
 
   useEffect(() => {

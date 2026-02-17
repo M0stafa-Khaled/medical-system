@@ -2,14 +2,14 @@ import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import truncateText from "@/shared/utils/truncateText";
-import { IBooking } from "@/interfaces/dashboard/bookings";
+import { IBooking } from "@/features/dashboard/bookings/types";
 import convertDay from "@/shared/utils/convertDayLang";
 import formatDateTime from "@/shared/utils/formatDate";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import { LiaNotesMedicalSolid } from "react-icons/lia";
-import BookingStatus from "@/components/dashboard/bookings/BookingStatus";
+import BookingStatus from "@/features/dashboard/bookings/components/BookingStatus";
 
 interface IProps {
   bookings: IBooking[];

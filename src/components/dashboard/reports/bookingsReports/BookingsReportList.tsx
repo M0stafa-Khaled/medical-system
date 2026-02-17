@@ -2,10 +2,10 @@ import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
 import { tableRowVariants } from "@/animations";
 import truncateText from "@/shared/utils/truncateText";
-import { IBooking } from "@/interfaces/dashboard/bookings";
+import { IBooking } from "@/features/dashboard/bookings/types";
 import convertDay from "@/shared/utils/convertDayLang";
 import formatDateTime from "@/shared/utils/formatDate";
-import BookingStatus from "../../bookings/BookingStatus";
+import BookingStatus from "../../../../features/dashboard/bookings/components/BookingStatus";
 import { TBookingStatus } from "@/shared/types";
 
 interface IProps {

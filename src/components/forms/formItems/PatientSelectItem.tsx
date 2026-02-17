@@ -32,7 +32,7 @@ interface IProps {
   input: IFormInput;
 }
 
-const PatientSelectItem = ({ field, input }: IProps) => {
+export const PatientSelectItem = ({ field, input }: IProps) => {
   const [open, setOpen] = useState(false);
   const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,7 +59,7 @@ const PatientSelectItem = ({ field, input }: IProps) => {
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className={`border-muted h-12! w-full justify-between overflow-hidden text-black dark:text-white`}
+              className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted h-12! w-full justify-between overflow-hidden text-black hover:text-black dark:text-white dark:hover:text-white`}
             >
               {field.value
                 ? patientsOption?.find((option) => option.value === field.value)
@@ -68,8 +68,8 @@ const PatientSelectItem = ({ field, input }: IProps) => {
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="z-1000 w-75 border-black/20 p-0 sm:w-100 md:w-92.5 dark:border-white/40">
-            <Command className="bg-foreground text-black dark:text-white">
+          <PopoverContent className="z-1000 w-75 p-0 sm:w-100 md:w-92.5">
+            <Command id={input.name} className="bg-background">
               <CommandInput
                 placeholder="اختر او ابحث بالاسم او رقم الهاتف"
                 value={searchTerm}
@@ -109,5 +109,3 @@ const PatientSelectItem = ({ field, input }: IProps) => {
     </FormItem>
   );
 };
-
-export default PatientSelectItem;

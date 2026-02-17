@@ -8,7 +8,7 @@ import MultiSelectFormItem from "../../formItems/MultiSelectFormItem";
 import InputFormItem from "../../formItems/InputFormItem";
 
 import PatientBalancesSelect from "@/components/dashboard/transactions/PatientBalancesSelect";
-import PatientSelectItem from "../../formItems/PatientSelectItem";
+import { PatientSelectItem } from "../../formItems/PatientSelectItem";
 
 interface IOption {
   value: string;

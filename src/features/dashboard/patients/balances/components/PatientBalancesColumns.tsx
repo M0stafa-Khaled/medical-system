@@ -1,5 +1,5 @@
 import { ColumnDef } from "@/components/shared/data-table";
-import { IBalance } from "@/interfaces/patientBalances";
+import { IBalance } from "@/interfaces/dashboard/transactions/transactions";
 import formatDateTime from "@/shared/utils/formatDate";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
 

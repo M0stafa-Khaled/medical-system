@@ -5,19 +5,15 @@ import { Form } from "@/shared/components/ui/form";
 import { PATIENT_FORM_INPUTS } from "@/constants";
 import { IPatient } from "@/features/dashboard/patients/types";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
-import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-import {
-  useCreatePatient,
-  useUpdatePatient,
-} from "@/features/dashboard/patients/queriesAndMutations";
+import { useCreatePatient, useUpdatePatient } from "../queriesAndMutations";
 import { useEffect } from "react";
-import SubmitButton from "../../../../components/shared/SubmitButton";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/animations";
 import { RenderPatientFormFields } from "./RenderPatientFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
+import SubmitButton from "@/components/shared/SubmitButton";
 
 interface IProps {
   patient?: IPatient;
@@ -26,7 +22,6 @@ interface IProps {
 }
 
 export const PatientForm = ({ patient, action, patientSchema }: IProps) => {
-  const token = cookieServices.getToken() || "";
   const navigate = useNavigate();
 
   const { mutateAsync: createPatient, isPending: isLoadingCreate } =
@@ -91,7 +86,6 @@ export const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       if (action === "create") {
         const { status, message } = await createPatient({
           data: formData,
-          token,
         });
         if (!status) return toast.error(message);
         toast.success("تم إضافة مريض جديد بنجاح");
@@ -100,7 +94,6 @@ export const PatientForm = ({ patient, action, patientSchema }: IProps) => {
       if (action === "update") {
         const { status, message } = await updatePatient({
           data: { ...formData, id: patient?.id },
-          token,
         });
         if (!status) return toast.error(message);
         toast.success("تم تحديث بيانات المريض بنجاح");

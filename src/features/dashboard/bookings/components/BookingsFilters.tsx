@@ -15,15 +15,42 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
-import { IBookingsFilter } from "@/interfaces/dashboard/bookings";
+import { IBookingsFilter } from "@/features/dashboard/bookings/types";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
+import { useSearchParams } from "react-router";
+import { useMemo } from "react";
 
-interface IProps {
-  filters: IBookingsFilter;
-  setFilters: (filters: IBookingsFilter) => void;
-}
-const BookingsFilters = ({ filters, setFilters }: IProps) => {
+export const BookingsFilters = () => {
   const { data: clinics } = useGetAllClinics({});
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const filters: IBookingsFilter = useMemo(
+    () => ({
+      doctor: searchParams.get("doctor") || "",
+      patient: searchParams.get("patient") || "",
+      created_at: searchParams.get("created_at") || "",
+      booking_date: searchParams.get("booking_date") || "",
+      status: searchParams.get("status") || "",
+      clinic: searchParams.get("clinic") || "",
+      sort: searchParams.get("sort") || "",
+    }),
+    [searchParams]
+  );
+  const setFilters = (newFilters: IBookingsFilter) => {
+    const params = new URLSearchParams(searchParams);
+
+    // Update each filter param
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    });
+
+    setSearchParams(params);
+  };
 
   const handleFilterChange = (key: string, value: string | null) =>
     setFilters({ ...filters, [key]: value });
@@ -32,14 +59,14 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
     <div className="my-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
       <Input
         placeholder="ابحث باسم الطبيب"
-        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
+        className="border-muted placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm"
         type="search"
         value={filters.doctor}
         onChange={(e) => handleFilterChange("doctor", e.target.value)}
       />
       <Input
         placeholder="ابحث باسم المريض او رقم الهاتف الأول"
-        className="placeholder:text-muted-foreground h-auto border-black/20 py-3 text-black placeholder:h-14 dark:border-white/40 dark:text-white"
+        className="border-muted placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm"
         type="search"
         value={filters.patient}
         onChange={(e) => handleFilterChange("patient", e.target.value)}
@@ -51,7 +78,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
         dir="rtl"
       >
         <SelectTrigger
-          className={`h-12! border-black/20 dark:border-white/40 ${
+          className={`border-muted h-12! ${
             filters.clinic
               ? "text-black dark:text-white"
               : "text-muted-foreground"
@@ -62,7 +89,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
             className={`text-muted-foreground py-4`}
           />
         </SelectTrigger>
-        <SelectContent className="bg-foreground border-black/20 text-black dark:border-white/40 dark:text-white">
+        <SelectContent className="bg-background">
           <SelectItem value="all" className="cursor-pointer py-2.5">
             الكل
           </SelectItem>
@@ -83,8 +110,9 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}
+            size={"lg"}
             className={
-              "hover:bg-foreground dark:hover:bg-foreground h-auto w-full justify-start border-black/20 py-3 text-right font-normal text-black hover:text-black dark:border-white/40 dark:text-white dark:hover:text-white"
+              "hover:bg-background hover:text-foreground h-auto w-full justify-start"
             }
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
@@ -95,11 +123,9 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          className="bg-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
-          align="start"
-        >
+        <PopoverContent className="border-muted p-0" align="start">
           <Calendar
+            className="w-full"
             mode="single"
             dir="rtl"
             selected={
@@ -127,8 +153,9 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}
+            size={"lg"}
             className={
-              "hover:bg-foreground dark:hover:bg-foreground h-auto w-full justify-start border-black/20 py-3 text-right font-normal text-black hover:text-black dark:border-white/40 dark:text-white dark:hover:text-white"
+              "hover:bg-background hover:text-foreground h-auto w-full justify-start"
             }
           >
             <CalendarIcon className="ml-2 h-4 w-4" />
@@ -139,13 +166,10 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          className="bg-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
-          align="start"
-        >
+        <PopoverContent className="border-muted p-0" align="start">
           <Calendar
+            className="w-full"
             mode="single"
-            dir="rtl"
             selected={
               filters.booking_date ? new Date(filters.booking_date) : undefined
             }
@@ -173,7 +197,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
         dir="rtl"
       >
         <SelectTrigger
-          className={`h-12! border-black/20 dark:border-white/40 ${
+          className={`border-muted h-12! ${
             filters.status
               ? "text-black dark:text-white"
               : "text-muted-foreground"
@@ -184,7 +208,7 @@ const BookingsFilters = ({ filters, setFilters }: IProps) => {
             className={`text-muted-foreground py-4`}
           />
         </SelectTrigger>
-        <SelectContent className="bg-foreground border-black/20 text-black dark:border-white/40 dark:text-white">
+        <SelectContent className="bg-background">
           <SelectItem value="all" className="cursor-pointer py-2.5">
             الكل
           </SelectItem>

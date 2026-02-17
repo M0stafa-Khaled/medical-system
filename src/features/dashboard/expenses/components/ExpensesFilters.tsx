@@ -38,7 +38,7 @@ export const ExpensesFilters = ({ filters, setFilters }: IProps) => {
     <div className="my-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
       <Input
         placeholder="ابحث برقم الإيصال"
-        className="border-muted placeholder:text-muted-foreground h-auto py-2 placeholder:h-12 placeholder:text-sm"
+        className="border-muted placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm"
         type="search"
         value={filters.code}
         onChange={(e) => handleFilterChange("code", e.target.value)}
@@ -46,7 +46,7 @@ export const ExpensesFilters = ({ filters, setFilters }: IProps) => {
 
       <Input
         placeholder="ابحث باسم الموظف"
-        className="border-muted placeholder:text-muted-foreground h-auto py-2 placeholder:h-12 placeholder:text-sm"
+        className="border-muted placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm"
         type="search"
         value={filters.employee}
         onChange={(e) => handleFilterChange("employee", e.target.value)}
@@ -59,7 +59,7 @@ export const ExpensesFilters = ({ filters, setFilters }: IProps) => {
         dir="rtl"
       >
         <SelectTrigger
-          className={`border-muted0 h-12! ${
+          className={`border-muted h-12! ${
             filters.treasury
               ? "text-black dark:text-white"
               : "text-muted-foreground"

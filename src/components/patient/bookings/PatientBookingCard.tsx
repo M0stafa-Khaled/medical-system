@@ -1,4 +1,4 @@
-import BookingStatus from "@/components/dashboard/bookings/BookingStatus";
+import BookingStatus from "@/features/dashboard/bookings/components/BookingStatus";
 import { Button } from "@/shared/components/ui/button";
 import {
   Card,

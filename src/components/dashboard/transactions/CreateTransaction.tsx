@@ -21,14 +21,14 @@ import RenderTransactionFormFields from "@/components/forms/dashboard/transactio
 import { TPaymentMethod } from "@/shared/types";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Link } from "react-router";
-import { IBooking } from "@/interfaces/dashboard/bookings";
+import { IBooking } from "@/features/dashboard/bookings/types";
 import { handleResErr } from "@/shared/utils/handleResError";
-import { useGetPatientBalances } from "@/shared/lib/react-query/dashboard/transactions/patientBalances";
 import InfoField from "../../shared/InfoField";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/enums/permissions";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { useGetDoctorActions } from "@/features/dashboard/doctors";
+import { useGetPatientBalances } from "@/features/dashboard/patients/balances";
 
 interface IProps {
   booking: IBooking;
@@ -47,7 +47,6 @@ const CreateTransaction = ({ booking }: IProps) => {
 
   const { data: patientBalances } = useGetPatientBalances({
     patientId: isOpen ? booking.patient.id.toString() : "",
-    token,
   });
 
   const doctorActionsOptions = doctorActions?.data?.map((action) => ({
@@ -119,7 +118,8 @@ const CreateTransaction = ({ booking }: IProps) => {
       <TooltipButton title="تحصيل">
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-9 w-9 gap-2 px-1 py-1 text-sm"
+          className="btn-primary rounded-full"
+          size={"icon"}
         >
           <Wallet size={20} />
         </Button>

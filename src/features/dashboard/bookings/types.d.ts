@@ -1,11 +1,8 @@
-import { TBookingStatus } from "@/shared/types";
-import { IPaginationMeta } from "../../shared/types";
-import { IDoctor } from "./doctors/doctor";
-import { IPatient } from "../../features/dashboard/patients/types";
-import { IEmployee } from "./employee";
-import { IWorkingDay } from "./doctors/workingDays";
-import { IDoctorAction } from "./doctors/doctorActions";
-import { IClinic } from "./clinics";
+import { IPaginationMeta, TBookingStatus } from "@/shared/types";
+import { IDoctor, IDoctorAction } from "../doctors/types";
+import { IEmployee } from "../employees/types";
+import { IClinic } from "../clinics/types";
+import { IWorkingDay } from "../doctors/working-days/types";
 
 export interface IBooking {
   id: number;
@@ -32,24 +29,19 @@ export interface IBookingsRes {
   };
 }
 export interface ICreateBooking {
-  id?: number;
-  token: string;
-  formData: {
-    status?: string;
-    patient_id: string;
-    doctor_id: string;
-    working_day_id: string;
-    clinic_id: string;
-    doctor_action_id: string;
-    date: string;
-    start_at: string;
-  };
+  status?: string;
+  patient_id: string;
+  doctor_id: string;
+  working_day_id: string;
+  clinic_id: string;
+  doctor_action_id: string;
+  date: string;
+  start_at: string;
 }
 
 export interface IUpdateBookingStatus {
   status: TBookingStatus;
   id: number;
-  token: string;
 }
 
 export interface IBookingsFilter {
@@ -59,4 +51,5 @@ export interface IBookingsFilter {
   booking_date: string | null;
   status: string;
   clinic: string;
+  sort: string;
 }
