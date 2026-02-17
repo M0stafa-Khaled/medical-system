@@ -1,6 +1,5 @@
 import axiosAPI from "@/config/axios.config";
-import { IGetWithParams } from "@/shared/types";
-import { IChartRes } from "@/interfaces/charts/charts";
+import { IChartRes, IGetWithParams } from "@/shared/types";
 
 export const getDoctorBookingsChart = async ({
   token,

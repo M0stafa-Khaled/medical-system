@@ -14,7 +14,7 @@ const DoctorClinics = lazy(() => import("@/pages/doctor/clinics"));
 const DoctorBookings = lazy(() => import("@/pages/doctor/bookings"));
 const Drugs = lazy(() => import("@/pages/shared/drugs"));
 const Analysis = lazy(() => import("@/pages/shared/analysis"));
-const Scans = lazy(() => import("@/pages/shared/scans"));
+const Scans = lazy(() => import("@/features/scans/pages/Scans"));
 const DoctorPrescriptions = lazy(() => import("@/pages/doctor/prescriptions"));
 const DoctorCreatePrescription = lazy(
   () => import("@/pages/doctor/prescriptions/DoctorCreatePrescription")

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/animations";
-import EmployeeTreasuriesChart from "./EmployeeTreasuriesChart";
+import { EmployeeTreasuriesChart } from "./EmployeeTreasuriesChart";
 
-const EmployeeChartsList = () => {
+export const EmployeeChartsList = () => {
   return (
     <motion.div
       variants={containerVariants}
@@ -16,5 +16,3 @@ const EmployeeChartsList = () => {
     </motion.div>
   );
 };
-
-export default EmployeeChartsList;

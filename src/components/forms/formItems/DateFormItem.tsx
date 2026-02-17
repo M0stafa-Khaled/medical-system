@@ -55,7 +55,7 @@ const DateFormItem = ({ input, field }: IProps) => {
               selected={field.value ? new Date(field.value) : undefined}
               onSelect={(date) => {
                 const formattedDated = date
-                  ? new Date(date).toLocaleDateString("en-CA", {
+                  ? new Date(date).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
@@ -63,7 +63,6 @@ const DateFormItem = ({ input, field }: IProps) => {
                   : "";
                 field.onChange(formattedDated);
               }}
-              initialFocus
             />
           </PopoverContent>
         </Popover>

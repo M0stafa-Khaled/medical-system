@@ -11,7 +11,7 @@ const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
 // Drugs
 const Drugs = lazy(() => import("@/pages/shared/drugs"));
 const Analysis = lazy(() => import("@/pages/shared/analysis"));
-const Scans = lazy(() => import("@/pages/shared/scans"));
+const Scans = lazy(() => import("@/features/scans/pages/Scans"));
 
 // Transactions
 const Transactions = lazy(() => import("@/pages/dashboard/transactions"));

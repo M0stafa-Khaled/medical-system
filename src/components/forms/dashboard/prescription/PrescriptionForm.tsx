@@ -68,7 +68,7 @@ const PrescriptionForm = ({ action, prescription }: IProps) => {
       note: prescription?.note || "",
       prescription_date:
         prescription?.date ||
-        new Date().toLocaleDateString("en-CA", {
+        new Date().toLocaleDateString("en-US", {
           year: "numeric",
           month: "2-digit",
           day: "2-digit",

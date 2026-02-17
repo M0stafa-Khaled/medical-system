@@ -8,7 +8,6 @@ import {
 } from "@/shared/types";
 import { IAnalysisRes } from "@/interfaces/dashboard/analysis";
 import { IDrugsResponse } from "@/interfaces/dashboard/drugs";
-import { IScansRes } from "@/interfaces/dashboard/scans";
 
 export const getAllDrugs = async ({
   token,
@@ -89,19 +88,6 @@ export const getAllAnalysis = async ({
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  });
-
-  return data;
-};
-
-export const getAllScans = async ({
-  token,
-  page,
-  search,
-}: IGetWithParams): Promise<IScansRes> => {
-  const { data } = await axiosAPI.get("/scans", {
-    params: { ...(search ? { q: search, page } : { page }) },
-    headers: { Authorization: `Bearer ${token}` },
   });
 
   return data;

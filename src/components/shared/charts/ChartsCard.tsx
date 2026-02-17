@@ -13,8 +13,8 @@ import {
   ChartOptions,
   ArcElement,
 } from "chart.js";
-import { IChartDataset } from "@/interfaces/charts/charts";
 import { Skeleton } from "@/shared/components/ui/skeleton";
+import { IChartDataset } from "@/shared/types";
 
 ChartJS.register(
   CategoryScale,
@@ -132,7 +132,7 @@ const AnalyticsChart = ({ datasets, labels, isLoading }: IProps) => {
   return (
     <div className="h-80 max-w-5xl">
       {isLoading ? (
-        <Skeleton className="min-h-64 w-full lg:h-[320px]" />
+        <Skeleton className="min-h-64 w-full lg:h-80" />
       ) : (
         <Line
           data={{ ...chartData, datasets: chartData.datasets ?? [] }}

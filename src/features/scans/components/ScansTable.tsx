@@ -1,16 +1,14 @@
-import DataTable from "@/shared/components/ui/DataTable";
-import ScansHeader from "./ScansHeader";
 import { useEffect } from "react";
 import cookieServices from "@/shared/utils/cookieServices";
-import ScansTableHeader from "./ScansTableHeader";
-import ScansList from "./ScansList";
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { useGetAllScans } from "@/shared/lib/react-query/main";
+import { useGetAllScans } from "../queries";
+import { DataTable } from "@/components/shared/data-table";
+import { useScansColumns } from "./ScansColumns";
 
-const ScansTable = () => {
+export const ScansTable = () => {
   const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
@@ -30,25 +28,15 @@ const ScansTable = () => {
     }
   }, [scans?.message, scans?.status, isError]);
 
+  const columns = useScansColumns({ meta: scans?.data.meta });
+
   return (
     <DataTable
       isLoading={isLoading}
-      header={<ScansHeader />}
-      tableHeader={<ScansTableHeader />}
-      list={
-        <ScansList
-          scans={scans?.data?.items || []}
-          meta={scans?.data && scans.data?.meta}
-        />
-      }
+      data={scans?.data.items || []}
+      columns={columns}
       skeleton={<TableSkeleton columns={3} rows={6} showButtons={false} />}
-      pagination={
-        scans?.data && {
-          meta: scans.data?.meta,
-        }
-      }
+      meta={scans?.data?.meta}
     />
   );
 };
-
-export default ScansTable;

@@ -1,10 +1,7 @@
 import cookieServices from "@/shared/utils/cookieServices";
-import AnalyticsChart from "../../../shared/charts/ChartsCard";
-import { useGetTreasuriesChart } from "@/shared/lib/react-query/dashboard/charts/adminCharts";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
-import ChartDate from "../../../shared/charts/ChartDate";
-import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
+import { useGetAllTreasuries } from "@/features/dashboard/treasuries";
 import {
   Select,
   SelectContent,
@@ -12,13 +9,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
+import { useGetTreasuriesChart } from "@/features/dashboard/queries";
+import ChartDate from "@/components/shared/charts/ChartDate";
+import AnalyticsChart from "@/components/shared/charts/ChartsCard";
 
 interface ITreasuriesFilter {
   treasury_start_at: string;
   treasury_end_at: string;
   treasury: string;
 }
-const TreasuriesChart = () => {
+export const TreasuriesChart = () => {
   const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -61,8 +61,8 @@ const TreasuriesChart = () => {
     setFilters({ ...filters, [key]: value });
 
   return (
-    <div className="dark:bg-dark space-y-5 rounded-xl bg-white px-3 py-6 shadow-md md:p-6">
-      <h2 className="text-dark text-center font-semibold md:text-start md:text-lg dark:text-white">
+    <div className="bg-card space-y-5 rounded-xl px-3 py-6 shadow-md md:p-6">
+      <h2 className="text-center font-semibold md:text-start md:text-lg">
         إحصائيات الخزائن
       </h2>
       <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-10">
@@ -84,11 +84,11 @@ const TreasuriesChart = () => {
           dir="rtl"
         >
           <SelectTrigger
-            className={`bg-primary text-primary-foreground data-placeholder:text-primary-foreground h-11! border-black/20 dark:border-white/40`}
+            className={`h-11! border-black/20 dark:border-white/40`}
           >
             <SelectValue placeholder="الخزينة" className={`py-4 text-white`} />
           </SelectTrigger>
-          <SelectContent className="text-primary dark:text-primary-foreground bg-primary-foreground dark:bg-primary border-black/20 dark:border-white/40">
+          <SelectContent className="bg-card">
             <SelectItem value="all" className="cursor-pointer py-2.5">
               الكل
             </SelectItem>
@@ -112,5 +112,3 @@ const TreasuriesChart = () => {
     </div>
   );
 };
-
-export default TreasuriesChart;

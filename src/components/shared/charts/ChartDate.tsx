@@ -19,27 +19,30 @@ const ChartDate = ({ value, onChange, placeholder }: IProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="h-auto w-full justify-start border-black/20 py-3 text-right font-normal dark:border-white/40">
+        <Button
+          variant={"outline"}
+          size={"lg"}
+          className={
+            "hover:text-foreground h-auto w-full justify-start hover:bg-transparent"
+          }
+        >
           <CalendarIcon className="ml-2 h-4 w-4" />
           {value ? (
             format(new Date(value), "dd-MM-yyyy")
           ) : (
-            <span>{placeholder}</span>
+            <span className="text-muted-foreground">{placeholder}</span>
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent
-        className="dark:bg-primary dark:text-primary-foreground w-full border-black/20 p-0 px-3 dark:border-white/40"
-        align="start"
-      >
+      <PopoverContent className="border-muted p-0" align="start">
         <Calendar
           mode="single"
-          dir="rtl"
+          className="w-full"
           selected={value ? new Date(value) : undefined}
           onSelect={(date) =>
             onChange(
               date
-                ? new Date(date).toLocaleDateString("en-CA", {
+                ? new Date(date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "2-digit",
                     day: "2-digit",
@@ -47,7 +50,6 @@ const ChartDate = ({ value, onChange, placeholder }: IProps) => {
                 : null
             )
           }
-          initialFocus
         />
       </PopoverContent>
     </Popover>
