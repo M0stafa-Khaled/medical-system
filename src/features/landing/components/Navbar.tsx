@@ -3,7 +3,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Activity, Menu, X } from "lucide-react";
 import { m, AnimatePresence } from "framer-motion";
 import { Link, NavLink } from "react-router";
-import ToggleTheme from "../../../components/shared/ToggleTheme";
+import ToggleTheme from "../../../shared/components/ToggleTheme";
 
 const navLinks = [
   { name: "الرئيسية", href: "#home" },

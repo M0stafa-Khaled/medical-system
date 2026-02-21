@@ -1,7 +1,7 @@
 import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
-import { GENDER } from "@/constants";
+import { GENDER } from "@/shared/constants";
 import SelectFormItem from "./SelectFormItem";
 import {
   FormItem,

@@ -75,7 +75,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
               handleFilterChange(
                 "start_at",
                 date
-                  ? new Date(date).toLocaleDateString("en-US", {
+                  ? new Date(date).toLocaleDateString("en-CA", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
@@ -116,7 +116,7 @@ const TransfersFilters = ({ filters, setFilters }: IProps) => {
               handleFilterChange(
                 "end_at",
                 date
-                  ? new Date(date).toLocaleDateString("en-US", {
+                  ? new Date(date).toLocaleDateString("en-CA", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",

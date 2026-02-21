@@ -6,20 +6,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
-import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import { BOOKING_FORM_INPUTS, BOOKING_STATUS_OPTIONS } from "@/constants";
-import convertDay from "@/shared/utils/convertDayLang";
-import {
-  useGetAllClinicDoctors,
-  useGetAvailableBookingsTime,
-} from "@/shared/lib/react-query/main";
-import {
-  useCreateBooking,
-  useUpdateBooking,
-} from "@/features/dashboard/bookings/queriesAndMutations";
-import SubmitButton from "@/components/shared/SubmitButton";
+import { containerVariants, itemVariants } from "@/shared/animations";
+import { useCreateBooking, useUpdateBooking } from "../queriesAndMutations";
+import SubmitButton from "@/shared/components/SubmitButton";
 import { useNavigate } from "react-router";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { AxiosResErr } from "@/shared/types";
@@ -28,6 +18,9 @@ import { useGetAllClinics } from "@/features/dashboard/clinics";
 import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
 import { useGetDoctorActions } from "@/features/dashboard/doctors";
 import { RenderBookingFormFields } from "./RenderBookingFromFields";
+import { useGetAllClinicDoctors, useGetAvailableBookingsTime } from "@/shared";
+import convertDay from "@/shared/utils/convertDayLang";
+import { BOOKING_FORM_INPUTS, BOOKING_STATUS_OPTIONS } from "../constants";
 
 interface IProps {
   booking?: IBooking;
@@ -37,7 +30,6 @@ interface IProps {
 
 export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   const navigate = useNavigate();
-  const token = cookieServices.getToken()!;
 
   const form = useForm<z.infer<typeof bookingSchema>>({
     resolver: zodResolver(bookingSchema),
@@ -74,18 +66,17 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     name: "date",
   });
 
-  // Fetch data using watched values directly
   const {
     data: clinics,
     isError: isErrorClinics,
     failureReason: failureReasonClinic,
-  } = useGetAllClinics({ token, filter: { status: "1" } });
+  } = useGetAllClinics({ filter: { status: "1" } });
 
   const {
     data: doctors,
     isError: isErrorDoctors,
     failureReason: failureReasonDoctors,
-  } = useGetAllClinicDoctors({ token, clinic_id: clinicId! });
+  } = useGetAllClinicDoctors({ clinic_id: clinicId! });
 
   const {
     data: workingDays,
@@ -100,7 +91,6 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   } = useGetDoctorActions({ doctorId });
 
   const { data: availableTimes } = useGetAvailableBookingsTime({
-    token,
     doctor_id: doctorId,
     working_day_id: workingDayId,
     clinic_id: clinicId,
@@ -165,7 +155,6 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     (day) => day.id.toString() === workingDayId
   );
 
-  // Cascading reset logic
   useEffect(() => {
     if (!clinicId) return;
     form.setValue("doctor_id", "");
@@ -194,7 +183,6 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     form.setValue("start_at", "");
   }, [date, form]);
 
-  // Initial setup for edit mode
   useEffect(() => {
     if (!booking) return;
 

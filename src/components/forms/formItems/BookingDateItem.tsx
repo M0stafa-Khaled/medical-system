@@ -68,7 +68,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                   selected={field.value ? new Date(field.value) : undefined}
                   onSelect={(date) => {
                     const formattedDated = date
-                      ? new Date(date).toLocaleDateString("en-US", {
+                      ? new Date(date).toLocaleDateString("en-CA", {
                           year: "numeric",
                           month: "2-digit",
                           day: "2-digit",
@@ -82,7 +82,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                           date.setHours(0, 0, 0, 0);
 
                           const dayName = date
-                            .toLocaleDateString("en-US", { weekday: "long" })
+                            .toLocaleDateString("en-CA", { weekday: "long" })
                             .toLowerCase();
                           const isNotAllowedDay = dayName !== allowedDay;
                           const todayDate = new Date();
@@ -91,7 +91,7 @@ const BookingDateItem = ({ input, form, allowedDay }: IProps) => {
                           if (dayName !== allowedDay) {
                             while (
                               firstAvailableDay
-                                .toLocaleDateString("en-US", {
+                                .toLocaleDateString("en-CA", {
                                   weekday: "long",
                                 })
                                 .toLowerCase() !== allowedDay

@@ -11,29 +11,23 @@ import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
 import { handleResErr } from "@/shared/utils/handleResError";
-import { containerVariants, itemVariants } from "@/animations";
-import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
+import { containerVariants, itemVariants } from "@/shared/animations";
+import { PATIENT_BOOKING_FORM_INPUTS } from "@/shared/constants";
 import convertDay from "@/shared/utils/convertDayLang";
-import {
-  useGetAllClinicDoctors,
-  useGetAvailableBookingsTime,
-} from "@/shared/lib/react-query/main";
 import patientBookingSchema from "@/validations/patient/patientBookingSchema";
 import { useCreatePatientBooking } from "@/shared/lib/react-query/patient/patientBookings";
-import cookieServices from "@/shared/utils/cookieServices";
 import RenderPatientBookingFormFields from "@/components/forms/patient/RenderPatientBookingFormFields";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
 import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
 import { useGetDoctorActions } from "@/features/dashboard/doctors";
+import { useGetAllClinicDoctors, useGetAvailableBookingsTime } from "@/shared";
 
 const CreatePatientBooking = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const token = cookieServices.getToken()!;
 
   const form = useForm<z.infer<typeof patientBookingSchema>>({
     resolver: zodResolver(patientBookingSchema),
@@ -62,7 +56,6 @@ const CreatePatientBooking = () => {
   });
 
   const { data: doctors } = useGetAllClinicDoctors({
-    token,
     clinic_id: clinicId,
   });
 
@@ -75,14 +68,12 @@ const CreatePatientBooking = () => {
   });
 
   const { data: availableTimes } = useGetAvailableBookingsTime({
-    token,
     doctor_id: doctorId,
     working_day_id: workingDayId,
     clinic_id: clinicId,
     booking_date: date,
   });
 
-  // Prepare options (safe fallback to empty array)
   const clinicsOptions =
     clinics?.data?.map((clinic) => ({
       label: clinic.name,
@@ -111,7 +102,6 @@ const CreatePatientBooking = () => {
     workingDays?.data?.find((day) => day.id.toString() === workingDayId)?.day ??
     "";
 
-  // Cascading reset logic — reactive to watched values
   useEffect(() => {
     if (!clinicId) return;
     form.setValue("doctor_id", "");
@@ -146,15 +136,12 @@ const CreatePatientBooking = () => {
   const onSubmit = async (data: z.infer<typeof patientBookingSchema>) => {
     try {
       const { status, message } = await createPatientBooking({
-        booking: {
-          clinic_id: data.clinic_id,
-          doctor_id: data.doctor_id,
-          working_day_id: data.working_day_id,
-          doctor_action_id: data.doctor_action_id,
-          date: data.date,
-          start_at: data.start_at,
-        },
-        token,
+        clinic_id: data.clinic_id,
+        doctor_id: data.doctor_id,
+        working_day_id: data.working_day_id,
+        doctor_action_id: data.doctor_action_id,
+        date: data.date,
+        start_at: data.start_at,
       });
 
       if (!status) return toast.error(message);

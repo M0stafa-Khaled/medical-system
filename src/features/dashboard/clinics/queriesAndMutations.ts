@@ -1,6 +1,6 @@
 import { createClinic, updateClinic, deleteClinic, getAllClinics } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import type { ICreateClinic, IUpdateClinic } from "./types";
 import { IGetWithParams } from "@/shared/types";
 

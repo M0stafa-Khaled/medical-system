@@ -5,9 +5,9 @@ import {
   TabsTrigger,
 } from "@/shared/components/ui/tabs";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { motion } from "framer-motion";
-import { itemVariants } from "@/animations";
+import { itemVariants } from "@/shared/animations";
 import { DoctorTransactions } from "./transactions/DoctorTransactions";
 import { Actions } from "./actions/Actions";
 import { WorkingDays } from "../working-days/components/WorkingDays";

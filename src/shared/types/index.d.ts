@@ -1,5 +1,4 @@
 import { IDoctor } from "../dashboard/doctors/doctor";
-import { IBalance } from "../../interfaces/patientBalances";
 
 import { AxiosError } from "axios";
 
@@ -63,7 +62,6 @@ export interface IGetWithParams {
 }
 
 // Bookings
-
 export interface IDoctorClinicsRes {
   status: boolean;
   message: string | null;
@@ -74,19 +72,12 @@ export interface IGetAvailableTimes {
   working_day_id: string;
   clinic_id: string;
   booking_date: string;
-  token: string;
 }
 
 export interface IAvailableTimesRes {
   status: boolean;
   message: string | null;
   data: string[];
-}
-
-export interface IPatientBalancesTransactionsRes {
-  status: boolean;
-  message: null | string;
-  data: IBalance[];
 }
 
 export interface IChartDataset {

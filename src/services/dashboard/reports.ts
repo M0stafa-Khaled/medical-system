@@ -1,14 +1,14 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { IGetWithParams } from "@/shared/types";
 import { IBookingsRes } from "@/features/dashboard/bookings/types";
 import { IExpensesRes } from "@/features/dashboard/expenses/types";
 import { IPatientsRes } from "@/features/dashboard/patients/types";
-import { IPrescriptionsRes } from "@/interfaces/dashboard/prescription";
+import { IPrescriptionsRes } from "@/features/dashboard/prescriptions/types";
 import {
   ITransfersRes,
   ITreasuriesReportRes,
 } from "@/interfaces/dashboard/reports";
-import { ITransactionsRes } from "@/interfaces/dashboard/transactions/transactions";
+import { ITransactionsRes } from "@/features/dashboard/transactions/types";
 import { IPatientBalancesRes } from "@/features/dashboard/patients/balances/types";
 
 export const getTransactionsReport = async ({

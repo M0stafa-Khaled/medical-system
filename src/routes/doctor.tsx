@@ -1,6 +1,6 @@
 import { createRoutesFromElements, Route } from "react-router";
 import { lazy, Suspense } from "react";
-import PageLoader from "@/components/shared/PageLoader";
+import PageLoader from "@/shared/components/PageLoader";
 import Error from "@/pages/Error";
 import { ProtectedRoute } from "@/features/auth";
 
@@ -12,8 +12,8 @@ const DoctorLayout = lazy(
 const DoctorDashboard = lazy(() => import("@/pages/doctor"));
 const DoctorClinics = lazy(() => import("@/pages/doctor/clinics"));
 const DoctorBookings = lazy(() => import("@/pages/doctor/bookings"));
-const Drugs = lazy(() => import("@/pages/shared/drugs"));
-const Analysis = lazy(() => import("@/pages/shared/analysis"));
+// const Drugs = lazy(() => import("@/features/drugs/pages"));
+// const Analysis = lazy(() => import("@/features/analysis"));
 const Scans = lazy(() => import("@/features/scans/pages/Scans"));
 const DoctorPrescriptions = lazy(() => import("@/pages/doctor/prescriptions"));
 const DoctorCreatePrescription = lazy(
@@ -128,9 +128,7 @@ const doctorRoutes = createRoutesFromElements(
         <Route
           path="drugs"
           element={
-            <Suspense fallback={<PageLoader />}>
-              <Drugs />
-            </Suspense>
+            <Suspense fallback={<PageLoader />}>{/* <Drugs /> */}</Suspense>
           }
           id="doctor-drugs"
         />
@@ -146,13 +144,11 @@ const doctorRoutes = createRoutesFromElements(
         />
         {/* Analysis */}
         <Route
-          path="analytics"
+          path="analysis"
           element={
-            <Suspense fallback={<PageLoader />}>
-              <Analysis />
-            </Suspense>
+            <Suspense fallback={<PageLoader />}>{/* <Analysis /> */}</Suspense>
           }
-          id="doctor-analytics"
+          id="doctor-analysis"
         />
       </Route>
     </Route>

@@ -1,6 +1,6 @@
-import RefetchDataButton from "@/components/shared/RefetchDataButton";
+import RefetchDataButton from "@/shared/components/RefetchDataButton";
 import { Button } from "@/shared/components/ui/button";
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { format } from "date-fns";
 import { Eraser } from "lucide-react";
 import PatientBookingsFilters from "./PatientBookingsFilters";

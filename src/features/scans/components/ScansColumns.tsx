@@ -1,4 +1,4 @@
-import { ColumnDef } from "@/components/shared/data-table";
+import { ColumnDef } from "@/shared/components/data-table";
 import { IScan } from "../types";
 import countSerial from "@/shared/utils/countSerial";
 import { IPaginationMeta } from "@/shared/types";

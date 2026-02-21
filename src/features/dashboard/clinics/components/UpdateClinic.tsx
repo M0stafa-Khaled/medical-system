@@ -12,13 +12,13 @@ import { clinicSchema } from "../schema";
 import { useUpdateClinic } from "../queriesAndMutations";
 import { toast } from "react-toastify";
 import { Loader2, Pen } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
-import { CLINIC_FORM_INPUTS } from "@/constants";
-import { containerVariants, itemVariants } from "@/animations";
+import { Modal } from "@/shared/components/Modal";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { motion } from "framer-motion";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { RenderClinicsFormFields } from "./RenderClinicsFormFields";
+import { CLINIC_FORM_INPUTS } from "../constants";
 
 interface IProps {
   id: number;

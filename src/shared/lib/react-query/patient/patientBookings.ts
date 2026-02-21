@@ -1,4 +1,4 @@
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { IGetWithParams } from "@/shared/types";
 import {
   ICreatePatientBooking,
@@ -38,8 +38,8 @@ export const useGetPatientBookingById = ({
 export const useCreatePatientBooking = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ booking, token }: ICreatePatientBooking) =>
-      createPatientBooking({ token, booking }),
+    mutationFn: (booking: ICreatePatientBooking) =>
+      createPatientBooking(booking),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_BOOKINGS],
@@ -54,8 +54,8 @@ export const useCreatePatientBooking = () => {
 export const useUpdatePatientBooking = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ booking, token, id }: IUpdatePatientBooking) =>
-      updatePatientBooking({ token, booking, id }),
+    mutationFn: (booking: IUpdatePatientBooking) =>
+      updatePatientBooking(booking),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_BOOKINGS],

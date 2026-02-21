@@ -25,19 +25,19 @@ import {
   VenusAndMars,
   Wallet,
 } from "lucide-react";
-import ImageModal from "@/components/shared/ImageModal";
-import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
-import InfoField from "@/components/shared/InfoField";
+import ImageModal from "@/shared/components/ImageModal";
+import HeaderUserDetails from "@/shared/components/HeaderUserDetails";
+import InfoField from "@/shared/components/InfoField";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import DataLoader from "@/shared/components/ui/DataLoader";
 import { Badge } from "@/shared/components/ui/badge";
 import { Helmet } from "react-helmet-async";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { AxiosResErr } from "@/shared/types";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteEmployee, useGetEmployeeById } from "../queriesAndMutations";
 
 const EmployeeDetails = () => {

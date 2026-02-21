@@ -1,7 +1,6 @@
 import { login } from "@/app/store/features/auth/authSlice";
 import { setPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import { Form } from "@/shared/components/ui/form";
-import { LOGIN_FORM_INPUTS } from "@/constants";
 import { useLogin } from "@/features/auth/queriesAndMutations";
 import { loginSchema } from "../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +13,7 @@ import { Button } from "@/shared/components/ui/button";
 import { handleResErr } from "@/shared/utils/handleResError";
 import Swal from "sweetalert2";
 import { RenderAuthFormFields } from "./RenderAuthFormFields";
+import { LOGIN_FORM_INPUTS } from "../constants";
 
 export const LoginForm = () => {
   const navigate = useNavigate();

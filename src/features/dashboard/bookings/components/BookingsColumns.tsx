@@ -1,18 +1,18 @@
-import { ColumnDef } from "@/components/shared/data-table";
+import { ColumnDef } from "@/shared/components/data-table";
 import { IBooking } from "../types";
 import truncateText from "@/shared/utils/truncateText";
 import { UpdateBookingStatus } from "./UpdateBookingStatus";
 import convertDay from "@/shared/utils/convertDayLang";
 import formatDateTime from "@/shared/utils/formatDate";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Link } from "react-router";
 import { Button } from "@/shared/components/ui/button";
 import { LiaNotesMedicalSolid } from "react-icons/lia";
-import CreateTransaction from "@/components/dashboard/transactions/CreateTransaction";
+import CreateTransaction from "@/features/dashboard/transactions/components/CreateTransaction";
 import { Eye, Pen } from "lucide-react";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteBooking } from "../queriesAndMutations";
 
 export const useBookingsColumns = (): ColumnDef<IBooking>[] => {

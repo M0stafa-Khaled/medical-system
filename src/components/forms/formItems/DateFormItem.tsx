@@ -33,8 +33,9 @@ const DateFormItem = ({ input, field }: IProps) => {
             <Button
               id={input.name}
               variant={"outline"}
+              size={"lg"}
               className={
-                "hover:bg-foreground dark:hover:bg-foreground border-muted h-auto w-full justify-start py-3 text-right font-normal text-black hover:text-black dark:text-white dark:hover:text-white"
+                "dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! hover:text-foreground h-auto w-full justify-start"
               }
             >
               <CalendarIcon className="ml-2 h-4 w-4" />
@@ -45,22 +46,13 @@ const DateFormItem = ({ input, field }: IProps) => {
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent
-            className="border-muted bg-foreground w-full p-0 px-3"
-            align="start"
-          >
+          <PopoverContent className="border-muted p-0" align="start">
             <Calendar
               mode="single"
-              dir="rtl"
+              className="w-full"
               selected={field.value ? new Date(field.value) : undefined}
               onSelect={(date) => {
-                const formattedDated = date
-                  ? new Date(date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    })
-                  : "";
+                const formattedDated = date ? format(date, "yyyy-MM-dd") : "";
                 field.onChange(formattedDated);
               }}
             />

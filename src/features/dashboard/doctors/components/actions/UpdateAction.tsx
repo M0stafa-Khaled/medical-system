@@ -10,16 +10,16 @@ import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2, Pen } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
-import { DOCTOR_ACTION_INPUTS } from "@/constants";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { RenderDoctorFormFields } from "../RenderDoctorFormFields";
 import { IDoctorAction } from "../../types";
 import { useUpdateDoctorAction } from "../../queriesAndMutations";
 import { doctorActionSchema } from "../../working-days/schema";
+import { DOCTOR_ACTION_INPUTS } from "../../constants";
 
 interface IProps {
   doctorId: string;

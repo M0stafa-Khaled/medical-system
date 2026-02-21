@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
 import { useGetAllScans } from "../queries";
-import { DataTable } from "@/components/shared/data-table";
+import { DataTable } from "@/shared/components/data-table";
 import { useScansColumns } from "./ScansColumns";
 
 export const ScansTable = () => {

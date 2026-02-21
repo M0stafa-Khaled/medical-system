@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { motion } from "framer-motion";
 import PatientBookingCard from "./PatientBookingCard";
 import { IPatientBooking } from "@/interfaces/patient/patientBookings";
@@ -10,7 +10,7 @@ const PatientBookingsList = ({ bookings }: IProps) => {
   return (
     <>
       {!bookings?.length ? (
-        <h2 className="text-xl text-muted-foreground text-center font-medium my-8">
+        <h2 className="text-muted-foreground my-8 text-center text-xl font-medium">
           لا يوجد حجوزات
         </h2>
       ) : (
@@ -18,7 +18,7 @@ const PatientBookingsList = ({ bookings }: IProps) => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-6 mt-8"
+          className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3"
         >
           {bookings.map((booking, idx) => (
             <motion.div variants={itemVariants} key={booking.id} custom={idx}>

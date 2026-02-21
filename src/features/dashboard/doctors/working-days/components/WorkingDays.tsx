@@ -5,9 +5,9 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import useDebounce from "@/shared/hooks/useDebounce";
 import { WorkingDayCard } from "./WorkingDayCard";
 import { Button } from "@/shared/components/ui/button";

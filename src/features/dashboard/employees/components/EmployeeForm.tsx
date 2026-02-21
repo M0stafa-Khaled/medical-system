@@ -2,7 +2,6 @@ import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
 import { Form } from "@/shared/components/ui/form";
-import { EMPLOYEE_FORM_INPUTS } from "@/constants";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
 import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
@@ -13,19 +12,20 @@ import {
   useCheckAuth,
   useGetAllPermissions,
 } from "@/features/auth/queriesAndMutations";
-import SubmitButton from "../../../../components/shared/SubmitButton";
 import { motion } from "framer-motion";
-import { itemVariants, containerVariants } from "@/animations";
+import { itemVariants, containerVariants } from "@/shared/animations";
 import { useDispatch } from "react-redux";
 import {
   clearPermissions,
   setPermissions,
 } from "@/app/store/features/permissions/permissionsSlice";
 import { logout } from "@/app/store/features/auth/authSlice";
-import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { RenderEmployeeFormFields } from "./RenderEmployeeFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { type IEmployee } from "../types";
+import { useGetAllTreasuries } from "../../treasuries";
+import { EMPLOYEE_FORM_INPUTS } from "../constants";
+import SubmitButton from "@/shared/components/SubmitButton";
 
 interface IProps {
   employee?: IEmployee;
@@ -34,7 +34,6 @@ interface IProps {
 }
 
 export const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
-  const token = cookieServices.getToken()!;
   const currentEmployeeId = cookieServices.getUser()?.id;
 
   const dispatch = useDispatch();
@@ -49,7 +48,7 @@ export const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     useCreateEmployee();
   const { mutateAsync: updateEmployee, isPending: isLoadingUpdate } =
     useUpdateEmployee();
-  const { data: treasuries } = useGetAllTreasuries({ token });
+  const { data: treasuries } = useGetAllTreasuries({});
 
   const treasuriesOptions = treasuries?.data.map((treasury) => ({
     value: treasury?.id.toString(),

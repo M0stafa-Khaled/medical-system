@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import {
   Card,
   CardContent,
@@ -13,13 +13,16 @@ import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import InfoField from "@/components/shared/InfoField";
+import InfoField from "@/shared/components/InfoField";
 import { Button } from "@/shared/components/ui/button";
 import { AxiosResErr } from "@/shared/types";
-import DeletePrescription from "@/components/dashboard/prescriptions/DeletePrescription";
 import { FaNotesMedical } from "react-icons/fa6";
-import PrescriptibleList from "@/components/dashboard/prescriptions/prescriptables/PrescriptibleList";
-import { useGetDoctorPrescriptionById } from "@/shared/lib/react-query/doctor/prescriptions";
+import PrescriptibleList from "@/features/dashboard/prescriptions/components/prescriptables/PrescriptibleList";
+import {
+  useDeleteDoctorPrescription,
+  useGetDoctorPrescriptionById,
+} from "@/shared/lib/react-query/doctor/prescriptions";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 
 const DoctorPrescriptionDetails = () => {
   const navigate = useNavigate();
@@ -38,6 +41,7 @@ const DoctorPrescriptionDetails = () => {
 
   const prescriptionFailure = failureReason as AxiosResErr;
 
+  const { mutateAsync: deletePrescription } = useDeleteDoctorPrescription();
   useEffect(() => {
     if (isError || prescriptionFailure?.response?.data.message) {
       toast.error(
@@ -88,9 +92,9 @@ const DoctorPrescriptionDetails = () => {
                   </Button>
                 </motion.div>
                 <motion.div variants={itemVariants}>
-                  <DeletePrescription
-                    name={patient?.name as string}
-                    id={id?.toString() as string}
+                  <DeleteAlert
+                    name={`روشتة المريض ${patient?.name}`}
+                    deleteAction={() => deletePrescription({ id: `${id}` })}
                   />
                 </motion.div>
               </div>

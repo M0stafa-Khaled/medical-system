@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import {
   Card,
   CardContent,
@@ -26,16 +26,16 @@ import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import InfoField from "@/components/shared/InfoField";
+import InfoField from "@/shared/components/InfoField";
 import convertDay from "@/shared/utils/convertDayLang";
 import formatDateTime from "@/shared/utils/formatDate";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { UpdateBookingStatus } from "../components/UpdateBookingStatus";
 import { IBooking } from "@/features/dashboard/bookings/types";
 import { Button } from "@/shared/components/ui/button";
 import { AxiosResErr } from "@/shared/types";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { LiaNotesMedicalSolid } from "react-icons/lia";
 
 const BookingDetails = () => {

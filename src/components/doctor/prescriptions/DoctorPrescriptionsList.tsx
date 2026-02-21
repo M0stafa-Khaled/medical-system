@@ -1,13 +1,13 @@
 import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations";
+import { tableRowVariants } from "@/shared/animations";
 import truncateText from "@/shared/utils/truncateText";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import { Eye, Pen } from "lucide-react";
 import DoctorDeletePrescription from "./DeleteDoctorPrescription";
-import { IPrescription } from "@/interfaces/dashboard/prescription";
+import { IPrescription } from "@/features/dashboard/prescriptions/types";
 
 interface IProps {
   prescriptions: IPrescription[];

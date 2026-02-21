@@ -1,4 +1,4 @@
-import { DAYS } from "@/constants";
+import { DAYS } from "@/shared/constants";
 
 type Language = "en" | "ar";
 const convertDay = (day: string, fromLang: Language): string => {

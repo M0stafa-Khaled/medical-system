@@ -1,4 +1,4 @@
-import { IBalance } from "@/interfaces/dashboard/transactions/transactions";
+import { IBalance } from "@/features/dashboard/transactions/types";
 
 export interface IPatientBalancesRes {
   status: boolean;

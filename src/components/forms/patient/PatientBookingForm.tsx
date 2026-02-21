@@ -4,16 +4,11 @@ import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
-import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import { PATIENT_BOOKING_FORM_INPUTS } from "@/constants";
+import { containerVariants, itemVariants } from "@/shared/animations";
+import { PATIENT_BOOKING_FORM_INPUTS } from "@/shared/constants";
 import convertDay from "@/shared/utils/convertDayLang";
-import {
-  useGetAllClinicDoctors,
-  useGetAvailableBookingsTime,
-} from "@/shared/lib/react-query/main";
-import SubmitButton from "@/components/shared/SubmitButton";
+import SubmitButton from "@/shared/components/SubmitButton";
 import { useNavigate } from "react-router";
 import { handleResErr } from "@/shared/utils/handleResError";
 import patientBookingSchema from "@/validations/patient/patientBookingSchema";
@@ -27,6 +22,7 @@ import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
 import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
 import { useGetDoctorActions } from "@/features/dashboard/doctors";
+import { useGetAllClinicDoctors, useGetAvailableBookingsTime } from "@/shared";
 
 interface IProps {
   booking?: IPatientBooking;
@@ -35,7 +31,6 @@ interface IProps {
 
 const PatientBookingForm = ({ booking, action }: IProps) => {
   const navigate = useNavigate();
-  const token = cookieServices.getToken()!;
 
   const form = useForm<z.infer<typeof patientBookingSchema>>({
     resolver: zodResolver(patientBookingSchema),
@@ -76,7 +71,6 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
   });
 
   const { data: doctors } = useGetAllClinicDoctors({
-    token,
     clinic_id: clinicId,
   });
 
@@ -89,14 +83,12 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
   });
 
   const { data: availableTimes } = useGetAvailableBookingsTime({
-    token,
     doctor_id: doctorId,
     working_day_id: workingDayId,
     clinic_id: clinicId,
     booking_date: date,
   });
 
-  // Prepare options
   const clinicsOptions =
     clinics?.data?.map((clinic) => ({
       label: clinic.name,
@@ -121,12 +113,10 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
       label: `${action.name} - ${numberToPrice(action.price)}`,
     })) ?? [];
 
-  // Find allowed day (changed from filter → find)
   const allowedDay =
     workingDays?.data?.find((day) => day.id.toString() === workingDayId)?.day ??
     "";
 
-  // Reactive resets when parent field changes
   useEffect(() => {
     if (!clinicId) return;
     form.setValue("doctor_id", "");
@@ -180,30 +170,24 @@ const PatientBookingForm = ({ booking, action }: IProps) => {
       if (action === "update") {
         const { message, status } = await updatePatientBooking({
           id: booking?.id.toString() || "",
-          booking: {
-            clinic_id: data.clinic_id,
-            doctor_id: data.doctor_id,
-            working_day_id: data.working_day_id,
-            doctor_action_id: data.doctor_action_id,
-            date: data.date,
-            start_at: data.start_at,
-          },
-          token,
+          clinic_id: data.clinic_id,
+          doctor_id: data.doctor_id,
+          working_day_id: data.working_day_id,
+          doctor_action_id: data.doctor_action_id,
+          date: data.date,
+          start_at: data.start_at,
         });
 
         if (!status) return toast.error(message);
         toast.success(message);
       } else {
         const { status, message } = await createPatientBooking({
-          booking: {
-            clinic_id: data.clinic_id,
-            doctor_id: data.doctor_id,
-            working_day_id: data.working_day_id,
-            doctor_action_id: data.doctor_action_id,
-            date: data.date,
-            start_at: data.start_at,
-          },
-          token,
+          clinic_id: data.clinic_id,
+          doctor_id: data.doctor_id,
+          working_day_id: data.working_day_id,
+          doctor_action_id: data.doctor_action_id,
+          date: data.date,
+          start_at: data.start_at,
         });
 
         if (!status) return toast.error(message);

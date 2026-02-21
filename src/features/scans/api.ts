@@ -1,6 +1,6 @@
 import { IGetWithParams } from "@/shared/types";
 import { IScansRes } from "./types";
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 
 export const getAllScans = async ({
   page,

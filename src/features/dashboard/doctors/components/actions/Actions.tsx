@@ -7,9 +7,9 @@ import {
 import { ActionsList } from "./ActionsList";
 import { CreateAction } from "./CreateAction";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 
 export const Actions = ({ doctorId }: { doctorId: string }) => {
   const canViewActions = useHasPermission(PERMISSIONS.DOCTOR_ACTIONS);

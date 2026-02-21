@@ -1,16 +1,5 @@
 import { lazy } from "react";
 
-// ---- Prescriptions
-export const Prescriptions = lazy(() => import("./dashboard/prescription"));
-export const PrescriptionDetails = lazy(
-  () => import("./dashboard/prescription/PrescriptionDetails")
-);
-export const CreatePrescription = lazy(
-  () => import("./dashboard/prescription/CreatePrescription")
-);
-export const UpdatePrescription = lazy(
-  () => import("./dashboard/prescription/UpdatePrescription")
-);
 // ---- Reports
 export const BookingsReports = lazy(
   () => import("./dashboard/reports/bookingsReports")
@@ -38,15 +27,6 @@ export const TreasuriesReports = lazy(
 );
 // ---- Settings
 export const Settings = lazy(() => import("./dashboard/settings"));
-// ---- Transactions
-export const Transactions = lazy(() => import("./dashboard/transactions"));
-export const LastVisits = lazy(
-  () => import("./dashboard/transactions/LastVisits")
-);
-export const TransactionDetails = lazy(
-  () => import("./dashboard/transactions/TransactionDetails")
-);
-
 // Doctor
 export const DoctorDashboard = lazy(() => import("./doctor"));
 export const DoctorBookings = lazy(() => import("./doctor/bookings"));
@@ -72,11 +52,6 @@ export const UpdatePatientBooking = lazy(
 );
 
 export const PatientBalances = lazy(() => import("./patient/balances"));
-
-// Shared
-export const Drugs = lazy(() => import("./shared/drugs"));
-export const Scans = lazy(() => import("../features/scans/pages/Scans"));
-export const Analysis = lazy(() => import("./shared/analysis"));
 
 // Errors & NotFound
 export const Error = lazy(() => import("./Error"));

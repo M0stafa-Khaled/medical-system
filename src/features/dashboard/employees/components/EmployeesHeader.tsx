@@ -1,4 +1,4 @@
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import SearchInput from "../../../../shared/components/ui/SearchInput";
 import { Button } from "@/shared/components/ui/button";
 import useHasPermission from "@/shared/hooks/useHasPermission";

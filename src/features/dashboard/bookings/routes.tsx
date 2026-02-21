@@ -1,41 +1,52 @@
 import { ProtectedRoute } from "@/features/auth";
-import Bookings from "./pages/Bookings";
-import { PERMISSIONS } from "@/enums/permissions";
-import BookingDetails from "./pages/BookingDetails";
-import CreateBooking from "./pages/CreateBooking";
-import UpdateBooking from "./pages/UpdateBooking";
+import PageLoader from "@/shared/components/PageLoader";
+import { PERMISSIONS } from "@/shared/enums/permissions";
+import { lazy, Suspense } from "react";
+
+const Bookings = lazy(() => import("./pages/Bookings"));
+const BookingDetails = lazy(() => import("./pages/BookingDetails"));
+const CreateBooking = lazy(() => import("./pages/CreateBooking"));
+const UpdateBooking = lazy(() => import("./pages/UpdateBooking"));
 
 export const bookingRoutes = [
   {
     path: "bookings",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-        <Bookings />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+          <Bookings />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "bookings/:bookingId",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
-        <BookingDetails />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_BOOKING}>
+          <BookingDetails />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "bookings/create",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-        <CreateBooking />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+          <CreateBooking />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "bookings/:bookingId/update",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
-        <UpdateBooking />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.BOOKINGS}>
+          <UpdateBooking />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 ];

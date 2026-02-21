@@ -170,7 +170,7 @@
 
 @layer utilities {
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted));
+    background: var(--muted);
     border-radius: 10px;
   }
 
@@ -179,7 +179,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
+    background: var(--accent);
   }
 
   .custom-scrollbar::-webkit-scrollbar {

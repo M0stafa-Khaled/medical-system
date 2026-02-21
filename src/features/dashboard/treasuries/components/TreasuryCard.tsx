@@ -1,11 +1,11 @@
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { UpdateTreasury } from "./UpdateTreasury";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { ITreasury } from "@/features/dashboard/treasuries/types";
 import { motion } from "framer-motion";
 import { CircleDollarSign, Power, Wallet } from "lucide-react";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteTreasury } from "../queriesAndMutations";
 
 interface IProps {

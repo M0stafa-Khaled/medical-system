@@ -2,18 +2,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
 import { Form } from "@/shared/components/ui/form";
-import { DOCTOR_FORM_INPUTS } from "@/constants";
 import { IDoctor } from "../types";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
 import { toast } from "react-toastify";
 import { useCreateDoctor, useUpdateDoctor } from "../queriesAndMutations";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
-import { itemVariants, containerVariants } from "@/animations";
+import { itemVariants, containerVariants } from "@/shared/animations";
 import { RenderDoctorFormFields } from "./RenderDoctorFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
-import SubmitButton from "@/components/shared/SubmitButton";
+import SubmitButton from "@/shared/components/SubmitButton";
+import { DOCTOR_FORM_INPUTS } from "../constants";
 
 interface IProps {
   doctor?: IDoctor;

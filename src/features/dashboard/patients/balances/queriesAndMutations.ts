@@ -1,4 +1,4 @@
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { createPatientPayment, getPatientBalances } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ICreatePatientPayment } from "./types";

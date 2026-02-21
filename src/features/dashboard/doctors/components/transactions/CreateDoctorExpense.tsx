@@ -1,4 +1,4 @@
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { Button } from "@/shared/components/ui/button";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useState } from "react";

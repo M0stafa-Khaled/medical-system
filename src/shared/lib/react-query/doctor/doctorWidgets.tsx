@@ -1,4 +1,4 @@
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { getDoctorWidgets } from "@/services/doctor/doctorWidgets";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 

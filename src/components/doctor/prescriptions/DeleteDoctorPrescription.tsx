@@ -1,8 +1,7 @@
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { Button } from "@/shared/components/ui/button";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { useDeleteDoctorPrescription } from "@/shared/lib/react-query/doctor/prescriptions";
-import cookieServices from "@/shared/utils/cookieServices";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -14,14 +13,13 @@ interface IProps {
 }
 
 const DoctorDeletePrescription = ({ name, id }: IProps) => {
-  const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: deletePrescription, isPending } =
     useDeleteDoctorPrescription();
 
   const handleDelete = async () => {
     try {
-      const { status, message } = await deletePrescription({ id, token });
+      const { status, message } = await deletePrescription({ id });
 
       // ! Delete failed
       if (!status) return toast.error(message);

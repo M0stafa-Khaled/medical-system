@@ -103,7 +103,7 @@ const PatientBookingsFilters = ({ filters, setFilters }: IProps) => {
               handleFilterChange(
                 "created_at",
                 date
-                  ? new Date(date).toLocaleDateString("en-US", {
+                  ? new Date(date).toLocaleDateString("en-CA", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
@@ -147,7 +147,7 @@ const PatientBookingsFilters = ({ filters, setFilters }: IProps) => {
               handleFilterChange(
                 "booking_date",
                 date
-                  ? new Date(date).toLocaleDateString("en-US", {
+                  ? new Date(date).toLocaleDateString("en-CA", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",

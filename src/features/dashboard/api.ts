@@ -1,4 +1,4 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import type { IChartRes, IGetWithParams } from "@/shared/types";
 import type { IAdminWidgetRes, ITreasuriesChartRes } from "./types";
 

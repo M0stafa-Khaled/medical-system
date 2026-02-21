@@ -1,37 +1,22 @@
 import { createRoutesFromElements, Route } from "react-router";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { lazy, Suspense } from "react";
-import PageLoader from "@/components/shared/PageLoader";
+import PageLoader from "@/shared/components/PageLoader";
 import { ProtectedRoute } from "@/features/auth";
 import DashboardLayout from "@/features/dashboard/layout";
 // import Error from "@/pages/Error";
 
 const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
 
-// Drugs
-const Drugs = lazy(() => import("@/pages/shared/drugs"));
-const Analysis = lazy(() => import("@/pages/shared/analysis"));
-const Scans = lazy(() => import("@/features/scans/pages/Scans"));
-
 // Transactions
-const Transactions = lazy(() => import("@/pages/dashboard/transactions"));
+const Transactions = lazy(
+  () => import("@/features/dashboard/transactions/pages/Transactions")
+);
 const TransactionDetails = lazy(
-  () => import("@/pages/dashboard/transactions/TransactionDetails")
+  () => import("@/features/dashboard/transactions/pages/TransactionDetails")
 );
 const LastVisits = lazy(
-  () => import("@/pages/dashboard/transactions/LastVisits")
-);
-
-// Prescriptions
-const Prescriptions = lazy(() => import("@/pages/dashboard/prescription"));
-const CreatePrescription = lazy(
-  () => import("@/pages/dashboard/prescription/CreatePrescription")
-);
-const UpdatePrescription = lazy(
-  () => import("@/pages/dashboard/prescription/UpdatePrescription")
-);
-const PrescriptionDetails = lazy(
-  () => import("@/pages/dashboard/prescription/PrescriptionDetails")
+  () => import("@/features/dashboard/transactions/pages/LastVisits")
 );
 
 // Company
@@ -92,35 +77,6 @@ const dashboardRoutes = createRoutesFromElements(
         id="settings"
       />
 
-      {/* Drugs */}
-      <Route
-        path="drugs"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <Drugs />
-          </Suspense>
-        }
-        id="dashboard-drugs"
-      />
-      <Route
-        path="analytics"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <Analysis />
-          </Suspense>
-        }
-        id="dashboard-analytics"
-      />
-      <Route
-        path="scans"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <Scans />
-          </Suspense>
-        }
-        id="dashboard-scans"
-      />
-
       {/* Transactions */}
       <Route
         path="transactions"
@@ -156,66 +112,6 @@ const dashboardRoutes = createRoutesFromElements(
           </Suspense>
         }
         id="dashboard-last-visits"
-      />
-
-      {/* Prescriptions */}
-
-      <Route
-        path="prescriptions"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.PRESCRIPTIONS}>
-              <Prescriptions />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-prescriptions"
-      />
-      <Route
-        path="prescriptions/:prescriptionId"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PRESCRIPTION}>
-              <PrescriptionDetails />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-prescription-details"
-      />
-      <Route
-        path="prescriptions/create"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PRESCRIPTION}>
-              <CreatePrescription />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-prescriptions-create"
-      />
-      <Route
-        path="bookings/:bookingId/prescriptions/create"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PRESCRIPTION}>
-              <CreatePrescription />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-bookings-prescriptions-create"
-      />
-      <Route
-        path="prescriptions/:prescriptionId/update"
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <ProtectedRoute
-              requiredPermission={PERMISSIONS.UPDATE_PRESCRIPTION}
-            >
-              <UpdatePrescription />
-            </ProtectedRoute>
-          </Suspense>
-        }
-        id="dashboard-prescriptions-update"
       />
 
       {/* Reports */}

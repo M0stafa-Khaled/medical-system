@@ -1,17 +1,17 @@
-import { ColumnDef } from "@/components/shared/data-table";
+import { ColumnDef } from "@/shared/components/data-table";
 import { type IExpense } from "../types";
 import { Link } from "react-router";
 import truncateText from "@/shared/utils/truncateText";
 import { Badge } from "@/shared/components/ui/badge";
 import formatDateTime from "@/shared/utils/formatDate";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Button } from "@/shared/components/ui/button";
 import { FiEye } from "react-icons/fi";
 import { PrintExpenseReceipt } from "./PrintExpenseReceipt";
 import { CancelExpense } from "./CancelExpense";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteExpense } from "../queriesAndMutations";
 
 export const useExpensesColumns = (): ColumnDef<IExpense>[] => {

@@ -22,7 +22,13 @@ import {
 } from "@/shared/components/ui/alert-dialog";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 
-export const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
+export const LogoutButton = ({
+  icon = true,
+  className,
+}: {
+  icon?: boolean;
+  className?: string;
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -72,7 +78,7 @@ export const LogoutButton = ({ icon = true }: { icon?: boolean }) => {
                   icon
                     ? "btn-destructive h-9 w-9 rounded-full px-0 py-0 font-bold"
                     : "flex h-auto w-full items-center justify-center gap-2 py-3"
-                }`}
+                } ${className}`}
               >
                 <LogOut size={20} />
                 {icon ? null : "تسجيل الخروج"}

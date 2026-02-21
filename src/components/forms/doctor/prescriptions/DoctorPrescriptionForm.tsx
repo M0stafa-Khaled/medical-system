@@ -14,15 +14,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/components/ui/form";
-import { DOCTOR_PRESCRIPTIONS_INPUTS, PRESCRIPTIONS_TYPES } from "@/constants";
-import { IPrescription } from "@/interfaces/dashboard/prescription";
+import {
+  DOCTOR_PRESCRIPTIONS_INPUTS,
+  PRESCRIPTIONS_TYPES,
+} from "@/shared/constants";
+import { IPrescription } from "@/features/dashboard/prescriptions/types";
 import { handleResErr } from "@/shared/utils/handleResError";
-import prescriptionSchema from "@/validations/dashboard/prescriptionSchema";
+import { prescriptionSchema } from "@/features/dashboard/prescriptions/schema";
 import { TPrescriptableType } from "@/shared/types";
 import { useNavigate, useParams } from "react-router";
 import { Delete } from "lucide-react";
-import SubmitButton from "@/components/shared/SubmitButton";
-import RenderPrescriptionFormFields from "../../dashboard/prescription/RenderPrescriptionFormFields";
+import SubmitButton from "@/shared/components/SubmitButton";
+import { RenderPrescriptionFormFields } from "@/features/dashboard/prescriptions/components/RenderPrescriptionFormFields";
 import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -32,7 +35,7 @@ import ScansSelectFormItem from "../../formItems/ScansSelectFormItem";
 import DrugsSelectFormItem from "../../formItems/DrugsSelectFormItem";
 import AnalysisSelectFormItem from "../../formItems/AnalysisSelectFormItem";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import {
   useCreateDoctorPrescription,
   useUpdateDoctorPrescription,
@@ -79,7 +82,7 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
       note: prescription?.note || "",
       prescription_date:
         prescription?.date ||
-        new Date().toLocaleDateString("en-US", {
+        new Date().toLocaleDateString("en-CA", {
           year: "numeric",
           month: "2-digit",
           day: "2-digit",
@@ -114,8 +117,7 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
     try {
       if (action === "update") {
         const { message, status } = await updatePrescription({
-          token,
-          prescription: data,
+          ...data,
           id: prescription?.id.toString() || "",
         });
 
@@ -135,11 +137,8 @@ const DoctorPrescriptionForm = ({ action, prescription }: IProps) => {
 
       if (action === "create") {
         const { message, status } = await createPrescription({
-          token,
-          prescription: {
-            ...data,
-            booking_id: bookingId,
-          },
+          ...data,
+          booking_id: bookingId,
         });
 
         if (!status)

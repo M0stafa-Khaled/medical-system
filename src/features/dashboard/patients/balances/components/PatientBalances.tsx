@@ -1,4 +1,4 @@
-import { containerVariants } from "@/animations";
+import { containerVariants } from "@/shared/animations";
 import { Card, CardHeader } from "@/shared/components/ui/card";
 import DataLoader from "@/shared/components/ui/DataLoader";
 import { useGetPatientBalances } from "../queriesAndMutations";

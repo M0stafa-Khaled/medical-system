@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { Form } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,15 +7,16 @@ import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
-import { EXPENSE_FORM_INPUTS } from "@/constants";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { itemVariants, containerVariants } from "@/animations";
+import { itemVariants, containerVariants } from "@/shared/animations";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useGetAllExpensesCategories } from "../../expenses-categories";
 import { useCreateExpense } from "../queriesAndMutations";
 import { createExpenseSchema } from "../schema";
 import RenderExpensesFormFields from "./RenderExpensesFormFields";
+import { EXPENSE_FORM_INPUTS } from "../constants";
+import { DialogFooter } from "@/shared/components/ui/dialog";
 
 export const CreateExpense = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -124,15 +121,15 @@ export const CreateExpense = () => {
               ))}
             </motion.div>
 
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel onClick={handleCloseModal}>
+            <DialogFooter className="mt-3">
+              <Button onClick={handleCloseModal} variant={"outline"}>
                 إلغاء
-              </AlertDialogCancel>
+              </Button>
               <Button type="submit" disabled={isPending}>
                 إضافة
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

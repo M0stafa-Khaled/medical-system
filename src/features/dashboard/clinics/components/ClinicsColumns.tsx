@@ -1,8 +1,8 @@
 import { UpdateClinic } from "./UpdateClinic";
-import { ColumnDef } from "@/components/shared/data-table";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { ColumnDef } from "@/shared/components/data-table";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { Badge } from "@/shared/components/ui/badge";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { type IClinic } from "../types";
 import { useDeleteClinic } from "../queriesAndMutations";

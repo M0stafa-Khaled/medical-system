@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { EmployeeTreasuriesChart } from "./EmployeeTreasuriesChart";
 
 export const EmployeeChartsList = () => {

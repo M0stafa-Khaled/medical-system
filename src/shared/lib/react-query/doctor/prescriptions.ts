@@ -1,9 +1,9 @@
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { IGetWithParams } from "@/shared/types";
 import {
   ICreatePrescription,
   IUpdatePrescription,
-} from "@/interfaces/dashboard/prescription";
+} from "@/features/dashboard/prescriptions/types";
 import {
   createDoctorPrescription,
   deleteDoctorPrescription,
@@ -39,8 +39,8 @@ export const useGetDoctorPrescriptionById = ({
 export const useCreateDoctorPrescription = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ prescription, token }: ICreatePrescription) =>
-      createDoctorPrescription({ prescription, token }),
+    mutationFn: (prescription: ICreatePrescription) =>
+      createDoctorPrescription(prescription),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PRESCRIPTIONS],
@@ -52,8 +52,8 @@ export const useCreateDoctorPrescription = () => {
 export const useUpdateDoctorPrescription = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ prescription, token, id }: IUpdatePrescription) =>
-      updateDoctorPrescription({ prescription, token, id }),
+    mutationFn: (prescription: IUpdatePrescription) =>
+      updateDoctorPrescription(prescription),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PRESCRIPTIONS],
@@ -68,8 +68,7 @@ export const useUpdateDoctorPrescription = () => {
 export const useDeleteDoctorPrescription = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ token, id }: { id: string; token: string }) =>
-      deleteDoctorPrescription({ token, id }),
+    mutationFn: ({ id }: { id: string }) => deleteDoctorPrescription({ id }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PRESCRIPTIONS],

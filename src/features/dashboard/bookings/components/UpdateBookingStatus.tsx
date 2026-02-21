@@ -15,15 +15,15 @@ import { cn } from "@/shared/lib/utils";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
-import { BOOKING_STATUS_OPTIONS } from "@/constants";
 import BookingStatus from "./BookingStatus";
 import { TBookingStatus } from "@/shared/types";
 import { toast } from "react-toastify";
 import { useUpdateBookingStatus } from "@/features/dashboard/bookings/queriesAndMutations";
 import { IBooking } from "@/features/dashboard/bookings/types";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { handleResErr } from "@/shared/utils/handleResError";
+import { BOOKING_STATUS_OPTIONS } from "../constants";
 
 interface IProps {
   booking: IBooking;

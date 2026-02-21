@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
-import { DAYS, DOCTOR_WORKING_DAY_INPUTS } from "@/constants";
+import { DAYS } from "@/shared/constants";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { useNavigate, useParams } from "react-router";
 import { formatTime, reverseFormatTime } from "@/shared/utils/formatTime";
 import { useEffect } from "react";
@@ -17,8 +17,9 @@ import {
   useCreateWorkingDay,
   useUpdateWorkingDay,
 } from "../queriesAndMutations";
-import SubmitButton from "@/components/shared/SubmitButton";
+import SubmitButton from "@/shared/components/SubmitButton";
 import { doctorWorkingDaySchema } from "../schema";
+import { DOCTOR_WORKING_DAY_INPUTS } from "../../constants";
 
 interface IProps {
   day?: IWorkingDay;

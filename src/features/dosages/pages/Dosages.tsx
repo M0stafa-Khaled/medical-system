@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { DosagesHeader } from "../components/DosagesHeader";
 
-export const Dosages = () => {
+const Dosages = () => {
   return (
     <>
       <Helmet>
@@ -20,3 +20,5 @@ export const Dosages = () => {
     </>
   );
 };
+
+export default Dosages;

@@ -1,41 +1,52 @@
 import { ProtectedRoute } from "@/features/auth";
-import Patients from "./pages/Patients";
-import { PERMISSIONS } from "@/enums/permissions";
-import PatientDetails from "./pages/PatientDetails";
-import CreatePatient from "./pages/CreatePatient";
-import UpdatePatient from "./pages/UpdatePatient";
+import PageLoader from "@/shared/components/PageLoader";
+import { PERMISSIONS } from "@/shared/enums/permissions";
+import { lazy, Suspense } from "react";
+
+const Patients = lazy(() => import("./pages/Patients"));
+const PatientDetails = lazy(() => import("./pages/PatientDetails"));
+const CreatePatient = lazy(() => import("./pages/CreatePatient"));
+const UpdatePatient = lazy(() => import("./pages/UpdatePatient"));
 
 export const patientsRoutes = [
   {
     path: "patients",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS}>
-        <Patients />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.PATIENTS}>
+          <Patients />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "patients/:patientId",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PATIENT}>
-        <PatientDetails />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_PATIENT}>
+          <PatientDetails />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "patients/create",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
-        <CreatePatient />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.ADD_PATIENT}>
+          <CreatePatient />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "patients/:patientId/update",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
-        <UpdatePatient />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
+          <UpdatePatient />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 ];

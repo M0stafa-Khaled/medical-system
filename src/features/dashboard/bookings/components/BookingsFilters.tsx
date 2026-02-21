@@ -15,10 +15,10 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
-import { IBookingsFilter } from "@/features/dashboard/bookings/types";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
 import { useSearchParams } from "react-router";
 import { useMemo } from "react";
+import { IBookingsFilter } from "../types";
 
 export const BookingsFilters = () => {
   const { data: clinics } = useGetAllClinics({});
@@ -127,7 +127,6 @@ export const BookingsFilters = () => {
           <Calendar
             className="w-full"
             mode="single"
-            dir="rtl"
             selected={
               filters.created_at ? new Date(filters.created_at) : undefined
             }
@@ -135,7 +134,7 @@ export const BookingsFilters = () => {
               handleFilterChange(
                 "created_at",
                 date
-                  ? new Date(date).toLocaleDateString("en-US", {
+                  ? new Date(date).toLocaleDateString("en-CA", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
@@ -177,7 +176,7 @@ export const BookingsFilters = () => {
               handleFilterChange(
                 "booking_date",
                 date
-                  ? new Date(date).toLocaleDateString("en-US", {
+                  ? new Date(date).toLocaleDateString("en-CA", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",

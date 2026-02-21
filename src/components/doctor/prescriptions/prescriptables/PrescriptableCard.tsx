@@ -1,4 +1,4 @@
-import { IPrescriptable } from "@/interfaces/dashboard/prescription";
+import { IPrescriptable } from "@/features/dashboard/prescriptions/types";
 
 interface IProps {
   prescriptable: IPrescriptable;
@@ -7,7 +7,7 @@ const PrescriptableCard = ({
   prescriptable: { name, type, drug_name },
 }: IProps) => {
   return (
-    <div className="h-full font-medium space-y-2 bg-background rounded-lg p-5 border border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-xs shadow-muted flex justify-center flex-col">
+    <div className="bg-background border-primary/10 hover:border-primary/30 shadow-muted flex h-full flex-col justify-center space-y-2 rounded-lg border p-5 font-medium shadow-xs transition-all duration-500">
       <div className="flex items-center gap-2">
         <h4 className="text-dark/80 dark:text-white/70">النوع: </h4>
         <p className="md:text-lg">
@@ -19,8 +19,8 @@ const PrescriptableCard = ({
           {type === "scan"
             ? "اسم الأشعة"
             : type === "analysis"
-            ? "اسم التحليل"
-            : "اسم الجرعة"}
+              ? "اسم التحليل"
+              : "اسم الجرعة"}
           :
         </h4>
         <p className="md:text-lg">{name}</p>
@@ -28,10 +28,10 @@ const PrescriptableCard = ({
 
       {drug_name && (
         <div className="flex items-center gap-2">
-          <h4 className="text-dark/80 dark:text-white/70 text-nowrap">
+          <h4 className="text-dark/80 text-nowrap dark:text-white/70">
             اسم الدواء:
           </h4>
-          <p className="md:text-lg text-wrap wrap-break-word">{drug_name}</p>
+          <p className="text-wrap wrap-break-word md:text-lg">{drug_name}</p>
         </div>
       )}
     </div>

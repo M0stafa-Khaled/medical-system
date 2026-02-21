@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
-import { DataTable } from "@/components/shared/data-table";
+import { PERMISSIONS } from "@/shared/enums/permissions";
+import { DataTable } from "@/shared/components/data-table";
 import { usePatientsColumns } from "./PatientsColumns";
 import { useGetAllPatients } from "../queriesAndMutations";
 

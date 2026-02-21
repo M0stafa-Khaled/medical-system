@@ -1,24 +1,21 @@
 import { useState } from "react";
 import { Form } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
-import { patientUpdateProfileSchema } from "@/validations/dashboard/profileSchema";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import { UPDATE_PROFILE_PATIENT_INPUTS } from "@/constants";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
-import { RenderPatientFormFields } from "../../dashboard/patients/components/RenderPatientFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useUpdateProfile } from "../queriesAndMutations";
+import { patientUpdateProfileSchema } from "../schema";
+import { RenderPatientFormFields } from "@/features/dashboard/patients/components/RenderPatientFormFields";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
+import { UPDATE_PROFILE_PATIENT_INPUTS } from "../constants";
 
 export const UpdatePatientProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -121,13 +118,13 @@ export const UpdatePatientProfile = () => {
               </motion.div>
             ))}
 
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel
+            <DialogFooter className="justify-start! gap-2 text-start">
+              <DialogClose
                 onClick={handleCloseModal}
                 className="h-auto py-2.5 text-black dark:text-white"
               >
                 إلغاء
-              </AlertDialogCancel>
+              </DialogClose>
               <Button
                 type="submit"
                 disabled={isPending}
@@ -136,7 +133,7 @@ export const UpdatePatientProfile = () => {
                 تحديث
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

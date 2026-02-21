@@ -10,15 +10,15 @@ import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { itemVariants, containerVariants } from "@/animations";
-import { TREASURY_FORM_INPUTS } from "@/constants";
+import { itemVariants, containerVariants } from "@/shared/animations";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useState } from "react";
 import { createTreasurySchema } from "../schema";
 import { RenderTreasuryFormFields } from "./RenderTreasuryFormFields";
 import { useCreateTreasury } from "../queriesAndMutations";
+import { TREASURY_FORM_INPUTS } from "../constants";
 
 export const CreateTreasury = () => {
   const [isOpen, setIsOpen] = useState(false);

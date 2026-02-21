@@ -1,28 +1,25 @@
 import { useState } from "react";
 import { Form } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
-import { itemVariants, containerVariants } from "@/animations";
+import { itemVariants, containerVariants } from "@/shared/animations";
 import { transferTreasurySchema } from "../schema";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
-import { TRANSFER_TREASURIES_FORM_INPUTS } from "@/constants";
 import {
   useGetAllTreasuries,
   useTransferTreasuries,
 } from "../queriesAndMutations";
 import { RenderTreasuryFormFields } from "./RenderTreasuryFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
+import { TRANSFER_TREASURIES_FORM_INPUTS } from "../constants";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 export const TransferBetweenTreasuries = () => {
   const token = cookieServices.getToken()!;
@@ -96,7 +93,7 @@ export const TransferBetweenTreasuries = () => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 text-black dark:text-white"
+            className="space-y-4"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -112,13 +109,10 @@ export const TransferBetweenTreasuries = () => {
               </motion.div>
             ))}
 
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
+            <DialogFooter className="justify-start! gap-2 text-start">
+              <DialogClose onClick={handleCloseModal} className="h-auto py-2.5">
                 إلغاء
-              </AlertDialogCancel>
+              </DialogClose>
               <Button
                 type="submit"
                 disabled={isPending}
@@ -127,7 +121,7 @@ export const TransferBetweenTreasuries = () => {
                 تحويل
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

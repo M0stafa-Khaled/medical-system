@@ -31,15 +31,12 @@ export interface IPatientBookingsRes {
 }
 
 export interface ICreatePatientBooking {
-  token: string;
-  booking: {
-    clinic_id: string;
-    doctor_id: string;
-    working_day_id: string;
-    doctor_action_id: string;
-    start_at: string;
-    date: string;
-  };
+  clinic_id: string;
+  doctor_id: string;
+  working_day_id: string;
+  doctor_action_id: string;
+  start_at: string;
+  date: string;
 }
 
 export interface IUpdatePatientBooking extends ICreatePatientBooking {

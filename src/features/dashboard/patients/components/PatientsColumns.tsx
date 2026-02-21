@@ -1,6 +1,6 @@
-import { ColumnDef } from "@/components/shared/data-table";
-import { DeleteAlert } from "@/components/shared/delete-alert";
-import { PERMISSIONS } from "@/enums/permissions";
+import { ColumnDef } from "@/shared/components/data-table";
+import { DeleteAlert } from "@/shared/components/delete-alert";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { IPatient } from "@/features/dashboard/patients/types";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";

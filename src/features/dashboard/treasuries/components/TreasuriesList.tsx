@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { TreasuryCard } from "./TreasuryCard";
 import { CardSkeleton } from "@/shared/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { useSearchParams } from "react-router";
 

@@ -1,6 +1,6 @@
 import { ActionCard } from "./ActionCard";
 import ActionSkeleton from "@/shared/components/ui/ActionSkeleton";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { toast } from "react-toastify";

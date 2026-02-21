@@ -1,10 +1,10 @@
-import { ColumnDef } from "@/components/shared/data-table";
+import { ColumnDef } from "@/shared/components/data-table";
 import { IDosage } from "../types";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { useDeleteDosage } from "../queriesAndMutations";
 import { UpdateDosage } from "./UpdateDosage";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 
 export const useDosagesColumns = (): ColumnDef<IDosage>[] => {
   const canUpdateDosage = useHasPermission(PERMISSIONS.UPDATE_DOSAGE);

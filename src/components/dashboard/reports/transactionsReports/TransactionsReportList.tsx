@@ -1,8 +1,8 @@
 import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations";
+import { tableRowVariants } from "@/shared/animations";
 import truncateText from "@/shared/utils/truncateText";
-import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
+import { ITransaction } from "@/features/dashboard/transactions/types";
 import formatDateTime from "@/shared/utils/formatDate";
 import { Badge } from "@/shared/components/ui/badge";
 import { numberToPrice } from "@/shared/utils/numberToPrice";

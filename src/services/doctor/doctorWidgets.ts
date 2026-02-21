@@ -1,4 +1,4 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { IDoctorWidgetRes } from "@/interfaces/widgets/widgets";
 
 export const getDoctorWidgets = async (

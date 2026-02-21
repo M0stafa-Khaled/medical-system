@@ -1,7 +1,6 @@
 import { RenderAuthFormFields } from "@/features/auth/components/RenderAuthFormFields";
 import { Button } from "@/shared/components/ui/button";
 import { Form } from "@/shared/components/ui/form";
-import { REGISTER_FORM_INPUTS } from "@/constants";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
 import { useRegister } from "@/features/auth/queriesAndMutations";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,6 +14,7 @@ import { login } from "@/app/store/features/auth/authSlice";
 import { setPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import Swal from "sweetalert2";
 import { registerSchema } from "../schema";
+import { REGISTER_FORM_INPUTS } from "../constants";
 
 export const RegisterForm = () => {
   const navigate = useNavigate();

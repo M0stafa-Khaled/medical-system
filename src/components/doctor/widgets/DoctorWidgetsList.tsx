@@ -1,7 +1,7 @@
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
-import WidgetCard from "../../shared/widgets/WidgetCard";
+import WidgetCard from "../../../shared/components/WidgetCard";
 import {
   BadgeDollarSign,
   Bookmark,
@@ -9,7 +9,7 @@ import {
   Calendar,
   Users,
 } from "lucide-react";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { Fragment } from "react/jsx-runtime";
 import { Separator } from "@/shared/components/ui/separator";
 import { DoctorWorkingDayCard } from "./DoctorWorkingDayCard";

@@ -1,4 +1,4 @@
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { Button } from "@/shared/components/ui/button";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import BookingsFilters from "./BookingsFilters";
@@ -7,8 +7,8 @@ import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router";
-import RefetchDataButton from "@/components/shared/RefetchDataButton";
-import Query_Keys from "@/enums/queryKeys";
+import RefetchDataButton from "@/shared/components/RefetchDataButton";
+import Query_Keys from "@/shared/enums/queryKeys";
 
 interface IProps {
   isLoading: boolean;

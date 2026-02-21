@@ -3,7 +3,7 @@ import cookieServices from "@/shared/utils/cookieServices";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import { motion } from "framer-motion";
-import { navItemsVariants } from "@/animations/navbarAnimations";
+import { navItemsVariants } from "@/shared/animations/navbarAnimations";
 import { Button } from "@/shared/components/ui/button";
 
 export const AuthButtons = () => {

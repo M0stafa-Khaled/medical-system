@@ -1,4 +1,4 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { IStatusMsg } from "@/shared/types";
 import {
   ICreateWorkingDay,

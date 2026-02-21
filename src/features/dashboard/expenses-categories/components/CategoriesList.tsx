@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { CategoryCard } from "./CategoryCard";
 import { CardSkeleton } from "@/shared/components/ui/CardSkeleton";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { useSearchParams } from "react-router";
 import { useGetAllExpensesCategories } from "../queriesAndMutations";
 

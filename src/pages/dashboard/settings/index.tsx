@@ -1,7 +1,7 @@
-import { containerVariants } from "@/animations";
+import { containerVariants } from "@/shared/animations";
 import CompanyInfo from "@/components/dashboard/settings/CompanyInfo";
 import Subscription from "@/components/dashboard/settings/Subscription";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import NotFound from "@/pages/NotFound";
 import { motion } from "framer-motion";

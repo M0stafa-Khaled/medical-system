@@ -1,4 +1,4 @@
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { IGetWithParams } from "@/shared/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {

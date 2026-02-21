@@ -4,8 +4,8 @@ import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
-import { DataTable } from "@/components/shared/data-table";
+import { PERMISSIONS } from "@/shared/enums/permissions";
+import { DataTable } from "@/shared/components/data-table";
 import { useClinicsColumns } from "@/features/dashboard/clinics/components/ClinicsColumns";
 
 export const ClinicsTable = () => {

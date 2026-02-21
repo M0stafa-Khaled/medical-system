@@ -1,4 +1,4 @@
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { getDoctorBookings } from "@/services/doctor/doctorBookings";
 import { useQuery } from "@tanstack/react-query";
 

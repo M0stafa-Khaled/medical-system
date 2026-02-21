@@ -1,4 +1,4 @@
-import { tableSkeletonVariants } from "@/animations";
+import { tableSkeletonVariants } from "@/shared/animations";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { TableBody, TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";

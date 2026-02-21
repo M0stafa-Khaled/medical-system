@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { useGetDoctorClinics } from "@/shared/lib/react-query/doctor/doctorClinics";
 import cookieServices from "@/shared/utils/cookieServices";
