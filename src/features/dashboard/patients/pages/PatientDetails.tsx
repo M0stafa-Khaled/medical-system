@@ -21,14 +21,14 @@ import {
   Users,
   VenusAndMars,
 } from "lucide-react";
-import ImageModal from "@/components/shared/ImageModal";
-import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
-import InfoField from "@/components/shared/InfoField";
+import ImageModal from "@/shared/components/ImageModal";
+import HeaderUserDetails from "@/shared/components/HeaderUserDetails";
+import InfoField from "@/shared/components/InfoField";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { Calendar, BadgeCheck, BadgeX } from "lucide-react";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import {
@@ -39,7 +39,7 @@ import {
 } from "@/shared/components/ui/tabs";
 import { AxiosResErr } from "@/shared/types";
 import { useDeletePatient, useGetPatientById } from "../queriesAndMutations";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { PatientBalances } from "../balances/components/PatientBalances";
 
 const PatientDetails = () => {

@@ -1,7 +1,7 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { motion } from "framer-motion";
 import PatientBalanceCard from "./PatientBalanceCard";
-import { IBalance } from "@/interfaces/dashboard/transactions/transactions";
+import { IBalance } from "@/features/dashboard/transactions/types";
 interface IProps {
   balances: IBalance[];
 }

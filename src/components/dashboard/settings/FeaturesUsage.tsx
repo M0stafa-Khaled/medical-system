@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import CircleProgress from "@/shared/components/ui/CircleProgress";
 import { IFeature } from "@/interfaces/dashboard/company";
 import { motion } from "framer-motion";

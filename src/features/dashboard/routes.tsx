@@ -11,6 +11,10 @@ import { bookingRoutes } from "./bookings";
 import { treasuriesRoutes } from "./treasuries";
 import { dosagesRoutes } from "../dosages";
 import { scansRoutes } from "../scans";
+import { drugsRoutes } from "../drugs";
+import { analysisRoutes } from "../analysis";
+import { prescriptionsRoutes } from "./prescriptions";
+import { transactionsRoutes } from "./transactions";
 
 export const dashboardRoutes = [
   {
@@ -34,7 +38,11 @@ export const dashboardRoutes = [
       ...expensesCategoriesRoutes,
       ...treasuriesRoutes,
       ...dosagesRoutes,
+      ...transactionsRoutes,
+      ...prescriptionsRoutes,
       ...scansRoutes,
+      ...drugsRoutes,
+      ...analysisRoutes,
     ],
   },
 ];

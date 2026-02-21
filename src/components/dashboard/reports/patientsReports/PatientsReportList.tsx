@@ -1,7 +1,7 @@
 import { Badge } from "@/shared/components/ui/badge";
 import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations";
+import { tableRowVariants } from "@/shared/animations";
 import formatDateTime from "@/shared/utils/formatDate";
 import { IPatient } from "@/features/dashboard/patients/types";
 

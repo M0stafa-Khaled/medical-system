@@ -9,7 +9,7 @@ import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ChangeEvent, useState } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import { GENDER } from "@/constants";
+import { GENDER } from "@/shared/constants";
 import SelectFormItem from "../../../components/forms/formItems/SelectFormItem";
 import { Input } from "@/shared/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";

@@ -1,6 +1,6 @@
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { CreateClinic } from "./CreateClinic";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 
 export const ClinicsHeader = () => {
   const canCreateClinic = useHasPermission(PERMISSIONS.ADD_CLINIC);

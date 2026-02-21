@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { IPrescriptionsFilter } from "@/interfaces/dashboard/prescription";
+import { IPrescriptionsFilter } from "@/features/dashboard/prescriptions/types";
 import { useGetAllDoctorPrescriptions } from "@/shared/lib/react-query/doctor/prescriptions";
 
 const DoctorPrescriptionsTable = () => {

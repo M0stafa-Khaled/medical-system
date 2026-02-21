@@ -1,4 +1,4 @@
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { CreateTreasury } from "./CreateTreasury";
 import { TransferBetweenTreasuries } from "./TransferBetweenTreasuries";

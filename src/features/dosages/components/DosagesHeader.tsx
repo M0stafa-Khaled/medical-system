@@ -1,5 +1,5 @@
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import SearchInput from "@/shared/components/ui/SearchInput";
 import { CreateDosage } from "./CreateDosage";
 

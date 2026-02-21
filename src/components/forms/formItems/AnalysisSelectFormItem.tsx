@@ -13,14 +13,12 @@ import {
 } from "@/shared/components/ui/popover";
 import { cn } from "@/shared/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { FormMessage } from "@/shared/components/ui/form";
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import useDebounce from "@/shared/hooks/useDebounce";
-import cookieServices from "@/shared/utils/cookieServices";
 import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
-import { useGetAllAnalysis } from "@/shared/lib/react-query/main";
+import { useGetAllAnalysis } from "@/features/analysis";
 
 interface IProps {
   field: ControllerRenderProps<any>;
@@ -28,16 +26,14 @@ interface IProps {
 }
 const AnalysisSelectFormItem = ({ field, input }: IProps) => {
   const [open, setOpen] = useState(false);
-  const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
-  const { data: analytics } = useGetAllAnalysis({
-    token,
+  const { data: analysis } = useGetAllAnalysis({
     search,
   });
 
   const analysisOptions =
-    analytics?.data.items?.map((analysis) => ({
+    analysis?.data.items?.map((analysis) => ({
       value: analysis.name,
       label: analysis.name,
     })) ?? [];
@@ -55,14 +51,14 @@ const AnalysisSelectFormItem = ({ field, input }: IProps) => {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="border-muted h-12! w-full justify-between overflow-hidden text-black dark:text-white"
+            className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted h-12! w-full justify-between overflow-hidden text-black hover:text-black dark:text-white dark:hover:text-white`}
           >
             {selectedOption ? selectedOption.label : "اختر..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="z-1000 w-[300px] border-black/20 p-0 sm:w-[400px] md:w-[370px] dark:border-white/40">
-          <Command className="bg-foreground text-black dark:text-white">
+        <PopoverContent className="z-1000 w-75 p-0 sm:w-100 md:w-92.5">
+          <Command id={input.name} className="bg-background">
             <CommandInput
               placeholder="اختر أو اكتب اسم جديد"
               value={searchTerm}
@@ -90,7 +86,7 @@ const AnalysisSelectFormItem = ({ field, input }: IProps) => {
               <CommandGroup>
                 {analysisOptions.map((option) => (
                   <CommandItem
-                    className="cursor-pointer py-2.5 text-black hover:bg-blue-200/20 dark:text-white"
+                    className="cursor-pointer py-2.5 text-[13px]"
                     key={option.value}
                     value={option.label}
                     onSelect={() => {
@@ -114,7 +110,6 @@ const AnalysisSelectFormItem = ({ field, input }: IProps) => {
           </Command>
         </PopoverContent>
       </Popover>
-      <FormMessage />
     </>
   );
 };

@@ -3,7 +3,7 @@ import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ChangeEvent } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import { GENDER } from "@/constants";
+import { GENDER } from "@/shared/constants";
 import SwitchFormItem from "@/components/forms/formItems/SwitchFormItem";
 import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
 import FileFormItem from "@/components/forms/formItems/FileFormItem";

@@ -2,10 +2,10 @@ import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { DataTable } from "@/components/shared/data-table";
+import { DataTable } from "@/shared/components/data-table";
 import { useGetAllDosages } from "../queriesAndMutations";
 import { useDosagesColumns } from "./DosagesColumns";
 

@@ -6,9 +6,9 @@ import {
 } from "@/shared/components/ui/card";
 import { UpdateAction } from "./UpdateAction";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { IDoctorAction } from "../../types";
 import { useDeleteDoctorAction } from "../../queriesAndMutations";
 

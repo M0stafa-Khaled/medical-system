@@ -1,4 +1,4 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { type IStatusMsg } from "@/shared/types";
 import { IChangePassword, IResponseProfile, IUpdateProfile } from "./types";
 

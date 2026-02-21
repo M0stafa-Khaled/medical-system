@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { DollarSign, Percent } from "lucide-react";
 import { CreateDoctorExpense } from "./CreateDoctorExpense";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
-import { DataTable } from "@/components/shared/data-table";
+import { DataTable } from "@/shared/components/data-table";
 import { useDoctorTransactionsColumns } from "./DoctorTransactionsColumns";
 import { useGetDoctorTransactions } from "../../queriesAndMutations";
 

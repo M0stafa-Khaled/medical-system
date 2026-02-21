@@ -1,14 +1,18 @@
 import { ProtectedRoute } from "@/features/auth";
-import ExpensesCategories from "./pages/ExpensesCategories";
-import { PERMISSIONS } from "@/enums/permissions";
+import PageLoader from "@/shared/components/PageLoader";
+import { PERMISSIONS } from "@/shared/enums/permissions";
+import { lazy, Suspense } from "react";
 
+const ExpensesCategories = lazy(() => import("./pages/ExpensesCategories"));
 export const expensesCategoriesRoutes = [
   {
     path: "expenses-categories",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_CATEGORIES}>
-        <ExpensesCategories />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSE_CATEGORIES}>
+          <ExpensesCategories />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 ];

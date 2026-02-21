@@ -1,7 +1,5 @@
-import Header from "@/components/shared/navbar/Header";
-import PathIndicator from "@/components/shared/PathIndicator";
-import Sidebar from "@/components/shared/Sidebar";
-import { PERMISSIONS } from "@/enums/permissions";
+import Navbar from "@/features/dashboard/components/navbar/Navbar";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { ILink } from "@/shared/types";
 import {
@@ -20,8 +18,10 @@ import { TbReportAnalytics, TbReportMedical } from "react-icons/tb";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAttachMoney, MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router";
-import ROUTES_NAME from "@/constants/routesName";
 import { HiOutlineUsers } from "react-icons/hi2";
+import PathIndicator from "./components/PathIndicator";
+import Sidebar from "./components/Sidebar";
+import { ROUTES_NAME } from "@/shared/constants";
 
 const DashboardLayout = () => {
   // Codes
@@ -306,10 +306,10 @@ const DashboardLayout = () => {
       path: "/dashboard/drugs",
       icon: <MdMedication size={18} />,
     },
-    // Analytics
+    // analysis
     {
-      name: ROUTES_NAME.analytics,
-      path: "/dashboard/analytics",
+      name: ROUTES_NAME.analysis,
+      path: "/dashboard/analysis",
       icon: <TbReportAnalytics size={18} />,
     },
     // Scans
@@ -333,9 +333,9 @@ const DashboardLayout = () => {
       <div className="fixed inset-y-0 right-0">
         <Sidebar links={NAV_LINKS} />
       </div>
-      <div className="bg-background border-border flex min-h-screen flex-1 flex-col overflow-hidden lg:mr-67.5 lg:rounded-tr-[36px] lg:rounded-br-[36px] lg:border-r">
+      <div className="bg-background border-border flex min-h-screen flex-1 flex-col overflow-hidden lg:mr-67.5 lg:border-r">
+        <Navbar links={NAV_LINKS} dashboard />
         <div className="container">
-          <Header links={NAV_LINKS} dashboard />
           <main className="mt-20 flex-1 lg:mt-6">
             <PathIndicator routeNames={ROUTES_NAME} />
             <div className="my-3">

@@ -10,8 +10,8 @@ import {
   SelectValue,
 } from "@/shared/components/ui/select";
 import { useGetTreasuriesChart } from "@/features/dashboard/queries";
-import ChartDate from "@/components/shared/charts/ChartDate";
-import AnalyticsChart from "@/components/shared/charts/ChartsCard";
+import ChartDate from "@/shared/components/ChartDate";
+import AnalyticsChart from "@/shared/components/ChartsCard";
 
 interface ITreasuriesFilter {
   treasury_start_at: string;

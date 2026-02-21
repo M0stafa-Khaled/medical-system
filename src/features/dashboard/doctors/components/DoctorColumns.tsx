@@ -1,8 +1,8 @@
-import { type ColumnDef } from "@/components/shared/data-table";
+import { type ColumnDef } from "@/shared/components/data-table";
 import { type IDoctor } from "../types";
 import { type IPaginationMeta } from "@/shared/types";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import countSerial from "@/shared/utils/countSerial";
 import {
   Avatar,
@@ -16,7 +16,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router";
 import { FiEye } from "react-icons/fi";
 import { Pen } from "lucide-react";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteDoctor } from "../queriesAndMutations";
 
 export const useDoctorsColumns = ({

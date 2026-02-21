@@ -1,23 +1,30 @@
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { ProtectedRoute } from "@/features/auth";
-import CreateWorkingDay from "./pages/CreateWorkingDay";
-import UpdateWorkingDay from "./pages/UpdateWorkingDay";
+import { lazy, Suspense } from "react";
+import PageLoader from "@/shared/components/PageLoader";
+
+const CreateWorkingDay = lazy(() => import("./pages/CreateWorkingDay"));
+const UpdateWorkingDay = lazy(() => import("./pages/UpdateWorkingDay"));
 
 export const doctorsWorkingDaysRoute = [
   {
     path: "doctors/:doctorId/working-days/create",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.ADD_WORKING_DAY}>
-        <CreateWorkingDay />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.ADD_WORKING_DAY}>
+          <CreateWorkingDay />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "doctors/:doctorId/working-days/:workingDayId/update",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_WORKING_DAY}>
-        <UpdateWorkingDay />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_WORKING_DAY}>
+          <UpdateWorkingDay />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 ];

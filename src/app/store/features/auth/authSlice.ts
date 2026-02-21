@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CookieService from "@/shared/utils/cookieServices";
 import { TRole } from "@/shared/types";
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { ICheckAuth, IPermission } from "@/features/auth/types";
 
 interface IAuthState {

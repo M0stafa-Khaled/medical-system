@@ -9,7 +9,7 @@ import cookieServices from "@/shared/utils/cookieServices";
 import formatDateTime from "@/shared/utils/formatDate";
 import FeaturesUsage from "./FeaturesUsage";
 import DataLoader from "@/shared/components/ui/DataLoader";
-import { containerVariants } from "@/animations";
+import { containerVariants } from "@/shared/animations";
 import { motion } from "framer-motion";
 
 const Subscription = () => {

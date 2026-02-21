@@ -13,10 +13,10 @@ import { clinicSchema } from "../schema";
 import { useCreateClinic } from "../queriesAndMutations";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import { CLINIC_FORM_INPUTS } from "@/constants";
+import { containerVariants, itemVariants } from "@/shared/animations";
+import { CLINIC_FORM_INPUTS } from "../constants";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { RenderClinicsFormFields } from "./RenderClinicsFormFields";
 

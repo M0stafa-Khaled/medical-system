@@ -1,11 +1,11 @@
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { UpdateExpenseCategory } from "./UpdateExpenseCategory";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { motion } from "framer-motion";
 import { Workflow } from "lucide-react";
 import { IExpenseCategory } from "../types";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteExpenseCategory } from "../queriesAndMutations";
 
 interface IProps {

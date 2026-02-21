@@ -9,8 +9,8 @@ import {
   SelectValue,
 } from "@/shared/components/ui/select";
 import { useGetBookingsChart } from "@/features/dashboard/queries";
-import AnalyticsChart from "@/components/shared/charts/ChartsCard";
-import ChartDate from "@/components/shared/charts/ChartDate";
+import AnalyticsChart from "@/shared/components/ChartsCard";
+import ChartDate from "@/shared/components/ChartDate";
 
 interface IBookingsFilter {
   booking_start_at: string;

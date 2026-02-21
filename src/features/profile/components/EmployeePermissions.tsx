@@ -1,5 +1,5 @@
 import { Badge } from "../../../shared/components/ui/badge";
-import { itemVariants } from "@/animations";
+import { itemVariants } from "@/shared/animations";
 import { IPermission } from "@/features/auth/types";
 import { motion } from "framer-motion";
 

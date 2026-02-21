@@ -1,14 +1,18 @@
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { ProtectedRoute } from "../auth";
-import { Dosages } from "./pages/Dosages";
+import { lazy, Suspense } from "react";
+import PageLoader from "@/shared/components/PageLoader";
 
+const Dosages = lazy(() => import("./pages/Dosages"));
 export const dosagesRoutes = [
   {
     path: "dosages",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.DOSAGES}>
-        <Dosages />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.DOSAGES}>
+          <Dosages />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 ];

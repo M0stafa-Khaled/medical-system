@@ -1,4 +1,4 @@
-import InfoField from "@/components/shared/InfoField";
+import InfoField from "@/shared/components/InfoField";
 import { IWorkingDay } from "@/features/dashboard/doctors/working-days/types";
 import { convertDayFromEnToAr } from "@/shared/utils/convertDayLang";
 import { Calendar, Clock, Hospital, Users } from "lucide-react";

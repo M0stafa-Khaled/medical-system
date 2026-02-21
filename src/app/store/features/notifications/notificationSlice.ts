@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INotification } from "@/interfaces/notifications";
+import { INotification } from "@/features/notifications/types";
 
 interface INotificationsState {
   notifications: INotification[];

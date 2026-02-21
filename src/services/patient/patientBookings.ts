@@ -2,7 +2,7 @@ import {
   ICreatePatientBooking,
   IUpdatePatientBooking,
 } from "../../interfaces/patient/patientBookings";
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { IGetWithParams, IStatusMsg } from "@/shared/types";
 import {
   IPatientBooking,
@@ -40,28 +40,21 @@ export const getPatientBookingById = async ({
   return data;
 };
 
-export const createPatientBooking = async ({
-  token,
-  booking,
-}: ICreatePatientBooking): Promise<IStatusMsg> => {
-  const { data } = await axiosAPI.post("/bookings", booking, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export const createPatientBooking = async (
+  booking: ICreatePatientBooking
+): Promise<IStatusMsg> => {
+  const { data } = await axiosAPI.post("/bookings", booking);
   return data;
 };
 
-export const updatePatientBooking = async ({
-  token,
-  booking,
-  id,
-}: IUpdatePatientBooking): Promise<IStatusMsg> => {
-  const { data } = await axiosAPI.post(
-    `/bookings/${id}`,
-    { ...booking, _method: "put" },
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+export const updatePatientBooking = async (
+  booking: IUpdatePatientBooking
+): Promise<IStatusMsg> => {
+  const { id, ...values } = booking;
+  const { data } = await axiosAPI.post(`/bookings/${booking.id}`, {
+    ...values,
+    _method: "put",
+  });
   return data;
 };
 

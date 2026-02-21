@@ -1,42 +1,53 @@
 import { ProtectedRoute } from "@/features/auth";
-import Doctors from "./pages/Doctors";
-import { PERMISSIONS } from "@/enums/permissions";
-import DoctorDetails from "./pages/DoctorDetails";
-import UpdateDoctor from "./pages/UpdateDoctor";
-import CreateDoctor from "./pages/CreateDoctor";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { doctorsWorkingDaysRoute } from "./working-days";
+import { lazy, Suspense } from "react";
+import PageLoader from "@/shared/components/PageLoader";
+
+const Doctors = lazy(() => import("./pages/Doctors"));
+const DoctorDetails = lazy(() => import("./pages/DoctorDetails"));
+const CreateDoctor = lazy(() => import("./pages/CreateDoctor"));
+const UpdateDoctor = lazy(() => import("./pages/UpdateDoctor"));
 
 export const doctorsRoutes = [
   {
     path: "doctors",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.DOCTORS}>
-        <Doctors />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.DOCTORS}>
+          <Doctors />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "doctors/:doctorId",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_DOCTOR}>
-        <DoctorDetails />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_DOCTOR}>
+          <DoctorDetails />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "doctors/create",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
-        <CreateDoctor />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.ADD_DOCTOR}>
+          <CreateDoctor />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "doctors/:doctorId/update",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
-        <UpdateDoctor />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
+          <UpdateDoctor />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   ...doctorsWorkingDaysRoute,

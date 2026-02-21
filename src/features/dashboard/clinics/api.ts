@@ -1,4 +1,4 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import type { IStatusMsg, IGetWithParams } from "@/shared/types";
 import type { ICreateClinic, IClinicsRes, IUpdateClinic } from "./types";
 

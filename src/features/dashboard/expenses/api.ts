@@ -1,4 +1,4 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { IGetWithParams, IStatusMsg } from "@/shared/types";
 import {
   ICreateExpense,

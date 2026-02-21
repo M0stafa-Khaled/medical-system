@@ -1,8 +1,8 @@
 import cookieServices from "@/shared/utils/cookieServices";
-import AnalyticsChart from "../../../../components/shared/charts/ChartsCard";
+import AnalyticsChart from "../../../../shared/components/ChartsCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
-import ChartDate from "../../../../components/shared/charts/ChartDate";
+import ChartDate from "../../../../shared/components/ChartDate";
 import { useGetRegistrationChart } from "@/features/dashboard/queries";
 
 interface IRegistrationFilter {

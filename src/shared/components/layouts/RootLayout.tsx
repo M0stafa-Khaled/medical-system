@@ -13,10 +13,10 @@ import {
   useNavigate,
 } from "react-router";
 import { toast } from "react-toastify";
-import { useGetNotifications } from "@/shared/lib/react-query/notifications/notifications";
+import { useGetNotifications } from "@/features/notifications/queriesAndMutations";
 import { setNotifications } from "@/app/store/features/notifications/notificationSlice";
 import { useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import useNotificationSound from "@/shared/hooks/useNotificationSound";
 import {
   initializeEcho,
@@ -24,9 +24,9 @@ import {
   getEchoInstance,
 } from "@/shared/lib/pusher/echo";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import PageLoader from "@/components/shared/PageLoader";
+import PageLoader from "@/shared/components/PageLoader";
 
 const RootLayout = () => {
   useNetworkStatus();
@@ -45,6 +45,7 @@ const RootLayout = () => {
   const { isLoading: authLoading } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
+    console.log("auth check");
     (async () => {
       const action = await dispatch(checkAuth());
       if (checkAuth.fulfilled.match(action)) {
@@ -122,7 +123,7 @@ const RootLayout = () => {
   }, [user, queryClient, playNotificationSound]);
 
   const { data: notifications, isLoading } = useGetNotifications(
-    user?.role !== "doctor" && canReceiveNotifications ? token : ""
+    user?.role !== "doctor" && canReceiveNotifications ? true : false
   );
 
   const unreadNotifications = useMemo(() => {

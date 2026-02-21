@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import DoctorBookingsCharts from "./DoctorBookingsCharts";
 import DoctorPrescriptionsCharts from "./DoctorPrescriptionsCharts";
 import DoctorTransactionsCharts from "./DoctorTransactionsCharts";

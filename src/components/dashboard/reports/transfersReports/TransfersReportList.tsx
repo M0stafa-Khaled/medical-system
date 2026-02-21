@@ -1,6 +1,6 @@
 import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations";
+import { tableRowVariants } from "@/shared/animations";
 import formatDateTime from "@/shared/utils/formatDate";
 import { ITransfer } from "@/interfaces/dashboard/reports";
 import { numberToPrice } from "@/shared/utils/numberToPrice";

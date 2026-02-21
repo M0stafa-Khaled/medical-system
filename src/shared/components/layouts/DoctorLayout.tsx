@@ -1,13 +1,12 @@
-import Header from "@/components/shared/navbar/Header";
-import Sidebar from "@/components/shared/Sidebar";
-
+import Navbar from "@/features/dashboard/components/navbar/Navbar";
+import Sidebar from "@/features/dashboard/components/Sidebar";
 import { ILink } from "@/shared/types";
 import { BookMarkedIcon, HomeIcon, UserRoundSearch } from "lucide-react";
 import { GiMedicinePills } from "react-icons/gi";
 import { TbReportAnalytics, TbReportMedical } from "react-icons/tb";
 import { MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router";
-import ROUTES_NAME from "@/constants/routesName";
+import { ROUTES_NAME } from "@/shared/constants";
 
 const DoctorLayout = () => {
   const NAV_LINKS: ILink[] = [
@@ -44,8 +43,8 @@ const DoctorLayout = () => {
     },
     // Analytics
     {
-      name: ROUTES_NAME.analytics,
-      path: "/doctor/analytics",
+      name: ROUTES_NAME.analysis,
+      path: "/doctor/analysis",
       icon: <TbReportAnalytics size={18} />,
     },
     // Scans
@@ -64,7 +63,7 @@ const DoctorLayout = () => {
       </div>
       <div className="bg-background border-border flex min-h-screen flex-1 flex-col overflow-hidden lg:mr-67.5 lg:rounded-tr-[36px] lg:rounded-br-[36px] lg:border-r">
         <div className="container">
-          <Header links={NAV_LINKS} dashboard />
+          <Navbar links={NAV_LINKS} dashboard />
           <main className="bg-background mt-20 flex-1 lg:mt-6">
             <div className="my-10">
               <Outlet />

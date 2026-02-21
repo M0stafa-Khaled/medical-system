@@ -1,6 +1,6 @@
 import { IPaginationMeta } from "@/shared/types";
 import { IClinic } from "../clinics/types";
-import { ITransaction } from "@/interfaces/dashboard/transactions/transactions";
+import { ITransaction } from "@/features/dashboard/transactions/types";
 
 export interface IDoctor {
   id: number;

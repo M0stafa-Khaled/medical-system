@@ -1,4 +1,4 @@
-import InfoField from "@/components/shared/InfoField";
+import InfoField from "@/shared/components/InfoField";
 import {
   Card,
   CardContent,
@@ -21,7 +21,7 @@ import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { useGetExpenseById } from "@/features/dashboard/expenses/queriesAndMutations";

@@ -1,6 +1,6 @@
-import { ColumnDef } from "@/components/shared/data-table";
+import { ColumnDef } from "@/shared/components/data-table";
 import { Badge } from "@/shared/components/ui/badge";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { type IEmployee } from "../types";
 import {
@@ -16,7 +16,7 @@ import truncateText from "@/shared/utils/truncateText";
 import countSerial from "@/shared/utils/countSerial";
 import { Link } from "react-router";
 import { type IPaginationMeta } from "@/shared/types";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteEmployee } from "../queriesAndMutations";
 
 export const useEmployeesColumns = ({

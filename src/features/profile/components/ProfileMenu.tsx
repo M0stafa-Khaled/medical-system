@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router";
 import cookieServices from "@/shared/utils/cookieServices";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { buttonVariants } from "@/shared/components/ui/button";
 
 export const ProfileMenu = () => {

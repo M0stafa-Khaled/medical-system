@@ -16,7 +16,7 @@ import { Input } from "@/shared/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import cookieServices from "@/shared/utils/cookieServices";
 import { format } from "date-fns";
-import { IPrescriptionsFilter } from "@/interfaces/dashboard/prescription";
+import { IPrescriptionsFilter } from "@/features/dashboard/prescriptions/types";
 import { useGetDoctorClinics } from "@/shared/lib/react-query/doctor/doctorClinics";
 
 interface IProps {
@@ -109,7 +109,7 @@ const DoctorPrescriptionsFilters = ({ filters, setFilters }: IProps) => {
               handleFilterChange(
                 "date",
                 date
-                  ? new Date(date).toLocaleDateString("en-US", {
+                  ? new Date(date).toLocaleDateString("en-CA", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",

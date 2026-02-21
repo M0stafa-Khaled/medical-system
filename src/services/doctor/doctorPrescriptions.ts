@@ -1,11 +1,11 @@
-import axiosAPI from "@/config/axios.config";
+import axiosAPI from "@/shared/lib/axios";
 import { IGetWithParams, IStatusMsg } from "@/shared/types";
 import {
   ICreatePrescription,
   IPrescription,
   IPrescriptionsRes,
   IUpdatePrescription,
-} from "@/interfaces/dashboard/prescription";
+} from "@/features/dashboard/prescriptions/types";
 
 export const getAllDoctorPrescriptions = async ({
   token,
@@ -33,10 +33,9 @@ export const getDoctorPrescriptionById = async ({
   return data;
 };
 
-export const createDoctorPrescription = async ({
-  token,
-  prescription,
-}: ICreatePrescription): Promise<IStatusMsg> => {
+export const createDoctorPrescription = async (
+  prescription: ICreatePrescription
+): Promise<IStatusMsg> => {
   const formData = new FormData();
   if (prescription.booking_id)
     formData.append("booking_id", prescription.booking_id);
@@ -55,17 +54,13 @@ export const createDoctorPrescription = async ({
     });
   });
 
-  const { data } = await axiosAPI.post("/patients-prescriptions", formData, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const { data } = await axiosAPI.post("/patients-prescriptions", formData);
   return data;
 };
 
-export const updateDoctorPrescription = async ({
-  token,
-  prescription,
-  id,
-}: IUpdatePrescription): Promise<IStatusMsg> => {
+export const updateDoctorPrescription = async (
+  prescription: IUpdatePrescription
+): Promise<IStatusMsg> => {
   const formData = new FormData();
   if (prescription.booking_id)
     formData.append("booking_id", prescription.booking_id);
@@ -85,24 +80,17 @@ export const updateDoctorPrescription = async ({
   });
   formData.append("_method", "put");
   const { data } = await axiosAPI.post(
-    `/patients-prescriptions/${id}`,
-    formData,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
+    `/patients-prescriptions/${prescription.id}`,
+    formData
   );
   return data;
 };
 
 export const deleteDoctorPrescription = async ({
-  token,
   id,
 }: {
-  token: string;
   id: string;
 }): Promise<IStatusMsg> => {
-  const { data } = await axiosAPI.delete(`/patients-prescriptions/${id}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const { data } = await axiosAPI.delete(`/patients-prescriptions/${id}`);
   return data;
 };

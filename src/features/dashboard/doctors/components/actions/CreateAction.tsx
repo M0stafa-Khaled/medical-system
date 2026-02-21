@@ -11,14 +11,14 @@ import { Button } from "@/shared/components/ui/button";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
-import { DOCTOR_ACTION_INPUTS } from "@/constants";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useCreateDoctorAction } from "../../queriesAndMutations";
 import { RenderDoctorFormFields } from "../RenderDoctorFormFields";
 import { doctorActionSchema } from "../../working-days/schema";
+import { DOCTOR_ACTION_INPUTS } from "../../constants";
 
 export const CreateAction = ({ doctorId }: { doctorId: string }) => {
   const [isOpen, setIsOpen] = useState(false);

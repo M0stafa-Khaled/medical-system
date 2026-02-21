@@ -10,16 +10,16 @@ import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2, Pen } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { itemVariants, containerVariants } from "@/animations";
-import { TREASURY_FORM_INPUTS } from "@/constants";
+import { itemVariants, containerVariants } from "@/shared/animations";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { ITreasury } from "../types";
 import { useUpdateTreasury } from "../queriesAndMutations";
 import { createTreasurySchema } from "../schema";
 import { RenderTreasuryFormFields } from "./RenderTreasuryFormFields";
+import { TREASURY_FORM_INPUTS } from "../constants";
 
 interface IProps {
   treasury: ITreasury;
@@ -99,7 +99,7 @@ export const UpdateTreasury = ({ treasury }: IProps) => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 text-black dark:text-white"
+            className="space-y-4"
             initial="hidden"
             animate="visible"
             variants={containerVariants}

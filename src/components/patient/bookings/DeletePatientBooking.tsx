@@ -1,4 +1,4 @@
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { Button } from "@/shared/components/ui/button";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { useDeletePatientBooking } from "@/shared/lib/react-query/patient/patientBookings";

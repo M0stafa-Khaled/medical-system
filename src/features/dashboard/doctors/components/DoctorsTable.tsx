@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { useGetAllDoctors } from "../queriesAndMutations";
-import { DataTable } from "@/components/shared/data-table";
+import { DataTable } from "@/shared/components/data-table";
 import { useDoctorsColumns } from "./DoctorColumns";
 
 export const DoctorsTable = () => {

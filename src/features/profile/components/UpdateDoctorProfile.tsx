@@ -8,17 +8,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
-import { doctorUpdateProfileSchema } from "@/validations/dashboard/profileSchema";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import { UPDATE_PROFILE_DOCTOR_INPUTS } from "@/constants";
-import { RenderDoctorFormFields } from "../../dashboard/doctors/components/RenderDoctorFormFields";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useUpdateProfile } from "../queriesAndMutations";
+import { doctorUpdateProfileSchema } from "../schema";
+import { RenderDoctorFormFields } from "@/features/dashboard/doctors/components/RenderDoctorFormFields";
+import { UPDATE_PROFILE_DOCTOR_INPUTS } from "../constants";
 
 export const UpdateDoctorProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +91,7 @@ export const UpdateDoctorProfile = () => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-3 text-black dark:text-white"
+            className="space-y-3"
           >
             {UPDATE_PROFILE_DOCTOR_INPUTS.map((input) => (
               <motion.div

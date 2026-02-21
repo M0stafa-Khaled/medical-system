@@ -6,7 +6,7 @@ import {
   updatePatient,
 } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { ICreatePatient } from "./types";
 import { IGetWithParams } from "@/shared/types";
 

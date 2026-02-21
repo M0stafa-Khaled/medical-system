@@ -22,10 +22,9 @@ import {
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { useGetAllPatients } from "@/features/dashboard/patients/queriesAndMutations";
-import cookieServices from "@/shared/utils/cookieServices";
 import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
+import { useGetAllPatients } from "@/features/dashboard/patients";
 
 interface IProps {
   field: ControllerRenderProps<any>;
@@ -34,11 +33,9 @@ interface IProps {
 
 export const PatientSelectItem = ({ field, input }: IProps) => {
   const [open, setOpen] = useState(false);
-  const token = cookieServices.getToken()!;
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
   const { data: patients } = useGetAllPatients({
-    token,
     search,
   });
 
@@ -80,7 +77,7 @@ export const PatientSelectItem = ({ field, input }: IProps) => {
                 <CommandGroup>
                   {patientsOption?.map((option) => (
                     <CommandItem
-                      className="cursor-pointer py-2.5 text-black hover:bg-blue-200/20 dark:text-white"
+                      className="cursor-pointer py-2.5 text-[13px]"
                       key={option.label}
                       value={option.label}
                       onSelect={() => {

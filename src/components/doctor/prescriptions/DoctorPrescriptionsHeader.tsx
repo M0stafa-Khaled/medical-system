@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router";
-import { IPrescriptionsFilter } from "@/interfaces/dashboard/prescription";
+import { IPrescriptionsFilter } from "@/features/dashboard/prescriptions/types";
 import DoctorPrescriptionsFilters from "./DoctorPrescriptionsFilters";
 
 interface IProps {

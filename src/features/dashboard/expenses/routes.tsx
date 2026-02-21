@@ -1,23 +1,30 @@
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { ProtectedRoute } from "@/features/auth";
-import Expenses from "./pages/Expenses";
-import ExpenseDetails from "./pages/ExpenseDetails";
+import { lazy, Suspense } from "react";
+import PageLoader from "@/shared/components/PageLoader";
+
+const Expenses = lazy(() => import("./pages/Expenses"));
+const ExpenseDetails = lazy(() => import("./pages/ExpenseDetails"));
 
 export const expensesRoutes = [
   {
     path: "expenses",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES}>
-        <Expenses />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.EXPENSES}>
+          <Expenses />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "expenses/:expenseId",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EXPENSE}>
-        <ExpenseDetails />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.VIEW_EXPENSE}>
+          <ExpenseDetails />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 ];

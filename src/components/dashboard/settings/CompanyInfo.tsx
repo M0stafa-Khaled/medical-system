@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { Button } from "@/shared/components/ui/button";
 import {
   Card,

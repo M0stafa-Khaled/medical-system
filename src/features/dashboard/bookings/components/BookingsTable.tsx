@@ -1,7 +1,7 @@
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
-import { DataTable } from "@/components/shared/data-table";
+import { PERMISSIONS } from "@/shared/enums/permissions";
+import { DataTable } from "@/shared/components/data-table";
 import { useBookingsColumns } from "./BookingsColumns";
 import { IPaginationMeta } from "@/shared/types";
 import { IBooking } from "../types";

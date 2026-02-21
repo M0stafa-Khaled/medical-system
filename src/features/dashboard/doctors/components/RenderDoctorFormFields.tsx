@@ -9,7 +9,7 @@ import FileFormItem from "../../../../components/forms/formItems/FileFormItem";
 import MultiSelectFormItem from "../../../../components/forms/formItems/MultiSelectFormItem";
 import InputFormItem from "../../../../components/forms/formItems/InputFormItem";
 
-import { GENDER } from "@/constants";
+import { GENDER } from "@/shared/constants";
 
 interface IOption {
   value: string;

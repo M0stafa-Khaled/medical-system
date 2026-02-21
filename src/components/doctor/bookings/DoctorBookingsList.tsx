@@ -1,6 +1,6 @@
 import { TableCell } from "@/shared/components/ui/table";
 import { motion } from "framer-motion";
-import { tableRowVariants } from "@/animations";
+import { tableRowVariants } from "@/shared/animations";
 import truncateText from "@/shared/utils/truncateText";
 import { IBooking } from "@/features/dashboard/bookings/types";
 import convertDay from "@/shared/utils/convertDayLang";

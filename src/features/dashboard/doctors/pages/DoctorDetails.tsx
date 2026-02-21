@@ -25,13 +25,13 @@ import { useEffect } from "react";
 import { Separator } from "@/shared/components/ui/separator";
 import formatDateTime from "@/shared/utils/formatDate";
 import { Badge } from "@/shared/components/ui/badge";
-import ImageModal from "@/components/shared/ImageModal";
-import HeaderUserDetails from "@/components/shared/HeaderUserDetails";
-import InfoField from "@/components/shared/InfoField";
+import ImageModal from "@/shared/components/ImageModal";
+import HeaderUserDetails from "@/shared/components/HeaderUserDetails";
+import InfoField from "@/shared/components/InfoField";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { useDeleteDoctor, useGetDoctorById } from "../queriesAndMutations";
@@ -39,7 +39,7 @@ import { useDeleteDoctor, useGetDoctorById } from "../queriesAndMutations";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { AxiosResErr } from "@/shared/types";
 import { DoctorTabs } from "../components/DoctorTabs";
-import { DeleteAlert } from "@/components/shared/delete-alert";
+import { DeleteAlert } from "@/shared/components/delete-alert";
 
 const DoctorDetails = () => {
   const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
@@ -162,7 +162,7 @@ const DoctorDetails = () => {
                 className="col-span-full flex items-center gap-2"
                 variants={itemVariants}
               >
-                <Building2 className="text-blue-700" />
+                <Building2 className="text-blue-700" size={20} />
                 <h3 className="text-muted-foreground text-sm">العيادات:</h3>
                 <div className="flex flex-wrap items-center gap-2">
                   {clinics?.map((clinic) => (
@@ -177,9 +177,9 @@ const DoctorDetails = () => {
                 <InfoField
                   icon={
                     status ? (
-                      <BadgeCheck className="text-green-500" />
+                      <BadgeCheck className="text-green-500" size={20} />
                     ) : (
-                      <BadgeX className="text-red-500" />
+                      <BadgeX className="text-red-500" size={20} />
                     )
                   }
                   label="حالة الحساب"
@@ -188,7 +188,7 @@ const DoctorDetails = () => {
               </motion.div>
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Percent className="text-orange-500" />}
+                  icon={<Percent className="text-orange-500" size={20} />}
                   label="العمولة"
                   value={commission!}
                 />
@@ -196,7 +196,7 @@ const DoctorDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<BadgeInfo className="text-blue-700" />}
+                  icon={<BadgeInfo className="text-blue-700" size={20} />}
                   label="رقم القيد"
                   value={register_id!}
                 />
@@ -204,7 +204,7 @@ const DoctorDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<UserCircle2 className="text-primary" />}
+                  icon={<UserCircle2 className="text-primary" size={20} />}
                   label="رقم الهوية"
                   value={personal_id!}
                 />
@@ -212,7 +212,7 @@ const DoctorDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Phone className="text-green-600" />}
+                  icon={<Phone className="text-green-600" size={20} />}
                   label="رقم الهاتف الاول"
                   value={first_phone!}
                 />
@@ -220,7 +220,7 @@ const DoctorDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Phone className="text-purple-600" />}
+                  icon={<Phone className="text-purple-600" size={20} />}
                   label="رقم الهاتف الثاني"
                   value={second_phone ? second_phone : "لا يوجد"}
                 />
@@ -228,7 +228,7 @@ const DoctorDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Mail className="text-orange-500" />}
+                  icon={<Mail className="text-orange-500" size={20} />}
                   label="البريد الإلكتروني"
                   value={user?.email as string}
                   sm
@@ -238,7 +238,7 @@ const DoctorDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<VenusAndMars className="text-primary" />}
+                  icon={<VenusAndMars className="text-primary" size={20} />}
                   label="الجنس"
                   value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
                   sm
@@ -247,7 +247,7 @@ const DoctorDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  icon={<Calendar className="text-teal-500" />}
+                  icon={<Calendar className="text-teal-500" size={20} />}
                   label="تاريخ الإنشاء"
                   value={formatDateTime(created_at as string)}
                   sm
@@ -258,7 +258,7 @@ const DoctorDetails = () => {
                 variants={itemVariants}
                 className="flex items-center gap-2"
               >
-                <FileImage className="text-cyan-500" />
+                <FileImage className="text-cyan-500" size={20} />
                 <h5 className="text-muted-foreground text-sm">التوقيع:</h5>
                 {signature ? (
                   <ImageModal

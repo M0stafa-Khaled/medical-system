@@ -13,7 +13,7 @@ import {
   updateDoctorAction,
 } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 import { IGetWithParams } from "@/shared/types";
 export const useGetAllDoctors = ({ page, search }: IGetWithParams) => {
   return useQuery({

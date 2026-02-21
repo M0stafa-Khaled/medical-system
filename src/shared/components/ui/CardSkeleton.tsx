@@ -1,4 +1,4 @@
-import { containerVariants, itemVariants } from "@/animations";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { Skeleton } from "./skeleton";
 import { motion } from "framer-motion";
 interface IProps {

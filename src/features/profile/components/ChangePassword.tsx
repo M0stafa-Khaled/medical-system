@@ -8,16 +8,16 @@ import { ControllerRenderProps, FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
-import { changePasswordSchema } from "@/validations/dashboard/profileSchema";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
-import { Modal } from "@/components/shared/Modal";
+import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/animations";
-import { CHANGE_PASSWORD_INPUTS } from "@/constants";
-import InputFormItem from "../../../components/forms/formItems/InputFormItem";
+import { containerVariants, itemVariants } from "@/shared/animations";
 import { useChangePassword } from "../queriesAndMutations";
 import { handleResErr } from "@/shared/utils/handleResError";
+import { changePasswordSchema } from "../schema";
+import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import { CHANGE_PASSWORD_INPUTS } from "../constants";
 
 export const ChangePassword = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +79,7 @@ export const ChangePassword = () => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-3 text-black dark:text-white"
+            className="space-y-3"
           >
             {CHANGE_PASSWORD_INPUTS.map((input) => (
               <motion.div

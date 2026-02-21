@@ -11,9 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { useResetPassword } from "@/features/auth/queriesAndMutations";
 import cookieServices from "@/shared/utils/cookieServices";
-import { RESET_PASSWORD_FORM_INPUTS } from "@/constants";
 import Swal from "sweetalert2";
 import { resetPasswordSchema } from "../schema";
+import { RESET_PASSWORD_FORM_INPUTS } from "../constants";
 
 export const ResetPasswordForm = () => {
   const navigate = useNavigate();

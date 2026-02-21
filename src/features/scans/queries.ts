@@ -1,7 +1,7 @@
 import { IGetWithParams } from "@/shared/types";
 import { getAllScans } from "./api";
 import { useQuery } from "@tanstack/react-query";
-import Query_Keys from "@/enums/queryKeys";
+import Query_Keys from "@/shared/enums/queryKeys";
 
 export const useGetAllScans = ({ page, search }: IGetWithParams) =>
   useQuery({

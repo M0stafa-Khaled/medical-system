@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { useGetAllEmployees } from "../queriesAndMutations";
 import { useSearchParams } from "react-router";
 import useDebounce from "@/shared/hooks/useDebounce";
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
-import { DataTable } from "@/components/shared/data-table";
+import { DataTable } from "@/shared/components/data-table";
 import { useEmployeesColumns } from "./EmployeesColumns";
 
 export const EmployeesTable = () => {

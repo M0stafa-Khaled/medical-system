@@ -1,14 +1,19 @@
-import { PERMISSIONS } from "@/enums/permissions";
+import { PERMISSIONS } from "@/shared/enums/permissions";
 import { ProtectedRoute } from "@/features/auth";
-import Treasuries from "./pages/Treasuries";
+import { lazy, Suspense } from "react";
+import PageLoader from "@/shared/components/PageLoader";
+
+const Treasuries = lazy(() => import("./pages/Treasuries"));
 
 export const treasuriesRoutes = [
   {
     path: "treasuries",
     element: (
-      <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
-        <Treasuries />
-      </ProtectedRoute>
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES}>
+          <Treasuries />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 ];

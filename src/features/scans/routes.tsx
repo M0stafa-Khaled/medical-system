@@ -1,3 +1,15 @@
-import Scans from "./pages/Scans";
+import { lazy, Suspense } from "react";
+import PageLoader from "@/shared/components/PageLoader";
 
-export const scansRoutes = [{ path: "scans", element: <Scans /> }];
+const Scans = lazy(() => import("./pages/Scans"));
+
+export const scansRoutes = [
+  {
+    path: "scans",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <Scans />
+      </Suspense>
+    ),
+  },
+];
