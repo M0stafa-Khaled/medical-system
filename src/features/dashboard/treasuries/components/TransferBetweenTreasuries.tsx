@@ -87,7 +87,7 @@ export const TransferBetweenTreasuries = () => {
         isOpen={isOpen}
         onOpenChange={handleCloseModal}
         title="تحويل أموال"
-        description={{ text: "تحويل جميع الأموال إلي خزينة آخرى" }}
+        description={{ text: "تحويل الأموال إلي خزنة آخرى" }}
         showFooter={false}
       >
         <Form {...form}>
@@ -109,15 +109,13 @@ export const TransferBetweenTreasuries = () => {
               </motion.div>
             ))}
 
-            <DialogFooter className="justify-start! gap-2 text-start">
-              <DialogClose onClick={handleCloseModal} className="h-auto py-2.5">
-                إلغاء
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
               </DialogClose>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 تحويل
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>

@@ -2,7 +2,7 @@ import { createRoutesFromElements, Route } from "react-router";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/shared/components/PageLoader";
 import Error from "@/pages/Error";
-import { ProtectedRoute } from "@/features/auth";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 
 const RootLayout = lazy(() => import("@/shared/components/layouts/RootLayout"));
 const PatientLayout = lazy(

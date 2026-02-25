@@ -1,4 +1,4 @@
-import { ProtectedRoute } from "@/features/auth";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { doctorsWorkingDaysRoute } from "./working-days";
 import { lazy, Suspense } from "react";

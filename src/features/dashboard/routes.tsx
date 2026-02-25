@@ -1,4 +1,4 @@
-import { ProtectedRoute } from "../auth";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 import DashboardLayout from "./layout";
 import Dashboard from "./pages/Dashboard";
 import { clinicsRoutes } from "./clinics";
@@ -15,6 +15,7 @@ import { drugsRoutes } from "../drugs";
 import { analysisRoutes } from "../analysis";
 import { prescriptionsRoutes } from "./prescriptions";
 import { transactionsRoutes } from "./transactions";
+import { reportsRoutes } from "./reports/routes";
 
 export const dashboardRoutes = [
   {
@@ -40,6 +41,7 @@ export const dashboardRoutes = [
       ...dosagesRoutes,
       ...transactionsRoutes,
       ...prescriptionsRoutes,
+      ...reportsRoutes,
       ...scansRoutes,
       ...drugsRoutes,
       ...analysisRoutes,

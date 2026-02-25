@@ -8,14 +8,13 @@ import {
   navVariants,
   sidebarVariants,
   logoVariants,
-  navItemsVariants,
 } from "@/shared/animations/navbarAnimations";
 import { ILink } from "@/shared/types";
 import cookieServices from "@/shared/utils/cookieServices";
 import {} from "react";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
-import { AuthButtons, LogoutButton } from "@/features/auth";
+import { LogoutButton } from "@/features/auth";
 import NavList from "./NavList";
 import { NotificationsMenu } from "@/features/notifications";
 import { ProfileMenu } from "@/features/profile";
@@ -48,15 +47,11 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
       } fixed inset-x-0 top-0 w-full`}
     >
       <div className="backdrop-blur-xl">
-        <motion.nav
-          initial="hidden"
-          animate="visible"
-          variants={navItemsVariants}
+        <nav
           className={`border-border mx-auto flex flex-wrap items-center justify-between border-b py-2`}
         >
           <div className="container flex w-full items-center justify-between px-3">
             <div className={`hidden w-full items-center gap-3 lg:flex`}>
-              <AuthButtons />
               <NavList links={links} />
             </div>
             <button
@@ -73,6 +68,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
                     animate="visible"
                     exit="hidden"
                     variants={menuIconVariants}
+                    className="cursor-pointer"
                   >
                     <IoClose size={36} />
                   </motion.span>
@@ -83,6 +79,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
                     animate="visible"
                     exit="hidden"
                     variants={menuIconVariants}
+                    className="cursor-pointer"
                   >
                     <IoMenu size={36} />
                   </motion.span>
@@ -90,43 +87,27 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
               </AnimatePresence>
             </button>
             {/* Toggle Mode */}
-            <motion.div
-              variants={navItemsVariants}
-              className="flex items-center justify-center gap-3 p-1"
-            >
-              <motion.div
-                variants={navItemsVariants}
-                className="flex items-center justify-center gap-2"
-              >
-                <motion.div variants={navItemsVariants}>
-                  <LogoutButton />
-                </motion.div>
+            <div className="flex items-center justify-center gap-3 p-1">
+              <div className="flex items-center justify-center gap-2">
+                <LogoutButton />
                 {role !== "doctor" && canReceiveNotifications && (
-                  <motion.div variants={navItemsVariants}>
-                    <NotificationsMenu />
-                  </motion.div>
+                  <NotificationsMenu />
                 )}
 
-                <motion.div variants={navItemsVariants}>
-                  <ProfileMenu />
-                </motion.div>
-                <motion.div variants={navItemsVariants}>
-                  <ToggleTheme />
-                </motion.div>
-              </motion.div>
-              <motion.div variants={logoVariants} className="w-8">
-                <Link to={"/"}>
-                  <motion.img
-                    src={"/images/logo.svg"}
-                    alt="logo"
-                    variants={logoVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="h-full w-full cursor-pointer"
-                  />
-                </Link>
-              </motion.div>
-            </motion.div>
+                <ProfileMenu />
+                <ToggleTheme />
+              </div>
+              <Link to={"/"} className="flex w-8">
+                <motion.img
+                  src={"/images/logo.svg"}
+                  alt="logo"
+                  variants={logoVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="h-full w-full cursor-pointer"
+                />
+              </Link>
+            </div>
           </div>
           {/* Mobile menu */}
           <AnimatePresence>
@@ -137,19 +118,15 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
                 animate="visible"
                 exit="hidden"
                 variants={navVariants}
-                className="w-full overflow-hidden py-3"
+                className="w-full overflow-hidden"
               >
-                <motion.div
-                  variants={navItemsVariants}
-                  className="custom-scrollbar mx-auto max-h-[80vh] w-full overflow-y-scroll py-2"
-                >
+                <div className="custom-scrollbar container mx-auto max-h-[80vh] w-full overflow-y-scroll py-2">
                   <NavList links={links} setOpenNav={setOpenNav} />
-                </motion.div>
-                <AuthButtons />
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.nav>
+        </nav>
       </div>
     </motion.header>
   );

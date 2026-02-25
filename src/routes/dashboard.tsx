@@ -2,7 +2,7 @@ import { createRoutesFromElements, Route } from "react-router";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/shared/components/PageLoader";
-import { ProtectedRoute } from "@/features/auth";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 import DashboardLayout from "@/features/dashboard/layout";
 // import Error from "@/pages/Error";
 
@@ -24,28 +24,28 @@ const Settings = lazy(() => import("@/pages/dashboard/settings"));
 
 // Reports
 const BookingsReports = lazy(
-  () => import("@/pages/dashboard/reports/bookingsReports")
+  () => import("@/features/dashboard/reports/pages/BookingsReports")
 );
 const ExpensesReports = lazy(
-  () => import("@/pages/dashboard/reports/expensesReports")
+  () => import("@/features/dashboard/reports/pages/ExpensesReports")
 );
 const TransactionsReports = lazy(
-  () => import("@/pages/dashboard/reports/transactionsReports")
+  () => import("@/features/dashboard/reports/pages/TransactionsReports")
 );
 const PrescriptionsReports = lazy(
   () => import("@/pages/dashboard/reports/prescriptionsReports")
 );
 const PatientsReports = lazy(
-  () => import("@/pages/dashboard/reports/patientsReports")
+  () => import("@/features/dashboard/reports/pages/PatientsReports")
 );
 const PatientBalancesReports = lazy(
   () => import("@/pages/dashboard/reports/patientBalancesReports")
 );
 const TransfersReports = lazy(
-  () => import("@/pages/dashboard/reports/transfersReports")
+  () => import("@/features/dashboard/reports/pages/TransfersReports")
 );
 const TreasuriesReports = lazy(
-  () => import("@/pages/dashboard/reports/treasuriesReports")
+  () => import("@/features/dashboard/reports/pages/TreasuriesReports")
 );
 
 const dashboardRoutes = createRoutesFromElements(

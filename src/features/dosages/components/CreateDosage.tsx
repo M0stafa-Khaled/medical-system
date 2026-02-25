@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { Form, FormField } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -18,6 +14,7 @@ import { handleResErr } from "@/shared/utils/handleResError";
 import { useCreateDosage } from "@/features/dosages/queriesAndMutations";
 import { dosageSchema } from "../schema";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 export const CreateDosage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,15 +96,17 @@ export const CreateDosage = () => {
               />
             </motion.div>
 
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel onClick={handleCloseModal}>
-                إلغاء
-              </AlertDialogCancel>
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
               <Button type="submit" disabled={isPending}>
                 إضافة
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

@@ -2,6 +2,7 @@ import { IPaginationMeta, TBalanceType, TPaymentMethod } from "@/shared/types";
 import { IDoctor, IDoctorAction } from "../doctors/types";
 import { IEmployee } from "../employees/types";
 import { ITreasury } from "../treasuries/types";
+import { IPatient } from "../patients/types";
 
 export interface ITransaction {
   id: number;

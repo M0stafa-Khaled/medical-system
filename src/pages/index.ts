@@ -2,28 +2,28 @@ import { lazy } from "react";
 
 // ---- Reports
 export const BookingsReports = lazy(
-  () => import("./dashboard/reports/bookingsReports")
+  () => import("../features/dashboard/reports/pages/BookingsReports")
 );
 export const ExpensesReports = lazy(
-  () => import("./dashboard/reports/expensesReports")
+  () => import("../features/dashboard/reports/pages/ExpensesReports")
 );
 export const PatientBalancesReports = lazy(
   () => import("./dashboard/reports/patientBalancesReports")
 );
 export const PatientsReports = lazy(
-  () => import("./dashboard/reports/patientsReports")
+  () => import("../features/dashboard/reports/pages/PatientsReports")
 );
 export const PrescriptionsReports = lazy(
   () => import("./dashboard/reports/prescriptionsReports")
 );
 export const TransactionsReports = lazy(
-  () => import("./dashboard/reports/transactionsReports")
+  () => import("../features/dashboard/reports/pages/TransactionsReports")
 );
 export const TransfersReports = lazy(
-  () => import("./dashboard/reports/transfersReports")
+  () => import("../features/dashboard/reports/pages/TransfersReports")
 );
 export const TreasuriesReports = lazy(
-  () => import("./dashboard/reports/treasuriesReports")
+  () => import("../features/dashboard/reports/pages/TreasuriesReports")
 );
 // ---- Settings
 export const Settings = lazy(() => import("./dashboard/settings"));

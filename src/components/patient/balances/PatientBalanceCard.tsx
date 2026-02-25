@@ -27,7 +27,7 @@ const PatientBalanceCard = ({ balance }: IProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 px-2 py-0 sm:px-3 lg:px-4 xl:px-2">
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2">
             <Hash className="h-5 w-5" />
             <h2 className="md:text-lg">كود الدفع:</h2>
             <p className="bg-foreground border-primary/20 flex h-10 w-10 items-center justify-center rounded-full border p-2 text-lg">
@@ -72,7 +72,7 @@ const PatientBalanceCard = ({ balance }: IProps) => {
         </CardContent>
         <Separator className="dark:bg-gray-700" />
         <CardFooter className="flex-col items-start gap-4 px-0 pb-1">
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2">
             <Calendar className="h-5 w-5" />
             <h2 className="text-sm">تاريخ الدفع:</h2>
             <p className="text-sm">{formatDateTime(balance.created_at!)}</p>

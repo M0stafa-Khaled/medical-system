@@ -251,7 +251,7 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
         animate="visible"
         variants={containerVariants}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 text-black dark:text-white"
+        className="space-y-6"
       >
         <motion.div
           className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2 md:gap-y-5 dark:text-white"

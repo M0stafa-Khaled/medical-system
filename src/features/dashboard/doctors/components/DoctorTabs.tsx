@@ -27,7 +27,7 @@ export const DoctorTabs = ({ doctorId }: { doctorId: string }) => {
           <Tabs
             defaultValue={canViewDoctorActions ? "actions" : "working-days"}
             dir="rtl"
-            className="my-2 text-black dark:text-white"
+            className="my-2"
           >
             <TabsList className="h-auto w-full gap-2">
               {canViewDoctorTransactions && (

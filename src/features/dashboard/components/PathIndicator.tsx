@@ -37,7 +37,7 @@ const PathIndicator = ({ routeNames }: IProps) => {
             const routeTo = `/${cumulativePaths[index]}`;
             return (
               <Fragment key={`${name}-${index}`}>
-                <BreadcrumbItem className="text-sm! text-black dark:text-white!">
+                <BreadcrumbItem className="! text-sm!">
                   {isLast ? (
                     <BreadcrumbPage className="text-black! dark:text-white!">
                       {arabicName}

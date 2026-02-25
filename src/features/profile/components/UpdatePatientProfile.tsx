@@ -100,7 +100,7 @@ export const UpdatePatientProfile = () => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-3 text-black dark:text-white"
+            className="space-y-3"
           >
             {UPDATE_PROFILE_PATIENT_INPUTS.map((input) => (
               <motion.div
@@ -118,18 +118,13 @@ export const UpdatePatientProfile = () => {
               </motion.div>
             ))}
 
-            <DialogFooter className="justify-start! gap-2 text-start">
-              <DialogClose
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
-                إلغاء
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
               </DialogClose>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 تحديث
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>

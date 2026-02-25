@@ -1,10 +1,6 @@
 import { Button } from "@/shared/components/ui/button";
 import { useEffect, useState } from "react";
 import { Form } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -19,6 +15,7 @@ import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { RenderClinicsFormFields } from "./RenderClinicsFormFields";
 import { CLINIC_FORM_INPUTS } from "../constants";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 interface IProps {
   id: number;
@@ -108,7 +105,7 @@ export const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-5 text-black dark:text-white"
+            className="space-y-5"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -122,19 +119,17 @@ export const UpdateClinic = ({ id, name, status, virtual_number }: IProps) => {
                 />
               </motion.div>
             ))}
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel className="h-auto py-2.5 text-black dark:text-white">
-                إلغاء
-              </AlertDialogCancel>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
+              <Button type="submit" disabled={isPending}>
                 تعديل
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

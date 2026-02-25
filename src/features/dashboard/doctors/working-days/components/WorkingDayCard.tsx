@@ -33,7 +33,7 @@ export const WorkingDayCard = ({
     <Card className="border-muted bg-background dark:bg-dark transition-shadow duration-300 hover:shadow-lg">
       <div>
         <CardHeader className="p-4">
-          <CardTitle className="flex flex-row items-center justify-between gap-2 text-lg wrap-break-word break-all text-black dark:text-white">
+          <CardTitle className="flex flex-row items-center justify-between gap-2 text-lg wrap-break-word break-all">
             <h2 className="flex items-center justify-center gap-2">
               <Calendar className="h-5 w-5" />
               {convertDayFromEnToAr(day)}

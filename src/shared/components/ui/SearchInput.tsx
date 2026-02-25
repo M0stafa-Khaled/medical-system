@@ -1,16 +1,21 @@
 import { Input } from "@/shared/components/ui/input";
+import { cn } from "@/shared/lib/utils";
 import { useSearchParams } from "react-router";
 
 interface IProps {
   placeholder: string;
+  className?: string;
 }
-const SearchInput = ({ placeholder }: IProps) => {
+const SearchInput = ({ placeholder, className }: IProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("q");
   return (
     <Input
       placeholder={placeholder}
-      className="border-muted placeholder:text-muted-foreground h-auto py-2.5 placeholder:h-14 placeholder:text-sm md:max-w-md md:py-3"
+      className={cn(
+        "border-border placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm",
+        className
+      )}
       onChange={(e) => {
         const value = e.target.value;
         if (value) setSearchParams({ q: value });

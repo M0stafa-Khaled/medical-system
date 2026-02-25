@@ -2,16 +2,10 @@ import cookieServices from "@/shared/utils/cookieServices";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { useGetAllTreasuries } from "@/features/dashboard/treasuries";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui/select";
 import { useGetTreasuriesChart } from "@/features/dashboard/queries";
-import ChartDate from "@/shared/components/ChartDate";
 import AnalyticsChart from "@/shared/components/ChartsCard";
+import DateFilter from "@/shared/components/ui/date-filter";
+import SelectFilter from "@/shared/components/ui/select-filter";
 
 interface ITreasuriesFilter {
   treasury_start_at: string;
@@ -66,43 +60,34 @@ export const TreasuriesChart = () => {
         إحصائيات الخزائن
       </h2>
       <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-10">
-        <ChartDate
+        <DateFilter
           value={filters.treasury_start_at}
-          onChange={(date) => handleFilterChange("treasury_start_at", date)}
+          handleFilterChange={handleFilterChange}
+          filterKey="treasury_start_at"
           placeholder="من"
         />
-        <ChartDate
+        <DateFilter
           value={filters.treasury_end_at}
-          onChange={(date) => handleFilterChange("treasury_end_at", date)}
+          handleFilterChange={handleFilterChange}
+          filterKey="treasury_end_at"
           placeholder="إلي"
         />
-        <Select
+
+        <SelectFilter
+          placeholder="الخزنة"
+          handleFilterChange={handleFilterChange}
           value={filters.treasury}
-          onValueChange={(value) =>
-            handleFilterChange("treasury", value === "all" ? "" : value)
-          }
-          dir="rtl"
-        >
-          <SelectTrigger
-            className={`h-11! border-black/20 dark:border-white/40`}
-          >
-            <SelectValue placeholder="الخزينة" className={`py-4 text-white`} />
-          </SelectTrigger>
-          <SelectContent className="bg-card">
-            <SelectItem value="all" className="cursor-pointer py-2.5">
-              الكل
-            </SelectItem>
-            {treasuries?.data.map((treasury) => (
-              <SelectItem
-                key={treasury.id}
-                value={treasury.name}
-                className="cursor-pointer py-2.5"
-              >
-                {treasury.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          filterKey="treasury"
+          options={[
+            { value: "all", label: "الكل" },
+            ...(treasuries?.data.length
+              ? treasuries.data.map((t) => ({
+                  value: t.name.trim(),
+                  label: t.name,
+                }))
+              : []),
+          ]}
+        />
       </div>
       <AnalyticsChart
         datasets={analyticsData?.data.datasets || []}

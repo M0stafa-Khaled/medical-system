@@ -87,15 +87,12 @@ export const LogoutButton = ({
           </AlertDialogTrigger>
           <AlertDialogContent className="rounded-xl">
             <AlertDialogHeader className="gap-4">
-              <AlertDialogTitle className="text-center text-black dark:text-white">
+              <AlertDialogTitle className="text-center">
                 تسجيل الخروج
               </AlertDialogTitle>
               <AlertDialogDescription>
                 هل انت متأكد من{" "}
-                <span className="font-medium text-black dark:text-white">
-                  تسجيل الخروج
-                </span>
-                ؟
+                <span className="font-medium">تسجيل الخروج</span>؟
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

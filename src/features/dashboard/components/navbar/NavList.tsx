@@ -2,10 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { ChevronDown, ChevronRight, Dot } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  linkVariants,
-  navItemsVariants,
-} from "@/shared/animations/navbarAnimations";
+import { linkVariants } from "@/shared/animations/navbarAnimations";
 import { ILink } from "@/shared/types";
 
 interface IProps {
@@ -45,9 +42,8 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
         >
           <div className="flex items-center">
             {hasChildren ? (
-              <motion.div
-                variants={navItemsVariants}
-                className={`flex w-full cursor-pointer items-center justify-between px-4 py-3.5 text-[15px] transition-all duration-300 select-none`}
+              <div
+                className={`hover:bg-primary/15 hover:text-primary flex w-full cursor-pointer items-center justify-between rounded-md px-4 py-3 text-sm transition-all duration-300 select-none`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleLinkExpansion(link.name);
@@ -60,6 +56,7 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                 <motion.button
                   animate={{ rotate: isExpanded ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
+                  className="cursor-pointer"
                 >
                   {isExpanded ? (
                     <ChevronDown size={16} />
@@ -67,10 +64,9 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                     <ChevronRight size={16} />
                   )}
                 </motion.button>
-              </motion.div>
+              </div>
             ) : (
-              <motion.div
-                variants={navItemsVariants}
+              <div
                 className="w-full"
                 onClick={() => setOpenNav && setOpenNav(false)}
               >
@@ -78,9 +74,9 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                   to={link.path || "#"}
                   className={`${
                     isChildLink ? "pr-5" : ""
-                  } flex w-full items-center justify-between gap-3 px-4 py-3.5 text-[15px] transition-all duration-300 ${
+                  } hover:bg-primary/15 hover:text-primary flex w-full items-center justify-between gap-3 rounded-md px-4 py-3 text-sm transition-all duration-300 ${
                     activeLink
-                      ? "bg-primary dark:bg-primary text-white dark:text-white"
+                      ? "bg-primary dark:bg-primary hover:bg-primary! text-white hover:text-white"
                       : ""
                   }`}
                 >
@@ -90,13 +86,13 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                     {link.name}
                   </span>
                 </NavLink>
-              </motion.div>
+              </div>
             )}
           </div>
           <AnimatePresence>
             {hasChildren && isExpanded && (
               <motion.ul
-                className={`pl-${level * 4}`}
+                className={`pl-${level * 4} flex flex-col gap-y-2`}
                 variants={linkVariants}
                 initial="hidden"
                 animate="visible"
@@ -112,16 +108,13 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
   };
 
   return (
-    <motion.ul
-      className={`custom-scrollbar flex h-full max-h-full w-full flex-col justify-start overflow-y-auto ${
-        sidebar ? "" : "lg:flex-row"
+    <ul
+      className={`custom-scrollbar flex h-full max-h-full w-full flex-col justify-start gap-y-2 overflow-y-auto px-2 ${
+        sidebar ? "py-2" : "lg:flex-row"
       }`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
     >
       {renderLinks(links)}
-    </motion.ul>
+    </ul>
   );
 };
 

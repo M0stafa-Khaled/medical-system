@@ -25,7 +25,7 @@ const DoctorBookingsList = ({ bookings }: IProps) => {
       >
         <TableCell
           colSpan={10}
-          className="py-5 text-center text-sm font-medium text-black dark:text-white"
+          className="py-5 text-center text-sm font-medium"
         >
           لا يوجد حجوزات اليوم
         </TableCell>
@@ -43,28 +43,28 @@ const DoctorBookingsList = ({ bookings }: IProps) => {
           variants={tableRowVariants}
           className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
         >
-          <TableCell className="w-20 py-3 text-center text-sm font-medium text-black dark:text-white">
+          <TableCell className="w-20 py-3 text-center text-sm font-medium">
             {booking?.code}
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {truncateText(booking?.patient?.name, 20)}
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium">
             {booking?.patient?.first_phone}
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {booking?.clinic.name}
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             <BookingStatus status={booking.status} />
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium">
             {convertDay(booking?.day, "en")}
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {booking?.start_at}
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {formatDateTime(booking?.booking_date as string)}
           </TableCell>
           <TableCell className="text-center">

@@ -81,12 +81,12 @@ const PatientBookingCard = ({ booking }: IProps) => {
         <Separator className="dark:bg-gray-700" />
         <CardFooter className="flex-col items-start gap-4 px-0 pb-1">
           <div className="flex flex-col items-start gap-3">
-            <div className="flex items-center gap-2 text-black dark:text-white">
+            <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
               <h2 className="text-sm">تاريخ الحجز:</h2>
               <p className="text-sm">{formatDateTime(booking.booking_date!)}</p>
             </div>
-            <div className="flex items-center gap-2 text-black dark:text-white">
+            <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
               <h2 className="text-sm text-nowrap">تاريخ انشاء الحجز:</h2>
               <p className="text-sm">{formatDateTime(booking.created_at!)}</p>

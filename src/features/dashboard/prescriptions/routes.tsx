@@ -1,4 +1,4 @@
-import { ProtectedRoute } from "@/features/auth";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 import PageLoader from "@/shared/components/PageLoader";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { lazy, Suspense } from "react";

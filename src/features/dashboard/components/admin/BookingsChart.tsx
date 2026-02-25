@@ -1,16 +1,10 @@
 import cookieServices from "@/shared/utils/cookieServices";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui/select";
 import { useGetBookingsChart } from "@/features/dashboard/queries";
 import AnalyticsChart from "@/shared/components/ChartsCard";
-import ChartDate from "@/shared/components/ChartDate";
+import DateFilter from "@/shared/components/ui/date-filter";
+import SelectFilter from "@/shared/components/ui/select-filter";
 
 interface IBookingsFilter {
   booking_start_at: string;
@@ -63,55 +57,55 @@ export const BookingsChart = () => {
         إحصائيات الحجوزات
       </h2>
       <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-10">
-        <ChartDate
+        <DateFilter
           value={filters.booking_start_at}
-          onChange={(date) => handleFilterChange("booking_start_at", date)}
+          handleFilterChange={handleFilterChange}
+          filterKey="booking_start_at"
           placeholder="من"
         />
-        <ChartDate
+        <DateFilter
           value={filters.booking_end_at}
-          onChange={(date) => handleFilterChange("booking_end_at", date)}
+          handleFilterChange={handleFilterChange}
+          filterKey="booking_end_at"
           placeholder="إلي"
         />
-        <Select
+
+        <SelectFilter
           value={filters.booking_status}
-          onValueChange={(value) =>
-            handleFilterChange("booking_status", value === "all" ? "" : value)
-          }
-          dir="rtl"
-        >
-          <SelectTrigger
-            className={`h-11! border-black/20 dark:border-white/40`}
-          >
-            <SelectValue
-              placeholder="الحالة"
-              className={`text-muted-foreground py-4`}
-            />
-          </SelectTrigger>
-          <SelectContent className="bg-card">
-            <SelectItem value="all" className="cursor-pointer py-2.5">
-              الكل
-            </SelectItem>
-            <SelectItem value="pending" className="cursor-pointer py-2.5">
-              قيد الانتظار
-            </SelectItem>
-            <SelectItem value="completed" className="cursor-pointer py-2.5">
-              مكتمل
-            </SelectItem>
-            <SelectItem value="collected" className="cursor-pointer py-2.5">
-              تم التحصيل
-            </SelectItem>
-            <SelectItem value="cancelled" className="cursor-pointer py-2.5">
-              ملغي
-            </SelectItem>
-            <SelectItem value="no-show" className="cursor-pointer py-2.5">
-              لم يحضر
-            </SelectItem>
-            <SelectItem value="ended" className="cursor-pointer py-2.5">
-              منتهى
-            </SelectItem>
-          </SelectContent>
-        </Select>
+          filterKey="booking_status"
+          placeholder="الحالة"
+          handleFilterChange={handleFilterChange}
+          options={[
+            {
+              value: "all",
+              label: "الكل",
+            },
+            {
+              value: "pending",
+              label: "قيد الانتظار",
+            },
+            {
+              value: "completed",
+              label: "مكتمل",
+            },
+            {
+              value: "collected",
+              label: "تم التحصيل",
+            },
+            {
+              value: "cancelled",
+              label: "ملغي",
+            },
+            {
+              value: "no-show",
+              label: "لم يحضر",
+            },
+            {
+              value: "ended",
+              label: "منتهي",
+            },
+          ]}
+        />
       </div>
       <AnalyticsChart
         datasets={analyticsData?.data.datasets || []}

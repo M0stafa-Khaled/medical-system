@@ -239,11 +239,7 @@ const PatientDetails = () => {
 
         <motion.div variants={itemVariants}>
           {canViewPatientBalances && (
-            <Tabs
-              defaultValue={"balances"}
-              dir="rtl"
-              className="my-2 text-black dark:text-white"
-            >
+            <Tabs defaultValue={"balances"} dir="rtl" className="my-2">
               <TabsList className="h-auto w-full gap-2">
                 {canViewPatientBalances && (
                   <TabsTrigger

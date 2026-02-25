@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 import { Form } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -29,6 +25,7 @@ import InfoField from "@/shared/components/InfoField";
 import { RenderTransactionFormFields } from "./RenderTransactionFormFields";
 import { TRANSACTION_FORM_INPUTS } from "../constants";
 import { PAYMENT_METHODS } from "@/shared/constants";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 interface IProps {
   booking: IBooking;
@@ -147,7 +144,7 @@ const CreateTransaction = ({ booking }: IProps) => {
         title="تحصيل"
         description={{
           text: `تحصيل من حجز قم ${booking.code} للمريض ${booking.patient.name}`,
-          color: "text-black dark:text-white",
+          color: "",
         }}
         showFooter={false}
         maxWidth="lg"
@@ -188,7 +185,7 @@ const CreateTransaction = ({ booking }: IProps) => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-2 text-black dark:text-white"
+            className="space-y-2"
           >
             <Button className="h-auto w-full gap-2 px-0 py-0 text-sm">
               <Link
@@ -231,13 +228,12 @@ const CreateTransaction = ({ booking }: IProps) => {
               )}
             </motion.div>
 
-            <AlertDialogFooter className="justify-start gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
-                إلغاء
-              </AlertDialogCancel>
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
               <Button
                 type="submit"
                 disabled={isPending}
@@ -246,7 +242,7 @@ const CreateTransaction = ({ booking }: IProps) => {
                 تحصيل
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

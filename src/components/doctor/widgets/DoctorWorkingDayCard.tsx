@@ -11,7 +11,7 @@ export const DoctorWorkingDayCard = ({
 }: IProps) => {
   return (
     <div className="mb-5 space-y-2">
-      <div className="flex flex-row items-center justify-between gap-2 wrap-break-word break-all text-black dark:text-white">
+      <div className="flex flex-row items-center justify-between gap-2 wrap-break-word break-all">
         <h2 className="flex items-center justify-center gap-2">
           <Calendar className="h-5 w-5" />
           {convertDayFromEnToAr(day)}

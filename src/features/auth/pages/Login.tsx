@@ -14,7 +14,7 @@ const Login = () => {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1, duration: 0.3 }}
-        className="w-full max-w-md"
+        className="w-full max-w-sm"
       >
         <div className="mb-6 flex flex-col items-center justify-center gap-2">
           <img src="/images/logo.svg" alt="logo" className="w-16" />

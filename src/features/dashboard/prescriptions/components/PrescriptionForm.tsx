@@ -131,7 +131,6 @@ export const PrescriptionForm = ({ action, prescription }: IProps) => {
     }
   }, [clinicId, form]);
 
-  console.log(form.getValues());
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
     if (
       !bookingId &&
