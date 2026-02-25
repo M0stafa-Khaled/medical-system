@@ -38,7 +38,7 @@ const PatientBookingsHeader = ({ filters, isLoading, setFilters }: IProps) => {
               <FiPlus size={20} />
             </Link>
           </Button>
-          <div className="text-lg font-semibold text-black dark:text-white">
+          <div className="text-lg font-semibold">
             {format(new Date(), "EEEE, d MMMM yyyy", { locale: ar })}
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Variants } from "framer-motion";
 
-export const linkVariants:Variants = {
+export const linkVariants: Variants = {
   hidden: { opacity: 0, height: 0 },
   visible: {
     opacity: 1,
@@ -39,7 +39,7 @@ export const navVariants: Variants = {
   },
 };
 
-export const menuIconVariants:Variants = {
+export const menuIconVariants: Variants = {
   hidden: {
     rotate: 45,
     opacity: 0,
@@ -53,7 +53,7 @@ export const menuIconVariants:Variants = {
   },
 };
 
-export const sidebarVariants:Variants = {
+export const sidebarVariants: Variants = {
   hidden: { opacity: 0, x: -50 },
   visible: {
     opacity: 1,
@@ -66,7 +66,7 @@ export const sidebarVariants:Variants = {
   },
 };
 
-export const logoVariants:Variants = {
+export const logoVariants: Variants = {
   hidden: { scale: 0.8, opacity: 0 },
   visible: {
     scale: 1,
@@ -75,18 +75,6 @@ export const logoVariants:Variants = {
       type: "spring",
       stiffness: 300,
       damping: 10,
-    },
-  },
-};
-
-export const navItemsVariants:Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
     },
   },
 };

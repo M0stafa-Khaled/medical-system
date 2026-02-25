@@ -46,9 +46,7 @@ const PatientBookingsFilters = ({ filters, setFilters }: IProps) => {
       >
         <SelectTrigger
           className={`h-12! border-black/20 dark:border-white/40 ${
-            filters.clinic
-              ? "text-black dark:text-white"
-              : "text-muted-foreground"
+            filters.clinic ? "" : "text-muted-foreground"
           }`}
         >
           <SelectValue
@@ -168,9 +166,7 @@ const PatientBookingsFilters = ({ filters, setFilters }: IProps) => {
       >
         <SelectTrigger
           className={`h-12! border-black/20 dark:border-white/40 ${
-            filters.status
-              ? "text-black dark:text-white"
-              : "text-muted-foreground"
+            filters.status ? "" : "text-muted-foreground"
           }`}
         >
           <SelectValue

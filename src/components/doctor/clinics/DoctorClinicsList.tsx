@@ -24,7 +24,7 @@ const DoctorClinicsList = () => {
           </motion.div>
         ))
       ) : !clinics?.data.length ? (
-        <p className="py-5 text-center text-sm font-medium text-black dark:text-white">
+        <p className="py-5 text-center text-sm font-medium">
           لا يوجد لديك عيادات
         </p>
       ) : (

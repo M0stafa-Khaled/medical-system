@@ -21,10 +21,7 @@ const DoctorPrescriptionsList = ({ prescriptions }: IProps) => {
         variants={tableRowVariants}
         className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
       >
-        <TableCell
-          colSpan={6}
-          className="py-5 text-center text-sm font-medium text-black dark:text-white"
-        >
+        <TableCell colSpan={6} className="py-5 text-center text-sm font-medium">
           لا يوجد روشتات
         </TableCell>
       </motion.tr>
@@ -41,18 +38,18 @@ const DoctorPrescriptionsList = ({ prescriptions }: IProps) => {
           variants={tableRowVariants}
           className="dark:border-muted dark:bg-dark/40! dark:hover:bg-dark! bg-white/40! transition-all duration-300 hover:bg-gray-200!"
         >
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {truncateText(patient?.name, 20)}
           </TableCell>
 
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {clinic.name}
           </TableCell>
 
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {date}
           </TableCell>
-          <TableCell className="py-3 text-center text-sm font-medium text-nowrap text-black dark:text-white">
+          <TableCell className="py-3 text-center text-sm font-medium text-nowrap">
             {truncateText(note!, 20) || "لا يوجد"}
           </TableCell>
 

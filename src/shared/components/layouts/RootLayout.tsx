@@ -45,7 +45,6 @@ const RootLayout = () => {
   const { isLoading: authLoading } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    console.log("auth check");
     (async () => {
       const action = await dispatch(checkAuth());
       if (checkAuth.fulfilled.match(action)) {

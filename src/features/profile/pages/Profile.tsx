@@ -86,7 +86,7 @@ const Profile = () => {
       variants={containerVariants}
       className="dark:bg-background min-h-screen bg-[#e8f2fc] pt-20 pb-10 text-white"
     >
-      <div className="container max-w-7xl space-y-4 text-black dark:text-white">
+      <div className="container max-w-7xl space-y-4">
         {/* Header */}
         <ProfileHeader
           name={name!}

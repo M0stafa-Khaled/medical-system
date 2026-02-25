@@ -7,16 +7,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { containerVariants } from "@/shared/animations";
-import {
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormField } from "@/shared/components/ui/form";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
 import { handleResErr } from "@/shared/utils/handleResError";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 interface IProps {
   code: string;
@@ -114,22 +110,21 @@ export const RefundTransaction = ({ code, id }: IProps) => {
               )}
             />
 
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="bg-slate-100! text-slate-900! hover:bg-slate-200/70! hover:text-slate-900!"
-              >
-                إلغاء
-              </AlertDialogCancel>
-              <AlertDialogAction
-                className="bg-red-500/15! text-red-500! hover:bg-red-500/10! hover:text-red-800!"
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
+              <Button
+                className="btn-destructive"
                 onClick={() => onSubmit(form.getValues())}
                 disabled={isPending}
               >
                 استرداد
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
-              </AlertDialogAction>
-            </AlertDialogFooter>
+              </Button>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

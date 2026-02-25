@@ -69,9 +69,11 @@ export const Modal = ({
         {children}
 
         {showFooter && (
-          <DialogFooter>
-            <DialogClose onClick={onCancel} className="h-auto py-2.5">
-              إلغاء
+          <DialogFooter className="mt-3">
+            <DialogClose asChild>
+              <Button onClick={onCancel} variant={"outline"}>
+                إلغاء
+              </Button>
             </DialogClose>
             {onConfirm && (
               <Button

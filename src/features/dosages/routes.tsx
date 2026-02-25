@@ -1,7 +1,7 @@
 import { PERMISSIONS } from "@/shared/enums/permissions";
-import { ProtectedRoute } from "../auth";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/shared/components/PageLoader";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 
 const Dosages = lazy(() => import("./pages/Dosages"));
 export const dosagesRoutes = [

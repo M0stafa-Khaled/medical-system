@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
+
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -25,6 +22,7 @@ import { useGetAllClinics } from "@/features/dashboard/clinics";
 import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
 import { useGetDoctorActions } from "@/features/dashboard/doctors";
 import { useGetAllClinicDoctors, useGetAvailableBookingsTime } from "@/shared";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 const CreatePatientBooking = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -182,7 +180,7 @@ const CreatePatientBooking = () => {
             animate="visible"
             variants={containerVariants}
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 text-black dark:text-white"
+            className="space-y-6"
           >
             <motion.div
               className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2 md:gap-y-5 dark:text-white"
@@ -211,22 +209,17 @@ const CreatePatientBooking = () => {
               ))}
             </motion.div>
 
-            <AlertDialogFooter className="justify-start gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
-                إلغاء
-              </AlertDialogCancel>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
+              <Button type="submit" disabled={isPending}>
                 إضافة حجز
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

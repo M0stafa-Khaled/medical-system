@@ -1,5 +1,5 @@
 import { PERMISSIONS } from "@/shared/enums/permissions";
-import { ProtectedRoute } from "@/features/auth";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 import { lazy, Suspense } from "react";
 import PageLoader from "@/shared/components/PageLoader";
 

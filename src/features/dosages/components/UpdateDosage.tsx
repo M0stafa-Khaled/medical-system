@@ -1,10 +1,6 @@
 import { Button } from "@/shared/components/ui/button";
 import { useEffect, useState } from "react";
 import { Form, FormField } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -18,6 +14,7 @@ import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useUpdateDosage } from "../queriesAndMutations";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 interface IProps {
   id: number;
@@ -112,13 +109,17 @@ export const UpdateDosage = ({ id, name }: IProps) => {
               />
             </motion.div>
 
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel>إلغاء</AlertDialogCancel>
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
               <Button type="submit" disabled={isPending}>
                 حفظ
                 {isPending && <Loader2 className="animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

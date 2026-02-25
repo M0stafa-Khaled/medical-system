@@ -24,7 +24,7 @@ const AuthLayout = () => {
   }
 
   return (
-    <main className="auth-scroll-bar flex min-h-screen items-center justify-center bg-[url(/images/login-bg.webp)] bg-cover bg-right bg-no-repeat">
+    <main className="auth-scroll-bar flex min-h-screen items-center justify-center bg-[url(/images/auth-bg.webp)] bg-cover bg-right bg-no-repeat">
       <div
         className={`px-2 sm:container ${
           !path.includes("register") ? "md:max-w-3xl lg:max-w-7xl" : ""
@@ -55,7 +55,7 @@ const AuthLayout = () => {
           >
             <div className="flex max-w-sm items-center justify-center">
               <img
-                src="/images/login.webp"
+                src="/images/auth.webp"
                 alt="login"
                 className="mx-auto w-56! md:w-80!"
                 width={"60%"}

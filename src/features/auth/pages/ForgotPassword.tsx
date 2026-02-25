@@ -14,7 +14,7 @@ const ForgotPassword = () => {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1, duration: 0.3 }}
-        className="flex flex-col items-center justify-center"
+        className="mx-auto flex max-w-sm flex-col items-center justify-center"
       >
         <div className="mb-6 flex max-w-md flex-col items-center justify-center gap-2 md:max-w-sm">
           <img src="/images/logo.svg" alt="logo" className="w-20" />

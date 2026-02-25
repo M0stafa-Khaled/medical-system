@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { Form } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -19,6 +15,7 @@ import { useCreateDoctorAction } from "../../queriesAndMutations";
 import { RenderDoctorFormFields } from "../RenderDoctorFormFields";
 import { doctorActionSchema } from "../../working-days/schema";
 import { DOCTOR_ACTION_INPUTS } from "../../constants";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 export const CreateAction = ({ doctorId }: { doctorId: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +76,7 @@ export const CreateAction = ({ doctorId }: { doctorId: string }) => {
         <Form {...form}>
           <motion.form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-5 text-black dark:text-white"
+            className="space-y-5"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -93,13 +90,12 @@ export const CreateAction = ({ doctorId }: { doctorId: string }) => {
                 />
               </motion.div>
             ))}
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
-                إلغاء
-              </AlertDialogCancel>
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
               <Button
                 type="submit"
                 disabled={isPending}
@@ -108,7 +104,7 @@ export const CreateAction = ({ doctorId }: { doctorId: string }) => {
                 إضافة
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

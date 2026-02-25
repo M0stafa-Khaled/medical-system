@@ -11,7 +11,7 @@ import { format } from "date-fns";
 interface IProps {
   handleFilterChange: (key: string, value: string | null) => void;
   filterKey: string;
-  value?: string | null;
+  value: string | null;
   placeholder?: string;
 }
 const DateFilter = ({
@@ -25,6 +25,7 @@ const DateFilter = ({
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
+          size={"lg"}
           className={
             "hover:bg-input bg-input/30 hover:text-foreground border-border h-auto w-full justify-start"
           }

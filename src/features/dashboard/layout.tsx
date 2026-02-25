@@ -22,6 +22,10 @@ import { HiOutlineUsers } from "react-icons/hi2";
 import PathIndicator from "./components/PathIndicator";
 import Sidebar from "./components/Sidebar";
 import { ROUTES_NAME } from "@/shared/constants";
+import { NotificationsMenu } from "../notifications";
+import { ProfileMenu } from "../profile";
+import ToggleTheme from "@/shared/components/ToggleTheme";
+import cookieServices from "@/shared/utils/cookieServices";
 
 const DashboardLayout = () => {
   // Codes
@@ -320,6 +324,10 @@ const DashboardLayout = () => {
     },
   ];
 
+  const user = cookieServices.getUser();
+  const canReceiveNotifications = useHasPermission(
+    PERMISSIONS.RECEIVE_NOTIFICATIONS
+  );
   return (
     <div className="flex">
       <ScrollRestoration
@@ -330,14 +338,28 @@ const DashboardLayout = () => {
           return location.key;
         }}
       />
+
       <div className="fixed inset-y-0 right-0">
         <Sidebar links={NAV_LINKS} />
       </div>
-      <div className="bg-background border-border flex min-h-screen flex-1 flex-col overflow-hidden lg:mr-67.5 lg:border-r">
+
+      <div className="bg-background w-full lg:w-auto border-border flex min-h-screen flex-1 flex-col lg:mr-67.5 lg:border-r">
         <Navbar links={NAV_LINKS} dashboard />
-        <div className="container">
-          <main className="mt-20 flex-1 lg:mt-6">
-            <PathIndicator routeNames={ROUTES_NAME} />
+
+        <div className="bg-background sticky top-0 z-50 container hidden h-16 w-full items-center justify-between border-b lg:flex">
+          <PathIndicator routeNames={ROUTES_NAME} />
+
+          <div className="flex items-center justify-center gap-4">
+            {user?.role !== "doctor" && canReceiveNotifications && (
+              <NotificationsMenu />
+            )}
+            <ProfileMenu />
+            <ToggleTheme />
+          </div>
+        </div>
+
+        <div className="container mt-15 lg:mt-6">
+          <main className="flex-1">
             <div className="my-3">
               <Outlet />
             </div>

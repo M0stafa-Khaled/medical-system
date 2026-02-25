@@ -3,6 +3,7 @@ import { IDoctor, IDoctorAction } from "../doctors/types";
 import { IEmployee } from "../employees/types";
 import { IClinic } from "../clinics/types";
 import { IWorkingDay } from "../doctors/working-days/types";
+import { IPatient } from "../patients/types";
 
 export interface IBooking {
   id: number;

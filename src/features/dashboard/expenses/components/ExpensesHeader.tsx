@@ -53,7 +53,7 @@ export const ExpensesHeader = () => {
       <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div className="flex flex-col-reverse justify-between gap-4 md:flex-row md:items-center">
           {canCreateExpense && <CreateExpense />}
-          <div className="text-lg font-semibold text-black dark:text-white">
+          <div className="text-lg font-semibold">
             {format(new Date(), "EEEE, d MMMM yyyy", { locale: ar })}
           </div>
         </div>

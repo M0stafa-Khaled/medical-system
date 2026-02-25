@@ -78,7 +78,7 @@ const MultiSelectFormItem = ({
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted relative flex h-auto min-h-11! w-full flex-wrap items-center justify-start gap-1 overflow-hidden pl-8! text-black hover:text-black dark:text-white dark:hover:text-white`}
+              className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted hover: relative flex h-auto min-h-11! w-full flex-wrap items-center justify-start gap-1 overflow-hidden pl-8! text-black dark:hover:text-white`}
             >
               {field.value &&
               Array.isArray(field.value) &&
@@ -86,7 +86,7 @@ const MultiSelectFormItem = ({
                 ? field.value.map((item, idx: number) => (
                     <span
                       key={idx}
-                      className="rounded-full bg-blue-400/20 px-2 py-1 text-sm text-black dark:text-white"
+                      className="rounded-full bg-blue-400/20 px-2 py-1 text-sm"
                     >
                       {options
                         .find((option) => option.value === item)

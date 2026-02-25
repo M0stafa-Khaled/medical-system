@@ -50,7 +50,7 @@ const SelectAndWriteFormItem = ({ options, input, field }: IProps) => {
         <Button
           variant="outline"
           role="combobox"
-          className="border-muted h-12! w-full justify-between overflow-hidden text-black dark:text-white"
+          className="border-muted h-12! w-full justify-between overflow-hidden"
         >
           {field.value
             ? options.find((option) => option.value === field.value)?.label ||
@@ -60,7 +60,7 @@ const SelectAndWriteFormItem = ({ options, input, field }: IProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="z-1000 w-[300px] border-black/20 p-0 sm:w-[400px] md:w-[370px] dark:border-white/40">
-        <Command className="bg-foreground text-black dark:text-white">
+        <Command className="bg-foreground">
           <CommandInput
             placeholder="ابحث أو اكتب جديد"
             value={searchValue}

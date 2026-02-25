@@ -3,7 +3,7 @@ import NotFound from "@/pages/NotFound";
 import { authRoutes } from "@/features/auth";
 import { dashboardRoutes } from "@/features/dashboard";
 import RootLayout from "@/shared/components/layouts/RootLayout";
-import { ProtectedRoute } from "@/features/auth";
+import { ProtectedRoute } from "@/app/ProtectedRoute";
 import { Landing } from "@/features/landing";
 import { Profile } from "@/features/profile";
 

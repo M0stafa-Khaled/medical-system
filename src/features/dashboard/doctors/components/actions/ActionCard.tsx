@@ -31,10 +31,7 @@ export const ActionCard = ({ action, doctorId }: IProps) => {
         </CardHeader>
         <CardContent className="p-4 pt-0">
           <p className="text-black/70 dark:text-white/70">
-            السعر:{" "}
-            <span className="text-black dark:text-white">
-              {numberToPrice(action.price)}
-            </span>
+            السعر: <span className="">{numberToPrice(action.price)}</span>
           </p>
         </CardContent>
       </div>

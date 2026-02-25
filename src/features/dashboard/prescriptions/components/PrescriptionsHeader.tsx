@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router";
-import PrescriptionsFilters from "./PrescriptionsFilters";
+import { PrescriptionsFilters } from "./PrescriptionsFilters";
 
 export const PrescriptionsHeader = () => {
   const canCreatePrescription = useHasPermission(PERMISSIONS.ADD_PRESCRIPTION);

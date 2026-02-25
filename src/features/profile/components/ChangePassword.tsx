@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { Form, FormField } from "@/shared/components/ui/form";
-import {
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/shared/components/ui/alert-dialog";
 import { ControllerRenderProps, FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -18,6 +14,7 @@ import { handleResErr } from "@/shared/utils/handleResError";
 import { changePasswordSchema } from "../schema";
 import InputFormItem from "@/components/forms/formItems/InputFormItem";
 import { CHANGE_PASSWORD_INPUTS } from "../constants";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 export const ChangePassword = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -107,13 +104,12 @@ export const ChangePassword = () => {
               </motion.div>
             ))}
 
-            <AlertDialogFooter className="justify-start! gap-2 text-start">
-              <AlertDialogCancel
-                onClick={handleCloseModal}
-                className="h-auto py-2.5 text-black dark:text-white"
-              >
-                إلغاء
-              </AlertDialogCancel>
+            <DialogFooter className="mt-3">
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
               <Button
                 type="submit"
                 disabled={isPending}
@@ -122,7 +118,7 @@ export const ChangePassword = () => {
                 تحديث
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
-            </AlertDialogFooter>
+            </DialogFooter>
           </motion.form>
         </Form>
       </Modal>

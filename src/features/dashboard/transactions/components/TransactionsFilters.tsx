@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { ITransactionsFilter } from "@/features/dashboard/transactions/types";
 import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { useMemo } from "react";
@@ -8,8 +7,7 @@ import SelectFilter from "@/shared/components/ui/select-filter";
 import DateFilter from "@/shared/components/ui/date-filter";
 
 export const TransactionsFilters = () => {
-  const token = cookieServices.getToken()!;
-  const { data: treasuries } = useGetAllTreasuries({ token });
+  const { data: treasuries } = useGetAllTreasuries({});
   const [searchParams, setSearchParams] = useSearchParams();
 
   const setFilters = (newFilters: ITransactionsFilter) => {
@@ -77,12 +75,15 @@ export const TransactionsFilters = () => {
         placeholder="الخزنة"
         handleFilterChange={handleFilterChange}
         filterKey="treasury"
-        options={
-          treasuries?.data.map((treasury) => ({
-            label: treasury.name,
-            value: treasury.name,
-          })) || []
-        }
+        options={[
+          { value: "all", label: "الكل" },
+          ...(treasuries?.data.length
+            ? treasuries.data.map((t) => ({
+                value: t.name.trim(),
+                label: t.name,
+              }))
+            : []),
+        ]}
         value={filters.treasury}
       />
 

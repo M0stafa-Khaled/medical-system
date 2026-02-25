@@ -16,7 +16,7 @@ import { useCreateExpense } from "../queriesAndMutations";
 import { createExpenseSchema } from "../schema";
 import RenderExpensesFormFields from "./RenderExpensesFormFields";
 import { EXPENSE_FORM_INPUTS } from "../constants";
-import { DialogFooter } from "@/shared/components/ui/dialog";
+import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 export const CreateExpense = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,7 +97,7 @@ export const CreateExpense = () => {
             variants={containerVariants}
           >
             <motion.div
-              className="grid grid-cols-1 gap-3 text-black md:grid-cols-2 dark:text-white"
+              className="grid grid-cols-1 gap-3 md:grid-cols-2"
               variants={containerVariants}
             >
               {EXPENSE_FORM_INPUTS.map((input, idx) => (
@@ -122,9 +122,11 @@ export const CreateExpense = () => {
             </motion.div>
 
             <DialogFooter className="mt-3">
-              <Button onClick={handleCloseModal} variant={"outline"}>
-                إلغاء
-              </Button>
+              <DialogClose asChild>
+                <Button onClick={handleCloseModal} variant={"outline"}>
+                  إلغاء
+                </Button>
+              </DialogClose>
               <Button type="submit" disabled={isPending}>
                 إضافة
                 {isPending && <Loader2 className="ml-2 animate-spin" />}

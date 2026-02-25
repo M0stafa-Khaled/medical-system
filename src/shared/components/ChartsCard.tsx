@@ -66,6 +66,7 @@ const AnalyticsChart = ({ datasets, labels, isLoading }: IProps) => {
   const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
+
     plugins: {
       legend: {
         position: "top",

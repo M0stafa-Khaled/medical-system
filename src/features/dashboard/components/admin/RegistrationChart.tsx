@@ -1,9 +1,9 @@
 import cookieServices from "@/shared/utils/cookieServices";
-import AnalyticsChart from "../../../../shared/components/ChartsCard";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
-import ChartDate from "../../../../shared/components/ChartDate";
 import { useGetRegistrationChart } from "@/features/dashboard/queries";
+import DateFilter from "@/shared/components/ui/date-filter";
+import AnalyticsChart from "@/shared/components/ChartsCard";
 
 interface IRegistrationFilter {
   register_start_at: string;
@@ -52,16 +52,18 @@ export const RegistrationChart = () => {
       <h2 className="text-center font-semibold md:text-start md:text-lg">
         إحصائيات المستخدمين الجدد
       </h2>
-      <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:gap-x-10">
-        <ChartDate
+      <div className="grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2">
+        <DateFilter
           value={filters.register_start_at}
-          onChange={(date) => handleFilterChange("register_start_at", date)}
           placeholder="من"
+          handleFilterChange={handleFilterChange}
+          filterKey="register_start_at"
         />
-        <ChartDate
+        <DateFilter
           value={filters.register_end_at}
-          onChange={(date) => handleFilterChange("register_end_at", date)}
           placeholder="إلي"
+          handleFilterChange={handleFilterChange}
+          filterKey="register_end_at"
         />
       </div>
       <AnalyticsChart
