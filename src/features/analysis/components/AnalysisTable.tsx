@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import cookieServices from "@/shared/utils/cookieServices";
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
@@ -9,7 +8,6 @@ import { DataTable } from "@/shared/components/data-table";
 import { useAnalysisColumns } from "./AnalysisColumns";
 
 export const AnalysisTable = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const search = useDebounce(searchParams.get("q"), 500)!;
@@ -18,7 +16,7 @@ export const AnalysisTable = () => {
     data: analysis,
     isLoading,
     isError,
-  } = useGetAllAnalysis({ page, token, search });
+  } = useGetAllAnalysis({ page, search });
 
   useEffect(() => {
     if (analysis?.message && !analysis.status) toast.error(analysis.message);

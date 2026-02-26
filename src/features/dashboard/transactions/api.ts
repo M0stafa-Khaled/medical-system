@@ -69,7 +69,7 @@ export const getPatientLastVisits = async ({
   doctorId: string;
   patientId: string;
 }): Promise<IPatientLastVisits> =>
-  await axiosAPI.get(`/${patientId}/transactions/${doctorId}`);
+  (await axiosAPI.get(`/${patientId}/transactions/${doctorId}`)).data;
 
 export const getAllPatientBalancesTransactions = async ({
   patientId,

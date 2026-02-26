@@ -6,8 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   menuIconVariants,
   navVariants,
-  sidebarVariants,
-  logoVariants,
 } from "@/shared/animations/navbarAnimations";
 import { ILink } from "@/shared/types";
 import cookieServices from "@/shared/utils/cookieServices";
@@ -38,10 +36,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
     );
   }, []);
   return (
-    <motion.header
-      initial="hidden"
-      animate="visible"
-      variants={sidebarVariants}
+    <header
       className={`z-50 ${
         dashboard && "lg:hidden"
       } fixed inset-x-0 top-0 w-full`}
@@ -98,12 +93,9 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
                 <ToggleTheme />
               </div>
               <Link to={"/"} className="flex w-8">
-                <motion.img
+                <img
                   src={"/images/logo.svg"}
                   alt="logo"
-                  variants={logoVariants}
-                  initial="hidden"
-                  animate="visible"
                   className="h-full w-full cursor-pointer"
                 />
               </Link>
@@ -128,7 +120,7 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
           </AnimatePresence>
         </nav>
       </div>
-    </motion.header>
+    </header>
   );
 };
 

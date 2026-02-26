@@ -1,8 +1,8 @@
 import axiosAPI from "@/shared/lib/axios";
 import { type IStatusMsg } from "@/shared/types";
-import { IChangePassword, IResponseProfile, IUpdateProfile } from "./types";
+import { IChangePassword, IProfileRes, IUpdateProfile } from "./types";
 
-export const getUserProfile = async (): Promise<IResponseProfile> =>
+export const getUserProfile = async (): Promise<IProfileRes> =>
   (await axiosAPI.get("/me")).data;
 
 export const updateProfile = async ({

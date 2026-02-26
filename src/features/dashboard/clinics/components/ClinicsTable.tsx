@@ -1,6 +1,5 @@
 import { useGetAllClinics } from "../queriesAndMutations";
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
-import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import useHasPermission from "@/shared/hooks/useHasPermission";
@@ -9,8 +8,7 @@ import { DataTable } from "@/shared/components/data-table";
 import { useClinicsColumns } from "@/features/dashboard/clinics/components/ClinicsColumns";
 
 export const ClinicsTable = () => {
-  const token = cookieServices.getToken()!;
-  const { data: clinics, isLoading, isError } = useGetAllClinics({ token });
+  const { data: clinics, isLoading, isError } = useGetAllClinics({});
 
   useEffect(() => {
     if (clinics?.message && !clinics?.status) toast.error(clinics.message);

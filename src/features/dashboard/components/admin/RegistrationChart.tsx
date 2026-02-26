@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { useGetRegistrationChart } from "@/features/dashboard/queries";
@@ -10,7 +9,6 @@ interface IRegistrationFilter {
   register_end_at: string;
 }
 export const RegistrationChart = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters: IRegistrationFilter = useMemo(
@@ -22,7 +20,6 @@ export const RegistrationChart = () => {
   );
 
   const { data: analyticsData, isLoading } = useGetRegistrationChart({
-    token,
     filter: {
       ...(filters.register_start_at && { start_at: filters.register_start_at }),
       ...(filters.register_end_at && { end_at: filters.register_end_at }),

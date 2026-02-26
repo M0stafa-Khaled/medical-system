@@ -1,30 +1,5 @@
 import { lazy } from "react";
 
-// ---- Reports
-export const BookingsReports = lazy(
-  () => import("../features/dashboard/reports/pages/BookingsReports")
-);
-export const ExpensesReports = lazy(
-  () => import("../features/dashboard/reports/pages/ExpensesReports")
-);
-export const PatientBalancesReports = lazy(
-  () => import("./dashboard/reports/patientBalancesReports")
-);
-export const PatientsReports = lazy(
-  () => import("../features/dashboard/reports/pages/PatientsReports")
-);
-export const PrescriptionsReports = lazy(
-  () => import("./dashboard/reports/prescriptionsReports")
-);
-export const TransactionsReports = lazy(
-  () => import("../features/dashboard/reports/pages/TransactionsReports")
-);
-export const TransfersReports = lazy(
-  () => import("../features/dashboard/reports/pages/TransfersReports")
-);
-export const TreasuriesReports = lazy(
-  () => import("../features/dashboard/reports/pages/TreasuriesReports")
-);
 // ---- Settings
 export const Settings = lazy(() => import("./dashboard/settings"));
 // Doctor

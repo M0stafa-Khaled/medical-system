@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { useGetEmployeeTreasuriesChart } from "@/features/dashboard/queries";
@@ -13,7 +12,6 @@ interface ITreasuriesFilter {
 }
 
 export const EmployeeTreasuriesChart = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters: ITreasuriesFilter = useMemo(
@@ -29,7 +27,6 @@ export const EmployeeTreasuriesChart = () => {
     isLoading,
     failureReason,
   } = useGetEmployeeTreasuriesChart({
-    token,
     filter: {
       ...(filters.treasury_start_at && { start_at: filters.treasury_start_at }),
       ...(filters.treasury_end_at && { end_at: filters.treasury_end_at }),

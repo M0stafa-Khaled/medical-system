@@ -10,14 +10,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { type ICreateEmployee } from "./types";
 import { type IGetWithParams } from "@/shared/types";
 
-export const useGetAllEmployees = ({
-  token,
-  page = 1,
-  search,
-}: IGetWithParams) =>
+export const useGetAllEmployees = ({ page = 1, search }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_EMPLOYEES, page, search],
-    queryFn: () => getAllEmployees({ token, page, search }),
+    queryFn: () => getAllEmployees({ page, search }),
   });
 
 export const useGetEmployeeById = ({ id }: { id: string }) =>

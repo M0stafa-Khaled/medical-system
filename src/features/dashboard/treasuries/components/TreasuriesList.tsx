@@ -1,5 +1,4 @@
 import useDebounce from "@/shared/hooks/useDebounce";
-import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { TreasuryCard } from "./TreasuryCard";
@@ -10,7 +9,6 @@ import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndM
 import { useSearchParams } from "react-router";
 
 export const TreasuriesList = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const search = useDebounce(searchParams.get("q"), 500)!;
   const {
@@ -18,7 +16,6 @@ export const TreasuriesList = () => {
     isLoading,
     isError,
   } = useGetAllTreasuries({
-    token,
     search,
   });
 

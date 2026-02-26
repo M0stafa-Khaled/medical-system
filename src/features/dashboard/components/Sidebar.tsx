@@ -22,17 +22,6 @@ const Sidebar = ({ links }: IProps) => {
   return (
     <aside className="fixed inset-y-0 right-0 hidden h-full lg:block">
       <div className="flex h-screen max-w-87.5 min-w-67.5 flex-col">
-        <div className="flex items-center justify-center p-3">
-          <img
-            src={"/images/logo.svg"}
-            alt="logo"
-            loading="lazy"
-            className="flex w-full max-w-10 items-center justify-center"
-          />
-        </div>
-
-        <Separator />
-
         <div className="flex items-center gap-2 px-4 py-2">
           <img src="/images/logo.svg" alt="logo" className="w-9" />
           <div>

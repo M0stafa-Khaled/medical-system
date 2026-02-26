@@ -1,5 +1,4 @@
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
-import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router";
@@ -12,7 +11,6 @@ import { DataTable } from "@/shared/components/data-table";
 import { useTransactionsColumns } from "./TransactionsColumns";
 
 export const TransactionTable = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
 
@@ -41,7 +39,6 @@ export const TransactionTable = () => {
     isLoading,
     isError,
   } = useGetAllTransactions({
-    token,
     page,
     filter: {
       ...(filters.doctor && { doctor }),

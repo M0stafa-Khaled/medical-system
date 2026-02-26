@@ -24,12 +24,10 @@ const NotificationCard = ({ notification }: IProps) => {
   return (
     <div
       className={`border-primary/10 border-b p-3 ${
-        notification.last_view
-          ? "dark:bg-dark bg-white"
-          : "bg-[#eae8ec] dark:bg-slate-900/90"
+        notification.last_view ? "" : "bg-[#eae8ec] dark:bg-slate-900/90"
       }`}
     >
-      <div className="space-y-2">
+      <div className="space-y-1">
         <div className="flex items-center gap-2">
           <div className="relative">
             <img
@@ -47,30 +45,30 @@ const NotificationCard = ({ notification }: IProps) => {
             {notification.data.sender.name}
           </h3>
         </div>
-        <div className="space-y-3 pr-4">
+        <div className="space-y-1 pr-4">
           {/* Patient */}
           {role === "admin" || role === "employee" ? (
             notification.data.patient?.id ? (
               <Link
                 to={`/dashboard/patients/${notification.data.patient.id}`}
-                className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400"
+                className="text-muted-foreground text-sm font-medium dark:text-gray-400"
               >
                 {notification.data.message}
               </Link>
             ) : notification.data.booking?.id ? (
               <Link
                 to={`/dashboard/bookings/${notification.data.booking.id}`}
-                className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400"
+                className="text-muted-foreground text-sm font-medium dark:text-gray-400"
               >
                 {notification.data.message}
               </Link>
             ) : (
-              <p className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400">
+              <p className="text-muted-foreground text-sm font-medium dark:text-gray-400">
                 {notification.data.message}
               </p>
             )
           ) : (
-            <p className="text-muted-foreground text-sm leading-relaxed font-medium dark:text-gray-400">
+            <p className="text-muted-foreground text-sm font-medium dark:text-gray-400">
               {notification.data.message}
             </p>
           )}

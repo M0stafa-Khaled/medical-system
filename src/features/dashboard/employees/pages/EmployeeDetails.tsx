@@ -113,7 +113,11 @@ const EmployeeDetails = () => {
                     {canUpdateEmployee && (
                       <motion.div variants={itemVariants}>
                         <TooltipButton title="تعديل">
-                          <Button className="btn-edit" size={"icon"} asChild>
+                          <Button
+                            className="btn-edit rounded-full"
+                            size={"icon"}
+                            asChild
+                          >
                             <Link to={`/dashboard/employees/${id}/update`}>
                               <Pen size={20} />
                             </Link>

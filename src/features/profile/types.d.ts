@@ -1,9 +1,9 @@
-import { type IDoctor } from "../dashboard/doctors/doctor";
-import { type IPatient } from "../dashboard/patient";
-import { type IEmployee } from "../dashboard/employee";
 import { type TRole } from "@/shared/types";
+import { IDoctor } from "../dashboard/doctors/types";
+import { IPatient } from "../dashboard/patients/types";
+import { IEmployee } from "../dashboard/employees/types";
 
-export interface IResponseProfile {
+export interface IProfileRes {
   data: IDoctor | IPatient | IEmployee;
   message: null;
   status: boolean;

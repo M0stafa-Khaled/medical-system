@@ -53,7 +53,7 @@ export const useDoctorsColumns = ({
     {
       key: "name",
       header: "اسم الطبيب",
-      cell: (row) => truncateText(row.name, 15),
+      cell: (row) => truncateText(row.name, 25),
     },
     {
       key: "first_phone",

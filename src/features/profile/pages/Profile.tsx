@@ -84,7 +84,7 @@ const Profile = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="dark:bg-background min-h-screen bg-[#e8f2fc] pt-20 pb-10 text-white"
+      className="min-h-screen pt-20 pb-10"
     >
       <div className="container max-w-7xl space-y-4">
         {/* Header */}
@@ -99,7 +99,7 @@ const Profile = () => {
           initial={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.3 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="dark:bg-dark overflow-hidden rounded-2xl bg-white p-4 shadow-md"
+          className="bg-background overflow-hidden rounded-2xl p-4 shadow-md"
         >
           <motion.div
             variants={containerVariants}

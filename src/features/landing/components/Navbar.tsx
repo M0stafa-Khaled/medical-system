@@ -50,7 +50,9 @@ export const Navbar = () => {
           <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-xl shadow-lg">
             <Activity className="text-primary-foreground h-6 w-6" />
           </div>
-          <span className="text-2xl font-bold tracking-tight">عيادتي</span>
+          <span className="text-2xl font-bold tracking-tight">
+            {import.meta.env.VITE_WEB_NAME}
+          </span>
         </div>
 
         {/* Desktop Navigation */}
@@ -72,7 +74,7 @@ export const Navbar = () => {
           <ToggleTheme className="bg-transparent! dark:bg-transparent!" />
           <Button
             variant="ghost"
-            className="hover:text-primary rounded-full"
+            className="hover:text-primary hover:bg-primary/15 rounded-full"
             asChild
           >
             <Link to="/login">تسجيل الدخول</Link>
@@ -109,14 +111,14 @@ export const Navbar = () => {
           >
             <div className="container flex flex-col gap-4 py-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   onClick={(e) => scrollToSection(e, link.href)}
                   className="text-foreground hover:text-primary text-lg font-medium"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
               <hr className="border-border/50 my-2" />
               <div className="flex flex-col gap-3">

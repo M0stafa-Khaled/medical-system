@@ -1,5 +1,4 @@
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
-import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useGetAllEmployees } from "../queriesAndMutations";
@@ -11,7 +10,6 @@ import { DataTable } from "@/shared/components/data-table";
 import { useEmployeesColumns } from "./EmployeesColumns";
 
 export const EmployeesTable = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
 
@@ -21,7 +19,7 @@ export const EmployeesTable = () => {
     data: employees,
     isLoading,
     isError,
-  } = useGetAllEmployees({ token, page, search });
+  } = useGetAllEmployees({ page, search });
 
   useEffect(() => {
     if (employees?.message && !employees.status) toast.error(employees.message);

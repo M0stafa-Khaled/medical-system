@@ -31,6 +31,7 @@ const LastVisits = () => {
 
   if (isLoading) return <DataLoader />;
 
+  console.log(transactions);
   return (
     <>
       <Helmet>
@@ -41,7 +42,7 @@ const LastVisits = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <LastVisitsHeader name={transactions?.data[0].patient.name || ""} />
+        <LastVisitsHeader name={transactions?.data[0]?.patient?.name || ""} />
         <LastVisitsTable
           transactions={transactions?.data || []}
           isLoading={isLoading}

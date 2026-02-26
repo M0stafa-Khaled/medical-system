@@ -40,12 +40,12 @@ const NotificationsMenu = () => {
             size: "icon",
             variant: "outline",
             className:
-              "rounded-full! border border-yellow-500/30! bg-yellow-500/10! text-yellow-500! hover:bg-yellow-500/20! dark:bg-yellow-500/20! dark:hover:bg-yellow-500/30!",
+              "relative rounded-full! border border-yellow-500/30! bg-yellow-500/10! text-yellow-500! hover:bg-yellow-500/20! dark:bg-yellow-500/20! dark:hover:bg-yellow-500/30!",
           })}
         >
           <IoIosNotifications className="text-yellow-400" />
           {unreadNotifications > 0 && (
-            <span className="absolute -top-1 -right-1 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+            <span className="absolute -top-1.5 -right-1.5 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
               {unreadNotifications}
             </span>
           )}

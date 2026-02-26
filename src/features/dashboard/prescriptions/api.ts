@@ -8,14 +8,12 @@ import {
 } from "@/features/dashboard/prescriptions/types";
 
 export const getAllPrescriptions = async ({
-  token,
   filter,
   page,
   sort,
 }: IGetWithParams): Promise<IPrescriptionsRes> => {
   const { data } = await axiosAPI.get("/prescriptions", {
     params: { page, ...(filter && { filter }), sort },
-    headers: { Authorization: `Bearer ${token}` },
   });
   return data;
 };

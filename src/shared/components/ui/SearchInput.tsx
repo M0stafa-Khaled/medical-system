@@ -13,7 +13,7 @@ const SearchInput = ({ placeholder, className }: IProps) => {
     <Input
       placeholder={placeholder}
       className={cn(
-        "border-border placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm",
+        "border-border placeholder:text-muted-foreground h-auto w-full py-3 placeholder:h-14 placeholder:text-sm md:max-w-md",
         className
       )}
       onChange={(e) => {

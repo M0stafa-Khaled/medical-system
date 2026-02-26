@@ -61,7 +61,7 @@ export const CancelExpense = ({ id }: { id: number }) => {
         <Button
           size={"icon"}
           onClick={() => setIsOpen(true)}
-          className="h-9 w-9 gap-2 bg-gray-600 px-1 py-1 text-sm text-white hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600"
+          className="btn-destructive rounded-full"
         >
           <MdDoNotDisturbAlt size={24} />
         </Button>
