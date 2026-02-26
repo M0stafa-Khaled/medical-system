@@ -7,7 +7,6 @@ import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import { Modal } from "@/shared/components/Modal";
-import cookieServices from "@/shared/utils/cookieServices";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/shared/animations";
 import { transferTreasurySchema } from "../schema";
@@ -22,9 +21,8 @@ import { TRANSFER_TREASURIES_FORM_INPUTS } from "../constants";
 import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 export const TransferBetweenTreasuries = () => {
-  const token = cookieServices.getToken()!;
   const [isOpen, setIsOpen] = useState(false);
-  const { data: treasuries } = useGetAllTreasuries({ token });
+  const { data: treasuries } = useGetAllTreasuries({});
   const { mutateAsync: transferTreasury, isPending } = useTransferTreasuries();
 
   const treasuriesOptions = treasuries?.data?.map((treasury) => ({

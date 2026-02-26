@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { useGetBookingsChart } from "@/features/dashboard/queries";
@@ -12,7 +11,6 @@ interface IBookingsFilter {
   booking_status: string;
 }
 export const BookingsChart = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters: IBookingsFilter = useMemo(
@@ -25,7 +23,6 @@ export const BookingsChart = () => {
   );
 
   const { data: analyticsData, isLoading } = useGetBookingsChart({
-    token,
     filter: {
       ...(filters.booking_start_at && { start_at: filters.booking_start_at }),
       ...(filters.booking_end_at && { end_at: filters.booking_end_at }),

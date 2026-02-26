@@ -16,6 +16,7 @@ interface IProps {
 
 const PrintPrescriptionReceipt = ({ prescription }: IProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
+
   const reactToPrintFn = useReactToPrint({
     contentRef,
     onBeforePrint: async () => {
@@ -24,8 +25,7 @@ const PrintPrescriptionReceipt = ({ prescription }: IProps) => {
         month: "numeric",
         year: "numeric",
       });
-
-      document.title = `Prescription - ${prescription.patient.name} - ${formattedDate}`;
+      document.title = `روشة - ${prescription.patient.name} - ${formattedDate}`;
     },
     onAfterPrint: () => {
       document.title = `Medical System`;
@@ -45,111 +45,145 @@ const PrintPrescriptionReceipt = ({ prescription }: IProps) => {
       <TooltipButton title="طباعة">
         <Button
           onClick={() => reactToPrintFn()}
-          size={"icon"}
+          size="icon"
           className="btn-primary rounded-full"
         >
           <FaPrint size={24} />
         </Button>
       </TooltipButton>
+
+      {/* ─── Printable content ──────────────────────────────────────────────── */}
       <div
         dir="rtl"
-        className="hidden p-6 print:block print:text-black"
+        className="hidden print:block print:bg-white print:text-black"
         ref={contentRef}
       >
-        <div className="relative mx-auto min-h-[297mm] w-[210mm] overflow-hidden rounded-xl border border-gray-300 bg-white p-6 shadow-lg">
-          {/* Header */}
-          <div className="mb-6 flex items-center justify-between border-b-2 border-gray-400 pb-4">
-            <div className="flex items-center space-x-4 space-x-reverse">
-              <div className="rounded-full p-2">
+        <div className="relative mx-auto min-h-[297mm] w-[210mm] max-w-[210mm] border border-gray-200 bg-white p-8 pb-30 print:shadow-none">
+          {/* Header ─────────────────────────────────────────────────────────── */}
+          <header className="mb-8 flex items-center justify-between border-b-2 border-blue-900/30 pb-5">
+            <div className="flex items-center gap-4">
+              <div className="rounded-full bg-blue-50 p-2.5 ring-1 ring-blue-200">
                 <img
                   src="/images/logo.svg"
                   alt="logo"
-                  className="h-12 w-12 object-contain"
+                  className="h-14 w-14 object-contain"
                 />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">
-                  Modern Clinic
+                <h1 className="text-2xl font-bold tracking-tight text-blue-950">
+                  {import.meta.env.VITE_WEB_NAME}
                 </h1>
-                <p className="text-sm text-gray-600">
-                  Medical & Healthcare Services
+                <p className="mt-0.5 text-sm font-medium text-gray-600">
+                  الخدمات الطبية والرعاية الصحية
                 </p>
               </div>
             </div>
-            <div className="text-left">
-              <h2 className="text-xl font-bold text-gray-800">
-                Dr. {prescription.doctor.name}
+
+            <div className="text-right">
+              <h2 className="text-xl font-bold text-gray-900">
+                د/ {prescription.doctor.name}
               </h2>
+              <p className="mt-1 text-sm text-gray-700">
+                {prescription.clinic.name || import.meta.env.VITE_WEB_NAME}
+              </p>
               <p className="text-sm text-gray-600">
-                {prescription.doctor.first_phone || ""}
+                {prescription.doctor.first_phone}
+                {prescription.doctor.second_phone &&
+                  ` - ${prescription.doctor.second_phone}`}
               </p>
             </div>
-          </div>
-          {/* Patient Info */}
-          <div className="mb-6 grid grid-cols-3 gap-4 text-sm text-gray-700">
-            <div className="flex flex-col">
-              <span className="font-semibold text-gray-900">اسم المريض:</span>
-              <span>{prescription.patient.name}</span>
+          </header>
+
+          {/* Patient & Visit Info ───────────────────────────────────────────── */}
+          <section className="mb-8 grid grid-cols-3 gap-6 rounded-lg border bg-gray-50/70 p-5 text-sm">
+            <div>
+              <span className="block font-semibold text-gray-900">
+                اسم المريض
+              </span>
+              <span className="mt-1 block text-gray-800">
+                {prescription.patient.name}
+              </span>
             </div>
-            <div className="flex flex-col">
-              <span className="font-semibold text-gray-900">التاريخ:</span>
-              <span>{formatDateTime(prescription.date)}</span>
+            <div>
+              <span className="block font-semibold text-gray-900">التاريخ</span>
+              <span className="mt-1 block text-gray-800">
+                {formatDateTime(prescription.date)}
+              </span>
             </div>
-            <div className="flex flex-col">
-              <span className="font-semibold text-gray-900">العيادة:</span>
-              <span>{prescription.clinic.name}</span>
+            <div>
+              <span className="block font-semibold text-gray-900">
+                العيادة / المركز
+              </span>
+              <span className="mt-1 block text-gray-800">
+                {prescription.clinic.name}
+              </span>
             </div>
-          </div>
-          {/* Main Content */}
-          <div className="space-y-6 rounded-lg bg-gray-50 p-4">
-            {Object.keys(groupedPrescriptables).map((key) => {
+          </section>
+
+          {/* Prescriptions Content ──────────────────────────────────────────── */}
+          <section className="space-y-7">
+            {Object.entries(groupedPrescriptables).map(([key, items]) => {
               const type = key as TPrescriptableType;
+              const title =
+                type === "dosage"
+                  ? "الأدوية"
+                  : type === "analysis"
+                    ? "التحاليل المطلوبة"
+                    : "الأشعة والتصوير";
+
               return (
-                <div key={type}>
-                  <h3 className="mb-2 text-lg font-bold text-blue-600">
-                    {type === "dosage"
-                      ? "الادوية"
-                      : type === "analysis"
-                        ? "تحاليل"
-                        : "اشعات"}
+                <div key={type} className="space-y-3">
+                  <h3 className="border-b border-blue-100 pb-1.5 text-lg font-bold text-blue-800">
+                    {title}
                   </h3>
-                  <ul className="space-y-2">
-                    {groupedPrescriptables[type]?.map((item, index) => (
-                      <li
-                        key={index}
-                        className="rounded-md bg-white p-3 shadow-xs"
+                  <div className="space-y-2.5">
+                    {items?.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm transition-shadow hover:shadow"
                       >
-                        <p className="font-semibold text-gray-800">
+                        <div className="font-medium text-gray-900">
                           {item.name}
-                        </p>
-                        {item.drug_name && (
-                          <p className="text-sm text-gray-500">
+                        </div>
+                        {item.drug_name && item.drug_name !== item.name && (
+                          <div className="mt-1 text-sm text-gray-600">
                             {item.drug_name}
-                          </p>
+                          </div>
                         )}
-                      </li>
+                        {/* You can add dosage / frequency / duration fields here later */}
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               );
             })}
 
             {prescription.note && (
-              <div className="rounded-md bg-white p-3 shadow-xs">
-                <h3 className="mb-1 text-lg font-bold text-gray-800">
-                  ملاحظات
+              <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-4">
+                <h3 className="mb-2 text-lg font-bold text-amber-800">
+                  ملاحظات وتوصيات
                 </h3>
-                <p className="text-gray-600">{prescription.note}</p>
+                <p className="leading-relaxed whitespace-pre-line text-gray-800">
+                  {prescription.note}
+                </p>
               </div>
             )}
-          </div>
-          {/* Footer */}
-          <div className="absolute right-6 bottom-6 left-6 border-t pt-4 text-center text-xs text-gray-500">
+          </section>
+
+          {/* Footer ─────────────────────────────────────────────────────────── */}
+          <footer className="// أو حسب اللي يناسبك absolute right-8 bottom-6 left-8 border-t pt-4 text-center text-xs text-gray-500">
             <p>
-              Contact Dr. {prescription.doctor.name} at{" "}
+              برجاء التواصل مع د/ {prescription.doctor.name} عبر{" "}
               {prescription.clinic.name}
             </p>
-            <p className="mt-1">{prescription.clinic.created_at}</p>
+            <p className="mt-1">
+              تم إصدار الروشتة في {formatDateTime(prescription.date)}
+            </p>
+          </footer>
+
+          {/* Optional very light watermark */}
+          <div className="pointer-events-none absolute inset-0 flex -rotate-12 items-center justify-center text-[12rem] font-black text-blue-950 opacity-[0.03] select-none">
+            روشة
           </div>
         </div>
       </div>

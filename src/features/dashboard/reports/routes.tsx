@@ -9,6 +9,10 @@ const TransactionsReports = lazy(() => import("./pages/TransactionsReports"));
 const TransfersReports = lazy(() => import("./pages/TransfersReports"));
 const PatientsReports = lazy(() => import("./pages/PatientsReports"));
 const TreasuriesReports = lazy(() => import("./pages/TreasuriesReports"));
+const PrescriptionsReports = lazy(() => import("./pages/PrescriptionsReports"));
+const PatientBalancesReports = lazy(
+  () => import("./pages/PatientBalancesReports")
+);
 
 export const reportsRoutes = [
   {
@@ -67,6 +71,28 @@ export const reportsRoutes = [
       <Suspense fallback={<PageLoader />}>
         <ProtectedRoute requiredPermission={PERMISSIONS.TREASURIES_REPORTS}>
           <TreasuriesReports />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "reports/prescriptions",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.PRESCRIPTIONS_REPORTS}>
+          <PrescriptionsReports />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "reports/patient-balances",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute
+          requiredPermission={PERMISSIONS.PATIENT_BALANCES_REPORTS}
+        >
+          <PatientBalancesReports />
         </ProtectedRoute>
       </Suspense>
     ),

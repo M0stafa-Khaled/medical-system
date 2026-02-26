@@ -1,5 +1,5 @@
 import Query_Keys from "@/shared/enums/queryKeys";
-import { IGetWithParams } from "@/shared/types";
+import type { IGetWithParams } from "@/shared/types";
 import {
   getBookingsReport,
   getExpensesReport,

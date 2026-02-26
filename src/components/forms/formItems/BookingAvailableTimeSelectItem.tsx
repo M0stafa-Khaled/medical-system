@@ -46,7 +46,7 @@ const BookingAvailableTimeSelectItem = ({ field, input, times }: IProps) => {
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className={`dark:bg-input/30 hover:bg-input/10 dark:hover:bg-input/50! border-muted hover: h-12! w-full justify-between overflow-hidden text-black dark:hover:text-white`}
+              className={`dark:bg-input/30 hover:bg-input/10 hover:text-foreground dark:hover:bg-input/50! border-muted hover: h-12! w-full justify-between overflow-hidden`}
             >
               {field.value
                 ? times?.find((time) => time === field.value) || field.value

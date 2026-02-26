@@ -166,7 +166,7 @@ export const VerifyAccountForm = () => {
 
         <Button
           type="submit"
-          className="h-auto w-full py-3.5"
+          className="mt-2 w-full"
           disabled={isLoadingVerify}
         >
           تأكيد
@@ -190,9 +190,9 @@ export const VerifyAccountForm = () => {
           dispatch(clearPermissions());
           navigate("/login");
         }}
-        variant={"destructive"}
         type="submit"
-        className="mt-2 h-auto w-full py-3"
+        variant={"destructive"}
+        className="mt-2 h-auto w-full text-white"
       >
         تسجيل الخروج
       </Button>

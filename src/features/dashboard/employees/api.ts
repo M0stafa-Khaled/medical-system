@@ -3,16 +3,12 @@ import { IStatusMsg, IGetWithParams } from "@/shared/types";
 import { ICreateEmployee, IEmployeeRes, IEmployeesRes } from "./types";
 
 export const getAllEmployees = async ({
-  token,
   page = 1,
   search = "",
 }: IGetWithParams): Promise<IEmployeesRes> =>
   (
     await axiosAPI.get(`/employees`, {
       params: { ...(search ? { q: search, page } : { page }) },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
     })
   ).data;
 

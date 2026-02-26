@@ -7,6 +7,10 @@ import formatDateTime from "@/shared/utils/formatDate";
 export const useTreasuriesReportColumns = (): ColumnDef<ITreasuryReport>[] => {
   return [
     {
+      key: "details.code" as keyof ITreasuryReport,
+      header: "رقم العملية",
+    },
+    {
       key: "type",
       header: "العملية",
       cell: (row) =>
@@ -17,13 +21,10 @@ export const useTreasuriesReportColumns = (): ColumnDef<ITreasuryReport>[] => {
             : "تحويلات خزائن",
     },
     {
-      key: "details.code" as keyof ITreasuryReport,
-      header: "رقم العملية",
-    },
-    {
-      key: "details.amount" as keyof ITreasuryReport,
+      key: "details.price" as keyof ITreasuryReport,
       header: "المبلغ",
-      cell: (row) => numberToPrice(row.details.amount),
+      cell: (row) =>
+        row.details.price ? numberToPrice(row.details.price) : "لا يوجد",
     },
     {
       key: "details.status" as keyof ITreasuryReport,

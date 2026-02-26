@@ -43,7 +43,7 @@ export const Features = () => {
             </TabsList>
           </div>
 
-          <div className="bg-background border-border/50 relative min-h-[400px] overflow-hidden rounded-3xl border shadow-xl">
+          <div className="bg-background border-border/50 relative min-h-100 overflow-hidden rounded-3xl border shadow-xl">
             <AnimatePresence mode="wait">
               {features.map((feature) =>
                 activeTab === feature.id ? (

@@ -1,5 +1,4 @@
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
-import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router";
@@ -8,10 +7,9 @@ import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { useGetAllDoctors } from "../queriesAndMutations";
 import { DataTable } from "@/shared/components/data-table";
-import { useDoctorsColumns } from "./DoctorColumns";
+import { useDoctorsColumns } from "./DoctorsColumns";
 
 export const DoctorsTable = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const search = useDebounce(searchParams.get("q"), 500)!;
@@ -19,7 +17,7 @@ export const DoctorsTable = () => {
     data: doctors,
     isLoading,
     isError,
-  } = useGetAllDoctors({ token, page, search });
+  } = useGetAllDoctors({ page, search });
 
   useEffect(() => {
     if (doctors?.message && !doctors.status) toast.error(doctors.message);

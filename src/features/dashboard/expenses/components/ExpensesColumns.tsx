@@ -13,6 +13,7 @@ import { PrintExpenseReceipt } from "./PrintExpenseReceipt";
 import { CancelExpense } from "./CancelExpense";
 import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteExpense } from "../queriesAndMutations";
+import { numberToPrice } from "@/shared/utils/numberToPrice";
 
 export const useExpensesColumns = (): ColumnDef<IExpense>[] => {
   const canDeleteExpense = useHasPermission(
@@ -35,6 +36,7 @@ export const useExpensesColumns = (): ColumnDef<IExpense>[] => {
     {
       key: "price",
       header: "المبلغ",
+      cell: (row) => numberToPrice(row.price),
     },
     {
       key: "treasury.name" as keyof IExpense,

@@ -39,7 +39,8 @@ const PrintTransactionReceipt = ({ transaction }: IProps) => {
       <TooltipButton title="طباعة">
         <Button
           onClick={reactToPrintFn}
-          className="h-9 w-9 bg-blue-600 text-sm text-white hover:bg-blue-700"
+          size={"icon"}
+          className="btn-primary rounded-full"
         >
           <FaPrint size={24} />
         </Button>

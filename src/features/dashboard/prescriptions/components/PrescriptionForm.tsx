@@ -34,7 +34,6 @@ import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
 import DrugsSelectFormItem from "@/components/forms/formItems/DrugsSelectFormItem";
 import ScansSelectFormItem from "@/components/forms/formItems/ScansSelectFormItem";
 import AnalysisSelectFormItem from "@/components/forms/formItems/AnalysisSelectFormItem";
-import { formatDate } from "date-fns";
 import { PRESCRIPTIONS_INPUTS } from "../constants.ts";
 import { useGetAllClinicDoctors } from "@/shared/queriesAndMutations.ts";
 
@@ -132,6 +131,7 @@ export const PrescriptionForm = ({ action, prescription }: IProps) => {
   }, [clinicId, form]);
 
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
+    console.log(data);
     if (
       !bookingId &&
       (!data.clinic_id || !data.doctor_id || !data.patient_id)
@@ -146,7 +146,6 @@ export const PrescriptionForm = ({ action, prescription }: IProps) => {
       if (action === "update") {
         const { message, status } = await updatePrescription({
           ...data,
-          prescription_date: formatDate(data.prescription_date, "y-m-d"),
           id: prescription?.id.toString() || "",
         });
 
@@ -168,7 +167,6 @@ export const PrescriptionForm = ({ action, prescription }: IProps) => {
       if (action === "create") {
         const { message, status } = await createPrescription({
           ...data,
-          prescription_date: formatDate(data.prescription_date, "yyyy-mm-dd"),
           booking_id: bookingId,
         });
 

@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { IExpensesFilter } from "@/features/dashboard/expenses/types";
 import { useCallback } from "react";
@@ -11,8 +10,7 @@ interface IProps {
   setFilters: (filters: IExpensesFilter) => void;
 }
 export const ExpensesFilters = ({ filters, setFilters }: IProps) => {
-  const token = cookieServices.getToken()!;
-  const { data: treasuries } = useGetAllTreasuries({ token });
+  const { data: treasuries } = useGetAllTreasuries({});
 
   const handleFilterChange = useCallback(
     (key: string, value: string | null) =>

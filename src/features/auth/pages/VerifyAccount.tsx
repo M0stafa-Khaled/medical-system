@@ -47,7 +47,7 @@ const VerifyAccount = () => {
         <title>{import.meta.env.VITE_WEB_NAME} | تأكيد الحساب</title>
       </Helmet>
       <main className="container flex min-h-screen items-center justify-center py-4">
-        <Card className="border-muted bg-foreground shadow-none">
+        <Card className="border-muted">
           <div className="mx-auto flex max-w-xs items-center justify-center">
             <img
               src="/images/verify-email.svg"

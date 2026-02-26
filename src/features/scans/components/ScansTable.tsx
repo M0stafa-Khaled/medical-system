@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import cookieServices from "@/shared/utils/cookieServices";
 import TableSkeleton from "@/shared/components/ui/TableSkeleton";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router";
@@ -9,16 +8,11 @@ import { DataTable } from "@/shared/components/data-table";
 import { useScansColumns } from "./ScansColumns";
 
 export const ScansTable = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const search = useDebounce(searchParams.get("q"), 500)!;
 
-  const {
-    data: scans,
-    isLoading,
-    isError,
-  } = useGetAllScans({ page, token, search });
+  const { data: scans, isLoading, isError } = useGetAllScans({ page, search });
 
   useEffect(() => {
     if (scans?.message && !scans.status) toast.error(scans.message);

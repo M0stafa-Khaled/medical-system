@@ -16,10 +16,27 @@ import { tableRowVariants } from "@/shared/animations";
 import DataTablePagination from "./ui/DataTablePagination";
 import { motion } from "framer-motion";
 
+// Helper to safely get nested value (supports "a.b.c" paths)
+function getNestedValue<T>(obj: T, path: string): unknown {
+  if (!path.includes(".")) {
+    return (obj as any)[path];
+  }
+
+  try {
+    return path.split(".").reduce((o, key) => {
+      if (o == null) return undefined;
+      return (o as any)[key];
+    }, obj as any);
+  } catch {
+    return undefined;
+  }
+}
+
 export type ColumnDef<T> = {
-  key: keyof T | "actions";
+  // key can now be string (including "nested.path") or keyof T
+  key: string | keyof T | "actions";
   header: ReactNode;
-  cell?: (row: T, index?: number | undefined) => ReactNode;
+  cell?: (row: T, index?: number) => ReactNode;
   className?: string;
 };
 
@@ -68,7 +85,7 @@ export const DataTable = <T extends object>({
             skeleton || null
           ) : (
             <TableBody>
-              {data && data.length > 0 ? (
+              {data?.length > 0 ? (
                 data.map((row, rIdx) => (
                   <motion.tr
                     key={rIdx}
@@ -78,21 +95,30 @@ export const DataTable = <T extends object>({
                     variants={tableRowVariants}
                     className="border-border/60 odd:bg-muted/20 hover:bg-muted/50 border-b transition-colors"
                   >
-                    {columns.map((col, cIdx) => (
-                      <TableCell
-                        key={String(col.key) + cIdx}
-                        className={cn(
-                          col.className,
-                          "text-foreground py-4 text-center text-sm text-nowrap"
-                        )}
-                      >
-                        {col.cell
-                          ? col.cell(row, rIdx)
-                          : ((row[
-                              col.key as keyof T
-                            ] as unknown as ReactNode) ?? "غير متاح")}
-                      </TableCell>
-                    ))}
+                    {columns.map((col, cIdx) => {
+                      let content: ReactNode;
+
+                      if (col.cell) {
+                        content = col.cell(row, rIdx);
+                      } else if (col.key === "actions") {
+                        content = null;
+                      } else {
+                        const value = getNestedValue(row, String(col.key));
+                        content = value ?? ("غير متاح" as any);
+                      }
+
+                      return (
+                        <TableCell
+                          key={String(col.key) + cIdx}
+                          className={cn(
+                            col.className,
+                            "text-foreground py-4 text-center text-sm text-nowrap"
+                          )}
+                        >
+                          {content}
+                        </TableCell>
+                      );
+                    })}
                   </motion.tr>
                 ))
               ) : (

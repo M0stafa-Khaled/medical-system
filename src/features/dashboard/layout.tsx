@@ -343,7 +343,7 @@ const DashboardLayout = () => {
         <Sidebar links={NAV_LINKS} />
       </div>
 
-      <div className="bg-background w-full lg:w-auto border-border flex min-h-screen flex-1 flex-col lg:mr-67.5 lg:border-r">
+      <div className="bg-background border-border flex min-h-screen w-full flex-1 flex-col lg:mr-67.5 lg:w-auto lg:border-r">
         <Navbar links={NAV_LINKS} dashboard />
 
         <div className="bg-background sticky top-0 z-50 container hidden h-16 w-full items-center justify-between border-b lg:flex">
@@ -358,7 +358,7 @@ const DashboardLayout = () => {
           </div>
         </div>
 
-        <div className="container mt-15 lg:mt-6">
+        <div className="container mt-15 lg:mt-3">
           <main className="flex-1">
             <div className="my-3">
               <Outlet />

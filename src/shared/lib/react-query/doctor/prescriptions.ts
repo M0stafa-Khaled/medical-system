@@ -15,13 +15,12 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetAllDoctorPrescriptions = ({
-  token,
   filter,
   page,
 }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.GET_ALL_PRESCRIPTIONS, filter, page],
-    queryFn: () => getAllDoctorPrescriptions({ token, filter, page }),
+    queryFn: () => getAllDoctorPrescriptions({ filter, page }),
   });
 
 export const useGetDoctorPrescriptionById = ({

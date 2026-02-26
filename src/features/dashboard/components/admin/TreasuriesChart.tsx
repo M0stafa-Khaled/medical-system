@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { useGetAllTreasuries } from "@/features/dashboard/treasuries";
@@ -13,10 +12,9 @@ interface ITreasuriesFilter {
   treasury: string;
 }
 export const TreasuriesChart = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { data: treasuries } = useGetAllTreasuries({ token });
+  const { data: treasuries } = useGetAllTreasuries({});
 
   const filters: ITreasuriesFilter = useMemo(
     () => ({
@@ -28,7 +26,6 @@ export const TreasuriesChart = () => {
   );
 
   const { data: analyticsData, isLoading } = useGetTreasuriesChart({
-    token,
     filter: {
       ...(filters.treasury_start_at && { start_at: filters.treasury_start_at }),
       ...(filters.treasury_end_at && { end_at: filters.treasury_end_at }),
