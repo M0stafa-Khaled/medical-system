@@ -6,6 +6,7 @@ import RootLayout from "@/shared/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/app/ProtectedRoute";
 import { Landing } from "@/features/landing";
 import { Profile } from "@/features/profile";
+import { doctorRoutes } from "@/features/doctor";
 
 // import Error from "@/pages/Error";
 
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
         ),
       },
       ...dashboardRoutes,
+      ...doctorRoutes,
     ],
   },
   ...authRoutes,

@@ -1,10 +1,10 @@
 import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import DateFormItem from "@/components/forms/formItems/DateFormItem";
-import { PatientSelectItem } from "@/components/forms/formItems/PatientSelectItem";
-import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
-import TextareaFormItem from "@/components/forms/formItems/TextareaFormItem";
+import DateFormItem from "@/shared/components/formItems/DateFormItem";
+import { PatientSelectItem } from "@/shared/components/formItems/PatientSelectItem";
+import SelectFormItem from "@/shared/components/formItems/SelectFormItem";
+import TextareaFormItem from "@/shared/components/formItems/TextareaFormItem";
 import { FormField } from "@/shared/components/ui/form";
 
 interface IOption {

@@ -36,9 +36,6 @@ export const useCreateTransaction = () => {
         queryKey: [Query_Keys.GET_ALL_BOOKINGS],
       });
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ONE_TRANSACTION],
-      });
-      queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_LAST_VISITS],
       });
       queryClient.invalidateQueries({

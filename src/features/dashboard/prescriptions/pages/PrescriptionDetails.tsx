@@ -18,7 +18,7 @@ import { PERMISSIONS } from "@/shared/enums/permissions";
 import { Button } from "@/shared/components/ui/button";
 import { AxiosResErr } from "@/shared/types";
 import { FaNotesMedical } from "react-icons/fa6";
-import PrescriptablesList from "../components/prescriptables/PrescriptibleList";
+import PrescriptibleList from "../components/prescriptables/PrescriptibleList";
 import {
   useDeletePrescription,
   useGetPrescriptionById,
@@ -83,7 +83,7 @@ const PrescriptionDetails = () => {
               variants={itemVariants}
               className="flex items-center gap-4"
             >
-              <CardTitle className="text-dark flex items-center gap-2 dark:text-white">
+              <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-6 w-6" />
                 <span>تفاصيل الروشتة:</span>
               </CardTitle>
@@ -173,7 +173,7 @@ const PrescriptionDetails = () => {
         {/* Prescriptables */}
         <Card className="border-muted mt-3">
           <CardContent className="px-3 py-3">
-            <PrescriptablesList prescriptables={prescriptables!} />
+            <PrescriptibleList prescriptables={prescriptables!} />
           </CardContent>
         </Card>
       </motion.section>

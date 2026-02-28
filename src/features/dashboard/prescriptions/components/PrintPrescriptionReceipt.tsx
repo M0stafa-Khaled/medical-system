@@ -183,7 +183,7 @@ const PrintPrescriptionReceipt = ({ prescription }: IProps) => {
 
           {/* Optional very light watermark */}
           <div className="pointer-events-none absolute inset-0 flex -rotate-12 items-center justify-center text-[12rem] font-black text-blue-950 opacity-[0.03] select-none">
-            روشة
+            روشتة
           </div>
         </div>
       </div>

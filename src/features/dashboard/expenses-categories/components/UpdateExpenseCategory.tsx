@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/shared/animations";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { handleResErr } from "@/shared/utils/handleResError";
-import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 import { IExpenseCategory } from "../types";
 import { useUpdateExpenseCategory } from "../queriesAndMutations";
 import { expenseCategorySchema } from "../schema";

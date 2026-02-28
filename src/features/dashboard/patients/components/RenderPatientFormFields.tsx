@@ -4,10 +4,10 @@ import { z } from "zod";
 import { ChangeEvent } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { GENDER } from "@/shared/constants";
-import SwitchFormItem from "@/components/forms/formItems/SwitchFormItem";
-import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
-import FileFormItem from "@/components/forms/formItems/FileFormItem";
-import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import SwitchFormItem from "@/shared/components/formItems/SwitchFormItem";
+import SelectFormItem from "@/shared/components/formItems/SelectFormItem";
+import FileFormItem from "@/shared/components/formItems/FileFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 
 interface IProps {
   input: IFormInput;

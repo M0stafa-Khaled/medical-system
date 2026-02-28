@@ -31,7 +31,6 @@ const LastVisits = () => {
 
   if (isLoading) return <DataLoader />;
 
-  console.log(transactions);
   return (
     <>
       <Helmet>

@@ -9,15 +9,15 @@ export const usePrescriptionsReportColumns = (): ColumnDef<IPrescription>[] => {
       header: "رقم الطلب",
     },
     {
-      key: "patient.name",
+      key: "patient.name" as keyof IPrescription,
       header: "اسم المريض",
     },
     {
-      key: "doctor.name",
+      key: "doctor.name" as keyof IPrescription,
       header: "اسم الطبيب",
     },
     {
-      key: "clinic.name",
+      key: "clinic.name" as keyof IPrescription,
       header: "العيادة",
     },
     {

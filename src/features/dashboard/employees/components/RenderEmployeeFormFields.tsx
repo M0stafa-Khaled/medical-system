@@ -3,13 +3,13 @@ import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ChangeEvent } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import SwitchFormItem from "@/components/forms/formItems/SwitchFormItem";
-import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
+import SwitchFormItem from "@/shared/components/formItems/SwitchFormItem";
+import SelectFormItem from "@/shared/components/formItems/SelectFormItem";
 import { GENDER } from "@/shared/constants";
-import FileFormItem from "@/components/forms/formItems/FileFormItem";
+import FileFormItem from "@/shared/components/formItems/FileFormItem";
 import { ROLES } from "../constants";
-import MultiSelectFormItem from "@/components/forms/formItems/MultiSelectFormItem";
-import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import MultiSelectFormItem from "@/shared/components/formItems/MultiSelectFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 
 interface IOption {
   value: string;

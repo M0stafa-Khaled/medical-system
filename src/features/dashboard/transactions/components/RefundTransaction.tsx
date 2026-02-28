@@ -10,7 +10,7 @@ import { containerVariants } from "@/shared/animations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormField } from "@/shared/components/ui/form";
-import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 

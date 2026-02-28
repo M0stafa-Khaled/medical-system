@@ -55,6 +55,9 @@ export const useUpdateDoctor = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOCTORS],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_DOCTOR],
+      });
     },
   });
 };
@@ -66,6 +69,9 @@ export const useDeleteDoctor = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOCTORS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_DOCTOR],
       });
     },
   });

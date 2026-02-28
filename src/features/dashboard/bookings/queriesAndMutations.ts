@@ -30,16 +30,10 @@ export const useCreateBooking = () => {
     mutationFn: (formData: ICreateBooking) => createBooking(formData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ONE_BOOKING],
-      });
-      queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_BOOKINGS],
       });
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_BOOKINGS],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ONE_BOOKING],
       });
     },
   });
@@ -61,9 +55,6 @@ export const useUpdateBooking = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_BOOKINGS],
       });
-      queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ONE_BOOKING],
-      });
     },
   });
 };
@@ -81,9 +72,6 @@ export const useUpdateBookingStatus = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENT_BOOKINGS],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [Query_Keys.GET_ONE_BOOKING],
       });
     },
   });

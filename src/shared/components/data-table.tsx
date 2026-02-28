@@ -33,8 +33,7 @@ function getNestedValue<T>(obj: T, path: string): unknown {
 }
 
 export type ColumnDef<T> = {
-  // key can now be string (including "nested.path") or keyof T
-  key: string | keyof T | "actions";
+  key: keyof T | "actions";
   header: ReactNode;
   cell?: (row: T, index?: number) => ReactNode;
   className?: string;

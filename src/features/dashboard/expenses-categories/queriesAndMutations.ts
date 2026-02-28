@@ -17,7 +17,7 @@ export const useGetAllExpensesCategories = ({ search }: IGetWithParams) =>
 
 export const useGetAllExpensesCategoryById = ({ id }: { id: string }) =>
   useQuery({
-    queryKey: [Query_Keys.GET_ALL_ONE_EXPENSES_CATEGORY, id],
+    queryKey: [Query_Keys.GET_ONE_EXPENSES_CATEGORY, id],
     queryFn: () => getAllExpenseCategoryById({ id }),
     enabled: !!id,
   });
@@ -43,6 +43,9 @@ export const useUpdateExpenseCategory = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EXPENSES_CATEGORIES],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_EXPENSES_CATEGORY],
+      });
     },
   });
 };
@@ -54,6 +57,9 @@ export const useDeleteExpenseCategory = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EXPENSES_CATEGORIES],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_EXPENSES_CATEGORY],
       });
     },
   });

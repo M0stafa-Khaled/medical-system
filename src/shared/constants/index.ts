@@ -106,6 +106,7 @@ export const PRESCRIPTIONS_TYPES = [
 
 export const ROUTES_NAME: Record<string, string> = {
   dashboard: "الرئيسية",
+  doctor: "الرئيسية",
   settings: "الإعدادات",
   clinics: "العيادات",
   doctors: "الأطباء",
@@ -119,7 +120,7 @@ export const ROUTES_NAME: Record<string, string> = {
   expenses: "المصروفات",
   "expenses-categories": "تصنيفات المصروفات",
   bookings: "الحجوزات",
-  transactions: "التحصيلات",
+  transactions: "الإيرادات",
   "last-visits": "أخر الزيارات",
   analysis: "التحاليل",
   scans: "الأشعات",
@@ -128,7 +129,7 @@ export const ROUTES_NAME: Record<string, string> = {
   reports: "التقارير",
   transfers: "التحويلات",
   "patient-balances": "حسابات المرضى",
-  transactionsReports: "تقارير التحصيلات",
+  transactionsReports: "تقارير الإيرادات",
   bookingsReports: "تقارير الحجوزات",
   expensesReports: "تقارير المصروفات",
   transfersReports: "تقارير التحويلات",
