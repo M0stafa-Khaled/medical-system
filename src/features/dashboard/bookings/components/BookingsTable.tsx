@@ -24,7 +24,7 @@ export const BookingsTable = ({ bookings, isLoading, meta }: IProps) => {
       data={bookings || []}
       columns={columns}
       isLoading={isLoading}
-      emptyMessage="لا يوجد حجوزات اليوم"
+      emptyMessage="لا يوجد حجوزات"
       skeleton={
         <TableSkeleton
           columns={
@@ -32,8 +32,8 @@ export const BookingsTable = ({ bookings, isLoading, meta }: IProps) => {
             canDeleteBooking ||
             canUpdateBooking ||
             canViewBooking
-              ? 7
-              : 6
+              ? 8
+              : 7
           }
           rows={6}
           actionButtons={4}

@@ -1,4 +1,4 @@
-import Navbar from "@/features/dashboard/components/navbar/Navbar";
+import Navbar from "@/shared/components/navigation/navbar/Navbar";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { ILink } from "@/shared/types";
@@ -19,8 +19,8 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { MdAttachMoney, MdMedication } from "react-icons/md";
 import { Outlet, ScrollRestoration } from "react-router";
 import { HiOutlineUsers } from "react-icons/hi2";
-import PathIndicator from "./components/PathIndicator";
-import Sidebar from "./components/Sidebar";
+import PathIndicator from "../../shared/components/navigation/PathIndicator";
+import Sidebar from "../../shared/components/navigation/Sidebar";
 import { ROUTES_NAME } from "@/shared/constants";
 import { NotificationsMenu } from "../notifications";
 import { ProfileMenu } from "../profile";
@@ -343,13 +343,13 @@ const DashboardLayout = () => {
         <Sidebar links={NAV_LINKS} />
       </div>
 
-      <div className="bg-background border-border flex min-h-screen w-full flex-1 flex-col lg:mr-67.5 lg:w-auto lg:border-r">
-        <Navbar links={NAV_LINKS} dashboard />
+      <div className="bg-background border-border flex min-h-screen w-full flex-1 flex-col overflow-hidden lg:mr-67 lg:w-auto lg:border-r">
+        <div className="bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 container hidden h-16 w-full items-center justify-between gap-4 border-b backdrop-blur lg:flex">
+          <div className="flex items-center gap-4">
+            <PathIndicator routeNames={ROUTES_NAME} />
+          </div>
 
-        <div className="bg-background sticky top-0 z-50 container hidden h-16 w-full items-center justify-between border-b lg:flex">
-          <PathIndicator routeNames={ROUTES_NAME} />
-
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-3">
             {user?.role !== "doctor" && canReceiveNotifications && (
               <NotificationsMenu />
             )}
@@ -357,6 +357,8 @@ const DashboardLayout = () => {
             <ToggleTheme />
           </div>
         </div>
+
+        <Navbar links={NAV_LINKS} dashboard />
 
         <div className="container mt-15 lg:mt-3">
           <main className="flex-1">

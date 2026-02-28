@@ -45,6 +45,9 @@ export const useUpdateEmployee = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EMPLOYEES],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_EMPLOYEE],
+      });
     },
   });
 };
@@ -56,6 +59,9 @@ export const useDeleteEmployee = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EMPLOYEES],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_EMPLOYEE],
       });
     },
   });

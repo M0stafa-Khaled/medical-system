@@ -11,7 +11,7 @@ import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/shared/animations";
 import { handleResErr } from "@/shared/utils/handleResError";
-import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 import { useCreateExpenseCategory } from "../queriesAndMutations";
 import { expenseCategorySchema } from "../schema";
 import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";

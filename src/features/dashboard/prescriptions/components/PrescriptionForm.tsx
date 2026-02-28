@@ -30,10 +30,10 @@ import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { containerVariants, itemVariants } from "@/shared/animations/index";
 import { RenderPrescriptionFormFields } from "./RenderPrescriptionFormFields";
-import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
-import DrugsSelectFormItem from "@/components/forms/formItems/DrugsSelectFormItem";
-import ScansSelectFormItem from "@/components/forms/formItems/ScansSelectFormItem";
-import AnalysisSelectFormItem from "@/components/forms/formItems/AnalysisSelectFormItem";
+import SelectFormItem from "@/shared/components/formItems/SelectFormItem.tsx";
+import DrugsSelectFormItem from "@/shared/components/formItems/DrugsSelectFormItem.tsx";
+import ScansSelectFormItem from "@/shared/components/formItems/ScansSelectFormItem.tsx";
+import AnalysisSelectFormItem from "@/shared/components/formItems/AnalysisSelectFormItem.tsx";
 import { PRESCRIPTIONS_INPUTS } from "../constants.ts";
 import { useGetAllClinicDoctors } from "@/shared/queriesAndMutations.ts";
 
@@ -131,7 +131,6 @@ export const PrescriptionForm = ({ action, prescription }: IProps) => {
   }, [clinicId, form]);
 
   const onSubmit = async (data: z.infer<typeof prescriptionSchema>) => {
-    console.log(data);
     if (
       !bookingId &&
       (!data.clinic_id || !data.doctor_id || !data.patient_id)

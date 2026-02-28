@@ -44,6 +44,9 @@ export const useUpdatePatient = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENTS],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_PATIENT],
+      });
     },
   });
 };
@@ -55,6 +58,9 @@ export const useDeletePatient = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PATIENTS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_PATIENT],
       });
     },
   });

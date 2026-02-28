@@ -7,7 +7,7 @@ const Transactions = () => {
   return (
     <>
       <Helmet>
-        <title>{import.meta.env.VITE_WEB_NAME} | التحصيلات</title>
+        <title>{import.meta.env.VITE_WEB_NAME} | الإيرادات</title>
       </Helmet>
       <motion.section
         initial={{ opacity: 0, y: 20 }}

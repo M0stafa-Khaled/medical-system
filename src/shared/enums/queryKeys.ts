@@ -27,7 +27,7 @@ enum Query_Keys {
   GET_ALL_EXPENSES = "expenses",
   GET_ONE_EXPENSE = "expense",
   GET_ALL_EXPENSES_CATEGORIES = "expensesCategories",
-  GET_ALL_ONE_EXPENSES_CATEGORY = "expensesCategory",
+  GET_ONE_EXPENSES_CATEGORY = "expensesCategory",
   GET_ALL_BOOKINGS = "bookings",
   GET_ONE_BOOKING = "booking",
   GET_ALL_CLINIC_DOCTORS = "clinicDoctors",

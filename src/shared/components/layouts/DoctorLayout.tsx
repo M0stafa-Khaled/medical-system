@@ -1,5 +1,5 @@
-import Navbar from "@/features/dashboard/components/navbar/Navbar";
-import Sidebar from "@/features/dashboard/components/Sidebar";
+import Navbar from "@/shared/components/navigation/navbar/Navbar";
+import Sidebar from "@/shared/components/navigation/Sidebar";
 import { ILink } from "@/shared/types";
 import { BookMarkedIcon, HomeIcon, UserRoundSearch } from "lucide-react";
 import { GiMedicinePills } from "react-icons/gi";

@@ -52,12 +52,17 @@ export const usePrescriptionsColumns = ({
     {
       key: "date",
       header: "تاريخ الإنشاء",
-      cell: (row) => formatDateTime(row.date),
+      cell: (row) =>
+        formatDateTime(row.date, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
     },
     {
       key: "note",
       header: "الملاحظات",
-      cell: (row) => truncateText(row.note || "لا يوجد", 20),
+      cell: (row) => truncateText(row.note || "لا يوجد", 30),
     },
     ...(canUpdatePrescription || canDeletePrescription || canViewPrescription
       ? [

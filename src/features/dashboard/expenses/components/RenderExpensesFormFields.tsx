@@ -2,9 +2,9 @@ import { FormField } from "@/shared/components/ui/form";
 import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import SwitchFormItem from "@/components/forms/formItems/SwitchFormItem";
-import SelectFormItem from "@/components/forms/formItems/SelectFormItem";
-import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import SwitchFormItem from "@/shared/components/formItems/SwitchFormItem";
+import SelectFormItem from "@/shared/components/formItems/SelectFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 
 interface IOption {
   value: string;

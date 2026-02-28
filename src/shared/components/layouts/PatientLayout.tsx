@@ -1,4 +1,4 @@
-import Navbar from "@/features/dashboard/components/navbar/Navbar";
+import Navbar from "@/shared/components/navigation/navbar/Navbar";
 import { Outlet, ScrollRestoration } from "react-router";
 
 const NAV_LINKS = [

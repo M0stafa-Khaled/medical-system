@@ -1,4 +1,4 @@
-import { IWorkingDay } from "../dashboard/doctors/workingDays";
+import { IWorkingDay } from "@/features/dashboard/doctors/working-days/types";
 
 export interface IDoctorWidget {
   transactions_total: number;

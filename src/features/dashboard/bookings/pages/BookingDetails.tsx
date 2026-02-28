@@ -37,6 +37,7 @@ import { Button } from "@/shared/components/ui/button";
 import { AxiosResErr } from "@/shared/types";
 import { DeleteAlert } from "@/shared/components/delete-alert";
 import { LiaNotesMedicalSolid } from "react-icons/lia";
+import { MdPendingActions } from "react-icons/md";
 
 const BookingDetails = () => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
@@ -83,6 +84,7 @@ const BookingDetails = () => {
     start_at,
     status,
     employee,
+    action,
   } = booking?.data || {};
 
   return (
@@ -163,6 +165,15 @@ const BookingDetails = () => {
                     value={patient?.name as string}
                   />
                 </Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <InfoField
+                  icon={
+                    <MdPendingActions className="text-rose-600" size={20} />
+                  }
+                  label="الخدمة"
+                  value={action?.name as string}
+                />
               </motion.div>
               <motion.div variants={itemVariants}>
                 <InfoField

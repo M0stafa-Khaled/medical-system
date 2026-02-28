@@ -62,6 +62,9 @@ export const useDeletePrescription = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_PRESCRIPTIONS],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_PRESCRIPTION],
+      });
     },
   });
 };

@@ -49,6 +49,9 @@ export const useCancelExpense = () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EXPENSES],
       });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_EXPENSE],
+      });
     },
   });
 };
@@ -60,6 +63,9 @@ export const useDeleteExpense = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_EXPENSES],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.GET_ONE_EXPENSE],
       });
     },
   });

@@ -2,10 +2,10 @@ import { FormField } from "@/shared/components/ui/form";
 import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import SelectFormItem from "../formItems/SelectFormItem";
-import BookingAvailableTimeSelectItem from "../formItems/BookingAvailableTimeSelectItem";
-import BookingDateItem from "../formItems/BookingDateItem";
-import InputFormItem from "../formItems/InputFormItem";
+import SelectFormItem from "../../../shared/components/formItems/SelectFormItem";
+import BookingAvailableTimeSelectItem from "../../../shared/components/formItems/BookingAvailableTimeSelectItem";
+import BookingDateItem from "../../../shared/components/formItems/BookingDateItem";
+import InputFormItem from "../../../shared/components/formItems/InputFormItem";
 
 interface IOption {
   value: string;

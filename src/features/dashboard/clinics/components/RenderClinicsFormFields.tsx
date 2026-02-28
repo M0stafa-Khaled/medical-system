@@ -1,8 +1,8 @@
 import { FormField } from "@/shared/components/ui/form";
 import { IFormInput } from "@/shared/types";
 import { z } from "zod";
-import SwitchFormItem from "../../../../components/forms/formItems/SwitchFormItem";
-import InputFormItem from "../../../../components/forms/formItems/InputFormItem";
+import SwitchFormItem from "../../../../shared/components/formItems/SwitchFormItem";
+import InputFormItem from "../../../../shared/components/formItems/InputFormItem";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { clinicSchema } from "../schema";
 

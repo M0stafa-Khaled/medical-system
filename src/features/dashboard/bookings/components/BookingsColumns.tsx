@@ -40,6 +40,10 @@ export const useBookingsColumns = (): ColumnDef<IBooking>[] => {
       header: "رقم الهاتف",
     },
     {
+      key: "action.name" as keyof IBooking,
+      header: "الخدمة",
+    },
+    {
       key: "doctor.name" as keyof IBooking,
       header: "الطبيب",
       cell: (row) => truncateText(row.doctor?.name, 15),

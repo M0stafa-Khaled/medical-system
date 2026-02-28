@@ -13,7 +13,7 @@ import { containerVariants, itemVariants } from "@/shared/animations";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useCreateDosage } from "@/features/dosages/queriesAndMutations";
 import { dosageSchema } from "../schema";
-import InputFormItem from "@/components/forms/formItems/InputFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
 export const CreateDosage = () => {
