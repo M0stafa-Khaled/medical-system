@@ -88,6 +88,7 @@ export const PatientForm = ({ patient, action, patientSchema }: IProps) => {
           data: formData,
         });
         if (!status) return toast.error(message);
+
         toast.success("تم إضافة مريض جديد بنجاح");
       }
 
@@ -116,7 +117,7 @@ export const PatientForm = ({ patient, action, patientSchema }: IProps) => {
         variants={containerVariants}
       >
         <motion.div
-          className="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2 dark:text-white"
+          className="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2"
           variants={containerVariants}
         >
           {PATIENT_FORM_INPUTS.map((input, index) => (
