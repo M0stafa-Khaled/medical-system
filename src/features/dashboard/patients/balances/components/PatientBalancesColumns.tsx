@@ -26,7 +26,7 @@ export const usePatientBalancesColumns = (): ColumnDef<IBalance>[] => {
     },
     {
       key: "refund_amount",
-      header: "المرتجع",
+      header: "المسترد",
       cell: (row) => numberToPrice(row.refund_amount),
     },
     {

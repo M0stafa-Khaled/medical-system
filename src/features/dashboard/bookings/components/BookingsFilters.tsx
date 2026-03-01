@@ -43,11 +43,11 @@ export const BookingsFilters = () => {
 
   return (
     <div className="my-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-      <InputFilter
+      {/* <InputFilter
         placeholder="ابحث باسم الطبيب"
         value={filters.doctor}
         onChange={(e) => handleFilterChange("doctor", e.target.value)}
-      />
+      /> */}
       <InputFilter
         placeholder="ابحث باسم المريض او رقم الهاتف الأول"
         value={filters.patient}
@@ -75,12 +75,12 @@ export const BookingsFilters = () => {
       />
 
       {/* Created Date */}
-      <DateFilter
+      {/* <DateFilter
         placeholder="تاريخ الإنشاء"
         filterKey="created_at"
         handleFilterChange={handleFilterChange}
         value={filters.created_at}
-      />
+      /> */}
 
       {/* Booking Date */}
       <DateFilter

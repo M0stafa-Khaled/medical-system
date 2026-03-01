@@ -15,8 +15,8 @@ export const PATIENT_FORM_INPUTS: IFormInput[] = [
   },
   {
     name: "personal_id",
-    label: "رقم الهوية",
-    placeholder: "ادخل رقم الهوية",
+    label: "رقم الملف",
+    placeholder: "ادخل رقم الملف",
     type: "text",
   },
   {

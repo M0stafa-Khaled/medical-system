@@ -2,18 +2,19 @@ import { ColumnDef } from "@/shared/components/data-table";
 import { IBooking } from "../types";
 import truncateText from "@/shared/utils/truncateText";
 import { UpdateBookingStatus } from "./UpdateBookingStatus";
-import convertDay from "@/shared/utils/convertDayLang";
+// import convertDay from "@/shared/utils/convertDayLang";
 import formatDateTime from "@/shared/utils/formatDate";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Link } from "react-router";
 import { Button } from "@/shared/components/ui/button";
-import { LiaNotesMedicalSolid } from "react-icons/lia";
+// import { LiaNotesMedicalSolid } from "react-icons/lia";
 import CreateTransaction from "@/features/dashboard/transactions/components/CreateTransaction";
 import { Eye, Pen } from "lucide-react";
 import { DeleteAlert } from "@/shared/components/delete-alert";
 import { useDeleteBooking } from "../queriesAndMutations";
+import { LiaNotesMedicalSolid } from "react-icons/lia";
 
 export const useBookingsColumns = (): ColumnDef<IBooking>[] => {
   const canUpdateBooking = useHasPermission(PERMISSIONS.UPDATE_BOOKING);
@@ -40,8 +41,8 @@ export const useBookingsColumns = (): ColumnDef<IBooking>[] => {
       header: "رقم الهاتف",
     },
     {
-      key: "action.name" as keyof IBooking,
-      header: "الخدمة",
+      key: "patient.personal_id" as keyof IBooking,
+      header: "رقم الملف",
     },
     {
       key: "doctor.name" as keyof IBooking,
@@ -51,17 +52,22 @@ export const useBookingsColumns = (): ColumnDef<IBooking>[] => {
     {
       key: "status" as keyof IBooking,
       header: "الحالة",
-      cell: (row) => <UpdateBookingStatus booking={row} />,
-    },
-    {
-      key: "day",
-      header: "اليوم",
-      cell: (row) => convertDay(row?.day, "en"),
+      cell: (row) => (
+        <UpdateBookingStatus
+          booking={row}
+          disabled={row.status === "completed" || row.status === "collected"}
+        />
+      ),
     },
     {
       key: "booking_date",
       header: "تاريخ الحجز",
-      cell: (row) => formatDateTime(row.booking_date),
+      cell: (row) =>
+        formatDateTime(row.booking_date, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
     },
     ...(canDeleteBooking ||
     canUpdateBooking ||
@@ -89,10 +95,9 @@ export const useBookingsColumns = (): ColumnDef<IBooking>[] => {
                   </TooltipButton>
                 )}
 
-                {canCreateTransaction &&
-                  (row.status === "pending" || row.status === "completed") && (
-                    <CreateTransaction booking={row} />
-                  )}
+                {canCreateTransaction && row.status === "pending" && (
+                  <CreateTransaction booking={row} />
+                )}
                 {canViewBooking && (
                   <TooltipButton title="عرض">
                     <Button

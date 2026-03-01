@@ -7,45 +7,13 @@ import { format } from "date-fns";
 import { Button } from "@/shared/components/ui/button";
 import { Eraser } from "lucide-react";
 import { ar } from "date-fns/locale";
-import { useMemo } from "react";
-import { IExpensesFilter } from "../types";
 
 export const ExpensesHeader = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const canCreateExpense = useHasPermission(PERMISSIONS.ADD_EXPENSE);
 
-  const filters: IExpensesFilter = useMemo(
-    () => ({
-      status: searchParams.get("status") || "",
-      code: searchParams.get("code") || "",
-      employee: searchParams.get("employee") || "",
-      treasury: searchParams.get("treasury") || "",
-      created_at: searchParams.get("created_at") || "",
-      sort: searchParams.get("sort") || "",
-    }),
-    [searchParams]
-  );
-  const setFilters = (newFilters: IExpensesFilter) => {
-    const params = new URLSearchParams(searchParams);
-
-    // update each filter param
-    Object.entries(newFilters).forEach(([key, value]) => {
-      if (value) params.set(key, value);
-      else params.delete(key);
-    });
-
-    setSearchParams(params);
-  };
-
   const handleClearFilters = () => {
-    setFilters({
-      created_at: null,
-      treasury: "",
-      status: "",
-      code: "",
-      employee: "",
-      sort: "",
-    });
+    setSearchParams({});
   };
 
   return (
@@ -66,7 +34,7 @@ export const ExpensesHeader = () => {
           مسح الفلاتر
         </Button>
       </div>
-      <ExpensesFilters filters={filters} setFilters={setFilters} />
+      <ExpensesFilters />
     </div>
   );
 };

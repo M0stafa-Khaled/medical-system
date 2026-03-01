@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Landing />,
-    errorElement: <NotFound />,
+    // errorElement: <Error />,
   },
   {
     path: "/",
@@ -33,10 +33,12 @@ export const router = createBrowserRouter([
       ...dashboardRoutes,
       ...doctorRoutes,
     ],
+    // errorElement: <Error />,
   },
   ...authRoutes,
   {
     path: "*",
     element: <NotFound />,
+    // errorElement: <Error />,
   },
 ]);
