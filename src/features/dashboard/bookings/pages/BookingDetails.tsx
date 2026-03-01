@@ -20,6 +20,7 @@ import {
   CheckCheck,
   Phone,
   Pen,
+  FileText,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
@@ -238,7 +239,11 @@ const BookingDetails = () => {
                     <Calendar className="h-5 w-5 text-orange-500" size={20} />
                   }
                   label="تاريخ الحجز"
-                  value={formatDateTime(booking_date!)}
+                  value={formatDateTime(booking_date!, {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
                   sm
                 />
               </motion.div>
@@ -285,11 +290,24 @@ const BookingDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
+                  icon={<FileText className="h-5 w-5 text-red-500" size={20} />}
+                  label="رقم الملف"
+                  value={patient?.personal_id || ""}
+                  sm
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <InfoField
                   icon={
                     <Calendar className="h-5 w-5 text-yellow-500" size={20} />
                   }
                   label="تاريخ الإنشاء"
-                  value={formatDateTime(created_at!)}
+                  value={formatDateTime(created_at!, {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
                   sm
                 />
               </motion.div>

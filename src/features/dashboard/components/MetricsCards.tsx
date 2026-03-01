@@ -15,6 +15,7 @@ import { cn } from "@/shared/lib/utils";
 import { IWidgets } from "../types";
 import { useGetAdminWidgets } from "../queries";
 import { itemVariants, containerVariants } from "@/shared/animations";
+import { useNavigate } from "react-router";
 
 export const MetricsCards = () => {
   const cards = [
@@ -27,6 +28,7 @@ export const MetricsCards = () => {
       bg: "bg-emerald-500/10",
       gradient: "from-emerald-500 to-teal-500",
       shadow: "shadow-emerald-500/25",
+      path: "/dashboard/treasuries",
     },
     {
       key: "expenses_count",
@@ -37,6 +39,7 @@ export const MetricsCards = () => {
       bg: "bg-rose-500/10",
       gradient: "from-rose-500 to-red-500",
       shadow: "shadow-rose-500/25",
+      path: "/dashboard/expenses",
     },
     {
       key: "transactions_count",
@@ -47,6 +50,7 @@ export const MetricsCards = () => {
       bg: "bg-green-500/10",
       gradient: "from-green-500 to-emerald-500",
       shadow: "shadow-green-500/25",
+      path: "/dashboard/transactions",
     },
     {
       key: "transfers_count",
@@ -67,6 +71,7 @@ export const MetricsCards = () => {
       bg: "bg-violet-500/10",
       gradient: "from-violet-500 to-purple-500",
       shadow: "shadow-violet-500/25",
+      path: "/dashboard/bookings",
     },
     {
       key: "patients_count",
@@ -77,6 +82,7 @@ export const MetricsCards = () => {
       bg: "bg-sky-500/10",
       gradient: "from-sky-500 to-cyan-500",
       shadow: "shadow-sky-500/25",
+      path: "/dashboard/patients",
     },
     {
       key: "employees_count",
@@ -87,6 +93,7 @@ export const MetricsCards = () => {
       bg: "bg-amber-500/10",
       gradient: "from-amber-500 to-orange-500",
       shadow: "shadow-amber-500/25",
+      path: "/dashboard/employees",
     },
     {
       key: "doctors_count",
@@ -97,6 +104,7 @@ export const MetricsCards = () => {
       bg: "bg-cyan-500/10",
       gradient: "from-cyan-500 to-teal-500",
       shadow: "shadow-cyan-500/25",
+      path: "/dashboard/doctors",
     },
     {
       key: "clinics_count",
@@ -107,6 +115,7 @@ export const MetricsCards = () => {
       bg: "bg-indigo-500/10",
       gradient: "from-indigo-500 to-blue-500",
       shadow: "shadow-indigo-500/25",
+      path: "/dashboard/clinics",
     },
     {
       key: "prescriptions_count",
@@ -117,8 +126,10 @@ export const MetricsCards = () => {
       bg: "bg-pink-500/10",
       gradient: "from-pink-500 to-rose-500",
       shadow: "shadow-pink-500/25",
+      path: "/dashboard/prescriptions",
     },
   ];
+  const navigate = useNavigate();
 
   const { data: metrics, isLoading } = useGetAdminWidgets();
 
@@ -155,7 +166,10 @@ export const MetricsCards = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <Card className="group relative overflow-hidden border-0 bg-white shadow-md transition-all duration-300 hover:shadow-xl dark:bg-gray-900">
+            <Card
+              className="group relative cursor-pointer overflow-hidden border-0 bg-white shadow-md transition-all duration-300 hover:shadow-xl dark:bg-gray-900"
+              onClick={() => card.path && navigate(card.path)}
+            >
               {/* Top Gradient Line */}
               <div
                 className={cn(

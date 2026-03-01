@@ -12,6 +12,7 @@ interface IProps {
   filterKey: string;
   value: string;
   placeholder?: string;
+  className?: string;
 }
 const SelectFilter = ({
   options,
@@ -19,6 +20,7 @@ const SelectFilter = ({
   value,
   filterKey,
   placeholder,
+  className,
 }: IProps) => {
   return (
     <Select
@@ -28,7 +30,7 @@ const SelectFilter = ({
       <SelectTrigger
         className={`border-border hover:bg-input bg-input/30 h-12! cursor-pointer ${
           value ? "" : "text-muted-foreground"
-        }`}
+        } ${className}`}
       >
         <SelectValue
           placeholder={placeholder || ""}

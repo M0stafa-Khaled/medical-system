@@ -1,22 +1,41 @@
 import { useGetAllTreasuries } from "@/features/dashboard/treasuries/queriesAndMutations";
 import { IExpensesFilter } from "@/features/dashboard/expenses/types";
-import { useCallback } from "react";
+import { useMemo } from "react";
 import InputFilter from "@/shared/components/ui/input-filter";
 import SelectFilter from "@/shared/components/ui/select-filter";
 import DateFilter from "@/shared/components/ui/date-filter";
+import { useSearchParams } from "react-router";
 
-interface IProps {
-  filters: IExpensesFilter;
-  setFilters: (filters: IExpensesFilter) => void;
-}
-export const ExpensesFilters = ({ filters, setFilters }: IProps) => {
+export const ExpensesFilters = () => {
   const { data: treasuries } = useGetAllTreasuries({});
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleFilterChange = useCallback(
-    (key: string, value: string | null) =>
-      setFilters({ ...filters, [key]: value }),
-    [filters, setFilters]
+  const filters: IExpensesFilter = useMemo(
+    () => ({
+      status: searchParams.get("status") || "",
+      code: searchParams.get("code") || "",
+      employee: searchParams.get("employee") || "",
+      treasury: searchParams.get("treasury") || "",
+      created_at: searchParams.get("created_at") || "",
+      sort: searchParams.get("sort") || "",
+    }),
+    [searchParams]
   );
+
+  const setFilters = (newFilters: IExpensesFilter) => {
+    const params = new URLSearchParams(searchParams);
+
+    // update each filter param
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    });
+
+    setSearchParams(params);
+  };
+
+  const handleFilterChange = (key: string, value: string | null) =>
+    setFilters({ ...filters, [key]: value });
 
   return (
     <div className="my-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">

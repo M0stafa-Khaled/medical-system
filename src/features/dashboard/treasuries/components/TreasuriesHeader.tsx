@@ -2,13 +2,20 @@ import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { CreateTreasury } from "./CreateTreasury";
 import { TransferBetweenTreasuries } from "./TransferBetweenTreasuries";
-import SearchInput from "@/shared/components/ui/SearchInput";
+import SelectFilter from "@/shared/components/ui/select-filter";
+import { useSearchParams } from "react-router";
+import { useGetAllTreasuries } from "../queriesAndMutations";
 
 export const TreasuriesHeader = () => {
   const canCreateTreasury = useHasPermission(PERMISSIONS.ADD_TREASURY);
   const canTransferTreasury = useHasPermission(
     PERMISSIONS.TRANSFER_BETWEEN_TREASURIES
   );
+  const { data: treasuries } = useGetAllTreasuries({});
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const treasury = searchParams.get("q") || "";
 
   return (
     <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
@@ -16,7 +23,28 @@ export const TreasuriesHeader = () => {
         {canCreateTreasury && <CreateTreasury />}
         {canTransferTreasury && <TransferBetweenTreasuries />}
       </div>
-      <SearchInput placeholder="ابحث عن خزينة" />
+      <SelectFilter
+        className="max-w-sm"
+        placeholder="الخزنة"
+        value={treasury}
+        filterKey="q"
+        handleFilterChange={(key, value) => {
+          const params = new URLSearchParams(searchParams);
+          if (value === "all") params.delete(key);
+          else if (value) params.set(key, value);
+          else params.delete(key);
+          setSearchParams(params);
+        }}
+        options={[
+          { value: "all", label: "الكل" },
+          ...(treasuries?.data.length
+            ? treasuries.data.map((t) => ({
+                value: t.name.trim(),
+                label: t.name,
+              }))
+            : []),
+        ]}
+      />
     </div>
   );
 };

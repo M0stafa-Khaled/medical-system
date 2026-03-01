@@ -27,9 +27,10 @@ import { BOOKING_STATUS_OPTIONS } from "../constants";
 
 interface IProps {
   booking: IBooking;
+  disabled?: boolean;
 }
 
-export const UpdateBookingStatus = ({ booking }: IProps) => {
+export const UpdateBookingStatus = ({ booking, disabled }: IProps) => {
   const canUpdateBookingStatus = useHasPermission(
     PERMISSIONS.UPDATE_BOOKING_STATUS
   );
@@ -61,13 +62,17 @@ export const UpdateBookingStatus = ({ booking }: IProps) => {
   return (
     <>
       {canUpdateBookingStatus ? (
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover
+          open={disabled ? false : open}
+          onOpenChange={disabled ? undefined : setOpen}
+        >
           <PopoverTrigger asChild>
             <Button
+              disabled={disabled}
               id="patient_id"
               role="combobox"
               aria-expanded={open}
-              className="m-0 border-0 bg-transparent p-0 shadow-none hover:bg-transparent"
+              className="m-0 border-0 bg-transparent p-0 shadow-none hover:bg-transparent disabled:opacity-50"
             >
               <BookingStatus status={booking?.status} />
             </Button>
