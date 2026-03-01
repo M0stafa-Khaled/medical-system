@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const NotFound = () => {
   return (
-    <main className="dark:bg-background bg-[#FFF]">
+    <main>
       <div className="container flex min-h-screen flex-col items-center justify-center gap-4">
         <div className="flex max-w-sm items-center justify-center">
           <img
@@ -14,7 +14,7 @@ const NotFound = () => {
           />
         </div>
         <div className="max-w-xl space-y-4 text-center">
-          <h1 className="text-dark text-2xl leading-relaxed font-bold dark:text-white">
+          <h1 className="text-2xl leading-relaxed font-bold">
             الصفحة غير موجودة
           </h1>
           <p className="text-muted-foreground leading-8 font-medium">
@@ -22,11 +22,12 @@ const NotFound = () => {
             الرابط أو العودة إلى الصفحة الرئيسية.
           </p>
         </div>
-        <Button className="mt-5 h-auto w-auto px-0 py-0">
-          <Link
-            to="/"
-            className="flex items-center justify-center gap-2 px-6 py-3 font-medium"
-          >
+        <Button
+          className="mt- flex items-center justify-center gap-2 font-medium"
+          asChild
+          size={"lg"}
+        >
+          <Link to="/">
             الصفحة الرئيسية
             <Undo2 size={24} />
           </Link>

@@ -15,10 +15,12 @@ interface IProps {
 }
 
 const DataTablePagination = ({ currentPage, totalPages }: IProps) => {
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handlePageChange = (page: number) => {
-    setSearchParams({ page: page.toString() });
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    setSearchParams(params);
   };
 
   const renderPageNumbers = () => {
