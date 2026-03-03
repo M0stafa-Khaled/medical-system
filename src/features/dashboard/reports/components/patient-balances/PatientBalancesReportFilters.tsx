@@ -64,7 +64,6 @@ export const PatientBalancesReportFilters = () => {
         value={selectedPatientId}
         filterKey="patient_id"
         options={[
-          { value: "all", label: "كل المرضى" },
           ...(patients?.data.items?.length
             ? patients.data.items.map((p) => ({
                 value: String(p.id),

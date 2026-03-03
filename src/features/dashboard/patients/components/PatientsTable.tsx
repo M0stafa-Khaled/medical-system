@@ -41,7 +41,7 @@ export const PatientsTable = () => {
       skeleton={
         <TableSkeleton
           columns={
-            canDeletePatient || canViewPatient || canUpdatePatient ? 4 : 3
+            canDeletePatient || canViewPatient || canUpdatePatient ? 7 : 6
           }
           rows={6}
           actionButtons={3}

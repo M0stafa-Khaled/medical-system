@@ -23,7 +23,7 @@ export interface ITreasuryReport {
   created_at: string;
   details: {
     id: number;
-    price: string;
+    amount: string;
     code?: strings;
     status?: 1 | 0;
     refund_info?: string | null;

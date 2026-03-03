@@ -1,12 +1,13 @@
-import InputFilter from "@/shared/components/ui/input-filter";
 import { useSearchParams } from "react-router";
 import { useMemo } from "react";
 import SelectFilter from "@/shared/components/ui/select-filter";
 import DateFilter from "@/shared/components/ui/date-filter";
 import { ITreasuriesReportFilter } from "../../types";
+import { useGetAllTreasuries } from "@/features/dashboard/treasuries";
 
 export const TreasuriesReportFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { data: treasuries } = useGetAllTreasuries({});
 
   const filters: ITreasuriesReportFilter = useMemo(
     () => ({
@@ -23,7 +24,8 @@ export const TreasuriesReportFilters = () => {
 
     // update each filter param
     Object.entries(newFilters).forEach(([key, value]) => {
-      if (value) params.set(key, value);
+      if (value === "all") params.delete(key);
+      else if (value) params.set(key, value);
       else params.delete(key);
     });
 
@@ -35,10 +37,21 @@ export const TreasuriesReportFilters = () => {
 
   return (
     <div className="my-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-      <InputFilter
-        placeholder="ابحث باسم الخزينة"
+      <SelectFilter
+        className="max-w-sm"
+        placeholder="الخزنة"
         value={filters.treasury}
-        onChange={(e) => handleFilterChange("treasury", e.target.value)}
+        filterKey="treasury"
+        handleFilterChange={handleFilterChange}
+        options={[
+          { value: "all", label: "الكل" },
+          ...(treasuries?.data.length
+            ? treasuries.data.map((t) => ({
+                value: t.name.trim(),
+                label: t.name,
+              }))
+            : []),
+        ]}
       />
       {/* Status */}
 

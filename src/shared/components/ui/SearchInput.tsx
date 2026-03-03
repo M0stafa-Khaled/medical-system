@@ -18,10 +18,7 @@ const SearchInput = ({ placeholder, className }: IProps) => {
       )}
       onChange={(e) => {
         const value = e.target.value;
-        const params = new URLSearchParams(searchParams);
-        if (value) params.set("q", value);
-        else params.delete("q");
-        setSearchParams(params);
+        setSearchParams({ q: value });
       }}
       value={search ?? ""}
       type="search"

@@ -21,10 +21,9 @@ export const useTreasuriesReportColumns = (): ColumnDef<ITreasuryReport>[] => {
             : "تحويلات خزائن",
     },
     {
-      key: "details.price" as keyof ITreasuryReport,
+      key: "details.amount" as keyof ITreasuryReport,
       header: "المبلغ",
-      cell: (row) =>
-        row.details.price ? numberToPrice(row.details.price) : "لا يوجد",
+      cell: (row) => numberToPrice(row.details.amount) || "لا يوجد",
     },
     {
       key: "details.status" as keyof ITreasuryReport,
@@ -43,7 +42,7 @@ export const useTreasuriesReportColumns = (): ColumnDef<ITreasuryReport>[] => {
         ) : (
           <Badge className="rounded-full bg-blue-600/30 text-blue-500 shadow-none hover:bg-blue-600/10 dark:bg-blue-600/20">
             <div className="ml-2 h-1.5 w-1.5 rounded-full bg-blue-500" />
-            غير متوفر
+            لا يوجد
           </Badge>
         ),
     },
