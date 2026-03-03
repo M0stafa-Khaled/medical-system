@@ -40,6 +40,19 @@ export const usePatientsColumns = ({
       header: "رقم الهاتف",
     },
     {
+      key: "another_name",
+      header: "اسم أحد الأقارب",
+      cell: (row) => truncateText(row.another_name, 20),
+    },
+    {
+      key: "second_phone",
+      header: "رقم الهاتف الثاني",
+    },
+    {
+      key: "personal_id",
+      header: "رقم الملف",
+    },
+    {
       key: "status",
       header: "حالة الحساب",
       cell: (row) =>
