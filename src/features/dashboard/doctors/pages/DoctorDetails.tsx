@@ -35,7 +35,6 @@ import { containerVariants, itemVariants } from "@/shared/animations";
 import DataLoader from "@/shared/components/ui/DataLoader";
 import { Helmet } from "react-helmet-async";
 import { useDeleteDoctor, useGetDoctorById } from "../queriesAndMutations";
-
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { AxiosResErr } from "@/shared/types";
 import { DoctorTabs } from "../components/DoctorTabs";

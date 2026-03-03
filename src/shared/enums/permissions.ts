@@ -106,7 +106,7 @@ export enum PERMISSIONS {
 
   // Doctor Transactions
   DOCTOR_TRANSACTIONS = "تحصيلات-الطبيب",
-  ADD_DOCTOR_TRANSACTION = "اضافة-تحصيل-للطبيب",
+  ADD_DOCTOR_EXPENSE = "اضافة-مصروف-للطبيب",
 
   // Notifications
   RECEIVE_NOTIFICATIONS = "استقبال-اشعارات",

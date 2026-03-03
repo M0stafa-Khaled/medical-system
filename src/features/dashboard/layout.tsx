@@ -31,6 +31,9 @@ const DashboardLayout = () => {
   // Codes
   const canViewClinics = useHasPermission(PERMISSIONS.CLINICS);
   const canViewDoctors = useHasPermission(PERMISSIONS.DOCTORS);
+  const canViewDoctorTransactions = useHasPermission(
+    PERMISSIONS.DOCTOR_TRANSACTIONS
+  );
   const canViewEmployees = useHasPermission(PERMISSIONS.EMPLOYEES);
   const canViewPatients = useHasPermission(PERMISSIONS.PATIENTS);
   const canViewTreasuries = useHasPermission(PERMISSIONS.TREASURIES);
@@ -128,6 +131,7 @@ const DashboardLayout = () => {
                     },
                   ]
                 : []),
+
               ...(canViewEmployees
                 ? [
                     {
@@ -201,6 +205,15 @@ const DashboardLayout = () => {
                     {
                       name: ROUTES_NAME.transactions,
                       path: "/dashboard/transactions",
+                      icon: <BadgeDollarSign size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewDoctorTransactions
+                ? [
+                    {
+                      name: ROUTES_NAME.doctorTransactions,
+                      path: "/dashboard/doctors/transactions",
                       icon: <BadgeDollarSign size={18} />,
                     },
                   ]

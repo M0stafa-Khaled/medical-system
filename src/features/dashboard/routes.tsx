@@ -16,6 +16,7 @@ import { analysisRoutes } from "../analysis";
 import { prescriptionsRoutes } from "./prescriptions";
 import { transactionsRoutes } from "./transactions";
 import { reportsRoutes } from "./reports/routes";
+import { doctorTransactionsRoutes } from "./doctor-transactions/routes";
 
 export const dashboardRoutes = [
   {
@@ -40,6 +41,7 @@ export const dashboardRoutes = [
       ...treasuriesRoutes,
       ...dosagesRoutes,
       ...transactionsRoutes,
+      ...doctorTransactionsRoutes,
       ...prescriptionsRoutes,
       ...reportsRoutes,
       ...scansRoutes,
