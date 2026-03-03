@@ -35,18 +35,28 @@ const SelectFilter = ({
         <SelectValue
           placeholder={placeholder || ""}
           className={`text-muted-foreground py-4`}
-        />
+        ></SelectValue>
       </SelectTrigger>
       <SelectContent className="bg-background">
-        {options.map((option) => (
+        {options.length ? (
+          options.map((option) => (
+            <SelectItem
+              key={option.value}
+              value={option.value}
+              className="cursor-pointer py-2.5"
+            >
+              {option.label}
+            </SelectItem>
+          ))
+        ) : (
           <SelectItem
-            key={option.value}
-            value={option.value}
+            value={"disabled"}
             className="cursor-pointer py-2.5"
+            disabled
           >
-            {option.label}
+            لا يوجد
           </SelectItem>
-        ))}
+        )}
       </SelectContent>
     </Select>
   );

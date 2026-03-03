@@ -1,6 +1,5 @@
 import { IPaginationMeta } from "@/shared/types";
 import { IClinic } from "../clinics/types";
-import { ITransaction } from "@/features/dashboard/transactions/types";
 
 export interface IDoctor {
   id: number;
@@ -77,16 +76,4 @@ export interface IResponseDoctorActions {
   status: boolean;
   message: string | null;
   data: IDoctorAction[];
-}
-
-export interface IDoctorTransactions {
-  items: ITransaction[];
-  commission: string;
-  total_amount: number;
-}
-
-export interface IDoctorTransactionsRes {
-  status: boolean;
-  message: string | null;
-  data: IDoctorTransactions;
 }

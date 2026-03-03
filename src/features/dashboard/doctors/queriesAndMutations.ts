@@ -6,10 +6,8 @@ import {
   getDoctorById,
   updateDoctor,
   createDoctorAction,
-  createDoctorTransaction,
   deleteDoctorAction,
   getDoctorActions,
-  getDoctorTransactions,
   updateDoctorAction,
 } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -72,25 +70,6 @@ export const useDeleteDoctor = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ONE_DOCTOR],
-      });
-    },
-  });
-};
-
-export const useGetDoctorTransactions = ({ id }: { id: string }) =>
-  useQuery({
-    queryKey: [Query_Keys.DOCTOR_TRANSACTIONS, id],
-    queryFn: () => getDoctorTransactions({ id }),
-    enabled: !!id,
-  });
-
-export const useCreateDoctorTransaction = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: ({ id }: { id: string }) => createDoctorTransaction({ id }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [Query_Keys.DOCTOR_TRANSACTIONS],
       });
     },
   });

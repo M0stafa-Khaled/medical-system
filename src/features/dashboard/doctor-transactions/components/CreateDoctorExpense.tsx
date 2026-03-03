@@ -1,13 +1,18 @@
-import { Modal } from "@/shared/components/Modal";
+import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { handleResErr } from "@/shared/utils/handleResError";
-import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { useCreateDoctorTransaction } from "../../queriesAndMutations";
+import { Modal } from "@/shared/components/Modal";
+import { useCreateDoctorTransaction } from "../queriesAndMutations";
+import { Wallet } from "lucide-react";
 
-export const CreateDoctorExpense = ({ id }: { id: string }) => {
+interface CreateDoctorExpenseProps {
+  id: string;
+}
+
+export const CreateDoctorExpense = ({ id }: CreateDoctorExpenseProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: createTransaction, isPending } =
     useCreateDoctorTransaction();
@@ -16,14 +21,16 @@ export const CreateDoctorExpense = ({ id }: { id: string }) => {
     try {
       const { status, message } = await createTransaction({ id });
 
-      // ! create failed
       if (!status) return toast.error(message);
 
-      // * create Success
       return Swal.fire({
         icon: "success",
         title: "تم",
         text: message,
+        confirmButtonText: "حسناً",
+        customClass: {
+          confirmButton: "swal-confirm-btn",
+        },
       });
     } catch (error) {
       handleResErr(error);
@@ -36,11 +43,12 @@ export const CreateDoctorExpense = ({ id }: { id: string }) => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        size={"lg"}
+        size="lg"
         className="dark:btn-primary"
       >
+        <Wallet size={18} />
         إضافة مصروف للطبيب
-        <FiPlus size={20} />
+        <FiPlus size={18} />
       </Button>
 
       <Modal
@@ -48,7 +56,7 @@ export const CreateDoctorExpense = ({ id }: { id: string }) => {
         onOpenChange={() => setIsOpen(false)}
         title="إضافة مصروف"
         description={{
-          text: `هل انت متاكد من إضافة مصروف للطبيب ${name}؟`,
+          text: `هل أنت متأكد من إضافة مصروف للطبيب ؟`,
           color: "text-blue-600",
         }}
         onConfirm={handleCreateTransaction}

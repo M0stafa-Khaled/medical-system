@@ -110,6 +110,7 @@ export const ROUTES_NAME: Record<string, string> = {
   settings: "الإعدادات",
   clinics: "العيادات",
   doctors: "الأطباء",
+  doctorTransactions: "معاملات الأطباء",
   "working-days": "ايام العمل",
   create: "إضافة",
   update: "تعديل",

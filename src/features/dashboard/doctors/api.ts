@@ -3,7 +3,6 @@ import { IStatusMsg, IGetWithParams } from "@/shared/types";
 import {
   ICreateDoctor,
   ICreateDoctorAction,
-  IDoctorTransactionsRes,
   IResponseDoctor,
   IResponseDoctorActions,
   IResponseDoctors,
@@ -86,20 +85,6 @@ export const deleteDoctor = async ({
 }: {
   id: number;
 }): Promise<IStatusMsg> => (await axiosAPI.delete(`/doctors/${id}`)).data;
-
-export const getDoctorTransactions = async ({
-  id,
-}: {
-  id: string;
-}): Promise<IDoctorTransactionsRes> =>
-  (await axiosAPI.get(`/${id}/transactions`)).data;
-
-export const createDoctorTransaction = async ({
-  id,
-}: {
-  id: string;
-}): Promise<IStatusMsg> =>
-  (await axiosAPI.post(`/${id}/transactions/add-expense`)).data;
 
 export const getDoctorActions = async ({
   doctorId,
