@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2, LucideUserCog } from "lucide-react";
 import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/shared/animations";
@@ -17,7 +17,13 @@ import { RenderPatientFormFields } from "@/features/dashboard/patients/component
 import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 import { UPDATE_PROFILE_PATIENT_INPUTS } from "../constants";
 
-export const UpdatePatientProfile = () => {
+interface UpdatePatientProfileProps {
+  className?: string;
+}
+
+export const UpdatePatientProfile = ({
+  className = "",
+}: UpdatePatientProfileProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: updateProfile, isPending } = useUpdateProfile();
 
@@ -81,7 +87,11 @@ export const UpdatePatientProfile = () => {
 
   return (
     <>
-      <Button className="px-4 font-medium!" onClick={() => setIsOpen(true)}>
+      <Button
+        className={`w-full gap-2 ${className}`}
+        onClick={() => setIsOpen(true)}
+      >
+        <LucideUserCog className="h-4 w-4" />
         تحديث الملف الشخصي
       </Button>
 

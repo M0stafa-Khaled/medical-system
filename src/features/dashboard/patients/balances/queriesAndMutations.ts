@@ -5,7 +5,7 @@ import { ICreatePatientPayment } from "./types";
 
 export const useGetPatientBalances = ({ patientId }: { patientId: string }) =>
   useQuery({
-    queryKey: [Query_Keys.GET_ALL_TRANSACTION_PATIENT_BALANCES],
+    queryKey: [Query_Keys.GET_ALL_TRANSACTION_PATIENT_BALANCES, patientId],
     queryFn: () => getPatientBalances({ patientId }),
     enabled: !!patientId,
   });

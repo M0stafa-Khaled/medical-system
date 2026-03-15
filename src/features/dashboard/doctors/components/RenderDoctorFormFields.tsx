@@ -3,11 +3,11 @@ import { IFormInput } from "@/shared/types";
 import { z } from "zod";
 import { ChangeEvent } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import SwitchFormItem from "../../../../shared/components/formItems/SwitchFormItem";
-import SelectFormItem from "../../../../shared/components/formItems/SelectFormItem";
-import FileFormItem from "../../../../shared/components/formItems/FileFormItem";
-import MultiSelectFormItem from "../../../../shared/components/formItems/MultiSelectFormItem";
-import InputFormItem from "../../../../shared/components/formItems/InputFormItem";
+import SwitchFormItem from "@/shared/components/formItems/SwitchFormItem";
+import SelectFormItem from "@/shared/components/formItems/SelectFormItem";
+import FileFormItem from "@/shared/components/formItems/FileFormItem";
+import MultiSelectFormItem from "@/shared/components/formItems/MultiSelectFormItem";
+import InputFormItem from "@/shared/components/formItems/InputFormItem";
 
 import { GENDER } from "@/shared/constants";
 

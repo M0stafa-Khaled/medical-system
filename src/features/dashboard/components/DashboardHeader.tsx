@@ -6,7 +6,7 @@ export const DashboardHeader = () => {
   const description =
     role === "admin"
       ? "نظرة عامة على أداء المركز الطبي والعمليات."
-      : "متابعة الخزينة والعمليات المالية.";
+      : "متابعة الخزنة والعمليات المالية.";
   return (
     <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
       <div>

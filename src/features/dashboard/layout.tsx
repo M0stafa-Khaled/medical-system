@@ -79,6 +79,9 @@ const DashboardLayout = () => {
   const canViewPatientBalancesReports = useHasPermission(
     PERMISSIONS.PATIENT_BALANCES_REPORTS
   );
+  const canViewPatientsBalances = useHasPermission(
+    PERMISSIONS.PATIENT_BALANCES
+  );
   const canViewReports =
     canViewTransactionsReports ||
     canViewBookingsReports ||
@@ -214,6 +217,15 @@ const DashboardLayout = () => {
                     {
                       name: ROUTES_NAME.doctorTransactions,
                       path: "/dashboard/doctors/transactions",
+                      icon: <BadgeDollarSign size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canViewPatientsBalances
+                ? [
+                    {
+                      name: ROUTES_NAME.patientsBalances,
+                      path: "/dashboard/patients/transactions",
                       icon: <BadgeDollarSign size={18} />,
                     },
                   ]

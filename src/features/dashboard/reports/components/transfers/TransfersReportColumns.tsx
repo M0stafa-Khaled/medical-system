@@ -6,11 +6,11 @@ import formatDateTime from "@/shared/utils/formatDate";
 export const useTransfersReportColumns = (): ColumnDef<ITransfer>[] => {
   return [
     {
-      key: "from_treasury",
+      key: "from_treasury.name" as keyof ITransfer,
       header: "من الخزنة",
     },
     {
-      key: "to_treasury",
+      key: "to_treasury.name" as keyof ITransfer,
       header: "إلي الخزنة",
     },
     {

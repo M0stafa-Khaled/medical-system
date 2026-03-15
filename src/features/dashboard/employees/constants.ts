@@ -61,7 +61,7 @@ export const EMPLOYEE_FORM_INPUTS: IFormInput[] = [
   },
   {
     name: "treasury_id",
-    label: "الخزينة",
+    label: "الخزنة",
     type: "select",
   },
   {

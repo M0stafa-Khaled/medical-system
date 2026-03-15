@@ -3,7 +3,7 @@ import CircleProgress from "@/shared/components/ui/CircleProgress";
 import { IFeature } from "@/interfaces/dashboard/company";
 import { motion } from "framer-motion";
 
-const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
+export const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
   const colors = [
     "stroke-blue-600",
     "stroke-orange-600",
@@ -44,5 +44,3 @@ const FeaturesUsage = ({ features }: { features: IFeature[] }) => {
     </motion.div>
   );
 };
-
-export default FeaturesUsage;

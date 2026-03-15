@@ -70,7 +70,6 @@ export const DataTable = <T extends object>({
                 <TableHead
                   key={String(col.key)}
                   className={cn(
-                    col.className,
                     "text-muted-foreground py-4 text-center text-sm font-medium text-nowrap"
                   )}
                 >
@@ -110,8 +109,8 @@ export const DataTable = <T extends object>({
                         <TableCell
                           key={String(col.key) + cIdx}
                           className={cn(
-                            col.className,
-                            "text-foreground py-4 text-center text-sm text-nowrap"
+                            "text-foreground py-4 text-center text-sm text-nowrap",
+                            col.className
                           )}
                         >
                           {content}
@@ -139,7 +138,6 @@ export const DataTable = <T extends object>({
                 <TableCell
                   key={String(col.key)}
                   className={cn(
-                    col.className,
                     "text-muted-foreground py-4 text-center text-sm font-medium text-nowrap"
                   )}
                 >

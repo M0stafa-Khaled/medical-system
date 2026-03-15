@@ -5,6 +5,7 @@ import { lazy, Suspense } from "react";
 
 const Patients = lazy(() => import("./pages/Patients"));
 const PatientDetails = lazy(() => import("./pages/PatientDetails"));
+const PatientTransactions = lazy(() => import("./pages/PatientTransactions"));
 const CreatePatient = lazy(() => import("./pages/CreatePatient"));
 const UpdatePatient = lazy(() => import("./pages/UpdatePatient"));
 
@@ -45,6 +46,16 @@ export const patientsRoutes = [
       <Suspense fallback={<PageLoader />}>
         <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_PATIENT}>
           <UpdatePatient />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "patients/transactions",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.PATIENT_BALANCES}>
+          <PatientTransactions />
         </ProtectedRoute>
       </Suspense>
     ),

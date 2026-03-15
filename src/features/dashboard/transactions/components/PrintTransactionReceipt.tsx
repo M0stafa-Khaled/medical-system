@@ -172,7 +172,7 @@ const PrintTransactionReceipt = ({ transaction }: IProps) => {
           <div className="grid grid-cols-2 gap-4 py-4">
             <div className="flex flex-col space-y-2">
               <div className="flex items-center">
-                <span className="w-32 text-gray-600">الخزينة:</span>
+                <span className="w-32 text-gray-600">الخزنة:</span>
                 <span className="flex-1 font-bold">
                   {transaction.treasury.name}
                 </span>

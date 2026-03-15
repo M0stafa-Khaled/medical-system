@@ -74,10 +74,10 @@ export const EmployeeTreasuriesChart = () => {
           </motion.div>
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              إحصائيات الخزينة
+              إحصائيات الخزنة
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              تحليل ومتابعة أداء الخزينة
+              تحليل ومتابعة أداء الخزنة
             </p>
           </div>
         </div>

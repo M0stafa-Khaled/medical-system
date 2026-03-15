@@ -8,6 +8,7 @@ const Doctors = lazy(() => import("./pages/Doctors"));
 const DoctorDetails = lazy(() => import("./pages/DoctorDetails"));
 const CreateDoctor = lazy(() => import("./pages/CreateDoctor"));
 const UpdateDoctor = lazy(() => import("./pages/UpdateDoctor"));
+const DoctorTransactions = lazy(() => import("./pages/DoctorTransactions"));
 
 export const doctorsRoutes = [
   {
@@ -46,6 +47,16 @@ export const doctorsRoutes = [
       <Suspense fallback={<PageLoader />}>
         <ProtectedRoute requiredPermission={PERMISSIONS.UPDATE_DOCTOR}>
           <UpdateDoctor />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "doctors/transactions",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <ProtectedRoute requiredPermission={PERMISSIONS.DOCTOR_TRANSACTIONS}>
+          <DoctorTransactions />
         </ProtectedRoute>
       </Suspense>
     ),

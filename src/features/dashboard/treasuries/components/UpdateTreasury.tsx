@@ -49,7 +49,7 @@ export const UpdateTreasury = ({ treasury }: IProps) => {
       if (!serverStatus) return toast.error(message);
 
       // * Update Success
-      return toast.success(message || "تم تحديث بيانات الخزينة بنجاح");
+      return toast.success(message || "تم تحديث بيانات الخزنة بنجاح");
     } catch (error) {
       handleResErr(error);
     } finally {

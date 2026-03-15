@@ -5,14 +5,10 @@ import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { Modal } from "@/shared/components/Modal";
-import { useCreateDoctorTransaction } from "../queriesAndMutations";
+import { useCreateDoctorTransaction } from "../../queriesAndMutations";
 import { Wallet } from "lucide-react";
 
-interface CreateDoctorExpenseProps {
-  id: string;
-}
-
-export const CreateDoctorExpense = ({ id }: CreateDoctorExpenseProps) => {
+export const CreateDoctorExpense = ({ id }: { id: string }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: createTransaction, isPending } =
     useCreateDoctorTransaction();
