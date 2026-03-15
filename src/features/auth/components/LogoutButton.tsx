@@ -5,7 +5,6 @@ import { useLogout } from "@/features/auth/queriesAndMutations";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import { logout } from "@/app/store/features/auth/authSlice";
-import { clearPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import { handleResErr } from "@/shared/utils/handleResError";
 import Swal from "sweetalert2";
 import { LogOut } from "lucide-react";
@@ -48,7 +47,6 @@ export const LogoutButton = ({
 
       // * Logout Success
       dispatch(logout());
-      dispatch(clearPermissions());
       navigate("/login", {
         replace: true,
       });
@@ -68,19 +66,19 @@ export const LogoutButton = ({
       {isAuthenticated && (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
           <AlertDialogTrigger asChild>
-              <Button
-                size={"icon"}
-                onClick={() => setIsOpen(true)}
-                variant={"outline"}
-                className={`${
-                  icon
-                    ? "btn-destructive h-9 w-9 rounded-full px-0 py-0 font-bold"
-                    : "flex h-auto w-full items-center justify-center gap-2 py-3"
-                } ${className}`}
-              >
-                <LogOut size={20} />
-                {icon ? null : "تسجيل الخروج"}
-              </Button>
+            <Button
+              size={"icon"}
+              onClick={() => setIsOpen(true)}
+              variant={"outline"}
+              className={`${
+                icon
+                  ? "btn-destructive h-9 w-9 rounded-full px-0 py-0 font-bold"
+                  : "flex h-auto w-full items-center justify-center gap-2 py-3"
+              } ${className}`}
+            >
+              <LogOut size={20} />
+              {icon ? null : "تسجيل الخروج"}
+            </Button>
           </AlertDialogTrigger>
           <AlertDialogContent className="rounded-xl">
             <AlertDialogHeader className="gap-4">

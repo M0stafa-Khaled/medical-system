@@ -9,12 +9,14 @@ import {
   getEmployeeTreasuriesChart,
   getAdminWidgets,
 } from "./api";
+import cookieServices from "@/shared/utils/cookieServices";
 
 export const useGetEmployeeTreasuriesChart = ({ filter }: IGetWithParams) =>
   useQuery({
     queryKey: [Query_Keys.EMPLOYEE_TREASURIES_CHART, filter],
     queryFn: () => getEmployeeTreasuriesChart({ filter }),
     placeholderData: keepPreviousData,
+    enabled: cookieServices.getUser()?.role === "employee",
   });
 
 export const useGetActiveUsersChart = ({ filter }: IGetWithParams) =>

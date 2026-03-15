@@ -11,7 +11,6 @@ import { z } from "zod";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { useDispatch } from "react-redux";
 import { login } from "@/app/store/features/auth/authSlice";
-import { setPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import Swal from "sweetalert2";
 import { registerSchema } from "../schema";
 import { REGISTER_FORM_INPUTS } from "../constants";
@@ -55,7 +54,6 @@ export const RegisterForm = () => {
           user: data,
         })
       );
-      dispatch(setPermissions(data.permissions));
       form.reset();
       navigate("/verify-account");
     } catch (error) {

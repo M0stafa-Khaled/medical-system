@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodSchema } from "zod";
 import { Form } from "@/shared/components/ui/form";
 import { useUploadImgHandler } from "@/shared/hooks/useUploadImgHandler";
-import cookieServices from "@/shared/utils/cookieServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useCreateEmployee, useUpdateEmployee } from "../queriesAndMutations";
@@ -15,10 +14,6 @@ import {
 import { motion } from "framer-motion";
 import { itemVariants, containerVariants } from "@/shared/animations";
 import { useDispatch } from "react-redux";
-import {
-  clearPermissions,
-  setPermissions,
-} from "@/app/store/features/permissions/permissionsSlice";
 import { logout } from "@/app/store/features/auth/authSlice";
 import { RenderEmployeeFormFields } from "./RenderEmployeeFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
@@ -26,6 +21,7 @@ import { type IEmployee } from "../types";
 import { useGetAllTreasuries } from "../../treasuries";
 import { EMPLOYEE_FORM_INPUTS } from "../constants";
 import SubmitButton from "@/shared/components/SubmitButton";
+import { useAppSelector } from "@/app/store";
 
 interface IProps {
   employee?: IEmployee;
@@ -34,7 +30,8 @@ interface IProps {
 }
 
 export const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
-  const currentEmployeeId = cookieServices.getUser()?.id;
+  const { user } = useAppSelector((state) => state.auth);
+  const currentEmployeeId = user?.user?.id;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -82,10 +79,9 @@ export const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
   });
 
   const checkAuth = async () => {
-    const { auth, email_verified, status, permissions } = await checkAuthUser();
+    const { auth, email_verified, status } = await checkAuthUser();
     if (!auth || !status) {
       dispatch(logout());
-      dispatch(clearPermissions());
       navigate("/login");
       if (!auth)
         return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
@@ -96,9 +92,6 @@ export const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       navigate("/verify-account");
       return toast.warn("يرجى تاكيد البريد الالكتروني");
     }
-
-    // Set Permissions in state
-    dispatch(setPermissions(permissions));
   };
   const role = useWatch({
     control: form.control,

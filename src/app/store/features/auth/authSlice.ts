@@ -3,6 +3,7 @@ import CookieService from "@/shared/utils/cookieServices";
 import { TRole } from "@/shared/types";
 import axiosAPI from "@/shared/lib/axios";
 import { ICheckAuth, IPermission } from "@/features/auth/types";
+import { IProfile, IProfileRes } from "@/features/profile/types";
 
 interface IAuthState {
   isAuthenticated: boolean;
@@ -10,6 +11,7 @@ interface IAuthState {
   emailVerified: boolean;
   accountStatus: boolean;
   permissions: IPermission[] | null;
+  user: IProfile | null;
 }
 
 const initialState: IAuthState = {
@@ -18,26 +20,33 @@ const initialState: IAuthState = {
   emailVerified: false,
   accountStatus: false,
   permissions: null,
+  user: null,
 };
 
 export const checkAuth = createAsyncThunk<ICheckAuth, void>(
   "auth/checkAuth",
   async (_, { rejectWithValue }) => {
     try {
-      const token = CookieService.getToken();
-      if (!token) throw new Error("No token");
-
-      const res = await axiosAPI.post<ICheckAuth>(
-        "/check-auth",
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await axiosAPI.post<ICheckAuth>("/check-auth");
       return res.data;
     } catch {
       return rejectWithValue("Unauthorized");
     }
   }
 );
+
+export const fetchUser = createAsyncThunk(
+  "auth/profile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axiosAPI.get("/me");
+      return res.data as IProfileRes;
+    } catch {
+      return rejectWithValue(null);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -66,6 +75,8 @@ const authSlice = createSlice({
 
     logout: (state) => {
       state.isAuthenticated = false;
+      state.user = null;
+      state.permissions = null;
       CookieService.clearAllCookies();
     },
   },
@@ -91,6 +102,20 @@ const authSlice = createSlice({
         state.emailVerified = false;
         state.permissions = null;
         CookieService.clearAllCookies();
+      })
+      .addCase(fetchUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload.data;
+        state.isAuthenticated = true;
+      })
+      .addCase(fetchUser.rejected, (state) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+        state.permissions = null;
       });
   },
 });

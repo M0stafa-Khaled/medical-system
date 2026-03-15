@@ -25,7 +25,7 @@ import { ROUTES_NAME } from "@/shared/constants";
 import { NotificationsMenu } from "../notifications";
 import { ProfileMenu } from "../profile";
 import ToggleTheme from "@/shared/components/ToggleTheme";
-import cookieServices from "@/shared/utils/cookieServices";
+import { useAppSelector } from "@/app/store";
 
 const DashboardLayout = () => {
   // Codes
@@ -349,7 +349,7 @@ const DashboardLayout = () => {
     },
   ];
 
-  const user = cookieServices.getUser();
+  const { user } = useAppSelector((state) => state.auth);
   const canReceiveNotifications = useHasPermission(
     PERMISSIONS.RECEIVE_NOTIFICATIONS
   );
@@ -375,7 +375,7 @@ const DashboardLayout = () => {
           </div>
 
           <div className="flex items-center justify-center gap-3">
-            {user?.role !== "doctor" && canReceiveNotifications && (
+            {user?.user?.role !== "doctor" && canReceiveNotifications && (
               <NotificationsMenu />
             )}
             <ProfileMenu />

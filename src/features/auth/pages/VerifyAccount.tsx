@@ -11,7 +11,6 @@ import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { clearPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import { useCheckAuth } from "@/features/auth/queriesAndMutations";
 import { Helmet } from "react-helmet-async";
 import { VerifyAccountForm } from "../components/VerifyAccountForm";
@@ -30,7 +29,6 @@ const VerifyAccount = () => {
 
       if (!auth) {
         dispatch(logout());
-        dispatch(clearPermissions());
         navigate("/login");
         return;
       }

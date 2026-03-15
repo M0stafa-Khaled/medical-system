@@ -1,7 +1,9 @@
-import cookieServices from "@/shared/utils/cookieServices";
+import { useAppSelector } from "@/app/store";
 
 export const DashboardHeader = () => {
-  const role = cookieServices.getUser()!.role;
+  const { user } = useAppSelector((state) => state.auth);
+  const role = user?.user?.role;
+
   const title = role === "admin" ? "لوحة تحكم المدير" : "لوحة تحكم الموظف";
   const description =
     role === "admin"

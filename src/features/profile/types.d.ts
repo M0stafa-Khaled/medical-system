@@ -4,10 +4,12 @@ import { IPatient } from "../dashboard/patients/types";
 import { IEmployee } from "../dashboard/employees/types";
 
 export interface IProfileRes {
-  data: IDoctor | IPatient | IEmployee;
+  data: IProfile;
   message: null;
   status: boolean;
 }
+
+export type IProfile = IDoctor | IPatient | IEmployee;
 
 export interface IChangePassword {
   password: string;

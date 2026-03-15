@@ -1,4 +1,3 @@
-import cookieServices from "@/shared/utils/cookieServices";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { motion } from "framer-motion";
@@ -13,7 +12,6 @@ interface ITransactionsFilter {
 }
 
 const DoctorPrescriptionsCharts = () => {
-  const token = cookieServices.getToken()!;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters: ITransactionsFilter = useMemo(
@@ -25,7 +23,6 @@ const DoctorPrescriptionsCharts = () => {
   );
 
   const { data: analyticsData, isLoading } = useGetDoctorPrescriptionsChart({
-    token,
     filter: {
       ...(filters.prescription_start_at && {
         start_at: filters.prescription_start_at,

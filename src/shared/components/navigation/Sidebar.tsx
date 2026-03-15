@@ -1,6 +1,5 @@
 import { LogoutButton } from "@/features/auth";
 import { ILink } from "@/shared/types";
-import cookieServices from "@/shared/utils/cookieServices";
 import truncateText from "@/shared/utils/truncateText";
 import { Separator } from "@/shared/components/ui/separator";
 import { useNavigate } from "react-router";
@@ -10,13 +9,14 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/shared/components/ui/avatar";
+import { useAppSelector } from "@/app/store";
 
 interface IProps {
   links: ILink[];
 }
 
 const Sidebar = ({ links }: IProps) => {
-  const user = cookieServices.getUser();
+  const { user } = useAppSelector((state) => state.auth);
 
   const navigate = useNavigate();
   return (
@@ -56,7 +56,7 @@ const Sidebar = ({ links }: IProps) => {
             <div className="flex flex-col justify-center">
               <h3>{truncateText(user?.name || "", 15)}</h3>
               <p className="text-muted-foreground text-xs">
-                {"test@gmail.com"}
+                {user?.user?.email}
               </p>
             </div>
           </div>
