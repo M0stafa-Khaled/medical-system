@@ -5,17 +5,15 @@ import PatientBalancesList from "@/components/patient/balances/PatientBalancesLi
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useGetPatientTransactionsBalances } from "@/shared/lib/react-query/patient/patientBalances";
-import cookieServices from "@/shared/utils/cookieServices";
 import PCardSkeleton from "@/shared/components/ui/PCardSkeleton";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 
 const PatientBalances = () => {
-  const token = cookieServices.getToken()!;
   const {
     data: balances,
     isLoading,
     isError,
-  } = useGetPatientTransactionsBalances(token);
+  } = useGetPatientTransactionsBalances();
   const { refund_amount, total_amount_due, total_amount_paid, total_balance } =
     balances?.data || {};
   useEffect(() => {

@@ -5,7 +5,6 @@ import {
   useReadAllNotifications,
   useReadNotification,
 } from "../queriesAndMutations";
-import cookieServices from "@/shared/utils/cookieServices";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import { Bell, CheckCheck, ExternalLink, Loader2 } from "lucide-react";
@@ -23,26 +22,6 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
-
-const role = cookieServices.getUser()?.role;
-
-const getNotificationLink = (notification: INotification) => {
-  const { data } = notification;
-  // Patient related
-
-  if (role === "admin" || role === "employee") {
-    if (data.patient?.id) {
-      return `/dashboard/patients/${data.patient.id}`;
-    }
-    // Booking related
-    if (data.booking?.id) {
-      return `/dashboard/bookings/${data.booking.id}`;
-    }
-  }
-
-  // Default - no link
-  return "#";
-};
 
 const NotificationsMenu = () => {
   const navigate = useNavigate();
@@ -62,8 +41,8 @@ const NotificationsMenu = () => {
       handleResErr(error);
     }
   };
-
-  const role = cookieServices.getUser()?.role;
+  const { user } = useAppSelector((state) => state.auth);
+  const role = user?.user?.role;
 
   const { mutateAsync: readNotification } = useReadNotification();
 
@@ -87,6 +66,24 @@ const NotificationsMenu = () => {
   const canReceiveNotifications = useHasPermission(
     PERMISSIONS.RECEIVE_NOTIFICATIONS
   );
+
+  const getNotificationLink = (notification: INotification) => {
+    const { data } = notification;
+    // Patient related
+
+    if (role === "admin" || role === "employee") {
+      if (data.patient?.id) {
+        return `/dashboard/patients/${data.patient.id}`;
+      }
+      // Booking related
+      if (data.booking?.id) {
+        return `/dashboard/bookings/${data.booking.id}`;
+      }
+    }
+
+    // Default - no link
+    return "#";
+  };
 
   if (!canReceiveNotifications) return null;
 

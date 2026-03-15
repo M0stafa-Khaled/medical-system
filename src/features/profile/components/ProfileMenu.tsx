@@ -10,14 +10,15 @@ import {
 import { FaUser } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import cookieServices from "@/shared/utils/cookieServices";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { buttonVariants } from "@/shared/components/ui/button";
 
 export const ProfileMenu = () => {
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-  const role = cookieServices.getUser()?.role;
+  const { isAuthenticated, user } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const role = user?.user?.role;
 
   const canViewCompany = useHasPermission(PERMISSIONS.COMPANY_INFO);
 

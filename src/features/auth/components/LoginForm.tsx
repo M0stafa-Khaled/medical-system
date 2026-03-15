@@ -1,5 +1,4 @@
 import { login } from "@/app/store/features/auth/authSlice";
-import { setPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import { Form } from "@/shared/components/ui/form";
 import { useLogin } from "@/features/auth/queriesAndMutations";
 import { loginSchema } from "../schema";
@@ -55,9 +54,6 @@ export const LoginForm = () => {
         return navigate("/dashboard");
       if (data.role === "patient") navigate("/bookings");
       if (data.role === "doctor") navigate("/doctor");
-
-      // Permissions
-      if (data.role !== "patient") dispatch(setPermissions(data.permissions));
 
       return Swal.fire({
         icon: "success",

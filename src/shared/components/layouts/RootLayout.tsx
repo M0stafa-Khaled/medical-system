@@ -1,8 +1,9 @@
-import { checkAuth, logout } from "@/app/store/features/auth/authSlice";
 import {
-  clearPermissions,
-  setPermissions,
-} from "@/app/store/features/permissions/permissionsSlice";
+  checkAuth,
+  fetchUser,
+  logout,
+} from "@/app/store/features/auth/authSlice";
+
 import useNetworkStatus from "@/shared/hooks/useNetworkStatus";
 import cookieServices from "@/shared/utils/cookieServices";
 import { useEffect, useMemo, useRef } from "react";
@@ -45,15 +46,18 @@ const RootLayout = () => {
   const { isLoading: authLoading } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
+  useEffect(() => {
     (async () => {
       const action = await dispatch(checkAuth());
       if (checkAuth.fulfilled.match(action)) {
-        const { auth, email_verified, status, permissions } = action.payload;
+        const { auth, email_verified, status } = action.payload;
 
         // user unauthenticated
         if (!auth) {
           dispatch(logout());
-          dispatch(clearPermissions());
           if (location.pathname !== "/") {
             navigate("/login");
             toast.warn("يرجي تسجيل الدخول");
@@ -71,14 +75,9 @@ const RootLayout = () => {
         // Account is not Active
         if (!status) {
           dispatch(logout());
-          dispatch(clearPermissions());
           return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
         }
 
-        // Set Permissions in state
-        if (permissions && user?.role !== "patient") {
-          dispatch(setPermissions(permissions));
-        }
         // Enable socket
         if (user?.role !== "doctor") initializeEcho(token);
       }
