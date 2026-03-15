@@ -5,10 +5,11 @@ import { IPatientsRes, IPatientRes, ICreatePatient } from "./types";
 export const getAllPatients = async ({
   page = 1,
   search,
+  limit,
 }: IGetWithParams): Promise<IPatientsRes> =>
   (
     await axiosAPI.get(`/patients`, {
-      params: { ...(search ? { q: search, page } : { page }) },
+      params: { ...(search ? { q: search, page, limit } : { page, limit }) },
     })
   ).data;
 

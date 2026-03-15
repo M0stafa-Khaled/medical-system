@@ -37,6 +37,7 @@ export const PatientSelectItem = ({ field, input }: IProps) => {
   const search = useDebounce(searchTerm, 500);
   const { data: patients } = useGetAllPatients({
     search,
+    limit: 50,
   });
 
   const patientsOption = patients?.data.items.map((patient) => ({
