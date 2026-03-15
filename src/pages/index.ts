@@ -1,8 +1,5 @@
 import { lazy } from "react";
 
-// ---- Settings
-export const Settings = lazy(() => import("./dashboard/settings"));
-
 // Patient
 export const PatientBookings = lazy(() => import("./patient/bookings"));
 export const CreatePatientBooking = lazy(

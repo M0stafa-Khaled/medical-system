@@ -10,17 +10,19 @@ import {
 import { DataTable } from "@/shared/components/data-table";
 import { containerVariants } from "@/shared/animations";
 import { User, Receipt, Info } from "lucide-react";
-import { useGetDoctorTransactions } from "../queriesAndMutations";
-import { CreateDoctorExpense } from "../components/CreateDoctorExpense";
 import InputFilter from "@/shared/components/ui/input-filter";
 import SelectFilter from "@/shared/components/ui/select-filter";
 import { useSearchParams } from "react-router";
-import { useGetAllDoctors } from "../../doctors";
+import {
+  useGetAllDoctors,
+  useGetDoctorTransactions,
+} from "../queriesAndMutations";
 import useDebounce from "@/shared/hooks/useDebounce";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
-import { useDoctorTransactionsColumns } from "../components/DoctorTransactionsColumns";
-import { DoctorTransactionsStats } from "../components/DoctorTransactionsStats";
+import { useDoctorTransactionsColumns } from "../components/transactions/DoctorTransactionsColumns";
+import { DoctorTransactionsStats } from "../components/transactions/DoctorTransactionsStats";
+import { CreateDoctorExpense } from "../components/transactions/CreateDoctorExpense";
 
 const DoctorTransactions = () => {
   const [searchParams, setSearchParams] = useSearchParams();

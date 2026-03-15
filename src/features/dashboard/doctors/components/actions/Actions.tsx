@@ -1,9 +1,3 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/shared/components/ui/card";
 import { ActionsList } from "./ActionsList";
 import { CreateAction } from "./CreateAction";
 import useHasPermission from "@/shared/hooks/useHasPermission";
@@ -17,30 +11,19 @@ export const Actions = ({ doctorId }: { doctorId: string }) => {
 
   if (!canViewActions) return null;
   return (
-    <motion.section
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <Card className="border-muted mt-5">
-        <CardHeader className="pb-2">
-          <CardTitle>إجراءات الطبيب:</CardTitle>
-        </CardHeader>
-        <CardContent className="px-4 py-3">
-          {canCreateAction && (
-            <motion.div variants={itemVariants} custom={"createAction"}>
-              <CreateAction doctorId={doctorId} />
-            </motion.div>
-          )}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <ActionsList doctorId={doctorId} />
-          </motion.div>
-        </CardContent>
-      </Card>
-    </motion.section>
+    <>
+      {canCreateAction && (
+        <motion.div variants={itemVariants} custom={"createAction"}>
+          <CreateAction doctorId={doctorId} />
+        </motion.div>
+      )}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <ActionsList doctorId={doctorId} />
+      </motion.div>
+    </>
   );
 };

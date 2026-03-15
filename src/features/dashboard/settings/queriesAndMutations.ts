@@ -1,28 +1,19 @@
 import Query_Keys from "@/shared/enums/queryKeys";
 import { IUpdateCompany } from "@/interfaces/dashboard/company";
-import {
-  getCompanyInfo,
-  getSubscription,
-  updateCompanyInfo,
-} from "@/services/dashboard/company";
+import { getCompanyInfo, getSubscription, updateCompanyInfo } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useGetCompanyInfo = (token: string) =>
+export const useGetCompanyInfo = () =>
   useQuery({
     queryKey: [Query_Keys.COMPANY_INFO],
-    queryFn: () => getCompanyInfo(token),
+    queryFn: () => getCompanyInfo(),
   });
 
 export const useUpdateCompanyInfo = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      token,
-      company,
-    }: {
-      token: string;
-      company: IUpdateCompany;
-    }) => updateCompanyInfo({ token, company }),
+    mutationFn: ({ company }: { company: IUpdateCompany }) =>
+      updateCompanyInfo({ company }),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -32,8 +23,8 @@ export const useUpdateCompanyInfo = () => {
   });
 };
 
-export const useGetSubscription = (token: string) =>
+export const useGetSubscription = () =>
   useQuery({
     queryKey: [Query_Keys.SUBSCRIPTION],
-    queryFn: () => getSubscription(token),
+    queryFn: () => getSubscription(),
   });

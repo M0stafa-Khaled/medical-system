@@ -33,7 +33,7 @@ const InputFormItem = ({ input, field, isOptionalField }: IProps) => {
           min={0}
           onChange={(e) => field.onChange(e.target.value)}
           value={field.value as string | undefined}
-          className="border-muted placeholder:text-muted-foreground h-auto py-3 placeholder:h-14 placeholder:text-sm"
+          className="border-muted placeholder:text-muted-foreground h-auto py-2.5 placeholder:h-14 placeholder:text-sm"
         />
       </FormControl>
       <FormMessage />

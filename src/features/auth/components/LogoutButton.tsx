@@ -20,7 +20,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/shared/components/ui/alert-dialog";
-import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 
 export const LogoutButton = ({
   icon = true,
@@ -69,7 +68,6 @@ export const LogoutButton = ({
       {isAuthenticated && (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
           <AlertDialogTrigger asChild>
-            <TooltipButton title="حذف">
               <Button
                 size={"icon"}
                 onClick={() => setIsOpen(true)}
@@ -83,7 +81,6 @@ export const LogoutButton = ({
                 <LogOut size={20} />
                 {icon ? null : "تسجيل الخروج"}
               </Button>
-            </TooltipButton>
           </AlertDialogTrigger>
           <AlertDialogContent className="rounded-xl">
             <AlertDialogHeader className="gap-4">

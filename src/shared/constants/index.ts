@@ -111,6 +111,7 @@ export const ROUTES_NAME: Record<string, string> = {
   clinics: "العيادات",
   doctors: "الأطباء",
   doctorTransactions: "معاملات الأطباء",
+  patientsBalances: "كشف حسابات المرضى",
   "working-days": "ايام العمل",
   create: "إضافة",
   update: "تعديل",
@@ -138,4 +139,5 @@ export const ROUTES_NAME: Record<string, string> = {
   treasuriesReports: "تقارير الخزائن",
   patientsReports: "تقارير المرضى",
   patientBalancesReports: "تقارير حسابات المرضى",
+  notifications: "الإشعارات",
 };

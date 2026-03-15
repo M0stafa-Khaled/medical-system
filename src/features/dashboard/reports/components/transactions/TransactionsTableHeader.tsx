@@ -9,7 +9,7 @@ const TransactionsTableHeader = () => {
           رقم الإيصال
         </TableHead>
         <TableHead className="py-4 text-center text-nowrap">المبلغ</TableHead>
-        <TableHead className="py-4 text-center">الخزينة</TableHead>
+        <TableHead className="py-4 text-center">الخزنة</TableHead>
         <TableHead className="w-28 py-4 text-center">الخدمة</TableHead>
         <TableHead className="py-4 text-center">الموظف</TableHead>
         <TableHead className="py-4 text-center">المريض</TableHead>

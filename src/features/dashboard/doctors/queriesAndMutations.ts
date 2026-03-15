@@ -9,10 +9,13 @@ import {
   deleteDoctorAction,
   getDoctorActions,
   updateDoctorAction,
+  createDoctorTransaction,
+  getDoctorTransactions,
 } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Query_Keys from "@/shared/enums/queryKeys";
 import { IGetWithParams } from "@/shared/types";
+
 export const useGetAllDoctors = ({ page, search }: IGetWithParams) => {
   return useQuery({
     queryKey: [Query_Keys.GET_ALL_DOCTORS, page, search],
@@ -116,6 +119,25 @@ export const useDeleteDoctorAction = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [Query_Keys.GET_ALL_DOCTOR_ACTIONS],
+      });
+    },
+  });
+};
+
+export const useGetDoctorTransactions = ({ id }: { id: string }) =>
+  useQuery({
+    queryKey: [Query_Keys.DOCTOR_TRANSACTIONS, id],
+    queryFn: () => getDoctorTransactions({ id }),
+    enabled: !!id,
+  });
+
+export const useCreateDoctorTransaction = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id }: { id: string }) => createDoctorTransaction({ id }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [Query_Keys.DOCTOR_TRANSACTIONS],
       });
     },
   });

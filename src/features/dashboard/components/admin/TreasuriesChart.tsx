@@ -107,7 +107,6 @@ export const TreasuriesChart = () => {
             value={filters.treasury}
             filterKey="treasury"
             options={[
-              { value: "all", label: "الكل" },
               ...(treasuries?.data.length
                 ? treasuries.data.map((t) => ({
                     value: t.name.trim(),

@@ -1,6 +1,5 @@
-import { itemVariants } from "@/shared/animations";
 import { ReactNode } from "react";
-import { motion } from "framer-motion";
+
 interface IProps {
   label: string;
   value: string | number;
@@ -11,19 +10,21 @@ interface IProps {
 
 const InfoField = ({ label, value, sm, icon, breakAll }: IProps) => {
   return (
-    <motion.div variants={itemVariants} className="flex items-center gap-4">
-      {icon && <div className="shrink-0">{icon}</div>}
-      <div className="flex items-center gap-2">
-        <h5 className="text-muted-foreground text-nowrap">{label}:</h5>
+    <div className="flex items-center gap-3">
+      {icon && (
+        <div className="text-muted-foreground flex h-4 w-4 items-center justify-center">
+          {icon}
+        </div>
+      )}
+      <div className="flex flex-col">
+        <h5 className="text-muted-foreground text-sm font-medium">{label}</h5>
         <p
-          className={`text-dark font-medium text-wrap dark:text-white ${
-            sm && "text-sm"
-          } ${breakAll && "break-all"}`}
+          className={`font-medium ${sm ? "text-sm" : "text-base"} ${breakAll && "break-all"}`}
         >
-          {value ? value : typeof value === "number" ? 0.0 : "لا يوجد"}
+          {value || "غير محدد"}
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

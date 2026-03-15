@@ -40,13 +40,13 @@ export const TransfersFilters = () => {
       />
 
       <InputFilter
-        placeholder="اسم الخزينة المحول منها"
+        placeholder="اسم الخزنة المحول منها"
         value={filters.from_treasury}
         onChange={(e) => handleFilterChange("from_treasury", e.target.value)}
       />
 
       <InputFilter
-        placeholder="اسم الخزينة المحول إليها"
+        placeholder="اسم الخزنة المحول إليها"
         value={filters.to_treasury}
         onChange={(e) => handleFilterChange("to_treasury", e.target.value)}
       />

@@ -42,19 +42,19 @@ export const PatientBalances = ({ patientId }: IProps) => {
       <Card className="border-muted">
         <CardHeader className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
           <div className="flex items-center gap-2 font-semibold">
-            <h4 className="text-dark dark:text-white">المبلغ المستحق:</h4>
+            <h4>المستحق:</h4>
             <p>{numberToPrice(total_amount_due!)}</p>
           </div>
           <div className="flex items-center gap-2 font-semibold">
-            <h4 className="text-dark dark:text-white">إجمالي المدفوع:</h4>
+            <h4>المدفوع:</h4>
             <p>{numberToPrice(total_amount_paid!)}</p>
           </div>
           <div className="flex items-center gap-2 font-semibold">
-            <h4 className="text-dark dark:text-white">إجمالي المبالغ:</h4>
+            <h4>الإجمالي:</h4>
             <p>{numberToPrice(total_balance!)}</p>
           </div>
           <div className="flex items-center gap-2 font-semibold">
-            <h4 className="text-dark dark:text-white">إجمالي المسترد:</h4>
+            <h4>المسترد:</h4>
             <p>{numberToPrice(refund_amount!)}</p>
           </div>
         </CardHeader>

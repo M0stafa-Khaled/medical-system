@@ -37,15 +37,15 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
   }, []);
   return (
     <header
-      className={`z-50 ${
-        dashboard && "lg:hidden"
-      } fixed inset-x-0 top-0 w-full`}
+      className={`fixed inset-x-0 top-0 z-50 w-full lg:hidden ${!dashboard && "lg:block!"}`}
     >
       <div className="backdrop-blur-xl">
         <nav
           className={`border-border mx-auto flex flex-wrap items-center justify-between border-b py-2`}
         >
-          <div className="container flex w-full items-center justify-between px-3">
+          <div
+            className={`container flex w-full items-center justify-between px-4 ${!dashboard && "max-w-7xl px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24"}`}
+          >
             <div className={`hidden w-full items-center gap-3 lg:flex`}>
               <NavList links={links} />
             </div>

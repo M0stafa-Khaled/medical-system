@@ -179,7 +179,7 @@ const ExpenseDetails = () => {
 
               <motion.div variants={itemVariants}>
                 <InfoField
-                  label="الخزينة"
+                  label="الخزنة"
                   value={treasury?.name ?? "لا يوجد"}
                   icon={<Wallet className="h-5 w-5 text-yellow-500" />}
                 />

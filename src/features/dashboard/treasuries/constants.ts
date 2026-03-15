@@ -3,9 +3,9 @@ import { IFormInput } from "@/shared/types";
 export const TREASURY_FORM_INPUTS: IFormInput[] = [
   {
     name: "name",
-    label: "اسم الخزينة",
+    label: "اسم الخزنة",
     type: "text",
-    placeholder: "اسم الخزينة",
+    placeholder: "اسم الخزنة",
   },
   {
     name: "status",

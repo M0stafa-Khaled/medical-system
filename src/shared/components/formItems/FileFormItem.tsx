@@ -41,7 +41,7 @@ const FileFormItem = ({
             {...field}
             onChange={(e) => handleFileChange(e, field.onChange)}
             value={undefined}
-            className="border-muted file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 h-auto cursor-pointer py-3 file:mr-4 file:cursor-pointer file:rounded-full file:border-0 file:px-4 file:py-2 file:text-sm file:font-semibold"
+            className="border-muted file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 h-auto cursor-pointer py-2 file:mr-4 file:cursor-pointer file:rounded-full file:border-0 file:px-4 file:py-2 file:text-sm file:font-semibold"
           />
         </div>
       </FormControl>

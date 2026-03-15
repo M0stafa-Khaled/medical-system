@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2, LucideUserCog } from "lucide-react";
 import { Modal } from "@/shared/components/Modal";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/shared/animations";
@@ -17,7 +17,13 @@ import { RenderDoctorFormFields } from "@/features/dashboard/doctors/components/
 import { UPDATE_PROFILE_DOCTOR_INPUTS } from "../constants";
 import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 
-export const UpdateDoctorProfile = () => {
+interface UpdateDoctorProfileProps {
+  className?: string;
+}
+
+export const UpdateDoctorProfile = ({
+  className = "",
+}: UpdateDoctorProfileProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: updateProfile, isPending } = useUpdateProfile();
 
@@ -69,7 +75,11 @@ export const UpdateDoctorProfile = () => {
 
   return (
     <>
-      <Button className="px-4 font-medium!" onClick={() => setIsOpen(true)}>
+      <Button
+        className={`w-full gap-2 ${className}`}
+        onClick={() => setIsOpen(true)}
+      >
+        <LucideUserCog className="h-4 w-4" />
         تحديث الملف الشخصي
       </Button>
 
@@ -112,11 +122,7 @@ export const UpdateDoctorProfile = () => {
                   إلغاء
                 </Button>
               </DialogClose>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 تحديث
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>

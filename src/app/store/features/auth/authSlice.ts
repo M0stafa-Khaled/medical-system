@@ -33,7 +33,7 @@ export const checkAuth = createAsyncThunk<ICheckAuth, void>(
         { headers: { Authorization: `Bearer ${token}` } }
       );
       return res.data;
-    } catch (_err) {
+    } catch {
       return rejectWithValue("Unauthorized");
     }
   }

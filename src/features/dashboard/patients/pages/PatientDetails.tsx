@@ -8,44 +8,50 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { Button } from "@/shared/components/ui/button";
-import { Separator } from "@/shared/components/ui/separator";
-import formatDateTime from "@/shared/utils/formatDate";
 import {
-  BadgeInfo,
-  FileImage,
-  Info,
-  Mail,
-  Pen,
-  Phone,
-  UserCircle2,
-  Users,
-  VenusAndMars,
-} from "lucide-react";
-import ImageModal from "@/shared/components/ImageModal";
-import HeaderUserDetails from "@/shared/components/HeaderUserDetails";
-import InfoField from "@/shared/components/InfoField";
-import useHasPermission from "@/shared/hooks/useHasPermission";
-import { PERMISSIONS } from "@/shared/enums/permissions";
-import { Calendar, BadgeCheck, BadgeX } from "lucide-react";
-import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "@/shared/animations";
-import DataLoader from "@/shared/components/ui/DataLoader";
-import { Helmet } from "react-helmet-async";
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/shared/components/ui/avatar";
+import { Badge } from "@/shared/components/ui/badge";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/shared/components/ui/tabs";
+import {
+  LucideUser,
+  LucidePhone,
+  LucideMail,
+  LucideIdCard,
+  LucideCalendar,
+  LucidePen,
+  LucideUserCircle,
+  LucideImage,
+  LucideBadgeCheck,
+  LucideBadgeX,
+  LucideUsers,
+  LucideInfo,
+  LucideArrowLeft,
+  LucideFileText,
+} from "lucide-react";
+import ImageModal from "@/shared/components/ImageModal";
+import useHasPermission from "@/shared/hooks/useHasPermission";
+import { PERMISSIONS } from "@/shared/enums/permissions";
+import DataLoader from "@/shared/components/ui/DataLoader";
+import { Helmet } from "react-helmet-async";
 import { AxiosResErr } from "@/shared/types";
 import { useDeletePatient, useGetPatientById } from "../queriesAndMutations";
 import { DeleteAlert } from "@/shared/components/delete-alert";
 import { PatientBalances } from "../balances/components/PatientBalances";
+import { format } from "date-fns";
+import { cn } from "@/shared/lib/utils";
+import InfoField from "@/shared/components/InfoField";
 
 const PatientDetails = () => {
   const canUpdatePatient = useHasPermission(PERMISSIONS.UPDATE_PATIENT);
   const canDeletePatient = useHasPermission(PERMISSIONS.DELETE_PATIENT);
-
   const canViewPatientBalances = useHasPermission(PERMISSIONS.PATIENT_BALANCES);
 
   const navigate = useNavigate();
@@ -92,6 +98,8 @@ const PatientDetails = () => {
     description,
   } = patient?.data || {};
 
+  const profileImage = personal_image || "/images/avatar.svg";
+
   return (
     <>
       <Helmet>
@@ -99,166 +107,252 @@ const PatientDetails = () => {
           {import.meta.env.VITE_WEB_NAME} | {name || " "}
         </title>
       </Helmet>
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+
+      {/* Back Button */}
+      <Button
+        variant="ghost"
+        className="mb-4 gap-2"
+        onClick={() => navigate(-1)}
       >
-        <Card className="border-muted mt-5">
-          <CardHeader className="py-4">
-            <motion.div variants={itemVariants}>
-              <HeaderUserDetails
-                name={name!}
-                role={user?.role.toLowerCase() as string}
-                actionButtons={
-                  <>
-                    {canUpdatePatient && (
-                      <motion.div variants={itemVariants}>
-                        <Button className="btn-edit rounded-full" size={"icon"}>
-                          <Link to={`/dashboard/patients/${id}/update`}>
-                            <Pen />
-                          </Link>
-                        </Button>
-                      </motion.div>
-                    )}
-                    {canDeletePatient && (
-                      <motion.div variants={itemVariants}>
-                        <DeleteAlert
-                          name={name!}
-                          deleteAction={() => deletePatient({ id: id! })}
-                        />
-                      </motion.div>
-                    )}
-                  </>
-                }
-              />
-            </motion.div>
-          </CardHeader>
-          <motion.div variants={itemVariants} className="px-4">
-            <Separator className="bg-muted mx-auto w-2/6 sm:mx-0" />
-          </motion.div>
-          <CardContent className="py-4">
-            <motion.div variants={itemVariants}>
-              <CardTitle className="mb-4">المعلومات الأساسية:</CardTitle>
-            </motion.div>
+        <LucideArrowLeft className="h-4 w-4" />
+        رجوع
+      </Button>
 
-            <motion.div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <motion.div variants={itemVariants}>
-                <InfoField
-                  icon={
-                    status ? (
-                      <BadgeCheck className="text-green-500" size={20} />
-                    ) : (
-                      <BadgeX className="text-red-500" size={20} />
-                    )
-                  }
-                  label="حالة الحساب"
-                  value={status ? "نشط" : "غير نشط"}
-                />
-              </motion.div>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {/* Right Sidebar - Profile Card */}
+        <div className="lg:col-span-4">
+          <Card className="overflow-hidden border-0 shadow-lg">
+            {/* Cover */}
+            <div className="h-32 w-full bg-linear-to-br from-orange-500 via-amber-500 to-yellow-500" />
 
-              <InfoField
-                icon={<Info className="text-blue-700" size={20} />}
-                label="ملاحظات حالة الحساب"
-                value={info_status!}
-              />
+            <CardContent className="flex flex-col items-center px-6 pb-6">
+              {/* Avatar Container */}
+              <div className="-mt-16">
+                <div className="relative">
+                  <div className="border-background bg-background h-32 w-32 overflow-hidden rounded-full border-4 shadow-xl">
+                    <Avatar className="h-full w-full">
+                      <AvatarImage
+                        src={profileImage}
+                        alt={name}
+                        className="object-cover"
+                      />
+                      <AvatarFallback className="text-3xl">
+                        {name?.charAt(0) || "?"}
+                      </AvatarFallback>
+                    </Avatar>
+                  </div>
+                </div>
+              </div>
 
-              <InfoField
-                icon={<Users className="text-blue-700" size={20} />}
-                label="اسم احد الاقارب"
-                value={another_name!}
-                breakAll
-              />
+              {/* Name & Role */}
+              <div className="mt-4 text-center">
+                <h1 className="text-2xl font-bold">{name}</h1>
+                <span className="mt-2 inline-block rounded-full bg-orange-100 px-4 py-1 text-sm font-medium text-orange-700 dark:bg-orange-900 dark:text-orange-300">
+                  مريض
+                </span>
+              </div>
 
-              <InfoField
-                icon={<BadgeInfo className="text-primary" size={20} />}
-                label="ملاحظات"
-                value={description!}
-              />
-
-              <InfoField
-                icon={<UserCircle2 className="text-primary" size={20} />}
-                label="رقم الهوية"
-                value={personal_id!}
-              />
-
-              <InfoField
-                icon={<Phone className="text-green-600" size={20} />}
-                label="رقم الهاتف الاول"
-                value={first_phone!}
-              />
-
-              <InfoField
-                icon={<Phone className="text-purple-600" size={20} />}
-                label="رقم الهاتف الثاني"
-                value={second_phone ? second_phone : "لا يوجد"}
-              />
-
-              <InfoField
-                icon={<Mail className="text-orange-500" size={20} />}
-                label="البريد الإلكتروني"
-                value={user?.email as string}
-                sm
-                breakAll
-              />
-
-              <InfoField
-                label="الجنس"
-                value={gender?.toLowerCase() === "male" ? "ذكر" : "انثى"}
-                sm
-                icon={<VenusAndMars className="text-primary" size={20} />}
-              />
-
-              <InfoField
-                icon={<Calendar className="text-teal-500" size={20} />}
-                label="تاريخ الإنشاء"
-                value={formatDateTime(created_at!)}
-                sm
-              />
-
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center gap-2 select-none"
-              >
-                <FileImage className="text-cyan-500" size={20} />
-                <h5 className="text-muted-foreground text-sm">صورة الهوية :</h5>
-                {personal_image ? (
-                  <ImageModal
-                    src={personal_image}
-                    alt="صورة الهوية"
-                    showThumbnail={false}
-                    trigger={<Button size={"sm"}>عرض الصورة</Button>}
-                  />
+              {/* Status Badge */}
+              <div className="mt-3">
+                {status ? (
+                  <Badge variant="default" className="gap-1 bg-green-500">
+                    <LucideBadgeCheck className="h-3 w-3" />
+                    نشط
+                  </Badge>
                 ) : (
-                  <p>لا يوجد صورة</p>
+                  <Badge variant="destructive" className="gap-1">
+                    <LucideBadgeX className="h-3 w-3" />
+                    غير نشط
+                  </Badge>
                 )}
-              </motion.div>
-            </motion.div>
-          </CardContent>
-        </Card>
+              </div>
 
-        <motion.div variants={itemVariants}>
-          {canViewPatientBalances && (
-            <Tabs defaultValue={"balances"} dir="rtl" className="my-2">
-              <TabsList className="h-auto w-full gap-2">
-                {canViewPatientBalances && (
-                  <TabsTrigger
-                    value="balances"
-                    className="dark:text-muted-foreground w-full py-2.5 text-base font-medium text-slate-700 data-[state=active]:text-black dark:data-[state=active]:text-white"
-                  >
-                    مدفوعات المريض
-                  </TabsTrigger>
+              {/* Contact Info */}
+              <div className="mt-4 w-full space-y-2">
+                <div className="text-muted-foreground flex items-center justify-center gap-2">
+                  <LucidePhone className="h-4 w-4" />
+                  <span>{first_phone}</span>
+                </div>
+                <div className="text-muted-foreground flex items-center justify-center gap-2">
+                  <LucideMail className="h-4 w-4" />
+                  <span className="text-sm">{user?.email}</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="mt-6 w-full space-y-2">
+                {canUpdatePatient && (
+                  <Button variant="outline" className="w-full gap-2" asChild>
+                    <Link to={`/dashboard/patients/${id}/update`}>
+                      <LucidePen className="h-4 w-4" />
+                      تعديل
+                    </Link>
+                  </Button>
                 )}
-              </TabsList>
-              {canViewPatientBalances && (
-                <TabsContent value="balances">
-                  <PatientBalances patientId={patientId!} />
-                </TabsContent>
+                {canDeletePatient && (
+                  <DeleteAlert
+                    deleteAction={() => deletePatient({ id: id! })}
+                    name={name!}
+                    navigatePath="/dashboard/patients"
+                    className="w-full rounded-md"
+                  />
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Left Side - Tabs */}
+        <div className="lg:col-span-8">
+          <Tabs defaultValue="info" className="w-full">
+            <TabsList
+              className={cn(
+                "mb-4 grid w-full gap-2",
+                canViewPatientBalances ? "grid-cols-3" : "grid-cols-2"
               )}
-            </Tabs>
-          )}
-        </motion.div>
-      </motion.section>
+            >
+              <TabsTrigger value="info" className="gap-2">
+                <LucideUser className="h-4 w-4" />
+                <span className="hidden sm:inline">المعلومات</span>
+              </TabsTrigger>
+              <TabsTrigger value="image" className="gap-2">
+                <LucideImage className="h-4 w-4" />
+                <span className="hidden sm:inline">الصورة</span>
+              </TabsTrigger>
+              {canViewPatientBalances && (
+                <TabsTrigger value="balances" className="gap-2">
+                  <LucideFileText className="h-4 w-4" />
+                  <span className="hidden sm:inline">كشف حساب</span>
+                </TabsTrigger>
+              )}
+            </TabsList>
+
+            <TabsContent value="info">
+              <Card className="border-0 shadow-lg">
+                <CardHeader className="border-b pb-4">
+                  <CardTitle className="flex items-center gap-2 text-xl">
+                    <LucideUser className="h-5 w-5" />
+                    المعلومات الشخصية
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2">
+                    <InfoField
+                      icon={<LucideUsers className="h-4 w-4" />}
+                      label="اسم احد الاقارب"
+                      value={another_name || "غير محدد"}
+                    />
+                    <InfoField
+                      icon={<LucideInfo className="h-4 w-4" />}
+                      label="ملاحظات حالة الحساب"
+                      value={info_status || "غير محدد"}
+                    />
+                    <InfoField
+                      icon={<LucideIdCard className="h-4 w-4" />}
+                      label="رقم الهوية"
+                      value={personal_id || "غير محدد"}
+                    />
+                    <InfoField
+                      icon={<LucidePhone className="h-4 w-4" />}
+                      label="رقم الهاتف"
+                      value={first_phone || "غير محدد"}
+                    />
+                    <InfoField
+                      icon={<LucidePhone className="h-4 w-4" />}
+                      label="رقم الهاتف الثاني"
+                      value={second_phone || "غير محدد"}
+                    />
+                    <InfoField
+                      icon={<LucideMail className="h-4 w-4" />}
+                      label="البريد الإلكتروني"
+                      value={user?.email || "غير محدد"}
+                      sm
+                    />
+                    <InfoField
+                      icon={<LucideUserCircle className="h-4 w-4" />}
+                      label="الجنس"
+                      value={
+                        gender === "Male"
+                          ? "ذكر"
+                          : gender === "Female"
+                            ? "انثى"
+                            : "غير محدد"
+                      }
+                    />
+                    <InfoField
+                      icon={<LucideCalendar className="h-4 w-4" />}
+                      label="تاريخ التسجيل"
+                      value={
+                        created_at
+                          ? format(new Date(created_at), "dd / MM / yyyy")
+                          : "غير محدد"
+                      }
+                    />
+                    <div className="col-span-full">
+                      <InfoField
+                        icon={<LucideInfo className="h-4 w-4" />}
+                        label="ملاحظات"
+                        value={description || "لا توجد ملاحظات"}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Image Tab */}
+            <TabsContent value="image">
+              <Card className="border-0 shadow-lg">
+                <CardHeader className="border-b pb-4">
+                  <CardTitle className="flex items-center gap-2 text-xl">
+                    <LucideImage className="h-5 w-5" />
+                    صورة الهوية
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center pt-6">
+                  {personal_image ? (
+                    <ImageModal
+                      src={personal_image}
+                      alt="صورة الهوية"
+                      showThumbnail={false}
+                      trigger={
+                        <div className="cursor-pointer overflow-hidden rounded-lg border shadow-md transition-transform hover:scale-105">
+                          <img
+                            src={personal_image}
+                            alt="صورة الهوية"
+                            className="h-auto max-h-96 w-auto object-contain"
+                          />
+                        </div>
+                      }
+                    />
+                  ) : (
+                    <div className="bg-muted/50 flex h-64 w-full items-center justify-center rounded-lg border border-dashed">
+                      <p className="text-muted-foreground">لا توجد صورة</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Balances Tab */}
+            {canViewPatientBalances && (
+              <TabsContent value="balances">
+                <Card className="border-0 shadow-lg">
+                  <CardHeader className="border-b pb-4">
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <LucideFileText className="h-5 w-5" />
+                      كشف حساب المريض
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <PatientBalances patientId={patientId!} />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            )}
+          </Tabs>
+        </div>
+      </div>
     </>
   );
 };
