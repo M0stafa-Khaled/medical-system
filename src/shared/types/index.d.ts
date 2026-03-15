@@ -58,6 +58,7 @@ export interface IGetWithParams {
   sort?: string;
   start_at?: string;
   end_at?: string;
+  limit?: number;
   token?: string;
 }
 

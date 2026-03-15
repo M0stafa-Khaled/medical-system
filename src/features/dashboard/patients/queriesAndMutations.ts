@@ -10,10 +10,14 @@ import Query_Keys from "@/shared/enums/queryKeys";
 import { ICreatePatient } from "./types";
 import { IGetWithParams } from "@/shared/types";
 
-export const useGetAllPatients = ({ page = 1, search = "" }: IGetWithParams) =>
+export const useGetAllPatients = ({
+  page = 1,
+  search = "",
+  limit,
+}: IGetWithParams) =>
   useQuery({
-    queryKey: [Query_Keys.GET_ALL_PATIENTS, page, search],
-    queryFn: () => getAllPatients({ page, search }),
+    queryKey: [Query_Keys.GET_ALL_PATIENTS, page, search, limit],
+    queryFn: () => getAllPatients({ page, search, limit }),
   });
 
 export const useGetPatientById = ({ id }: { id: string }) =>

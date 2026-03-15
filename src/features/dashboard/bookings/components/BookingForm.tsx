@@ -187,7 +187,7 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     if (!booking) return;
 
     form.reset({
-      patient_id: booking.patient.id.toString(),
+      patient_id: booking.patient?.id.toString() || "",
       clinic_id: booking.clinic?.id.toString() || "",
       doctor_id: booking.doctor?.id.toString() || "",
       working_day_id: booking.working_day?.id.toString() || "",
