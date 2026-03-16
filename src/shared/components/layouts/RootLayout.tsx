@@ -43,11 +43,13 @@ const RootLayout = () => {
   );
   const { playNotificationSound } = useNotificationSound();
 
-  const { isLoading: authLoading } = useAppSelector((state) => state.auth);
+  const { isLoading: authLoading, isAuthenticated } = useAppSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
+    if (isAuthenticated) dispatch(fetchUser());
+  }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
     (async () => {
@@ -90,7 +92,7 @@ const RootLayout = () => {
   const lastNotificationId = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!user || hasSubscribed.current) return;
+    if (!isAuthenticated || !user || hasSubscribed.current) return;
 
     const echo = getEchoInstance();
     if (!echo) return;
@@ -118,7 +120,7 @@ const RootLayout = () => {
       leaveEchoChannel(channelName);
       hasSubscribed.current = false;
     };
-  }, [user, queryClient, playNotificationSound]);
+  }, [user, queryClient, playNotificationSound, isAuthenticated]);
 
   const { data: notifications, isLoading } = useGetNotifications(
     user?.role !== "doctor" && canReceiveNotifications ? true : false

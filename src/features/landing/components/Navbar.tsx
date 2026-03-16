@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
-import { Activity, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { m, AnimatePresence } from "framer-motion";
 import { Link, NavLink } from "react-router";
 import ToggleTheme from "../../../shared/components/ToggleTheme";
+import { useAppSelector } from "@/app/store";
+import { ProfileMenu } from "@/features/profile";
 
 const navLinks = [
   { name: "الرئيسية", href: "#home" },
@@ -16,6 +18,7 @@ const navLinks = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,10 +50,10 @@ export const Navbar = () => {
     >
       <div className="container flex h-14 items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-xl shadow-lg">
-            <Activity className="text-primary-foreground h-6 w-6" />
+          <div className="flex items-center justify-center">
+            <img src={"/images/logo.svg"} alt="logo" className="h-10 w-10" />
           </div>
-          <span className="text-2xl font-bold tracking-tight">
+          <span className="text-xl font-bold tracking-tight">
             {import.meta.env.VITE_WEB_NAME}
           </span>
         </div>
@@ -72,21 +75,26 @@ export const Navbar = () => {
         {/* Desktop Buttons */}
         <div className="hidden items-center gap-4 lg:flex">
           <ToggleTheme className="bg-transparent! dark:bg-transparent!" />
-          <Button
-            variant="ghost"
-            className="hover:text-primary hover:bg-primary/15 rounded-full"
-            asChild
-          >
-            <Link to="/login">تسجيل الدخول</Link>
-          </Button>
-          <Button className="shadow-primary/20 rounded-full shadow-lg" asChild>
+          {isAuthenticated ? (
+            <ProfileMenu />
+          ) : (
+            <Button
+              variant="ghost"
+              className="hover:text-primary rounded-full"
+              asChild
+            >
+              <Link to="/login">تسجيل الدخول</Link>
+            </Button>
+          )}
+          {/* <Button className="shadow-primary/20 rounded-full shadow-lg" asChild>
             <Link to="/register">حساب جديد</Link>
-          </Button>
+          </Button> */}
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center gap-4 lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <ToggleTheme className="bg-transparent! dark:bg-transparent!" />
+          {isAuthenticated && <ProfileMenu />}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
@@ -120,23 +128,30 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <hr className="border-border/50 my-2" />
-              <div className="flex flex-col gap-3">
-                <Button
-                  variant="link"
-                  className="hover:text-primary w-full justify-center"
-                  asChild
-                >
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                    تسجيل الدخول
-                  </Link>
-                </Button>
-                <Button className="w-full" asChild>
+              {!isAuthenticated && (
+                <>
+                  <hr className="border-border/50 my-2" />
+                  <div className="flex flex-col gap-3">
+                    <Button
+                      variant="link"
+                      className="hover:text-primary w-full justify-center"
+                      asChild
+                    >
+                      <Link
+                        to="/login"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        تسجيل الدخول
+                      </Link>
+                    </Button>
+                    {/* <Button className="w-full" asChild>
                   <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
-                    حساب جديد
+                  حساب جديد
                   </Link>
-                </Button>
-              </div>
+                  </Button> */}
+                  </div>
+                </>
+              )}
             </div>
           </m.div>
         )}

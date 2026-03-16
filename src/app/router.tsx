@@ -13,13 +13,14 @@ import { doctorRoutes } from "@/features/doctor";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Landing />,
-    // errorElement: <Error />,
-  },
-  {
-    path: "/",
     element: <RootLayout />,
     children: [
+      {
+        path: "/",
+        element: <Landing />,
+        errorElement: <NotFound />,
+      },
+
       {
         path: "/profile",
         element: (
@@ -33,12 +34,10 @@ export const router = createBrowserRouter([
       ...dashboardRoutes,
       ...doctorRoutes,
     ],
-    // errorElement: <Error />,
   },
   ...authRoutes,
   {
     path: "*",
     element: <NotFound />,
-    // errorElement: <Error />,
   },
 ]);
