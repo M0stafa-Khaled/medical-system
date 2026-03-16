@@ -70,10 +70,10 @@ export const LogoutButton = ({
               size={"icon"}
               onClick={() => setIsOpen(true)}
               variant={"outline"}
-              className={`${
+              className={`cursor-pointer ${
                 icon
                   ? "btn-destructive h-9 w-9 rounded-full px-0 py-0 font-bold"
-                  : "flex h-auto w-full items-center justify-center gap-2 py-3"
+                  : ""
               } ${className}`}
             >
               <LogOut size={20} />

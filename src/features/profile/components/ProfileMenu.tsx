@@ -13,6 +13,7 @@ import { Link } from "react-router";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { buttonVariants } from "@/shared/components/ui/button";
+import { LogoutButton } from "@/features/auth";
 
 export const ProfileMenu = () => {
   const { isAuthenticated, user } = useSelector(
@@ -87,6 +88,12 @@ export const ProfileMenu = () => {
               )}
             </>
           )}
+          <DropdownMenuItem asChild className="cursor-pointer">
+            <LogoutButton
+              className="w-full justify-start rounded-md border-none bg-transparent"
+              icon={false}
+            />
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     );
