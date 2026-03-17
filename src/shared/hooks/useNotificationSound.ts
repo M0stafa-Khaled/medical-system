@@ -7,22 +7,22 @@ const useNotificationSound = () => {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    if (role === "doctor") return;
-    audioRef.current = new Audio("/sounds/notification.mp3");
-    audioRef.current.load();
+    if (role === "doctor" || enabled) return;
+
+    const audio = new Audio("/sounds/notification.mp3");
+    audioRef.current = audio;
+    audio.load();
 
     const activateSound = () => {
-      if (!enabled && audioRef.current) {
-        audioRef.current.muted = true;
-        audioRef.current.volume = 0;
-        audioRef.current.play().then(() => {
-          audioRef.current!.pause();
-          audioRef.current!.currentTime = 0;
-          audioRef.current!.muted = false;
-          audioRef.current!.volume = 1;
-          setEnabled(true);
-        });
-      }
+      audio.muted = true;
+      audio.volume = 0;
+      audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.muted = false;
+        audio.volume = 1;
+        setEnabled(true);
+      });
     };
 
     window.addEventListener("click", activateSound, { once: true });

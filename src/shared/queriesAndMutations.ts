@@ -17,7 +17,13 @@ export const useGetAvailableBookingsTime = ({
   booking_date,
 }: IGetAvailableTimes) =>
   useQuery({
-    queryKey: [Query_Keys.GET_AVAILABLE_BOOKINGS_TIME],
+    queryKey: [
+      Query_Keys.GET_AVAILABLE_BOOKINGS_TIME,
+      doctor_id,
+      working_day_id,
+      clinic_id,
+      booking_date,
+    ],
     queryFn: () =>
       getAvailableBookingsTimes({
         booking_date,
