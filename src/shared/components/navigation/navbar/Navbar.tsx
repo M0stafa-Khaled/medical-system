@@ -9,7 +9,6 @@ import {
 } from "@/shared/animations/navbarAnimations";
 import { ILink } from "@/shared/types";
 import cookieServices from "@/shared/utils/cookieServices";
-import {} from "react";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { LogoutButton } from "@/features/auth";
@@ -30,10 +29,11 @@ const Navbar = ({ links, dashboard = false }: IProps) => {
     PERMISSIONS.RECEIVE_NOTIFICATIONS
   );
   useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
+    const handleResize = () => {
+      if (window.innerWidth >= 960) setOpenNav(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
     <header
