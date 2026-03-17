@@ -22,8 +22,8 @@ export const LoginForm = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "eslame.elgohary2@gmail.com",
-      password: "eslame@345",
+      email: "",
+      password: "",
     },
   });
   const onSubmit = async ({ email, password }: z.infer<typeof loginSchema>) => {
@@ -49,17 +49,10 @@ export const LoginForm = () => {
         })
       );
 
-      window.location.reload();
       if (data.role === "admin" || data.role === "employee")
         return navigate("/dashboard");
-      if (data.role === "patient") navigate("/bookings");
-      if (data.role === "doctor") navigate("/doctor");
-
-      return Swal.fire({
-        icon: "success",
-        title: "تم تسجيل الدخول بنجاح",
-        text: "يمكنك الآن المتابعة",
-      });
+      if (data.role === "patient") return navigate("/bookings");
+      if (data.role === "doctor") return navigate("/doctor");
     } catch (error) {
       handleResErr(error);
     }
