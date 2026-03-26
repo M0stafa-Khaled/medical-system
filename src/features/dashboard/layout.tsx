@@ -50,6 +50,9 @@ const DashboardLayout = () => {
     canViewTreasuries ||
     canViewExpensesCategories;
 
+  // master data
+  const canViewMasterData = useHasPermission(PERMISSIONS.MASTER_DATA);
+
   // Operations
   const canViewExpenses = useHasPermission(PERMISSIONS.EXPENSES);
   const canViewTransactions = useHasPermission(PERMISSIONS.TRANSACTIONS);
@@ -347,6 +350,17 @@ const DashboardLayout = () => {
       path: "/dashboard/scans",
       icon: <UserRoundSearch size={18} />,
     },
+
+    // Master Data
+    ...(canViewMasterData
+      ? [
+          {
+            name: ROUTES_NAME["daily-summary"],
+            path: "/dashboard/daily-summary",
+            icon: <TbReportMedical size={18} />,
+          },
+        ]
+      : []),
   ];
 
   const { user } = useAppSelector((state) => state.auth);

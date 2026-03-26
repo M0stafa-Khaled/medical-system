@@ -5,7 +5,7 @@ import { lazy, Suspense } from "react";
 
 const Patients = lazy(() => import("./pages/Patients"));
 const PatientDetails = lazy(() => import("./pages/PatientDetails"));
-const PatientTransactions = lazy(() => import("./pages/PatientTransactions"));
+const PatientTransactions = lazy(() => import("./pages/PatientBalances"));
 const CreatePatient = lazy(() => import("./pages/CreatePatient"));
 const UpdatePatient = lazy(() => import("./pages/UpdatePatient"));
 

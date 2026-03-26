@@ -18,6 +18,7 @@ import { transactionsRoutes } from "./transactions";
 import { reportsRoutes } from "./reports/routes";
 import { notificationsRoutes } from "../notifications/";
 import { settingsRoutes } from "./settings/";
+import { dailySummaryRoutes } from "./daily-summary";
 
 export const dashboardRoutes = [
   {
@@ -48,6 +49,7 @@ export const dashboardRoutes = [
       ...drugsRoutes,
       ...analysisRoutes,
       ...settingsRoutes,
+      ...dailySummaryRoutes,
       ...notificationsRoutes,
     ],
   },

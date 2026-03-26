@@ -64,7 +64,7 @@ export const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
       personal_id: employee?.personal_id || "",
       first_phone: employee?.first_phone || "",
       second_phone: employee?.second_phone || "",
-      salary: employee?.salary ? `${employee?.salary}` : "",
+      salary: employee?.salary != null ? employee.salary.toString() : "",
       email: employee?.user?.email || "",
       job: employee?.job || "",
       gender: employee?.gender?.toLowerCase() || "male",
