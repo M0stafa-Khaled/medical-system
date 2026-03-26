@@ -4,7 +4,7 @@ import {
   ICompanyRes,
   ISubscriptionRes,
   IUpdateCompany,
-} from "@/interfaces/dashboard/company";
+} from "@/features/dashboard/settings/types";
 
 export const getCompanyInfo = async (): Promise<ICompanyRes> =>
   (await axiosAPI.get("/company/me")).data;

@@ -34,7 +34,7 @@ const VerifyAccount = () => {
       }
       if (email_verified && (role === "admin" || role === "employee"))
         navigate("/dashboard");
-      if (email_verified && role === "patient") navigate("/bookings");
+      if (email_verified && role === "patient") navigate("/patient");
       if (email_verified && role === "doctor") navigate("/doctor");
     })();
   }, [navigate, dispatch, role, checkAuth, token]);

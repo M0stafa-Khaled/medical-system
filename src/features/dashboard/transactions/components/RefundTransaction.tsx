@@ -17,13 +17,20 @@ import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
 interface IProps {
   code: string;
   id: number;
+  icon?: boolean;
+  className?: string;
 }
 
 const refundSchema = z.object({
   refund_info: z.string({ message: "ادخل ملاحظات" }).optional(),
 });
 
-export const RefundTransaction = ({ code, id }: IProps) => {
+export const RefundTransaction = ({
+  code,
+  id,
+  icon = true,
+  className,
+}: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { mutateAsync: refundTransaction, isPending } = useRefundTransaction();
 
@@ -66,11 +73,12 @@ export const RefundTransaction = ({ code, id }: IProps) => {
   return (
     <>
       <Button
-        size={"icon"}
+        size={icon ? "icon" : "default"}
         onClick={() => setIsOpen(true)}
         variant={"outline"}
-        className={"btn-destructive rounded-full"}
+        className={`btn-destructive rounded-full ${className}`}
       >
+        {icon ? null : "استرداد"}
         <RefreshCcwDot size={24} />
       </Button>
 

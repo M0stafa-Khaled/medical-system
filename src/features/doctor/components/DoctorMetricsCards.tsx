@@ -14,7 +14,7 @@ import { useGetDoctorWidgets } from "@/features/doctor";
 import { TbReportMedical } from "react-icons/tb";
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
-import { IDoctorWidget } from "@/interfaces/widgets/widgets";
+import { IDoctorWidget } from "../types";
 
 const DoctorMetricsCards = () => {
   const { data: metrics, isLoading } = useGetDoctorWidgets();

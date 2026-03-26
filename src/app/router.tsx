@@ -7,6 +7,7 @@ import { ProtectedRoute } from "@/app/ProtectedRoute";
 import { Landing } from "@/features/landing";
 import { Profile } from "@/features/profile";
 import { doctorRoutes } from "@/features/doctor";
+import { patientRoutes } from "@/features/patient";
 
 // import Error from "@/pages/Error";
 
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
       },
       ...dashboardRoutes,
       ...doctorRoutes,
+      ...patientRoutes,
     ],
   },
   ...authRoutes,

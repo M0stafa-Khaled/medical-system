@@ -1,7 +1,6 @@
 import axiosAPI from "@/shared/lib/axios";
 import type { IClinicsRes } from "../dashboard/clinics/types";
 import type { IBookingsRes } from "../dashboard/bookings/types";
-import type { IDoctorWidgetRes } from "@/interfaces/widgets/widgets";
 import type { IChartRes, IGetWithParams, IStatusMsg } from "@/shared/types";
 import {
   ICreatePrescription,
@@ -9,6 +8,7 @@ import {
   IPrescriptionsRes,
   IUpdatePrescription,
 } from "../dashboard/prescriptions/types";
+import { IDoctorWidgetRes } from "./types";
 
 export const getDoctorClinics = async (): Promise<IClinicsRes> =>
   (await axiosAPI.get("doctor-clinics")).data;

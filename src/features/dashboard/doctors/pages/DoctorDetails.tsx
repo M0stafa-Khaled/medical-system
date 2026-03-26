@@ -53,8 +53,8 @@ import { WorkingDays } from "../working-days/components/WorkingDays";
 const DoctorDetails = () => {
   const canUpdateDoctor = useHasPermission(PERMISSIONS.UPDATE_DOCTOR);
   const canDeleteDoctor = useHasPermission(PERMISSIONS.DELETE_DOCTOR);
-  const canViewDoctorActions = false; //|| useHasPermission(PERMISSIONS.DOCTOR_ACTIONS);
-  const canViewDoctorWorkingDays = false; // useHasPermission(PERMISSIONS.WORKING_DAYS);
+  const canViewDoctorActions = useHasPermission(PERMISSIONS.DOCTOR_ACTIONS);
+  const canViewDoctorWorkingDays = useHasPermission(PERMISSIONS.WORKING_DAYS);
 
   const navigate = useNavigate();
   const { doctorId } = useParams();

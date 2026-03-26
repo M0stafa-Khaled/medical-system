@@ -58,7 +58,7 @@ export const Modal = ({
         <DialogHeader>
           <DialogTitle className="text-center">{title}</DialogTitle>
           <DialogDescription
-            className={`mx-auto max-w-md text-center text-base ${
+            className={`mx-auto max-w-md text-center ${
               description.color ? description.color : ""
             }`}
           >

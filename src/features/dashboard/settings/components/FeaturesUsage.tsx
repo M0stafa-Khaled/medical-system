@@ -1,6 +1,6 @@
 import { containerVariants, itemVariants } from "@/shared/animations";
 import CircleProgress from "@/shared/components/ui/CircleProgress";
-import { IFeature } from "@/interfaces/dashboard/company";
+import { IFeature } from "@/features/dashboard/settings/types";
 import { motion } from "framer-motion";
 
 export const FeaturesUsage = ({ features }: { features: IFeature[] }) => {

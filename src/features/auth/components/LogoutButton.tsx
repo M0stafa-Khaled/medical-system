@@ -67,7 +67,7 @@ export const LogoutButton = ({
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
           <AlertDialogTrigger asChild>
             <Button
-              size={"icon"}
+              size={icon ? "icon" : "default"}
               onClick={() => setIsOpen(true)}
               variant={"outline"}
               className={`cursor-pointer ${

@@ -35,62 +35,49 @@ export const ProfileMenu = () => {
         >
           <FaUser />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-card w-56">
+        <DropdownMenuContent className="w-52">
           <DropdownMenuLabel>حسابي</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <Link to="/profile" className="block h-full w-full py-1">
+          <DropdownMenuItem asChild className="cursor-pointer">
+            <Link to={role === "patient" ? "/patient/profile" : "/profile"}>
               الملف الشخصي
             </Link>
           </DropdownMenuItem>
 
           {role === "patient" && (
             <>
-              <DropdownMenuItem>
-                <Link to="/bookings" className="block h-full w-full py-1">
-                  الحجوزات
-                </Link>
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link to="/patient/bookings">الحجوزات</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link to="/balances" className="block h-full w-full py-1">
-                  مدفوعاتي
-                </Link>
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link to="/patient/balances">مدفوعاتي</Link>
               </DropdownMenuItem>
             </>
           )}
 
           {role === "doctor" && (
             <>
-              <DropdownMenuItem>
-                <Link to="/doctor" className="block h-full w-full py-1">
-                  لوحة التحكم
-                </Link>
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link to="/doctor">لوحة التحكم</Link>
               </DropdownMenuItem>
             </>
           )}
 
           {(role === "admin" || role === "employee") && (
             <>
-              <DropdownMenuItem>
-                <Link to="/dashboard" className="block h-full w-full py-1">
-                  لوحة التحكم
-                </Link>
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link to="/dashboard">لوحة التحكم</Link>
               </DropdownMenuItem>
               {canViewCompany && (
-                <DropdownMenuItem>
-                  <Link
-                    to="/dashboard/settings"
-                    className="block h-full w-full py-1"
-                  >
-                    الإعدادات
-                  </Link>
+                <DropdownMenuItem asChild className="cursor-pointer">
+                  <Link to="/dashboard/settings">الإعدادات</Link>
                 </DropdownMenuItem>
               )}
             </>
           )}
           <DropdownMenuItem asChild className="cursor-pointer">
             <LogoutButton
-              className="w-full justify-start rounded-md border-none bg-transparent"
+              className="w-full justify-start rounded-md border-none bg-transparent shadow-none"
               icon={false}
             />
           </DropdownMenuItem>

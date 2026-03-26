@@ -47,8 +47,8 @@ export const dashboardRoutes = [
       ...scansRoutes,
       ...drugsRoutes,
       ...analysisRoutes,
-      ...notificationsRoutes,
       ...settingsRoutes,
+      ...notificationsRoutes,
     ],
   },
 ];

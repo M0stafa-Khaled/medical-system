@@ -52,7 +52,7 @@ export const LoginForm = () => {
       window.location.reload();
       if (data.role === "admin" || data.role === "employee")
         return navigate("/dashboard");
-      if (data.role === "patient") navigate("/bookings");
+      if (data.role === "patient") navigate("/patient");
       if (data.role === "doctor") navigate("/doctor");
 
       return Swal.fire({
