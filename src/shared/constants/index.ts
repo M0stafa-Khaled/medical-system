@@ -140,4 +140,6 @@ export const ROUTES_NAME: Record<string, string> = {
   patientsReports: "تقارير المرضى",
   patientBalancesReports: "تقارير حسابات المرضى",
   notifications: "الإشعارات",
+  "daily-summary": "ملخص اليوم",
+  balances: "كشف حساب",
 };

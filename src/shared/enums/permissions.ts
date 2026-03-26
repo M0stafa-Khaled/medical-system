@@ -120,4 +120,7 @@ export enum PERMISSIONS {
   TREASURIES_REPORTS = "تقارير-الخزائن",
   PATIENTS_REPORTS = "تقارير-المرضي",
   PATIENT_BALANCES_REPORTS = "تقارير-حساب-مريض",
+
+  // Daily summary
+  MASTER_DATA = "البيانات-الاساسية",
 }

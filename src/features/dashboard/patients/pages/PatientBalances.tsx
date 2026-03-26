@@ -26,7 +26,7 @@ import useDebounce from "@/shared/hooks/useDebounce";
 import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { PatientBalancesTable } from "../balances/components/PatientBalancesTable";
 
-const PatientTransactions = () => {
+const PatientBalances = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [patientSearch, setPatientSearch] = useState<string>("");
   const debouncedSearch = useDebounce(patientSearch, 400);
@@ -256,7 +256,7 @@ const PatientTransactions = () => {
                   <Info className="h-6 w-6 text-orange-600 dark:text-orange-400" />
                 </div>
                 <p className="text-muted-foreground text-lg">
-                  الرجاء اختيار مريض من القائمة أعلاه لعرض حساباته ومستحقاتاته
+                  الرجاء اختيار مريض من القائمة أعلاه لعرض حساباته ومستحقاته
                 </p>
               </CardContent>
             </Card>
@@ -267,4 +267,4 @@ const PatientTransactions = () => {
   );
 };
 
-export default PatientTransactions;
+export default PatientBalances;
