@@ -40,7 +40,7 @@ const useNetworkStatus = () => {
     };
   }, [updateOnlineStatus, isOnline]);
 
-  return;
+  return { isOnline };
 };
 
 export default useNetworkStatus;

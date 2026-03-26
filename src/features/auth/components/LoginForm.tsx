@@ -22,8 +22,8 @@ export const LoginForm = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "eslame.elgohary2@gmail.com",
-      password: "eslame@345",
+      email: "",
+      password: "",
     },
   });
   const onSubmit = async ({ email, password }: z.infer<typeof loginSchema>) => {
@@ -49,7 +49,6 @@ export const LoginForm = () => {
         })
       );
 
-      window.location.reload();
       if (data.role === "admin" || data.role === "employee")
         return navigate("/dashboard");
       if (data.role === "patient") navigate("/patient");
