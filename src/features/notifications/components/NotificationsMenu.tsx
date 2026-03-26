@@ -23,7 +23,7 @@ import {
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 
-const NotificationsMenu = () => {
+const NotificationsMenu = ({ className = "" }: { className?: string }) => {
   const navigate = useNavigate();
 
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -85,7 +85,7 @@ const NotificationsMenu = () => {
     return "#";
   };
 
-  if (!canReceiveNotifications) return null;
+  if (!canReceiveNotifications && role !== "patient") return null;
 
   if (isAuthenticated && role !== "doctor")
     return (
@@ -94,7 +94,10 @@ const NotificationsMenu = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="relative rounded-full! border border-yellow-500/30! bg-yellow-500/10! text-yellow-500! hover:bg-yellow-500/20! dark:bg-yellow-500/20! dark:hover:bg-yellow-500/30!"
+            className={cn(
+              "relative rounded-full! border border-yellow-500/30! bg-yellow-500/10! text-yellow-500! hover:bg-yellow-500/20! dark:bg-yellow-500/20! dark:hover:bg-yellow-500/30!",
+              className
+            )}
           >
             <Bell className="h-5 w-5" />
             {unreadNotifications > 0 && (
@@ -202,18 +205,22 @@ const NotificationsMenu = () => {
             )}
           </ScrollArea>
 
-          <DropdownMenuSeparator />
+          {role !== "patient" && (
+            <>
+              <DropdownMenuSeparator />
 
-          {/* Footer */}
-          <DropdownMenuItem asChild>
-            <Link
-              to="notifications"
-              className="text-primary flex w-full cursor-pointer items-center justify-center gap-2"
-            >
-              عرض جميع الإشعارات
-              <ExternalLink className="h-3 w-3" />
-            </Link>
-          </DropdownMenuItem>
+              {/* Footer */}
+              <DropdownMenuItem asChild>
+                <Link
+                  to="notifications"
+                  className="text-primary flex w-full cursor-pointer items-center justify-center gap-2"
+                >
+                  عرض جميع الإشعارات
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     );

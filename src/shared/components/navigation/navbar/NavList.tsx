@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { ChevronDown, ChevronRight, Dot } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { linkVariants } from "@/shared/animations/navbarAnimations";
+import { linkVariants } from "@/shared/animations";
 import { ILink } from "@/shared/types";
 
 interface IProps {
@@ -43,7 +43,7 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
           <div className="flex items-center">
             {hasChildren ? (
               <div
-                className={`hover:bg-primary/15 hover:text-primary border-primary/40 flex w-full cursor-pointer items-center justify-between rounded-md border-b px-4 py-3 text-sm transition-all duration-300 select-none lg:border-none`}
+                className={`hover:bg-primary/15 hover:text-primary flex w-full cursor-pointer items-center justify-between rounded-md px-4 py-3 text-sm transition-all duration-300 select-none`}
                 onClick={(e) => {
                   e.preventDefault();
                   toggleLinkExpansion(link.name);
@@ -74,9 +74,9 @@ const NavList = ({ links, sidebar, setOpenNav }: IProps) => {
                   to={link.path || "#"}
                   className={`${
                     isChildLink ? "pr-5" : ""
-                  } hover:bg-primary/15 hover:text-primary border-primary/40 flex w-full items-center justify-between gap-3 rounded-md border-b px-4 py-3 text-sm transition-all duration-300 lg:border-none ${
+                  } hover:bg-primary/15 hover:text-primary flex w-full items-center justify-between gap-3 rounded-md px-4 py-3 text-sm transition-all duration-300 ${
                     activeLink
-                      ? "bg-primary dark:bg-primary hover:bg-primary! text-white hover:text-white"
+                      ? "bg-primary dark:bg-primary hover:bg-primary! shadow-primary text-white shadow-sm hover:text-white"
                       : ""
                   }`}
                 >

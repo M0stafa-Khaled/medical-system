@@ -20,7 +20,7 @@ const AuthLayout = () => {
     // Doctor
     if (role === "doctor") return <Navigate to="/doctor" replace />;
     // Patient
-    return <Navigate to="/bookings" replace />;
+    return <Navigate to="/patient" replace />;
   }
 
   return (
@@ -47,7 +47,7 @@ const AuthLayout = () => {
             </Button>
           </motion.div>
           <motion.div
-            className="order-1 col-span-12 flex justify-center lg:order-2 lg:col-span-4"
+            className="order-1 col-span-12 hidden justify-center lg:order-2 lg:col-span-4 lg:flex"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

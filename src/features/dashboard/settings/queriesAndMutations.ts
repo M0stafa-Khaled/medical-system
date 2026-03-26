@@ -1,5 +1,5 @@
 import Query_Keys from "@/shared/enums/queryKeys";
-import { IUpdateCompany } from "@/interfaces/dashboard/company";
+import { IUpdateCompany } from "@/features/dashboard/settings/types";
 import { getCompanyInfo, getSubscription, updateCompanyInfo } from "./api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 

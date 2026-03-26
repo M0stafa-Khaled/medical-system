@@ -22,13 +22,13 @@ import {
   useUpdateCompanyInfo,
 } from "../queriesAndMutations";
 import { handleResErr } from "@/shared/utils/handleResError";
-import { companySchema } from "@/validations/dashboard/companySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { z } from "zod";
+import { companySchema } from "../schema";
 
 export const CompanyInfo = () => {
   const { data: company, isLoading } = useGetCompanyInfo();

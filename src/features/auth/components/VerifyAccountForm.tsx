@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as z from "zod";
-import { clearPermissions } from "@/app/store/features/permissions/permissionsSlice";
 import Swal from "sweetalert2";
 import { useResendOtp, useVerifyAccount } from "../queriesAndMutations";
 import { AxiosError } from "axios";
@@ -68,7 +67,7 @@ export const VerifyAccountForm = () => {
       if (role === "admin" || role === "employee")
         return navigate("/dashboard");
       if (role === "doctor") return navigate("/doctor");
-      if (role === "patient") return navigate("/bookings");
+      if (role === "patient") return navigate("/patient");
     } catch (error) {
       const errorObj = error as AxiosError<{
         message: { [key: string]: string[] };
@@ -187,7 +186,6 @@ export const VerifyAccountForm = () => {
       <Button
         onClick={() => {
           dispatch(logout());
-          dispatch(clearPermissions());
           navigate("/login");
         }}
         type="submit"

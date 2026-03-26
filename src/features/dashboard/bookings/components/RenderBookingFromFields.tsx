@@ -82,13 +82,7 @@ export const RenderBookingFormFields = ({
           />
         );
       case input.name === "date":
-        return (
-          <BookingDateItem
-            {...commonProps}
-            form={form}
-            allowedDay={allowedDay}
-          />
-        );
+        return <BookingDateItem {...commonProps} allowedDay={allowedDay} />;
       case input.name === "status":
         return (
           <SelectFormItem {...commonProps} options={options?.status || []} />
