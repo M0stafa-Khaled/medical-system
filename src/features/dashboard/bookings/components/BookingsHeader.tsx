@@ -9,12 +9,15 @@ import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router";
 import RefetchDataButton from "@/shared/components/RefetchDataButton";
 import Query_Keys from "@/shared/enums/queryKeys";
+import { IPaginationMeta } from "@/shared/types";
 
 interface IProps {
   isLoading: boolean;
-}
+   meta?: IPaginationMeta;
+  }
 
-export const BookingsHeader = ({ isLoading }: IProps) => {
+
+export const BookingsHeader = ({ isLoading, meta }: IProps) => {
   const canCreateBooking = useHasPermission(PERMISSIONS.ADD_BOOKING);
   const [_, setSearchParams] = useSearchParams();
 
@@ -38,7 +41,11 @@ export const BookingsHeader = ({ isLoading }: IProps) => {
             {format(new Date(), "EEEE, d MMMM yyyy", { locale: ar })}
           </div>
         </div>
-
+          <>
+            <div className="text-lg font-semibold">
+              إجمالى الحجوزات: <span className="text-primary"> {meta?.total ?? 0} </span>
+            </div>
+          </>
         <div className="flex gap-2">
           <RefetchDataButton
             isLoading={isLoading}
