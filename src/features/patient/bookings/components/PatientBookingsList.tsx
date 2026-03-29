@@ -1,4 +1,5 @@
 import {
+  Eye,
   Building2,
   CalendarDays,
   Clock3,
@@ -159,6 +160,13 @@ export const PatientBookingsList = ({
               </div>
 
               <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+                <Button asChild className="w-full sm:w-auto">
+                  <Link to={`/patient/bookings/${booking.id}`}>
+                    <Eye className="mr-2 h-4 w-4" />
+                    التفاصيل
+                  </Link>
+                </Button>
+
                 {booking.status !== "cancelled" && (
                   <Button
                     variant="destructive"
