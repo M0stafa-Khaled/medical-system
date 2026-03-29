@@ -11,9 +11,11 @@ import { router } from "./app/router";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: true,
+      staleTime: 30 * 1000,
+      refetchOnWindowFocus: false,
       refetchOnReconnect: true,
-      refetchOnMount: true,
+      refetchOnMount: false,
+      retry: 1,
     },
   },
 });
