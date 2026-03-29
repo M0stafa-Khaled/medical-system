@@ -4,6 +4,7 @@ import {
   deleteTreasury,
   getAllTreasuries,
   updateTreasury,
+  getSimpleTreasuries,
 } from "./api";
 import { IGetWithParams } from "@/shared/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -65,3 +66,9 @@ export const useDeleteTreasury = () => {
     },
   });
 };
+
+export const useGetSimpleTreasuries = () =>
+  useQuery({
+    queryKey: [Query_Keys.GET_ALL_TREASURIES],
+    queryFn: () => getSimpleTreasuries(),
+  });

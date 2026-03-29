@@ -14,6 +14,7 @@ const CreateBooking = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
+        className="pb-10"
       >
         <Card className="border-muted mt-5">
           <div className="space-y-1.5 p-6">

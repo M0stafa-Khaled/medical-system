@@ -19,7 +19,7 @@ export interface IEmployee {
     name: string;
     status: boolean;
     expenses_total: number;
-  };
+  } | null;
   user: {
     id: number;
     email: string;

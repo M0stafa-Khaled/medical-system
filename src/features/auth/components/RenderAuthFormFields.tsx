@@ -48,7 +48,10 @@ export const RenderAuthFormFields = ({
       case input.type === "file":
         return (
           <FormItem>
-            <FormLabel htmlFor={input.name} className="text-black">
+            <FormLabel
+              htmlFor={input.name}
+              className="text-foreground font-medium dark:text-white"
+            >
               {input.label}
             </FormLabel>
             <FormControl>
@@ -62,7 +65,7 @@ export const RenderAuthFormFields = ({
                     handleFileChange && handleFileChange(e, field.onChange)
                   }
                   value={undefined}
-                  className="file:bg-primary border-muted-foreground h-auto cursor-pointer text-black file:cursor-pointer file:rounded-full file:border-0 file:px-4 file:text-sm file:font-semibold file:text-white placeholder:h-14 placeholder:text-sm placeholder:text-black/50 dark:bg-transparent"
+                  className="file:bg-primary file:hover:bg-primary/90 border-border text-foreground placeholder:text-muted-foreground focus:ring-primary dark:focus:ring-primary/50 h-auto cursor-pointer transition-colors file:cursor-pointer file:rounded-full file:border-0 file:px-4 file:text-sm file:font-semibold file:text-white dark:border-gray-700 dark:bg-gray-800/50 dark:text-white dark:placeholder:text-gray-500"
                 />
               </div>
             </FormControl>
@@ -73,14 +76,17 @@ export const RenderAuthFormFields = ({
       case input.type === "password":
         return (
           <FormItem>
-            <FormLabel className="text-black" htmlFor={input.name}>
+            <FormLabel
+              className="text-foreground font-medium dark:text-white"
+              htmlFor={input.name}
+            >
               {input.label}
             </FormLabel>
             <FormControl>
-              <div className="relative">
+              <div className="group relative">
                 <button
                   type="button"
-                  className="text-blue-gray-500 absolute top-2/4 left-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-black"
+                  className="text-muted-foreground hover:text-foreground absolute top-2/4 left-3 grid h-5 w-5 -translate-y-2/4 place-items-center transition-colors dark:text-gray-400 dark:hover:text-white"
                   name={showPassword ? "اخفاء كلمة المرور" : "عرض كلمة المرور"}
                 >
                   {showPassword ? (
@@ -100,7 +106,7 @@ export const RenderAuthFormFields = ({
                   placeholder={input.placeholder}
                   type={showPassword ? "text" : input.type}
                   {...field}
-                  className="border-muted-foreground h-auto py-3 pr-2 pl-9 text-black placeholder:h-14 placeholder:text-sm placeholder:text-black/50 md:py-3.5 dark:bg-transparent"
+                  className="border-border text-foreground placeholder:text-muted-foreground focus:ring-primary dark:focus:ring-primary/50 h-auto py-3 pr-2 pl-9 transition-colors md:py-3.5 dark:border-gray-700 dark:bg-gray-800/50 dark:text-white dark:placeholder:text-gray-500"
                 />
               </div>
             </FormControl>
@@ -111,7 +117,10 @@ export const RenderAuthFormFields = ({
       default:
         return (
           <FormItem>
-            <FormLabel className="text-black" htmlFor={input.name}>
+            <FormLabel
+              className="text-foreground font-medium dark:text-white"
+              htmlFor={input.name}
+            >
               {input.label}
             </FormLabel>
             <FormControl>
@@ -120,7 +129,7 @@ export const RenderAuthFormFields = ({
                 placeholder={input.placeholder}
                 type={input.type}
                 {...field}
-                className="border-muted-foreground h-auto py-3 text-black placeholder:h-14 placeholder:text-sm placeholder:text-black/50 dark:bg-transparent"
+                className="border-border text-foreground placeholder:text-muted-foreground focus:ring-primary dark:focus:ring-primary/50 h-auto py-3 transition-colors dark:border-gray-700 dark:bg-gray-800/50 dark:text-white dark:placeholder:text-gray-500"
               />
             </FormControl>
             <FormMessage />

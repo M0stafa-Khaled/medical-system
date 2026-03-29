@@ -25,7 +25,7 @@ export const ProtectedRoute = ({
   const hasPermission = useHasPermission(requiredPermission || "");
 
   if (!token || !isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/sign-in" replace />;
   }
 
   if (requiredRole) {

@@ -132,27 +132,27 @@ export const VerifyAccountForm = () => {
                     <InputOTPGroup>
                       <InputOTPSlot
                         index={0}
-                        className="border-muted h-12 w-12"
+                        className="border-border bg-background text-foreground h-12 w-12 dark:border-gray-700 dark:bg-gray-800/60 dark:text-white"
                       />
                       <InputOTPSlot
                         index={1}
-                        className="border-muted h-12 w-12"
+                        className="border-border bg-background text-foreground h-12 w-12 dark:border-gray-700 dark:bg-gray-800/60 dark:text-white"
                       />
                       <InputOTPSlot
                         index={2}
-                        className="border-muted h-12 w-12"
+                        className="border-border bg-background text-foreground h-12 w-12 dark:border-gray-700 dark:bg-gray-800/60 dark:text-white"
                       />
                       <InputOTPSlot
                         index={3}
-                        className="border-muted h-12 w-12"
+                        className="border-border bg-background text-foreground h-12 w-12 dark:border-gray-700 dark:bg-gray-800/60 dark:text-white"
                       />
                       <InputOTPSlot
                         index={4}
-                        className="border-muted h-12 w-12"
+                        className="border-border bg-background text-foreground h-12 w-12 dark:border-gray-700 dark:bg-gray-800/60 dark:text-white"
                       />
                       <InputOTPSlot
                         index={5}
-                        className="border-muted h-12 w-12"
+                        className="border-border bg-background text-foreground h-12 w-12 dark:border-gray-700 dark:bg-gray-800/60 dark:text-white"
                       />
                     </InputOTPGroup>
                   </InputOTP>
@@ -186,7 +186,7 @@ export const VerifyAccountForm = () => {
       <Button
         onClick={() => {
           dispatch(logout());
-          navigate("/login");
+          navigate("/sign-in");
         }}
         type="submit"
         variant={"destructive"}

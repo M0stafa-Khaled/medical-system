@@ -2,6 +2,7 @@ import { m } from "framer-motion";
 import { fadeInUp, staggerContainer } from "../animations";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router";
 
 export const CTA = () => {
   return (
@@ -43,15 +44,19 @@ export const CTA = () => {
             <Button
               size="lg"
               className="h-14 w-full rounded-full px-8 text-lg sm:w-auto"
+              asChild
             >
-              احجز كشف الآن <ArrowLeft className="mr-2 h-5 w-5" />
+              <Link to="/sign-in">
+                احجز موعدك الآن <ArrowLeft className="mr-2 h-4 w-4" />
+              </Link>
             </Button>
             <Button
               variant="outline"
               size="lg"
               className="bg-background h-14 w-full rounded-full px-8 text-lg sm:w-auto"
+              asChild
             >
-              تواصل معنا واتساب
+              <Link to="#">تواصل معنا واتساب</Link>
             </Button>
           </m.div>
 

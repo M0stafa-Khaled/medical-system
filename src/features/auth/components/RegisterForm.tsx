@@ -89,9 +89,12 @@ export const RegisterForm = () => {
           إنشاء حساب {isPending && <Loader2 className="animate-spin" />}
         </Button>
       </form>
-      <p className="mt-2 text-sm text-black">
+      <p className="text-muted-foreground mt-2 text-sm dark:text-gray-400">
         لديك حساب بالفعل؟{" "}
-        <Link to={"/login"} className="text-black underline">
+        <Link
+          to={"/sign-in"}
+          className="text-primary hover:text-primary/80 dark:hover:text-primary/90 font-medium underline transition-colors"
+        >
           تسجيل الدخول
         </Link>
       </p>

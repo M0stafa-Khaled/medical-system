@@ -82,7 +82,7 @@ export const EmployeeForm = ({ employee, action, employeeSchema }: IProps) => {
     const { auth, email_verified, status } = await checkAuthUser();
     if (!auth || !status) {
       dispatch(logout());
-      navigate("/login");
+      navigate("/sign-in");
       if (!auth)
         return toast.warn(" تم تسجيل الخروج يرجى تسجيل الدخول مرة اخرى");
       if (!status) return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");

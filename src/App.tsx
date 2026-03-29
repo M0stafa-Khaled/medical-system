@@ -34,7 +34,6 @@ const App = () => {
               theme="light"
               transition={Bounce}
             />
-
             <LazyMotion features={domAnimation}>
               <RouterProvider router={router} />
             </LazyMotion>

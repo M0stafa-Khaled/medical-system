@@ -61,7 +61,7 @@ const RootLayout = () => {
         if (!auth) {
           dispatch(logout());
           if (location.pathname !== "/") {
-            navigate("/login");
+            navigate("/sign-in");
             toast.warn("يرجي تسجيل الدخول");
           }
           return;

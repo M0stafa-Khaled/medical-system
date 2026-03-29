@@ -47,9 +47,9 @@ const UpdateBooking = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="mt-6"
+        className="pb-10"
       >
-        <Card className="border-muted">
+        <Card className="border-muted mt-5">
           <div className="flex flex-col space-y-1.5 p-6">
             <h1 className="leading-none font-semibold tracking-tight">
               تحديث بيانات الحجز

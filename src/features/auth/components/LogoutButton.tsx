@@ -47,7 +47,7 @@ export const LogoutButton = ({
 
       // * Logout Success
       dispatch(logout());
-      navigate("/login", {
+      navigate("/sign-in", {
         replace: true,
       });
       Swal.fire({

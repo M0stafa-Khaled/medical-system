@@ -52,7 +52,7 @@ export const ResetPasswordForm = () => {
         });
 
       // * Reset Success
-      navigate("/login");
+      navigate("/sign-in");
       cookieServices.clearCanResetPass();
       return Swal.fire({
         icon: "success",
