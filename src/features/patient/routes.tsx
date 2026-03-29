@@ -8,6 +8,9 @@ const PatientBookings = lazy(() => import("./bookings/pages/PatientBookings"));
 const CreatePatientBooking = lazy(
   () => import("./bookings/pages/CreatePatientBooking")
 );
+const PatientBookingDetails = lazy(
+  () => import("./bookings/pages/PatientBookingDetails")
+);
 const UpdatePatientBooking = lazy(
   () => import("./bookings/pages/UpdatePatientBooking")
 );
@@ -48,6 +51,14 @@ export const patientRoutes = [
         element: (
           <Suspense fallback={<PageLoader />}>
             <CreatePatientBooking />
+          </Suspense>
+        ),
+      },
+      {
+        path: "bookings/:bookingId",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <PatientBookingDetails />
           </Suspense>
         ),
       },
