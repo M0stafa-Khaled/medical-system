@@ -31,7 +31,9 @@ axiosAPI.interceptors.response.use(
         handleLogout();
       }
       toast.warn("يرجي تسجيل الدخول");
-    } else if (error?.status === 500) toast.error("حاول مجدداً في وقت لاحق");
+    } else if (error?.response?.status === 500 || error?.status === 500) {
+      toast.error("حاول مجدداً في وقت لاحق");
+    }
     return Promise.reject(error);
   }
 );

@@ -35,9 +35,13 @@ class CookieService {
   getToken(): string | undefined {
     const token = this.cookies.get("_tn");
     if (!token) return undefined;
-    const decryptedToken: string = decryptData(token);
-
-    return token && token.trim() !== "" ? decryptedToken : undefined;
+    try {
+      const decryptedToken: string = decryptData(token);
+      return token && token.trim() !== "" ? decryptedToken : undefined;
+    } catch {
+      this.cookies.remove("_tn", { path: "/" });
+      return undefined;
+    }
   }
 
   setUser({ id, name, role }: IUser, expiresInDays: number = 7) {
@@ -59,10 +63,14 @@ class CookieService {
   getUser(): IUser | undefined {
     const user = this.cookies.get("_ur");
     if (!user) return undefined;
-    const decryptedUser = decryptData(user) as IUser;
-
-    if (!decryptedUser) return undefined;
-    return decryptedUser;
+    try {
+      const decryptedUser = decryptData(user) as IUser;
+      if (!decryptedUser) return undefined;
+      return decryptedUser;
+    } catch {
+      this.cookies.remove("_ur", { path: "/" });
+      return undefined;
+    }
   }
 
   setCanResetPass() {
@@ -78,9 +86,14 @@ class CookieService {
   getCanResetPass(): boolean {
     const canResetPass = this.cookies.get("_cr_p");
     if (!canResetPass) return false;
-    const decryptCanReset = decryptData(canResetPass);
-    if (decryptCanReset === "true") return true;
-    return false;
+    try {
+      const decryptCanReset = decryptData(canResetPass);
+      if (decryptCanReset === "true") return true;
+      return false;
+    } catch {
+      this.cookies.remove("_cr_p", { path: "/" });
+      return false;
+    }
   }
 
   clearCanResetPass() {

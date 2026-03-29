@@ -191,6 +191,7 @@ const CreateTransaction = ({ booking }: IProps) => {
               <Link
                 to={`/dashboard/last-visits/${booking.patient.id}/transactions/${booking.doctor.id}`}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex w-full items-center justify-center gap-2 px-1 py-3"
               >
                 أخر زيارات المريض لدي الطبيب
