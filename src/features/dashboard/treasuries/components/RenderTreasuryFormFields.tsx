@@ -29,14 +29,21 @@ export const RenderTreasuryFormFields = ({
 }: IProps) => {
   const renderField = ({ field }: { field: ControllerRenderProps }) => {
     switch (true) {
-      case input.name === "treasury_id" ||
-        input.name === "from_treasury" ||
-        input.name === "to_treasury":
+      case input.name === "from_treasury":
         return (
           <SelectFormItem
             input={input}
             field={field}
-            options={options?.treasuries || []}
+            options={options?.fromTreasuries || options?.treasuries || []}
+          />
+        );
+
+      case input.name === "to_treasury":
+        return (
+          <SelectFormItem
+            input={input}
+            field={field}
+            options={options?.toTreasuries || options?.treasuries || []}
           />
         );
 

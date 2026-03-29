@@ -36,6 +36,7 @@ interface IProps {
 const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const isDisabled = !!input.disabled;
 
   const filteredOptions = useMemo(() => {
     if (!searchValue) return options;
@@ -53,12 +54,19 @@ const SelectFormItem = ({ field, options, input, isOptionalField }: IProps) => {
         )}
       </FormLabel>
       <FormControl>
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover
+          open={open}
+          onOpenChange={(newOpen) => {
+            if (isDisabled) return;
+            setOpen(newOpen);
+          }}
+        >
           <PopoverTrigger asChild>
             <Button
               id={input.name}
               variant="outline"
               role="combobox"
+              disabled={isDisabled}
               aria-expanded={open}
               className={`dark:bg-input/30 hover:bg-input/10 hover:text-foreground dark:hover:bg-input/50! border-muted h-11! w-full justify-between overflow-hidden`}
             >

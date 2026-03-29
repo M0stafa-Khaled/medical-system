@@ -58,3 +58,7 @@ export const deleteTreasury = async ({
 }: {
   id: string;
 }): Promise<IStatusMsg> => (await axiosAPI.delete(`/treasuries/${id}`)).data;
+
+export const getSimpleTreasuries = async (): Promise<{
+  data: { id: number; name: string }[];
+}> => (await axiosAPI.get("/treasuries/simple")).data;

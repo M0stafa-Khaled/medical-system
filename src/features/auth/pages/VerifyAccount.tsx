@@ -29,7 +29,7 @@ const VerifyAccount = () => {
 
       if (!auth) {
         dispatch(logout());
-        navigate("/login");
+        navigate("/sign-in");
         return;
       }
       if (email_verified && (role === "admin" || role === "employee"))

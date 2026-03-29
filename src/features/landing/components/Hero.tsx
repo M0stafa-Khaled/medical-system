@@ -1,7 +1,8 @@
 import { m } from "framer-motion";
-import { fadeInUp, staggerContainer, scaleIn } from "../animations";
+import { fadeInUp, staggerContainer } from "../animations";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router";
 
 export const Hero = () => {
   return (
@@ -10,189 +11,225 @@ export const Hero = () => {
       className="bg-background relative flex min-h-screen items-center overflow-hidden pt-20"
     >
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20">
-        <div className="bg-primary/30 h-[500px] w-[500px] translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]" />
-        <div className="bg-secondary/30 h-[400px] w-[400px] -translate-x-1/2 translate-y-1/2 rounded-full blur-[80px]" />
+        <div className="bg-primary/30 h-125 w-125 translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]" />
+        <div className="bg-secondary/30 h-100 w-100 -translate-x-1/2 translate-y-1/2 rounded-full blur-[80px]" />
       </div>
 
       <div className="relative z-10 container">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
+        <div className="grid items-center gap-12 py-4 lg:grid-cols-2 lg:gap-8">
           <m.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="flex flex-col items-start gap-6 text-right"
+            className="flex flex-col items-start gap-5 text-right lg:gap-7"
           >
             <m.div
               variants={fadeInUp}
-              className="border-primary/20 bg-primary/5 text-primary inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium"
+              className="border-primary/25 from-primary/10 to-primary/5 text-primary inline-flex items-center rounded-full border bg-linear-to-l px-3 py-1.5 text-xs font-semibold sm:text-sm"
             >
-              <span className="bg-primary ml-2 flex h-2 w-2 animate-pulse rounded-full"></span>
+              <span className="bg-primary ml-2 flex h-2 w-2 animate-pulse rounded-full" />
               رعاية طبية بمقاييس عالمية
             </m.div>
 
             <m.h1
               variants={fadeInUp}
-              className="text-foreground text-4xl leading-tight font-bold tracking-tight sm:text-6xl"
+              className="text-foreground max-w-2xl text-3xl leading-tight font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
             >
-              صحتك أمانة <br />
-              <span className="text-primary">بين أيدٍ أمينة</span>
+              مستقبل الرعاية الصحية
+              <br />
+              <span className="text-primary">يبدأ من هنا</span>
             </m.h1>
 
             <m.p
               variants={fadeInUp}
-              className="text-muted-foreground max-w-[600px] text-lg leading-relaxed"
+              className="text-muted-foreground max-w-160 text-base leading-8 sm:text-lg"
             >
-              نقدم في مجمع عيادتي الطبي خدمات صحية متكاملة بأحدث التقنيات وعلى
-              يد نخبة من أفضل الاستشاريين، لأن راحتكم وسلامتكم هي أولويتنا
-              القصوى.
+              نوفر تجربة طبية متكاملة تجمع بين الكفاءة السريرية والأنظمة الرقمية
+              الذكية، لضمان خدمة أسرع، دقة أعلى، وراحة كاملة في كل زيارة.
             </m.p>
 
             <m.div
+              variants={fadeInUp}
+              className="grid w-full max-w-xl gap-3 sm:grid-cols-3"
+            >
+              <div className="bg-card/70 border-border/60 rounded-2xl border p-3 text-center backdrop-blur">
+                <p className="text-primary text-xl font-black sm:text-2xl">
+                  24/7
+                </p>
+                <p className="text-muted-foreground text-xs sm:text-sm">
+                  دعم مستمر
+                </p>
+              </div>
+              <div className="bg-card/70 border-border/60 rounded-2xl border p-3 text-center backdrop-blur">
+                <p className="text-primary text-xl font-black sm:text-2xl">
+                  120+
+                </p>
+                <p className="text-muted-foreground text-xs sm:text-sm">
+                  مراجع يومياً
+                </p>
+              </div>
+              <div className="bg-card/70 border-border/60 rounded-2xl border p-3 text-center backdrop-blur">
+                <p className="text-primary text-xl font-black sm:text-2xl">
+                  4.9
+                </p>
+                <p className="text-muted-foreground text-xs sm:text-sm">
+                  متوسط التقييم
+                </p>
+              </div>
+            </m.div>
+
+            <m.div
               variants={staggerContainer}
-              className="flex w-full flex-wrap gap-4 pt-4"
+              className="flex w-full flex-col gap-3 pt-2 sm:w-auto sm:flex-row sm:gap-4"
             >
               <m.div variants={fadeInUp}>
                 <Button
                   size="lg"
-                  className="shadow-primary/20 hover:shadow-primary/30 h-12 rounded-full px-8 text-base shadow-lg transition-all"
+                  className="shadow-primary/20 hover:shadow-primary/30 h-11 w-full rounded-full px-6 text-sm shadow-lg transition-all sm:h-12 sm:w-auto sm:px-8 sm:text-base"
+                  asChild
                 >
-                  احجز موعدك الآن <ArrowLeft className="mr-2 h-4 w-4" />
-                </Button>
-              </m.div>
-              <m.div variants={fadeInUp}>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-primary/20 hover:bg-primary/5 bg-background/50 h-12 rounded-full px-8 text-base backdrop-blur-sm"
-                >
-                  خدماتنا
+                  <Link to="/sign-in">
+                    احجز موعدك الآن <ArrowLeft className="mr-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </m.div>
             </m.div>
 
             <m.div
               variants={fadeInUp}
-              className="text-muted-foreground flex items-center gap-6 pt-4 text-sm"
+              className="text-muted-foreground flex flex-wrap items-center gap-3 pt-1 text-xs sm:gap-6 sm:pt-2 sm:text-sm"
             >
-              <div className="flex items-center gap-2">
+              <div className="bg-background/80 border-border/60 flex items-center gap-2 rounded-full border px-3 py-1.5">
                 <CheckCircle2 className="text-primary h-4 w-4" />
                 <span>أطباء استشاريون</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="bg-background/80 border-border/60 flex items-center gap-2 rounded-full border px-3 py-1.5">
                 <CheckCircle2 className="text-primary h-4 w-4" />
                 <span>طوارئ 24 ساعة</span>
               </div>
             </m.div>
           </m.div>
 
-          <div className="perspective-1000 relative mx-auto w-full max-w-[500px] lg:max-w-none">
+          <m.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid gap-4 py-4 sm:grid-cols-2 lg:grid-cols-2"
+          >
             <m.div
-              initial="initial"
-              whileInView="whileInView"
-              variants={scaleIn}
-              className="relative flex aspect-square items-center justify-center rounded-full"
+              variants={fadeInUp}
+              className="bg-card/70 border-border/60 group hover:border-primary/40 relative overflow-hidden rounded-2xl border p-6 backdrop-blur transition-all hover:shadow-lg"
             >
-              <div className="from-primary/10 to-secondary/10 animate-pulse-slow absolute inset-0 rounded-full bg-linear-to-tr via-transparent blur-3xl" />
-
-              <div className="relative flex h-80 w-80 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-linear-to-b from-white/10 to-white/5 shadow-2xl backdrop-blur-md dark:from-black/10 dark:to-black/5">
-                <div className="from-primary/10 absolute inset-0 bg-linear-to-tr to-transparent opacity-50" />
-                <div className="p-6 text-center">
-                  <div className="bg-primary shadow-primary/30 mx-auto mb-4 flex h-16 items-center justify-center rounded-2xl shadow-lg">
-                    <span className="text-primary-foreground text-3xl font-bold">
-                      عيادتي
-                    </span>
-                  </div>
-                  <h3 className="text-foreground text-xl font-bold">
-                    مجمع عيادتي الطبي
-                  </h3>
-                  <p className="text-muted-foreground mt-2 text-sm">
-                    رعاية صحية متكاملة
-                  </p>
+              <div className="bg-primary/10 group-hover:bg-primary/20 absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl transition-all" />
+              <div className="relative space-y-3">
+                <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-xl">
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
                 </div>
+                <h3 className="text-foreground font-semibold">فحص شامل</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  فحوصات دورية وشاملة بأحدث الأجهزة الطبية
+                </p>
               </div>
-
-              <m.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="bg-card/90 border-border/50 absolute top-10 right-0 w-56 rounded-xl border p-4 shadow-xl backdrop-blur-md sm:-right-10"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M19 13.5v4L15.5 21L12 17.5l-3.5 3.5L5 17.5v-4" />
-                      <path d="M12 9V5a2 2 0 0 1 2-2h3" />
-                      <path d="M12 9v9" />
-                      <path d="M9 12H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-foreground text-sm font-semibold">
-                      حالات اليوم
-                    </p>
-                    <p className="flex items-center gap-1 text-xs font-medium text-green-600">
-                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500"></span>
-                      +120 مراجع
-                    </p>
-                  </div>
-                </div>
-              </m.div>
-
-              <m.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{
-                  duration: 7,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-                className="bg-card/90 border-border/50 absolute bottom-5 left-0 w-52 rounded-xl border p-4 shadow-xl backdrop-blur-md sm:-left-8 lg:bottom-16"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-foreground text-sm font-semibold">
-                      رضاء المرضى
-                    </p>
-                    <p className="text-muted-foreground mt-0.5 text-xs">
-                      4.9/5 تقييم عام
-                    </p>
-                  </div>
-                </div>
-              </m.div>
             </m.div>
-          </div>
+
+            <m.div
+              variants={fadeInUp}
+              className="bg-card/70 border-border/60 group hover:border-primary/40 relative overflow-hidden rounded-2xl border p-6 backdrop-blur transition-all hover:shadow-lg"
+            >
+              <div className="bg-primary/10 group-hover:bg-primary/20 absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl transition-all" />
+              <div className="relative space-y-3">
+                <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-xl">
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-foreground font-semibold">مواعيد مرنة</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  احجز موعدك بسهولة في أي وقت يناسبك
+                </p>
+              </div>
+            </m.div>
+
+            <m.div
+              variants={fadeInUp}
+              className="bg-card/70 border-border/60 group hover:border-primary/40 relative overflow-hidden rounded-2xl border p-6 backdrop-blur transition-all hover:shadow-lg"
+            >
+              <div className="bg-primary/10 group-hover:bg-primary/20 absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl transition-all" />
+              <div className="relative space-y-3">
+                <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-xl">
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-foreground font-semibold">أطباء متخصصون</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  فريق طبي متميز برعاية عالية الجودة
+                </p>
+              </div>
+            </m.div>
+
+            <m.div
+              variants={fadeInUp}
+              className="bg-card/70 border-border/60 group hover:border-primary/40 relative overflow-hidden rounded-2xl border p-6 backdrop-blur transition-all hover:shadow-lg"
+            >
+              <div className="bg-primary/10 group-hover:bg-primary/20 absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl transition-all" />
+              <div className="relative space-y-3">
+                <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-xl">
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-foreground font-semibold">سرعة الخدمة</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  علاج سريع وفعال بأحدث الطرق الطبية
+                </p>
+              </div>
+            </m.div>
+          </m.div>
         </div>
       </div>
     </section>

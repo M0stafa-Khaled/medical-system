@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "@/shared/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,31 +12,62 @@ import { itemVariants, containerVariants } from "@/shared/animations";
 import { transferTreasurySchema } from "../schema";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import {
-  useGetAllTreasuries,
+  useGetSimpleTreasuries,
   useTransferTreasuries,
 } from "../queriesAndMutations";
 import { RenderTreasuryFormFields } from "./RenderTreasuryFormFields";
 import { handleResErr } from "@/shared/utils/handleResError";
 import { TRANSFER_TREASURIES_FORM_INPUTS } from "../constants";
 import { DialogClose, DialogFooter } from "@/shared/components/ui/dialog";
+import { useAppSelector } from "@/app/store";
+import { IEmployee } from "../../employees/types";
 
 export const TransferBetweenTreasuries = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: treasuries } = useGetAllTreasuries({});
+  const { data: treasuries } = useGetSimpleTreasuries();
   const { mutateAsync: transferTreasury, isPending } = useTransferTreasuries();
 
-  const treasuriesOptions = treasuries?.data?.map((treasury) => ({
-    value: treasury?.id.toString(),
-    label: treasury?.name,
-  }));
+  const user = useAppSelector((state) => state.auth.user) as IEmployee;
+
+  const role = user?.user?.role;
+  const isEmployee = role === "employee";
+  const employeeTreasuryId = user?.treasury?.id?.toString() || "";
+  const treasuriesOptions =
+    treasuries?.data
+      .map((treasury) => ({
+        value: treasury?.id.toString(),
+        label: treasury?.name,
+      }))
+      .filter((t) => t.value !== employeeTreasuryId) || [];
+
+  const employeeTreasuryOption =
+    user?.treasury && employeeTreasuryId
+      ? [
+          {
+            value: employeeTreasuryId,
+            label: user.treasury.name,
+          },
+        ]
+      : [];
+
+  const fromTreasuriesOptions = isEmployee
+    ? employeeTreasuryOption
+    : treasuriesOptions;
+
   const form = useForm<z.infer<typeof transferTreasurySchema>>({
     resolver: zodResolver(transferTreasurySchema),
     defaultValues: {
       amount: 0,
-      from_treasury: "",
+      from_treasury: isEmployee ? employeeTreasuryId : "",
       to_treasury: "",
     },
   });
+
+  useEffect(() => {
+    if (isEmployee && employeeTreasuryId) {
+      form.setValue("from_treasury", employeeTreasuryId);
+    }
+  }, [isEmployee, employeeTreasuryId, form]);
 
   const onSubmit = async ({
     from_treasury,
@@ -66,7 +97,7 @@ export const TransferBetweenTreasuries = () => {
     setIsOpen(false);
     form.reset({
       amount: 0,
-      from_treasury: "",
+      from_treasury: isEmployee ? employeeTreasuryId : "",
       to_treasury: "",
     });
   };
@@ -96,16 +127,30 @@ export const TransferBetweenTreasuries = () => {
             animate="visible"
             variants={containerVariants}
           >
-            {TRANSFER_TREASURIES_FORM_INPUTS.map((input, idx) => (
-              <motion.div key={input.name} custom={idx} variants={itemVariants}>
-                <RenderTreasuryFormFields
-                  input={input}
-                  form={form}
-                  schema={transferTreasurySchema}
-                  options={{ treasuries: treasuriesOptions! }}
-                />
-              </motion.div>
-            ))}
+            {TRANSFER_TREASURIES_FORM_INPUTS.map((input, idx) => {
+              const currentInput =
+                isEmployee && input.name === "from_treasury"
+                  ? { ...input, disabled: true }
+                  : input;
+
+              return (
+                <motion.div
+                  key={input.name}
+                  custom={idx}
+                  variants={itemVariants}
+                >
+                  <RenderTreasuryFormFields
+                    input={currentInput}
+                    form={form}
+                    schema={transferTreasurySchema}
+                    options={{
+                      fromTreasuries: fromTreasuriesOptions,
+                      toTreasuries: treasuriesOptions,
+                    }}
+                  />
+                </motion.div>
+              );
+            })}
 
             <DialogFooter className="mt-3">
               <DialogClose asChild>

@@ -39,6 +39,10 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "react-helmet-async": path.resolve(
+        __dirname,
+        "./src/shared/lib/helmetShim.tsx"
+      ),
     },
   },
   build: {

@@ -3,6 +3,7 @@ import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { ILink } from "@/shared/types";
 import {
+  ArrowLeftRight,
   BadgeDollarSign,
   Bookmark,
   Building2,
@@ -37,6 +38,9 @@ const DashboardLayout = () => {
   const canViewEmployees = useHasPermission(PERMISSIONS.EMPLOYEES);
   const canViewPatients = useHasPermission(PERMISSIONS.PATIENTS);
   const canViewTreasuries = useHasPermission(PERMISSIONS.TREASURIES);
+  const canTransferBetweenTreasuries = useHasPermission(
+    PERMISSIONS.TRANSFER_BETWEEN_TREASURIES
+  );
   const canViewDosages = useHasPermission(PERMISSIONS.DOSAGES);
   const canViewExpensesCategories = useHasPermission(
     PERMISSIONS.EXPENSE_CATEGORIES
@@ -48,6 +52,7 @@ const DashboardLayout = () => {
     canViewPatients ||
     canViewDosages ||
     canViewTreasuries ||
+    canTransferBetweenTreasuries ||
     canViewExpensesCategories;
 
   // master data
@@ -172,6 +177,15 @@ const DashboardLayout = () => {
                       name: ROUTES_NAME.treasuries,
                       path: "/dashboard/treasuries",
                       icon: <Wallet size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canTransferBetweenTreasuries
+                ? [
+                    {
+                      name: ROUTES_NAME["transfers-between"],
+                      path: "/dashboard/treasuries/transfers-between",
+                      icon: <ArrowLeftRight size={18} />,
                     },
                   ]
                 : []),

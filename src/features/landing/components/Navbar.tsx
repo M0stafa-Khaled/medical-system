@@ -78,17 +78,22 @@ export const Navbar = () => {
           {isAuthenticated ? (
             <ProfileMenu />
           ) : (
-            <Button
-              variant="ghost"
-              className="hover:text-primary rounded-full"
-              asChild
-            >
-              <Link to="/login">تسجيل الدخول</Link>
-            </Button>
+            <>
+              <Button
+                variant="ghost"
+                className="hover:text-primary rounded-full"
+                asChild
+              >
+                <Link to="/sign-in">تسجيل الدخول</Link>
+              </Button>
+              <Button
+                className="shadow-primary/20 rounded-full shadow-lg"
+                asChild
+              >
+                <Link to="/sign-up">حساب جديد</Link>
+              </Button>
+            </>
           )}
-          {/* <Button className="shadow-primary/20 rounded-full shadow-lg" asChild>
-            <Link to="/register">حساب جديد</Link>
-          </Button> */}
         </div>
 
         {/* Mobile Menu Button */}
@@ -115,7 +120,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="bg-background border-b lg:hidden"
+            className={`${isScrolled ? "" : "bg-background/80 border-t border-b shadow-sm backdrop-blur-md"} lg:hidden ${isAuthenticated ? "" : "border-b"}`}
           >
             <div className="container flex flex-col gap-4 py-8">
               {navLinks.map((link) => (
@@ -138,17 +143,20 @@ export const Navbar = () => {
                       asChild
                     >
                       <Link
-                        to="/login"
+                        to="/sign-in"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         تسجيل الدخول
                       </Link>
                     </Button>
-                    {/* <Button className="w-full" asChild>
-                  <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
-                  حساب جديد
-                  </Link>
-                  </Button> */}
+                    <Button className="w-full" asChild>
+                      <Link
+                        to="/sign-up"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        حساب جديد
+                      </Link>
+                    </Button>
                   </div>
                 </>
               )}

@@ -80,7 +80,10 @@ export const ForgotPasswordForm = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-black" htmlFor={"email"}>
+                    <FormLabel
+                      className="text-foreground font-medium dark:text-white"
+                      htmlFor={"email"}
+                    >
                       البريد الإلكتروني
                     </FormLabel>
                     <FormControl>
@@ -89,7 +92,7 @@ export const ForgotPasswordForm = () => {
                         placeholder="البريد الإلكتروني"
                         type="text"
                         {...field}
-                        className="border-muted-foreground h-auto py-3 text-black placeholder:h-14 placeholder:text-sm placeholder:text-black/50 dark:bg-transparent"
+                        className="border-border text-foreground placeholder:text-muted-foreground focus:ring-primary dark:focus:ring-primary/50 h-auto py-3 transition-colors dark:border-gray-700 dark:bg-gray-800/50 dark:text-white dark:placeholder:text-gray-500"
                       />
                     </FormControl>
                     <FormMessage />

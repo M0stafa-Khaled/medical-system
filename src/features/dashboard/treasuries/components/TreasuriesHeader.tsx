@@ -1,9 +1,11 @@
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { CreateTreasury } from "./CreateTreasury";
-import { TransferBetweenTreasuries } from "./TransferBetweenTreasuries";
 import SelectFilter from "@/shared/components/ui/select-filter";
+import { Button } from "@/shared/components/ui/button";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { useSearchParams } from "react-router";
+import { Link } from "react-router";
 import { useGetAllTreasuries } from "../queriesAndMutations";
 
 export const TreasuriesHeader = () => {
@@ -21,7 +23,14 @@ export const TreasuriesHeader = () => {
     <div className="my-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
         {canCreateTreasury && <CreateTreasury />}
-        {canTransferTreasury && <TransferBetweenTreasuries />}
+        {canTransferTreasury && (
+          <Button asChild className="h-auto gap-2 py-3 md:w-40">
+            <Link to="/dashboard/treasuries/transfers-between">
+              تحويل بين الخزائن
+              <FaMoneyBillTransfer size={20} />
+            </Link>
+          </Button>
+        )}
       </div>
       <SelectFilter
         className="max-w-sm"

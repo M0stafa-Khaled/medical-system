@@ -83,7 +83,7 @@ export const LoginForm = () => {
           </div>
           <Link
             to={"/forgot-password"}
-            className="mt-1 mr-2 text-sm text-black underline"
+            className="text-primary dark:text-primary hover:text-primary/80 dark:hover:text-primary/90 mt-1 mr-2 text-sm font-medium underline transition-colors"
           >
             هل نسيت كلمة المرور؟
           </Link>

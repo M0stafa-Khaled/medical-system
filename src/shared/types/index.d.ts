@@ -34,6 +34,7 @@ export interface IFormInput {
   label: string;
   placeholder?: string;
   accept?: string;
+  disabled?: boolean;
 }
 
 // Pagination Interfaces

@@ -13,19 +13,19 @@ export const authRoutes = [
     path: "/verify-account",
     element: (
       <Suspense fallback={<PageLoader />}>
-        <VerifyAccount />,
+        <VerifyAccount />
       </Suspense>
     ),
   },
   {
     element: (
       <Suspense fallback={<PageLoader />}>
-        <AuthLayout />,
+        <AuthLayout />
       </Suspense>
     ),
     children: [
       {
-        path: "/login",
+        path: "/sign-in",
         element: (
           <Suspense fallback={<PageLoader />}>
             <Login />
@@ -33,7 +33,7 @@ export const authRoutes = [
         ),
       },
       {
-        path: "/register",
+        path: "/sign-up",
         element: (
           <Suspense fallback={<PageLoader />}>
             <Register />

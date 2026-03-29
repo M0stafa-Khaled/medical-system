@@ -142,4 +142,5 @@ export const ROUTES_NAME: Record<string, string> = {
   notifications: "الإشعارات",
   "daily-summary": "ملخص اليوم",
   balances: "كشف حساب",
+  "transfers-between": "تحويل بين الخزائن",
 };
