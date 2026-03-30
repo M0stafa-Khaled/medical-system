@@ -51,8 +51,7 @@ export const SpecializedClinics = () => {
         setClinics((payload as IApiRes)?.data || []);
         setIsLoading(false);
         return;
-      } catch (error) {
-        console.error("Error fetching clinics:", error);
+      } catch {
         setIsError(true);
       } finally {
         setIsLoading(false);

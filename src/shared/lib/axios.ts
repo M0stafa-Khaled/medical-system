@@ -34,7 +34,6 @@ axiosAPI.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       cookieServices.clearAllCookies();
-      // store.dispatch(logout());
       if (handleLogout) {
         handleLogout();
       }
