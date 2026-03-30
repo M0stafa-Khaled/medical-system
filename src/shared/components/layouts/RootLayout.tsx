@@ -52,38 +52,39 @@ const RootLayout = () => {
   }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
-    (async () => {
-      const action = await dispatch(checkAuth());
-      if (checkAuth.fulfilled.match(action)) {
-        const { auth, email_verified, status } = action.payload;
+    if (token)
+      (async () => {
+        const action = await dispatch(checkAuth());
+        if (checkAuth.fulfilled.match(action)) {
+          const { auth, email_verified, status } = action.payload;
 
-        // user unauthenticated
-        if (!auth) {
-          dispatch(logout());
-          if (location.pathname !== "/") {
-            navigate("/sign-in");
-            toast.warn("يرجي تسجيل الدخول");
+          // user unauthenticated
+          if (!auth) {
+            dispatch(logout());
+            if (location.pathname !== "/") {
+              navigate("/sign-in");
+              toast.warn("يرجي تسجيل الدخول");
+            }
+            return;
           }
-          return;
-        }
 
-        // ----- User authenticated ----- //
-        // Account is not verified
-        if (!email_verified) {
-          navigate("/verify-account");
-          return toast.warn("يرجى تاكيد البريد الالكتروني");
-        }
+          // ----- User authenticated ----- //
+          // Account is not verified
+          if (!email_verified) {
+            navigate("/verify-account");
+            return toast.warn("يرجى تاكيد البريد الالكتروني");
+          }
 
-        // Account is not Active
-        if (!status) {
-          dispatch(logout());
-          return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
-        }
+          // Account is not Active
+          if (!status) {
+            dispatch(logout());
+            return toast.warn("حسابك غير مفعل يرجى التواصل مع الادارة");
+          }
 
-        // Enable socket
-        if (user?.role !== "doctor") initializeEcho(token);
-      }
-    })();
+          // Enable socket
+          if (user?.role !== "doctor") initializeEcho(token);
+        }
+      })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
