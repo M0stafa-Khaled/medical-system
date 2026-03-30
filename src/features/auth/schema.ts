@@ -22,10 +22,7 @@ export const resetPasswordSchema = z
       .length(6, { message: "ادخل مز تحقق المكون من 6 ارقام" }),
     password: z
       .string({ message: "ادخل كلمة المرور الجديدة" })
-      .min(8, { message: "يجب ان تكون كلمة المرور 8 احرف علي الاقل" })
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/, {
-        message: "كلمة المرور يجب أن تحتوي على حرف كبير وحرف صغير ورقم",
-      }),
+      .min(8, { message: "يجب ان تكون كلمة المرور 8 احرف علي الاقل" }),
     password_confirmation: z.string({
       message: "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
     }),
@@ -42,20 +39,18 @@ export const registerSchema = z.object({
     .trim(),
   first_phone: z
     .string({ message: "رقم الهاتف مطلوب" })
-    .regex(/^\d{11}$/, "يجب ادخال رقم هاتف صالح مكون من 11 رقم"),
+    .regex(/^\d+$/, "يجب ادخال رقم هاتف صالح"),
   personal_id: z
     .string({ message: "رقم الهوية مطلوب" })
-    .regex(/^\d{14}$/, "ادخل رقم هوية صالح مكون من 14 رقم"),
+    .min(1, "رقم الهوية مطلوب")
+    .max(20, "ادخل رقم هوية صالح"),
   gender: z.enum(["male", "female"], { message: "الجنس مطلوب" }),
   email: z
     .string({ message: "ادخل البريد الإلكتروني" })
     .email({ message: "ادخل بريد إلكتروني صالح" }),
   password: z
     .string({ message: "كلمة المرور مطلوبة" })
-    .min(8, { message: "يجب ان تكون كلمة المرور 8 احرف علي الاقل" })
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/, {
-      message: "كلمة المرور يجب أن تحتوي على حرف كبير وحرف صغير ورقم",
-    }),
+    .min(8, { message: "يجب ان تكون كلمة المرور 6 احرف علي الاقل" }),
   personal_image: z
     .instanceof(File, { message: "صورة الهوية مطلوبة" })
     .refine((file) => file.size <= MAX_FILE_SIZE, {
