@@ -2,8 +2,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import cookieServices from "@/shared/utils/cookieServices";
 
+const apiUrl = import.meta.env.VITE_API_URL as string;
+const isProduction = import.meta.env.VITE_ENV === "production";
+
+if (isProduction && apiUrl && !apiUrl.startsWith("https://")) {
+  throw new Error("VITE_API_URL must use HTTPS in production");
+}
+
 const axiosAPI = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api`,
+  baseURL: `${apiUrl}/api`,
+  timeout: 30000,
   headers: {
     Accept: "application/json",
   },
