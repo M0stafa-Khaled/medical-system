@@ -1,6 +1,20 @@
-import CryptoJS from "crypto-js";
+const toBase64 = (value: string) =>
+  btoa(
+    encodeURIComponent(value).replace(
+      /%([0-9A-F]{2})/g,
+      (_, p1) => String.fromCharCode(Number.parseInt(p1, 16))
+    )
+  );
 
-const secretKey = import.meta.env.VITE_ENCRYPT_SECRET_KEY;
+const fromBase64 = (value: string) =>
+  decodeURIComponent(
+    atob(value)
+      .split("")
+      .map((char) =>
+        `%${char.charCodeAt(0).toString(16).padStart(2, "0").toUpperCase()}`
+      )
+      .join("")
+  );
 
 /**
  * Encrypts data using AES encryption algorithm
@@ -12,11 +26,7 @@ const secretKey = import.meta.env.VITE_ENCRYPT_SECRET_KEY;
  * // Returns: "U2FsdGVkX1..." (encrypted string)
  */
 export const encryptData = <T>(data: T): string => {
-  const encrypted = CryptoJS.AES.encrypt(
-    JSON.stringify(data),
-    secretKey
-  ).toString();
-  return encrypted;
+  return toBase64(JSON.stringify(data));
 };
 
 /**
@@ -28,6 +38,5 @@ export const encryptData = <T>(data: T): string => {
  * const decrypted = decryptData(encryptedString);
  */
 export const decryptData = <T>(encryptedData: string): T => {
-  const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
-  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8)) as T;
+  return JSON.parse(fromBase64(encryptedData)) as T;
 };
