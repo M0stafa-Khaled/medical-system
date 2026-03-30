@@ -1,33 +1,42 @@
-import CryptoJS from "crypto-js";
+const toBase64 = (value: string) =>
+  btoa(
+    encodeURIComponent(value).replace(
+      /%([0-9A-F]{2})/g,
+      (_, p1) => String.fromCharCode(Number.parseInt(p1, 16))
+    )
+  );
 
-const secretKey = import.meta.env.VITE_ENCRYPT_SECRET_KEY;
+const fromBase64 = (value: string) =>
+  decodeURIComponent(
+    atob(value)
+      .split("")
+      .map((char) =>
+        `%${char.charCodeAt(0).toString(16).padStart(2, "0").toUpperCase()}`
+      )
+      .join("")
+  );
 
 /**
- * Encrypts data using AES encryption algorithm
+ * Encodes data using Base64 encoding
  * @param {any} data - The data to be encrypted
- * @returns {string} The encrypted string
+ * @returns {string} The encoded string
  * @example
  * const sensitiveData = { id: 123, name: "John" };
  * const encrypted = encryptData(sensitiveData);
- * // Returns: "U2FsdGVkX1..." (encrypted string)
+ * // Returns: "eyJpZCI6MTIzLCJuYW1lIjoiSm9obiJ9..." (base64 string)
  */
 export const encryptData = <T>(data: T): string => {
-  const encrypted = CryptoJS.AES.encrypt(
-    JSON.stringify(data),
-    secretKey
-  ).toString();
-  return encrypted;
+  return toBase64(JSON.stringify(data));
 };
 
 /**
- * Decrypts previously encrypted data
- * @param {string} encryptedData - The encrypted string to decrypt
+ * Decodes previously encoded data
+ * @param {string} encryptedData - The encoded string to decode
  * @returns {any} The decrypted data in its original format
  * @example
  * const encryptedString = "U2FsdGVkX1...";
  * const decrypted = decryptData(encryptedString);
  */
 export const decryptData = <T>(encryptedData: string): T => {
-  const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
-  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8)) as T;
+  return JSON.parse(fromBase64(encryptedData)) as T;
 };
