@@ -17,21 +17,21 @@ const fromBase64 = (value: string) =>
   );
 
 /**
- * Encrypts data using AES encryption algorithm
+ * Encodes data using Base64 encoding
  * @param {any} data - The data to be encrypted
- * @returns {string} The encrypted string
+ * @returns {string} The encoded string
  * @example
  * const sensitiveData = { id: 123, name: "John" };
  * const encrypted = encryptData(sensitiveData);
- * // Returns: "U2FsdGVkX1..." (encrypted string)
+ * // Returns: "eyJpZCI6MTIzLCJuYW1lIjoiSm9obiJ9..." (base64 string)
  */
 export const encryptData = <T>(data: T): string => {
   return toBase64(JSON.stringify(data));
 };
 
 /**
- * Decrypts previously encrypted data
- * @param {string} encryptedData - The encrypted string to decrypt
+ * Decodes previously encoded data
+ * @param {string} encryptedData - The encoded string to decode
  * @returns {any} The decrypted data in its original format
  * @example
  * const encryptedString = "U2FsdGVkX1...";
