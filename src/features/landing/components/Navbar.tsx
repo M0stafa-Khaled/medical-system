@@ -81,7 +81,7 @@ export const Navbar = () => {
             <>
               <Button
                 variant="ghost"
-                className="hover:text-primary rounded-full"
+                className="dark:hover:text-primary text-foreground rounded-full"
                 asChild
               >
                 <Link to="/sign-in">تسجيل الدخول</Link>
