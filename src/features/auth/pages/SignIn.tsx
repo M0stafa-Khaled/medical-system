@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { motion as m } from "framer-motion";
-import { LoginForm } from "../components/LoginForm";
+import { SignInForm } from "../components/SignInForm";
 import { LogIn, ArrowLeft, Lock } from "lucide-react";
 
 const fadeInUp = {
@@ -14,29 +14,13 @@ const scaleIn = {
   show: { opacity: 1, scale: 1 },
 };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
-    },
-  },
-};
-
-const Login = () => {
+const SignIn = () => {
   return (
     <>
       <Helmet>
         <title>{import.meta.env.VITE_WEB_NAME} | تسجيل الدخول</title>
       </Helmet>
-      <m.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="show"
-        className="mx-auto w-full max-w-md space-y-7"
-      >
+      <div className="mx-auto w-full max-w-md space-y-5">
         {/* Logo Badge */}
         <m.div variants={scaleIn} className="mb-2 flex justify-center">
           <div className="border-primary/30 dark:border-primary/50 bg-primary/10 dark:bg-primary/15 relative inline-flex items-center gap-2 rounded-full border px-4 py-2">
@@ -48,14 +32,14 @@ const Login = () => {
         </m.div>
 
         {/* Header Section */}
-        <m.div variants={fadeInUp} className="space-y-3 text-center">
+        <m.div variants={fadeInUp} className="space-y-2 text-center">
           <div className="flex justify-center">
             <m.div
               variants={scaleIn}
-              className="from-primary/25 to-primary/15 dark:from-primary/30 dark:to-primary/20 relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br"
+              className="from-primary/25 to-primary/15 dark:from-primary/30 dark:to-primary/20 relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-linear-to-br"
             >
               <div className="from-primary/40 dark:from-primary/50 absolute inset-0 bg-linear-to-br to-transparent opacity-50" />
-              <LogIn className="text-primary dark:text-primary relative h-10 w-10" />
+              <LogIn className="text-primary dark:text-primary relative h-6 w-6" />
             </m.div>
           </div>
           <div className="space-y-2">
@@ -83,14 +67,14 @@ const Login = () => {
 
         {/* Form */}
         <m.div variants={fadeInUp}>
-          <LoginForm />
+          <SignInForm />
         </m.div>
 
         {/* Divider */}
         <m.div variants={fadeInUp} className="relative">
           <div className="absolute inset-0 flex items-center">
             <div
-              className="bg-border dark:bg-border/60 w-full"
+              className="bg-border w-full dark:bg-gray-700"
               style={{ height: "1px" }}
             />
           </div>
@@ -137,9 +121,9 @@ const Login = () => {
             هل نسيت كلمة المرور؟
           </Link>
         </m.div>
-      </m.div>
+      </div>
     </>
   );
 };
 
-export default Login;
+export default SignIn;

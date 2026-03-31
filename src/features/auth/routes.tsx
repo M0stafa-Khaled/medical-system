@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react";
 
 import PageLoader from "@/shared/components/PageLoader";
-const Login = lazy(() => import("./pages/Login"));
-const Register = lazy(() => import("./pages/Register"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+const SignUp = lazy(() => import("./pages/SignUp"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const VerifyAccount = lazy(() => import("./pages/VerifyAccount"));
@@ -28,7 +28,7 @@ export const authRoutes = [
         path: "/sign-in",
         element: (
           <Suspense fallback={<PageLoader />}>
-            <Login />
+            <SignIn />
           </Suspense>
         ),
       },
@@ -36,7 +36,7 @@ export const authRoutes = [
         path: "/sign-up",
         element: (
           <Suspense fallback={<PageLoader />}>
-            <Register />
+            <SignUp />
           </Suspense>
         ),
       },

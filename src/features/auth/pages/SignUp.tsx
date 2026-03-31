@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion as m } from "framer-motion";
-import { RegisterForm } from "../components/RegisterForm";
+import { SignUpForm } from "../components/SignUpForm";
 import { UserPlus } from "lucide-react";
 
 const fadeInUp = {
@@ -13,29 +13,13 @@ const scaleIn = {
   show: { opacity: 1, scale: 1 },
 };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
-    },
-  },
-};
-
-const Register = () => {
+const SignUp = () => {
   return (
     <>
       <Helmet>
         <title>{import.meta.env.VITE_WEB_NAME} | تسجيل</title>
       </Helmet>
-      <m.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="show"
-        className="mx-auto w-full max-w-md space-y-7 lg:max-w-xl"
-      >
+      <div className="mx-auto w-full max-w-md space-y-5 lg:max-w-xl">
         <m.div variants={scaleIn} className="flex justify-center">
           <div className="border-primary/30 dark:border-primary/50 bg-primary/10 dark:bg-primary/15 relative inline-flex items-center gap-2 rounded-full border px-4 py-2">
             <UserPlus className="text-primary h-4 w-4" />
@@ -45,14 +29,14 @@ const Register = () => {
           </div>
         </m.div>
 
-        <m.div variants={fadeInUp} className="space-y-3 text-center">
+        <m.div variants={fadeInUp} className="space-y-2 text-center">
           <div className="flex justify-center">
             <m.div
               variants={scaleIn}
-              className="from-primary/25 to-primary/15 dark:from-primary/30 dark:to-primary/20 relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br"
+              className="from-primary/25 to-primary/15 dark:from-primary/30 dark:to-primary/20 relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-linear-to-br"
             >
               <div className="from-primary/40 dark:from-primary/50 absolute inset-0 bg-linear-to-br to-transparent opacity-50" />
-              <UserPlus className="text-primary relative h-10 w-10" />
+              <UserPlus className="text-primary relative h-6 w-6" />
             </m.div>
           </div>
           <div className="space-y-2">
@@ -79,11 +63,11 @@ const Register = () => {
         </m.div>
 
         <m.div variants={fadeInUp}>
-          <RegisterForm />
+          <SignUpForm />
         </m.div>
-      </m.div>
+      </div>
     </>
   );
 };
 
-export default Register;
+export default SignUp;
