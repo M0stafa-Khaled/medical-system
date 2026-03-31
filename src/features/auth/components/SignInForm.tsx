@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 import { RenderAuthFormFields } from "./RenderAuthFormFields";
 import { LOGIN_FORM_INPUTS } from "../constants";
 
-export const LoginForm = () => {
+export const SignInForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { mutateAsync: loginUser, isPending } = useLogin();

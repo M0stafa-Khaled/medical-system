@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import { registerSchema } from "../schema";
 import { REGISTER_FORM_INPUTS } from "../constants";
 
-export const RegisterForm = () => {
+export const SignUpForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { mutateAsync: register, isPending } = useRegister();
