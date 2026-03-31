@@ -20,6 +20,7 @@ export const createPatientSchema = z.object({
     .refine((val) => !val || /^\d+$/.test(val), {
       message: "يجب ادخال رقم هاتف صالح",
     }),
+  file_code: z.string({ message: "رقم الملف مطلوب" }).trim(),
   status: z.boolean().default(true),
   email: z
     .string({ message: "البريد الإلكترونى مطلوب" })
@@ -67,6 +68,7 @@ export const updatePatientSchema = z.object({
     .refine((val) => !val || /^\d+$/.test(val), {
       message: "يجب ادخال رقم هاتف صالح",
     }),
+  file_code: z.string({ message: "رقم الملف مطلوب" }).trim(),
   status: z.boolean().default(true),
   description: z.string({ message: "الملاحظات مطلوبة" }).optional(),
   info_status: z.string({ message: "الملاحظات مطلوبة" }).optional(),

@@ -20,7 +20,7 @@ export const PrintExpenseReceipt = ({
     price,
     name,
     employee,
-    created_at,
+    date,
     status,
     treasury,
   },
@@ -110,7 +110,7 @@ export const PrintExpenseReceipt = ({
               </p>
               <p>
                 <span className="font-semibold">التاريخ:</span>{" "}
-                {formatDateTime(created_at, {
+                {formatDateTime(date, {
                   day: "numeric",
                   month: "numeric",
                   year: "numeric",

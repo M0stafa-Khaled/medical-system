@@ -2,14 +2,12 @@ import { ColumnDef } from "@/shared/components/data-table";
 import { IBooking } from "../types";
 import truncateText from "@/shared/utils/truncateText";
 import { UpdateBookingStatus } from "./UpdateBookingStatus";
-// import convertDay from "@/shared/utils/convertDayLang";
 import formatDateTime from "@/shared/utils/formatDate";
 import useHasPermission from "@/shared/hooks/useHasPermission";
 import { PERMISSIONS } from "@/shared/enums/permissions";
 import { TooltipButton } from "@/shared/components/ui/TooltipButton";
 import { Link } from "react-router";
 import { Button } from "@/shared/components/ui/button";
-// import { LiaNotesMedicalSolid } from "react-icons/lia";
 import CreateTransaction from "@/features/dashboard/transactions/components/CreateTransaction";
 import { Eye, Pen } from "lucide-react";
 import { DeleteAlert } from "@/shared/components/delete-alert";
@@ -41,7 +39,7 @@ export const useBookingsColumns = (): ColumnDef<IBooking>[] => {
       header: "رقم الهاتف",
     },
     {
-      key: "patient.personal_id" as keyof IBooking,
+      key: "patient.file_code" as keyof IBooking,
       header: "رقم الملف",
     },
     {
@@ -58,6 +56,10 @@ export const useBookingsColumns = (): ColumnDef<IBooking>[] => {
           disabled={row.status === "completed" || row.status === "collected"}
         />
       ),
+    },
+    {
+      key: "start_at",
+      header: "موعج الدخول",
     },
     {
       key: "booking_date",

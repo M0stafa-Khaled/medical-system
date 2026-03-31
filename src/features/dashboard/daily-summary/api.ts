@@ -7,7 +7,7 @@ export const getDailySummary = async ({
   date?: string;
 }): Promise<IDailySummaryRes> =>
   (
-    await axiosAPI.get("/systeme/info", {
+    await axiosAPI.get("/system/info", {
       params: { ...(date && { date }) },
     })
   ).data;

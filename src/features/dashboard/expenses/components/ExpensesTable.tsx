@@ -20,7 +20,7 @@ export const ExpensesTable = () => {
       code: searchParams.get("code") || "",
       employee: searchParams.get("employee") || "",
       treasury: searchParams.get("treasury") || "",
-      created_at: searchParams.get("created_at") || "",
+      date: searchParams.get("date") || "",
       sort: searchParams.get("sort") || "",
     }),
     [searchParams]
@@ -36,13 +36,13 @@ export const ExpensesTable = () => {
     isError,
   } = useGetAllExpenses({
     page,
-    sort: filters.sort ? "created_at" : "-created_at",
+    sort: filters.sort ? "date" : "-date",
     filter: {
       ...(filters.status && { status: filters.status }),
       ...(filters.code && { code }),
       ...(filters.employee && { employee }),
       ...(filters.treasury && { treasury }),
-      ...(filters.created_at && { created_at: filters.created_at }),
+      ...(filters.date && { date: filters.date }),
     },
   });
 

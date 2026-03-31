@@ -18,7 +18,7 @@ export interface IEmployee {
     id: number;
     name: string;
     status: boolean;
-    expenses_total: number;
+    total: number;
   } | null;
   user: {
     id: number;

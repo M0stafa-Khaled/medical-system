@@ -5,6 +5,7 @@ import { type IExpenseCategory } from "../expenses-categories/types";
 
 export interface ICreateExpense {
   name: string;
+  date: string;
   status: string;
   price: number;
   category_id: string;
@@ -17,10 +18,11 @@ export interface IExpense {
   price: string;
   status: true;
   code: string;
-  created_at: string;
+  date: string;
   category: IExpenseCategory;
   treasury: ITreasury;
   employee: IEmployee;
+  created_at: string;
 }
 
 export interface IExpensesRes {
@@ -35,7 +37,7 @@ export interface IExpensesRes {
 export interface IExpensesFilter {
   treasury: string;
   status: string;
-  created_at: string | null;
+  date: string | null;
   code: string;
   employee: string;
   sort: string;

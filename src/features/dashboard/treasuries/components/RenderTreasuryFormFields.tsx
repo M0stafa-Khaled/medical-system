@@ -34,7 +34,7 @@ export const RenderTreasuryFormFields = ({
           <SelectFormItem
             input={input}
             field={field}
-            options={options?.fromTreasuries || options?.treasuries || []}
+            options={options?.fromTreasuries || []}
           />
         );
 
@@ -43,7 +43,7 @@ export const RenderTreasuryFormFields = ({
           <SelectFormItem
             input={input}
             field={field}
-            options={options?.toTreasuries || options?.treasuries || []}
+            options={options?.toTreasuries || []}
           />
         );
 

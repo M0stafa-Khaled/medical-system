@@ -195,6 +195,7 @@ const Profile = () => {
   const getTabsCount = () => {
     let count = 2; // info + password always shown
     if (role === "doctor") count++;
+    if (role === "admin" || role === "employee") count++;
     if (role === "employee") count++;
     return count;
   };
@@ -336,6 +337,12 @@ const Profile = () => {
                   <LucideLock className="h-4 w-4" />
                   <span className="hidden sm:inline">كلمة المرور</span>
                 </TabsTrigger>
+                {(role === "admin" || role === "employee") && (
+                  <TabsTrigger value="treasury" className="gap-2 py-2.5">
+                    <LucideWallet className="h-4 w-4" />
+                    <span className="hidden sm:inline">الخزنة</span>
+                  </TabsTrigger>
+                )}
                 {role === "doctor" && (
                   <TabsTrigger value="clinics" className="gap-2 py-2.5">
                     <LucideStethoscope className="h-4 w-4" />
@@ -476,6 +483,49 @@ const Profile = () => {
                   </CardContent>
                 </Card>
               </TabsContent>
+
+              {/* Treasury Tab */}
+              {(role === "admin" || role === "employee") && (
+                <TabsContent value="treasury">
+                  <Card className="border-0 shadow-lg">
+                    <CardHeader className="border-b pb-4">
+                      <CardTitle className="flex items-center gap-2 text-xl">
+                        <LucideWallet className="h-5 w-5" />
+                        خزنة المستخدم
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      {employeeData.treasury ? (
+                        <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2">
+                          <InfoField
+                            icon={<LucideWallet className="h-4 w-4" />}
+                            label="اسم الخزنة"
+                            value={employeeData.treasury.name}
+                          />
+                          <InfoField
+                            icon={<LucideShield className="h-4 w-4" />}
+                            label="الحالة"
+                            value={
+                              employeeData.treasury.status
+                                ? "مفعلة"
+                                : "غير مفعلة"
+                            }
+                          />
+                          <InfoField
+                            icon={<LucideWallet className="h-4 w-4" />}
+                            label="إجمالي المبلغ"
+                            value={numberToPrice(employeeData.treasury.total)}
+                          />
+                        </div>
+                      ) : (
+                        <p className="text-muted-foreground text-sm">
+                          لا يوجد خزنة مضافة لهذا المستخدم.
+                        </p>
+                      )}
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              )}
 
               {/* Doctor Clinics Tab */}
               {role === "doctor" && (

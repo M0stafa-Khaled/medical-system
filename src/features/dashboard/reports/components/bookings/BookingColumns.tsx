@@ -8,13 +8,21 @@ import truncateText from "@/shared/utils/truncateText";
 export const useBookingsReportsColumns = (): ColumnDef<IBooking>[] => {
   return [
     {
-      key: "id",
+      key: "code",
       header: "رقم الحجز",
     },
     {
       key: "patient.name" as keyof IBooking,
       header: "المريض",
       cell: (row) => truncateText(row.patient.name || "", 20),
+    },
+    {
+      key: "patient.first_phone" as keyof IBooking,
+      header: "رقم الهاتف",
+    },
+    {
+      key: "patient.file_code" as keyof IBooking,
+      header: "رقم الملف",
     },
     {
       key: "clinic.name" as keyof IBooking,

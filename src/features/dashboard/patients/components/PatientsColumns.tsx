@@ -49,7 +49,7 @@ export const usePatientsColumns = ({
       header: "رقم الهاتف الثاني",
     },
     {
-      key: "personal_id",
+      key: "file_code",
       header: "رقم الملف",
     },
     {

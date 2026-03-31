@@ -33,6 +33,7 @@ export const CreateExpense = () => {
   const form = useForm<z.infer<typeof createExpenseSchema>>({
     resolver: zodResolver(createExpenseSchema),
     defaultValues: {
+      date: new Date().toISOString().split("T")[0],
       name: "",
       status: true,
       price: 0,
@@ -48,6 +49,7 @@ export const CreateExpense = () => {
           category_id: dataForm.category_id,
           name: dataForm.name,
           price: dataForm.price,
+          date: dataForm.date,
         },
       });
 
@@ -106,7 +108,9 @@ export const CreateExpense = () => {
                   custom={idx}
                   variants={itemVariants}
                   className={`${
-                    input.name === "name" || input.name === "category_id"
+                    input.name === "name" ||
+                    input.name === "category_id" ||
+                    input.name === "date"
                       ? "col-span-full"
                       : ""
                   }`}
