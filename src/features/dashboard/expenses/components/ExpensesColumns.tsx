@@ -71,9 +71,9 @@ export const useExpensesColumns = (): ColumnDef<IExpense>[] => {
         ),
     },
     {
-      key: "created_at",
+      key: "date",
       header: "التاريخ",
-      cell: (row) => formatDateTime(row?.created_at),
+      cell: (row) => formatDateTime(row?.date),
     },
     ...(canViewExpense || canCancelExpense || canDeleteExpense
       ? [

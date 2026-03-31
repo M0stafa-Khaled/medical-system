@@ -63,9 +63,10 @@ export const RenderTransactionFormFields = ({
       case input.name === "transaction_code":
         return (
           <PatientBalancesSelect
-            form={form}
             input={input}
             patientId={patientId!}
+            field={field}
+            form={form}
           />
         );
 

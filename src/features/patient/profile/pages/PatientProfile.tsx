@@ -3,6 +3,7 @@ import {
   BadgeCheck,
   CalendarDays,
   IdCard,
+  LucideIdCard,
   Mail,
   Phone,
   UserRound,
@@ -143,9 +144,16 @@ const PatientProfile = () => {
             <div className="bg-muted/30 rounded-lg border p-3">
               <p className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
                 <IdCard size={14} />
-                الرقم القومي
+                رقم الهوية
               </p>
               <p className="font-medium">{patient.personal_id || "-"}</p>
+            </div>
+            <div className="bg-muted/30 rounded-lg border p-3">
+              <p className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
+                <LucideIdCard size={14} />
+                رقم الملف
+              </p>
+              <p className="font-medium">{patient.file_code || "-"}</p>
             </div>
 
             <div className="bg-muted/30 rounded-lg border p-3">

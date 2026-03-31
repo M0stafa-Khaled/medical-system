@@ -180,15 +180,6 @@ const DashboardLayout = () => {
                     },
                   ]
                 : []),
-              ...(canTransferBetweenTreasuries
-                ? [
-                    {
-                      name: ROUTES_NAME["transfers-between"],
-                      path: "/dashboard/treasuries/transfers-between",
-                      icon: <ArrowLeftRight size={18} />,
-                    },
-                  ]
-                : []),
               ...(canViewExpensesCategories
                 ? [
                     {
@@ -226,6 +217,15 @@ const DashboardLayout = () => {
                       name: ROUTES_NAME.transactions,
                       path: "/dashboard/transactions",
                       icon: <BadgeDollarSign size={18} />,
+                    },
+                  ]
+                : []),
+              ...(canTransferBetweenTreasuries
+                ? [
+                    {
+                      name: ROUTES_NAME["transfers-between"],
+                      path: "/dashboard/treasuries/transfers-between",
+                      icon: <ArrowLeftRight size={18} />,
                     },
                   ]
                 : []),

@@ -379,7 +379,7 @@ const BookingDetails = () => {
                         icon={
                           <LucideFileText className="h-4 w-4 text-red-500" />
                         }
-                        label="رقم الملف"
+                        label="رقم الهوية"
                         value={patient?.personal_id || ""}
                       />
                     </div>

@@ -46,7 +46,7 @@ const DateFormItem = ({ input, field }: IProps) => {
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="border-muted p-0" align="start">
+          <PopoverContent className="border-muted z-1000 p-0" align="start">
             <Calendar
               mode="single"
               className="w-full"

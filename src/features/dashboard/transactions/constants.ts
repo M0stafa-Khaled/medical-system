@@ -12,7 +12,7 @@ export const TRANSACTION_FORM_INPUTS: IFormInput[] = [
     type: "select",
   },
   {
-    name: "visa_code", // Only for visa
+    name: "visa_code",
     label: "رقم العملية",
     type: "text",
     placeholder: "رقم العملية",
@@ -32,12 +32,18 @@ export const PATIENT_PAYMENT_FORM_INPUTS: IFormInput[] = [
     type: "select",
   },
   {
+    name: "transaction_code",
+    label: "رقم الإيصال",
+    type: "number",
+    placeholder: "رقم الإيصال",
+  },
+  {
     name: "payment_method",
     label: "وسيلة الدفع",
     type: "select",
   },
   {
-    name: "visa_code", // Only for visa
+    name: "visa_code",
     label: "رقم العملية",
     type: "text",
     placeholder: "رقم العملية",
@@ -47,11 +53,5 @@ export const PATIENT_PAYMENT_FORM_INPUTS: IFormInput[] = [
     label: "المبلغ",
     type: "number",
     placeholder: "المبلغ",
-  },
-  {
-    name: "transaction_code",
-    label: "رقم الإيصال",
-    type: "number",
-    placeholder: "رقم الإيصال",
   },
 ];

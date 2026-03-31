@@ -72,7 +72,7 @@ const ExpenseDetails = () => {
     cancelled_info,
     category,
     code,
-    created_at,
+    date,
     employee,
     price,
     status,
@@ -291,18 +291,7 @@ const ExpenseDetails = () => {
                     <div className="bg-muted/50 rounded-lg p-3">
                       <InfoField
                         label="تاريخ الصرف"
-                        value={
-                          created_at
-                            ? formatDateTime(created_at, {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                                hour: "numeric",
-                                minute: "numeric",
-                                hour12: true,
-                              })
-                            : ""
-                        }
+                        value={date ? formatDateTime(date) : ""}
                         icon={
                           <LucideCalendar className="h-4 w-4 text-orange-500" />
                         }

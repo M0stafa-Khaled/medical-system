@@ -351,17 +351,17 @@ const EmployeeDetails = () => {
                       <h3 className="text-muted-foreground mb-3 text-sm font-medium">
                         الصورة الشخصية
                       </h3>
-                      {personal_image ? (
+                      {image ? (
                         <ImageModal
-                          src={personal_image}
+                          src={image}
                           alt={name || "الصورة الشخصية"}
                           showThumbnail={false}
                           trigger={
-                            <div className="cursor-pointer overflow-hidden rounded-lg border shadow-md transition-transform hover:scale-105">
+                            <div className="cursor-pointer overflow-hidden rounded-lg border border-dashed shadow-md transition-transform hover:scale-105">
                               <img
-                                src={personal_image}
+                                src={image}
                                 alt={name || "الصورة الشخصية"}
-                                className="h-48 w-auto object-cover"
+                                className="h-48 w-auto rounded-md object-cover p-1"
                               />
                             </div>
                           }
@@ -384,11 +384,11 @@ const EmployeeDetails = () => {
                           alt="صورة الهوية"
                           showThumbnail={false}
                           trigger={
-                            <div className="cursor-pointer overflow-hidden rounded-lg border shadow-md transition-transform hover:scale-105">
+                            <div className="cursor-pointer overflow-hidden rounded-lg border border-dashed shadow-md transition-transform hover:scale-105">
                               <img
                                 src={personal_image}
                                 alt="صورة الهوية"
-                                className="h-48 w-auto object-cover"
+                                className="h-48 w-auto rounded-md object-cover p-1"
                               />
                             </div>
                           }

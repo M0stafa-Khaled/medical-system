@@ -45,12 +45,7 @@ const Sidebar = ({ links }: IProps) => {
             <Avatar>
               <AvatarImage src="" />
 
-              <AvatarFallback>
-                {user?.name
-                  .split(" ")
-                  .map((n) => n[0].toUpperCase())
-                  .join("")}
-              </AvatarFallback>
+              <AvatarFallback>{user?.name[0].toUpperCase()}</AvatarFallback>
             </Avatar>
 
             <div className="flex flex-col justify-center">

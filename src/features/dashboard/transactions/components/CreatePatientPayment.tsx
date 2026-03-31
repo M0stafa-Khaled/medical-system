@@ -169,7 +169,7 @@ export const CreatePatientPayment = () => {
           >
             <motion.div
               variants={containerVariants}
-              className="grid grid-cols-1 gap-x-4 gap-y-3 md:grid-cols-2"
+              className="grid grid-cols-1 gap-3 md:grid-cols-2"
             >
               {PATIENT_PAYMENT_FORM_INPUTS.map((input, idx) =>
                 input.name === "visa_code" && !showVisa ? null : (
@@ -178,8 +178,9 @@ export const CreatePatientPayment = () => {
                     key={input.name}
                     custom={idx}
                     className={`${
-                      input.name === "doctor_actions" ||
-                      (input.name === "price" && showVisa)
+                      input.name === "patient_id" ||
+                      input.name === "transaction_code" ||
+                      (input.name === "amount" && showVisa)
                         ? "md:col-span-2"
                         : ""
                     }`}

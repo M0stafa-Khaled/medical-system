@@ -41,12 +41,7 @@ export const useDoctorsColumns = ({
       cell: (row) => (
         <Avatar className="mx-auto">
           <AvatarImage src={row.image || ""} alt={row.name} />
-          <AvatarFallback>
-            {row.name
-              .split(" ")
-              .map((name) => name[0].toUpperCase())
-              .join("")}
-          </AvatarFallback>
+          <AvatarFallback>{row.name[0].toUpperCase()}</AvatarFallback>
         </Avatar>
       ),
     },

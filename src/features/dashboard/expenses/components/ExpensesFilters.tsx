@@ -16,7 +16,7 @@ export const ExpensesFilters = () => {
       code: searchParams.get("code") || "",
       employee: searchParams.get("employee") || "",
       treasury: searchParams.get("treasury") || "",
-      created_at: searchParams.get("created_at") || "",
+      date: searchParams.get("date") || "",
       sort: searchParams.get("sort") || "",
     }),
     [searchParams]
@@ -94,8 +94,8 @@ export const ExpensesFilters = () => {
       <DateFilter
         placeholder="تاريخ الصرف"
         handleFilterChange={handleFilterChange}
-        filterKey="created_at"
-        value={filters.created_at}
+        filterKey="date"
+        value={filters.date}
       />
     </div>
   );

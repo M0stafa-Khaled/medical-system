@@ -96,6 +96,7 @@ const PatientDetails = () => {
     another_name,
     info_status,
     description,
+    file_code,
   } = patient?.data || {};
 
   const profileImage = personal_image || "/images/avatar.svg";
@@ -241,6 +242,11 @@ const PatientDetails = () => {
                       icon={<LucideUsers className="h-4 w-4" />}
                       label="اسم احد الاقارب"
                       value={another_name || "غير محدد"}
+                    />
+                    <InfoField
+                      icon={<LucideIdCard className="h-4 w-4" />}
+                      label="رقم الملف"
+                      value={file_code || "غير محدد"}
                     />
                     <InfoField
                       icon={<LucideInfo className="h-4 w-4" />}

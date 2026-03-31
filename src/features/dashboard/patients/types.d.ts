@@ -13,6 +13,7 @@ export interface IPatient {
   gender: "Male" | "Female";
   description: string;
   created_at: string;
+  file_code: string;
   user: {
     id: number;
     email: string;
@@ -34,6 +35,7 @@ export interface ICreatePatient {
   password: string;
   gender: "male" | "female";
   status: boolean;
+  file_code: string;
   info_status?: string | null;
   personal_image?: File | undefined;
   description?: string | null;

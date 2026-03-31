@@ -38,12 +38,12 @@ export const useTransactionsColumns = (): ColumnDef<ITransaction>[] => {
     {
       key: "employee.name" as keyof ITransaction,
       header: "الموظف",
-      cell: (row) => truncateText(row.employee.name, 15),
+      cell: (row) => truncateText(row.employee.name, 25),
     },
     {
       key: "patient.name" as keyof ITransaction,
       header: "المريض",
-      cell: (row) => truncateText(row.patient.name, 15),
+      cell: (row) => truncateText(row.patient.name, 25),
     },
     {
       key: "status",
