@@ -10,8 +10,6 @@ import { doctorRoutes } from "@/features/doctor";
 import { patientRoutes } from "@/features/patient";
 import Error from "@/pages/Error";
 
-// import Error from "@/pages/Error";
-
 export const router = createBrowserRouter([
   {
     path: "/",

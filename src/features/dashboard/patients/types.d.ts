@@ -8,7 +8,7 @@ export interface IPatient {
   second_phone: string;
   personal_id: string;
   personal_image: string | null;
-  status: true;
+  status: boolean;
   info_status: string;
   gender: "Male" | "Female";
   description: string;

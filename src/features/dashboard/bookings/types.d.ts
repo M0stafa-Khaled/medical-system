@@ -29,6 +29,13 @@ export interface IBookingsRes {
     meta: IPaginationMeta;
   };
 }
+
+export interface IBookingRes {
+  status: boolean;
+  message: string | null;
+  data: IBooking;
+}
+
 export interface ICreateBooking {
   status?: string;
   patient_id: string;

@@ -3,13 +3,21 @@ import { Card, CardContent } from "@/shared/components/ui/card";
 import { createBookingSchema } from "../schema";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { Button } from "@/shared/components/ui/button";
+import { LucideArrowRight } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const CreateBooking = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Helmet>
         <title>{import.meta.env.VITE_WEB_NAME} | إضافة حجز</title>
       </Helmet>
+      <Button variant="ghost" className="gap-2" onClick={() => navigate(-1)}>
+        <LucideArrowRight className="h-4 w-4" />
+        رجوع
+      </Button>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

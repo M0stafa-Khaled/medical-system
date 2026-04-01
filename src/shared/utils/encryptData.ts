@@ -1,20 +1,26 @@
-const toBase64 = (value: string) =>
-  btoa(
-    encodeURIComponent(value).replace(
-      /%([0-9A-F]{2})/g,
-      (_, p1) => String.fromCharCode(Number.parseInt(p1, 16))
+const toBase64 = (value: string) => {
+  return btoa(
+    encodeURIComponent(value).replace(/%([0-9A-F]{2})/g, (_, p1) =>
+      String.fromCharCode(parseInt(p1, 16))
     )
   );
+};
 
-const fromBase64 = (value: string) =>
-  decodeURIComponent(
-    atob(value)
-      .split("")
-      .map((char) =>
-        `%${char.charCodeAt(0).toString(16).padStart(2, "0").toUpperCase()}`
-      )
-      .join("")
-  );
+const fromBase64 = (value: string) => {
+  try {
+    return decodeURIComponent(
+      atob(value)
+        .split("")
+        .map(
+          (char) =>
+            `%${char.charCodeAt(0).toString(16).padStart(2, "0").toUpperCase()}`
+        )
+        .join("")
+    );
+  } catch {
+    return "";
+  }
+};
 
 /**
  * Encodes data using Base64 encoding
