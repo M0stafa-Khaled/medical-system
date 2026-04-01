@@ -10,6 +10,8 @@ import { AxiosResErr } from "@/shared/types";
 import { useGetBookingById } from "../queriesAndMutations";
 import { BookingForm } from "../components/BookingForm";
 import { updateBookingSchema } from "../schema";
+import { LucideArrowRight } from "lucide-react";
+import { Button } from "@/shared/components/ui/button";
 
 const UpdateBooking = () => {
   const navigate = useNavigate();
@@ -43,6 +45,10 @@ const UpdateBooking = () => {
       <Helmet>
         <title>{import.meta.env.VITE_WEB_NAME} | تعديل حجز</title>
       </Helmet>
+      <Button variant="ghost" className="gap-2" onClick={() => navigate(-1)}>
+        <LucideArrowRight className="h-4 w-4" />
+        رجوع
+      </Button>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

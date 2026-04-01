@@ -1,7 +1,7 @@
 import axiosAPI from "@/shared/lib/axios";
 import { IGetWithParams, IStatusMsg } from "@/shared/types";
 import {
-  IBooking,
+  IBookingRes,
   IBookingsRes,
   ICreateBooking,
   IUpdateBookingStatus,
@@ -22,18 +22,17 @@ export const getBookingById = async ({
   id,
 }: {
   id: string;
-}): Promise<{ status: boolean; message: string; data: IBooking }> =>
-  (await axiosAPI(`/patients-bookings/${id}`)).data;
+}): Promise<IBookingRes> => (await axiosAPI(`/patients-bookings/${id}`)).data;
 
 export const createBooking = async (
   formData: ICreateBooking
-): Promise<IStatusMsg> =>
+): Promise<IBookingRes> =>
   (await axiosAPI.post("/patients-bookings", formData)).data;
 
 export const updateBooking = async (
   id: number,
   formData: ICreateBooking
-): Promise<IStatusMsg> =>
+): Promise<IBookingRes> =>
   (
     await axiosAPI.post(`/patients-bookings/${id}`, {
       ...formData,

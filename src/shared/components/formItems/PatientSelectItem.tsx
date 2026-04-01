@@ -25,13 +25,15 @@ import useDebounce from "@/shared/hooks/useDebounce";
 import { IFormInput } from "@/shared/types";
 import { ControllerRenderProps } from "react-hook-form";
 import { useGetAllPatients } from "@/features/dashboard/patients";
+import { IPatient } from "@/features/dashboard/patients/types";
 
 interface IProps {
   field: ControllerRenderProps<any>;
   input: IFormInput;
+  patient?: IPatient;
 }
 
-export const PatientSelectItem = ({ field, input }: IProps) => {
+export const PatientSelectItem = ({ field, input, patient }: IProps) => {
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const search = useDebounce(searchTerm, 500);
@@ -40,7 +42,9 @@ export const PatientSelectItem = ({ field, input }: IProps) => {
     limit: 50,
   });
 
-  const patientsOption = patients?.data.items.map((patient) => ({
+  const patientItems = patient ? [patient] : patients?.data.items || [];
+
+  const patientsOption = patientItems.map((patient) => ({
     value: patient.id.toString(),
     label: patient.name,
   }));
@@ -58,6 +62,7 @@ export const PatientSelectItem = ({ field, input }: IProps) => {
               role="combobox"
               aria-expanded={open}
               className={`dark:bg-input/30 hover:bg-input/10 hover:text-foreground dark:hover:bg-input/50! border-muted hover: h-12! w-full justify-between overflow-hidden`}
+              disabled={!!patient}
             >
               {field.value
                 ? patientsOption?.find((option) => option.value === field.value)

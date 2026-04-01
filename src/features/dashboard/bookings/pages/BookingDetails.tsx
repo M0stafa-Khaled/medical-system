@@ -18,10 +18,10 @@ import {
   LucidePhone,
   LucidePen,
   LucideFileText,
-  LucideArrowLeft,
   LucideStethoscope,
   LucideClipboardList,
   LucideIdCard,
+  LucideArrowRight,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
@@ -157,7 +157,7 @@ const BookingDetails = () => {
         className="mb-4 gap-2"
         onClick={() => navigate(-1)}
       >
-        <LucideArrowLeft className="h-4 w-4" />
+        <LucideArrowRight className="h-4 w-4" />
         رجوع
       </Button>
 
@@ -214,12 +214,12 @@ const BookingDetails = () => {
                   <div className="flex items-center gap-2">
                     <div
                       className={cn(
-                        "flex h-10 w-10 items-center justify-center rounded-lg",
+                        "border-border flex h-10 w-10 items-center justify-center rounded-lg border border-dashed",
                         statusInfo.color,
                         "shadow-lg"
                       )}
                     >
-                      <LucideTag className="h-5 w-5 text-white" />
+                      <LucideTag className="text-foreground h-5 w-5" />
                     </div>
                     <div>
                       <p className="text-muted-foreground text-xs">رقم الحجز</p>

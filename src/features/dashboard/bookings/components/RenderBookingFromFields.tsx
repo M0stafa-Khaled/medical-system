@@ -7,6 +7,7 @@ import { PatientSelectItem } from "@/shared/components/formItems/PatientSelectIt
 import BookingAvailableTimeSelectItem from "@/shared/components/formItems/BookingAvailableTimeSelectItem";
 import BookingDateItem from "@/shared/components/formItems/BookingDateItem";
 import InputFormItem from "@/shared/components/formItems/InputFormItem";
+import { IPatient } from "../../patients/types";
 
 interface IOption {
   value: string;
@@ -23,6 +24,7 @@ interface IProps {
   };
   availableTimes: string[];
   allowedDay: string;
+  patient?: IPatient;
 }
 
 export const RenderBookingFormFields = ({
@@ -34,6 +36,7 @@ export const RenderBookingFormFields = ({
   options,
   availableTimes,
   allowedDay,
+  patient,
 }: IProps) => {
   const renderField = ({ field }: { field: ControllerRenderProps }) => {
     const commonProps = {
@@ -51,7 +54,9 @@ export const RenderBookingFormFields = ({
           />
         );
       case input.name === "patient_id": {
-        return <PatientSelectItem field={field} input={input} />;
+        return (
+          <PatientSelectItem field={field} input={input} patient={patient} />
+        );
       }
       case input.name === "working_day_id":
         return (
@@ -83,6 +88,7 @@ export const RenderBookingFormFields = ({
         );
       case input.name === "date":
         return <BookingDateItem {...commonProps} allowedDay={allowedDay} />;
+
       case input.name === "status":
         return (
           <SelectFormItem {...commonProps} options={options?.status || []} />

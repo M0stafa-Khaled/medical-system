@@ -17,10 +17,13 @@ import { numberToPrice } from "@/shared/utils/numberToPrice";
 import { useGetAllClinics } from "@/features/dashboard/clinics";
 import { useGetAllWorkingDays } from "@/features/dashboard/doctors/working-days";
 import { useGetDoctorActions } from "@/features/dashboard/doctors";
+import { useGetPatientById } from "@/features/dashboard/patients";
 import { RenderBookingFormFields } from "./RenderBookingFromFields";
 import { useGetAllClinicDoctors, useGetAvailableBookingsTime } from "@/shared";
 import convertDay from "@/shared/utils/convertDayLang";
 import { BOOKING_FORM_INPUTS, BOOKING_STATUS_OPTIONS } from "../constants";
+import Swal from "sweetalert2";
+import BookingPatientDetails from "./BookingPatientDetails";
 
 interface IProps {
   booking?: IBooking;
@@ -66,6 +69,11 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     name: "date",
   });
 
+  const patientId = useWatch({
+    control: form.control,
+    name: "patient_id",
+  });
+
   const {
     data: clinics,
     isError: isErrorClinics,
@@ -89,6 +97,9 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     isError: isErrorActions,
     failureReason: failureReasonDoctorActions,
   } = useGetDoctorActions({ doctorId });
+
+  const { data: patientResponse, isFetching: isPatientLoading } =
+    useGetPatientById({ id: patientId });
 
   const { data: availableTimes } = useGetAvailableBookingsTime({
     doctor_id: doctorId,
@@ -155,6 +166,8 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
     (day) => day.id.toString() === workingDayId
   );
 
+  const selectedPatient = patientResponse?.data;
+
   useEffect(() => {
     if (!clinicId) return;
     form.setValue("doctor_id", "");
@@ -203,38 +216,51 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
   const { mutateAsync: updateBooking, isPending: isLoadingUpdate } =
     useUpdateBooking();
 
-  const onSubmit = async (data: z.infer<typeof bookingSchema>) => {
+  const onSubmit = async (values: z.infer<typeof bookingSchema>) => {
     try {
       if (action === "update") {
-        const { status, message } = await updateBooking({
+        const { status, message, data } = await updateBooking({
           id: booking?.id || 0,
           formData: {
-            clinic_id: data.clinic_id,
-            doctor_id: data.doctor_id,
-            patient_id: data.patient_id,
-            working_day_id: data.working_day_id,
-            doctor_action_id: data.doctor_action_id,
-            date: data.date,
-            start_at: data.start_at,
-            status: data.status,
+            clinic_id: values.clinic_id,
+            doctor_id: values.doctor_id,
+            patient_id: values.patient_id,
+            working_day_id: values.working_day_id,
+            doctor_action_id: values.doctor_action_id,
+            date: values.date,
+            start_at: values.start_at,
+            status: values.status,
           },
         });
 
         if (!status) return toast.error(message);
         toast.success(message);
+        Swal.fire({
+          title: `تم تحديث بيانات الحجز`,
+          icon: "success",
+          showConfirmButton: true,
+          confirmButtonText: "حسناً",
+          html: `<p>رقم الحجز: ${data?.code}</p>`,
+        });
       } else {
-        const { status, message } = await createBooking({
-          clinic_id: data.clinic_id,
-          doctor_id: data.doctor_id,
-          patient_id: data.patient_id,
-          working_day_id: data.working_day_id,
-          doctor_action_id: data.doctor_action_id,
-          date: data.date,
-          start_at: data.start_at,
+        const { status, message, data } = await createBooking({
+          clinic_id: values.clinic_id,
+          doctor_id: values.doctor_id,
+          patient_id: values.patient_id,
+          working_day_id: values.working_day_id,
+          doctor_action_id: values.doctor_action_id,
+          date: values.date,
+          start_at: values.start_at,
         });
 
         if (!status) return toast.error(message);
-        toast.success(message);
+        Swal.fire({
+          title: `تم إضافة الحجز بنجاح`,
+          icon: "success",
+          showConfirmButton: true,
+          confirmButtonText: "حسناً",
+          html: `<p>رقم الحجز: ${data?.code}</p>`,
+        });
         form.reset();
       }
 
@@ -246,51 +272,71 @@ export const BookingForm = ({ booking, action, bookingSchema }: IProps) => {
 
   return (
     <Form {...form}>
-      <motion.form
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6"
-      >
-        <motion.div
-          className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2 md:gap-y-5 dark:text-white"
+      <div className="grid gap-6 lg:grid-cols-12">
+        <motion.form
+          initial="hidden"
+          animate="visible"
           variants={containerVariants}
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6 lg:col-span-8"
         >
-          {BOOKING_FORM_INPUTS.map((input, idx) => {
-            if (input.name === "status" && action === "create") return null;
+          <motion.div
+            className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2 md:gap-y-5 dark:text-white"
+            variants={containerVariants}
+          >
+            {BOOKING_FORM_INPUTS.map((input, idx) => {
+              if (input.name === "status" && action === "create") return null;
 
-            return (
-              <motion.div key={input.name} custom={idx} variants={itemVariants}>
-                <RenderBookingFormFields
-                  input={input}
-                  form={form}
-                  schema={bookingSchema}
-                  options={{
-                    clinicsOptions,
-                    workingDaysOptions,
-                    doctorsOptions,
-                    doctorActionsOptions,
-                    status: BOOKING_STATUS_OPTIONS,
-                  }}
-                  availableTimes={availableTimes?.data || []}
-                  allowedDay={allowedDay?.day || ""}
-                />
-              </motion.div>
-            );
-          })}
-        </motion.div>
+              return (
+                <motion.div
+                  key={input.name}
+                  custom={idx}
+                  variants={itemVariants}
+                >
+                  <RenderBookingFormFields
+                    input={input}
+                    form={form}
+                    schema={bookingSchema}
+                    options={{
+                      clinicsOptions,
+                      workingDaysOptions,
+                      doctorsOptions,
+                      doctorActionsOptions,
+                      status: BOOKING_STATUS_OPTIONS,
+                    }}
+                    availableTimes={availableTimes?.data || []}
+                    allowedDay={allowedDay?.day || ""}
+                    patient={action === "update" ? selectedPatient : undefined}
+                  />
+                </motion.div>
+              );
+            })}
+          </motion.div>
 
-        <motion.div variants={containerVariants}>
-          <SubmitButton
-            action={action}
-            isLoadingCreate={isLoadingCreate}
-            isLoadingUpdate={isLoadingUpdate}
-            createText="إضافة حجز"
-            updateText="تحديث بيانات الحجز"
+          <motion.div variants={containerVariants}>
+            <SubmitButton
+              action={action}
+              isLoadingCreate={isLoadingCreate}
+              isLoadingUpdate={isLoadingUpdate}
+              createText="إضافة حجز"
+              updateText="تحديث بيانات الحجز"
+            />
+          </motion.div>
+        </motion.form>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.05 }}
+          className="lg:col-span-4"
+        >
+          <BookingPatientDetails
+            patient={selectedPatient}
+            isPatientLoading={isPatientLoading}
+            patientId={patientId}
           />
         </motion.div>
-      </motion.form>
+      </div>
     </Form>
   );
 };
