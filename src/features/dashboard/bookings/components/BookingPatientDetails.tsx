@@ -139,6 +139,13 @@ const BookingPatientDetails = ({
 
             <div className="bg-muted/20 grid gap-3 rounded-2xl border p-4">
               <InfoField
+                icon={<User className="h-4 w-4" />}
+                label="اسم احد الاقارب"
+                value={patient?.another_name || "غير محدد"}
+                sm
+                breakAll
+              />
+              <InfoField
                 icon={<Phone className="h-4 w-4" />}
                 label="رقم الهاتف"
                 value={patient?.first_phone || "غير محدد"}
@@ -151,6 +158,12 @@ const BookingPatientDetails = ({
                 value={patient?.second_phone || "غير محدد"}
                 sm
                 breakAll
+              />
+              <InfoField
+                icon={<FileText className="h-4 w-4" />}
+                label="ملاحظات"
+                value={patient.description || "لا توجد ملاحظات"}
+                sm
               />
               <InfoField
                 icon={<FileText className="h-4 w-4" />}

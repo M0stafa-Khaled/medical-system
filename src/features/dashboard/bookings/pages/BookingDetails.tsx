@@ -38,7 +38,7 @@ import { Button } from "@/shared/components/ui/button";
 import { AxiosResErr } from "@/shared/types";
 import { DeleteAlert } from "@/shared/components/delete-alert";
 import { LiaNotesMedicalSolid } from "react-icons/lia";
-import { MdPendingActions } from "react-icons/md";
+import { MdPendingActions, MdYard } from "react-icons/md";
 import {
   Tabs,
   TabsContent,
@@ -228,6 +228,21 @@ const BookingDetails = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Info */}
+              {patient?.description?.trim() && (
+                <div className="mt-4 w-full">
+                  <div className="flex items-center gap-3 rounded-lg border p-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30">
+                      <MdYard className="h-5 w-5 text-green-600 dark:text-green-400" />
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground text-xs">ملاحظات</p>
+                      <p className="font-medium">{patient.description}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Service Info */}
               <div className="mt-4 w-full">
