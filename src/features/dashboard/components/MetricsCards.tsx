@@ -187,7 +187,7 @@ export const MetricsCards = () => {
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Card
-                className="group relative cursor-pointer overflow-hidden border-0 bg-white shadow-md ring-1 transition-all duration-300 hover:shadow-2xl dark:bg-gray-900 dark:ring-gray-800 dark:hover:ring-gray-700"
+                className="group relative cursor-pointer overflow-hidden bg-white shadow-md transition-all duration-300 hover:shadow-2xl dark:bg-gray-900"
                 onClick={() => card.path && navigate(card.path)}
               >
                 {/* Top Gradient Line */}
