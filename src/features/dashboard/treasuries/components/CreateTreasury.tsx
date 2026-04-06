@@ -60,11 +60,12 @@ export const CreateTreasury = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="dark:btn-primary"
-        size={"lg"}
+        size="default"
+        className="flex-1 bg-linear-to-r from-yellow-600 to-amber-600 text-white shadow-md hover:shadow-lg sm:flex-none"
       >
-        إضافة خزينة
-        <FiPlus size={20} />
+        <FiPlus size={18} />
+        <span className="hidden sm:inline">إضافة خزينة</span>
+        <span className="sm:hidden">إضافة</span>
       </Button>
 
       <Modal
@@ -98,11 +99,7 @@ export const CreateTreasury = () => {
                   إلغاء
                 </Button>
               </DialogClose>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 إضافة
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>

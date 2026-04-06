@@ -1,5 +1,5 @@
 import { Button } from "@/shared/components/ui/button";
-import { Eraser } from "lucide-react";
+import { Filter } from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { FiPlus } from "react-icons/fi";
@@ -31,7 +31,7 @@ export const DoctorPrescriptionsHeader = () => {
           onClick={handleClearFilters}
           className="flex h-auto items-center gap-2 py-3"
         >
-          <Eraser className="h-4 w-4" />
+          <Filter className="h-4 w-4" />
           مسح الفلاتر
         </Button>
       </div>

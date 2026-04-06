@@ -69,8 +69,7 @@ export const CreateClinic = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="dark:btn-primary"
-        size={"lg"}
+        className="flex-1 bg-linear-to-br from-indigo-600 to-blue-600 text-white shadow-md shadow-indigo-500/30 sm:flex-none dark:shadow-indigo-500/20"
       >
         إضافة عيادة جديدة
         <FiPlus size={20} />
@@ -109,11 +108,7 @@ export const CreateClinic = () => {
                   إلغاء
                 </Button>
               </DialogClose>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 إضافة
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>

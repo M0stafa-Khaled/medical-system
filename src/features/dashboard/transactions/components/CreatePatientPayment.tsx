@@ -103,8 +103,7 @@ export const CreatePatientPayment = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        size={"lg"}
-        className="dark:btn-primary"
+        className="flex-1 bg-linear-to-r from-green-600 to-emerald-600 text-white shadow-md hover:shadow-lg sm:flex-none"
       >
         إضافة دفعة من مريض
         <Plus size={20} />

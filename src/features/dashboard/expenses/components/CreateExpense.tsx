@@ -74,8 +74,7 @@ export const CreateExpense = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="dark:btn-primary"
-        size={"lg"}
+        className="flex-1 bg-linear-to-r from-rose-600 to-red-600 text-white shadow-md hover:shadow-lg sm:flex-none"
       >
         إضافة مصروف
         <FiPlus size={20} />

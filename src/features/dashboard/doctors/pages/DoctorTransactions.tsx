@@ -69,8 +69,8 @@ const DoctorTransactions = () => {
       >
         <div className="flex flex-col gap-2">
           <h1 className="flex items-center gap-3 text-3xl font-bold tracking-tight">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-blue-600 to-blue-700 shadow-lg">
-              <Receipt className="h-5 w-5 text-white" />
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-blue-600 to-blue-700 shadow-lg shadow-blue-500/30 dark:shadow-blue-500/20">
+              <Receipt className="h-6 w-6 text-white" />
             </div>
             معاملات الأطباء
           </h1>

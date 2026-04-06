@@ -9,6 +9,7 @@ import { AxiosResErr } from "@/shared/types";
 import { useGetPatientById } from "../queriesAndMutations";
 import { PatientForm } from "../components/PatientForm";
 import { updatePatientSchema } from "../schema";
+import { Users } from "lucide-react";
 
 const UpdatePatient = () => {
   const navigate = useNavigate();
@@ -49,13 +50,26 @@ const UpdatePatient = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <Card className="border-muted mt-5">
-          <div className="flex flex-col space-y-1.5 p-6">
-            <h1 className="leading-none font-semibold tracking-tight">
-              تحديث بيانات المريض
-            </h1>
+        {/* Header Card */}
+        <div className="mb-6 overflow-hidden rounded-xl bg-linear-to-br from-sky-600 to-cyan-600 p-6 text-white shadow-lg">
+          <div className="flex items-center gap-4">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
+              <Users className="h-7 w-7" />
+            </div>
+            <div className="min-w-0">
+              <h1 className="truncate text-2xl font-bold">
+                تحديث بيانات المريض
+              </h1>
+              <p className="truncate text-sm text-sky-100">
+                {patient?.data?.name}
+              </p>
+            </div>
           </div>
-          <CardContent>
+        </div>
+
+        {/* Form Card */}
+        <Card className="border-gray-200 dark:border-gray-800">
+          <CardContent className="pt-6">
             <PatientForm
               action={"update"}
               patient={patient?.data}

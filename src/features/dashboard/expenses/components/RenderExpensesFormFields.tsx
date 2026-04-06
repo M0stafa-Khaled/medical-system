@@ -5,6 +5,7 @@ import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import SwitchFormItem from "@/shared/components/formItems/SwitchFormItem";
 import SelectFormItem from "@/shared/components/formItems/SelectFormItem";
 import InputFormItem from "@/shared/components/formItems/InputFormItem";
+import DateFormItem from "@/shared/components/formItems/DateFormItem";
 
 interface IOption {
   value: string;
@@ -27,6 +28,9 @@ export const RenderExpensesFormFields = ({
 }: IProps) => {
   const renderField = ({ field }: { field: ControllerRenderProps }) => {
     switch (true) {
+      case input.name == "date":
+        return <DateFormItem input={input} field={field} />;
+
       case input.name === "status":
         return <SwitchFormItem input={input} field={field} />;
 

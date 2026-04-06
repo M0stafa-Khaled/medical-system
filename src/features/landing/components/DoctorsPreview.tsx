@@ -141,10 +141,6 @@ export const DoctorsPreview = () => {
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span>متاح للحجز</span>
                   </div>
-
-                  <button className="bg-secondary text-secondary-foreground hover:bg-secondary/80 mt-auto w-full rounded-lg px-4 py-2 text-sm font-medium transition-colors">
-                    احجز موعد
-                  </button>
                 </div>
               </m.div>
             ))}

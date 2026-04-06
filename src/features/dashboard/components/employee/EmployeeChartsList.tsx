@@ -8,9 +8,9 @@ export const EmployeeChartsList = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="my-5 space-y-6"
+      className="space-y-6"
     >
-      <motion.div variants={itemVariants} className="col-span-2">
+      <motion.div variants={itemVariants}>
         <EmployeeTreasuriesChart />
       </motion.div>
     </motion.div>

@@ -33,6 +33,7 @@ const Bookings = () => {
     data: bookings,
     isLoading,
     isError,
+    isRefetching,
   } = useGetAllBookings({
     page,
     sort: filters.sort ? "date" : "-date",
@@ -71,7 +72,10 @@ const Bookings = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <BookingsHeader isLoading={isLoading} />
+        <BookingsHeader
+          isLoading={isRefetching || isLoading}
+          meta={bookings?.data.meta}
+        />
         <BookingsTable
           bookings={bookings?.data.items || []}
           isLoading={isLoading}

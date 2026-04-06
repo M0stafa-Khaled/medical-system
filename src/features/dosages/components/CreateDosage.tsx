@@ -54,11 +54,12 @@ export const CreateDosage = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="dark:btn-primary"
-        size={"lg"}
+        size="default"
+        className="flex-1 bg-linear-to-r from-purple-600 to-fuchsia-600 text-white shadow-md hover:shadow-lg sm:flex-none"
       >
-        إضافة جرعة جديدة
-        <FiPlus size={20} />
+        <FiPlus size={18} />
+        <span className="hidden sm:inline">إضافة جرعة جديدة</span>
+        <span className="sm:hidden">إضافة</span>
       </Button>
 
       <Modal

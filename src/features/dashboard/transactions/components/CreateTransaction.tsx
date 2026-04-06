@@ -234,11 +234,7 @@ const CreateTransaction = ({ booking }: IProps) => {
                   إلغاء
                 </Button>
               </DialogClose>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 تحصيل
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>

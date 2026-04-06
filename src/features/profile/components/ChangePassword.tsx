@@ -128,11 +128,7 @@ export const ChangePassword = ({
             ))}
 
             <div className="flex gap-3 pt-4">
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="h-auto py-2.5"
-              >
+              <Button type="submit" disabled={isPending}>
                 تغيير كلمة المرور
                 {isPending && <Loader2 className="ml-2 animate-spin" />}
               </Button>
