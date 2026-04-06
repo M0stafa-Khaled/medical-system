@@ -135,80 +135,114 @@ export const MetricsCards = () => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={i}
-            className="h-32 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800"
-          />
-        ))}
+      <div className="space-y-4">
+        {/* Section Header Skeleton */}
+        <div className="flex items-center gap-3">
+          <div className="h-1 w-12 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700"></div>
+          <div className="h-6 w-32 animate-pulse rounded bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className="h-40 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800"
+            />
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5"
-    >
-      {cards.map((card, index) => {
-        const value = metrics?.data
-          ? metrics.data[card.key as keyof IWidgets] || 0
-          : 0;
-        return (
-          <motion.div
-            key={card.key}
-            variants={itemVariants}
-            custom={index}
-            whileHover={{ y: -4, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Card
-              className="group relative cursor-pointer overflow-hidden border-0 bg-white shadow-md transition-all duration-300 hover:shadow-xl dark:bg-gray-900"
-              onClick={() => card.path && navigate(card.path)}
+    <div className="space-y-4">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="flex items-center gap-3"
+      >
+        <div className="h-1 w-12 rounded-full bg-linear-to-r from-blue-600 to-violet-600"></div>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          الإحصائيات العامة
+        </h2>
+      </motion.div>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5"
+      >
+        {cards.map((card, index) => {
+          const value = metrics?.data
+            ? metrics.data[card.key as keyof IWidgets] || 0
+            : 0;
+          return (
+            <motion.div
+              key={card.key}
+              variants={itemVariants}
+              custom={index}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              {/* Top Gradient Line */}
-              <div
-                className={cn(
-                  "absolute inset-x-0 top-0 h-1 bg-linear-to-r",
-                  card.gradient
-                )}
-              />
-
-              <CardContent className="relative flex flex-col items-center justify-center space-y-3 p-5 text-center">
-                {/* Icon Container with Gradient */}
-                <motion.div
-                  whileHover={{ rotate: 5, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              <Card
+                className="group relative cursor-pointer overflow-hidden border-0 bg-white shadow-md ring-1 transition-all duration-300 hover:shadow-2xl dark:bg-gray-900 dark:ring-gray-800 dark:hover:ring-gray-700"
+                onClick={() => card.path && navigate(card.path)}
+              >
+                {/* Top Gradient Line */}
+                <div
                   className={cn(
-                    "flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br shadow-lg transition-shadow duration-300 group-hover:shadow-xl",
-                    card.gradient,
-                    card.shadow
+                    "absolute inset-x-0 top-0 h-1.5 bg-linear-to-r transition-all duration-300",
+                    card.gradient
                   )}
-                >
-                  <card.icon className="h-6 w-6 text-white" />
-                </motion.div>
+                />
 
-                {/* Value */}
-                <div>
-                  <h3 className="bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text font-mono text-2xl font-bold text-transparent dark:from-white dark:to-gray-300">
-                    {new Intl.NumberFormat("en-Us").format(value as number)}
-                  </h3>
-                  <p className="mt-0.5 text-sm font-semibold text-gray-700 dark:text-gray-200">
-                    {card.title}
-                  </p>
-                  <p className="text-xs text-gray-400 dark:text-gray-500">
-                    {card.subtitle}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        );
-      })}
-    </motion.div>
+                {/* Background Glow Effect */}
+                <div
+                  className={cn(
+                    "absolute -top-6 -right-6 h-24 w-24 rounded-full bg-linear-to-br opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-20",
+                    card.gradient
+                  )}
+                />
+
+                <CardContent className="relative flex flex-col items-center justify-center space-y-3 p-6 text-center">
+                  {/* Icon Container with Gradient */}
+                  <motion.div
+                    whileHover={{ rotate: 10, scale: 1.15 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    className={cn(
+                      "flex h-14 w-14 items-center justify-center rounded-xl bg-linear-to-br shadow-lg transition-all duration-300 group-hover:shadow-2xl",
+                      card.gradient,
+                      card.shadow
+                    )}
+                  >
+                    <card.icon className="h-7 w-7 text-white" />
+                  </motion.div>
+
+                  {/* Value */}
+                  <div className="space-y-1">
+                    <motion.h3
+                      initial={{ scale: 0.5 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text font-mono text-3xl font-bold text-transparent dark:from-white dark:to-gray-300"
+                    >
+                      {new Intl.NumberFormat("en-Us").format(value as number)}
+                    </motion.h3>
+                    <p className="text-sm font-bold text-gray-800 dark:text-gray-100">
+                      {card.title}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {card.subtitle}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    </div>
   );
 };

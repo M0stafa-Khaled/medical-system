@@ -107,7 +107,6 @@ export const CancelExpense = ({ id }: { id: number }) => {
               <Button
                 type="submit"
                 disabled={isPending}
-                className="h-auto py-2.5"
                 variant={"destructive"}
               >
                 تأكيد

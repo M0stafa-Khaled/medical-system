@@ -54,11 +54,12 @@ export const CreateExpenseCategory = () => {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        size={"lg"}
-        className="dark:btn-primary"
+        size="default"
+        className="flex-1 bg-linear-to-r from-orange-600 to-red-600 text-white shadow-md hover:shadow-lg sm:flex-none"
       >
-        إضافة تصنيف
-        <FiPlus size={20} />
+        <FiPlus size={18} />
+        <span className="hidden sm:inline">إضافة تصنيف</span>
+        <span className="sm:hidden">إضافة</span>
       </Button>
 
       <Modal

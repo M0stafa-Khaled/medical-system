@@ -51,24 +51,26 @@ export const RegistrationChart = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white/80 shadow-lg backdrop-blur-xl transition-all duration-500 dark:border-white/10 dark:bg-gray-900/80 dark:shadow-gray-900/50"
+      className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white shadow-xl backdrop-blur-xl transition-all duration-500 hover:shadow-2xl dark:border-white/10 dark:bg-gray-900 dark:shadow-gray-900/50"
     >
-      {/* Top Accent Line */}
-      <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-amber-500 via-orange-500 to-rose-500" />
+      {/* Top Accent Line with Pulse Effect */}
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-linear-to-r from-amber-500 via-orange-500 to-rose-500" />
+      <div className="absolute inset-x-0 top-0 h-1.5 animate-pulse bg-linear-to-r from-amber-500 via-orange-500 to-rose-500 opacity-50" />
 
-      <div className="relative border-b border-gray-100 p-6 dark:border-gray-800">
+      <div className="relative border-b border-gray-100 bg-gradient-to-br from-gray-50/50 to-transparent p-6 dark:border-gray-800 dark:from-gray-800/30">
         <div className="flex items-center gap-3">
           <motion.div
-            whileHover={{ rotate: 10 }}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500 shadow-lg shadow-amber-500/25 dark:shadow-amber-500/10"
+            whileHover={{ rotate: 10, scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            className="flex h-14 w-14 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500 shadow-lg shadow-amber-500/30 dark:shadow-amber-500/20"
           >
-            <Users className="h-6 w-6 text-white" />
+            <Users className="h-7 w-7 text-white" />
           </motion.div>
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
               إحصائيات المستخدمين الجدد
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               تحليل تسجيلات المستخدمين الجدد عبر الوقت
             </p>
           </div>
@@ -76,7 +78,7 @@ export const RegistrationChart = () => {
       </div>
 
       <div className="border-b border-gray-100 bg-gray-50/50 p-6 dark:border-gray-800 dark:bg-gray-800/30">
-        <div className="mb-4 flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+        <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400">
           <Calendar className="h-4 w-4" />
           <span>فلترة البيانات</span>
         </div>
@@ -103,6 +105,9 @@ export const RegistrationChart = () => {
           isLoading={isLoading}
         />
       </div>
+
+      {/* Corner Decorations */}
+      <div className="pointer-events-none absolute -right-10 -bottom-10 h-40 w-40 rounded-full bg-linear-to-br from-amber-500/10 to-transparent blur-3xl transition-all duration-500 group-hover:scale-150 dark:from-amber-500/20" />
     </motion.div>
   );
 };

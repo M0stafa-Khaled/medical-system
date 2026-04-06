@@ -92,7 +92,6 @@ export const Modal = ({
                 onClick={onConfirm}
                 disabled={isLoading}
                 variant={variant}
-                className="h-auto py-2.5"
               >
                 {confirmText}
                 {isLoading && <Loader2 className="ml-2 animate-spin" />}

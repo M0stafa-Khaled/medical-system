@@ -70,8 +70,8 @@ const PatientBalances = () => {
       >
         <div className="flex flex-col gap-2">
           <h1 className="flex items-center gap-3 text-3xl font-bold tracking-tight">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-orange-500 to-orange-600 shadow-lg">
-              <Receipt className="h-5 w-5 text-white" />
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-orange-500 to-orange-600 shadow-lg shadow-orange-500/30 dark:shadow-orange-500/20">
+              <Receipt className="h-6 w-6 text-white" />
             </div>
             كشف حسابات المرضى
           </h1>
